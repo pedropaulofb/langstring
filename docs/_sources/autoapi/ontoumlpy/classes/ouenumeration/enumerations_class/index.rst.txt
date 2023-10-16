@@ -1,0 +1,373 @@
+:py:mod:`ontoumlpy.classes.ouenumeration.enumerations_class`
+============================================================
+
+.. py:module:: ontoumlpy.classes.ouenumeration.enumerations_class
+
+.. autoapi-nested-parse::
+
+   This module defines various OntoUML Class Stereotypes used in OntoUML modeling.
+
+   Each enumeration represents a specific grouping of stereotypes, providing a convenient and
+   semantically meaningful way to access and utilize the stereotypes in OntoUML modeling.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUBaseSortalClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUUltimateSortalClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUSortalClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUNonSortalClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUAbstractClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OURigidClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUAntiRigidClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUSemiRigidClass
+   ontoumlpy.classes.ouenumeration.enumerations_class.OUClassStereotype
+
+
+
+
+.. py:class:: OUBaseSortalClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as base sortals.
+
+   .. py:attribute:: historicalRole
+
+      
+
+   .. py:attribute:: phase
+
+      
+
+   .. py:attribute:: role
+
+      
+
+   .. py:attribute:: subkind
+
+      
+
+
+.. py:class:: OUUltimateSortalClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as ultimate sortals.
+
+   .. py:attribute:: collective
+
+      
+
+   .. py:attribute:: kind
+
+      
+
+   .. py:attribute:: mode
+
+      
+
+   .. py:attribute:: quality
+
+      
+
+   .. py:attribute:: quantity
+
+      
+
+   .. py:attribute:: relator
+
+      
+
+   .. py:attribute:: type
+
+      
+
+
+.. py:class:: OUSortalClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as sortals.
+   Combines base sortals and ultimate sortals.
+
+   .. py:attribute:: historicalRole
+
+      
+
+   .. py:attribute:: phase
+
+      
+
+   .. py:attribute:: role
+
+      
+
+   .. py:attribute:: subkind
+
+      
+
+   .. py:attribute:: collective
+
+      
+
+   .. py:attribute:: kind
+
+      
+
+   .. py:attribute:: mode
+
+      
+
+   .. py:attribute:: quality
+
+      
+
+   .. py:attribute:: quantity
+
+      
+
+   .. py:attribute:: relator
+
+      
+
+   .. py:attribute:: type
+
+      
+
+
+.. py:class:: OUNonSortalClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as non-sortals.
+
+   .. py:attribute:: category
+
+      
+
+   .. py:attribute:: historicalRoleMixin
+
+      
+
+   .. py:attribute:: mixin
+
+      
+
+   .. py:attribute:: phaseMixin
+
+      
+
+   .. py:attribute:: roleMixin
+
+      
+
+
+.. py:class:: OUAbstractClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as abstracts.
+
+   .. py:attribute:: abstract
+
+      
+
+   .. py:attribute:: datatype
+
+      
+
+   .. py:attribute:: enumeration
+
+      
+
+
+.. py:class:: OURigidClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as rigids.
+
+   .. py:attribute:: category
+
+      
+
+   .. py:attribute:: collective
+
+      
+
+   .. py:attribute:: kind
+
+      
+
+   .. py:attribute:: mode
+
+      
+
+   .. py:attribute:: quality
+
+      
+
+   .. py:attribute:: quantity
+
+      
+
+   .. py:attribute:: relator
+
+      
+
+   .. py:attribute:: subkind
+
+      
+
+
+.. py:class:: OUAntiRigidClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as anti-rigids.
+
+   .. py:attribute:: historicalRole
+
+      
+
+   .. py:attribute:: historicalRoleMixin
+
+      
+
+   .. py:attribute:: phase
+
+      
+
+   .. py:attribute:: phaseMixin
+
+      
+
+   .. py:attribute:: role
+
+      
+
+   .. py:attribute:: roleMixin
+
+      
+
+
+.. py:class:: OUSemiRigidClass(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing OntoUML class stereotypes defined as semi-rigids.
+
+   .. py:attribute:: mixin
+
+      
+
+
+.. py:class:: OUClassStereotype(*args, **kwds)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration`
+
+   An enumeration representing all OntoUML class stereotypes defined in the OntoUML profile.
+   Combines sortals, non-sortals, and abstracts, and also adds event and situation stereotypes.
+
+   .. py:attribute:: abstract
+
+      
+
+   .. py:attribute:: category
+
+      
+
+   .. py:attribute:: collective
+
+      
+
+   .. py:attribute:: datatype
+
+      
+
+   .. py:attribute:: enumeration
+
+      
+
+   .. py:attribute:: event
+
+      
+
+   .. py:attribute:: historicalRole
+
+      
+
+   .. py:attribute:: historicalRoleMixin
+
+      
+
+   .. py:attribute:: kind
+
+      
+
+   .. py:attribute:: mixin
+
+      
+
+   .. py:attribute:: mode
+
+      
+
+   .. py:attribute:: phase
+
+      
+
+   .. py:attribute:: phaseMixin
+
+      
+
+   .. py:attribute:: quality
+
+      
+
+   .. py:attribute:: quantity
+
+      
+
+   .. py:attribute:: relator
+
+      
+
+   .. py:attribute:: role
+
+      
+
+   .. py:attribute:: roleMixin
+
+      
+
+   .. py:attribute:: situation
+
+      
+
+   .. py:attribute:: subkind
+
+      
+
+   .. py:attribute:: type
+
+      
+
+

@@ -1,0 +1,42 @@
+:py:mod:`ontoumlpy.classes.ouelement.ouproject`
+===============================================
+
+.. py:module:: ontoumlpy.classes.ouelement.ouproject
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.ouproject.OUProject
+
+
+
+
+.. py:class:: OUProject(object_id, name = None, diagram = None, model = None, description = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a project in OntoUML.
+
+
+
+   :param object_id: The URI reference of the project.
+   :type object_id: URIRef
+
+   :ivar name: The name of the project.
+   :vartype name: URIRef
+   :ivar diagram: A list of diagrams associated with the project.
+   :vartype diagram: List[URIRef]
+   :ivar model: The model associated with the project.
+   :vartype model: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

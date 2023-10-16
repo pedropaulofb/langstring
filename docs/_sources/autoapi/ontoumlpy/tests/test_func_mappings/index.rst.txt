@@ -1,0 +1,6 @@
+:py:mod:`ontoumlpy.tests.test_func_mappings`
+============================================
+
+.. py:module:: ontoumlpy.tests.test_func_mappings
+
+

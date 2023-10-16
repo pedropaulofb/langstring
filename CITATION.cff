@@ -1,0 +1,28 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: LangStrings Python Library
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Pedro Paulo
+    family-names: Favato Barcelos
+    email: p.p.favatobarcelos@utwente.nl
+    affiliation: University of Twente
+    orcid: 'https://orcid.org/0000-0003-2736-7817'
+identifiers:
+  - type: url
+    value: 'https://github.com/pedropaulofb/langString'
+    description: Git repository
+repository-code: 'https://github.com/pedropaulofb/langString'
+url: 'https://github.com/pedropaulofb/langString/docs'
+repository-artifact: 'https://pypi.org/project/langString/'
+abstract: A Python library designed to simplify the development of software applications using the OntoUML vocabulary.
+keywords:
+  - language
+  - datatype
+  - python
+license: Apache-2.0

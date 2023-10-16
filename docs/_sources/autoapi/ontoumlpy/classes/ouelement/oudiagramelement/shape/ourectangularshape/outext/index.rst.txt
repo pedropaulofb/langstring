@@ -1,0 +1,44 @@
+:py:mod:`ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape.outext`
+======================================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape.outext
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape.outext.OUText
+
+
+
+
+.. py:class:: OUText(object_id, name = None, height = None, project = None, text = None, topLeftPosition = None, width = None, description = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents text in OntoUML.
+
+   :param object_id: The URI reference of the text.
+   :type object_id: URIRef
+
+   :ivar height: The height of the text.
+   :vartype height: URIRef
+   :ivar project: The project to which the text belongs.
+   :vartype project: URIRef
+   :ivar text: The text content.
+   :vartype text: URIRef
+   :ivar topLeftPosition: The top-left position of the text.
+   :vartype topLeftPosition: URIRef
+   :ivar width: The width of the text.
+   :vartype width: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

@@ -1,0 +1,17 @@
+:py:mod:`ontoumlpy.classes.ouenumeration`
+=========================================
+
+.. py:module:: ontoumlpy.classes.ouenumeration
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   _ouenumeration/index.rst
+   enumerations_class/index.rst
+   enumerations_other/index.rst
+
+

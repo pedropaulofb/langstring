@@ -1,0 +1,40 @@
+:py:mod:`ontoumlpy.classes.ouelement.oumodelelement.oupackage`
+==============================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oumodelelement.oupackage
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oumodelelement.oupackage.OUPackage
+
+
+
+
+.. py:class:: OUPackage(object_id, project = None, containsModelElement = None, name = None, description = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a package in OntoUML.
+
+   :param object_id: The URI reference of the package.
+   :type object_id: URIRef
+
+   :ivar containsModelElement: A list of model elements contained within the package.
+   :vartype containsModelElement: List[URIRef]
+   :ivar name: The name of the package.
+   :vartype name: URIRef
+   :ivar project: The project to which the package belongs.
+   :vartype project: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

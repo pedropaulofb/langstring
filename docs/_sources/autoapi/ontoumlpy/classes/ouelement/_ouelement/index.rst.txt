@@ -1,0 +1,79 @@
+:py:mod:`ontoumlpy.classes.ouelement._ouelement`
+================================================
+
+.. py:module:: ontoumlpy.classes.ouelement._ouelement
+
+.. autoapi-nested-parse::
+
+   This module provides foundational classes for representing elements in OntoUML models.
+
+   The module contains the `_OUElement` class, which serves as the base class for OntoUML models. Designed to be
+   abstract and protected, it must not be directly used by users and prevents direct instantiation, requiring subclassing
+   to provide specific functionalities and representations for OntoUML models.
+
+   While managing elements within the model by keeping track of their ID, type, name, and description using
+   URI references, `_OUElement` does not perform checks for the existence or the validity of the ID within an OntoUML
+   graph. Such checks and additional logic for managing OntoUML models should be implemented within
+   subclasses.
+
+   Note that the implementation assumes URI references are utilized for model element identification, ensuring
+   compatibility with RDF data structures and semantics.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement._ouelement._OUElement
+
+
+
+
+.. py:class:: _OUElement(object_id, related_type, name, description)
+
+
+   Abstract and protected foundational class for elements in OntoUML models.
+
+   The `_OUElement` class encapsulates common attributes like ID, name, type, and description using URI references and
+   is intended to be subclassed to provide specific functionalities and representations for OntoUML models. Direct
+   instantiation is discouraged, and therefore, the class is marked as abstract.
+
+   :ivar id: The URI reference identifying the object.
+   :vartype id: URIRef
+   :ivar description: A textual description of the object being created, represented as a URI reference.
+   :vartype description: URIRef
+   :ivar element_type: The type of the object represented as a URI reference.
+   :vartype element_type: URIRef
+   :ivar name: The name of the object, represented as a URI reference.
+   :vartype name: URIRef
+
+   .. py:attribute:: element_term_mapping
+
+      
+
+   .. py:method:: add_to_rdf_graph(graph)
+
+      Integrate the _OUElement instance data into the provided RDF graph.
+
+      This method selectively iterates through the attributes of an _OUElement instance, identifies corresponding
+      OntoUML terms, and inserts triples into the supplied RDF graph, where each triple represents a meaningful
+      semantic relationship (subject, predicate, object) pertinent to OntoUML models.
+
+      Notably, while the method acts on the current state of the instance, it does not maintain ongoing synchronization
+      with subsequent alterations to the element. Therefore, subsequent changes to the element post-graph addition
+      will not automatically reflect in the graph and would necessitate a re-invocation of this method for update.
+
+      In cases where the OntoUML term for a particular attribute is unavailable, the method proceeds without raising
+      an exception or halting execution but does log the occurrence for debugging purposes. This behavior ensures that
+      a singular issue during the graph addition process does not inhibit the incorporation of remaining, valid data.
+
+      :param graph: The RDF graph where the instance’s semantic data, in the form of triples, should be appended.
+      :type graph: Graph
+
+
+

@@ -1,0 +1,29 @@
+:py:mod:`ontoumlpy.classes.ouelement.oumodelelement`
+====================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oumodelelement
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   ouclassifier/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   ougeneralization/index.rst
+   ougeneralizationset/index.rst
+   ouliteral/index.rst
+   ounote/index.rst
+   oupackage/index.rst
+   ouproperty/index.rst
+
+

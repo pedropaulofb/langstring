@@ -1,0 +1,132 @@
+:py:mod:`ontoumlpy.tests.test_ougraph`
+======================================
+
+.. py:module:: ontoumlpy.tests.test_ougraph
+
+.. autoapi-nested-parse::
+
+   This module contains unit tests for validating the behavior and functionality of the OUGraph class.
+
+   The tests cover the initialization of OUGraph instances, population of OUGraph with different OntoUML elements,
+   and the handling of include_concrete parameter during the initialization. It also includes negative tests to ensure
+   robustness against incorrect input types and exceptions handling.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.tests.test_ougraph.test_successful_initialization
+   ontoumlpy.tests.test_ougraph.test_negative_assertion_during_initialization
+   ontoumlpy.tests.test_ougraph.test_population_with_empty_graph
+   ontoumlpy.tests.test_ougraph.test_population_with_single_class
+   ontoumlpy.tests.test_ougraph.test_population_with_two_classes
+   ontoumlpy.tests.test_ougraph.test_population_with_two_classes_and_one_generalization
+   ontoumlpy.tests.test_ougraph.test_include_concrete_elements_when_set_to_true
+   ontoumlpy.tests.test_ougraph.test_exclude_concrete_elements_when_set_to_false
+   ontoumlpy.tests.test_ougraph.test_negative_scenario_exclude_concrete_elements
+   ontoumlpy.tests.test_ougraph.test_invalid_type_handling_population
+   ontoumlpy.tests.test_ougraph.test_invalid_type_handling_population_without_concrete
+   ontoumlpy.tests.test_ougraph.test_correct_type_handling_population_without_concrete
+   ontoumlpy.tests.test_ougraph.test_wrong_type_exception_handling_on_initialization
+   ontoumlpy.tests.test_ougraph.test_wrong_argument_exception_handling_on_initialization
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.tests.test_ougraph.EXAMPLE_NS
+
+
+.. py:data:: EXAMPLE_NS
+   :value: 'https://example.org/'
+
+   
+
+.. py:function:: test_successful_initialization()
+
+   Test the successful initialization of an OUGraph instance.
+
+
+.. py:function:: test_negative_assertion_during_initialization()
+
+   Test the incorrect type assertion during OUGraph initialization.
+
+
+.. py:function:: test_population_with_empty_graph()
+
+   Test OUGraph population with an empty graph. All other lists should be empty.
+
+
+.. py:function:: test_population_with_single_class()
+
+   Test OUGraph population with a graph containing one class. Check if all other lists are empty.
+
+
+.. py:function:: test_population_with_two_classes()
+
+   Test OUGraph population with a graph containing two classes. Check if all other lists are empty.
+
+
+.. py:function:: test_population_with_two_classes_and_one_generalization()
+
+   Test OUGraph population with a graph containing two classes and one generalization.
+   Check if unrelated lists are empty.
+
+
+.. py:function:: test_include_concrete_elements_when_set_to_true()
+
+   Test the inclusion of concrete syntax elements when include_concrete is set to True. Check unrelated lists.
+
+
+.. py:function:: test_exclude_concrete_elements_when_set_to_false()
+
+   Test the exclusion of concrete syntax elements when include_concrete is set to False. Check unrelated lists.
+
+
+.. py:function:: test_negative_scenario_exclude_concrete_elements()
+
+   Negative test for the exclusion of concrete syntax elements when include_concrete is set to False.
+   Check unrelated lists.
+
+
+.. py:function:: test_invalid_type_handling_population()
+
+   Test the handling of an incorrect type during OUGraph population. Check unrelated lists.
+
+
+.. py:function:: test_invalid_type_handling_population_without_concrete()
+
+   Test the handling of an incorrect type during OUGraph population with include_concrete set to False.
+   Check if OUClass list is empty.
+
+
+.. py:function:: test_correct_type_handling_population_without_concrete()
+
+   Test the correct handling of OntoUML types during OUGraph population with include_concrete set to False.
+   Check if OUClass list is not empty.
+
+
+.. py:function:: test_wrong_type_exception_handling_on_initialization(type_name)
+
+   Test the exception handling during OUGraph initialization with an incorrect type.
+   Pass a type name as an argument to test various invalid types.
+
+   :param type_name: A string representing an invalid OntoUML type name to test various invalid types.
+   :type type_name: str
+
+
+.. py:function:: test_wrong_argument_exception_handling_on_initialization()
+
+   Test the exception handling during OUGraph initialization with an incorrect argument.
+
+

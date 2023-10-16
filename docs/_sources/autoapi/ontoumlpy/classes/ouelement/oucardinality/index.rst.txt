@@ -1,0 +1,40 @@
+:py:mod:`ontoumlpy.classes.ouelement.oucardinality`
+===================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oucardinality
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oucardinality.OUCardinality
+
+
+
+
+.. py:class:: OUCardinality(object_id, cardinalityValue = None, description = None, lowerBound = None, name = None, upperBound = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents cardinality information for a property.
+
+   :param object_id: The URI reference of the cardinality object.
+   :type object_id: URIRef
+
+   :ivar cardinalityValue: The cardinality value.
+   :vartype cardinalityValue: URIRef
+   :ivar lowerBound: The lower bound of the cardinality.
+   :vartype lowerBound: URIRef
+   :ivar upperBound: The upper bound of the cardinality.
+   :vartype upperBound: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

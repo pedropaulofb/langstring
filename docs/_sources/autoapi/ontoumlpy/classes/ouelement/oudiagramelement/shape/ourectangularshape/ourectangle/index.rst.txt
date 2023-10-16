@@ -1,0 +1,44 @@
+:py:mod:`ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape.ourectangle`
+===========================================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape.ourectangle
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape.ourectangle.OURectangle
+
+
+
+
+.. py:class:: OURectangle(object_id, description = None, height = None, name = None, project = None, topLeftPosition = None, width = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a rectangle in OntoUML.
+
+
+
+   :param object_id: The URI reference of the rectangle.
+   :type object_id: URIRef
+
+   :ivar topLeftPosition: The top-left position of the rectangle.
+   :vartype topLeftPosition: URIRef
+   :ivar height: The height of the rectangle.
+   :vartype height: URIRef
+   :ivar width: The width of the rectangle.
+   :vartype width: URIRef
+   :ivar project: The project to which the rectangle belongs.
+   :vartype project: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

@@ -1,0 +1,73 @@
+:py:mod:`ontoumlpy.tests.test_ouexception`
+==========================================
+
+.. py:module:: ontoumlpy.tests.test_ouexception
+
+.. autoapi-nested-parse::
+
+   Module for testing custom exceptions related to OntoUML.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.tests.test_ouexception.test_ouid_not_in_graph_absent_id
+   ontoumlpy.tests.test_ouexception.test_ouid_not_in_graph_present_id
+   ontoumlpy.tests.test_ouexception.test_ouid_type_mismatch_error_mismatched_type
+   ontoumlpy.tests.test_ouexception.test_ouid_type_mismatch_error_matched_type
+   ontoumlpy.tests.test_ouexception.test_ou_invalid_attribute_valid_access
+   ontoumlpy.tests.test_ouexception.test_ou_invalid_attribute_invalid_access
+
+
+
+.. py:function:: test_ouid_not_in_graph_absent_id()
+
+   Test case for the 'OUIDNotInGraph' exception when the ID does not exist in the OntoUML graph.
+
+   :raises OUIDNotInGraph: When the provided ID does not exist in the OntoUML graph.
+
+
+.. py:function:: test_ouid_not_in_graph_present_id()
+
+   Test case for the 'OUIDNotInGraph' exception when the ID exists in the OntoUML graph.
+
+   :raises OUIDNotInGraph: When the provided ID exists in the OntoUML graph.
+
+
+.. py:function:: test_ouid_type_mismatch_error_mismatched_type(ouclass, outerm)
+
+   Test case for the 'OUIDTypeMismatchError' exception when the ID has a type mismatch.
+
+   :raises OUIDTypeMismatchError: When the provided ID has a type mismatch with the expected type.
+
+
+.. py:function:: test_ouid_type_mismatch_error_matched_type()
+
+   Test case for the 'OUIDTypeMismatchError' exception when the ID has the expected type.
+
+   :raises OUIDTypeMismatchError: When the provided ID has the expected type.
+
+
+.. py:function:: test_ou_invalid_attribute_valid_access()
+
+   Test case for accessing valid attributes of OntoUML classes.
+
+   :raises OUInvalidAttribute: When an invalid attribute is accessed on an OntoUML class.
+   :raises Exception: For any other exception that might occur.
+
+
+.. py:function:: test_ou_invalid_attribute_invalid_access()
+
+   Test case for the 'OUInvalidAttribute' exception when accessing an invalid attribute.
+
+   :raises OUInvalidAttribute: When an invalid attribute is accessed on an OntoUML class.
+   :raises Exception: For any other exception that might occur.
+
+

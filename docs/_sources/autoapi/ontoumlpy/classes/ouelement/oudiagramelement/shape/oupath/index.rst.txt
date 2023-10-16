@@ -1,0 +1,40 @@
+:py:mod:`ontoumlpy.classes.ouelement.oudiagramelement.shape.oupath`
+===================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oudiagramelement.shape.oupath
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oudiagramelement.shape.oupath.OUPath
+
+
+
+
+.. py:class:: OUPath(object_id, name = None, description = None, point = None, project = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a path in OntoUML.
+
+
+
+   :param object_id: The URI reference of the path.
+   :type object_id: URIRef
+
+   :ivar point: A list of points that make up the path.
+   :vartype point: List[URIRef]
+   :ivar project: The project to which the path belongs.
+   :vartype project: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

@@ -1,0 +1,77 @@
+:py:mod:`ontoumlpy.functions.func_class`
+========================================
+
+.. py:module:: ontoumlpy.functions.func_class
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.functions.func_class.ou_get_direct_superclasses
+   ontoumlpy.functions.func_class.ou_get_direct_subclasses
+   ontoumlpy.functions.func_class.ou_get_all_superclasses
+   ontoumlpy.functions.func_class.ou_get_all_subclasses
+   ontoumlpy.functions.func_class.ou_create_list_classes_sts
+
+
+
+.. py:function:: ou_get_direct_superclasses(ontouml_graph, ou_class_id)
+
+   Retrieve a list of IDs (as URIRefs) of the direct superclasses of a specified OntoUML class from a     given OntoUML RDF graph.
+
+   Allows the user to specify a list of restricted types.
+   Superclasses of those types will not be included in the returned list.
+
+   :param ontouml_graph: The RDF graph containing OntoUML model data.
+   :type ontouml_graph: rdflib.Graph
+   :param ou_class_id: The URI of the OntoUML class for which to retrieve superclasses.
+   :type ou_class_id: str
+   :return: A list of URIRefs representing the direct superclasses of the specified OntoUML class. The list     may be empty.
+   :rtype: list[URIRef]
+
+
+.. py:function:: ou_get_direct_subclasses(ontouml_graph, ou_class_id)
+
+   Retrieve a list of IDs (as URIRefs) of the direct subclasses of a specified OntoUML class from a given     OntoUML RDF graph.
+
+   :param ontouml_graph: The RDF graph containing OntoUML model data.
+   :type ontouml_graph: rdflib.Graph
+   :param ou_class_id: The URI of the OntoUML class for which to retrieve subclasses.
+   :type ou_class_id: str
+   :return: A list of URIRefs representing the direct subclasses of the specified OntoUML class.
+   :rtype: list[URIRef]
+
+
+.. py:function:: ou_get_all_superclasses(ontouml_graph, ou_class_id)
+
+   Retrieve a list of IDs (as URIRefs) of the all (direct and indirect) superclasses of a specified OntoUML     class from a given OntoUML RDF graph.
+
+   :param ontouml_graph: The RDF graph containing OntoUML model data.
+   :type ontouml_graph: Graph
+   :param ou_class_id: The URI of the OntoUML class for which to retrieve superclasses.
+   :type ou_class_id: URIRef
+   :return: A list of URIRefs representing the direct superclasses of the specified OntoUML class.
+   :rtype: list[URIRef]
+
+
+.. py:function:: ou_get_all_subclasses(ontouml_graph, ou_class_id)
+
+   Retrieve a list of IDs (as URIRefs) of the all (direct and indirect) subclasses of a specified OntoUML     class from a given OntoUML RDF graph.
+
+   :param ontouml_graph: The RDF graph containing OntoUML model data.
+   :type ontouml_graph: rdflib.Graph
+   :param ou_class_id: The URI of the OntoUML class for which to retrieve subclasses.
+   :type ou_class_id: URIRef
+   :return: A list of URIRefs representing the direct subclasses of the specified OntoUML class.
+   :rtype: list[URIRef]
+
+
+.. py:function:: ou_create_list_classes_sts(ontouml_graph, include_st)
+
+

@@ -1,0 +1,16 @@
+:py:mod:`ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape`
+===============================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oudiagramelement.shape.ourectangularshape
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   ourectangle/index.rst
+   outext/index.rst
+
+

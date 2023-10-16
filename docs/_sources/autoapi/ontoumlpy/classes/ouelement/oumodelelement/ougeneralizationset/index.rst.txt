@@ -1,0 +1,46 @@
+:py:mod:`ontoumlpy.classes.ouelement.oumodelelement.ougeneralizationset`
+========================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oumodelelement.ougeneralizationset
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oumodelelement.ougeneralizationset.OUGeneralizationSet
+
+
+
+
+.. py:class:: OUGeneralizationSet(object_id, name=None, description=None, generalization=None, isComplete=None, isDisjoint=None, project=None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a generalization set in OntoUML.
+
+
+
+   :param object_id: The URI reference of the generalization set.
+   :type object_id: URIRef
+
+   :ivar generalization: A list of generalizations included in the set.
+   :vartype generalization: List[URIRef]
+   :ivar isComplete: Indicates if the generalization set is complete.
+   :vartype isComplete: URIRef
+   :ivar isDisjoint: Indicates if the generalization set is disjoint.
+   :vartype isDisjoint: URIRef
+   :ivar name: The name of the generalization set.
+   :vartype name: URIRef
+   :ivar project: The project to which the generalization set belongs.
+   :vartype project: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

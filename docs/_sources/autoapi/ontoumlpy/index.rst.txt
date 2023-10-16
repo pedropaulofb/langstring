@@ -1,0 +1,17 @@
+:py:mod:`ontoumlpy`
+===================
+
+.. py:module:: ontoumlpy
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   classes/index.rst
+   functions/index.rst
+   tests/index.rst
+
+

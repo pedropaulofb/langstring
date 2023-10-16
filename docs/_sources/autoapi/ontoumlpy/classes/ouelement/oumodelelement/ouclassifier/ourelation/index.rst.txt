@@ -1,0 +1,54 @@
+:py:mod:`ontoumlpy.classes.ouelement.oumodelelement.ouclassifier.ourelation`
+============================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oumodelelement.ouclassifier.ourelation
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oumodelelement.ouclassifier.ourelation.OURelation
+
+
+
+
+.. py:class:: OURelation(object_id, name = None, description = None, isAbstract = None, isDerived = None, relationEnd = None, stereotype = None, sourceEnd = None, targetEnd = None, project = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a relation in OntoUML.
+
+
+
+   :param object_id: The URI reference of the relation.
+   :type object_id: URIRef
+
+   :ivar description: The description of the relation.
+   :vartype description: URIRef
+   :ivar isAbstract: Indicates if the relation is abstract.
+   :vartype isAbstract: URIRef
+   :ivar isDerived: Indicates if the relation is derived.
+   :vartype isDerived: URIRef
+   :ivar name: The name of the relation.
+   :vartype name: URIRef
+   :ivar relationEnd: A list of ends associated with the relation.
+   :vartype relationEnd: List[URIRef]
+   :ivar sourceEnd: The source end of the relation.
+   :vartype sourceEnd: URIRef
+   :ivar stereotype: The stereotype of the relation.
+   :vartype stereotype: URIRef
+   :ivar targetEnd: The target end of the relation.
+   :vartype targetEnd: URIRef
+   :ivar project: The project to which the relation belongs.
+   :vartype project: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

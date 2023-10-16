@@ -1,0 +1,40 @@
+:py:mod:`ontoumlpy.classes.ouelement.oupoint`
+=============================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oupoint
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oupoint.OUPoint
+
+
+
+
+.. py:class:: OUPoint(object_id, name = None, description = None, xCoordinate = None, yCoordinate = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a point in OntoUML.
+
+
+
+   :param object_id: The URI reference of the point.
+   :type object_id: URIRef
+
+   :ivar xCoordinate: The x-coordinate of the point.
+   :vartype xCoordinate: URIRef
+   :ivar yCoordinate: The y-coordinate of the point.
+   :vartype yCoordinate: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

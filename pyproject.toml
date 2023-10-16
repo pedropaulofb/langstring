@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "langString"
+version = "0.1.0a0"
+description = "LangString Python Library"
+license = "Apache-2.0"
+authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]
+readme = "README.md"
+homepage = "https://github.com/pedropaulofb/langString"
+repository = "https://github.com/pedropaulofb/langString"
+documentation = "https://github.com/pedropaulofb/langString/docs"
+keywords = ["string", "langstring", "datatype", "python", "library"]
+packages = [{ include = "langString" }]
+exclude = ["langString/tests"]
+
+[tool.poetry.urls]
+"PyPi Project" = "https://pypi.org/project/langString/"
+
+[tool.poetry.dependencies]
+python = "^3.09"
+loguru = "^0.7.2"
+langcodes = "^3.3.0"
+
+[tool.poetry.group.dev.dependencies]
+myst-parser = "^2.0.0"
+poetry = "^1.6.1"
+pre-commit = "^3.4.0"
+pytest = "^7.4.2"
+sphinx = "^7.2.6"
+sphinx-autoapi = "^3.0.0"
+sphinx-rtd-size = "^0.2.0"
+sphinx-rtd-theme = "^1.3.0"
+sphinx-toolbox = "^3.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120

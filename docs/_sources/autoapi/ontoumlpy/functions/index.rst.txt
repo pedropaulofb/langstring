@@ -1,0 +1,17 @@
+:py:mod:`ontoumlpy.functions`
+=============================
+
+.. py:module:: ontoumlpy.functions
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   func_class/index.rst
+   func_load_specific/index.rst
+   func_mappings/index.rst
+
+

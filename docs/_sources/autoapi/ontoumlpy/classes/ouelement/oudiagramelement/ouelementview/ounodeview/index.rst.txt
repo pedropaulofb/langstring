@@ -1,0 +1,17 @@
+:py:mod:`ontoumlpy.classes.ouelement.oudiagramelement.ouelementview.ounodeview`
+===============================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oudiagramelement.ouelementview.ounodeview
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   ouclassview/index.rst
+   ounoteview/index.rst
+   oupackageview/index.rst
+
+

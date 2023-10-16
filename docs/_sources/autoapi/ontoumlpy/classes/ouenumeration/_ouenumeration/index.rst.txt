@@ -1,0 +1,49 @@
+:py:mod:`ontoumlpy.classes.ouenumeration._ouenumeration`
+========================================================
+
+.. py:module:: ontoumlpy.classes.ouenumeration._ouenumeration
+
+.. autoapi-nested-parse::
+
+   This module provides the `_OUEnumeration` class, an enumeration base class which provides a method to retrieve all
+   members of an enumeration. Enumerations inheriting from `_OUEnumeration` can leverage this method to fetch all of
+   their members, simplifying tasks like iteration over all values.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouenumeration._ouenumeration._OUEnumeration
+
+
+
+
+.. py:class:: _OUEnumeration(*args, **kwds)
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   Base enumeration class providing a method to retrieve all members of the enumeration.
+
+   Designed to be subclassed by other enumerations, this class introduces utility method, ensuring an enhanced
+   reusability and adherence to DRY (Don't Repeat Yourself) principles in the codebase.
+
+   .. py:method:: get_all()
+      :classmethod:
+
+      Method to retrieve all members of the enumeration.
+
+      Iterates over all the enumeration members and returns their value in a list, simplifying tasks such as member
+      iteration or display.
+
+      :return: A list of all enumeration members' values.
+      :rtype: list
+
+
+

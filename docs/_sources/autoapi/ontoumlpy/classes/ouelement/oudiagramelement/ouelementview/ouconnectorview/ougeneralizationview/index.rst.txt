@@ -1,0 +1,46 @@
+:py:mod:`ontoumlpy.classes.ouelement.oudiagramelement.ouelementview.ouconnectorview.ougeneralizationview`
+=========================================================================================================
+
+.. py:module:: ontoumlpy.classes.ouelement.oudiagramelement.ouelementview.ouconnectorview.ougeneralizationview
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ontoumlpy.classes.ouelement.oudiagramelement.ouelementview.ouconnectorview.ougeneralizationview.OUGeneralizationView
+
+
+
+
+.. py:class:: OUGeneralizationView(object_id, isViewOf = None, name = None, description = None, project = None, shape = None, sourceView = None, targetView = None)
+
+
+   Bases: :py:obj:`ontoumlpy.classes.ouelement._ouelement._OUElement`
+
+   Represents a view of a generalization in OntoUML.
+
+
+
+   :param object_id: The URI reference of the generalization view.
+   :type object_id: URIRef
+
+   :ivar isViewOf: The generalization that this view is associated with.
+   :vartype isViewOf: URIRef
+   :ivar project: The project to which the generalization view belongs.
+   :vartype project: URIRef
+   :ivar shape: The shape of the generalization view.
+   :vartype shape: URIRef
+   :ivar sourceView: The source view of the generalization.
+   :vartype sourceView: URIRef
+   :ivar targetView: The target view of the generalization.
+   :vartype targetView: URIRef
+
+   .. py:method:: __getattr__(invalid_att_name)
+
+
+

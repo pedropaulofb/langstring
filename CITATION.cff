@@ -18,11 +18,15 @@ identifiers:
     value: 'https://github.com/pedropaulofb/langString'
     description: Git repository
 repository-code: 'https://github.com/pedropaulofb/langString'
-url: 'https://github.com/pedropaulofb/langString/docs'
+url: 'https://pedropaulofb.github.io/langString/'
 repository-artifact: 'https://pypi.org/project/langString/'
-abstract: A Python library designed to simplify the development of software applications using the OntoUML vocabulary.
+abstract: A Python library that implements langString and multiLangStrings.
 keywords:
-  - language
-  - datatype
-  - python
+  - langstring
+  - language-representation
+  - language-string
+  - multilangstring
+  - multilanguage
+  - multilanguage-string
+  - string
 license: Apache-2.0

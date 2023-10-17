@@ -10,8 +10,8 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "ontouml-py"
-copyright = "2023, Semantics, Cybersecurity & Services (SCS), University of Twente, the Netherlands"
+project = "langstring"
+copyright = "Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"
 author = "Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"
 
 # -- General configuration ---------------------------------------------------
@@ -31,10 +31,10 @@ extensions = [
 
 autodoc_typehints = "description"
 github_username = "pedropaulofb"
-github_repository = "ontouml/ontouml-py"
+github_repository = "pedropaulofb/langstring"
 
 autoapi_dirs = [
-    "../ontoumlpy/",
+    "../langstring/",
 ]
 
 templates_path = ["_templates"]
@@ -45,7 +45,6 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
-html_logo = "../resources/logo-ontouml-py-reduced.png"
 html_theme_options = {"display_version": True}
 
 sphinx_rtd_size_width = "100%"

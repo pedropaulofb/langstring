@@ -1,9 +1,7 @@
 .. ontouml-py code documentation master file
 
-Welcome to ontouml-py's code documentation!
+Welcome to langString's code documentation!
 =============================================
-
-.. image:: ../resources/logo-ontouml-py-reduced.png
 
 .. toctree::
    :maxdepth: 2
@@ -15,3 +13,17 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+LangString Websites
+===================
+
+.. raw:: html
+
+    <div style="text-align: left; margin-bottom: 20px;">
+        <a href="https://github.com/pedropaulofb/langString">
+            <img src="../resources/github-logo.png" width="20" align="middle"> View on GitHub </a>
+    </div>
+    <div style="text-align: left;">
+        <a href="https://pypi.org/project/langString">
+            <img src="../resources/pypi-logo.png" width="20" align="middle"> View on PyPI </a>
+    </div>

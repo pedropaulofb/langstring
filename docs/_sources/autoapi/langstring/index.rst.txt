@@ -1,0 +1,31 @@
+:py:mod:`langstring`
+====================
+
+.. py:module:: langstring
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   langstring.LangString
+
+
+
+
+.. py:class:: LangString(text, lang = None)
+
+
+   .. py:method:: to_string()
+
+
+   .. py:method:: __str__()
+
+      Return str(self).
+
+
+

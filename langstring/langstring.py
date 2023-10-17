@@ -56,7 +56,3 @@ class LangString:
             return f'"{self.text}"'
         else:
             return f'"{self.text}"@{self.lang}'
-
-x = LangString("")
-ic(x)
-ic(x.text, x.lang)

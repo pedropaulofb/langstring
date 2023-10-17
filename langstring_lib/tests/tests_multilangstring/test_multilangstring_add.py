@@ -1,3 +1,4 @@
+"""Tests for the MultiLangString class's method add."""
 import pytest
 
 from langstring_lib.langstring import LangString

@@ -2,7 +2,6 @@
 import warnings
 from enum import Enum
 
-from icecream import ic
 from langcodes import Language, tag_is_valid
 from loguru import logger
 
@@ -58,18 +57,29 @@ class MultiLangString:
             raise ValueError(f"Invalid control value: {control}. "
                              f"Valid control values are: {ControlMultipleEntries._member_names_}.")
 
-        if not tag_is_valid(preferred_lang):
-            warn_message = f"Invalid preferred language tag '{preferred_lang}' used."
+        if preferred_lang is None:
+            warn_message ="Preferred language set to default value: 'en'."
             warnings.warn(warn_message, UserWarning)
             logger.warning(warn_message)
+            self.preferred_lang = "en"
+        elif not isinstance(preferred_lang, str):
+            raise TypeError(
+                f"preferred_lang should be of type string or None. Received '{type(preferred_lang).__name__}' with value '{preferred_lang}'.")
+        else:
+            if not tag_is_valid(preferred_lang):
+                warn_message = f"Invalid preferred language tag '{preferred_lang}' used."
+                warnings.warn(warn_message, UserWarning)
+                logger.warning(warn_message)
+
+            self.preferred_lang: Language = preferred_lang
 
         self.langstrings: dict = {}  # Initialize self.langStrings here
         self.control: ControlMultipleEntries = ControlMultipleEntries[control]
-        self.preferred_lang: Language = preferred_lang
 
         for arg in args:
             if not isinstance(arg, LangString):
-                logger.error(f"MultiLangString initialized with invalid argument. Expected a LangString but received '{type(arg).__name__}' with value '{arg}'.")
+                logger.error(
+                    f"MultiLangString initialized with invalid argument. Expected a LangString but received '{type(arg).__name__}' with value '{arg}'.")
                 raise TypeError
             else:
                 self.add(arg)
@@ -106,6 +116,8 @@ class MultiLangString:
         :return: List of LangStrings for the specified language tag.
         :rtype: list
         """
+        if not isinstance(lang, str):
+            raise TypeError(f"Expected a string but received '{type(lang).__name__}'.")
         return self.langstrings.get(lang, [])
 
     def get_pref_langstring(self) -> str:
@@ -182,4 +194,3 @@ class MultiLangString:
         return ", ".join(
             f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in
             langstrings)
-

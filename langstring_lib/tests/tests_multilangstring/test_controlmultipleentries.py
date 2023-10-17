@@ -1,3 +1,4 @@
+"""Tests for the Class ControlMultipleEntries."""
 import pytest
 
 from langstring_lib.multilangstring import ControlMultipleEntries

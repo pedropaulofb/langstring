@@ -1,5 +1,6 @@
 from enum import Enum
 
+from icecream import ic
 from langcodes import Language, tag_is_valid
 from loguru import logger
 
@@ -70,7 +71,16 @@ class MultiLangString:
     def __len__(self):
         return sum(len(lang_strings) for lang_strings in self.langStrings.values())
 
-    def __str__(self) -> str:
+    def toString(self) -> str:
         return ', '.join(
             f'{repr(lang_string)}@{lang}' for lang, lang_strings in self.langStrings.items() for lang_string in
             lang_strings)
+
+    def toStringList(self) -> list:
+        return [f'{repr(lang_string)}@{lang}' for lang, lang_strings in self.langStrings.items() for lang_string in
+                lang_strings]
+
+    def __str__(self) -> str:
+        self.toString(self)
+
+

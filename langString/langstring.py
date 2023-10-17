@@ -11,8 +11,11 @@ class LangString:
         self.text: str = text
         self.lang: Language = lang
 
-    def __str__(self):
+    def toString(self) -> str:
         if self.lang is None:
             return f'"{self.text}"'
         else:
             return f'"{self.text}"@{self.lang}'
+
+    def __str__(self) -> str:
+        self.toString(self)

@@ -2,6 +2,7 @@
 import warnings
 from enum import Enum
 
+from icecream import ic
 from langcodes import Language, tag_is_valid
 from loguru import logger
 
@@ -9,6 +10,7 @@ from langstring_lib.langstring import LangString
 
 # Suppress the display of UserWarnings
 warnings.simplefilter("ignore", UserWarning)
+
 
 class ControlMultipleEntries(Enum):
     """ControlMultipleEntries Enum for specifying handling of duplicate language tags.
@@ -49,6 +51,7 @@ class MultiLangString:
         :param args: LangString objects to initialize the MultiLangString with.
         :type args: LangString
         """
+
         try:
             self.control = ControlMultipleEntries[control]
         except KeyError:
@@ -66,6 +69,7 @@ class MultiLangString:
 
         for arg in args:
             if not isinstance(arg, LangString):
+                logger.error(f"MultiLangString initialized with invalid argument. Expected a LangString but received '{type(arg).__name__}' with value '{arg}'.")
                 raise TypeError
             else:
                 self.add(arg)
@@ -89,6 +93,10 @@ class MultiLangString:
             else:  # self.control == ALLOW
                 if langstring.text not in self.langstrings.get(langstring.lang, []):
                     self.langstrings.setdefault(langstring.lang, []).append(langstring.text)
+        else:
+            logger.error(
+                f"MultiLangString initialized with invalid argument. Expected a LangString but received '{type(langstring).__name__}' with value '{langstring}'.")
+            raise TypeError
 
     def get_langstring(self, lang: str) -> list:
         """Get LangStrings for a specific language tag.

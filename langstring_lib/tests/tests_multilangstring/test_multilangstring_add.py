@@ -4,27 +4,109 @@ from langstring_lib.langstring import LangString
 from langstring_lib.multilangstring import MultiLangString
 
 
-def test_add_langstring():
-    mls = MultiLangString()
-    ls = LangString("Hello", "en")
-    mls.add(ls)
-    assert len(mls.langstrings) == 1
-    assert mls.get_langstring("en") == ["Hello"]
+def test_add_overwrite()->None:
+    """Test the OVERWRITE control strategy."""
+    ls1 = LangString("hello", "en")
+    ls2 = LangString("goodbye", "en")
+
+    mls = MultiLangString(ls1, control="OVERWRITE")
+    mls.add(ls2)
+
+    assert mls.langstrings["en"] == ["goodbye"], f"Expected 'goodbye', but got {mls.langstrings['en']}"
 
 
-def test_add_duplicate_langstring_warn():
-    mls = MultiLangString(control="BLOCK_WARN")
-    ls1 = LangString("Hello", "en")
-    ls2 = LangString("Hi", "en")
-    with pytest.warns(UserWarning, match=r".*LangString with language tag 'en' already exists.*"):
-        mls.add(ls1)
+def test_add_allow()->None:
+    """Test the ALLOW control strategy."""
+    ls1 = LangString("hello", "en")
+    ls2 = LangString("goodbye", "en")
+
+    mls = MultiLangString(ls1, control="ALLOW")
+    mls.add(ls2)
+
+    assert mls.langstrings["en"] == ["hello",
+                                     "goodbye"], f"Expected ['hello', 'goodbye'], but got {mls.langstrings['en']}"
+
+
+def test_add_block_warn()->None:
+    """Test the BLOCK_WARN control strategy with a warning."""
+    ls1 = LangString("hello", "en")
+    ls2 = LangString("hello", "en")
+
+    mls = MultiLangString(ls1, control="BLOCK_WARN")
+    with pytest.warns(UserWarning, match=r"Operation not possible, a LangString with language tag en already exists."):
+        mls.add(ls2)
+
+    assert mls.langstrings["en"] == ["hello"], f"Expected 'hello', but got {mls.langstrings['en']}"
+
+
+def test_add_block_error()->None:
+    """Test the BLOCK_ERROR control strategy with an error."""
+    ls1 = LangString("hello", "en")
+    ls2 = LangString("hello", "en")
+
+    mls = MultiLangString(ls1, control="BLOCK_ERROR")
+    with pytest.raises(ValueError, match=r"Operation not possible, a LangString with language tag en already exists."):
         mls.add(ls2)
 
 
-def test_add_duplicate_langstring_error():
-    mls = MultiLangString(control="BLOCK_ERROR")
-    ls1 = LangString("Hello", "en")
-    ls2 = LangString("Hi", "en")
-    with pytest.raises(ValueError, match=r".*LangString with language tag 'en' already exists.*"):
-        mls.add(ls1)
-        mls.add(ls2)
+def test_add_new_language()->None:
+    """Test adding a LangString with a new language."""
+    ls1 = LangString("hello", "en")
+    ls2 = LangString("hola", "es")
+
+    mls = MultiLangString(ls1)
+    mls.add(ls2)
+
+    assert mls.langstrings["en"] == ["hello"], f"Expected 'hello', but got {mls.langstrings['en']}"
+    assert mls.langstrings["es"] == ["hola"], f"Expected 'hola', but got {mls.langstrings['es']}"
+
+
+def test_add_wrong_type()->None:
+    """Test adding a non-LangString type."""
+    mls = MultiLangString(control="ALLOW")
+    with pytest.raises(TypeError):
+        mls.add("hello")
+
+
+def test_add_empty_value()->None:
+    """Test adding a LangString with an empty string value."""
+    ls_empty = LangString("", "en")
+
+    mls = MultiLangString(control="ALLOW")
+    mls.add(ls_empty)
+
+    assert mls.langstrings["en"] == [""], f"Expected an empty string, but got {mls.langstrings['en']}"
+
+
+def test_add_empty_value_overwrite()->None:
+    """Test the OVERWRITE control strategy with an empty string value."""
+    ls1 = LangString("hello", "en")
+    ls_empty = LangString("", "en")
+
+    mls = MultiLangString(ls1, control="OVERWRITE")
+    mls.add(ls_empty)
+
+    assert mls.langstrings["en"] == [""], f"Expected an empty string, but got {mls.langstrings['en']}"
+
+
+def test_add_empty_value_block_warn()->None:
+    """Test the BLOCK_WARN control strategy with an empty string value."""
+    ls_empty1 = LangString("", "en")
+    ls_empty2 = LangString("", "en")
+
+    mls = MultiLangString(ls_empty1, control="BLOCK_WARN")
+    with pytest.warns(UserWarning, match=r"Operation not possible, a LangString with language tag en already exists."):
+        mls.add(ls_empty2)
+
+    assert mls.langstrings["en"] == [""], f"Expected an empty string, but got {mls.langstrings['en']}"
+
+
+def test_add_empty_value_block_error()->None:
+    """Test the BLOCK_ERROR control strategy with an empty string value."""
+    ls_empty1 = LangString("", "en")
+    ls_empty2 = LangString("", "en")
+
+    mls = MultiLangString(ls_empty1, control="BLOCK_ERROR")
+    with pytest.raises(ValueError, match=r"Operation not possible, a LangString with language tag en already exists."):
+        mls.add(ls_empty2)
+

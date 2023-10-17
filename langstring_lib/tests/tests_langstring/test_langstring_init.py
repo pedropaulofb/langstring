@@ -7,7 +7,7 @@ def test_initialization() -> None:
     """Test the initialization of a LangString object without specifying a language."""
     ls = LangString("hello")
     assert ls.text == "hello", f'Expected text to be "hello", but got {ls.text}'
-    assert isinstance(ls.text, str)
+    assert isinstance(ls.text, str), f"Expected text type to be str, but got {type(ls.text).__name__}"
     assert ls.lang is None, f"Expected lang to be None, but got {ls.lang}"
 
 
@@ -15,9 +15,9 @@ def test_language_initialization() -> None:
     """Test the initialization of a LangString object with a specified language."""
     ls = LangString("hola", "es")
     assert ls.text == "hola", f'Expected text to be "hola", but got {ls.text}'
-    assert isinstance(ls.text, str)
+    assert isinstance(ls.text, str), f"Expected text type to be str, but got {type(ls.text).__name__}"
     assert ls.lang == "es", f'Expected lang to be "es", but got {ls.lang}'
-    assert isinstance(ls.lang, str)
+    assert isinstance(ls.lang, str), f"Expected lang type to be str, but got {type(ls.lang).__name__}"
 
 
 def test_empty_initialization() -> None:
@@ -56,3 +56,39 @@ def test_very_long_string() -> None:
     ls = LangString(long_string)
     assert ls.text == long_string, f"Unexpected text: {ls.text}"
     assert ls.to_string() == f'"{long_string}"', f"Unexpected string representation: {ls.to_string()}"
+
+
+def test_warning_on_empty_string() -> None:
+    """Test that a warning is generated when an empty string is used."""
+    with pytest.warns(UserWarning, match="Received empty string.") as record:
+        LangString("")
+
+    # Confirming that the warning message is as expected
+    assert "Received empty string." in str(record[0].message)
+
+
+def test_warning_on_invalid_language_tag() -> None:
+    """Test that a warning is generated when an invalid language tag is used."""
+    with pytest.warns(UserWarning, match=r"Invalid language tag 'xx-INVALID' used.") as record:
+        LangString("Hello", "xx-INVALID")
+
+    # Confirming that the warning message is as expected
+    assert "Invalid language tag 'xx-INVALID' used." in str(record[0].message)
+
+
+def test_no_warning_on_valid_language_tag() -> None:
+    """Test that no warning is generated when a valid language tag is used."""
+    with pytest.warns(None) as record:
+        LangString("Hello", "en")
+
+    # Confirming that no warnings were captured
+    assert len(record) == 0
+
+
+def test_no_warning_on_no_language_tag() -> None:
+    """Test that no warning is generated when no language tag is provided."""
+    with pytest.warns(None) as record:
+        LangString("Hello")
+
+    # Confirming that no warnings were captured
+    assert len(record) == 0

@@ -3,10 +3,13 @@
 This module utilizes the langcodes library for validating language tags and the loguru library for logging
 warnings in case of invalid language tags.
 """
+import warnings
 
 from langcodes import tag_is_valid, Language
 from loguru import logger
 
+# Suppress the display of UserWarnings
+warnings.simplefilter("ignore", UserWarning)
 
 class LangString:
     """A class to encapsulate a string with its language information.
@@ -31,9 +34,13 @@ class LangString:
             raise TypeError
 
         if not text:
-            logger.warning("Received empty string.")
+            warning_msg = "Received empty string."
+            warnings.warn(warning_msg, UserWarning)
+            logger.warning(warning_msg)
         if lang and not tag_is_valid(lang):
-            logger.warning(f"Invalid language tag '{lang}' used.")
+            warning_msg = f"Invalid language tag '{lang}' used."
+            warnings.warn(warning_msg, UserWarning)
+            logger.warning(warning_msg)
 
         self.text: str = text
         self.lang: Language = lang

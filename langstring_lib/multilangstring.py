@@ -1,12 +1,14 @@
 """This module defines the `MultiLangString` class for handling multilingual text strings."""
+import warnings
 from enum import Enum
 
-from icecream import ic
 from langcodes import Language, tag_is_valid
 from loguru import logger
 
 from langstring_lib.langstring import LangString
 
+# Suppress the display of UserWarnings
+warnings.simplefilter("ignore", UserWarning)
 
 class ControlMultipleEntries(Enum):
     """ControlMultipleEntries Enum for specifying handling of duplicate language tags.
@@ -54,14 +56,19 @@ class MultiLangString:
                              f"Valid control values are: {ControlMultipleEntries._member_names_}.")
 
         if not tag_is_valid(preferred_lang):
-            logger.warning(f"Invalid preferred language tag '{preferred_lang}' used.")
+            warn_message = f"Invalid preferred language tag '{preferred_lang}' used."
+            warnings.warn(warn_message, UserWarning)
+            logger.warning(warn_message)
 
         self.langstrings: dict = {}  # Initialize self.langStrings here
         self.control: ControlMultipleEntries = ControlMultipleEntries[control]
         self.preferred_lang: Language = preferred_lang
 
         for arg in args:
-            self.add(arg)
+            if not isinstance(arg, LangString):
+                raise TypeError
+            else:
+                self.add(arg)
 
     def add(self, langstring: LangString):
         """Add a LangString to the MultiLangString.
@@ -71,8 +78,9 @@ class MultiLangString:
         """
         if isinstance(langstring, LangString):
             if self.control == ControlMultipleEntries.BLOCK_WARN and langstring.lang in self.langstrings:
-                logger.warning(
-                    f"Operation not possible, a LangString with language tag {langstring.lang} already exists.")
+                warn_message = f"Operation not possible, a LangString with language tag {langstring.lang} already exists."
+                warnings.warn(warn_message, UserWarning)
+                logger.warning(warn_message)
             elif self.control == ControlMultipleEntries.BLOCK_ERROR and langstring.lang in self.langstrings:
                 raise ValueError(
                     f"Operation not possible, a LangString with language tag {langstring.lang} already exists.")
@@ -166,8 +174,4 @@ class MultiLangString:
         return ", ".join(
             f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in
             langstrings)
-
-
-ic(type(ControlMultipleEntries.OVERWRITE.value))
-ic(type(ControlMultipleEntries.OVERWRITE.name))
 

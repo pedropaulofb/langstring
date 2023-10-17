@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "langstring"
+project = "langstring_lib"
 copyright = "Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"
 author = "Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"
 
@@ -31,10 +31,10 @@ extensions = [
 
 autodoc_typehints = "description"
 github_username = "pedropaulofb"
-github_repository = "pedropaulofb/langstring"
+github_repository = "pedropaulofb/langstring_lib"
 
 autoapi_dirs = [
-    "../langstring/",
+    "../langstring_lib/",
 ]
 
 templates_path = ["_templates"]

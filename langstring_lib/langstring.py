@@ -1,7 +1,9 @@
-"""The langstring module provides the LangString class to encapsulate a string with its language information.
+"""The langstring_lib module provides the LangString class to encapsulate a string with its language information.
+
 This module utilizes the langcodes library for validating language tags and the loguru library for logging
-warnings in case of invalid language tags."""
-from icecream import ic
+warnings in case of invalid language tags.
+"""
+
 from langcodes import tag_is_valid, Language
 from loguru import logger
 
@@ -23,15 +25,13 @@ class LangString:
         :param lang: The language of the text, defaults to None.
         :type lang: Language, optional
         """
-
-
         if text and not isinstance(text, str):
             raise TypeError
         if lang and not isinstance(lang, str):
             raise TypeError
 
         if not text:
-            logger.warning(f"Received empty string.")
+            logger.warning("Received empty string.")
         if lang and not tag_is_valid(lang):
             logger.warning(f"Invalid language tag '{lang}' used.")
 
@@ -56,3 +56,5 @@ class LangString:
             return f'"{self.text}"'
         else:
             return f'"{self.text}"@{self.lang}'
+
+

@@ -1,10 +1,11 @@
 """This module defines the `MultiLangString` class for handling multilingual text strings."""
 from enum import Enum
 
+from icecream import ic
 from langcodes import Language, tag_is_valid
 from loguru import logger
 
-from langstring.langstring import LangString
+from langstring_lib.langstring import LangString
 
 
 class ControlMultipleEntries(Enum):
@@ -16,6 +17,7 @@ class ControlMultipleEntries(Enum):
         BLOCK_WARN: Block and log a warning for duplicate language tags.
         BLOCK_ERROR: Block and raise an error for duplicate language tags.
     """
+
     OVERWRITE = "OVERWRITE"
     ALLOW = "ALLOW"
     BLOCK_WARN = "BLOCK_WARN"
@@ -61,26 +63,26 @@ class MultiLangString:
         for arg in args:
             self.add(arg)
 
-    def add(self, lang_string: LangString):
+    def add(self, langstring: LangString):
         """Add a LangString to the MultiLangString.
 
-        :param lang_string: The LangString to add.
-        :type lang_string: LangString
+        :param langstring: The LangString to add.
+        :type langstring: LangString
         """
-        if isinstance(lang_string, LangString):
-            if self.control == ControlMultipleEntries.BLOCK_WARN and lang_string.lang in self.langstrings:
+        if isinstance(langstring, LangString):
+            if self.control == ControlMultipleEntries.BLOCK_WARN and langstring.lang in self.langstrings:
                 logger.warning(
-                    f"Operation not possible, a LangString with language tag {lang_string.lang} already exists.")
-            elif self.control == ControlMultipleEntries.BLOCK_ERROR and lang_string.lang in self.langstrings:
+                    f"Operation not possible, a LangString with language tag {langstring.lang} already exists.")
+            elif self.control == ControlMultipleEntries.BLOCK_ERROR and langstring.lang in self.langstrings:
                 raise ValueError(
-                    f"Operation not possible, a LangString with language tag {lang_string.lang} already exists.")
+                    f"Operation not possible, a LangString with language tag {langstring.lang} already exists.")
             elif self.control == ControlMultipleEntries.OVERWRITE:
-                self.langstrings[lang_string.lang] = [lang_string.text]
+                self.langstrings[langstring.lang] = [langstring.text]
             else:  # self.control == ALLOW
-                if lang_string.text not in self.langstrings.get(lang_string.lang, []):
-                    self.langstrings.setdefault(lang_string.lang, []).append(lang_string.text)
+                if langstring.text not in self.langstrings.get(langstring.lang, []):
+                    self.langstrings.setdefault(langstring.lang, []).append(langstring.text)
 
-    def get_lang_string(self, lang: str) -> list:
+    def get_langstring(self, lang: str) -> list:
         """Get LangStrings for a specific language tag.
 
         :param lang: The language tag to retrieve LangStrings for.
@@ -90,7 +92,7 @@ class MultiLangString:
         """
         return self.langstrings.get(lang, [])
 
-    def get_preferred_lang_string(self) -> str:
+    def get_pref_langstring(self) -> str:
         """Get the preferred language's LangString.
 
         :return: The LangString for the preferred language.
@@ -98,23 +100,23 @@ class MultiLangString:
         """
         return self.langstrings.get(self.preferred_lang, None)
 
-    def remove_lang_string(self, lang_string: LangString) -> bool:
+    def remove_langstring(self, langstring: LangString) -> bool:
         """Remove a LangString from the MultiLangString.
 
-        :param lang_string: The LangString to remove.
-        :type lang_string: LangString
+        :param langstring: The LangString to remove.
+        :type langstring: LangString
         :return: True if the LangString was removed, False otherwise.
         :rtype: bool
         """
-        lang_strings = self.langstrings.get(lang_string.lang, [])
-        if lang_string.text in lang_strings:
-            lang_strings.remove(lang_string.text)
-            if not lang_strings:
-                del self.langstrings[lang_string.lang]
+        langstrings = self.langstrings.get(langstring.lang, [])
+        if langstring.text in langstrings:
+            langstrings.remove(langstring.text)
+            if not langstrings:
+                del self.langstrings[langstring.lang]
             return True
         return False
 
-    def remove_lang(self, lang: str):
+    def remove_language(self, lang: str):
         """Remove all LangStrings for a specific language tag.
 
         :param lang: The language tag for which to remove LangStrings.
@@ -136,8 +138,8 @@ class MultiLangString:
         :return: List of strings representing the MultiLangString.
         :rtype: list
         """
-        return [f"{repr(lang_string)}@{lang}" for lang, lang_strings in self.langstrings.items() for lang_string in
-            lang_strings]
+        return [f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in
+                langstrings]
 
     def __repr__(self):
         """Return a string representation of the MultiLangString object.
@@ -153,7 +155,7 @@ class MultiLangString:
         :return: The total number of LangStrings.
         :rtype: int
         """
-        return sum(len(lang_strings) for lang_strings in self.langstrings.values())
+        return sum(len(langstrings) for langstrings in self.langstrings.values())
 
     def __str__(self) -> str:
         """Return a string representation of the MultiLangString, including language tags.
@@ -162,5 +164,10 @@ class MultiLangString:
         :rtype: str
         """
         return ", ".join(
-            f"{repr(lang_string)}@{lang}" for lang, lang_strings in self.langstrings.items() for lang_string in
-            lang_strings)
+            f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in
+            langstrings)
+
+
+ic(type(ControlMultipleEntries.OVERWRITE.value))
+ic(type(ControlMultipleEntries.OVERWRITE.name))
+

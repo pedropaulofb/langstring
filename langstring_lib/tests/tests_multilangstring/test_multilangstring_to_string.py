@@ -19,7 +19,7 @@ def test_string_representation_single_entry() -> None:
 
     expected_output = "'Hello'@en"
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
@@ -31,7 +31,7 @@ def test_string_representation_multiple_entries_single_language() -> None:
 
     expected_output = "'Hello'@en, 'Hi'@en"
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
@@ -44,7 +44,7 @@ def test_string_representation_multiple_entries_multiple_languages() -> None:
 
     expected_output = "'Hello'@en, 'Hi'@en, 'Bonjour'@fr"
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
@@ -54,7 +54,7 @@ def test_string_representation_empty_multilangstring() -> None:
 
     expected_output = ""
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected string representation to be an empty string but got {str(multi_lang_string)}."
 
 
@@ -65,7 +65,7 @@ def test_string_representation_invalid_langstring() -> None:
 
     expected_output = "'Hello'@"
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
@@ -77,7 +77,7 @@ def test_string_representation_multiple_same_language() -> None:
 
     expected_output = "'Hello'@en, 'Hi'@en"
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected '{expected_output}' but got '{str(multi_lang_string)}'."
 
 
@@ -90,7 +90,7 @@ def test_string_representation_special_characters() -> None:
     # Adjusting the expected_output to match the repr representation
     expected_output = f"{repr(special_value)}@en"
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected '{expected_output}' but got '{str(multi_lang_string)}'."
 
 
@@ -115,5 +115,5 @@ def test_string_representation_multiple_languages() -> None:
 
     expected_output = "'Hello'@en, 'Bonjour'@fr"
     assert (
-        str(multi_lang_string) == expected_output
+            str(multi_lang_string) == expected_output
     ), f"Expected '{expected_output}' but got '{str(multi_lang_string)}'."

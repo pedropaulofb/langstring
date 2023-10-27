@@ -36,10 +36,10 @@ def test_remove_langstring_from_language_with_multiple_entries() -> None:
 
     assert result is True, "Failed to remove a LangString from a language with multiple entries."
     assert (
-        "Hello" not in multi_lang_string.langstrings["en"]
+            "Hello" not in multi_lang_string.langstrings["en"]
     ), "'Hello' was not removed from English LangStrings in MultiLangString."
     assert (
-        "Hi" in multi_lang_string.langstrings["en"]
+            "Hi" in multi_lang_string.langstrings["en"]
     ), "'Hi' was not found in English LangStrings in MultiLangString after removal attempt."
 
 

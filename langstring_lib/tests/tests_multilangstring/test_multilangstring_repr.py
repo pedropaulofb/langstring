@@ -1,5 +1,4 @@
 import pytest
-from icecream import ic
 
 from langstring_lib.langstring import LangString
 from langstring_lib.multilangstring import MultiLangString

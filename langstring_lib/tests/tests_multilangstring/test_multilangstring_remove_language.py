@@ -39,7 +39,7 @@ def test_remove_invalid_language_format() -> None:
     """Test attempting to remove LangStrings using an invalid language format."""
     multi_lang_string = create_sample_multilangstring()
     invalid_language = "123"
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(invalid_language)
     assert (
         str(excinfo.value) == f"Invalid language format. Expected alphabetic string and received '{invalid_language}'."
@@ -72,7 +72,7 @@ def test_remove_empty_language_code() -> None:
     """Test removing LangStrings with an empty language code."""
     multi_lang_string = create_sample_multilangstring()
     empty_language = ""
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(empty_language)
     assert (
         str(excinfo.value)
@@ -85,7 +85,7 @@ def test_remove_language_non_string() -> None:
     multi_lang_string = create_sample_multilangstring()
 
     non_string_language = 123  # Using a number
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(non_string_language)
 
     assert (
@@ -98,7 +98,7 @@ def test_remove_language_with_special_characters() -> None:
     """Test attempting to remove LangStrings with a language code that contains special characters."""
     multi_lang_string = create_sample_multilangstring()
     special_char_language = "en-US"  # Using a regional code
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(special_char_language)
     assert (
         str(excinfo.value)
@@ -110,7 +110,7 @@ def test_remove_language_with_spaces() -> None:
     """Test attempting to remove LangStrings with a language code that contains spaces."""
     multi_lang_string = create_sample_multilangstring()
     spaced_language = "en us"  # Using spaces
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(spaced_language)
     assert (
         str(excinfo.value) == f"Invalid language format. Expected alphabetic string and received '{spaced_language}'."
@@ -121,6 +121,6 @@ def test_remove_language_with_mixed_characters() -> None:
     """Test attempting to remove LangStrings with a mixed character set in the language code."""
     multi_lang_string = create_sample_multilangstring()
     mixed_language = "3n"  # Using alphanumeric characters
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(mixed_language)
     assert str(excinfo.value) == f"Invalid language format. Expected alphabetic string and received '{mixed_language}'."

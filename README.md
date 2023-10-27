@@ -282,6 +282,8 @@ Remember, the `MultiLangString` class is designed to handle multiple language st
 
 ## Getting Started
 
+### Installation
+
 Install with:
 
 ```bash
@@ -290,26 +292,52 @@ pip install langstring
 
 Then, encapsulate strings with their language tags as shown in the examples above.
 
-### Key Classes
+### Importing and Using the Library
 
-- **`LangString`**: Holds a single string with its language.
-
-```python
-from langstring_lib import LangString
-
-ls = LangString(text="Hello", lang="en")
-```
-
-- **`MultiLangString`**: Contains multiple translations of a string.
+After installation, you can use the `LangString` and `MultiLangString` classes in your project. Simply import the classes and start encapsulating strings with their language tags.
 
 ```python
-from langstring_lib import MultiLangString
-
-mls = MultiLangString({
-    "en": "Hello",
-    "fr": "Bonjour"
-})
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
 ```
+
+#### Example Usage of `LangString`:
+
+```python
+# Create a LangString object with text and language information
+greeting_en = LangString("Hello", "en")
+
+# Printing the LangString object
+print(greeting_en)  # Outputs: "Hello"@en
+```
+
+#### Example Usage of `MultiLangString`:
+
+```python
+# Create LangString objects for greetings in English and Spanish
+greeting_en = LangString("Hello", "en")
+greeting_es = LangString("Hola", "es")
+
+# Use MultiLangString to combine them. The 'control' parameter determines how duplicate language tags are handled.
+combined_greeting = MultiLangString(greeting_en, greeting_es, control="ALLOW")
+
+# Fetch and print a greeting based on language
+# Note: The `get_langstring` method returns a list, so we'll take the first item if available
+spanish_greetings = combined_greeting.get_langstring("es")
+if spanish_greetings:
+    print(spanish_greetings[0])  # Outputs: "Hola"@es
+else:
+    print("No greeting found for the specified language.")
+
+# Retrieve the preferred language's greeting (defaults to English in this example)
+preferred_greeting = combined_greeting.get_pref_langstring()
+if preferred_greeting:
+    print(preferred_greeting)  # Outputs: "Hello"@en
+else:
+    print("No greeting found for the preferred language.")
+```
+
+
 
 ## Code Testing
 

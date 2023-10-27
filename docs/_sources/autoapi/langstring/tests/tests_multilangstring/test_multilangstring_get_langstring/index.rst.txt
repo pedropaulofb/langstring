@@ -1,0 +1,77 @@
+:py:mod:`langstring.tests.tests_multilangstring.test_multilangstring_get_langstring`
+====================================================================================
+
+.. py:module:: langstring.tests.tests_multilangstring.test_multilangstring_get_langstring
+
+.. autoapi-nested-parse::
+
+   Tests for the MultiLangString class's method get_langstring.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_existing_language
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_non_existing_language
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_invalid_language
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_with_preferred_language
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_parametrized
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_with_non_string_arg
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_with_empty_string
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_with_none_arg
+   langstring.tests.tests_multilangstring.test_multilangstring_get_langstring.test_get_langstring_with_long_string_arg
+
+
+
+.. py:function:: test_get_langstring_existing_language()
+
+   Test retrieving LangStrings for an existing language tag.
+
+
+.. py:function:: test_get_langstring_non_existing_language()
+
+   Test retrieving LangStrings for a non-existing language tag.
+
+
+.. py:function:: test_get_langstring_invalid_language()
+
+   Test retrieving LangStrings for an invalid language tag.
+
+
+.. py:function:: test_get_langstring_with_preferred_language()
+
+   Test retrieving LangStrings with preferred language.
+
+
+.. py:function:: test_get_langstring_parametrized(lang, expected)
+
+   Parametrized test for retrieving LangStrings for various language tags.
+
+
+.. py:function:: test_get_langstring_with_non_string_arg()
+
+   Test retrieving LangStrings using a non-string argument.
+
+
+.. py:function:: test_get_langstring_with_empty_string()
+
+   Test retrieving LangStrings using an empty string.
+
+
+.. py:function:: test_get_langstring_with_none_arg()
+
+   Test retrieving LangStrings using None as an argument.
+
+
+.. py:function:: test_get_langstring_with_long_string_arg()
+
+   Test retrieving LangStrings using an unusually long string argument.
+
+

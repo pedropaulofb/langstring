@@ -1,0 +1,6 @@
+:py:mod:`langstring.tests.tests_multilangstring.test_multilangstring_remove_language`
+=====================================================================================
+
+.. py:module:: langstring.tests.tests_multilangstring.test_multilangstring_remove_language
+
+

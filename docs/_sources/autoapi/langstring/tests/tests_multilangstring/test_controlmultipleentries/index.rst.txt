@@ -1,0 +1,53 @@
+:py:mod:`langstring.tests.tests_multilangstring.test_controlmultipleentries`
+============================================================================
+
+.. py:module:: langstring.tests.tests_multilangstring.test_controlmultipleentries
+
+.. autoapi-nested-parse::
+
+   Tests for the Class ControlMultipleEntries.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring.tests.tests_multilangstring.test_controlmultipleentries.test_enum_iteration
+   langstring.tests.tests_multilangstring.test_controlmultipleentries.test_enum_names
+   langstring.tests.tests_multilangstring.test_controlmultipleentries.test_enum_values
+   langstring.tests.tests_multilangstring.test_controlmultipleentries.test_enum_types
+   langstring.tests.tests_multilangstring.test_controlmultipleentries.test_invalid_enum_value
+
+
+
+.. py:function:: test_enum_iteration()
+
+   Test enumeration of ControlMultipleEntries.
+
+
+.. py:function:: test_enum_names()
+
+   Test enum names of ControlMultipleEntries.
+
+
+.. py:function:: test_enum_values()
+
+   Test enum values of ControlMultipleEntries.
+
+
+.. py:function:: test_enum_types()
+
+   Test enum types of ControlMultipleEntries.
+
+
+.. py:function:: test_invalid_enum_value()
+
+   Test handling of invalid enum value.
+
+

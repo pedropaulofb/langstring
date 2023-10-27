@@ -15,12 +15,12 @@ authors:
     orcid: 'https://orcid.org/0000-0003-2736-7817'
 identifiers:
   - type: url
-    value: 'https://github.com/pedropaulofb/langString'
+    value: 'https://github.com/pedropaulofb/langstring'
     description: Git repository
-repository-code: 'https://github.com/pedropaulofb/langString'
-url: 'https://pedropaulofb.github.io/langString/'
-repository-artifact: 'https://pypi.org/project/langString/'
-abstract: A Python library that implements langString and multiLangStrings.
+repository-code: 'https://github.com/pedropaulofb/langstring'
+url: 'https://pedropaulofb.github.io/langstring/'
+repository-artifact: 'https://pypi.org/project/langstring/'
+abstract: A Python library that implements langstring and multiLangStrings.
 keywords:
   - langstring
   - language-representation

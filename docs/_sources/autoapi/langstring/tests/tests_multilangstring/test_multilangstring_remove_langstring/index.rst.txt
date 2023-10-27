@@ -1,0 +1,26 @@
+:py:mod:`langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring`
+=======================================================================================
+
+.. py:module:: langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_langstring
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_langstring_not_found
+
+
+
+.. py:function:: test_remove_langstring()
+
+
+.. py:function:: test_remove_langstring_not_found()
+
+

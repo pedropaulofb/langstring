@@ -1,20 +1,20 @@
 [tool.poetry]
-name = "langString"
+name = "langstring"
 version = "1.0.0a0"
 description = "LangString Python Library"
 license = "Apache-2.0"
 authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]
 readme = "README.md"
-homepage = "https://github.com/pedropaulofb/langString"
-repository = "https://github.com/pedropaulofb/langString"
-documentation = "https://pedropaulofb.github.io/langString"
+homepage = "https://github.com/pedropaulofb/langstring"
+repository = "https://github.com/pedropaulofb/langstring"
+documentation = "https://pedropaulofb.github.io/langstring"
 keywords = ["string", "langstring", "multilangstring", "language-string", "multilanguage-string",
     "language-representation", "multilanguage"]
-packages = [{ include = "langString" }]
-exclude = ["langString/tests"]
+packages = [{ include = "langstring" }]
+exclude = ["langstring/tests"]
 
 [tool.poetry.urls]
-"PyPi Project" = "https://pypi.org/project/langString/"
+"PyPi Project" = "https://pypi.org/project/langstring/"
 
 [tool.poetry.dependencies]
 python = "^3.09"

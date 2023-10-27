@@ -1,0 +1,86 @@
+:py:mod:`langstring.tests.tests_langstring.test_langstring_init`
+================================================================
+
+.. py:module:: langstring.tests.tests_langstring.test_langstring_init
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring.tests.tests_langstring.test_langstring_init.test_initialization
+   langstring.tests.tests_langstring.test_langstring_init.test_language_initialization
+   langstring.tests.tests_langstring.test_langstring_init.test_empty_initialization
+   langstring.tests.tests_langstring.test_langstring_init.test_empty_language_initialization
+   langstring.tests.tests_langstring.test_langstring_init.test_wrong_type_initialization
+   langstring.tests.tests_langstring.test_langstring_init.test_wrong_type_language_initialization
+   langstring.tests.tests_langstring.test_langstring_init.test_whitespace_and_special_characters
+   langstring.tests.tests_langstring.test_langstring_init.test_very_long_string
+   langstring.tests.tests_langstring.test_langstring_init.test_warning_on_empty_string
+   langstring.tests.tests_langstring.test_langstring_init.test_warning_on_invalid_language_tag
+   langstring.tests.tests_langstring.test_langstring_init.test_no_warning_on_valid_language_tag
+   langstring.tests.tests_langstring.test_langstring_init.test_no_warning_on_no_language_tag
+
+
+
+.. py:function:: test_initialization()
+
+   Test the initialization of a LangString object without specifying a language.
+
+
+.. py:function:: test_language_initialization()
+
+   Test the initialization of a LangString object with a specified language.
+
+
+.. py:function:: test_empty_initialization()
+
+   Test the initialization of a LangString object with empty text and no specified language.
+
+
+.. py:function:: test_empty_language_initialization()
+
+   Test the initialization of a LangString object with empty text and a specified language.
+
+
+.. py:function:: test_wrong_type_initialization()
+
+   Test initialization with wrong types.
+
+
+.. py:function:: test_wrong_type_language_initialization()
+
+   Test language initialization with wrong types.
+
+
+.. py:function:: test_whitespace_and_special_characters()
+
+
+.. py:function:: test_very_long_string()
+
+
+.. py:function:: test_warning_on_empty_string()
+
+   Test that a warning is generated when an empty string is used.
+
+
+.. py:function:: test_warning_on_invalid_language_tag()
+
+   Test that a warning is generated when an invalid language tag is used.
+
+
+.. py:function:: test_no_warning_on_valid_language_tag()
+
+   Test that no warning is generated when a valid language tag is used.
+
+
+.. py:function:: test_no_warning_on_no_language_tag()
+
+   Test that no warning is generated when no language tag is provided.
+
+

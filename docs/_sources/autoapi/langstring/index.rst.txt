@@ -3,29 +3,28 @@
 
 .. py:module:: langstring
 
+.. autoapi-nested-parse::
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   langstring.LangString
+   This package contains modules related to handling language-specific strings using the LangString and MultiLangString classes.
 
 
 
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
 
-.. py:class:: LangString(text, lang = None)
+   tests/index.rst
 
 
-   .. py:method:: to_string()
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
 
-
-   .. py:method:: __str__()
-
-      Return str(self).
-
+   langstring/index.rst
+   multilangstring/index.rst
 
 

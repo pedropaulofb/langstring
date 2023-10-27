@@ -14,7 +14,7 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-LangString Websites
+langstring Websites
 ===================
 
 .. raw:: html

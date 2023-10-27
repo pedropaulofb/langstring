@@ -47,7 +47,7 @@ class LangString:
         self.lang: Language = lang
 
     def to_string(self) -> str:
-        """Convert the LangString object to a string.
+        """Convert the LangString object to a string. Syntactical sugar for calling self.__str__().
 
         :return: The string representation of the LangString object.
         :rtype: str

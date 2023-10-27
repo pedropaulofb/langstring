@@ -192,7 +192,7 @@ class MultiLangString:
         return False
 
     def to_string(self) -> str:
-        """Convert the MultiLangString to a string.
+        """Convert the MultiLangString to a string. Syntactical sugar for self.__str()__.
 
         :return: The string representation of the MultiLangString.
         :rtype: str

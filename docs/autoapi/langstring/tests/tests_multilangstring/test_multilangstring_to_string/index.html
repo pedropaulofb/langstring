@@ -95,15 +95,97 @@
 <h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_list" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_to_string_list</span></code></a>()</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_matches_str_representation" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_matches_str_representation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_to_string_matches_str_representation</span></code></a>()</p></td>
+<td><p>Verify that to_string() provides the same output as __str__().</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_single_entry" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_single_entry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_single_entry</span></code></a>()</p></td>
+<td><p>Check the string representation for a MultiLangString with a single LangString.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_single_language" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_single_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_multiple_entries_single_language</span></code></a>()</p></td>
+<td><p>Verify string representation for MultiLangString with multiple LangStrings for a single language.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_multiple_languages" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_multiple_languages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_multiple_entries_multiple_languages</span></code></a>()</p></td>
+<td><p>Confirm string representation for a MultiLangString with multiple LangStrings for multiple languages.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_empty_multilangstring" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_empty_multilangstring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_empty_multilangstring</span></code></a>()</p></td>
+<td><p>Check the string representation for an empty MultiLangString.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_invalid_langstring" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_invalid_langstring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_invalid_langstring</span></code></a>()</p></td>
+<td><p>Check the string representation with an improperly initialized LangString (e.g., no language).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_same_language" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_same_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_multiple_same_language</span></code></a>()</p></td>
+<td><p>Check the string representation when there are multiple LangStrings for the same language.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_special_characters" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_special_characters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_special_characters</span></code></a>()</p></td>
+<td><p>Check the string representation handles special characters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_long_value" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_long_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_long_value</span></code></a>()</p></td>
+<td><p>Test the string representation with a very long LangString value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_languages" title="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_languages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_string_representation_multiple_languages</span></code></a>()</p></td>
+<td><p>Test the string representation with multiple LangStrings of different languages.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
-<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_list">
-<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_to_string_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_list" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_matches_str_representation">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_to_string_matches_str_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_to_string_matches_str_representation" title="Link to this definition"></a></dt>
+<dd><p>Verify that to_string() provides the same output as __str__().</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_single_entry">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_single_entry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_single_entry" title="Link to this definition"></a></dt>
+<dd><p>Check the string representation for a MultiLangString with a single LangString.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_single_language">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_multiple_entries_single_language</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_single_language" title="Link to this definition"></a></dt>
+<dd><p>Verify string representation for MultiLangString with multiple LangStrings for a single language.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_multiple_languages">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_multiple_entries_multiple_languages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_entries_multiple_languages" title="Link to this definition"></a></dt>
+<dd><p>Confirm string representation for a MultiLangString with multiple LangStrings for multiple languages.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_empty_multilangstring">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_empty_multilangstring</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_empty_multilangstring" title="Link to this definition"></a></dt>
+<dd><p>Check the string representation for an empty MultiLangString.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_invalid_langstring">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_invalid_langstring</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_invalid_langstring" title="Link to this definition"></a></dt>
+<dd><p>Check the string representation with an improperly initialized LangString (e.g., no language).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_same_language">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_multiple_same_language</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_same_language" title="Link to this definition"></a></dt>
+<dd><p>Check the string representation when there are multiple LangStrings for the same language.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_special_characters">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_special_characters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_special_characters" title="Link to this definition"></a></dt>
+<dd><p>Check the string representation handles special characters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_long_value">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_long_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_long_value" title="Link to this definition"></a></dt>
+<dd><p>Test the string representation with a very long LangString value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_languages">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_to_string.</span></span><span class="sig-name descname"><span class="pre">test_string_representation_multiple_languages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_to_string.test_string_representation_multiple_languages" title="Link to this definition"></a></dt>
+<dd><p>Test the string representation with multiple LangStrings of different languages.</p>
+</dd></dl>
 
 </section>
 </section>

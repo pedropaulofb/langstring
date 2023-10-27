@@ -1,9 +1,9 @@
-from langstring.langstring import LangString
-from langstring.multilangstring import MultiLangString
-from langstring.tests.tests_multilangstring.sample_multilangstring import create_sample_multilangstring
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
+from langstring_lib.tests.tests_multilangstring.sample_multilangstring import create_sample_multilangstring
 
 
-def test_to_string_matches_str_representation():
+def test_to_string_matches_str_representation() -> None:
     """Verify that to_string() provides the same output as __str__()."""
     multi_lang_string = create_sample_multilangstring()
 
@@ -12,7 +12,7 @@ def test_to_string_matches_str_representation():
     ), "The output of to_string() should match the output of __str__()."
 
 
-def test_string_representation_single_entry():
+def test_string_representation_single_entry() -> None:
     """Check the string representation for a MultiLangString with a single LangString."""
     lang_string = LangString("Hello", "en")
     multi_lang_string = MultiLangString(lang_string)
@@ -23,7 +23,7 @@ def test_string_representation_single_entry():
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
-def test_string_representation_multiple_entries_single_language():
+def test_string_representation_multiple_entries_single_language() -> None:
     """Verify string representation for MultiLangString with multiple LangStrings for a single language."""
     lang_string1 = LangString("Hello", "en")
     lang_string2 = LangString("Hi", "en")
@@ -35,7 +35,7 @@ def test_string_representation_multiple_entries_single_language():
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
-def test_string_representation_multiple_entries_multiple_languages():
+def test_string_representation_multiple_entries_multiple_languages() -> None:
     """Confirm string representation for a MultiLangString with multiple LangStrings for multiple languages."""
     lang_string1 = LangString("Hello", "en")
     lang_string2 = LangString("Hi", "en")
@@ -48,7 +48,7 @@ def test_string_representation_multiple_entries_multiple_languages():
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
-def test_string_representation_empty_multilangstring():
+def test_string_representation_empty_multilangstring() -> None:
     """Check the string representation for an empty MultiLangString."""
     multi_lang_string = MultiLangString()
 
@@ -58,7 +58,7 @@ def test_string_representation_empty_multilangstring():
     ), f"Expected string representation to be an empty string but got {str(multi_lang_string)}."
 
 
-def test_string_representation_invalid_langstring():
+def test_string_representation_invalid_langstring() -> None:
     """Check the string representation with an improperly initialized LangString (e.g., no language)."""
     lang_string = LangString("Hello", "")  # Empty language code
     multi_lang_string = MultiLangString(lang_string)
@@ -69,7 +69,7 @@ def test_string_representation_invalid_langstring():
     ), f"Expected string representation to be {expected_output} but got {str(multi_lang_string)}."
 
 
-def test_string_representation_multiple_same_language():
+def test_string_representation_multiple_same_language() -> None:
     """Check the string representation when there are multiple LangStrings for the same language."""
     langstring1 = LangString("Hello", "en")
     langstring2 = LangString("Hi", "en")
@@ -81,7 +81,7 @@ def test_string_representation_multiple_same_language():
     ), f"Expected '{expected_output}' but got '{str(multi_lang_string)}'."
 
 
-def test_string_representation_special_characters():
+def test_string_representation_special_characters() -> None:
     """Check the string representation handles special characters."""
     special_value = "Hello\nWorld\"!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
     langstring = LangString(special_value, "en")
@@ -94,7 +94,7 @@ def test_string_representation_special_characters():
     ), f"Expected '{expected_output}' but got '{str(multi_lang_string)}'."
 
 
-def test_string_representation_long_value():
+def test_string_representation_long_value() -> None:
     """Test the string representation with a very long LangString value."""
     long_value = "A" * 5000  # Creating a very long string
     langstring = LangString(long_value, "en")
@@ -107,7 +107,7 @@ def test_string_representation_long_value():
     )
 
 
-def test_string_representation_multiple_languages():
+def test_string_representation_multiple_languages() -> None:
     """Test the string representation with multiple LangStrings of different languages."""
     langstring_en = LangString("Hello", "en")
     langstring_fr = LangString("Bonjour", "fr")

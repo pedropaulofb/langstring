@@ -1,8 +1,8 @@
 """Tests for the MultiLangString class's method add."""
 import pytest
 
-from langstring.langstring import LangString
-from langstring.multilangstring import MultiLangString
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
 
 
 def test_add_overwrite() -> None:

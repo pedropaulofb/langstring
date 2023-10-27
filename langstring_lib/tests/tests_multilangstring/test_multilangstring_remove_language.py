@@ -1,11 +1,11 @@
 import pytest
 
-from langstring.langstring import LangString
-from langstring.multilangstring import MultiLangString
-from langstring.tests.tests_multilangstring.sample_multilangstring import create_sample_multilangstring
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
+from langstring_lib.tests.tests_multilangstring.sample_multilangstring import create_sample_multilangstring
 
 
-def test_remove_existing_language():
+def test_remove_existing_language() -> None:
     """Test removing all LangStrings of an existing language from a MultiLangString."""
     multi_lang_string = create_sample_multilangstring()
 
@@ -15,7 +15,7 @@ def test_remove_existing_language():
     assert "fr" not in multi_lang_string.langstrings, "French LangStrings were not removed from MultiLangString."
 
 
-def test_remove_non_existent_language():
+def test_remove_non_existent_language() -> None:
     """Test attempting to remove LangStrings of a non-existent language from a MultiLangString."""
     multi_lang_string = create_sample_multilangstring()
 
@@ -25,7 +25,7 @@ def test_remove_non_existent_language():
     assert "eo" not in multi_lang_string.langstrings, "Esperanto, a non-existent language, found in MultiLangString."
 
 
-def test_remove_language_with_multiple_entries():
+def test_remove_language_with_multiple_entries() -> None:
     """Test removing a language with multiple associated LangString entries."""
     multi_lang_string = MultiLangString(LangString("Hello", "en"), LangString("Hi", "en"), control="ALLOW")
 
@@ -35,7 +35,7 @@ def test_remove_language_with_multiple_entries():
     assert "en" not in multi_lang_string.langstrings, "English LangStrings were not removed from MultiLangString."
 
 
-def test_remove_invalid_language_format():
+def test_remove_invalid_language_format() -> None:
     """Test attempting to remove LangStrings using an invalid language format."""
     multi_lang_string = create_sample_multilangstring()
     invalid_language = "123"
@@ -46,7 +46,7 @@ def test_remove_invalid_language_format():
     )
 
 
-def test_language_case_sensitivity():
+def test_language_case_sensitivity() -> None:
     """Test if the removal of LangStrings by language is case-sensitive."""
     multi_lang_string = create_sample_multilangstring()
 
@@ -57,7 +57,7 @@ def test_language_case_sensitivity():
     assert "FR" not in multi_lang_string.langstrings, "Uppercase language was not removed from MultiLangString."
 
 
-def test_remove_from_empty_multilangstring():
+def test_remove_from_empty_multilangstring() -> None:
     """Test attempting to remove a language from an empty MultiLangString."""
     multi_lang_string = MultiLangString(control="ALLOW")
 
@@ -68,7 +68,7 @@ def test_remove_from_empty_multilangstring():
     )
 
 
-def test_remove_empty_language_code():
+def test_remove_empty_language_code() -> None:
     """Test removing LangStrings with an empty language code."""
     multi_lang_string = create_sample_multilangstring()
     empty_language = ""
@@ -80,7 +80,7 @@ def test_remove_empty_language_code():
     )
 
 
-def test_remove_language_non_string():
+def test_remove_language_non_string() -> None:
     """Test attempting to remove LangStrings with a non-string language code."""
     multi_lang_string = create_sample_multilangstring()
 
@@ -94,7 +94,7 @@ def test_remove_language_non_string():
     )
 
 
-def test_remove_language_with_special_characters():
+def test_remove_language_with_special_characters() -> None:
     """Test attempting to remove LangStrings with a language code that contains special characters."""
     multi_lang_string = create_sample_multilangstring()
     special_char_language = "en-US"  # Using a regional code
@@ -106,7 +106,7 @@ def test_remove_language_with_special_characters():
     )
 
 
-def test_remove_language_with_spaces():
+def test_remove_language_with_spaces() -> None:
     """Test attempting to remove LangStrings with a language code that contains spaces."""
     multi_lang_string = create_sample_multilangstring()
     spaced_language = "en us"  # Using spaces
@@ -117,7 +117,7 @@ def test_remove_language_with_spaces():
     )
 
 
-def test_remove_language_with_mixed_characters():
+def test_remove_language_with_mixed_characters() -> None:
     """Test attempting to remove LangStrings with a mixed character set in the language code."""
     multi_lang_string = create_sample_multilangstring()
     mixed_language = "3n"  # Using alphanumeric characters

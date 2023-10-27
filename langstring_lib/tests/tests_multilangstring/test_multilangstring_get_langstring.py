@@ -1,8 +1,8 @@
 """Tests for the MultiLangString class's method get_langstring."""
 import pytest
 
-from langstring.langstring import LangString
-from langstring.multilangstring import MultiLangString
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
 
 
 def test_get_langstring_existing_language() -> None:

@@ -4,8 +4,8 @@ The primary function in this module is `create_sample_multilangstring`, which re
 populated with example `LangString` entries in English, French, and German.
 """
 
-from langstring.langstring import LangString
-from langstring.multilangstring import MultiLangString
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
 
 
 def create_sample_multilangstring() -> MultiLangString:

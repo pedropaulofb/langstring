@@ -1,4 +1,4 @@
-"""Tests for the Initialization of the `MultiLangString` Class from the `langstring` Package.
+"""Tests for the Initialization of the `MultiLangString` Class from the `langstring_lib` Package.
 
 This module contains a suite of tests dedicated to verifying the behavior of the `__init__` method of the
 `MultiLangString` class. The tests encompass a range of scenarios, ensuring that the class is properly initialized
@@ -6,18 +6,19 @@ under various conditions, with different arguments, and that it correctly respon
 """
 import pytest
 
-from langstring.langstring import LangString
-from langstring.multilangstring import MultiLangString, ControlMultipleEntries
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
 
 
 def test_multilangstring_initialization() -> None:
     """Test the initialization of MultiLangString with no arguments."""
     multilang_str = MultiLangString()
-    assert (
-        multilang_str.control == ControlMultipleEntries.ALLOW
-    ), "Expected default control to be ALLOW, but found another value."
 
-    assert len(multilang_str.langstrings) == 0, "Expected no langstrings on default initialization, but found some."
+    assert multilang_str.control == "ALLOW", f"Expected default control to be ALLOW, but found {multilang_str.control}."
+
+    assert (
+        len(multilang_str.langstrings) == 0
+    ), f"Expected 0 langstrings on default initialization, but found {len(multilang_str.langstrings)}."
 
 
 def test_init_with_none_arguments() -> None:
@@ -53,15 +54,14 @@ def test_init_with_langstring_objects() -> None:
 def test_init_with_control_and_preferred_language() -> None:
     """Test the initialization of MultiLangString with control and preferred language."""
     mls = MultiLangString(control="BLOCK_WARN", preferred_lang="fr")
+
     assert (
         len(mls.langstrings) == 0
-    ), "Expected no langstrings when initializing with specific control and language, but found some."
+    ), f"Expected 0 langstrings when initializing with given control and language, but found {len(mls.langstrings)}."
 
-    assert (
-        mls.control == ControlMultipleEntries.BLOCK_WARN
-    ), "Expected control to be BLOCK_WARN, but found another value."
+    assert mls.control == "BLOCK_WARN", f"Expected control to be 'BLOCK_WARN', but found {mls.control}."
 
-    assert mls.preferred_lang == "fr", "Expected preferred language to be 'fr', but found another value."
+    assert mls.preferred_lang == "fr", f"Expected preferred language to be 'fr', but found '{mls.preferred_lang}'."
 
 
 def test_init_with_invalid_control_value() -> None:
@@ -79,9 +79,7 @@ def test_init_with_invalid_preferred_language() -> None:
     """
     ls1 = LangString("Hello", "en")
 
-    # Use an invalid preferred language and capture the warning
-    with pytest.warns(UserWarning, match="Invalid preferred language tag"):
-        mls = MultiLangString(ls1, preferred_lang="xx-INVALID")
+    mls = MultiLangString(ls1, preferred_lang="xx-INVALID")
 
     # (Optional) Verify that the MultiLangString was still created correctly with the given LangString
     assert len(mls.langstrings) == 1
@@ -91,7 +89,7 @@ def test_init_with_invalid_preferred_language() -> None:
 def test_init_with_control_enum_value() -> None:
     """Test the initialization of MultiLangString with a control enum value."""
     mls = MultiLangString(control="BLOCK_WARN")
-    assert mls.control == ControlMultipleEntries.BLOCK_WARN
+    assert mls.control == "BLOCK_WARN"
 
 
 def test_init_with_mixed_language_tags() -> None:
@@ -127,3 +125,9 @@ def test_init_with_duplicate_language_tags() -> None:
     langstr_en2 = LangString("Hi", "en")
     with pytest.raises(ValueError):
         MultiLangString(langstr_en1, langstr_en2, control="BLOCK_ERROR")
+
+
+def test_invalid_control_value_init():
+    """Test the representation when control has an invalid value."""
+    with pytest.raises(ValueError):
+        MultiLangString(LangString("Hello", "en"), control="INVALID")

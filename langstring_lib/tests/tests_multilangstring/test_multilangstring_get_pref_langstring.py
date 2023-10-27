@@ -1,8 +1,8 @@
 """Tests for the MultiLangString class's method get_pref_langstring."""
 import pytest
 
-from langstring.langstring import LangString
-from langstring.multilangstring import MultiLangString
+from langstring_lib.langstring import LangString
+from langstring_lib.multilangstring import MultiLangString
 
 
 def test_get_pref_langstring_existing() -> None:
@@ -65,15 +65,15 @@ def test_get_pref_langstring_invalid_pref_lang() -> None:
     assert mls.get_pref_langstring() is None, "Expected None for an invalid preferred language"
 
 
-def test_get_pref_langstring_with_invalid_type() -> None:
+def test_get_pref_langstring_with_invalid_type_int() -> None:
     """Test behavior when the preferred language is set to a non-string type."""
     lang_str1 = LangString("Hello", "en")
     with pytest.raises(TypeError):
         MultiLangString(lang_str1, preferred_lang=123)
 
 
-def test_get_pref_langstring_with_none_pref_lang() -> None:
-    """Test if English string is returned when the preferred language is set to None."""
+def test_get_pref_langstring_with_invalid_type_none() -> None:
+    """Test behavior when the preferred language is set to a non-string type."""
     lang_str1 = LangString("Hello", "en")
-    mls = MultiLangString(lang_str1, preferred_lang=None)
-    assert mls.get_pref_langstring() == ["Hello"], "Expected 'Hello' for a None preferred language defaulting to 'en'"
+    with pytest.raises(TypeError):
+        MultiLangString(lang_str1, preferred_lang=None)

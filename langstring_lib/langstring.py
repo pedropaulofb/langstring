@@ -1,4 +1,4 @@
-"""The langstring module provides the LangString class to encapsulate a string with its language information.
+"""The langstring_lib module provides the LangString class to encapsulate a string with its language information.
 
 This module utilizes the langcodes library for validating language tags and the loguru library for logging
 warnings in case of invalid language tags.

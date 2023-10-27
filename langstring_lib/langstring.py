@@ -29,10 +29,10 @@ class LangString:
         :param lang: The language of the text, defaults to None.
         :type lang: Language, optional
         """
-        if text and not isinstance(text, str):
-            raise TypeError
-        if lang and not isinstance(lang, str):
-            raise TypeError
+        if text is not None and not isinstance(text, str):
+            raise TypeError(f"Expected 'text' to be of type str, but got {type(text).__name__}.")
+        if lang is not None and not isinstance(lang, str):
+            raise TypeError(f"Expected 'lang' to be of type str, but got {type(lang).__name__}.")
 
         if not text:
             warning_msg = "Received empty string."

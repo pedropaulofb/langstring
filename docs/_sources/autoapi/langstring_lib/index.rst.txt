@@ -1,0 +1,30 @@
+:py:mod:`langstring_lib`
+========================
+
+.. py:module:: langstring_lib
+
+.. autoapi-nested-parse::
+
+   This package contains modules related to handling language-specific strings using the LangString and MultiLangString classes.
+
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   tests/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   langstring/index.rst
+   multilangstring/index.rst
+
+

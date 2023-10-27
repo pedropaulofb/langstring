@@ -1,0 +1,79 @@
+:py:mod:`langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring`
+=============================================================================================
+
+.. py:module:: langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring
+
+.. autoapi-nested-parse::
+
+   Tests for the MultiLangString class's method get_pref_langstring.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_existing
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_non_existing
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_multiple_entries_allow
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_with_overwrite
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_with_block_error
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_empty_pref_lang
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_invalid_pref_lang
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_with_invalid_type_int
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_get_pref_langstring.test_get_pref_langstring_with_invalid_type_none
+
+
+
+.. py:function:: test_get_pref_langstring_existing()
+
+   Test if the correct LangString is returned for an existing preferred language.
+
+
+.. py:function:: test_get_pref_langstring_non_existing()
+
+   Test if None is returned when the preferred language doesn't exist.
+
+
+.. py:function:: test_get_pref_langstring_multiple_entries_allow()
+
+   Test if the first LangString is returned when multiple are associated with the preferred language.
+
+
+.. py:function:: test_get_pref_langstring_with_overwrite()
+
+   Test behavior when the control is set to OVERWRITE and multiple LangStrings are added for
+   the preferred language.
+
+
+.. py:function:: test_get_pref_langstring_with_block_error()
+
+   Test behavior when the control is set to BLOCK_ERROR and a duplicate LangString for the preferred language
+   is added.
+
+
+.. py:function:: test_get_pref_langstring_empty_pref_lang()
+
+   Test if None is returned when the preferred language is an empty string.
+
+
+.. py:function:: test_get_pref_langstring_invalid_pref_lang()
+
+   Test if None is returned when the preferred language is invalid.
+
+
+.. py:function:: test_get_pref_langstring_with_invalid_type_int()
+
+   Test behavior when the preferred language is set to a non-string type.
+
+
+.. py:function:: test_get_pref_langstring_with_invalid_type_none()
+
+   Test behavior when the preferred language is set to a non-string type.
+
+

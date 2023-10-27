@@ -1,0 +1,83 @@
+:py:mod:`langstring_lib.tests.tests_multilangstring.test_multilangstring_add`
+=============================================================================
+
+.. py:module:: langstring_lib.tests.tests_multilangstring.test_multilangstring_add
+
+.. autoapi-nested-parse::
+
+   Tests for the MultiLangString class's method add.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_overwrite
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_allow
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_block_warn
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_block_error
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_new_language
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_wrong_type
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_empty_value
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_empty_value_overwrite
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_empty_value_block_warn
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_add.test_add_empty_value_block_error
+
+
+
+.. py:function:: test_add_overwrite()
+
+   Test the OVERWRITE control strategy.
+
+
+.. py:function:: test_add_allow()
+
+   Test the ALLOW control strategy.
+
+
+.. py:function:: test_add_block_warn()
+
+   Test the BLOCK_WARN control strategy with a warning.
+
+
+.. py:function:: test_add_block_error()
+
+   Test the BLOCK_ERROR control strategy with an error.
+
+
+.. py:function:: test_add_new_language()
+
+   Test adding a LangString with a new language.
+
+
+.. py:function:: test_add_wrong_type()
+
+   Test adding a non-LangString type.
+
+
+.. py:function:: test_add_empty_value()
+
+   Test adding a LangString with an empty string value.
+
+
+.. py:function:: test_add_empty_value_overwrite()
+
+   Test the OVERWRITE control strategy with an empty string value.
+
+
+.. py:function:: test_add_empty_value_block_warn()
+
+   Test the BLOCK_WARN control strategy with an empty string value.
+
+
+.. py:function:: test_add_empty_value_block_error()
+
+   Test the BLOCK_ERROR control strategy with an empty string value.
+
+

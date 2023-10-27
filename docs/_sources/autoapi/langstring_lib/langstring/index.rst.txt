@@ -1,0 +1,54 @@
+:py:mod:`langstring_lib.langstring`
+===================================
+
+.. py:module:: langstring_lib.langstring
+
+.. autoapi-nested-parse::
+
+   The langstring_lib module provides the LangString class to encapsulate a string with its language information.
+
+   This module utilizes the langcodes library for validating language tags and the loguru library for logging
+   warnings in case of invalid language tags.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   langstring_lib.langstring.LangString
+
+
+
+
+.. py:class:: LangString(text, lang = None)
+
+
+   A class to encapsulate a string with its language information.
+
+   :ivar text: The actual text string.
+   :vartype text: str
+   :ivar lang: The language of the text, as a Language object or None if not specified.
+   :vartype lang: Language
+
+   .. py:method:: to_string()
+
+      Convert the LangString object to a string. Syntactical sugar for calling self.__str__().
+
+      :return: The string representation of the LangString object.
+      :rtype: str
+
+
+   .. py:method:: __str__()
+
+      Define the string representation of the LangString object.
+
+      :return: The string representation of the LangString object.
+      :rtype: str
+
+
+

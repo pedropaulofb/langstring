@@ -42,7 +42,7 @@ def test_remove_invalid_language_format() -> None:
     with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(invalid_language)
     assert (
-            str(excinfo.value) == f"Invalid language format. Expected alphabetic string and received '{invalid_language}'."
+        str(excinfo.value) == f"Invalid language format. Expected alphabetic string and received '{invalid_language}'."
     )
 
 
@@ -75,8 +75,8 @@ def test_remove_empty_language_code() -> None:
     with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(empty_language)
     assert (
-            str(excinfo.value)
-            == "Invalid language format. Expected non-empty alphabetic string and received an empty string."
+        str(excinfo.value)
+        == "Invalid language format. Expected non-empty alphabetic string and received an empty string."
     )
 
 
@@ -89,8 +89,8 @@ def test_remove_language_non_string() -> None:
         multi_lang_string.remove_language(non_string_language)
 
     assert (
-            str(excinfo.value)
-            == f"Invalid language format. Expected alphabetic string and received '{non_string_language}'."
+        str(excinfo.value)
+        == f"Invalid language format. Expected alphabetic string and received '{non_string_language}'."
     )
 
 
@@ -101,8 +101,8 @@ def test_remove_language_with_special_characters() -> None:
     with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(special_char_language)
     assert (
-            str(excinfo.value)
-            == f"Invalid language format. Expected alphabetic string and received '{special_char_language}'."
+        str(excinfo.value)
+        == f"Invalid language format. Expected alphabetic string and received '{special_char_language}'."
     )
 
 
@@ -113,7 +113,7 @@ def test_remove_language_with_spaces() -> None:
     with pytest.raises(TypeError) as excinfo:
         multi_lang_string.remove_language(spaced_language)
     assert (
-            str(excinfo.value) == f"Invalid language format. Expected alphabetic string and received '{spaced_language}'."
+        str(excinfo.value) == f"Invalid language format. Expected alphabetic string and received '{spaced_language}'."
     )
 
 

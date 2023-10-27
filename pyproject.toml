@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langstring"
-version = "1.0.0a0"
+version = "1.0.0b0"
 description = "LangString Python Library"
 license = "Apache-2.0"
 authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]
@@ -10,8 +10,8 @@ repository = "https://github.com/pedropaulofb/langstring"
 documentation = "https://pedropaulofb.github.io/langstring"
 keywords = ["string", "langstring", "multilangstring", "language-string", "multilanguage-string",
     "language-representation", "multilanguage"]
-packages = [{ include = "langstring" }]
-exclude = ["langstring/tests"]
+packages = [{ include = "langstring_lib" }]
+exclude = ["langstring_lib/tests"]
 
 [tool.poetry.urls]
 "PyPi Project" = "https://pypi.org/project/langstring/"

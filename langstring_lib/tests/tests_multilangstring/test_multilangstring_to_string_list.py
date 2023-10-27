@@ -48,11 +48,13 @@ def test_duplicate_langstring_same_text() -> None:
     assert result_allow == ["'Hello'@en"], f"Expected no duplicate entries for control ALLOW, but got {result_allow}"
 
     # Using control "OVERWRITE"
-    mls_overwrite: MultiLangString = MultiLangString(LangString("Hello", "en"), LangString("Hello", "en"),
-                                                     control="OVERWRITE")
+    mls_overwrite: MultiLangString = MultiLangString(
+        LangString("Hello", "en"), LangString("Hello", "en"), control="OVERWRITE"
+    )
     result_overwrite: list[str] = mls_overwrite.to_string_list()
     assert result_overwrite == [
-        "'Hello'@en"], f"Expected a single entry for control OVERWRITE, but got {result_overwrite}"
+        "'Hello'@en"
+    ], f"Expected a single entry for control OVERWRITE, but got {result_overwrite}"
 
 
 def test_duplicate_langstring_different_text() -> None:
@@ -60,8 +62,10 @@ def test_duplicate_langstring_different_text() -> None:
     # Using control "ALLOW"
     mls_allow: MultiLangString = MultiLangString(LangString("Hello", "en"), LangString("Hi", "en"), control="ALLOW")
     result_allow: list[str] = mls_allow.to_string_list()
-    assert set(result_allow) == {"'Hello'@en",
-                                 "'Hi'@en"}, f"Expected different texts for control ALLOW, but got {result_allow}"
+    assert set(result_allow) == {
+        "'Hello'@en",
+        "'Hi'@en",
+    }, f"Expected different texts for control ALLOW, but got {result_allow}"
 
 
 def test_extremely_long_text() -> None:

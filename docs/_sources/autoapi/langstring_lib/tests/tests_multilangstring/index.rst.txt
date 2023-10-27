@@ -1,0 +1,30 @@
+:py:mod:`langstring_lib.tests.tests_multilangstring`
+====================================================
+
+.. py:module:: langstring_lib.tests.tests_multilangstring
+
+.. autoapi-nested-parse::
+
+   This package contains test modules for the MultiLangString class.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   sample_multilangstring/index.rst
+   test_multilangstring_add/index.rst
+   test_multilangstring_get_langstring/index.rst
+   test_multilangstring_get_pref_langstring/index.rst
+   test_multilangstring_init/index.rst
+   test_multilangstring_len/index.rst
+   test_multilangstring_remove_langstring/index.rst
+   test_multilangstring_remove_language/index.rst
+   test_multilangstring_repr/index.rst
+   test_multilangstring_to_string/index.rst
+   test_multilangstring_to_string_list/index.rst
+
+

@@ -17,7 +17,7 @@ def test_multilangstring_initialization() -> None:
     assert multilang_str.control == "ALLOW", f"Expected default control to be ALLOW, but found {multilang_str.control}."
 
     assert (
-            len(multilang_str.langstrings) == 0
+        len(multilang_str.langstrings) == 0
     ), f"Expected 0 langstrings on default initialization, but found {len(multilang_str.langstrings)}."
 
 
@@ -56,7 +56,7 @@ def test_init_with_control_and_preferred_language() -> None:
     mls = MultiLangString(control="BLOCK_WARN", preferred_lang="fr")
 
     assert (
-            len(mls.langstrings) == 0
+        len(mls.langstrings) == 0
     ), f"Expected 0 langstrings when initializing with given control and language, but found {len(mls.langstrings)}."
 
     assert mls.control == "BLOCK_WARN", f"Expected control to be 'BLOCK_WARN', but found {mls.control}."

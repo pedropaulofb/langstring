@@ -54,8 +54,10 @@ class MultiLangString:
         :raises TypeError: If the passed argument is not an instance of LangString.
         """
         if not isinstance(arg, LangString):
-            logger.error(f"MultiLangString received invalid argument. Expected a LangString but "
-                         f"received '{type(arg).__name__}' with value '{arg}'.")
+            logger.error(
+                f"MultiLangString received invalid argument. Expected a LangString but "
+                f"received '{type(arg).__name__}' with value '{arg}'."
+            )
             raise TypeError
 
     def __init__(self, *args: LangString, control: str = "ALLOW", preferred_lang: str = "en"):
@@ -101,8 +103,10 @@ class MultiLangString:
         if control_value in self.MULTIPLE_ENTRIES_CONTROLS:
             self._control = control_value
         else:
-            raise ValueError(f"Invalid control value: {control_value}. "
-                             f"Valid control values are: {self.MULTIPLE_ENTRIES_CONTROLS}.")
+            raise ValueError(
+                f"Invalid control value: {control_value}. "
+                f"Valid control values are: {self.MULTIPLE_ENTRIES_CONTROLS}."
+            )
 
     # preferred_lang GETTER
     @property
@@ -133,16 +137,16 @@ class MultiLangString:
         :param langstring: The LangString to add.
         :type langstring: LangString
         """
-
         self._validate_langstring_arg(langstring)  # Use the helper method
 
         if self.control == "BLOCK_WARN" and langstring.lang in self.langstrings:
-            warn_message = (f"Operation not possible, a LangString with language tag {langstring.lang} already exists.")
+            warn_message = f"Operation not possible, a LangString with language tag {langstring.lang} already exists."
             warnings.warn(warn_message, UserWarning)
             logger.warning(warn_message)
         elif self.control == "BLOCK_ERROR" and langstring.lang in self.langstrings:
             raise ValueError(
-                f"Operation not possible, a LangString with language tag {langstring.lang} already exists.")
+                f"Operation not possible, a LangString with language tag {langstring.lang} already exists."
+            )
         elif self.control == "OVERWRITE":
             self.langstrings[langstring.lang] = [langstring.text]
         else:  # self.control == ALLOW
@@ -206,7 +210,8 @@ class MultiLangString:
             raise TypeError(f"Invalid language format. Expected alphabetic string and received '{language_code}'.")
         elif not language_code:
             raise TypeError(
-                "Invalid language format. Expected non-empty alphabetic string and received an empty string.")
+                "Invalid language format. Expected non-empty alphabetic string and received an empty string."
+            )
         elif not language_code.isalpha():
             raise TypeError(f"Invalid language format. Expected alphabetic string and received '{language_code}'.")
 
@@ -235,8 +240,9 @@ class MultiLangString:
         :return: List of strings representing the MultiLangString.
         :rtype: list
         """
-        return [f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in
-                langstrings]
+        return [
+            f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in langstrings
+        ]
 
     def __repr__(self):
         """Return a string representation of the MultiLangString object.
@@ -264,5 +270,5 @@ class MultiLangString:
         :rtype: str
         """
         return ", ".join(
-            f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in
-            langstrings)
+            f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in langstrings
+        )

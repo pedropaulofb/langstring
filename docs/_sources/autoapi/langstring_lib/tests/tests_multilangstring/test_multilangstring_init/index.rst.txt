@@ -1,0 +1,114 @@
+:py:mod:`langstring_lib.tests.tests_multilangstring.test_multilangstring_init`
+==============================================================================
+
+.. py:module:: langstring_lib.tests.tests_multilangstring.test_multilangstring_init
+
+.. autoapi-nested-parse::
+
+   Tests for the Initialization of the `MultiLangString` Class from the `langstring_lib` Package.
+
+   This module contains a suite of tests dedicated to verifying the behavior of the `__init__` method of the
+   `MultiLangString` class. The tests encompass a range of scenarios, ensuring that the class is properly initialized
+   under various conditions, with different arguments, and that it correctly responds to invalid or unexpected inputs.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_multilangstring_initialization
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_none_arguments
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_unexpected_data_types
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_langstring_objects
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_control_and_preferred_language
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_invalid_control_value
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_invalid_preferred_language
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_control_enum_value
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_mixed_language_tags
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_default_preferred_language
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_init_with_duplicate_language_tags
+   langstring_lib.tests.tests_multilangstring.test_multilangstring_init.test_invalid_control_value_init
+
+
+
+.. py:function:: test_multilangstring_initialization()
+
+   Test the initialization of MultiLangString with no arguments.
+
+
+.. py:function:: test_init_with_none_arguments()
+
+   Test initializing `MultiLangString` with `None`, expecting a `TypeError`.
+
+   The test ensures that the `MultiLangString` class correctly identifies and
+   raises a `TypeError` when provided with a `None` value during initialization.
+
+
+.. py:function:: test_init_with_unexpected_data_types()
+
+   Test initializing `MultiLangString` with unexpected data types.
+
+   This test validates that initializing `MultiLangString` with a non-string
+   and non-LangString data type like an integer will result in a `TypeError`.
+
+
+.. py:function:: test_init_with_langstring_objects()
+
+   Test the initialization of MultiLangString with LangString objects.
+
+
+.. py:function:: test_init_with_control_and_preferred_language()
+
+   Test the initialization of MultiLangString with control and preferred language.
+
+
+.. py:function:: test_init_with_invalid_control_value()
+
+   Test the initialization of MultiLangString with an invalid control value.
+
+
+.. py:function:: test_init_with_invalid_preferred_language()
+
+   Test the initialization of the `MultiLangString` class with an invalid preferred language.
+
+   This test aims to:
+   1. Ensure that a warning is raised when an invalid preferred language is provided during initialization.
+   2. Verify that the instance of `MultiLangString` is still created correctly despite the invalid preferred language.
+
+
+.. py:function:: test_init_with_control_enum_value()
+
+   Test the initialization of MultiLangString with a control enum value.
+
+
+.. py:function:: test_init_with_mixed_language_tags()
+
+   Test the initialization of the `MultiLangString` class with a mixture of valid and invalid language tags.
+
+   This test aims to:
+   1. Ensure that a warning is raised when an invalid language tag is encountered during initialization.
+   2. Confirm that valid language tags are correctly added to the `MultiLangString` instance.
+   3. Check that invalid language tags, even if not causing a failure, do not get added to the `MultiLangString`.
+
+
+.. py:function:: test_init_with_default_preferred_language()
+
+   Test the initialization of MultiLangString with its default preferred language.
+
+
+.. py:function:: test_init_with_duplicate_language_tags()
+
+   Test the initialization of MultiLangString with duplicate language tags.
+
+
+.. py:function:: test_invalid_control_value_init()
+
+   Test the representation when control has an invalid value.
+
+

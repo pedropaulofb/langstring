@@ -8,7 +8,9 @@ from langstring_lib.tests.tests_multilangstring.sample_multilangstring import cr
 def test_repr_basic_representation() -> None:
     """Check the representation of a standard MultiLangString with multiple languages."""
     multi_lang_string = create_sample_multilangstring()
-    expected_repr = "MultiLangString({'en': ['Hello'], 'fr': ['Bonjour'], 'de': ['Hallo']}, control='ALLOW', preferred_lang='en')"
+    expected_repr = (
+        "MultiLangString({'en': ['Hello'], 'fr': ['Bonjour'], 'de': ['Hallo']}, control='ALLOW', preferred_lang='en')"
+    )
     assert repr(multi_lang_string) == expected_repr, f"Got {repr(multi_lang_string)}, expected {expected_repr}"
 
 
@@ -61,7 +63,7 @@ def test_repr_long_value() -> None:
 
 def test_repr_special_characters() -> None:
     """Check the representation of a MultiLangString with special characters."""
-    special_value = 'Hello\nWorld"!#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+    special_value = "Hello\nWorld\"!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
     multi_lang_string = MultiLangString(LangString(special_value, "en"))
     expected_repr = f"MultiLangString({{{repr('en')}: {repr([special_value])}}}, control='ALLOW', preferred_lang='en')"
     assert repr(multi_lang_string) == expected_repr, f"Got {repr(multi_lang_string)}, expected {expected_repr}"
@@ -99,5 +101,6 @@ def test_repr_multiple_langstrings() -> None:
     expected_repr = f"MultiLangString({multiple_entries_repr}, control='ALLOW', preferred_lang='en')"
 
     # Assert the actual representation matches the expected representation
-    assert repr(multi_lang_string) == expected_repr, (
-        f"Expected representation '{expected_repr}' but got '{repr(multi_lang_string)}'.")
+    assert (
+        repr(multi_lang_string) == expected_repr
+    ), f"Expected representation '{expected_repr}' but got '{repr(multi_lang_string)}'."

@@ -15,6 +15,7 @@ Submodules
    :titlesonly:
    :maxdepth: 1
 
+   sample_multilangstring/index.rst
    test_controlmultipleentries/index.rst
    test_multilangstring_add/index.rst
    test_multilangstring_get_langstring/index.rst

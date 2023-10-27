@@ -107,12 +107,19 @@ Classes
       :rtype: bool
 
 
-   .. py:method:: remove_language(lang)
+   .. py:method:: remove_language(language_code)
 
-      Remove all LangStrings for a specific language tag.
+      Remove all LangStrings associated with a specific language code.
 
-      :param lang: The language tag for which to remove LangStrings.
-      :type lang: str
+      This method attempts to remove all LangStrings that match the given language code. If the
+      language code is found and entries are removed, the method returns `True`. If the language
+      code isn't found, the method returns `False`. For invalid language_code formats, a
+      `ValueError` is raised.
+
+      :param str language_code: The language code (e.g., "en", "fr") for which to remove LangStrings.
+      :return: True if the language entries were removed, False otherwise.
+      :rtype: bool
+      :raises ValueError: If the provided language_code isn't valid or contains non-alphabetical chars.
 
 
    .. py:method:: to_string()

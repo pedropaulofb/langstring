@@ -5,7 +5,7 @@ warnings in case of invalid language tags.
 """
 import warnings
 
-from langcodes import tag_is_valid, Language
+from langcodes import tag_is_valid
 from loguru import logger
 
 # Suppress the display of UserWarnings

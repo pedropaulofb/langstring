@@ -89,6 +89,115 @@
              
   <section id="module-langstring.tests.tests_multilangstring.test_multilangstring_remove_language">
 <span id="langstring-tests-tests-multilangstring-test-multilangstring-remove-language"></span><h1><a class="reference internal" href="#module-langstring.tests.tests_multilangstring.test_multilangstring_remove_language" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language</span></code></a><a class="headerlink" href="#module-langstring.tests.tests_multilangstring.test_multilangstring_remove_language" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_existing_language" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_existing_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_existing_language</span></code></a>()</p></td>
+<td><p>Test removing all LangStrings of an existing language from a MultiLangString.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_non_existent_language" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_non_existent_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_non_existent_language</span></code></a>()</p></td>
+<td><p>Test attempting to remove LangStrings of a non-existent language from a MultiLangString.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_multiple_entries" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_multiple_entries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_language_with_multiple_entries</span></code></a>()</p></td>
+<td><p>Test removing a language with multiple associated LangString entries.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_invalid_language_format" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_invalid_language_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_invalid_language_format</span></code></a>()</p></td>
+<td><p>Test attempting to remove LangStrings using an invalid language format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_language_case_sensitivity" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_language_case_sensitivity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_language_case_sensitivity</span></code></a>()</p></td>
+<td><p>Test if the removal of LangStrings by language is case-sensitive.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_from_empty_multilangstring" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_from_empty_multilangstring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_from_empty_multilangstring</span></code></a>()</p></td>
+<td><p>Test attempting to remove a language from an empty MultiLangString.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_empty_language_code" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_empty_language_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_empty_language_code</span></code></a>()</p></td>
+<td><p>Test removing LangStrings with an empty language code.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_non_string" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_non_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_language_non_string</span></code></a>()</p></td>
+<td><p>Test attempting to remove LangStrings with a non-string language code.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_special_characters" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_special_characters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_language_with_special_characters</span></code></a>()</p></td>
+<td><p>Test attempting to remove LangStrings with a language code that contains special characters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_spaces" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_spaces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_language_with_spaces</span></code></a>()</p></td>
+<td><p>Test attempting to remove LangStrings with a language code that contains spaces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_mixed_characters" title="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_mixed_characters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_remove_language_with_mixed_characters</span></code></a>()</p></td>
+<td><p>Test attempting to remove LangStrings with a mixed character set in the language code.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_existing_language">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_existing_language</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_existing_language" title="Link to this definition"></a></dt>
+<dd><p>Test removing all LangStrings of an existing language from a MultiLangString.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_non_existent_language">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_non_existent_language</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_non_existent_language" title="Link to this definition"></a></dt>
+<dd><p>Test attempting to remove LangStrings of a non-existent language from a MultiLangString.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_multiple_entries">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_language_with_multiple_entries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_multiple_entries" title="Link to this definition"></a></dt>
+<dd><p>Test removing a language with multiple associated LangString entries.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_invalid_language_format">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_invalid_language_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_invalid_language_format" title="Link to this definition"></a></dt>
+<dd><p>Test attempting to remove LangStrings using an invalid language format.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_language_case_sensitivity">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_language_case_sensitivity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_language_case_sensitivity" title="Link to this definition"></a></dt>
+<dd><p>Test if the removal of LangStrings by language is case-sensitive.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_from_empty_multilangstring">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_from_empty_multilangstring</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_from_empty_multilangstring" title="Link to this definition"></a></dt>
+<dd><p>Test attempting to remove a language from an empty MultiLangString.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_empty_language_code">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_empty_language_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_empty_language_code" title="Link to this definition"></a></dt>
+<dd><p>Test removing LangStrings with an empty language code.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_non_string">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_language_non_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_non_string" title="Link to this definition"></a></dt>
+<dd><p>Test attempting to remove LangStrings with a non-string language code.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_special_characters">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_language_with_special_characters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_special_characters" title="Link to this definition"></a></dt>
+<dd><p>Test attempting to remove LangStrings with a language code that contains special characters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_spaces">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_language_with_spaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_spaces" title="Link to this definition"></a></dt>
+<dd><p>Test attempting to remove LangStrings with a language code that contains spaces.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_mixed_characters">
+<span class="sig-prename descclassname"><span class="pre">langstring.tests.tests_multilangstring.test_multilangstring_remove_language.</span></span><span class="sig-name descname"><span class="pre">test_remove_language_with_mixed_characters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.tests.tests_multilangstring.test_multilangstring_remove_language.test_remove_language_with_mixed_characters" title="Link to this definition"></a></dt>
+<dd><p>Test attempting to remove LangStrings with a mixed character set in the language code.</p>
+</dd></dl>
+
+</section>
+</section>
 </section>
 
 

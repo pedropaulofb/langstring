@@ -146,7 +146,6 @@ class MultiLangString:
         :return: True if the LangString was removed, False otherwise.
         :rtype: bool
         """
-
         if not isinstance(langstring, LangString):
             raise TypeError(f"Expected a LangString but received '{type(langstring).__name__}'.")
 
@@ -158,13 +157,39 @@ class MultiLangString:
             return True
         return False
 
-    def remove_language(self, lang: str):
-        """Remove all LangStrings for a specific language tag.
+    def remove_language(self, language_code: str) -> bool:
+        """Remove all LangStrings associated with a specific language code.
 
-        :param lang: The language tag for which to remove LangStrings.
-        :type lang: str
+        This method attempts to remove all LangStrings that match the given language code. If the
+        language code is found and entries are removed, the method returns `True`. If the language
+        code isn't found, the method returns `False`. For invalid language_code formats, a
+        `ValueError` is raised.
+
+        :param str language_code: The language code (e.g., "en", "fr") for which to remove LangStrings.
+        :return: True if the language entries were removed, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the provided language_code isn't valid or contains non-alphabetical chars.
         """
-        self.langstrings.pop(lang, None)
+        # Handling of Invalid Language Formats
+        if not isinstance(language_code, str):
+            raise ValueError(f"Invalid language format. Expected alphabetic string and received '{language_code}'.")
+        elif not language_code:
+            raise ValueError(
+                "Invalid language format. Expected non-empty alphabetic string and received an empty string."
+            )
+        elif not language_code.isalpha():
+            raise ValueError(f"Invalid language format. Expected alphabetic string and received '{language_code}'.")
+
+        # Ensure case insensitivity
+        language_code = language_code.lower()
+
+        # Check if the language exists
+        if language_code in self.langstrings:
+            del self.langstrings[language_code]
+            return True
+
+        # If language was not found
+        return False
 
     def to_string(self) -> str:
         """Convert the MultiLangString to a string.

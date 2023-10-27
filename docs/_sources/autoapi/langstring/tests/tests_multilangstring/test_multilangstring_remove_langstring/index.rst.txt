@@ -13,14 +13,90 @@ Functions
 
 .. autoapisummary::
 
-   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_langstring
-   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_langstring_not_found
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_existing_langstring
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_non_existent_langstring
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_langstring_from_language_with_multiple_entries
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_last_langstring_from_language
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_invalid_argument_type
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_none_argument
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_empty_langstring
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_duplicate_langstring_entries
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_case_sensitive_removal
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_whitespace_handling
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_special_characters
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_from_empty_multilangstring
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_remove_langstring_same_text_diff_lang
+   langstring.tests.tests_multilangstring.test_multilangstring_remove_langstring.test_unicode_removal
 
 
 
-.. py:function:: test_remove_langstring()
+.. py:function:: test_remove_existing_langstring()
+
+   Test removing an existing LangString from a MultiLangString.
 
 
-.. py:function:: test_remove_langstring_not_found()
+.. py:function:: test_remove_non_existent_langstring()
+
+   Test attempting to remove a non-existent LangString from a MultiLangString.
+
+
+.. py:function:: test_remove_langstring_from_language_with_multiple_entries()
+
+   Test removing a LangString from a language with multiple LangString entries.
+
+
+.. py:function:: test_remove_last_langstring_from_language()
+
+   Test removing the last LangString for a specific language.
+
+
+.. py:function:: test_remove_invalid_argument_type()
+
+   Test attempting to remove a LangString using an invalid argument type.
+
+
+.. py:function:: test_remove_none_argument()
+
+   Test attempting to remove a LangString using a None argument.
+
+
+.. py:function:: test_remove_empty_langstring()
+
+   Test attempting to remove an empty LangString.
+
+
+.. py:function:: test_remove_duplicate_langstring_entries()
+
+   Test removing a duplicate LangString entry from a MultiLangString.
+
+
+.. py:function:: test_case_sensitive_removal()
+
+   Test the case sensitivity when removing a LangString.
+
+
+.. py:function:: test_whitespace_handling()
+
+   Test the removal of a LangString with leading or trailing whitespaces.
+
+
+.. py:function:: test_special_characters()
+
+   Test the removal of a LangString with special characters.
+
+
+.. py:function:: test_remove_from_empty_multilangstring()
+
+   Test attempting to remove a LangString from an empty MultiLangString.
+
+
+.. py:function:: test_remove_langstring_same_text_diff_lang()
+
+   Test removing a LangString with the same text but different language.
+
+
+.. py:function:: test_unicode_removal()
+
+   Test the removal of a LangString with non-ASCII characters.
 
 

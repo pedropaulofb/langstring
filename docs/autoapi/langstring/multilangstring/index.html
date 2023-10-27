@@ -218,11 +218,24 @@ BLOCK_ERROR: Block and raise an error for duplicate language tags.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.remove_language">
-<span class="sig-name descname"><span class="pre">remove_language</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.remove_language" title="Link to this definition"></a></dt>
-<dd><p>Remove all LangStrings for a specific language tag.</p>
+<span class="sig-name descname"><span class="pre">remove_language</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language_code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.remove_language" title="Link to this definition"></a></dt>
+<dd><p>Remove all LangStrings associated with a specific language code.</p>
+<p>This method attempts to remove all LangStrings that match the given language code. If the
+language code is found and entries are removed, the method returns <cite>True</cite>. If the language
+code isn’t found, the method returns <cite>False</cite>. For invalid language_code formats, a
+<cite>ValueError</cite> is raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language tag for which to remove LangStrings.</p>
+<dd class="field-odd"><p><strong>language_code</strong> (<em>str</em>) – The language code (e.g., “en”, “fr”) for which to remove LangStrings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the language entries were removed, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided language_code isn’t valid or contains non-alphabetical chars.</p>
 </dd>
 </dl>
 </dd></dl>

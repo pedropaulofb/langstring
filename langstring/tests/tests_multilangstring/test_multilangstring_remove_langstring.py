@@ -2,19 +2,7 @@ import pytest
 
 from langstring.langstring import LangString
 from langstring.multilangstring import MultiLangString
-
-
-def create_sample_multilangstring() -> MultiLangString:
-    """Create a sample MultiLangString for testing purposes.
-
-    :return: A sample MultiLangString.
-    :rtype: MultiLangString
-    """
-    langstring_en = LangString("Hello", "en")
-    langstring_fr = LangString("Bonjour", "fr")
-    langstring_de = LangString("Hallo", "de")
-
-    return MultiLangString(langstring_en, langstring_fr, langstring_de, control="ALLOW")
+from langstring.tests.tests_multilangstring.sample_multilangstring import create_sample_multilangstring
 
 
 def test_remove_existing_langstring():
@@ -41,17 +29,18 @@ def test_remove_non_existent_langstring():
 
 def test_remove_langstring_from_language_with_multiple_entries():
     """Test removing a LangString from a language with multiple LangString entries."""
-    multi_lang_string = MultiLangString(LangString("Hello", "en"), LangString("Hi", "en"),
-                                        control="ALLOW")
+    multi_lang_string = MultiLangString(LangString("Hello", "en"), LangString("Hi", "en"), control="ALLOW")
 
     langstring_to_remove = LangString("Hello", "en")
     result = multi_lang_string.remove_langstring(langstring_to_remove)
 
     assert result is True, "Failed to remove a LangString from a language with multiple entries."
-    assert "Hello" not in multi_lang_string.langstrings[
-        "en"], "'Hello' was not removed from English LangStrings in MultiLangString."
-    assert "Hi" in multi_lang_string.langstrings[
-        "en"], "'Hi' was not found in English LangStrings in MultiLangString after removal attempt."
+    assert (
+        "Hello" not in multi_lang_string.langstrings["en"]
+    ), "'Hello' was not removed from English LangStrings in MultiLangString."
+    assert (
+        "Hi" in multi_lang_string.langstrings["en"]
+    ), "'Hi' was not found in English LangStrings in MultiLangString after removal attempt."
 
 
 def test_remove_last_langstring_from_language():
@@ -62,8 +51,9 @@ def test_remove_last_langstring_from_language():
     result = multi_lang_string.remove_langstring(langstring_to_remove)
 
     assert result is True, "Failed to remove the last LangString for a specific language."
-    assert "de" not in multi_lang_string.langstrings, ("German LangString was not removed even though it was "
-                                                       "the last one.")
+    assert "de" not in multi_lang_string.langstrings, (
+        "German LangString was not removed even though it was " "the last one."
+    )
 
 
 def test_remove_invalid_argument_type():
@@ -97,10 +87,10 @@ def test_remove_empty_langstring():
 
     assert result is False, "Expected to not find and remove an empty French string in MultiLangString."
 
+
 def test_remove_duplicate_langstring_entries():
     """Test removing a duplicate LangString entry from a MultiLangString."""
-    multi_lang_string = MultiLangString(LangString("Hello", "en"), LangString("Hello", "en"),
-                                        control="ALLOW")
+    multi_lang_string = MultiLangString(LangString("Hello", "en"), LangString("Hello", "en"), control="ALLOW")
 
     langstring_to_remove = LangString("Hello", "en")
     result = multi_lang_string.remove_langstring(langstring_to_remove)
@@ -158,8 +148,7 @@ def test_remove_from_empty_multilangstring():
 
 def test_remove_langstring_same_text_diff_lang():
     """Test removing a LangString with the same text but different language."""
-    multi_lang_string = MultiLangString(LangString("Hello", "en"), LangString("Hello", "fr"),
-                                        control="ALLOW")
+    multi_lang_string = MultiLangString(LangString("Hello", "en"), LangString("Hello", "fr"), control="ALLOW")
 
     langstring_to_remove = LangString("Hello", "fr")
     result = multi_lang_string.remove_langstring(langstring_to_remove)

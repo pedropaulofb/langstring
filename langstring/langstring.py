@@ -21,7 +21,7 @@ class LangString:
     :vartype lang: Language
     """
 
-    def __init__(self, text: str, lang: Language = None) -> None:
+    def __init__(self, text: str, lang: str = None) -> None:
         """Initialize a new LangString object.
 
         :param text: The actual text string.
@@ -44,7 +44,7 @@ class LangString:
             logger.warning(warning_msg)
 
         self.text: str = text
-        self.lang: Language = lang
+        self.lang: str = lang
 
     def to_string(self) -> str:
         """Convert the LangString object to a string. Syntactical sugar for calling self.__str__().

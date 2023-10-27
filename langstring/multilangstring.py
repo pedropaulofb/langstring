@@ -146,6 +146,10 @@ class MultiLangString:
         :return: True if the LangString was removed, False otherwise.
         :rtype: bool
         """
+
+        if not isinstance(langstring, LangString):
+            raise TypeError(f"Expected a LangString but received '{type(langstring).__name__}'.")
+
         langstrings = self.langstrings.get(langstring.lang, [])
         if langstring.text in langstrings:
             langstrings.remove(langstring.text)

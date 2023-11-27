@@ -272,3 +272,39 @@ class MultiLangString:
         return ", ".join(
             f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in langstrings
         )
+
+    def __eq__(self, other: object) -> bool:
+        """
+        Check equality of this MultiLangString with another MultiLangString.
+
+        This method compares the 'langstrings' and 'preferred_lang' attributes of the two MultiLangString objects.
+        The 'control' attribute, which dictates the behavior for handling duplicate language tags, is not considered
+        in this comparison. This design decision is based on the premise that two MultiLangString objects are
+        considered equal if they contain the same multilingual content and have the same preferred language,
+        irrespective of their internal handling of duplicates.
+
+        :param other: Another MultiLangString object to compare with.
+        :type other: MultiLangString
+        :return: True if both MultiLangString objects have the same content and preferred language, False otherwise.
+        :rtype: bool
+        """
+        if not isinstance(other, MultiLangString):
+            return False
+        return self.langstrings == other.langstrings and self.preferred_lang == other.preferred_lang
+
+    def __hash__(self) -> int:
+        """
+        Generate a hash value for a MultiLangString object.
+
+        The hash is computed based on the 'langstrings' and 'preferred_lang' attributes of the MultiLangString.
+        Similar to the __eq__ method, the 'control' attribute is not included in the hash calculation. This ensures
+        that the hash value reflects the content and preferred language of the MultiLangString, aligning with the
+        equality comparison logic. This approach guarantees that MultiLangString objects with the same content and
+        preferred language will have the same hash value, even if they differ in their duplicate handling strategy.
+
+        :return: The hash value of the MultiLangString object.
+        :rtype: int
+        """
+        # Creating a frozenset for the dictionary items to ensure the hash is independent of order
+        langstrings_hash = hash(frozenset((lang, frozenset(texts)) for lang, texts in self.langstrings.items()))
+        return hash((langstrings_hash, self.preferred_lang))

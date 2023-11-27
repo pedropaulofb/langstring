@@ -63,9 +63,9 @@ def test_remove_from_empty_multilangstring() -> None:
 
     result = multi_lang_string.remove_language("en")
 
-    assert result is False, (
-        "Unexpectedly reported success while trying to remove a language from an empty " "MultiLangString."
-    )
+    assert (
+        result is False
+    ), "Unexpectedly reported success while trying to remove a language from an empty MultiLangString."
 
 
 def test_remove_empty_language_code() -> None:

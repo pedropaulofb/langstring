@@ -31,17 +31,20 @@ def test_hash_consistency(langstring_en_hello):
 def test_hash_difference_for_different_texts(langstring_en_hello, langstring_en_hi):
     """Test that LangString objects with different texts have different hashes."""
     assert hash(langstring_en_hello) != hash(
-        langstring_en_hi), "LangString objects with different texts should have different hashes"
+        langstring_en_hi
+    ), "LangString objects with different texts should have different hashes"
 
 
 def test_hash_difference_for_different_languages(langstring_en_hello, langstring_es_hello):
     """Test that LangString objects with different languages have different hashes."""
     assert hash(langstring_en_hello) != hash(
-        langstring_es_hello), "LangString objects with different languages should have different hashes"
+        langstring_es_hello
+    ), "LangString objects with different languages should have different hashes"
 
 
 def test_hash_equality_for_identical_objects(langstring_en_hello):
     """Test that two identical LangString objects have the same hash."""
     langstring_duplicate = LangString("Hello", "en")
     assert hash(langstring_en_hello) == hash(
-        langstring_duplicate), "Identical LangString objects should have the same hash"
+        langstring_duplicate
+    ), "Identical LangString objects should have the same hash"

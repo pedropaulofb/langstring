@@ -65,7 +65,7 @@ class LangString:
         else:
             return f'"{self.text}"@{self.lang}'
 
-    def __eq__(self, other: 'LangString') -> bool:
+    def __eq__(self, other: "LangString") -> bool:
         """
         Check equality of this LangString with another LangString.
 

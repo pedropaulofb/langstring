@@ -51,9 +51,9 @@ def test_remove_last_langstring_from_language() -> None:
     result = multi_lang_string.remove_langstring(langstring_to_remove)
 
     assert result is True, "Failed to remove the last LangString for a specific language."
-    assert "de" not in multi_lang_string.langstrings, (
-        "German LangString was not removed even though it was " "the last one."
-    )
+    assert (
+        "de" not in multi_lang_string.langstrings
+    ), "German LangString was not removed even though it was the last one."
 
 
 def test_remove_invalid_argument_type() -> None:

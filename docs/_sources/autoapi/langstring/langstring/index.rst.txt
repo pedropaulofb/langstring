@@ -51,4 +51,22 @@ Classes
       :rtype: str
 
 
+   .. py:method:: __eq__(other)
+
+      Check equality of this LangString with another LangString.
+
+      :param other: Another LangString object to compare with.
+      :type other: LangString
+      :return: True if both LangString objects are equal, False otherwise.
+      :rtype: bool
+
+
+   .. py:method:: __hash__()
+
+      Generate a hash value for a LangString object.
+
+      :return: The hash value of the LangString object.
+      :rtype: int
+
+
 

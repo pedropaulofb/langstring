@@ -59,6 +59,24 @@ Classes
       :rtype: str
 
 
+   .. py:method:: __eq__(other)
+
+      Check equality of this LangString with another LangString.
+
+      :param other: Another LangString object to compare with.
+      :type other: LangString
+      :return: True if both LangString objects are equal, False otherwise.
+      :rtype: bool
+
+
+   .. py:method:: __hash__()
+
+      Generate a hash value for a LangString object.
+
+      :return: The hash value of the LangString object.
+      :rtype: int
+
+
 
 .. py:class:: MultiLangString(*args, control = 'ALLOW', preferred_lang = 'en')
 
@@ -213,6 +231,36 @@ Classes
 
       :return: A string representation of the MultiLangString with language tags.
       :rtype: str
+
+
+   .. py:method:: __eq__(other)
+
+      Check equality of this MultiLangString with another MultiLangString.
+
+      This method compares the 'langstrings' and 'preferred_lang' attributes of the two MultiLangString objects.
+      The 'control' attribute, which dictates the behavior for handling duplicate language tags, is not considered
+      in this comparison. This design decision is based on the premise that two MultiLangString objects are
+      considered equal if they contain the same multilingual content and have the same preferred language,
+      irrespective of their internal handling of duplicates.
+
+      :param other: Another MultiLangString object to compare with.
+      :type other: MultiLangString
+      :return: True if both MultiLangString objects have the same content and preferred language, False otherwise.
+      :rtype: bool
+
+
+   .. py:method:: __hash__()
+
+      Generate a hash value for a MultiLangString object.
+
+      The hash is computed based on the 'langstrings' and 'preferred_lang' attributes of the MultiLangString.
+      Similar to the __eq__ method, the 'control' attribute is not included in the hash calculation. This ensures
+      that the hash value reflects the content and preferred language of the MultiLangString, aligning with the
+      equality comparison logic. This approach guarantees that MultiLangString objects with the same content and
+      preferred language will have the same hash value, even if they differ in their duplicate handling strategy.
+
+      :return: The hash value of the MultiLangString object.
+      :rtype: int
 
 
 

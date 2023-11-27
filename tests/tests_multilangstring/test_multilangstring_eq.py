@@ -4,36 +4,36 @@ from langstring import LangString, MultiLangString
 
 
 @pytest.fixture
-def sample_langstrings():
+def sample_langstrings_eq():
     """Fixture to provide sample LangString objects for testing."""
     return [LangString("Hello", "en"), LangString("Hola", "es"), LangString("Bonjour", "fr")]
 
 
-def test_equality_with_identical_multilangstrings(sample_langstrings):
+def test_equality_with_identical_multilangstrings(sample_langstrings_eq):
     """
     Test equality of two MultiLangString objects with identical langstrings and preferred_lang.
 
     :param sample_langstrings: Fixture providing sample LangString objects.
     :return: Asserts that two identical MultiLangString objects are equal.
     """
-    mls1 = MultiLangString(*sample_langstrings, preferred_lang="en")
-    mls2 = MultiLangString(*sample_langstrings, preferred_lang="en")
+    mls1 = MultiLangString(*sample_langstrings_eq, preferred_lang="en")
+    mls2 = MultiLangString(*sample_langstrings_eq, preferred_lang="en")
     assert mls1 == mls2, "MultiLangString objects with identical langstrings and preferred_lang should be equal."
 
 
-def test_inequality_with_different_langstrings(sample_langstrings):
+def test_inequality_with_different_langstrings(sample_langstrings_eq):
     """
     Test inequality of two MultiLangString objects with different langstrings.
 
     :param sample_langstrings: Fixture providing sample LangString objects.
     :return: Asserts that MultiLangString objects with different langstrings are not equal.
     """
-    mls1 = MultiLangString(sample_langstrings[0], preferred_lang="en")
-    mls2 = MultiLangString(sample_langstrings[1], preferred_lang="en")
+    mls1 = MultiLangString(sample_langstrings_eq[0], preferred_lang="en")
+    mls2 = MultiLangString(sample_langstrings_eq[1], preferred_lang="en")
     assert mls1 != mls2, "MultiLangString objects with different langstrings should not be equal."
 
 
-def test_equality_with_different_preferred_lang(sample_langstrings):
+def test_equality_with_different_preferred_lang(sample_langstrings_eq):
     """
     Test equality of two MultiLangString objects with different preferred_lang.
 
@@ -44,24 +44,24 @@ def test_equality_with_different_preferred_lang(sample_langstrings):
     :param sample_langstrings: Fixture providing sample LangString objects.
     :return: Asserts that MultiLangString objects with different preferred_lang are equal.
     """
-    mls1 = MultiLangString(sample_langstrings[0], preferred_lang="en")
-    mls2 = MultiLangString(sample_langstrings[0], preferred_lang="es")
+    mls1 = MultiLangString(sample_langstrings_eq[0], preferred_lang="en")
+    mls2 = MultiLangString(sample_langstrings_eq[0], preferred_lang="es")
     assert mls1 == mls2, "MultiLangString objects with different preferred_lang should be equal."
 
 
-def test_inequality_with_non_multilangstring_object(sample_langstrings):
+def test_inequality_with_non_multilangstring_object(sample_langstrings_eq):
     """
     Test inequality of a MultiLangString object compared with a non-MultiLangString object.
 
     :param sample_langstrings: Fixture providing sample LangString objects.
     :return: Asserts that a MultiLangString object is not equal to a non-MultiLangString object.
     """
-    mls = MultiLangString(sample_langstrings[0], preferred_lang="en")
+    mls = MultiLangString(sample_langstrings_eq[0], preferred_lang="en")
     non_mls = "Hello"
     assert mls != non_mls, "MultiLangString object should not be equal to a non-MultiLangString object."
 
 
-def test_equality_with_different_control_values(sample_langstrings):
+def test_equality_with_different_control_values(sample_langstrings_eq):
     """
     Test equality of two MultiLangString objects with different control values but identical langstrings and \
     preferred_lang.
@@ -70,8 +70,8 @@ def test_equality_with_different_control_values(sample_langstrings):
     :return: Asserts that MultiLangString objects with different control values but identical langstrings and \
     preferred_lang are equal.
     """
-    mls1 = MultiLangString(*sample_langstrings, control="ALLOW", preferred_lang="en")
-    mls2 = MultiLangString(*sample_langstrings, control="OVERWRITE", preferred_lang="en")
+    mls1 = MultiLangString(*sample_langstrings_eq, control="ALLOW", preferred_lang="en")
+    mls2 = MultiLangString(*sample_langstrings_eq, control="OVERWRITE", preferred_lang="en")
     assert (
         mls1 == mls2
     ), "MultiLangString objects with different control values but identical langstrings and preferred_lang \
@@ -87,21 +87,21 @@ def test_equality_with_empty_multilangstrings():
     assert mls1 == mls2, "Empty MultiLangString objects should be equal."
 
 
-def test_equality_with_partial_overlap_in_langstrings(sample_langstrings):
+def test_equality_with_partial_overlap_in_langstrings(sample_langstrings_eq):
     """
     Test equality of two MultiLangString objects with partial overlap in langstrings.
     """
-    mls1 = MultiLangString(*sample_langstrings[:2], preferred_lang="en")  # First two langstrings
-    mls2 = MultiLangString(*sample_langstrings[1:], preferred_lang="en")  # Last two langstrings
+    mls1 = MultiLangString(*sample_langstrings_eq[:2], preferred_lang="en")  # First two langstrings
+    mls2 = MultiLangString(*sample_langstrings_eq[1:], preferred_lang="en")  # Last two langstrings
     assert mls1 != mls2, "MultiLangString objects with partial overlap in langstrings should not be equal."
 
 
-def test_equality_with_different_order_of_addition(sample_langstrings):
+def test_equality_with_different_order_of_addition(sample_langstrings_eq):
     """
     Test equality of two MultiLangString objects with langstrings added in different order.
     """
-    mls1 = MultiLangString(*sample_langstrings, preferred_lang="en")
-    mls2 = MultiLangString(*reversed(sample_langstrings), preferred_lang="en")
+    mls1 = MultiLangString(*sample_langstrings_eq, preferred_lang="en")
+    mls2 = MultiLangString(*reversed(sample_langstrings_eq), preferred_lang="en")
     assert mls1 == mls2, "MultiLangString objects with same langstrings in different order should be equal."
 
 

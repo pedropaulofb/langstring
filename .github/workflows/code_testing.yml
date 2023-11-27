@@ -36,4 +36,4 @@ jobs:
           ls .
 
       - name: Testing with pytest
-        run: pytest -p no:warnings ./langstring/tests/
+        run: pytest -p no:warnings ./tests/

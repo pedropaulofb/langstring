@@ -10,7 +10,7 @@
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 ![License - GitHub](https://img.shields.io/github/license/pedropaulofb/langstring)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/OntoUML/langstring/main.svg)](https://results.pre-commit.ci/latest/github/OntoUML/langstring/main)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pedropaulofb/langstring/main.svg)](https://results.pre-commit.ci/latest/github/OntoUML/langstring/main)
 ![Website](https://img.shields.io/website/http/pedropaulofb.github.io/langstring.svg)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/pedropaulofb/langstring/code_testing.yml)
 

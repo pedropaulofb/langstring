@@ -43,6 +43,10 @@ For inquiries and further information, please refer to the [comprehensive docstr
     * [Importing and Using the Library](#importing-and-using-the-library)
       * [Example Usage of `LangString`:](#example-usage-of-langstring)
       * [Example Usage of `MultiLangString`:](#example-usage-of-multilangstring)
+  * [Comparison and Hashing of LangString Objects](#comparison-and-hashing-of-langstring-objects)
+    * [Equality and Inequality](#equality-and-inequality)
+    * [Hashing](#hashing)
+    * [Ordering](#ordering)
   * [Code Testing](#code-testing)
   * [How to Contribute](#how-to-contribute)
     * [Reporting Issues](#reporting-issues)
@@ -340,6 +344,75 @@ if preferred_greeting:
 else:
     print("No greeting found for the preferred language.")
 ```
+
+
+## Comparison and Hashing of LangString Objects
+
+The `LangString` class supports comparison and hashing operations, making it easier to compare and manage these objects in data structures like sets and dictionaries.
+
+### Equality and Inequality
+
+- `__eq__`: Checks if two `LangString` objects are equal (both `text` and `lang` attributes are the same).
+- `__ne__`: Checks if two `LangString` objects are not equal.
+
+```python
+from langstring import LangString
+
+ls1 = LangString("Hello", "en")
+ls2 = LangString("Hello", "en")
+ls3 = LangString("Hola", "es")
+
+# Equality
+print(ls1 == ls2)  # Output: True
+print(ls1 == ls3)  # Output: False
+
+# Inequality
+print(ls1 != ls2)  # Output: False
+print(ls1 != ls3)  # Output: True
+```
+
+### Hashing
+
+- `__hash__`: Generates a hash value for a `LangString` object, allowing it to be used in sets and as dictionary keys.
+
+```python
+from langstring import LangString
+
+ls1 = LangString("Hello", "en")
+ls2 = LangString("Hello", "en")
+ls3 = LangString("Hola", "es")
+
+# Using LangString objects in a set
+lang_strings = {ls1, ls2, ls3}
+print(len(lang_strings))  # Output: 2 (since ls1 and ls2 are equal)
+
+# Using LangString as dictionary keys
+lang_dict = {ls1: "Greeting in English", ls3: "Greeting in Spanish"}
+print(lang_dict[ls1])  # Output: "Greeting in English"
+```
+
+### Ordering
+
+- `__lt__`: Less than comparison.
+- `__le__`: Less than or equal to comparison.
+- `__gt__`: Greater than comparison.
+- `__ge__`: Greater than or equal to comparison.
+
+These methods allow `LangString` objects to be sorted and compared based on their `text` and `lang` attributes.
+
+```python
+ls4 = LangString("Bonjour", "fr")
+ls5 = LangString("Hello", "en")
+
+# Ordering
+print(ls4 < ls5)  # Output: True (based on text comparison)
+print(ls4 > ls5)  # Output: False
+print(ls4 <= ls5) # Output: True
+print(ls4 >= ls5) # Output: False
+```
+
+With these methods, `LangString` objects can be compared, sorted, and used in various Python data structures effectively.
+
 
 ## Code Testing
 

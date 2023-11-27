@@ -41,11 +41,17 @@ def test_hash_with_different_order_of_addition(sample_langstrings):
 
 def test_hash_with_different_preferred_languages(sample_langstrings):
     """
-    Test that different preferred languages affect the hash value.
+    Test that different preferred languages do not affect the hash value.
+
+    With the updated logic, different preferred_lang values do not affect the hash.
+    This test checks that two MultiLangString objects with the same langstrings but different preferred_lang
+    have the same hash value.
+
+    :param sample_langstrings: Fixture providing sample LangString objects.
     """
     mls1 = MultiLangString(*sample_langstrings, preferred_lang="en")
     mls2 = MultiLangString(*sample_langstrings, preferred_lang="es")
-    assert hash(mls1) != hash(mls2), "Different preferred languages should affect the hash value."
+    assert hash(mls1) == hash(mls2), "Different preferred languages should not affect the hash value."
 
 
 def test_hash_with_different_control_strategies(sample_langstrings):

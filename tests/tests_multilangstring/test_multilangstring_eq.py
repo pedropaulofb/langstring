@@ -33,16 +33,20 @@ def test_inequality_with_different_langstrings(sample_langstrings):
     assert mls1 != mls2, "MultiLangString objects with different langstrings should not be equal."
 
 
-def test_inequality_with_different_preferred_lang(sample_langstrings):
+def test_equality_with_different_preferred_lang(sample_langstrings):
     """
-    Test inequality of two MultiLangString objects with different preferred_lang.
+    Test equality of two MultiLangString objects with different preferred_lang.
+
+    With the updated logic, different preferred_lang values do not affect equality.
+    This test checks that two MultiLangString objects with the same langstrings but different preferred_lang
+    are considered equal.
 
     :param sample_langstrings: Fixture providing sample LangString objects.
-    :return: Asserts that MultiLangString objects with different preferred_lang are not equal.
+    :return: Asserts that MultiLangString objects with different preferred_lang are equal.
     """
     mls1 = MultiLangString(sample_langstrings[0], preferred_lang="en")
     mls2 = MultiLangString(sample_langstrings[0], preferred_lang="es")
-    assert mls1 != mls2, "MultiLangString objects with different preferred_lang should not be equal."
+    assert mls1 == mls2, "MultiLangString objects with different preferred_lang should be equal."
 
 
 def test_inequality_with_non_multilangstring_object(sample_langstrings):

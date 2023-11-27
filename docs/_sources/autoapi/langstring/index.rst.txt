@@ -84,11 +84,10 @@ Classes
    MultiLangString class for handling multilingual text strings.
 
    This class allows the management of multilingual text strings with different language tags.
-   Depending on the specified control strategy, the behavior when encountering duplicate language tags
-   can differ. The default behavior (using "ALLOW") prevents the addition of duplicate texts for the same
-   language. That is, even if multiple identical `LangString` objects with the same text and language
-   are added to a `MultiLangString`, the text for that language will not be duplicated in the internal
-   representation.
+   Depending on the specified control strategy, the behavior when encountering duplicate language tags can differ.
+   The default behavior (using "ALLOW") prevents the addition of duplicate texts for the same language.
+   That is, even if multiple identical `LangString` objects with the same text and language are added to
+   a `MultiLangString`, the text for that language will not be duplicated in the internal representation.
 
    :ivar control: The control strategy for handling duplicate language tags.
    :vartype control: str
@@ -237,15 +236,15 @@ Classes
 
       Check equality of this MultiLangString with another MultiLangString.
 
-      This method compares the 'langstrings' and 'preferred_lang' attributes of the two MultiLangString objects.
-      The 'control' attribute, which dictates the behavior for handling duplicate language tags, is not considered
-      in this comparison. This design decision is based on the premise that two MultiLangString objects are
-      considered equal if they contain the same multilingual content and have the same preferred language,
-      irrespective of their internal handling of duplicates.
+      This method compares only the 'langstrings' attribute of the two MultiLangString objects.
+      The 'control' and 'preferred_lang' attributes, which dictate the behavior for handling duplicate language tags
+      and the preferred language, are not considered in this comparison. This design decision is based on the premise
+      that two MultiLangString objects are considered equal if they contain the same multilingual content,
+      irrespective of their internal handling of duplicates and preferred language.
 
       :param other: Another MultiLangString object to compare with.
       :type other: MultiLangString
-      :return: True if both MultiLangString objects have the same content and preferred language, False otherwise.
+      :return: True if both MultiLangString objects have the same content, False otherwise.
       :rtype: bool
 
 
@@ -253,11 +252,11 @@ Classes
 
       Generate a hash value for a MultiLangString object.
 
-      The hash is computed based on the 'langstrings' and 'preferred_lang' attributes of the MultiLangString.
-      Similar to the __eq__ method, the 'control' attribute is not included in the hash calculation. This ensures
-      that the hash value reflects the content and preferred language of the MultiLangString, aligning with the
-      equality comparison logic. This approach guarantees that MultiLangString objects with the same content and
-      preferred language will have the same hash value, even if they differ in their duplicate handling strategy.
+      The hash is computed based on the 'langstrings' attribute of the MultiLangString.
+      The 'control' and 'preferred_lang' attributes are not included in the hash calculation. This ensures
+      that the hash value reflects only the content of the MultiLangString, aligning with the
+      equality comparison logic. This approach guarantees that MultiLangString objects with the same content
+      will have the same hash value, even if they differ in their duplicate handling strategy and preferred language.
 
       :return: The hash value of the MultiLangString object.
       :rtype: int

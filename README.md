@@ -28,32 +28,38 @@ For inquiries and further information, please refer to the [comprehensive docstr
 ## Contents
 
 <!-- TOC -->
+
 * [LangString Python Library](#langstring-python-library)
-  * [Contents](#contents)
-  * [LangString Overview](#langstring-overview)
-    * [Benefits of LangStrings](#benefits-of-langstrings)
-    * [Practical Use of LangStrings](#practical-use-of-langstrings)
-    * [LangString Class - Usage Examples](#langstring-class---usage-examples)
-  * [MultiLangString: Handling Multiple Translations](#multilangstring-handling-multiple-translations)
-    * [MultiLangString Control Options](#multilangstring-control-options)
-      * [Available Controls:](#available-controls)
-    * [Usage Examples for the MultiLangString Class](#usage-examples-for-the-multilangstring-class)
-  * [Getting Started](#getting-started)
-    * [Installation](#installation)
-    * [Importing and Using the Library](#importing-and-using-the-library)
-      * [Example Usage of `LangString`:](#example-usage-of-langstring)
-      * [Example Usage of `MultiLangString`:](#example-usage-of-multilangstring)
-    * [Comparison and Hashing of LangString Objects](#comparison-and-hashing-of-langstring-objects)
-      * [Equality and Inequality](#equality-and-inequality)
-      * [Hashing](#hashing)
-  * [Code Testing](#code-testing)
-  * [How to Contribute](#how-to-contribute)
-    * [Reporting Issues](#reporting-issues)
-    * [Code Contributions](#code-contributions)
-    * [Test Contributions](#test-contributions)
-    * [General Guidelines](#general-guidelines)
-  * [License](#license)
-  * [Author](#author)
+    * [Contents](#contents)
+    * [LangString Overview](#langstring-overview)
+        * [Benefits of LangStrings](#benefits-of-langstrings)
+        * [Practical Use of LangStrings](#practical-use-of-langstrings)
+        * [LangString Class - Usage Examples](#langstring-class---usage-examples)
+    * [MultiLangString: Handling Multiple Translations](#multilangstring-handling-multiple-translations)
+        * [MultiLangString Control Options](#multilangstring-control-options)
+            * [Available Controls](#available-controls)
+        * [Usage Examples for the MultiLangString Class](#usage-examples-for-the-multilangstring-class)
+    * [Getting Started](#getting-started)
+        * [Installation](#installation)
+        * [Importing and Using the Library](#importing-and-using-the-library)
+            * [Example Usage of `LangString`](#example-usage-of-langstring)
+            * [Example Usage of `MultiLangString`](#example-usage-of-multilangstring)
+        * [Comparison and Hashing](#comparison-and-hashing)
+            * [LangString](#langstring)
+                * [Equality and Inequality](#equality-and-inequality)
+                * [Hashing](#hashing)
+            * [MultiLangString](#multilangstring)
+                * [Equality and Inequality](#equality-and-inequality-1)
+                * [Hashing](#hashing-1)
+    * [Code Testing](#code-testing)
+    * [How to Contribute](#how-to-contribute)
+        * [Reporting Issues](#reporting-issues)
+        * [Code Contributions](#code-contributions)
+        * [Test Contributions](#test-contributions)
+        * [General Guidelines](#general-guidelines)
+    * [License](#license)
+    * [Author](#author)
+
 <!-- TOC -->
 
 ## LangString Overview
@@ -162,7 +168,7 @@ print(product_names.get_lang("es"))  # Teléfono inteligente
 
 `MultiLangString` provides granular controls for handling situations where there are multiple entries with the same language tag. This behavior is defined by the `MULTIPLE_ENTRIES_CONTROLS` configuration.
 
-#### Available Controls:
+#### Available Controls
 
 1. **`ALLOW`**:
     - **Description**: Permits multiple entries with the same language tag. However, it ensures that no duplicate texts for the same language tag are added.
@@ -308,7 +314,7 @@ After installation, you can use the `LangString` and `MultiLangString` classes i
 from langstring import LangString, MultiLangString
 ```
 
-#### Example Usage of `LangString`:
+#### Example Usage of `LangString`
 
 ```python
 # Creating a LangString object for an English greeting
@@ -318,7 +324,7 @@ greeting_en = LangString("Hello", "en")
 print(greeting_en)  # Output: "Hello"@en
 ```
 
-#### Example Usage of `MultiLangString`:
+#### Example Usage of `MultiLangString`
 
 ```python
 # Create LangString objects for greetings in English and Spanish
@@ -344,12 +350,13 @@ else:
     print("No greeting found for the preferred language.")
 ```
 
+### Comparison and Hashing
 
-### Comparison and Hashing of LangString Objects
+Both the `LangString` and the `MultiLangString` classes support comparison and hashing operations, making it easier to compare and manage these objects in data structures like sets and dictionaries.
 
-The `LangString` class supports comparison and hashing operations, making it easier to compare and manage these objects in data structures like sets and dictionaries.
+#### LangString
 
-#### Equality and Inequality
+##### Equality and Inequality
 
 - `__eq__`: Checks if two `LangString` objects are equal (both `text` and `lang` attributes are the same).
 - `__ne__`: Checks if two `LangString` objects are not equal.
@@ -370,7 +377,7 @@ print(ls1 != ls2)  # Output: False
 print(ls1 != ls3)  # Output: True
 ```
 
-#### Hashing
+##### Hashing
 
 - `__hash__`: Generates a hash value for a `LangString` object, allowing it to be used in sets and as dictionary keys.
 
@@ -390,6 +397,43 @@ lang_dict = {ls1: "Greeting in English", ls3: "Greeting in Spanish"}
 print(lang_dict[ls1])  # Output: "Greeting in English"
 ```
 
+#### MultiLangString
+
+##### Equality and Inequality
+
+- `__eq__`: Checks if two `MultiLangString` objects are equal. Equality is determined based on the content of the `langstrings` attribute, which holds the multilingual data. The `preferred_lang` and `control` attributes are not considered in this comparison.
+
+```python
+from multilangstring import MultiLangString, LangString
+
+mls1 = MultiLangString(LangString("Hello", "en"), LangString("Hola", "es"))
+mls2 = MultiLangString(LangString("Hello", "en"), LangString("Hola", "es"))
+mls3 = MultiLangString(LangString("Bonjour", "fr"))
+
+# Equality
+print(mls1 == mls2)  # Output: True
+print(mls1 == mls3)  # Output: False
+```
+
+##### Hashing
+
+- `__hash__`: Generates a hash value for a `MultiLangString` object, allowing it to be used in sets and as dictionary keys. The hash is computed based on the `langstrings` attribute.
+
+```python
+from multilangstring import MultiLangString, LangString
+
+mls1 = MultiLangString(LangString("Hello", "en"), LangString("Hola", "es"))
+mls2 = MultiLangString(LangString("Hello", "en"), LangString("Hola", "es"))
+mls3 = MultiLangString(LangString("Bonjour", "fr"))
+
+# Using MultiLangString objects in a set
+multi_lang_strings = {mls1, mls2, mls3}
+print(len(multi_lang_strings))  # Output: 2 (since mls1 and mls2 are equal)
+
+# Using MultiLangString as dictionary keys
+multi_lang_dict = {mls1: "Greetings in English and Spanish", mls3: "Greeting in French"}
+print(multi_lang_dict[mls1])  # Output: "Greetings in English and Spanish"
+```
 
 ## Code Testing
 

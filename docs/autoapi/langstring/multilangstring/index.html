@@ -107,11 +107,10 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.multilangstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ALLOW'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preferred_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString" title="Link to this definition"></a></dt>
 <dd><p>MultiLangString class for handling multilingual text strings.</p>
 <p>This class allows the management of multilingual text strings with different language tags.
-Depending on the specified control strategy, the behavior when encountering duplicate language tags
-can differ. The default behavior (using “ALLOW”) prevents the addition of duplicate texts for the same
-language. That is, even if multiple identical <cite>LangString</cite> objects with the same text and language
-are added to a <cite>MultiLangString</cite>, the text for that language will not be duplicated in the internal
-representation.</p>
+Depending on the specified control strategy, the behavior when encountering duplicate language tags can differ.
+The default behavior (using “ALLOW”) prevents the addition of duplicate texts for the same language.
+That is, even if multiple identical <cite>LangString</cite> objects with the same text and language are added to
+a <cite>MultiLangString</cite>, the text for that language will not be duplicated in the internal representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -354,17 +353,17 @@ code isn’t found, the method returns <cite>False</cite>. For invalid language_
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__eq__">
 <span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__eq__" title="Link to this definition"></a></dt>
 <dd><p>Check equality of this MultiLangString with another MultiLangString.</p>
-<p>This method compares the ‘langstrings’ and ‘preferred_lang’ attributes of the two MultiLangString objects.
-The ‘control’ attribute, which dictates the behavior for handling duplicate language tags, is not considered
-in this comparison. This design decision is based on the premise that two MultiLangString objects are
-considered equal if they contain the same multilingual content and have the same preferred language,
-irrespective of their internal handling of duplicates.</p>
+<p>This method compares only the ‘langstrings’ attribute of the two MultiLangString objects.
+The ‘control’ and ‘preferred_lang’ attributes, which dictate the behavior for handling duplicate language tags
+and the preferred language, are not considered in this comparison. This design decision is based on the premise
+that two MultiLangString objects are considered equal if they contain the same multilingual content,
+irrespective of their internal handling of duplicates and preferred language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>MultiLangString</em></a>) – Another MultiLangString object to compare with.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if both MultiLangString objects have the same content and preferred language, False otherwise.</p>
+<dd class="field-even"><p>True if both MultiLangString objects have the same content, False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -376,11 +375,11 @@ irrespective of their internal handling of duplicates.</p>
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__hash__">
 <span class="sig-name descname"><span class="pre">__hash__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__hash__" title="Link to this definition"></a></dt>
 <dd><p>Generate a hash value for a MultiLangString object.</p>
-<p>The hash is computed based on the ‘langstrings’ and ‘preferred_lang’ attributes of the MultiLangString.
-Similar to the __eq__ method, the ‘control’ attribute is not included in the hash calculation. This ensures
-that the hash value reflects the content and preferred language of the MultiLangString, aligning with the
-equality comparison logic. This approach guarantees that MultiLangString objects with the same content and
-preferred language will have the same hash value, even if they differ in their duplicate handling strategy.</p>
+<p>The hash is computed based on the ‘langstrings’ attribute of the MultiLangString.
+The ‘control’ and ‘preferred_lang’ attributes are not included in the hash calculation. This ensures
+that the hash value reflects only the content of the MultiLangString, aligning with the
+equality comparison logic. This approach guarantees that MultiLangString objects with the same content
+will have the same hash value, even if they differ in their duplicate handling strategy and preferred language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The hash value of the MultiLangString object.</p>

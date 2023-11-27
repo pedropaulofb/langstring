@@ -75,19 +75,8 @@ class LangString:
         :rtype: bool
         """
         if not isinstance(other, LangString):
-            return NotImplemented
+            return False
         return self.text == other.text and self.lang == other.lang
-
-    def __ne__(self, other: 'LangString') -> bool:
-        """
-        Check inequality of this LangString with another LangString.
-
-        :param other: Another LangString object to compare with.
-        :type other: LangString
-        :return: True if both LangString objects are not equal, False otherwise.
-        :rtype: bool
-        """
-        return not self.__eq__(other)
 
     def __hash__(self) -> int:
         """
@@ -97,49 +86,3 @@ class LangString:
         :rtype: int
         """
         return hash((self.text, self.lang))
-
-    def __lt__(self, other: 'LangString') -> bool:
-        """
-        Check if this LangString is less than another LangString.
-
-        :param other: Another LangString object to compare with.
-        :type other: LangString
-        :return: True if this LangString is less than the other, False otherwise.
-        :rtype: bool
-        """
-        if not isinstance(other, LangString):
-            return NotImplemented
-        return (self.text, self.lang) < (other.text, other.lang)
-
-    def __le__(self, other: 'LangString') -> bool:
-        """
-        Check if this LangString is less than or equal to another LangString.
-
-        :param other: Another LangString object to compare with.
-        :type other: LangString
-        :return: True if this LangString is less than or equal to the other, False otherwise.
-        :rtype: bool
-        """
-        return self.__lt__(other) or self.__eq__(other)
-
-    def __gt__(self, other: 'LangString') -> bool:
-        """
-        Check if this LangString is greater than another LangString.
-
-        :param other: Another LangString object to compare with.
-        :type other: LangString
-        :return: True if this LangString is greater than the other, False otherwise.
-        :rtype: bool
-        """
-        return not self.__le__(other)
-
-    def __ge__(self, other: 'LangString') -> bool:
-        """
-        Check if this LangString is greater than or equal to another LangString.
-
-        :param other: Another LangString object to compare with.
-        :type other: LangString
-        :return: True if this LangString is greater than or equal to the other, False otherwise.
-        :rtype: bool
-        """
-        return not self.__lt__(other)

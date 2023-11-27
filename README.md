@@ -391,28 +391,6 @@ lang_dict = {ls1: "Greeting in English", ls3: "Greeting in Spanish"}
 print(lang_dict[ls1])  # Output: "Greeting in English"
 ```
 
-### Ordering
-
-- `__lt__`: Less than comparison.
-- `__le__`: Less than or equal to comparison.
-- `__gt__`: Greater than comparison.
-- `__ge__`: Greater than or equal to comparison.
-
-These methods allow `LangString` objects to be sorted and compared based on their `text` and `lang` attributes.
-
-```python
-ls4 = LangString("Bonjour", "fr")
-ls5 = LangString("Hello", "en")
-
-# Ordering
-print(ls4 < ls5)  # Output: True (based on text comparison)
-print(ls4 > ls5)  # Output: False
-print(ls4 <= ls5) # Output: True
-print(ls4 >= ls5) # Output: False
-```
-
-With these methods, `LangString` objects can be compared, sorted, and used in various Python data structures effectively.
-
 
 ## Code Testing
 

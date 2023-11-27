@@ -43,10 +43,9 @@ For inquiries and further information, please refer to the [comprehensive docstr
     * [Importing and Using the Library](#importing-and-using-the-library)
       * [Example Usage of `LangString`:](#example-usage-of-langstring)
       * [Example Usage of `MultiLangString`:](#example-usage-of-multilangstring)
-  * [Comparison and Hashing of LangString Objects](#comparison-and-hashing-of-langstring-objects)
-    * [Equality and Inequality](#equality-and-inequality)
-    * [Hashing](#hashing)
-    * [Ordering](#ordering)
+    * [Comparison and Hashing of LangString Objects](#comparison-and-hashing-of-langstring-objects)
+      * [Equality and Inequality](#equality-and-inequality)
+      * [Hashing](#hashing)
   * [Code Testing](#code-testing)
   * [How to Contribute](#how-to-contribute)
     * [Reporting Issues](#reporting-issues)
@@ -346,11 +345,11 @@ else:
 ```
 
 
-## Comparison and Hashing of LangString Objects
+### Comparison and Hashing of LangString Objects
 
 The `LangString` class supports comparison and hashing operations, making it easier to compare and manage these objects in data structures like sets and dictionaries.
 
-### Equality and Inequality
+#### Equality and Inequality
 
 - `__eq__`: Checks if two `LangString` objects are equal (both `text` and `lang` attributes are the same).
 - `__ne__`: Checks if two `LangString` objects are not equal.
@@ -371,7 +370,7 @@ print(ls1 != ls2)  # Output: False
 print(ls1 != ls3)  # Output: True
 ```
 
-### Hashing
+#### Hashing
 
 - `__hash__`: Generates a hash value for a `LangString` object, allowing it to be used in sets and as dictionary keys.
 

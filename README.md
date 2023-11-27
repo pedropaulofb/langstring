@@ -2,6 +2,7 @@
 ![GitHub - Release Date - PublishedAt](https://img.shields.io/github/release-date/pedropaulofb/langstring)
 ![GitHub - Last Commit - Branch](https://img.shields.io/github/last-commit/pedropaulofb/langstring/main)
 ![PyPI - Project](https://img.shields.io/pypi/v/langstring)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/langstring)
 ![Language - Top](https://img.shields.io/github/languages/top/pedropaulofb/langstring)
 ![Language - Version](https://img.shields.io/pypi/pyversions/langstring)
 ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/pedropaulofb/langstring)
@@ -96,6 +97,7 @@ print(eiffel_fr.to_string())  # "Tour Eiffel"@fr
 The `LangString` class in the `langstring_lib` module encapsulates a string with its associated language information.
 
 1. Initialization
+
 ```python
 # Create a LangString object with only text
 simple_string = LangString("Hello, world!")
@@ -111,7 +113,10 @@ If an invalid language tag is used or non-string type is provided, appropriate w
 invalid_lang = LangString("Hello, world!", "invalid-lang")
 
 # This will raise a TypeError since the text is not a string
-invalid_text_type = LangString(12345)
+try:
+    invalid_text_type = LangString(12345)
+except TypeError as e:
+    print(f"Error: {e}")  # Outputs an error message if the input is not a string
 ```
 
 2. Converting the LangString Object to String
@@ -130,7 +135,6 @@ print(str(english_greeting))  # Outputs: "Hello, world!"@en
 
 The string representation will include the text encapsulated in double quotes. If a language is associated with the text, it will be appended after the text, preceded by an "@" symbol.
 
-
 ## MultiLangString: Handling Multiple Translations
 
 While `LangString` manages one string-language pair, `MultiLangString` holds several translations of a string. This is useful for keeping various translations of a term within one object.
@@ -138,7 +142,7 @@ While `LangString` manages one string-language pair, `MultiLangString` holds sev
 For instance, if you have a product with multiple language names:
 
 ```python
-from langstring_lib import MultiLangString
+from langstring import MultiLangString
 
 product_names = MultiLangString({
     "en": "Smartphone",
@@ -183,14 +187,13 @@ To utilize these controls, configure the desired behavior when initializing the 
 You can initialize a `MultiLangString` object by passing in multiple `LangString` objects and specifying control and preferred language properties:
 
 ```python
-from langstring_lib.langstring import LangString
-from your_module import MultiLangString
+from langstring import LangString, MultiLangString
 
-lang_str1 = LangString("Hello", "en")
-lang_str2 = LangString("Bonjour", "fr")
+english_greeting = LangString("Hello", "en")
+french_greeting = LangString("Bonjour", "fr")
 
 # Initializing MultiLangString with two LangString objects
-multi_lang_str = MultiLangString(lang_str1, lang_str2, control="ALLOW", preferred_lang="en")
+multi_lang_str = MultiLangString(english_greeting, french_greeting, control="ALLOW", preferred_lang="en")
 ```
 
 2. Add Method
@@ -237,6 +240,7 @@ multi_lang_str.remove_language("es")  # Removes all Spanish strings
 7. Converting to String
 
 You can convert a `MultiLangString` object to a string representation:
+
 ```python
 str_representation = multi_lang_str.to_string()
 print(str_representation)  # Outputs: '"Hello"@en, "Bonjour"@fr'
@@ -260,28 +264,25 @@ length = len(multi_lang_str)  # Outputs: 2
 ```
 
 10. String Representation
-11.
-Get a string representation of the `MultiLangString`:
+
+"Obtain a user-friendly string representation of the `MultiLangString`. This representation is ideal for displaying the content of the `MultiLangString` object in a readable format, suitable for user interfaces or textual outputs. The `str()` method is used to achieve this."
 
 ```python
 print(str(multi_lang_str))  # Outputs: '"Hello"@en, "Bonjour"@fr'
+
 ```
 
 11. Representation Method
 
-Get a formal string representation of the `MultiLangString` suitable for debugging:
+Use the `repr()` method to get a formal, detailed string representation of the `MultiLangString` object. This output is more technical, showing the exact state of the object, which is particularly useful for debugging and development purposes. It provides a clear view of the internal structure and data of the `MultiLangString`."
 
 ```python
-print(repr(multi_lang_str))
+print(repr(multi_lang_str))  # Outputs a detailed, technical representation of the object
 ```
 
 This is useful for understanding the current state of a `MultiLangString` object.
 
 Remember, the `MultiLangString` class is designed to handle multiple language strings, allowing you to manage multilingual text strings effectively and efficiently.
-
-
-
-
 
 ## Getting Started
 
@@ -300,18 +301,17 @@ Then, encapsulate strings with their language tags as shown in the examples abov
 After installation, you can use the `LangString` and `MultiLangString` classes in your project. Simply import the classes and start encapsulating strings with their language tags.
 
 ```python
-from langstring_lib.langstring import LangString
-from langstring_lib.multilangstring import MultiLangString
+from langstring import LangString, MultiLangString
 ```
 
 #### Example Usage of `LangString`:
 
 ```python
-# Create a LangString object with text and language information
+# Creating a LangString object for an English greeting
 greeting_en = LangString("Hello", "en")
 
-# Printing the LangString object
-print(greeting_en)  # Outputs: "Hello"@en
+# Printing the LangString object, which shows the text and its language tag
+print(greeting_en)  # Output: "Hello"@en
 ```
 
 #### Example Usage of `MultiLangString`:
@@ -340,14 +340,12 @@ else:
     print("No greeting found for the preferred language.")
 ```
 
-
-
 ## Code Testing
 
 The code provided has undergone rigorous testing to ensure its reliability and correctness. The tests can be found in the 'tests' directory of the project. To run the tests, navigate to the project root directory and execute the following command:
 
 ```bash
-langstring> pytest .\langstring_lib\tests
+langstring> pytest .\tests
 ```
 
 ## How to Contribute

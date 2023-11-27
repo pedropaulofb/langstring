@@ -5,37 +5,41 @@
 import os
 import sys
 
+import tomli
+
 sys.path.insert(0, os.path.abspath(".."))
+
+
+# Function to read version from pyproject.toml
+def get_version_from_pyproject():
+    pyproject_path = os.path.join(os.path.dirname(__file__), "..", "pyproject.toml")
+    with open(pyproject_path, "rb") as pyproject:
+        pyproject_data = tomli.load(pyproject)
+    return pyproject_data["tool"]["poetry"]["version"]
+
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "langstring_lib"
+project = "langstring"
 copyright = "Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"
 author = "Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"
+
+# Extract version and release from pyproject.toml
+version = get_version_from_pyproject()
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = [
-    "autoapi.extension",
-    "myst_parser",
-    "sphinx.ext.autosectionlabel",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.coverage",
-    "sphinx.ext.doctest",
-    "sphinx.ext.githubpages",
-    "sphinx_rtd_size",
-    "sphinx_toolbox.sidebar_links",
-]
+extensions = ["autoapi.extension", "myst_parser", "sphinx.ext.autosectionlabel", "sphinx.ext.autosummary",
+    "sphinx.ext.coverage", "sphinx.ext.doctest", "sphinx.ext.githubpages", "sphinx_rtd_size",
+    "sphinx_toolbox.sidebar_links", ]
 
 autodoc_typehints = "description"
 github_username = "pedropaulofb"
-github_repository = "pedropaulofb/langstring_lib"
+github_repository = "pedropaulofb/langstring"
 
-autoapi_dirs = [
-    "../langstring_lib/",
-]
+autoapi_dirs = ["../langstring/"]
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]

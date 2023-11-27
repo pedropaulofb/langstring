@@ -3,11 +3,13 @@ exclude: ^(sphinx|doc)
 repos:
   - repo: local
     hooks:
-      - id: run_tests
-        name: run pytest tests
-        entry: pytest -p no:warnings ./langstring_lib/tests
+      - id: pre_commit_autoupdate
+        name: pre-commit autoupdate
+        entry: pre-commit autoupdate
         language: system
         pass_filenames: false
+        stages:
+          - pre-push
       - id: poetry-update
         name: poetry update
         entry: poetry update
@@ -15,6 +17,11 @@ repos:
         pass_filenames: false
         stages:
           - pre-push
+      - id: run_tests
+        name: run pytest tests
+        entry: pytest -p no:warnings ./tests
+        language: system
+        pass_filenames: false
       - id: update_requirements
         name: update requirements.txt
         entry: poetry export -f requirements.txt --output requirements.txt --with dev
@@ -31,7 +38,7 @@ repos:
         stages:
           - pre-push
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
@@ -40,7 +47,7 @@ repos:
       - id: check-merge-conflict
       # - id: no-commit-to-branch    # To be included when other contributions join the project
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.9.1
+    rev: 23.11.0
     hooks:
       - id: black
         args: [ --line-length=120 ]

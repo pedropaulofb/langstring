@@ -44,4 +44,4 @@ line-length = 120
 
 [tool.vulture]
 paths = ["."]
-exclude = ["docs/", "sphinx/"]
+exclude = ["docs/", "sphinx/", "venv/"]

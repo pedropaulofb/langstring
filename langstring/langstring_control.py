@@ -4,7 +4,7 @@ This module contains flags to control various aspects of LangString behavior, in
 language validation, and verbose mode for detailed logging. It provides functions to set the state of these flags.
 
 Constants:
- _ENSURE_TEXT (bool): Flag to ensure that a LangString 'text' field content is not empty. Default is False.
+_ENSURE_TEXT (bool): Flag to ensure that a LangString 'text' field content is not empty. Default is False.
 _ENSURE_ANY_LANG (bool): Flag to ensure that a LangString 'text' field content is not empty. Default is False.
 _ENSURE_VALID_LANG (bool): Flag to ensure that a LangString 'text' field content is not empty and that it corresponds
 to a valid language. Default is False.
@@ -46,7 +46,7 @@ def ls_ensure_valid_lang(state: bool) -> None:  # noqa (vulture)
     _ENSURE_VALID_LANG = state
 
 
-def enable_verbose_mode(state: bool) -> None:  # noqa (vulture)
+def ls_enable_verbose_mode(state: bool) -> None:  # noqa (vulture)
     """Enable or disable verbose mode.
 
     :param state: True to enable verbose mode, False to disable.

@@ -788,6 +788,20 @@ files = [
 ]
 
 [[package]]
+name = "flake8-pytest-style"
+version = "1.7.2"
+description = "A flake8 plugin checking common style issues or inconsistencies with pytest-based tests."
+optional = false
+python-versions = ">=3.7.2,<4.0.0"
+files = [
+    {file = "flake8_pytest_style-1.7.2-py3-none-any.whl", hash = "sha256:f5d2aa3219163a052dd92226589d45fab8ea027a3269922f0c4029f548ea5cd1"},
+    {file = "flake8_pytest_style-1.7.2.tar.gz", hash = "sha256:b924197c99b951315949920b0e5547f34900b1844348432e67a44ab191582109"},
+]
+
+[package.dependencies]
+flake8-plugin-utils = ">=1.3.2,<2.0.0"
+
+[[package]]
 name = "flake8-return"
 version = "1.2.0"
 description = "Flake8 plugin that checks return values"
@@ -2523,4 +2537,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.09"
-content-hash = "fce08fefe21a329ca1e04e017660b8695f4165fa8cbabd3cd82fcb9cd3b6355f"
+content-hash = "6ecdcc484141bdb981f25e58244f676c311da442f01cc7fa2bd590e818178b2c"

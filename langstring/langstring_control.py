@@ -24,7 +24,8 @@ Note:
     via LangStringControl will affect the LangString class behavior globally and can be modified at runtime.
 
 """
-from enum import Enum, auto
+from enum import auto
+from enum import Enum
 
 from loguru import logger
 
@@ -43,10 +44,12 @@ class LangStringFlag(Enum):
     :cvar VERBOSE_MODE: Enables verbose mode for additional information during operations.
     :vartype VERBOSE_MODE: Enum
     """
+
     ENSURE_TEXT = auto()
     ENSURE_ANY_LANG = auto()
     ENSURE_VALID_LANG = auto()
     VERBOSE_MODE = auto()
+
 
 class LangStringControl:
     """Control class for managing LangString configuration flags.
@@ -56,6 +59,7 @@ class LangStringControl:
     :cvar _flags: Dictionary storing the state of each LangStringFlag.
     :vartype _flags: dict[LangStringFlag, bool]
     """
+
     _flags = {
         LangStringFlag.ENSURE_TEXT: False,
         LangStringFlag.ENSURE_ANY_LANG: False,
@@ -73,11 +77,11 @@ class LangStringControl:
         :type flag: LangStringFlag
         :param state: Setting this to True or False will enable or disable the flag, respectively.
         :type state: bool
-        :raises ValueError: If an invalid LangStringFlag is provided.
+        :raises TypeError: If an invalid LangStringFlag is provided.
         """
         if not isinstance(flag, LangStringFlag):
             valid_flags = ", ".join(f"LangStringFlag.{f.name}" for f in LangStringFlag)
-            raise ValueError(f"Invalid flag received. Valid flags are: {valid_flags}.")
+            raise TypeError(f"Invalid flag received. Valid flags are: {valid_flags}.")
         cls._flags[flag] = state
 
     @classmethod
@@ -90,20 +94,20 @@ class LangStringControl:
         :type flag: LangStringFlag
         :return: The current state of the flag.
         :rtype: bool
-        :raises ValueError: If an invalid LangStringFlag is provided.
+        :raises TypeError: If an invalid LangStringFlag is provided.
         """
         if not isinstance(flag, LangStringFlag):
             valid_flags = ", ".join(f"LangStringFlag.{f.name}" for f in LangStringFlag)
-            raise ValueError(f"Invalid flag received. Valid flags are: {valid_flags}.")
+            raise TypeError(f"Invalid flag received. Valid flags are: {valid_flags}.")
         return cls._flags.get(flag, False)
 
     @classmethod
     def get_flags(cls) -> dict[LangStringFlag, bool]:
         """Retrieve the current state of all configuration flags.
-        
+
         This class method provides a way to access the states of all flags globally for the LangString class.
         It returns a copy of the flags dictionary, ensuring that the original data is not modified.
-        
+
         :return: A dictionary with LangStringFlag as keys and their corresponding boolean states as values.
         :rtype: dict[LangStringFlag, bool]
         """

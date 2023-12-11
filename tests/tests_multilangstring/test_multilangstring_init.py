@@ -103,9 +103,8 @@ def test_init_with_mixed_language_tags() -> None:
     ls1 = LangString("Hello", "en")
     ls2 = LangString("Bonjour", "fr")
 
-    # Add an invalid language tag and capture the warning here
-    with pytest.warns(UserWarning):
-        ls3 = LangString("Hola", "es-INVALID")
+    # Add an invalid language tag
+    ls3 = LangString("Hola", "es-INVALID")
 
     mls = MultiLangString(ls1, ls2, ls3)
 

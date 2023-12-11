@@ -87,7 +87,7 @@ def test_neq_different_languages(langstring_en_hello, langstring_es_hello):
     ), "LangStrings with same text but different languages should be unequal"
 
 
-def test_neq_different_texts_and_languages(langstring_en_hello, langstring_es_hello):
+def test_neq_different_texts_and_languages(langstring_en_hello):
     """Test inequality with different texts and different languages."""
     langstring_es_hi = LangString("Hola", "es")
     assert langstring_en_hello != langstring_es_hi, "LangStrings with different texts and languages should be unequal"

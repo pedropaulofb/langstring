@@ -36,7 +36,7 @@ Classes
    :ivar control: The control strategy for handling duplicate language tags.
    :vartype control: str
    :ivar langstrings: A dictionary of LangStrings indexed by language tag.
-   :vartype langstrings: dict
+   :vartype langstrings: dict[str,list[str]]
    :ivar preferred_lang: The preferred language for this MultiLangString.
    :vartype preferred_lang: str
 

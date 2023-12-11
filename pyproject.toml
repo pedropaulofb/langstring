@@ -10,10 +10,8 @@ repository = "https://github.com/pedropaulofb/langstring"
 documentation = "https://pedropaulofb.github.io/langstring"
 keywords = ["string", "langstring", "multilangstring", "language-string", "multilanguage-string",
     "language-representation", "multilanguage"]
-packages = [
-    { include = "langstring" },
-    { include = "py.typed", from = "langstring" }
-]
+packages = [{ include = "langstring" },
+    { include = "py.typed", from = "langstring" }]
 
 [tool.poetry.urls]
 "PyPi Project" = "https://pypi.org/project/langstring/"
@@ -29,6 +27,7 @@ poetry = "^1.7.1"
 pre-commit = "^3.4.0"
 pytest = "^7.4.2"
 black = "^23.11.0"
+tomli = "^2.0.1"
 # Sphynx and plugins
 sphinx = "^7.2.6"
 sphinx-autoapi = "^3.0.0"
@@ -38,6 +37,7 @@ sphinx-toolbox = "^3.5.0"
 myst-parser = "^2.0.0"
 # Flake8 and plugins
 flake8 = "^6.1.0"
+flake8-pytest-style = "^1.7.2"
 flake8-broken-line = "^1.0.0"
 flake8-fixme = "^1.1.1"
 flake8-implicit-str-concat = "^0.4.0"

@@ -16,6 +16,7 @@ Submodules
    :maxdepth: 1
 
    langstring/index.rst
+   langstring_control/index.rst
    multilangstring/index.rst
 
 
@@ -28,26 +29,34 @@ Classes
 .. autoapisummary::
 
    langstring.LangString
+   langstring.LangStringControl
+   langstring.LangStringFlag
    langstring.MultiLangString
 
 
 
 
-.. py:class:: LangString(text, lang = None)
+.. py:class:: LangString(text = '', lang = None)
 
 
    A class to encapsulate a string with its language information.
 
+   This class provides functionality to associate a text string with a language tag, offering methods for string
+   representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
+   from the LangStringControl class, which can enforce non-empty text, valid language tags, and other constraints.
+
    :ivar text: The actual text string.
    :vartype text: str
-   :ivar lang: The language of the text, as a Language object or None if not specified.
-   :vartype lang: Language
+   :ivar lang: The language of the text, represented by a language tag or None if not specified.
+   :vartype lang: str or None
 
    .. py:method:: to_string()
 
-      Convert the LangString object to a string. Syntactical sugar for calling self.__str__().
+      Convert the LangString object to a string representation.
 
-      :return: The string representation of the LangString object.
+      This method is a convenience wrapper for the __str__ method.
+
+      :return: The string representation of the LangString object, including language tag if present.
       :rtype: str
 
 
@@ -55,7 +64,7 @@ Classes
 
       Define the string representation of the LangString object.
 
-      :return: The string representation of the LangString object.
+      :return: The string representation of the LangString object. Format: '"text"@lang' or '"text"' if lang is None.
       :rtype: str
 
 
@@ -65,7 +74,7 @@ Classes
 
       :param other: Another LangString object to compare with.
       :type other: LangString
-      :return: True if both LangString objects are equal, False otherwise.
+      :return: True if both LangString objects have the same text and language tag, False otherwise.
       :rtype: bool
 
 
@@ -73,9 +82,107 @@ Classes
 
       Generate a hash value for a LangString object.
 
-      :return: The hash value of the LangString object.
+      :return: The hash value of the LangString object, based on its text and language tag.
       :rtype: int
 
+
+
+.. py:class:: LangStringControl
+
+
+   Control class for managing LangString configuration flags.
+
+   This class uses class methods and class variables to set and retrieve configuration flags for LangString behavior.
+
+   :cvar _flags: Dictionary storing the state of each LangStringFlag.
+   :vartype _flags: dict[LangStringFlag, bool]
+
+   .. py:attribute:: _flags
+
+      
+
+   .. py:method:: set_flag(flag, state)
+      :classmethod:
+
+      Set the state of a specified configuration flag.
+
+      This class method allows setting the state of a flag globally for the LangString class.
+
+      :param flag: The LangStringFlag to be set.
+      :type flag: LangStringFlag
+      :param state: Setting this to True or False will enable or disable the flag, respectively.
+      :type state: bool
+      :raises TypeError: If an invalid LangStringFlag is provided.
+
+
+   .. py:method:: get_flag(flag)
+      :classmethod:
+
+      Retrieve the current state of a specified configuration flag.
+
+      This class method provides a way to access the state of a flag globally for the LangString class.
+
+      :param flag: The LangStringFlag whose state is to be retrieved.
+      :type flag: LangStringFlag
+      :return: The current state of the flag.
+      :rtype: bool
+      :raises TypeError: If an invalid LangStringFlag is provided.
+
+
+   .. py:method:: get_flags()
+      :classmethod:
+
+      Retrieve the current state of all configuration flags.
+
+      This class method provides a way to access the states of all flags globally for the LangString class.
+      It returns a copy of the flags dictionary, ensuring that the original data is not modified.
+
+      :return: A dictionary with LangStringFlag as keys and their corresponding boolean states as values.
+      :rtype: dict[LangStringFlag, bool]
+
+
+   .. py:method:: log_flags()
+      :classmethod:
+
+      Log the current state of all configuration flags.
+
+      This class method uses the loguru logger to log the state of each flag in the _flags dictionary.
+
+
+
+.. py:class:: LangStringFlag(*args, **kwds)
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   Enumeration for LangString control flags.
+
+   This enum defines various flags that can be used to configure the behavior of the LangString class.
+
+   :cvar ENSURE_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a LangString.
+   :vartype ENSURE_TEXT: Enum
+   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a LangString.
+   :vartype ENSURE_ANY_LANG: Enum
+   :cvar ENSURE_VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
+   :vartype ENSURE_VALID_LANG: Enum
+   :cvar VERBOSE_MODE: Enables verbose mode for additional information during operations.
+   :vartype VERBOSE_MODE: Enum
+
+   .. py:attribute:: ENSURE_TEXT
+
+      
+
+   .. py:attribute:: ENSURE_ANY_LANG
+
+      
+
+   .. py:attribute:: ENSURE_VALID_LANG
+
+      
+
+   .. py:attribute:: VERBOSE_MODE
+
+      
 
 
 .. py:class:: MultiLangString(*args, control = 'ALLOW', preferred_lang = 'en')
@@ -92,7 +199,7 @@ Classes
    :ivar control: The control strategy for handling duplicate language tags.
    :vartype control: str
    :ivar langstrings: A dictionary of LangStrings indexed by language tag.
-   :vartype langstrings: dict
+   :vartype langstrings: dict[str,list[str]]
    :ivar preferred_lang: The preferred language for this MultiLangString.
    :vartype preferred_lang: str
 

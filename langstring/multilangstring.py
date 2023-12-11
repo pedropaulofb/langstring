@@ -1,13 +1,11 @@
 """This module defines the `MultiLangString` class for handling multilingual text strings."""
 import warnings
+from typing import Any
 from typing import Optional
 
 from loguru import logger
 
-from langstring.langstring import LangString
-
-# Suppress the display of UserWarnings
-warnings.simplefilter("ignore", UserWarning)
+from .langstring import LangString
 
 
 class MultiLangString:
@@ -22,7 +20,7 @@ class MultiLangString:
     :ivar control: The control strategy for handling duplicate language tags.
     :vartype control: str
     :ivar langstrings: A dictionary of LangStrings indexed by language tag.
-    :vartype langstrings: dict
+    :vartype langstrings: dict[str,list[str]]
     :ivar preferred_lang: The preferred language for this MultiLangString.
     :vartype preferred_lang: str
 
@@ -46,7 +44,7 @@ class MultiLangString:
         BLOCK_ERROR: Block and raise an error for duplicate language tags.
     """
 
-    def _validate_langstring_arg(self, arg) -> None:
+    def _validate_langstring_arg(self, arg: Any) -> None:
         """Private helper method to validate if the argument is a LangString.
 
         :param arg: Argument to be checked.
@@ -69,10 +67,10 @@ class MultiLangString:
         :param args: LangString objects to initialize the MultiLangString with.
         :type args: LangString
         """
-        self._control = None  # Used getter and setter
-        self._preferred_lang = None  # Used getter and setter
+        self._control: str = "ALLOW"  # Used getter and setter. Default value is "ALLOW".
+        self._preferred_lang: Optional[str] = None  # Used getter and setter
 
-        self.langstrings: dict = {}  # Initialize self.langstrings here
+        self.langstrings: dict[str, list[str]] = {}  # Initialize self.langstrings here
 
         self.control: str = control  # Used setter to validate
         self.preferred_lang: str = preferred_lang  # Used setter to validate
@@ -92,7 +90,7 @@ class MultiLangString:
 
     # Control SETTER
     @control.setter
-    def control(self, control_value: str):
+    def control(self, control_value: str) -> None:
         """Set the control strategy for handling duplicate language tags.
 
         :param control_value: The control strategy as a string.
@@ -118,7 +116,7 @@ class MultiLangString:
 
     # preferred_lang SETTER
     @preferred_lang.setter
-    def preferred_lang(self, preferred_lang_value: str):
+    def preferred_lang(self, preferred_lang_value: str) -> None:
         """Set the preferred language for this MultiLangString.
 
         :param preferred_lang_value: The preferred language as a string.
@@ -207,11 +205,13 @@ class MultiLangString:
         # Handling of Invalid Language Formats
         if not isinstance(language_code, str):
             raise TypeError(f"Invalid language format. Expected alphabetic string and received '{language_code}'.")
-        elif not language_code:
+
+        if not language_code:
             raise TypeError(
                 "Invalid language format. Expected non-empty alphabetic string and received an empty string."
             )
-        elif not language_code.isalpha():
+
+        if not language_code.isalpha():
             raise TypeError(f"Invalid language format. Expected alphabetic string and received '{language_code}'.")
 
         # Ensure case insensitivity
@@ -243,7 +243,7 @@ class MultiLangString:
             f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in langstrings
         ]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Return a string representation of the MultiLangString object.
 
         :return: A string representation of the MultiLangString.
@@ -254,7 +254,7 @@ class MultiLangString:
 
         return f"MultiLangString({self.langstrings}, control='{self.control}', preferred_lang='{self.preferred_lang}')"
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return the total number of LangStrings stored in the MultiLangString.
 
         :return: The total number of LangStrings.

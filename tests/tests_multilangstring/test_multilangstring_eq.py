@@ -73,10 +73,10 @@ def test_equality_with_different_control_values(sample_langstrings_eq):
     """
     mls1 = MultiLangString(*sample_langstrings_eq, control="ALLOW", preferred_lang="en")
     mls2 = MultiLangString(*sample_langstrings_eq, control="OVERWRITE", preferred_lang="en")
-    assert (
-        mls1 == mls2
-    ), "MultiLangString objects with different control values but identical langstrings and preferred_lang \
-    should be equal."
+    assert mls1 == mls2, (
+        "MultiLangString objects with different control values but identical langstrings and preferred_lang should "
+        "be equal."
+    )
 
 
 def test_equality_with_empty_multilangstrings():

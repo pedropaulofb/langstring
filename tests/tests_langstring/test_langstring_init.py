@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 import pytest
 
 from langstring.langstring import LangString
@@ -56,24 +58,6 @@ def test_very_long_string() -> None:
     ls = LangString(long_string)
     assert ls.text == long_string, f"Unexpected text: {ls.text}"
     assert ls.to_string() == f'"{long_string}"', f"Unexpected string representation: {ls.to_string()}"
-
-
-def test_warning_on_empty_string() -> None:
-    """Test that a warning is generated when an empty string is used."""
-    with pytest.warns(UserWarning, match="Received empty string.") as record:
-        LangString("")
-
-    # Confirming that the warning message is as expected
-    assert "Received empty string." in str(record[0].message)
-
-
-def test_warning_on_invalid_language_tag() -> None:
-    """Test that a warning is generated when an invalid language tag is used."""
-    with pytest.warns(UserWarning, match=r"Invalid language tag 'xx-INVALID' used.") as record:
-        LangString("Hello", "xx-INVALID")
-
-    # Confirming that the warning message is as expected
-    assert "Invalid language tag 'xx-INVALID' used." in str(record[0].message)
 
 
 def test_no_warning_on_valid_language_tag() -> None:

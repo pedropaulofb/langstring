@@ -26,10 +26,9 @@ text and valid language tags. These flags can be set externally to alter the beh
 """
 import warnings
 
+import control_flags as ls_control
 from langcodes import tag_is_valid
 from loguru import logger
-
-import langstring_control as ls_control
 
 # Suppress the display of UserWarnings
 warnings.simplefilter("ignore", UserWarning)

@@ -1,6 +1,7 @@
 import pytest
 
-from langstring import LangString, MultiLangString
+from langstring import LangString
+from langstring import MultiLangString
 
 
 @pytest.fixture

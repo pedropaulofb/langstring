@@ -32,8 +32,8 @@ version = get_version_from_pyproject()
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = ["autoapi.extension", "myst_parser", "sphinx.ext.autosectionlabel", "sphinx.ext.autosummary",
-    "sphinx.ext.coverage", "sphinx.ext.doctest", "sphinx.ext.githubpages", "sphinx_rtd_size",
-    "sphinx_toolbox.sidebar_links", ]
+              "sphinx.ext.coverage", "sphinx.ext.doctest", "sphinx.ext.githubpages", "sphinx_rtd_size",
+              "sphinx_toolbox.sidebar_links", ]
 
 autodoc_typehints = "description"
 github_username = "pedropaulofb"

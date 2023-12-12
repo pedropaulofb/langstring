@@ -79,9 +79,13 @@ class LangStringControl:
         :type state: bool
         :raises TypeError: If an invalid LangStringFlag is provided.
         """
+        if not isinstance(state, bool):
+            raise TypeError(f"Invalid state received. State must be a boolean value.")
+
         if not isinstance(flag, LangStringFlag):
             valid_flags = ", ".join(f"LangStringFlag.{f.name}" for f in LangStringFlag)
             raise TypeError(f"Invalid flag received. Valid flags are: {valid_flags}.")
+
         cls._flags[flag] = state
 
     @classmethod
@@ -99,6 +103,7 @@ class LangStringControl:
         if not isinstance(flag, LangStringFlag):
             valid_flags = ", ".join(f"LangStringFlag.{f.name}" for f in LangStringFlag)
             raise TypeError(f"Invalid flag received. Valid flags are: {valid_flags}.")
+
         return cls._flags.get(flag, False)
 
     @classmethod

@@ -248,7 +248,7 @@ Classes
       :raises TypeError: If the passed argument is not an instance of LangString.
 
 
-   .. py:method:: add(langstring)
+   .. py:method:: add_langstring(langstring)
 
       Add a LangString to the MultiLangString.
 

@@ -77,7 +77,7 @@ def test_hash_with_modified_langstrings(sample_langstrings_hash):
     """
     mls1 = MultiLangString(*sample_langstrings_hash, preferred_lang="en")
     hash_before = hash(mls1)
-    mls1.add(LangString("New text", "en"))
+    mls1.add_langstring(LangString("New text", "en"))
     hash_after = hash(mls1)
     assert hash_before != hash_after, "Modifying the contents of a MultiLangString should change its hash value."
 

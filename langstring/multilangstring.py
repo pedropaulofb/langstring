@@ -51,11 +51,10 @@ class MultiLangString:
         :raises TypeError: If the passed argument is not an instance of LangString.
         """
         if not isinstance(arg, LangString):
-            logger.error(
+            raise TypeError(
                 f"MultiLangString received invalid argument. Expected a LangString but "
                 f"received '{type(arg).__name__}' with value '{arg}'."
             )
-            raise TypeError
 
     def __init__(self, *args: LangString, control: str = "ALLOW", preferred_lang: str = "en"):
         """Initialize a new MultiLangString object.
@@ -77,7 +76,7 @@ class MultiLangString:
 
         for arg in args:
             self._validate_langstring_arg(arg)
-            self.add(arg)
+            self.add_langstring(arg)
 
     # Control GETTER
     @property
@@ -128,7 +127,7 @@ class MultiLangString:
         else:
             raise TypeError(f"Invalid preferred_lang type. Should be 'str', but is '{type(preferred_lang_value)}'.")
 
-    def add(self, langstring: LangString) -> None:
+    def add_langstring(self, langstring: LangString) -> None:
         """Add a LangString to the MultiLangString.
 
         :param langstring: The LangString to add.

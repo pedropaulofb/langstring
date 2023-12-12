@@ -36,7 +36,7 @@ def test_get_pref_langstring_with_overwrite() -> None:
     lang_str1 = LangString("Hello", "en")
     lang_str2 = LangString("Hi", "en")
     mls = MultiLangString(lang_str1, control="OVERWRITE", preferred_lang="en")
-    mls.add(lang_str2)
+    mls.add_langstring(lang_str2)
     assert mls.get_pref_langstring() == ["Hi"], "Expected 'Hi' as the last LangString should overwrite the previous one"
 
 
@@ -47,7 +47,7 @@ def test_get_pref_langstring_with_block_error() -> None:
     lang_str2 = LangString("Hi", "en")
     mls = MultiLangString(lang_str1, control="BLOCK_ERROR", preferred_lang="en")
     with pytest.raises(ValueError):
-        mls.add(lang_str2)
+        mls.add_langstring(lang_str2)
     assert mls.get_pref_langstring() == ["Hello"], "Expected 'Hello' as the second addition should be blocked"
 
 

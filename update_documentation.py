@@ -41,7 +41,7 @@ def execute_documentation_commands() -> None:
         os.makedirs(docs_dir, exist_ok=True)
         logger.info(f"Empty directory '{docs_dir}' has been successfully created.")
     except OSError as e:
-        logger.error(f"Error: {e}")
+        logger.exception(f"Error: {e}")
 
     logger.info("Executing commands 'make clean' and 'make html' sequentially")
     try:
@@ -49,10 +49,10 @@ def execute_documentation_commands() -> None:
         subprocess.run(["make", "html"], cwd=sphinx_dir, shell=True, check=True)
         logger.info("Commands 'make clean' and 'make html' successfully executed.")
     except subprocess.CalledProcessError as e:
-        logger.error(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
+        logger.exception(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
         exit(1)
     except Exception as e:
-        logger.error(f"An error occurred: {e}")
+        logger.exception(f"An error occurred: {e}")
         exit(1)
 
     try:
@@ -61,17 +61,17 @@ def execute_documentation_commands() -> None:
         shutil.copytree(sphinx_dir_html, docs_dir, dirs_exist_ok=True)
         logger.info(f"Contents of '{sphinx_dir_html}' copied to '{docs_dir}' successfully.")
     except Exception as e:
-        logger.error(f"Error: {e}")
+        logger.exception(f"Error: {e}")
 
     logger.info("Executing command 'make clean'")
     try:
         subprocess.run(["make", "clean"], cwd=sphinx_dir, shell=True, check=True)
         logger.info("Commands 'make clean' and 'make html' successfully executed.")
     except subprocess.CalledProcessError as e:
-        logger.error(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
+        logger.exception(f"Commands 'make clean' and 'make html' failed with return code {e.returncode}: {e.cmd}")
         exit(1)
     except Exception as e:
-        logger.error(f"An error occurred: {e}")
+        logger.exception(f"An error occurred: {e}")
         exit(1)
 
     logger.info("Documentation commands executed successfully.")

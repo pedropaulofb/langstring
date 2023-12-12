@@ -90,5 +90,5 @@ def test_multilangstring_length_block_on_duplicate() -> None:
     en_string2 = LangString(text="Hello", lang="en")
     mls = MultiLangString(en_string1, control="BLOCK_ERROR")
     with pytest.raises(ValueError):
-        mls.add(en_string2)
+        mls.add_langstring(en_string2)
     assert len(mls) == 1, "Length should not change when addition of duplicate LangString is blocked."

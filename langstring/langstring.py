@@ -114,7 +114,6 @@ class LangString:
         """
         if self.lang is None:
             return f'"{self.text}"'
-
         return f'"{self.text}"@{self.lang}'
 
     def __eq__(self, other: "LangString") -> bool:

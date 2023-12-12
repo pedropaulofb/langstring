@@ -29,38 +29,50 @@ For inquiries and further information, please refer to the [comprehensive docstr
 ## Contents
 
 <!-- TOC -->
-
 * [LangString Python Library](#langstring-python-library)
-    * [Contents](#contents)
-    * [LangString Overview](#langstring-overview)
-        * [Benefits of LangStrings](#benefits-of-langstrings)
-        * [Practical Use of LangStrings](#practical-use-of-langstrings)
-        * [LangString Class - Usage Examples](#langstring-class---usage-examples)
-    * [MultiLangString: Handling Multiple Translations](#multilangstring-handling-multiple-translations)
-        * [MultiLangString Control Options](#multilangstring-control-options)
-            * [Available Controls](#available-controls)
-        * [Usage Examples for the MultiLangString Class](#usage-examples-for-the-multilangstring-class)
-    * [Getting Started](#getting-started)
-        * [Installation](#installation)
-        * [Importing and Using the Library](#importing-and-using-the-library)
-            * [Example Usage of `LangString`](#example-usage-of-langstring)
-            * [Example Usage of `MultiLangString`](#example-usage-of-multilangstring)
-        * [Comparison and Hashing](#comparison-and-hashing)
-            * [LangString](#langstring)
-                * [Equality and Inequality](#equality-and-inequality)
-                * [Hashing](#hashing)
-            * [MultiLangString](#multilangstring)
-                * [Equality and Inequality](#equality-and-inequality-1)
-                * [Hashing](#hashing-1)
-    * [Code Testing](#code-testing)
-    * [How to Contribute](#how-to-contribute)
-        * [Reporting Issues](#reporting-issues)
-        * [Code Contributions](#code-contributions)
-        * [Test Contributions](#test-contributions)
-        * [General Guidelines](#general-guidelines)
-    * [License](#license)
-    * [Author](#author)
-
+  * [Contents](#contents)
+  * [LangString Overview](#langstring-overview)
+    * [Benefits of LangStrings](#benefits-of-langstrings)
+    * [Practical Use of LangStrings](#practical-use-of-langstrings)
+    * [LangString Class - Usage Examples](#langstring-class---usage-examples)
+    * [Control Options for LangString](#control-options-for-langstring)
+      * [Available Flags](#available-flags)
+      * [Setting and Retrieving Flags](#setting-and-retrieving-flags)
+      * [Example Usage](#example-usage)
+  * [MultiLangString: Handling Multiple Translations](#multilangstring-handling-multiple-translations)
+    * [MultiLangString Control Options](#multilangstring-control-options)
+      * [Available Controls](#available-controls)
+    * [Usage Examples for the MultiLangString Class](#usage-examples-for-the-multilangstring-class)
+  * [Getting Started](#getting-started)
+    * [Installation](#installation)
+    * [Importing and Using the Library](#importing-and-using-the-library)
+      * [Example Usage of `LangString`](#example-usage-of-langstring)
+      * [Example Usage of `MultiLangString`](#example-usage-of-multilangstring)
+    * [Comparison and Hashing](#comparison-and-hashing)
+      * [LangString](#langstring)
+        * [Equality and Inequality](#equality-and-inequality)
+        * [Hashing](#hashing)
+      * [MultiLangString](#multilangstring)
+        * [Equality and Inequality](#equality-and-inequality-1)
+        * [Hashing](#hashing-1)
+  * [Code Testing](#code-testing)
+  * [Changelog and Future Development](#changelog-and-future-development)
+    * [Version 1.3.0 - [To be developed: Translations for MultiLangString (Expected)]](#version-130---to-be-developed-translations-for-multilangstring-expected)
+    * [Version 1.2.0 - [To be developed: MultiLangStringControl and MultiLangStringFlags (Expected)]](#version-120---to-be-developed-multilangstringcontrol-and-multilangstringflags-expected)
+    * [Version 1.1.0 - [Released: LangStringControl and LangStringFlags]](#version-110---released-langstringcontrol-and-langstringflags)
+      * [New Features](#new-features)
+      * [Enhancements](#enhancements)
+      * [Usage](#usage)
+  * [How to Contribute](#how-to-contribute)
+    * [Reporting Issues](#reporting-issues)
+    * [Code Contributions](#code-contributions)
+    * [Test Contributions](#test-contributions)
+    * [General Guidelines](#general-guidelines)
+  * [Dependencies](#dependencies)
+    * [Using Poetry](#using-poetry)
+    * [Using `requirements.txt`](#using-requirementstxt)
+  * [License](#license)
+  * [Author](#author)
 <!-- TOC -->
 
 ## LangString Overview
@@ -128,6 +140,54 @@ try:
     invalid_text_type = LangString(12345)
 except TypeError as e:
     print(f"Error: {e}")  # Outputs an error message if the input is not a string
+```
+
+### Control Options for LangString
+
+The `LangString` class is designed to work with text strings and their associated language tags, offering enhanced functionality and control over how these strings are handled and validated. This control is achieved through a set of flags defined in the `LangStringControl` class, using the `LangStringFlag` enumeration. These flags allow for dynamic configuration of `LangString` behavior, enabling customization to fit various application needs.
+
+#### Available Flags
+
+- `ENSURE_TEXT`: When enabled, this flag ensures that the `text` field of a `LangString` object is not empty. An attempt to create a `LangString` with an empty `text` field will raise a `ValueError`.
+
+- `ENSURE_ANY_LANG`: This flag mandates the presence of a non-empty language tag in the `lang` field of a `LangString`. If enabled, creating a `LangString` with an empty `lang` field will result in a `ValueError`.
+
+- `ENSURE_VALID_LANG`: Enabling this flag requires that the `lang` field of a `LangString` contains a valid language code. Invalid language codes will lead to a `ValueError` upon `LangString` creation.
+
+- `VERBOSE_MODE`: This flag activates verbose logging. When enabled, any warnings or informational messages related to `LangString` operations, such as the use of empty strings or invalid language tags, are logged for better traceability and debugging.
+
+#### Setting and Retrieving Flags
+
+Flags can be set globally and will affect the behavior of all `LangString` instances within the application. To set a flag, use:
+
+```python
+LangStringControl.set_flag(LangStringFlag.<FLAG_NAME>, <True/False>)
+```
+
+To check the current state of a flag:
+
+```python
+current_state = LangStringControl.get_flag(LangStringFlag.<FLAG_NAME>)
+```
+
+#### Example Usage
+```python
+from langstring import LangString, LangStringControl, LangStringFlag
+
+# Enable the ENSURE_TEXT flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+
+# Attempting to create a LangString with an empty text will raise an error
+try:
+    lang_str = LangString("", "en")
+except ValueError as e:
+    print(e)  # Output: "ENSURE_TEXT enabled: Langstring's 'text' field cannot receive empty string."
+
+# Disable the ENSURE_TEXT flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+
+# Now, creating a LangString with an empty text will succeed
+lang_str = LangString("", "en")
 ```
 
 2. Converting the LangString Object to String
@@ -213,7 +273,7 @@ Use the `add` method to add a new `LangString` object to the `MultiLangString`:
 
 ```python
 lang_str3 = LangString("Hola", "es")
-multi_lang_str.add(lang_str3)
+multi_lang_str.add_langstring(lang_str3)
 ```
 
 3. Getting a Specific Language String
@@ -444,6 +504,30 @@ The code provided has undergone rigorous testing to ensure its reliability and c
 langstring> pytest .\tests
 ```
 
+## Changelog and Future Development
+
+### Version 1.3.0 - [To be developed: Translations for MultiLangString (Expected)]
+### Version 1.2.0 - [To be developed: MultiLangStringControl and MultiLangStringFlags (Expected)]
+
+### Version 1.1.0 - [Released: LangStringControl and LangStringFlags]
+
+#### New Features
+- **LangStringControl**: A new class introduced to manage the configuration settings for language strings dynamically. This addition allows for global settings that affect the behavior of `LangString` instances throughout your application.
+
+- **LangStringFlags**: An enumeration (`LangStringFlag`) that defines various configuration flags. These flags provide enhanced control over the `LangString` class, enabling behaviors such as:
+  - `ENSURE_TEXT`: Ensures that the `text` field in `LangString` is not empty.
+  - `ENSURE_ANY_LANG`: Requires a non-empty language tag in `LangString`.
+  - `ENSURE_VALID_LANG`: Enforces the use of valid language codes in `LangString`.
+  - `VERBOSE_MODE`: Activates verbose logging for operations, aiding in debugging and monitoring.
+
+#### Enhancements
+- Improved validation and error handling in `LangString` based on the new control flags.
+- Enhanced logging capabilities with the integration of the `VERBOSE_MODE` flag, providing better insights into the library's operations.
+
+#### Usage
+These new features can be utilized to fine-tune the behavior of `LangString` objects in various scenarios, making the library more adaptable to specific requirements. For detailed usage examples, refer to the [Control Options for LangString](#control-options-for-langstring) section.
+
+
 ## How to Contribute
 
 ### Reporting Issues
@@ -469,6 +553,31 @@ langstring> pytest .\tests
 - Make sure your contributions do not introduce new issues.
 
 We appreciate your time and expertise in contributing to this project!
+
+## Dependencies
+
+This project can be set up using either Poetry or `requirements.txt`. Both are kept in sync to ensure consistency in dependencies.
+
+### Using Poetry
+
+[Poetry](https://python-poetry.org/) is used for easy management of dependencies and packaging. To install the dependencies with Poetry, first [install Poetry](https://python-poetry.org/docs/#installation) if you haven't already, and then run:
+
+```bash
+poetry install
+```
+
+This will install all the dependencies as specified in `pyproject.toml`.
+
+### Using `requirements.txt`
+
+If you prefer not to use Poetry, a `requirements.txt` file is also provided. You can install the dependencies using pip:
+
+```bash
+pip install -r requirements.txt
+```
+
+This is a straightforward way to set up the project if you are accustomed to using pip and traditional requirements files.
+
 
 ## License
 

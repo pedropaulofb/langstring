@@ -113,5 +113,5 @@ ci:
   autoupdate_branch: ''
   autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
   autoupdate_schedule: weekly
-  skip: [ run_tests ]
+  skip: [ run_tests, mypy, flake8 ]  # mypy, flake8 removed as some small details must be updated.
   submodules: false

@@ -40,61 +40,28 @@ class LangString:
     :vartype lang: str or None
     """
 
-    def __init__(self, text: str = "", lang: Optional[str] = None) -> None:
+    def __init__(self, text: Optional[str] = "", lang: Optional[str] = None) -> None:
         """Initialize a new LangString object with text and an optional language tag.
 
         The behavior of this method is influenced by control flags set in LangStringControl. For instance, if the
         ENSURE_TEXT flag is enabled, an empty 'text' string will raise a ValueError.
 
         :param text: The actual text string. Defaults to the empty string ("").
-        :type text: str
+        :type text: str, optional
         :param lang: The language tag of the text, defaults to None.
         :type lang: str, optional
         :raises TypeError: If 'text' is not a string, or if 'lang' is provided and is not a string.
         :raises ValueError: If 'text' is empty and ENSURE_TEXT is enabled; if 'lang' is empty and ENSURE_ANY_LANG is \
         enabled; or if 'lang' is invalid and ENSURE_VALID_LANG is enabled.
         """
-        # Type validation
-        if not isinstance(text, str):
-            raise TypeError(f"Expected 'text' to be of type str, but got {type(text).__name__}.")
-        if lang is not None and not isinstance(lang, str):
-            raise TypeError(f"Expected 'lang' to be of type str, but got {type(lang).__name__}.")
-
-        # Text field cannot be empty
-        if text is None:
-            raise ValueError("Langstring's 'text' field cannot be None.")
-
-        # Ensure text control option
-        if text == "":
-            if LangStringControl.get_flag(LangStringFlag.VERBOSE_MODE):
-                warning_msg = "Langstring's 'text' field received empty string."
-                warnings.warn(warning_msg, UserWarning)
-                logger.warning(warning_msg)
-            if LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT):
-                raise ValueError("ENSURE_TEXT enabled: Langstring's 'text' field cannot receive empty string.")
-
-        # Ensure lang control option
-        if lang == "":
-            if LangStringControl.get_flag(LangStringFlag.VERBOSE_MODE):
-                warning_msg = "Langstring's 'lang' field received empty string."
-                warnings.warn(warning_msg, UserWarning)
-                logger.warning(warning_msg)
-            if LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG):
-                raise ValueError("ENSURE_ANY_LANG enabled: Langstring's 'lang' field cannot receive empty string.")
-            if LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG):
-                raise ValueError("ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot receive empty string.")
-
-        # Validate lang control option
-        if lang and not tag_is_valid(lang):
-            if LangStringControl.get_flag(LangStringFlag.VERBOSE_MODE):
-                warning_msg = f"Invalid language tag '{lang}' used."
-                warnings.warn(warning_msg, UserWarning)
-                logger.warning(warning_msg)
-            if LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG):
-                raise ValueError("ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot be invalid.")
 
         self.text: Optional[str] = text
         self.lang: Optional[str] = lang
+
+        self._validate_arguments_types()
+        self._validate_ensure_text()
+        self._validate_ensure_any_lang()
+        self._validate_ensure_valid_lang()
 
     def to_string(self) -> str:
         """Convert the LangString object to a string representation.
@@ -135,3 +102,70 @@ class LangString:
         :rtype: int
         """
         return hash((self.text, self.lang))
+
+    def _validate_arguments_types(self) -> None:
+        """Validate the types of the 'text' and 'lang' arguments.
+
+        Ensures that 'text' is a string and 'lang' is either a string or None. Raises a TypeError if the types do not
+        match the expected types.
+
+        :raises TypeError: If 'text' is not a string or if 'lang' is provided and is not a string or None.
+        """
+        if not isinstance(self.text, str):
+            raise TypeError(f"Expected 'text' to be of type str, but got {type(self.text).__name__}.")
+        if self.lang is not None and not isinstance(self.lang, str):
+            raise TypeError(f"Expected 'lang' to be of type str, but got {type(self.lang).__name__}.")
+
+        # Text field cannot be empty
+        if self.text is None:
+            raise ValueError("Langstring's 'text' field cannot be None.")
+
+    def _validate_ensure_text(self) -> None:
+        """Validate the 'text' argument based on the ENSURE_TEXT control flag.
+
+        Checks if the 'text' field is empty and raises a ValueError or warning depending on the ENSURE_TEXT and
+        VERBOSE_MODE flags set in LangStringControl.
+
+        :raises ValueError: If ENSURE_TEXT is enabled and 'text' is an empty string.
+        """
+        if self.text == "":
+            if LangStringControl.get_flag(LangStringFlag.VERBOSE_MODE):
+                warning_msg = "Langstring's 'text' field received empty string."
+                warnings.warn(warning_msg, UserWarning)
+                logger.warning(warning_msg)
+            if LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT):
+                raise ValueError("ENSURE_TEXT enabled: Langstring's 'text' field cannot receive empty string.")
+
+    def _validate_ensure_any_lang(self) -> None:
+        """Validate the 'lang' argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.
+
+        Checks if the 'lang' field is empty and raises a ValueError or warning depending on the ENSURE_ANY_LANG,
+        ENSURE_VALID_LANG, and VERBOSE_MODE flags set in LangStringControl.
+
+        :raises ValueError: If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and 'lang' is an empty string.
+        """
+        if self.lang == "":
+            if LangStringControl.get_flag(LangStringFlag.VERBOSE_MODE):
+                warning_msg = "Langstring's 'lang' field received empty string."
+                warnings.warn(warning_msg, UserWarning)
+                logger.warning(warning_msg)
+            if LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG):
+                raise ValueError("ENSURE_ANY_LANG enabled: Langstring's 'lang' field cannot receive empty string.")
+            if LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG):
+                raise ValueError("ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot receive empty string.")
+
+    def _validate_ensure_valid_lang(self) -> None:
+        """Validate the language tag for its validity.
+
+        This method checks if the language tag is valid. If the tag is invalid, it raises a warning or an error
+        depending on the control flags set in LangStringControl.
+
+        :raises ValueError: If ENSURE_VALID_LANG is enabled and the language tag is invalid.
+        """
+        if self.lang and not tag_is_valid(self.lang):
+            if LangStringControl.get_flag(LangStringFlag.VERBOSE_MODE):
+                warning_msg = f"Invalid language tag '{self.lang}' used."
+                warnings.warn(warning_msg, UserWarning)
+                logger.warning(warning_msg)
+            if LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG):
+                raise ValueError("ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot be invalid.")

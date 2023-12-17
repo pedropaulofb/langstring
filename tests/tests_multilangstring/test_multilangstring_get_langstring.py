@@ -40,7 +40,7 @@ def test_get_langstring_with_preferred_language() -> None:
 
 
 @pytest.mark.parametrize("lang, expected", [("en", ["Hello"]), ("fr", []), ("es", ["Hola"])])
-def test_get_langstring_parametrized(lang, expected):
+def test_get_langstring_parametrized(lang, expected) -> None:
     """Parametrized test for retrieving LangStrings for various language tags."""
     lang_str1 = LangString("Hello", "en")
     lang_str2 = LangString("Hola", "es")

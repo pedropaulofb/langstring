@@ -14,7 +14,7 @@ from langstring import LangStringFlag
         (None, True),  # None should be accepted
     ],
 )
-def test_validate_ensure_any_lang(lang: str, is_valid: bool):
+def test_validate_ensure_any_lang(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_any_lang method for various language codes."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     if is_valid:
@@ -27,7 +27,7 @@ def test_validate_ensure_any_lang(lang: str, is_valid: bool):
             LangString("Test", lang)
 
 
-def test_langstring_init_with_ensure_any_lang_flag_disabled():
+def test_langstring_init_with_ensure_any_lang_flag_disabled() -> None:
     """Test LangString initialization with various language tags with ENSURE_ANY_LANG flag disabled."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, False)
     # Test with an empty string as language code
@@ -42,7 +42,7 @@ def test_langstring_init_with_ensure_any_lang_flag_disabled():
         ("fr ", True),  # trailing whitespace
     ],
 )
-def test_validate_ensure_any_lang_whitespace(lang: str, is_valid: bool):
+def test_validate_ensure_any_lang_whitespace(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_any_lang method for language codes with whitespace."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     if is_valid:
@@ -59,7 +59,7 @@ def test_validate_ensure_any_lang_whitespace(lang: str, is_valid: bool):
         ("eN", True),  # mixed case, valid if language code itself is valid
     ],
 )
-def test_validate_ensure_any_lang_mixed_case(lang: str, is_valid: bool):
+def test_validate_ensure_any_lang_mixed_case(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_any_lang method for mixed case language codes."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     if is_valid:
@@ -76,7 +76,7 @@ def test_validate_ensure_any_lang_mixed_case(lang: str, is_valid: bool):
         ("fr-CA", True),  # another valid extended language tag
     ],
 )
-def test_validate_ensure_any_lang_extended(lang: str, is_valid: bool):
+def test_validate_ensure_any_lang_extended(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_any_lang method for extended language tags."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     if is_valid:

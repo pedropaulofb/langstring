@@ -6,7 +6,7 @@ from langstring.langstring_control import LangStringControl
 from langstring.langstring_control import LangStringFlag
 
 
-def test_langstring_init_invalid_lang_without_ensure_valid_lang_flag():
+def test_langstring_init_invalid_lang_without_ensure_valid_lang_flag() -> None:
     """Test LangString initialization with an invalid language tag but without ENSURE_VALID_LANG flag."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
     lang_str = LangString("Hello", "invalid-lang")
@@ -30,9 +30,8 @@ def test_langstring_init_invalid_lang_without_ensure_valid_lang_flag():
         (None, True),  # None should not trigger validation
     ],
 )
-def test_validate_ensure_valid_lang(lang: str, is_valid: bool):
-    """
-    Test the _validate_ensure_valid_lang method for various language codes.
+def test_validate_ensure_valid_lang(lang: str, is_valid: bool) -> None:
+    """Test the _validate_ensure_valid_lang method for various language codes.
 
     :param lang: The language code to test.
     :param is_valid: Expected validity of the language code.
@@ -50,7 +49,7 @@ def test_validate_ensure_valid_lang(lang: str, is_valid: bool):
             LangString("Test", lang)
 
 
-def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled():
+def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled() -> None:
     """Test LangString initialization with an invalid language tag with ENSURE_VALID_LANG flag disabled."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
     lang_str = LangString("Hello", "invalid-lang")
@@ -59,7 +58,7 @@ def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled():
     ), "LangString should accept invalid language tag when ENSURE_VALID_LANG is disabled"
 
 
-def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled():
+def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled() -> None:
     """Test LangString initialization with an invalid language tag with ENSURE_VALID_LANG flag disabled."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
     lang_str = LangString("Hello", "invalid-lang")
@@ -75,7 +74,7 @@ def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled():
         ("eN", True),  # mixed case, valid
     ],
 )
-def test_validate_ensure_valid_lang_mixed_case(lang: str, is_valid: bool):
+def test_validate_ensure_valid_lang_mixed_case(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_valid_lang method for mixed case language codes."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
@@ -92,7 +91,7 @@ def test_validate_ensure_valid_lang_mixed_case(lang: str, is_valid: bool):
         ("fr-CA", True),  # another valid extended language tag
     ],
 )
-def test_validate_ensure_valid_lang_extended(lang: str, is_valid: bool):
+def test_validate_ensure_valid_lang_extended(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_valid_lang method for extended language tags."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
@@ -109,7 +108,7 @@ def test_validate_ensure_valid_lang_extended(lang: str, is_valid: bool):
         ("fr ", False),  # trailing whitespace
     ],
 )
-def test_validate_ensure_valid_lang_whitespace(lang: str, is_valid: bool):
+def test_validate_ensure_valid_lang_whitespace(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_valid_lang method for language codes with whitespace."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
@@ -126,7 +125,7 @@ def test_validate_ensure_valid_lang_whitespace(lang: str, is_valid: bool):
         ("invalid-lang", False),  # invalid language code
     ],
 )
-def test_langstring_init_empty_text(lang: str, is_valid: bool):
+def test_langstring_init_empty_text(lang: str, is_valid: bool) -> None:
     """Test LangString initialization with empty text and various language codes."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:

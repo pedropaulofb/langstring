@@ -272,8 +272,7 @@ class MultiLangString:
         )
 
     def __eq__(self, other: object) -> bool:
-        """
-        Check equality of this MultiLangString with another MultiLangString.
+        """Check equality of this MultiLangString with another MultiLangString.
 
         This method compares only the 'langstrings' attribute of the two MultiLangString objects.
         The 'control' and 'preferred_lang' attributes, which dictate the behavior for handling duplicate language tags
@@ -291,8 +290,7 @@ class MultiLangString:
         return self.langstrings == other.langstrings
 
     def __hash__(self) -> int:
-        """
-        Generate a hash value for a MultiLangString object.
+        """Generate a hash value for a MultiLangString object.
 
         The hash is computed based on the 'langstrings' attribute of the MultiLangString.
         The 'control' and 'preferred_lang' attributes are not included in the hash calculation. This ensures

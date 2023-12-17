@@ -86,6 +86,46 @@ Classes
       :rtype: int
 
 
+   .. py:method:: _validate_arguments_types()
+
+      Validate the types of the 'text' and 'lang' arguments.
+
+      Ensures that 'text' is a string and 'lang' is either a string or None. Raises a TypeError if the types do not
+      match the expected types.
+
+      :raises TypeError: If 'text' is not a string or if 'lang' is provided and is not a string or None.
+
+
+   .. py:method:: _validate_ensure_text()
+
+      Validate the 'text' argument based on the ENSURE_TEXT control flag.
+
+      Checks if the 'text' field is empty and raises a ValueError or warning depending on the ENSURE_TEXT and
+      VERBOSE_MODE flags set in LangStringControl.
+
+      :raises ValueError: If ENSURE_TEXT is enabled and 'text' is an empty string.
+
+
+   .. py:method:: _validate_ensure_any_lang()
+
+      Validate the 'lang' argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.
+
+      Checks if the 'lang' field is empty and raises a ValueError or warning depending on the ENSURE_ANY_LANG,
+      ENSURE_VALID_LANG, and VERBOSE_MODE flags set in LangStringControl.
+
+      :raises ValueError: If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and 'lang' is an empty string.
+
+
+   .. py:method:: _validate_ensure_valid_lang()
+
+      Validate the language tag for its validity.
+
+      This method checks if the language tag is valid. If the tag is invalid, it raises a warning or an error
+      depending on the control flags set in LangStringControl.
+
+      :raises ValueError: If ENSURE_VALID_LANG is enabled and the language tag is invalid.
+
+
 
 .. py:class:: LangStringControl
 

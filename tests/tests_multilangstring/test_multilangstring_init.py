@@ -126,7 +126,7 @@ def test_init_with_duplicate_language_tags() -> None:
         MultiLangString(langstr_en1, langstr_en2, control="BLOCK_ERROR")
 
 
-def test_invalid_control_value_init():
+def test_invalid_control_value_init() -> None:
     """Test the representation when control has an invalid value."""
     with pytest.raises(ValueError):
         MultiLangString(LangString("Hello", "en"), control="INVALID")

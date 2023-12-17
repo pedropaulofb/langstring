@@ -7,14 +7,6 @@ from langstring import LangStringFlag
 from langstring.langstring import LangString
 
 
-@pytest.fixture(autouse=True)
-def reset_flags():
-    # Reset all flags to False before each test
-    for flag in LangStringFlag:
-        LangStringControl.set_flag(flag, False)
-    yield
-
-
 def test_initialization() -> None:
     """Test the initialization of a LangString object without specifying a language."""
     ls = LangString("hello")

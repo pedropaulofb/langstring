@@ -9,7 +9,7 @@ def test_to_string() -> None:
     assert ls.to_string() == '"hello"', f'Expected to_string() to return "hello", but got {ls.to_string()}'
 
 
-def test_to_string_invalid_argument():
+def test_to_string_invalid_argument() -> None:
     """Test passing an invalid argument to the to_string method."""
     ls = LangString("hello")
     with pytest.raises(TypeError):
@@ -31,7 +31,7 @@ def test_str() -> None:
         ("", None, '""'),
     ],
 )
-def test_langstring_string_representation(text, lang, expected_str):
+def test_langstring_string_representation(text, lang, expected_str) -> None:
     """Test LangString string representation.
 
     :param text: Text for the LangString.

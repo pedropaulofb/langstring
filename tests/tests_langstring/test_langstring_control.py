@@ -7,14 +7,6 @@ from langstring.langstring_control import LangStringControl
 from langstring.langstring_control import LangStringFlag
 
 
-@pytest.fixture(autouse=True)
-def reset_flags():
-    # Reset all flags to False before each test
-    for flag in LangStringFlag:
-        LangStringControl.set_flag(flag, False)
-    yield
-
-
 @pytest.mark.parametrize(
     "flag, state",
     [
@@ -24,14 +16,14 @@ def reset_flags():
         (LangStringFlag.VERBOSE_MODE, False),
     ],
 )
-def test_set_flag_valid(flag: LangStringFlag, state: bool):
+def test_set_flag_valid(flag: LangStringFlag, state: bool) -> None:
     """Test setting a flag with valid values."""
     LangStringControl.set_flag(flag, state)
     assert LangStringControl.get_flag(flag) == state, "Flag state should be updated correctly"
 
 
 @pytest.mark.parametrize("flag, state", [("InvalidFlag", True), (123, False)])
-def test_set_flag_invalid(flag, state):
+def test_set_flag_invalid(flag, state) -> None:
     """Test setting a flag with invalid flag values."""
     with pytest.raises(TypeError, match="Invalid flag received. Valid flags are:"):
         LangStringControl.set_flag(flag, state)
@@ -46,19 +38,19 @@ def test_set_flag_invalid(flag, state):
         LangStringFlag.VERBOSE_MODE,
     ],
 )
-def test_get_flag_valid(flag: LangStringFlag):
+def test_get_flag_valid(flag: LangStringFlag) -> None:
     """Test retrieving the state of a valid flag."""
     LangStringControl.set_flag(flag, True)  # Set flag to True for testing
     assert LangStringControl.get_flag(flag) is True, "Flag state should be retrievable"
 
 
-def test_get_flag_invalid():
+def test_get_flag_invalid() -> None:
     """Test retrieving the state of an invalid flag."""
     with pytest.raises(TypeError, match="Invalid flag received. Valid flags are:"):
         LangStringControl.get_flag("InvalidFlag")
 
 
-def test_get_flags():
+def test_get_flags() -> None:
     """Test retrieving the states of all flags."""
     expected_flags = {
         LangStringFlag.ENSURE_TEXT: False,
@@ -69,7 +61,7 @@ def test_get_flags():
     assert LangStringControl.get_flags() == expected_flags, "All flags should be retrieved correctly"
 
 
-def test_log_flags():
+def test_log_flags() -> None:
     """Test logging the state of all flags."""
     with patch.object(logger, "info") as mock_logger:
         LangStringControl.log_flags()
@@ -86,7 +78,7 @@ def test_log_flags():
         (LangStringFlag.VERBOSE_MODE, True, False),
     ],
 )
-def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state: bool):
+def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state: bool) -> None:
     """Test toggling the state of a flag.
 
     :param flag: The LangStringFlag to be toggled.
@@ -108,7 +100,7 @@ def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state:
         LangStringFlag.VERBOSE_MODE,
     ],
 )
-def test_default_flag_state(flag: LangStringFlag):
+def test_default_flag_state(flag: LangStringFlag) -> None:
     """Test the default state of flags.
 
     :param flag: The LangStringFlag to check the default state for.
@@ -125,7 +117,7 @@ def test_default_flag_state(flag: LangStringFlag):
         (LangStringFlag.VERBOSE_MODE, 0),
     ],
 )
-def test_set_flag_invalid_state_type(flag: LangStringFlag, state):
+def test_set_flag_invalid_state_type(flag: LangStringFlag, state) -> None:
     """Test setting a flag with invalid state types.
 
     :param flag: The LangStringFlag to be set.
@@ -135,7 +127,7 @@ def test_set_flag_invalid_state_type(flag: LangStringFlag, state):
         LangStringControl.set_flag(flag, state)
 
 
-def test_get_flags_after_modification():
+def test_get_flags_after_modification() -> None:
     """Test retrieving the states of all flags after modification."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
     flags = LangStringControl.get_flags()

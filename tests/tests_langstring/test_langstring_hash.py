@@ -21,6 +21,30 @@ def langstring_en_hi():
     return LangString("Hi", "en")
 
 
+@pytest.mark.parametrize(
+    "text, lang, other_text, other_lang, are_equal",
+    [
+        ("Hello", "en", "Hello", "en", True),
+        ("Hello", "en", "Hello", None, False),
+        ("Hello", "en", "Hi", "en", False),
+        ("Hello", None, "Hello", None, True),
+    ],
+)
+def test_langstring_hashing(text, lang, other_text, other_lang, are_equal):
+    """Test LangString equality and hashing.
+
+    :param text: Text for the first LangString.
+    :param lang: Language tag for the first LangString.
+    :param other_text: Text for the second LangString.
+    :param other_lang: Language tag for the second LangString.
+    :param are_equal: Expected equality result.
+    """
+    lang_str1 = LangString(text, lang)
+    lang_str2 = LangString(other_text, other_lang)
+    if are_equal:
+        assert hash(lang_str1) == hash(lang_str2), "Equal LangStrings should have the same hash"
+
+
 def test_hash_consistency(langstring_en_hello):
     """Test that the hash of a LangString object is consistent."""
     hash1 = hash(langstring_en_hello)

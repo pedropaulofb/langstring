@@ -82,6 +82,29 @@ def langstring_en_hello_duplicate():
     return LangString("Hello", "en")
 
 
+@pytest.mark.parametrize(
+    "text, lang, other_text, other_lang, are_equal",
+    [
+        ("Hello", "en", "Hello", "en", True),
+        ("Hello", "en", "Hello", None, False),
+        ("Hello", "en", "Hi", "en", False),
+        ("Hello", None, "Hello", None, True),
+    ],
+)
+def test_langstring_equality(text, lang, other_text, other_lang, are_equal):
+    """Test LangString equality and hashing.
+
+    :param text: Text for the first LangString.
+    :param lang: Language tag for the first LangString.
+    :param other_text: Text for the second LangString.
+    :param other_lang: Language tag for the second LangString.
+    :param are_equal: Expected equality result.
+    """
+    lang_str1 = LangString(text, lang)
+    lang_str2 = LangString(other_text, other_lang)
+    assert (lang_str1 == lang_str2) is are_equal, "LangString equality check failed"
+
+
 # Tests for __ne__ method
 def test_neq_different_texts(langstring_en_hello, langstring_en_hi):
     """Test inequality with different texts but same language."""

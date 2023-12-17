@@ -54,7 +54,6 @@ class LangString:
         :raises ValueError: If 'text' is empty and ENSURE_TEXT is enabled; if 'lang' is empty and ENSURE_ANY_LANG is \
         enabled; or if 'lang' is invalid and ENSURE_VALID_LANG is enabled.
         """
-
         self.text: Optional[str] = text
         self.lang: Optional[str] = lang
 

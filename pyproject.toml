@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langstring"
-version = "1.1.0"
+version = "1.1.1"
 description = "LangString Python Library"
 license = "Apache-2.0"
 authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]
@@ -36,16 +36,19 @@ sphinx-toolbox = "^3.5.0"
 myst-parser = "^2.0.0"
 # Flake8 and plugins
 flake8 = "^6.1.0"
-flake8-pytest-style = "^1.7.2"
 flake8-broken-line = "^1.0.0"
 flake8-fixme = "^1.1.1"
 flake8-implicit-str-concat = "^0.4.0"
 flake8-noqa = "^1.3.2"
+flake8-pyproject="^1.2.3"
+flake8-pytest-style = "^1.7.2"
 flake8-return = "^1.2.0"
 flake8-unused-arguments = "^0.0.13"
 flake8-useless-assert = "^0.4.4"
 pep8-naming = "^0.13.3"
 pydoclint = "^0.3.8"
+pydocstyle = "^6.3.0"
+pyflakes = "^3.1.0"
 tryceratops = "^2.3.2"
 
 [build-system]
@@ -88,4 +91,6 @@ profile = "black"
 
 [tool.flake8]
 # OTHER USED PLUGINS: flake8-project
-#per-file-ignores = "ontouml_py/__init__.py:F401"
+max-line-length = 120
+exclude = ["tests/*", "update_documentation.py"]
+ignore = "TRY003, DOC301"

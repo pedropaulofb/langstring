@@ -45,17 +45,8 @@ def test_validate_ensure_valid_lang(lang: str, is_valid: bool) -> None:
             pytest.fail(f"Unexpected ValueError for valid language code '{lang}': {e}")
     else:
         # Expect ValueError for invalid language codes
-        with pytest.raises(ValueError, match=f"ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
             LangString("Test", lang)
-
-
-def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled() -> None:
-    """Test LangString initialization with an invalid language tag with ENSURE_VALID_LANG flag disabled."""
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
-    lang_str = LangString("Hello", "invalid-lang")
-    assert (
-        lang_str.lang == "invalid-lang"
-    ), "LangString should accept invalid language tag when ENSURE_VALID_LANG is disabled"
 
 
 def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled() -> None:

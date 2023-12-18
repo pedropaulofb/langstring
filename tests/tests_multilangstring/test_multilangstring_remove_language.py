@@ -72,12 +72,10 @@ def test_remove_empty_language_code() -> None:
     """Test removing LangStrings with an empty language code."""
     multi_lang_string = create_sample_multilangstring()
     empty_language = ""
-    with pytest.raises(TypeError) as excinfo:
+    with pytest.raises(
+        TypeError, match="Invalid language format. Expected non-empty alphabetic string and received an empty string."
+    ):
         multi_lang_string.remove_language(empty_language)
-    assert (
-        str(excinfo.value)
-        == "Invalid language format. Expected non-empty alphabetic string and received an empty string."
-    )
 
 
 def test_remove_language_non_string() -> None:

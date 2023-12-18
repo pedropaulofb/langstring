@@ -133,21 +133,22 @@ class MultiLangString:
         :param langstring: The LangString to add.
         :type langstring: LangString
         """
-        self._validate_langstring_arg(langstring)  # Use the helper method
+        self._validate_langstring_arg(langstring)
+
+        if self.control == "BLOCK_ERROR" and langstring.lang in self.langstrings:
+            raise ValueError(
+                f"Operation not possible. A LangString with language tag {langstring.lang} already exists."
+            )
 
         if self.control == "BLOCK_WARN" and langstring.lang in self.langstrings:
-            warn_message = f"Operation not possible, a LangString with language tag {langstring.lang} already exists."
+            warn_message = f"Operation not possible. A LangString with language tag {langstring.lang} already exists."
             warnings.warn(warn_message, UserWarning)
             logger.warning(warn_message)
-        elif self.control == "BLOCK_ERROR" and langstring.lang in self.langstrings:
-            raise ValueError(
-                f"Operation not possible, a LangString with language tag {langstring.lang} already exists."
-            )
-        elif self.control == "OVERWRITE":
+
+        if self.control == "OVERWRITE":
             self.langstrings[langstring.lang] = [langstring.text]
-        else:  # self.control == ALLOW
-            if langstring.text not in self.langstrings.get(langstring.lang, []):
-                self.langstrings.setdefault(langstring.lang, []).append(langstring.text)
+        elif langstring.text not in self.langstrings.get(langstring.lang, []):
+            self.langstrings.setdefault(langstring.lang, []).append(langstring.text)
 
     def get_langstring(self, lang: str) -> list[str]:
         """Get LangStrings for a specific language tag.

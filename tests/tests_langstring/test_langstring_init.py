@@ -1,9 +1,5 @@
-from unittest.mock import patch
-
 import pytest
 
-from langstring import LangStringControl
-from langstring import LangStringFlag
 from langstring.langstring import LangString
 
 

@@ -1,8 +1,6 @@
 import pytest
 
 from langstring import LangString
-from langstring import LangStringControl
-from langstring import LangStringFlag
 
 
 @pytest.mark.parametrize(

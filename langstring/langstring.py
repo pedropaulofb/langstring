@@ -82,16 +82,16 @@ class LangString:
             return f'"{self.text}"'
         return f'"{self.text}"@{self.lang}'
 
-    def __eq__(self, other: "LangString") -> bool:
-        """Check equality of this LangString with another LangString.
+    def __eq__(self, other: object) -> bool:
+        """Check equality of this LangString with another object.
 
-        :param other: Another LangString object to compare with.
-        :type other: LangString
-        :return: True if both LangString objects have the same text and language tag, False otherwise.
+        :param other: Another object to compare with.
+        :type other: object
+        :return: True if 'other' is a LangString object with the same text and language tag, False otherwise.
         :rtype: bool
         """
         if not isinstance(other, LangString):
-            return False
+            return NotImplemented
         return self.text == other.text and self.lang == other.lang
 
     def __hash__(self) -> int:

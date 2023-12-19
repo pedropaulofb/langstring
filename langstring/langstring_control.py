@@ -126,3 +126,29 @@ class LangStringControl:
         """
         for flag, state in cls._flags.items():
             logger.info(f"{flag.name} = {state}")
+
+    @classmethod
+    def reset_flags(cls) -> None:
+        """Reset all configuration flags for LangString to their default values.
+
+        This class method resets the states of all flags in the LangStringControl to their default values. This is
+        particularly useful for restoring the default behavior of the LangString class after temporary changes to
+        the configuration flags.
+
+        After calling this method, all flags will be set to False, which is their default state. This includes flags
+        for ensuring text presence, validating language codes, and enabling verbose mode.
+
+        :example:
+            # Change and then reset the flags
+            LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+            LangStringControl.reset_flags()  # Resets ENSURE_TEXT and all other flags to False
+
+        Note:
+            This reset affects all instances where LangString flags are checked, as the flags are managed globally.
+        """
+        cls._flags = {
+            LangStringFlag.ENSURE_TEXT: False,
+            LangStringFlag.ENSURE_ANY_LANG: False,
+            LangStringFlag.ENSURE_VALID_LANG: False,
+            LangStringFlag.VERBOSE_MODE: False,
+        }

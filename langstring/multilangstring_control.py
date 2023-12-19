@@ -33,9 +33,8 @@ Note:
     Changes made using `MultiLangStringControl` affect the behavior of multilingual string handling globally
     within the application and are intended to be used where consistent behavior across all instances is required.
 """
-
-
-from enum import Enum, auto
+from enum import auto
+from enum import Enum
 
 from loguru import logger
 
@@ -46,10 +45,10 @@ class MultiLangStringStrategy(Enum):
     This enum defines the control strategies used for handling duplicate language tags in a MultiLangString instance.
     Each member of this enum represents a specific strategy for managing duplicates.
 
-    :cvar OVERWRITE: Enum member to overwrite existing entries with the same language tag.
-    :cvar ALLOW: Enum member to allow multiple entries with the same language tag, preventing duplication of identical texts.
-    :cvar BLOCK_WARN: Enum member to block and log a warning for duplicate language tags.
-    :cvar BLOCK_ERROR: Enum member to block and raise an error for duplicate language tags.
+    :cvar OVERWRITE: Overwrites existing entries with the same language tag.
+    :cvar ALLOW: Allows multiple entries with the same language tag, preventing duplication of identical texts.
+    :cvar BLOCK_WARN: Blocks and logs a warning for duplicate language tags.
+    :cvar BLOCK_ERROR: Block and raises an error for duplicate language tags.
     """
 
     OVERWRITE = auto()
@@ -57,7 +56,7 @@ class MultiLangStringStrategy(Enum):
     BLOCK_WARN = auto()
     BLOCK_ERROR = auto()
 
-    def __str__(self) -> None:
+    def __str__(self) -> str:
         """Return the string representation of the enum member.
 
         Overrides the default string representation to return the name of the enum member, making it more readable

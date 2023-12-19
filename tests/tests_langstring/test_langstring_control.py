@@ -135,3 +135,37 @@ def test_get_flags_after_modification() -> None:
     assert all(
         flags[flag] is False for flag in LangStringFlag if flag != LangStringFlag.ENSURE_TEXT
     ), "Unmodified flags should remain in their default state"
+
+
+def test_reset_flags_to_default() -> None:
+    """Test resetting all flags to their default values.
+
+    This test ensures that the reset_flags method sets all flags to their default state, which is False.
+    """
+    # Set all flags to True for testing
+    for flag in LangStringFlag:
+        LangStringControl.set_flag(flag, True)
+
+    # Reset all flags
+    LangStringControl.reset_flags()
+
+    # Assert that all flags are reset to False
+    assert all(
+        not LangStringControl.get_flag(flag) for flag in LangStringFlag
+    ), "All flags should be reset to their default state (False)"
+
+
+def test_reset_flags_idempotence() -> None:
+    """Test the idempotence of the reset_flags method.
+
+    This test ensures that calling reset_flags multiple times does not change the outcome, i.e., all flags
+    should remain in their default state (False) after multiple resets.
+    """
+    # Reset flags twice
+    LangStringControl.reset_flags()
+    LangStringControl.reset_flags()
+
+    # Assert that all flags are still False
+    assert all(
+        not LangStringControl.get_flag(flag) for flag in LangStringFlag
+    ), "Multiple resets should not change the state of the flags (remain False)"

@@ -8,9 +8,9 @@ manages multilingual strings.
 The `MultiLangStringStrategy` enumeration includes strategies like OVERWRITE, ALLOW, BLOCK_WARN, and BLOCK_ERROR,
 each dictating a different approach to handling duplicate language tags in multilingual string instances.
 
-The `MultiLangStringControl` class provides class methods to set, retrieve, log, and reset the global control strategy.
-This allows for a consistent and centralized management of control strategies, which is particularly useful in
-applications where consistent handling of multilingual strings is critical.
+The `MultiLangStringControl` class provides class methods to set, retrieve, log, and reset the global control strategy
+and configuration flags. This allows for a consistent and centralized management of control strategies and flags,
+which is particularly useful in applications where consistent handling of multilingual strings is critical.
 
 The module utilizes the `loguru` library for logging and the `icecream` library for debugging purposes, enhancing
 the development and maintenance experience.
@@ -25,19 +25,53 @@ Example Usage:
     # Reset to the default global control strategy
     MultiLangStringControl.reset_strategy()
 
+    # Set a configuration flag
+    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, True)
+
+    # Retrieve the current state of a specific flag
+    flag_state = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_TEXT)
+
+    # Log the current state of all flags
+    MultiLangStringControl.log_flags()
+
+    # Reset all flags to their default states
+    MultiLangStringControl.reset_flags()
+
 Classes:
     MultiLangStringStrategy (Enum): Defines control strategies for handling duplicate language tags.
-    MultiLangStringControl: Manages the global control strategy for handling duplicate language tags.
+    MultiLangStringControl: Manages the global control strategy and configuration flags for handling duplicate
+                            language tags.
 
 Note:
     Changes made using `MultiLangStringControl` affect the behavior of multilingual string handling globally
     within the application and are intended to be used where consistent behavior across all instances is required.
 """
-from enum import auto
+
 from enum import Enum
+from enum import auto
 
 from loguru import logger
 
+
+class MultiLangStringFlag(Enum):
+    """Enumeration for LangString control flags.
+
+    This enum defines various flags that can be used to configure the behavior of the LangString class.
+
+    :cvar ENSURE_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a LangString.
+    :vartype ENSURE_TEXT: Enum
+    :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a LangString.
+    :vartype ENSURE_ANY_LANG: Enum
+    :cvar ENSURE_VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
+    :vartype ENSURE_VALID_LANG: Enum
+    :cvar VERBOSE_MODE: Enables verbose mode for additional information during operations.
+    :vartype VERBOSE_MODE: Enum
+    """
+
+    ENSURE_TEXT = auto()
+    ENSURE_ANY_LANG = auto()
+    ENSURE_VALID_LANG = auto()
+    VERBOSE_MODE = auto()
 
 class MultiLangStringStrategy(Enum):
     """Enumeration for control strategies in MultiLangString.
@@ -76,9 +110,104 @@ class MultiLangStringControl:
 
     :cvar _strategy: The global control strategy for all MultiLangString instances.
     :vartype _global_control: MultiLangStringStrategy
+    :cvar _flags: Dictionary holding the state of configuration flags for LangString.
+    :vartype _flags: Dict[MultiLangStringFlag, bool]
     """
 
     _strategy = MultiLangStringStrategy.ALLOW
+
+    _flags = {
+        MultiLangStringFlag.ENSURE_TEXT: False,
+        MultiLangStringFlag.ENSURE_ANY_LANG: False,
+        MultiLangStringFlag.ENSURE_VALID_LANG: False,
+        MultiLangStringFlag.VERBOSE_MODE: False,
+    }
+
+    @classmethod
+    def set_flag(cls, flag: MultiLangStringFlag, state: bool) -> None:
+        """Set the state of a specified configuration flag.
+
+        This class method allows setting the state of a flag globally for the LangString class.
+
+        :param flag: The MultiLangStringFlag to be set.
+        :type flag: MultiLangStringFlag
+        :param state: Setting this to True or False will enable or disable the flag, respectively.
+        :type state: bool
+        :raises TypeError: If an invalid 'MultiLangStringFlag' is provided or if 'state' is not a Boolean.
+        """
+        if not isinstance(state, bool):
+            raise TypeError("Invalid state received. State must be a boolean value.")
+
+        if not isinstance(flag, MultiLangStringFlag):
+            valid_flags = ", ".join(f"MultiLangStringFlag.{f.name}" for f in MultiLangStringFlag)
+            raise TypeError(f"Invalid flag received. Valid flags are: {valid_flags}.")
+
+        cls._flags[flag] = state
+
+    @classmethod
+    def get_flag(cls, flag: MultiLangStringFlag) -> bool:
+        """Retrieve the current state of a specified configuration flag.
+
+        This class method provides a way to access the state of a flag globally for the LangString class.
+
+        :param flag: The MultiLangStringFlag whose state is to be retrieved.
+        :type flag: MultiLangStringFlag
+        :return: The current state of the flag.
+        :rtype: bool
+        :raises TypeError: If an invalid MultiLangStringFlag is provided.
+        """
+        if not isinstance(flag, MultiLangStringFlag):
+            valid_flags = ", ".join(f"MultiLangStringFlag.{f.name}" for f in MultiLangStringFlag)
+            raise TypeError(f"Invalid flag received. Valid flags are: {valid_flags}.")
+
+        return cls._flags.get(flag, False)
+
+    @classmethod
+    def get_flags(cls) -> dict[MultiLangStringFlag, bool]:
+        """Retrieve the current state of all configuration flags.
+
+        This class method provides a way to access the states of all flags globally for the LangString class.
+        It returns a copy of the flags dictionary, ensuring that the original data is not modified.
+
+        :return: A dictionary mapping each MultiLangStringFlag to its boolean state.
+        :rtype: Dict[MultiLangStringFlag, bool]
+        """
+        return cls._flags.copy()
+
+    @classmethod
+    def log_flags(cls) -> None:
+        """Log the current state of all configuration flags.
+
+        This class method uses the loguru logger to log the state of each flag in the _flags dictionary.
+        """
+        for flag, state in cls._flags.items():
+            logger.info(f"{flag.name} = {state}")
+
+    @classmethod
+    def reset_flags(cls) -> None:
+        """Reset all configuration flags for LangString to their default values.
+
+        This class method resets the states of all flags in the LangStringControl to their default values. This is
+        particularly useful for restoring the default behavior of the LangString class after temporary changes to
+        the configuration flags.
+
+        After calling this method, all flags will be set to False, which is their default state. This includes flags
+        for ensuring text presence, validating language codes, and enabling verbose mode.
+
+        :example:
+            # Change and then reset the flags
+            LangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, True)
+            LangStringControl.reset_flags()  # Resets ENSURE_TEXT and all other flags to False
+
+        Note:
+            This reset affects all instances where LangString flags are checked, as the flags are managed globally.
+        """
+        cls._flags = {
+            MultiLangStringFlag.ENSURE_TEXT: False,
+            MultiLangStringFlag.ENSURE_ANY_LANG: False,
+            MultiLangStringFlag.ENSURE_VALID_LANG: False,
+            MultiLangStringFlag.VERBOSE_MODE: False,
+        }
 
     @classmethod
     def set_strategy(cls, control: MultiLangStringStrategy) -> None:

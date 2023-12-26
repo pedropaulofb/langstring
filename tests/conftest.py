@@ -10,22 +10,16 @@ from langstring import LangStringControl
 
 
 @pytest.fixture(autouse=True)
-def reset_langstrings_flags() -> None:
-    """Reset automatically all flags in the LangStringControl to False before each test.
+def reset_configurations() -> None:
+    """Reset automatically all controllable configurations in the LangStringControl and MultiLangStringControl
+    to False before each test.
 
-    This fixture ensures that each test starts with a clean state regarding the flags used in the LangString module.
-    It is applied to all tests automatically due to the 'autouse=True' setting.
+    This fixture ensures that each test starts with a clean state regarding the flags used in the
+    LangString and MultiLangString modules. It is applied to all tests automatically due to the 'autouse=True' setting.
     """
     # Reset all LangString's flags to False before each test
     LangStringControl.reset_flags()
-
-
-@pytest.fixture(autouse=True)
-def reset_multilangstring_strategy() -> None:
-    """Reset automatically all flags in the LangStringControl to False before each test.
-
-    This fixture ensures that each test starts with a clean state regarding the flags used in the LangString module.
-    It is applied to all tests automatically due to the 'autouse=True' setting.
-    """
+    # Reset all LangString's flags to False before each test
+    MultiLangStringControl.reset_flags()
     # Reset MultiLangString's strategy before each test
     MultiLangStringControl.reset_strategy()

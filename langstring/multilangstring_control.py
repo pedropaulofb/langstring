@@ -73,6 +73,7 @@ class MultiLangStringFlag(Enum):
     ENSURE_VALID_LANG = auto()
     VERBOSE_MODE = auto()
 
+
 class MultiLangStringStrategy(Enum):
     """Enumeration for control strategies in MultiLangString.
 
@@ -103,16 +104,58 @@ class MultiLangStringStrategy(Enum):
 
 
 class MultiLangStringControl:
-    """Control class for managing the global control strategy of MultiLangString instances.
+    class MultiLangStringControl:
+        """
+        Control class for managing the global control strategy and configuration flags of MultiLangString instances.
 
-    This class uses class methods and class variables to set and retrieve the global control strategy for handling
-    duplicate language tags in MultiLangString instances.
+        This class provides class methods to set, retrieve, log, and reset both the global control strategy and
+        configuration flags for handling duplicate language tags and other behaviors in MultiLangString instances.
+        It allows for a consistent and centralized management of these settings, which is particularly useful in
+        applications where consistent handling of multilingual strings and additional configurations are critical.
 
-    :cvar _strategy: The global control strategy for all MultiLangString instances.
-    :vartype _global_control: MultiLangStringStrategy
-    :cvar _flags: Dictionary holding the state of configuration flags for LangString.
-    :vartype _flags: Dict[MultiLangStringFlag, bool]
-    """
+        The class manages two types of settings:
+        1. Control Strategy: Determines how duplicate language tags are handled (e.g., OVERWRITE, ALLOW, etc.).
+        2. Configuration Flags: Provide additional control over the behavior of MultiLangString instances, such as
+           enforcing text presence or validating language codes.
+
+        :cvar _strategy: The global control strategy for all MultiLangString instances. Determines how the system
+        handles duplicate language tags.
+        :vartype _strategy: MultiLangStringStrategy
+        :cvar _flags: A dictionary holding the state of configuration flags for LangString. These flags allow for
+        additional fine-tuning of the behavior of MultiLangString instances, such as ensuring the presence of text or
+        the validity of language codes.
+        :vartype _flags: Dict[MultiLangStringFlag, bool]
+
+        Class methods for managing control strategy:
+            - set_strategy: Set the global control strategy.
+            - get_strategy: Retrieve the current global control strategy.
+            - log_strategy: Log the current global control strategy.
+            - reset_strategy: Reset the global control strategy to the default value.
+
+        Class methods for managing configuration flags:
+            - set_flag: Set the state of a specified configuration flag.
+            - get_flag: Retrieve the current state of a specified configuration flag.
+            - get_flags: Retrieve the current state of all configuration flags.
+            - log_flags: Log the current state of all configuration flags.
+            - reset_flags: Reset all configuration flags to their default values.
+
+        Example Usage:
+            # Set a global control strategy
+            MultiLangStringControl.set_strategy(MultiLangStringStrategy.BLOCK_WARN)
+
+            # Set a configuration flag
+            MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, True)
+
+            # Retrieve the current state of a specific flag
+            flag_state = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_TEXT)
+
+            # Reset all flags to their default states
+            MultiLangStringControl.reset_flags()
+
+        Note:
+            Changes made using `MultiLangStringControl` affect the behavior of multilingual string handling globally
+            within the application and are intended to be used where consistent behavior across all instances is required.
+        """
 
     _strategy = MultiLangStringStrategy.ALLOW
 

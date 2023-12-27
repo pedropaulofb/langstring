@@ -1,8 +1,11 @@
 """Module for controlling and managing language string settings.
 
-This module provides classes and methods to manage configuration settings for language strings. It is designed
-to be used in applications where language string properties, such as text validation and language code verification,
-need to be dynamically set and accessed.
+This module provides classes and methods to manage configuration settings for language strings, including a control
+class and an enumeration of configuration flags. It is designed for dynamic setting and accessing of language string
+properties like text validation and language code verification.
+
+The module also imports and utilizes the NonInstantiable metaclass from the control_metaclass module to ensure that
+the LangStringControl class remains non-instantiable, aligning with its intended use as a static configuration manager.
 
 Classes:
     LangStringFlag (Enum): An enumeration defining various configuration flags for language string settings.
@@ -12,10 +15,14 @@ The LangStringFlag enumeration includes flags for ensuring text presence, valida
 verbose mode. The LangStringControl class uses class methods and variables to set and retrieve these flags,
 allowing for a global configuration state that persists throughout the application's runtime.
 
+Classes:
+    LangStringFlag (Enum): Defines configuration flags for language string settings.
+    LangStringControl (NonInstantiable): Manages the state of LangString configuration flags.
+
 Example:
     LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
     if LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT):
-        # Perform actions based on the ENSURE_TEXT flag being True
+        # Actions based on the ENSURE_TEXT flag
 
 This module utilizes the loguru library for logging flag states, offering an easy way to track configuration changes.
 
@@ -28,6 +35,7 @@ from enum import auto
 from enum import Enum
 
 from loguru import logger
+from utils.control_metaclass import NonInstantiable
 
 
 class LangStringFlag(Enum):
@@ -51,12 +59,14 @@ class LangStringFlag(Enum):
     VERBOSE_MODE = auto()
 
 
-class LangStringControl:
-    """Control class for managing LangString configuration flags.
+class LangStringControl(metaclass=NonInstantiable):
+    """Control class for managing LangString configuration flags, designed to be non-instantiable.
 
-    This class uses class methods and class variables to set and retrieve configuration flags for LangString behavior.
+    This class uses class methods to set and retrieve configuration flags for LangString behavior, ensuring a
+    consistent global configuration state. It is made non-instantiable by using the NonInstantiable metaclass,
+    emphasizing its role as a static configuration manager rather than an object to be instantiated.
 
-    :cvar _flags: Dictionary storing the state of each LangStringFlag.
+    :cvar _flags: Stores the state of each LangStringFlag.
     :vartype _flags: dict[LangStringFlag, bool]
     """
 
@@ -75,9 +85,9 @@ class LangStringControl:
 
         :param flag: The LangStringFlag to be set.
         :type flag: LangStringFlag
-        :param state: Setting this to True or False will enable or disable the flag, respectively.
+        :param state: True or False to enable or disable the flag, respectively.
         :type state: bool
-        :raises TypeError: If an invalid LangStringFlag is provided.
+        :raises TypeError: If an invalid LangStringFlag is provided or if 'state' is not a boolean.
         """
         if not isinstance(state, bool):
             raise TypeError("Invalid state received. State must be a boolean value.")
@@ -113,17 +123,14 @@ class LangStringControl:
         This class method provides a way to access the states of all flags globally for the LangString class.
         It returns a copy of the flags dictionary, ensuring that the original data is not modified.
 
-        :return: A dictionary with LangStringFlag as keys and their corresponding boolean states as values.
+        :return: A dictionary with LangStringFlag as keys and their boolean states as values.
         :rtype: dict[LangStringFlag, bool]
         """
         return cls._flags.copy()
 
     @classmethod
     def log_flags(cls) -> None:
-        """Log the current state of all configuration flags.
-
-        This class method uses the loguru logger to log the state of each flag in the _flags dictionary.
-        """
+        """Log the current state of all configuration flags using the loguru logger."""
         for flag, state in cls._flags.items():
             logger.info(f"{flag.name} = {state}")
 
@@ -133,10 +140,7 @@ class LangStringControl:
 
         This class method resets the states of all flags in the LangStringControl to their default values. This is
         particularly useful for restoring the default behavior of the LangString class after temporary changes to
-        the configuration flags.
-
-        After calling this method, all flags will be set to False, which is their default state. This includes flags
-        for ensuring text presence, validating language codes, and enabling verbose mode.
+        the configuration flags. After calling this method, all flags will be set to False, their default state.
 
         :example:
             # Change and then reset the flags

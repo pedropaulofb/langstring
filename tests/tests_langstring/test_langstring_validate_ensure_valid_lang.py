@@ -45,7 +45,7 @@ def test_validate_ensure_valid_lang(lang: str, is_valid: bool) -> None:
             pytest.fail(f"Unexpected ValueError for valid language code '{lang}': {e}")
     else:
         # Expect ValueError for invalid language codes
-        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)
 
 
@@ -71,7 +71,7 @@ def test_validate_ensure_valid_lang_mixed_case(lang: str, is_valid: bool) -> Non
     if is_valid:
         LangString("Test", lang)
     else:
-        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)
 
 
@@ -88,7 +88,7 @@ def test_validate_ensure_valid_lang_extended(lang: str, is_valid: bool) -> None:
     if is_valid:
         LangString("Test", lang)
     else:
-        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)
 
 
@@ -105,7 +105,7 @@ def test_validate_ensure_valid_lang_whitespace(lang: str, is_valid: bool) -> Non
     if is_valid:
         LangString("Test", lang)
     else:
-        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)
 
 
@@ -122,5 +122,5 @@ def test_langstring_init_empty_text(lang: str, is_valid: bool) -> None:
     if is_valid:
         LangString("", lang)
     else:
-        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
             LangString("", lang)

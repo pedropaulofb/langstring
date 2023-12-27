@@ -23,7 +23,7 @@ def test_validate_ensure_any_lang(lang: str, is_valid: bool) -> None:
         except ValueError as e:
             pytest.fail(f"Unexpected ValueError for language code '{lang}': {e}")
     else:
-        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)
 
 
@@ -48,7 +48,7 @@ def test_validate_ensure_any_lang_whitespace(lang: str, is_valid: bool) -> None:
     if is_valid:
         LangString("Test", lang)
     else:
-        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)
 
 
@@ -65,7 +65,7 @@ def test_validate_ensure_any_lang_mixed_case(lang: str, is_valid: bool) -> None:
     if is_valid:
         LangString("Test", lang)
     else:
-        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)
 
 
@@ -82,5 +82,5 @@ def test_validate_ensure_any_lang_extended(lang: str, is_valid: bool) -> None:
     if is_valid:
         LangString("Test", lang)
     else:
-        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: Langstring's 'lang' field cannot"):
+        with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: LangString's 'lang' field cannot"):
             LangString("Test", lang)

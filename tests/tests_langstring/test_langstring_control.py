@@ -169,3 +169,60 @@ def test_reset_flags_idempotence() -> None:
     assert all(
         not LangStringControl.get_flag(flag) for flag in LangStringFlag
     ), "Multiple resets should not change the state of the flags (remain False)"
+
+
+def test_reset_flags_effectiveness() -> None:
+    """
+    Test the effectiveness of the reset_flags method in resetting all flags to False.
+
+    This test ensures that after modifying the flags, calling reset_flags resets them all to their default state (False).
+
+    :raises AssertionError: If any flag does not reset to False after calling reset_flags.
+    """
+    # Set all flags to True for testing
+    for flag in LangStringFlag:
+        LangStringControl.set_flag(flag, True)
+
+    LangStringControl.reset_flags()
+
+    assert all(
+        not LangStringControl.get_flag(flag) for flag in LangStringFlag
+    ), "All flags should be reset to False after calling reset_flags"
+
+
+def test_instantiation_of_langstringcontrol() -> None:
+    """
+    Test that instantiation of LangStringControl raises a TypeError.
+
+    This test ensures that LangStringControl, being a static configuration manager, cannot be instantiated due to
+    the NonInstantiable metaclass.
+
+    :raises AssertionError: If LangStringControl can be instantiated without raising a TypeError.
+    """
+    with pytest.raises(TypeError, match="LangStringControl class cannot be instantiated."):
+        LangStringControl()
+
+
+@pytest.mark.parametrize(
+    "initial_state, new_state",
+    [
+        (False, True),
+        (True, False),
+    ],
+)
+def test_flag_state_persistence(initial_state: bool, new_state: bool) -> None:
+    """
+    Test the persistence of flag states after modification.
+
+    This test verifies that once a flag's state is modified, it persists until explicitly changed again.
+
+    :param initial_state: The initial state to set for a flag.
+    :param new_state: The new state to set for the same flag.
+    :raises AssertionError: If the flag state does not persist as expected.
+    """
+    flag = LangStringFlag.ENSURE_TEXT
+    LangStringControl.set_flag(flag, initial_state)
+    assert LangStringControl.get_flag(flag) == initial_state, "Initial flag state should persist"
+
+    LangStringControl.set_flag(flag, new_state)
+    assert LangStringControl.get_flag(flag) == new_state, "Modified flag state should persist"

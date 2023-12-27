@@ -53,7 +53,7 @@ def test_verbose_mode_warnings() -> None:
         with pytest.raises(ValueError):
             LangString("")
 
-        mock_logger.assert_any_call("Langstring's 'text' field received empty string.")
+        mock_logger.assert_any_call("LangString's 'text' field received empty string.")
 
 
 def test_langstring_with_all_flags_enabled_valid_inputs() -> None:
@@ -71,7 +71,7 @@ def test_langstring_with_all_flags_enabled_invalid_language() -> None:
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
-    with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang' field cannot"):
+    with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
         LangString("Hello", "invalid-lang")
 
 
@@ -81,7 +81,7 @@ def test_langstring_with_all_flags_enabled_empty_text() -> None:
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
-    with pytest.raises(ValueError, match="ENSURE_TEXT enabled: Langstring's 'text' field cannot"):
+    with pytest.raises(ValueError, match="ENSURE_TEXT enabled: LangString's 'text' field cannot"):
         LangString("", "en")
 
 
@@ -91,7 +91,7 @@ def test_langstring_with_all_flags_enabled_empty_language() -> None:
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
-    with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: Langstring's 'lang' field cannot"):
+    with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: LangString's 'lang' field cannot"):
         LangString("Hello", "")
 
 
@@ -101,7 +101,7 @@ def test_langstring_with_mixed_flags() -> None:
     LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, False)
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
-    with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: Langstring's 'lang'"):
+    with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang'"):
         LangString("Hello", "invalid-lang")
 
 
@@ -136,3 +136,34 @@ def test_langstring_with_long_string_input() -> None:
 
     lang_str = LangString(long_text, "en")
     assert lang_str.text == long_text, "LangString should correctly handle very long text inputs"
+
+
+def test_langstring_equality() -> None:
+    """Test that two LangString instances with the same text and language are equal."""
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", "en")
+    assert lang_str1 == lang_str2, "LangString instances with the same text and language should be equal"
+
+
+def test_langstring_inequality() -> None:
+    """Test that LangString instances with different text or language are not equal."""
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", "fr")
+    lang_str3 = LangString("Bonjour", "en")
+    assert lang_str1 != lang_str2, "LangString instances with different languages should not be equal"
+    assert lang_str1 != lang_str3, "LangString instances with different text should not be equal"
+
+
+def test_langstring_hash() -> None:
+    """Test the hash functionality of LangString."""
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", "en")
+    assert hash(lang_str1) == hash(lang_str2), "Hash values should be the same for identical LangString instances"
+
+
+def test_langstring_string_representation() -> None:
+    """Test the string representation of LangString."""
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", None)
+    assert str(lang_str1) == '"Hello"@en', "String representation with language should be correct"
+    assert str(lang_str2) == '"Hello"', "String representation without language should be correct"

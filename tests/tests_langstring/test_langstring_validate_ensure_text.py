@@ -1,8 +1,8 @@
 import pytest
 
-from langstring import LangString
-from langstring import LangStringControl
-from langstring import LangStringFlag
+from langstring.langstring import LangString
+from langstring.langstring_control import LangStringControl
+from langstring.langstring_control import LangStringFlag
 
 
 def test_validate_ensure_text_with_non_empty_text() -> None:
@@ -17,7 +17,7 @@ def test_validate_ensure_text_with_non_empty_text() -> None:
 def test_validate_ensure_text_with_empty_text_flag_enabled() -> None:
     """Test _validate_ensure_text method with empty text and ENSURE_TEXT flag enabled."""
     LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    with pytest.raises(ValueError, match="ENSURE_TEXT enabled: Langstring's 'text' field cannot receive empty string."):
+    with pytest.raises(ValueError, match="ENSURE_TEXT enabled: LangString's 'text' field cannot receive empty string."):
         LangString("", "en")
 
 

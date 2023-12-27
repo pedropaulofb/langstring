@@ -4,5 +4,16 @@ from .langstring import LangString
 from .langstring_control import LangStringControl
 from .langstring_control import LangStringFlag
 from .multilangstring import MultiLangString
+from .multilangstring_control import MultiLangStringControl
+from .multilangstring_control import MultiLangStringFlag
+from .multilangstring_control import MultiLangStringStrategy
 
-__all__ = ["LangString", "MultiLangString", "LangStringFlag", "LangStringControl"]
+__all__ = [
+    "LangString",
+    "MultiLangString",
+    "LangStringFlag",
+    "LangStringControl",
+    "MultiLangStringFlag",
+    "MultiLangStringStrategy",
+    "MultiLangStringControl",
+]

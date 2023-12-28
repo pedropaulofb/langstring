@@ -1,6 +1,6 @@
-"""This module defines the ValidationMixin class.
+"""This module defines the ValidationBase class.
 
-The ValidationMixin provides validation functionalities for LangString and MultiLangString classes.
+The ValidationBase provides validation functionalities for LangString and MultiLangString classes.
 It includes methods to validate argument types, ensure text and language requirements, and check the validity of
 language tags based on configurable control flags.
 
@@ -9,24 +9,23 @@ rules. It leverages control flags from a control class (like LangStringControl o
 determine the validation behavior.
 
 Classes:
-    ValidationMixin: A mixin class providing validation methods for LangString and MultiLangString classes.
+    ValidationBase: A mixin class providing validation methods for LangString and MultiLangString classes.
 
 Example Usage:
-    class LangString(ValidationMixin):
+    class LangString(ValidationBase):
         # LangString implementation
         ...
 
-    class MultiLangString(ValidationMixin):
+    class MultiLangString(ValidationBase):
         # MultiLangString implementation
         ...
 """
 from abc import abstractmethod
 
 from langcodes import tag_is_valid
-from loguru import logger
 
 
-class ValidationMixin:
+class ValidationBase:
     """A mixin class that provides validation methods for classes handling language strings.
 
     It ensures that the text and language arguments meet specific criteria, such as type correctness, non-emptiness,
@@ -38,7 +37,6 @@ class ValidationMixin:
         """Abstract method that must be implemented by subclasses.
 
         It should return the control class and its flags enumeration used for validation.
-
         This method is intended to be overridden in subclasses to return a tuple containing the specific control
         class and the corresponding flags enumeration. These are used for configuring and validating instances of
         the subclass. The exact types of the control class and flags enumeration will depend on the subclass.
@@ -48,7 +46,7 @@ class ValidationMixin:
             - The flags enumeration that defines these flags.
         """
 
-    def _validate_arguments_types(self) -> None:
+    def _validate_arguments(self) -> None:
         """Validate the types of the 'text' and 'lang' arguments.
 
         Ensures that 'text' is a string and 'lang' is either a string or None. Raises a TypeError if the types do not
@@ -62,7 +60,7 @@ class ValidationMixin:
         if self.lang is not None and not isinstance(self.lang, str):
             raise TypeError(f"Expected 'lang' to be of type str, but got {type(self.lang).__name__}.")
 
-        # Text field cannot be empty
+        # Text field cannot be None
         if self.text is None:
             raise ValueError(f"{self.__class__.__name__}'s 'text' field cannot be None.")
 
@@ -77,9 +75,6 @@ class ValidationMixin:
         control, flags = self._get_control_and_flags_type()
 
         if self.text == "":
-            if control.get_flag(flags.VERBOSE_MODE):
-                warning_msg = f"{self.__class__.__name__}'s 'text' field received empty string."
-                logger.warning(warning_msg)
             if control.get_flag(flags.ENSURE_TEXT):
                 raise ValueError(
                     f"ENSURE_TEXT enabled: {self.__class__.__name__}'s 'text' field cannot receive empty string."
@@ -96,9 +91,6 @@ class ValidationMixin:
         control, flags = self._get_control_and_flags_type()
 
         if self.lang == "":
-            if control.get_flag(flags.VERBOSE_MODE):
-                warning_msg = f"{self.__class__.__name__}'s 'lang' field received empty string."
-                logger.warning(warning_msg)
             if control.get_flag(flags.ENSURE_ANY_LANG):
                 raise ValueError(
                     f"ENSURE_ANY_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
@@ -119,9 +111,6 @@ class ValidationMixin:
         control, flags = self._get_control_and_flags_type()
 
         if self.lang and not tag_is_valid(self.lang):
-            if control.get_flag(flags.VERBOSE_MODE):
-                warning_msg = f"Invalid language tag '{self.lang}' used."
-                logger.warning(warning_msg)
             if control.get_flag(flags.ENSURE_VALID_LANG):
                 raise ValueError(
                     f"ENSURE_VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot be invalid."

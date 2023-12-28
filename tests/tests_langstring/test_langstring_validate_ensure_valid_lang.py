@@ -2,8 +2,8 @@
 import pytest
 
 from langstring import LangString
-from langstring.langstring_control import LangStringControl
-from langstring.langstring_control import LangStringFlag
+from langstring import LangStringControl
+from langstring import LangStringFlag
 
 
 def test_langstring_init_invalid_lang_without_ensure_valid_lang_flag() -> None:

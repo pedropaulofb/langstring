@@ -1,8 +1,8 @@
 import pytest
 
-from langstring.langstring import LangString
-from langstring.langstring_control import LangStringControl
-from langstring.langstring_control import LangStringFlag
+from langstring import LangString
+from langstring import LangStringControl
+from langstring import LangStringFlag
 
 
 def test_validate_ensure_text_with_non_empty_text() -> None:

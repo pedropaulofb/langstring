@@ -22,5 +22,3 @@ def reset_configurations() -> None:
     LangStringControl.reset_flags()
     # Reset all LangString's flags to False before each test
     MultiLangStringControl.reset_flags()
-    # Reset MultiLangString's strategy before each test
-    MultiLangStringControl.reset_strategy()

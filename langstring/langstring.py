@@ -1,5 +1,4 @@
-"""
-The langstring module provides the LangString class to encapsulate a string with its language information.
+"""The langstring module provides the LangString class to encapsulate a string with its language information.
 
 This module is designed to work with text strings and their associated language tags, offering functionalities
 such as validation of language tags, handling of empty strings and language tags based on control flags, and
@@ -19,13 +18,12 @@ text and valid language tags. These flags can be set externally to alter the beh
 """
 from typing import Optional
 
-from utils.validation_mixin import ValidationMixin
+from langstring_control import LangStringControl
+from langstring_control import LangStringFlag
+from utils.validation_base import ValidationBase
 
-from .langstring_control import LangStringControl
-from .langstring_control import LangStringFlag
 
-
-class LangString(ValidationMixin):
+class LangString(ValidationBase):
     """A class to encapsulate a string with its language information.
 
     This class provides functionality to associate a text string with a language tag, offering methods for string
@@ -43,14 +41,14 @@ class LangString(ValidationMixin):
 
         This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)
         that are used for configuring and validating the LangString instances. It is essential for the functioning of
-        the ValidationMixin methods, which rely on these control settings.
+        the ValidationBase methods, which rely on these control settings.
 
         :return: A tuple containing the LangStringControl class and the LangStringFlag enumeration.
         :rtype: tuple[type[LangStringControl], type[LangStringFlag]]
         """
         return LangStringControl, LangStringFlag
 
-    def __init__(self, text: Optional[str] = "", lang: Optional[str] = None) -> None:
+    def __init__(self, text: str = "", lang: Optional[str] = None) -> None:
         """Initialize a new LangString object with text and an optional language tag.
 
         The behavior of this method is influenced by control flags set in LangStringControl. For instance, if the
@@ -64,10 +62,10 @@ class LangString(ValidationMixin):
         :raises ValueError: If 'text' is empty and ENSURE_TEXT is enabled; if 'lang' is empty and ENSURE_ANY_LANG is
                             enabled; or if 'lang' is invalid and ENSURE_VALID_LANG is enabled.
         """
-        self.text: Optional[str] = text
+        self.text: str = text
         self.lang: Optional[str] = lang
 
-        self._validate_arguments_types()
+        self._validate_arguments()
         self._validate_ensure_text()
         self._validate_ensure_any_lang()
         self._validate_ensure_valid_lang()

@@ -1,6 +1,6 @@
 import pytest
 
-from langstring.langstring import LangString
+from langstring import LangString
 
 
 def test_to_string() -> None:

@@ -1,6 +1,6 @@
 import pytest
 
-from langstring.langstring import LangString
+from langstring import LangString
 
 
 def test_initialization() -> None:
@@ -20,7 +20,7 @@ def test_language_initialization() -> None:
     assert isinstance(ls.lang, str), f"Expected lang type to be str, but got {type(ls.lang).__name__}"
 
 
-def test_empty_initialization() -> None:
+def test_empty_text_lang_initialization() -> None:
     """Test the initialization of a LangString object with empty text and no specified language."""
     ls = LangString("")
     assert ls.text == "", f"Expected text to be an empty string, but got {ls.text}"

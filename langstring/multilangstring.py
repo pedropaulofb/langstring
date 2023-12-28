@@ -1,31 +1,43 @@
 """This module defines the `MultiLangString` class for handling multilingual text strings."""
-import warnings
 from typing import Any
 from typing import Optional
 
-from loguru import logger
 from multilangstring_control import MultiLangStringControl
-from multilangstring_control import MultiLangStringStrategy
+from multilangstring_control import MultiLangStringFlag
+from utils.validation_base import ValidationBase
 
-from .langstring import LangString
+from langstring import LangString
 
 
-class MultiLangString:
+class MultiLangString(ValidationBase):
     """A class for managing multilingual text strings with various language tags.
 
     Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
     operations like adding, removing, and retrieving language strings in multiple languages.
 
+    :ivar langstrings: A dictionary of LangStrings indexed by language tag.
+    :vartype mls_dict: dict[str, list[str]]
     :ivar preferred_lang: The preferred language for this MultiLangString. Defaults to "en".
     :vartype preferred_lang: str
-    :ivar langstrings: A dictionary of LangStrings indexed by language tag.
-    :vartype langstrings: dict[str, list[str]]
     """
+
+    def _get_control_and_flags_type(self) -> tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]:
+        """Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.
+
+        This method provides the specific control class (MultiLangStringControl) and the flags enumeration
+        (MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
+        It is essential for the functioning of the ValidationBase methods, which rely on these control settings.
+
+        :return: A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.
+        :rtype: tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]
+        """
+        return MultiLangStringControl, MultiLangStringFlag
 
     def _validate_langstring_arg(self, arg: Any) -> None:
         """Private helper method to validate if the argument is a LangString.
 
         :param arg: Argument to be checked.
+        :type arg: Any
         :raises TypeError: If the passed argument is not an instance of LangString.
         """
         if not isinstance(arg, LangString):
@@ -34,25 +46,12 @@ class MultiLangString:
                 f"received '{type(arg).__name__}' with value '{arg}'."
             )
 
-    def __init__(self, *args: LangString, preferred_lang: str = "en"):
-        """Initialize a new MultiLangString object with optional initial LangString objects and a preferred language.
+    def __init__(self, mls_dict: dict[str, set[str]] = None, preferred_lang: str = "en") -> None:
+        if mls_dict is None:
+            mls_dict = {}
+        self.mls_dict: dict[str, set[str]] = mls_dict
 
-        Each `LangString` represents a text in a specific language. Multiple `LangString` objects can be provided as
-        separate arguments.
-
-        :param args: LangString objects to initialize the MultiLangString with.
-        :type args: LangString
-        :param preferred_lang: The preferred language for this MultiLangString. Defaults to "en".
-        :type preferred_lang: str
-        """
-        self._preferred_lang: Optional[str] = None  # Used getter and setter
-
-        self.langstrings: dict[str, list[str]] = {}  # Initialize self.langstrings here
-        self.preferred_lang: str = preferred_lang  # Used setter to validate
-
-        for arg in args:
-            self._validate_langstring_arg(arg)
-            self.add_langstring(arg)
+        self._preferred_lang: str = preferred_lang
 
     # preferred_lang GETTER
     @property
@@ -77,8 +76,15 @@ class MultiLangString:
         else:
             raise TypeError(f"Invalid preferred_lang type. Should be 'str', but is '{type(preferred_lang_value)}'.")
 
+    def add_entry(self, text: str, lang: str = "") -> None:
+        self._validate_arguments()
+
+        if lang not in self.mls_dict:
+            self.mls_dict[lang] = set()
+        self.mls_dict[lang].add(text)
+
     def add_langstring(self, langstring: LangString) -> None:
-        """Add a LangString to the MultiLangString, adhering to the global control strategy set in MultiLangStringControl.
+        """Add a LangString to the MultiLangString.
 
         Depending on the current global control strategy (e.g., ALLOW, OVERWRITE, BLOCK_WARN, BLOCK_ERROR), the behavior
         for handling duplicate language tags varies. For example, BLOCK_ERROR will prevent adding a LangString with a
@@ -86,26 +92,9 @@ class MultiLangString:
 
         :param langstring: The LangString object to be added, representing a text in a specific language.
         :type langstring: LangString
-        :raises ValueError: If the control strategy is BLOCK_ERROR and a LangString with the same language tag already exists.
-        :raises UserWarning: If the control strategy is BLOCK_WARN and a LangString with the same language tag already exists.
         """
-        strategy = MultiLangStringControl.get_strategy()
         self._validate_langstring_arg(langstring)
-
-        if strategy == MultiLangStringStrategy.BLOCK_ERROR and langstring.lang in self.langstrings:
-            raise ValueError(
-                f"Operation not possible. A LangString with language tag {langstring.lang} already exists."
-            )
-
-        if strategy == MultiLangStringStrategy.BLOCK_WARN and langstring.lang in self.langstrings:
-            warn_message = f"Operation not possible. A LangString with language tag {langstring.lang} already exists."
-            warnings.warn(warn_message, UserWarning)
-            logger.warning(warn_message)
-
-        if strategy == MultiLangStringStrategy.OVERWRITE:
-            self.langstrings[langstring.lang] = [langstring.text]
-        elif langstring.text not in self.langstrings.get(langstring.lang, []):
-            self.langstrings.setdefault(langstring.lang, []).append(langstring.text)
+        self.add_entry(text=langstring.text, lang=langstring.lang)
 
     def get_langstring(self, lang: str) -> list[str]:
         """Get LangStrings for a specific language tag.
@@ -157,6 +146,8 @@ class MultiLangString:
                 del self.langstrings[langstring.lang]
             return True
         return False
+
+        # Perform cleaning method
 
     def remove_language(self, language_code: str) -> bool:
         """Remove all LangStrings associated with a specific language code from the MultiLangString.
@@ -213,6 +204,12 @@ class MultiLangString:
             f"{repr(langstring)}@{lang}" for lang, langstrings in self.langstrings.items() for langstring in langstrings
         ]
 
+    def to_langstrings_all(self) -> list[LangString]:
+        pass
+
+    def to_langstrings_lang(self, lang: str) -> list[LangString]:
+        pass
+
     def __repr__(self) -> str:
         """Return a detailed string representation of the MultiLangString object.
 
@@ -223,7 +220,7 @@ class MultiLangString:
         :rtype: str
         """
         if not isinstance(self.langstrings, dict):
-            raise TypeError("langstrings must be a dictionary.")
+            raise TypeError("mls_dict must be a dictionary.")
 
         return f"MultiLangString({self.langstrings}, preferred_lang='{self.preferred_lang}')"
 
@@ -255,7 +252,7 @@ class MultiLangString:
     def __eq__(self, other: object) -> bool:
         """Check equality of this MultiLangString with another MultiLangString.
 
-        This method compares the 'langstrings' attribute of the two MultiLangString objects. The comparison is based on
+        This method compares the 'mls_dict' attribute of the two MultiLangString objects. The comparison is based on
         the content of the MultiLangString objects, irrespective of their internal handling of duplicates and preferred language.
 
         :param other: Another MultiLangString object to compare with.
@@ -270,7 +267,7 @@ class MultiLangString:
     def __hash__(self) -> int:
         """Generate a hash value for a MultiLangString object.
 
-        The hash is computed based on the 'langstrings' attribute of the MultiLangString. This approach ensures that
+        The hash is computed based on the 'mls_dict' attribute of the MultiLangString. This approach ensures that
         MultiLangString objects with the same content will have the same hash value.
 
         :return: The hash value of the MultiLangString object.
@@ -279,3 +276,15 @@ class MultiLangString:
         # Creating a frozenset for the dictionary items to ensure the hash is independent of order
         langstrings_hash = hash(frozenset((lang, frozenset(texts)) for lang, texts in self.langstrings.items()))
         return hash(langstrings_hash)
+
+    def _exist_in_mls_dict(self, text_searched: str, lang_searched: str) -> bool:
+        """Check if a given text is associated with a specified language in the dictionary.
+
+        :param text_searched: The text to search for in the dictionary.
+        :type text_searched: str
+        :param lang_searched: The language key to search under in the dictionary.
+        :type lang_searched: str
+        :return: True if the text is found under the specified language, False otherwise.
+        :rtype: bool
+        """
+        return lang_searched in self.mls_dict and text_searched in self.mls_dict[lang_searched]

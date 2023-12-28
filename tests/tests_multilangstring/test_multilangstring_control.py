@@ -1,6 +1,6 @@
 import pytest
-
-from multilangstring_control import MultiLangStringFlag, MultiLangStringControl
+from multilangstring_control import MultiLangStringControl
+from multilangstring_control import MultiLangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -9,7 +9,6 @@ from multilangstring_control import MultiLangStringFlag, MultiLangStringControl
         (MultiLangStringFlag.ENSURE_TEXT, True),
         (MultiLangStringFlag.ENSURE_ANY_LANG, False),
         (MultiLangStringFlag.ENSURE_VALID_LANG, True),
-        (MultiLangStringFlag.VERBOSE_MODE, False),
     ],
 )
 def test_set_flag_valid(flag: MultiLangStringFlag, state: bool):
@@ -31,7 +30,6 @@ def test_set_flag_invalid(flag, state):
         (MultiLangStringFlag.ENSURE_TEXT, False),
         (MultiLangStringFlag.ENSURE_ANY_LANG, False),
         (MultiLangStringFlag.ENSURE_VALID_LANG, False),
-        (MultiLangStringFlag.VERBOSE_MODE, False),
     ],
 )
 def test_get_flag_default_state(flag: MultiLangStringFlag, expected_state: bool):

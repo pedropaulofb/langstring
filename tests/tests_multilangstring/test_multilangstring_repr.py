@@ -36,7 +36,7 @@ def test_repr_with_control() -> None:
 
 
 def test_repr_invalid_langstrings_type() -> None:
-    """Ensure a TypeError is raised if the provided langstrings are not in dictionary format."""
+    """Ensure a TypeError is raised if the provided mls_dict are not in dictionary format."""
     with pytest.raises(TypeError):
         MultiLangString(["Hello", "Bonjour"])
 

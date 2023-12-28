@@ -18,11 +18,11 @@ packages = [{ include = "langstring" },
 
 [tool.poetry.dependencies]
 langcodes = "^3.3.0"
-loguru = "^0.7.2"
 python = "^3.09"
 
 [tool.poetry.group.dev.dependencies]
 # General
+loguru = "^0.7.2"
 poetry = "^1.7.1"
 pre-commit = "^3.4.0"
 pytest = "^7.4.2"

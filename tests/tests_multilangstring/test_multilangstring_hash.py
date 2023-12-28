@@ -43,27 +43,27 @@ def test_hash_inequality_for_different_multilangstrings(sample_langstrings_hash:
     :param sample_langstrings_hash: Fixture providing sample LangString objects.
     :type sample_langstrings_hash: list[LangString]
     """
-    mls1 = MultiLangString(*sample_langstrings_hash[:2], preferred_lang="en")  # First two langstrings
-    mls2 = MultiLangString(*sample_langstrings_hash[1:], preferred_lang="en")  # Last two langstrings
+    mls1 = MultiLangString(*sample_langstrings_hash[:2], preferred_lang="en")  # First two mls_dict
+    mls2 = MultiLangString(*sample_langstrings_hash[1:], preferred_lang="en")  # Last two mls_dict
     assert hash(mls1) != hash(mls2), "Different MultiLangString objects should have different hash values."
 
 
 def test_hash_with_different_order_of_addition(sample_langstrings_hash: list[LangString]) -> None:
-    """Test that the order of addition of langstrings does not affect the hash value.
+    """Test that the order of addition of mls_dict does not affect the hash value.
 
     :param sample_langstrings_hash: Fixture providing sample LangString objects.
     :type sample_langstrings_hash: list[LangString]
     """
     mls1 = MultiLangString(*sample_langstrings_hash, preferred_lang="en")
     mls2 = MultiLangString(*reversed(sample_langstrings_hash), preferred_lang="en")
-    assert hash(mls1) == hash(mls2), "Order of addition of langstrings should not affect the hash value."
+    assert hash(mls1) == hash(mls2), "Order of addition of mls_dict should not affect the hash value."
 
 
 def test_hash_with_different_preferred_languages(sample_langstrings_hash: list[LangString]) -> None:
     """Test that different preferred languages do not affect the hash value.
 
     With the updated logic, different preferred_lang values do not affect the hash.
-    This test checks that two MultiLangString objects with the same langstrings but different preferred_lang
+    This test checks that two MultiLangString objects with the same mls_dict but different preferred_lang
     have the same hash value.
 
     :param sample_langstrings_hash: Fixture providing sample LangString objects.

@@ -18,7 +18,7 @@ def test_multilangstring_initialization() -> None:
 
     assert (
         len(multilang_str.langstrings) == 0
-    ), f"Expected 0 langstrings on default initialization, but found {len(multilang_str.langstrings)}."
+    ), f"Expected 0 mls_dict on default initialization, but found {len(multilang_str.langstrings)}."
 
 
 def test_init_with_none_arguments() -> None:
@@ -46,7 +46,7 @@ def test_init_with_langstring_objects() -> None:
     langstr_en = LangString("Hello", "en")
     langstr_fr = LangString("Bonjour", "fr")
     multilang_str = MultiLangString(langstr_en, langstr_fr)
-    assert len(multilang_str.langstrings) == 2, "Expected 2 langstrings, but found a different number."
+    assert len(multilang_str.langstrings) == 2, "Expected 2 mls_dict, but found a different number."
 
     assert multilang_str.preferred_lang == "en", "Expected preferred language to be 'en', but found another value."
 
@@ -57,7 +57,7 @@ def test_init_with_control_and_preferred_language() -> None:
 
     assert (
         len(mls.langstrings) == 0
-    ), f"Expected 0 langstrings when initializing with given control and language, but found {len(mls.langstrings)}."
+    ), f"Expected 0 mls_dict when initializing with given control and language, but found {len(mls.langstrings)}."
 
     assert mls.control == "BLOCK_WARN", f"Expected control to be 'BLOCK_WARN', but found {mls.control}."
 
@@ -109,7 +109,7 @@ def test_init_with_mixed_language_tags() -> None:
     mls = MultiLangString(ls1, ls2, ls3)
 
     # Verify that all language tags, including invalid ones, are added
-    assert len(mls.langstrings) == 3, "Expected 3 langstrings (including invalid ones), but found a different number."
+    assert len(mls.langstrings) == 3, "Expected 3 mls_dict (including invalid ones), but found a different number."
 
 
 def test_init_with_default_preferred_language() -> None:

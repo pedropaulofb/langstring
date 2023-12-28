@@ -3,8 +3,8 @@ from unittest.mock import patch
 import pytest
 from loguru import logger
 
-from langstring.langstring_control import LangStringControl
-from langstring.langstring_control import LangStringFlag
+from langstring import LangStringControl
+from langstring import LangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -13,7 +13,6 @@ from langstring.langstring_control import LangStringFlag
         (LangStringFlag.ENSURE_TEXT, True),
         (LangStringFlag.ENSURE_ANY_LANG, False),
         (LangStringFlag.ENSURE_VALID_LANG, True),
-        (LangStringFlag.VERBOSE_MODE, False),
     ],
 )
 def test_set_flag_valid(flag: LangStringFlag, state: bool) -> None:
@@ -35,7 +34,6 @@ def test_set_flag_invalid(flag, state) -> None:
         LangStringFlag.ENSURE_TEXT,
         LangStringFlag.ENSURE_ANY_LANG,
         LangStringFlag.ENSURE_VALID_LANG,
-        LangStringFlag.VERBOSE_MODE,
     ],
 )
 def test_get_flag_valid(flag: LangStringFlag) -> None:
@@ -56,7 +54,6 @@ def test_get_flags() -> None:
         LangStringFlag.ENSURE_TEXT: False,
         LangStringFlag.ENSURE_ANY_LANG: False,
         LangStringFlag.ENSURE_VALID_LANG: False,
-        LangStringFlag.VERBOSE_MODE: False,
     }
     assert LangStringControl.get_flags() == expected_flags, "All flags should be retrieved correctly"
 
@@ -64,7 +61,7 @@ def test_get_flags() -> None:
 def test_log_flags() -> None:
     """Test logging the state of all flags."""
     with patch.object(logger, "info") as mock_logger:
-        LangStringControl.log_flags()
+        LangStringControl.print_flags()
         for flag in LangStringFlag:
             mock_logger.assert_any_call(f"{flag.name} = {LangStringControl.get_flag(flag)}")
 
@@ -75,7 +72,6 @@ def test_log_flags() -> None:
         (LangStringFlag.ENSURE_TEXT, False, True),
         (LangStringFlag.ENSURE_ANY_LANG, True, False),
         (LangStringFlag.ENSURE_VALID_LANG, False, True),
-        (LangStringFlag.VERBOSE_MODE, True, False),
     ],
 )
 def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state: bool) -> None:
@@ -97,7 +93,6 @@ def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state:
         LangStringFlag.ENSURE_TEXT,
         LangStringFlag.ENSURE_ANY_LANG,
         LangStringFlag.ENSURE_VALID_LANG,
-        LangStringFlag.VERBOSE_MODE,
     ],
 )
 def test_default_flag_state(flag: LangStringFlag) -> None:
@@ -114,7 +109,6 @@ def test_default_flag_state(flag: LangStringFlag) -> None:
         (LangStringFlag.ENSURE_TEXT, None),
         (LangStringFlag.ENSURE_ANY_LANG, "True"),
         (LangStringFlag.ENSURE_VALID_LANG, 1),
-        (LangStringFlag.VERBOSE_MODE, 0),
     ],
 )
 def test_set_flag_invalid_state_type(flag: LangStringFlag, state) -> None:

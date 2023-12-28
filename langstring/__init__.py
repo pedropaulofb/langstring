@@ -6,7 +6,6 @@ from .langstring_control import LangStringFlag
 from .multilangstring import MultiLangString
 from .multilangstring_control import MultiLangStringControl
 from .multilangstring_control import MultiLangStringFlag
-from .multilangstring_control import MultiLangStringStrategy
 
 __all__ = [
     "LangString",
@@ -14,6 +13,5 @@ __all__ = [
     "LangStringFlag",
     "LangStringControl",
     "MultiLangStringFlag",
-    "MultiLangStringStrategy",
     "MultiLangStringControl",
 ]

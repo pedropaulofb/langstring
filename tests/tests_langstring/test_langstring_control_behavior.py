@@ -1,7 +1,4 @@
-from unittest.mock import patch
-
 import pytest
-from loguru import logger
 
 from langstring import LangString
 from langstring import LangStringControl
@@ -41,19 +38,6 @@ def test_langstring_init_with_flags(
     else:
         lang_str = LangString(text, lang)
         assert lang_str.text == text and lang_str.lang == lang
-
-
-# Test for VERBOSE_MODE flag affecting warnings
-def test_verbose_mode_warnings() -> None:
-    """Test that enabling VERBOSE_MODE flag triggers warnings in LangString."""
-    LangStringControl.set_flag(LangStringFlag.VERBOSE_MODE, True)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-
-    with patch.object(logger, "warning") as mock_logger:
-        with pytest.raises(ValueError):
-            LangString("")
-
-        mock_logger.assert_any_call("LangString's 'text' field received empty string.")
 
 
 def test_langstring_with_all_flags_enabled_valid_inputs() -> None:

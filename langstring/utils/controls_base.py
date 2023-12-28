@@ -1,5 +1,4 @@
-"""This module defines the foundational structure for managing configuration flags in LangString and
-MultiLangString classes.
+"""Define the foundational structure for managing configuration flags in LangString and MultiLangString classes.
 
 Overview:
 ---------
@@ -75,7 +74,17 @@ class ControlBase(metaclass=NonInstantiable):
     This class serves as a base for both LangStringControl and MultiLangStringControl, offering methods to manage
     configuration flags that affect the behavior of LangString and MultiLangString instances. It is designed to be
     non-instantiable, acting as a utility class for flag management.
+
+    The class uses an "abstract" class variable `_flags` to store the state of each configuration flag. Subclasses are
+    expected to initialize this variable with a dictionary mapping flag types to their boolean states. This design
+    allows for a flexible yet consistent approach to managing configuration flags across different classes.
+
+    :cvar _flags: An "abstract" class variable that stores the state of each configuration flag.
+    :vartype _flags: dict[Union[type[LangStringFlag], type[MultiLangStringFlag]], bool]
     """
+
+    # "Abstract" variable: must be implemented by ControlBase's subclasses
+    _flags: dict[Union[type["LangStringFlag"], type["MultiLangStringFlag"]], bool] = {}
 
     @classmethod
     @abstractmethod
@@ -104,8 +113,13 @@ class ControlBase(metaclass=NonInstantiable):
         :raises TypeError: If 'flag' is not an instance of LangStringFlag or MultiLangStringFlag,
         or if 'state' is not a Boolean.
         """
+        flags = cls._get_flags_type()
+
         if not isinstance(state, bool):
             raise TypeError("Invalid state received. State must be a boolean value.")
+
+        if not any(flag == member for member in flags.__members__.values()):
+            raise TypeError(f"Invalid flag {flag} received. Valid flags are members of {flags.__name__}.")
 
         cls._flags[flag] = state
 
@@ -121,7 +135,13 @@ class ControlBase(metaclass=NonInstantiable):
         :type flag: Union[LangStringFlag, MultiLangStringFlag]
         :return: The current state of the flag.
         :rtype: bool
+        :raises TypeError: If 'flag' is not a member of LangStringFlag or MultiLangStringFlag.
         """
+        flags = cls._get_flags_type()
+
+        if not any(flag == member for member in flags.__members__.values()):
+            raise TypeError(f"Invalid flag {flag} received. Valid flags are members of {flags.__name__}.")
+
         return cls._flags.get(flag, False)
 
     @classmethod

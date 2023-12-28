@@ -18,9 +18,9 @@ text and valid language tags. These flags can be set externally to alter the beh
 """
 from typing import Optional
 
-from langstring_control import LangStringControl
-from langstring_control import LangStringFlag
-from utils.validation_base import ValidationBase
+from .langstring_control import LangStringControl
+from .langstring_control import LangStringFlag
+from .utils.validation_base import ValidationBase
 
 
 class LangString(ValidationBase):

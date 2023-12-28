@@ -1,4 +1,3 @@
-# Test LangString initialization with invalid language tag but without ENSURE_VALID_LANG flag
 import pytest
 
 from langstring import LangString
@@ -27,7 +26,7 @@ def test_langstring_init_invalid_lang_without_ensure_valid_lang_flag() -> None:
         ("xyz", False),  # invalid language code
         ("123", False),  # numeric string, invalid language code
         ("", False),  # empty string, invalid language code
-        (None, True),  # None should not trigger validation
+        (None, False),  # None should not trigger validation
     ],
 )
 def test_validate_ensure_valid_lang(lang: str, is_valid: bool) -> None:
@@ -118,9 +117,48 @@ def test_validate_ensure_valid_lang_whitespace(lang: str, is_valid: bool) -> Non
 )
 def test_langstring_init_empty_text(lang: str, is_valid: bool) -> None:
     """Test LangString initialization with empty text and various language codes."""
+    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
     LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
-        LangString("", lang)
+        assert LangString("", lang), "Should be possible to create when both flags are enabled."
     else:
         with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
             LangString("", lang)
+
+
+@pytest.mark.parametrize(
+    "lang",
+    [
+        "abc-",  # note that "abc" is valid
+        "abc ",
+        " abc",
+        "123",  # numeric string, invalid language code
+        "en-@",  # special character in language code
+    ],
+)
+def test_validate_ensure_valid_lang_non_standard_codes(lang: str) -> None:
+    """
+    Test the _validate_ensure_valid_lang method with non-standard language codes when ENSURE_VALID_LANG is enabled.
+
+    :param lang: The language code to test.
+    :raises AssertionError: If LangString accepts a non-standard language code when ENSURE_VALID_LANG is enabled.
+    """
+    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
+        LangString("Test", lang)
+
+
+@pytest.mark.parametrize(
+    "lang",
+    [None, "undefined"],
+)
+def test_validate_ensure_valid_lang_null_or_undefined(lang) -> None:
+    """
+    Test the _validate_ensure_valid_lang method with null or undefined language codes when ENSURE_VALID_LANG is enabled.
+
+    :param lang: The language code to test (None or "undefined").
+    :raises AssertionError: If LangString accepts null or undefined language codes when ENSURE_VALID_LANG is enabled.
+    """
+    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
+        LangString("Test", lang)

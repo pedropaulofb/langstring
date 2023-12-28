@@ -41,16 +41,30 @@ Classes
 .. py:class:: LangString(text = '', lang = None)
 
 
+   Bases: :py:obj:`langstring.utils.validation_base.ValidationBase`
+
    A class to encapsulate a string with its language information.
 
    This class provides functionality to associate a text string with a language tag, offering methods for string
    representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
    from the LangStringControl class, which can enforce non-empty text, valid language tags, and other constraints.
 
-   :ivar text: The actual text string.
-   :vartype text: str
-   :ivar lang: The language of the text, represented by a language tag or None if not specified.
-   :vartype lang: str or None
+   :ivar text: The text string.
+   :vartype text: Optional[str]
+   :ivar lang: The language tag of the text, or None if not specified.
+   :vartype lang: Optional[str]
+
+   .. py:method:: _get_control_and_flags_type()
+
+      Retrieve the control class and its corresponding flags enumeration used in the LangString class.
+
+      This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)
+      that are used for configuring and validating the LangString instances. It is essential for the functioning of
+      the ValidationBase methods, which rely on these control settings.
+
+      :return: A tuple containing the LangStringControl class and the LangStringFlag enumeration.
+      :rtype: tuple[type[LangStringControl], type[LangStringFlag]]
+
 
    .. py:method:: to_string()
 
@@ -58,7 +72,7 @@ Classes
 
       This method is a convenience wrapper for the __str__ method.
 
-      :return: The string representation of the LangString object, including language tag if present.
+      :return: The string representation of the LangString object, including the language tag if present.
       :rtype: str
 
 
@@ -86,46 +100,6 @@ Classes
 
       :return: The hash value of the LangString object, based on its text and language tag.
       :rtype: int
-
-
-   .. py:method:: _validate_arguments_types()
-
-      Validate the types of the 'text' and 'lang' arguments.
-
-      Ensures that 'text' is a string and 'lang' is either a string or None. Raises a TypeError if the types do not
-      match the expected types.
-
-      :raises TypeError: If 'text' is not a string or if 'lang' is provided and is not a string or None.
-
-
-   .. py:method:: _validate_ensure_text()
-
-      Validate the 'text' argument based on the ENSURE_TEXT control flag.
-
-      Checks if the 'text' field is empty and raises a ValueError or warning depending on the ENSURE_TEXT and
-      VERBOSE_MODE flags set in LangStringControl.
-
-      :raises ValueError: If ENSURE_TEXT is enabled and 'text' is an empty string.
-
-
-   .. py:method:: _validate_ensure_any_lang()
-
-      Validate the 'lang' argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.
-
-      Checks if the 'lang' field is empty and raises a ValueError or warning depending on the ENSURE_ANY_LANG,
-      ENSURE_VALID_LANG, and VERBOSE_MODE flags set in LangStringControl.
-
-      :raises ValueError: If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and 'lang' is an empty string.
-
-
-   .. py:method:: _validate_ensure_valid_lang()
-
-      Validate the language tag for its validity.
-
-      This method checks if the language tag is valid. If the tag is invalid, it raises a warning or an error
-      depending on the control flags set in LangStringControl.
-
-      :raises ValueError: If ENSURE_VALID_LANG is enabled and the language tag is invalid.
 
 
 

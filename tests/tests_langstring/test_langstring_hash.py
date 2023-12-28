@@ -1,6 +1,8 @@
 import pytest
 
 from langstring import LangString
+from langstring import LangStringControl
+from langstring import LangStringFlag
 
 
 @pytest.fixture
@@ -72,3 +74,23 @@ def test_hash_equality_for_identical_objects(langstring_en_hello) -> None:
     assert hash(langstring_en_hello) == hash(
         langstring_duplicate
     ), "Identical LangString objects should have the same hash"
+
+
+def test_langstring_hash() -> None:
+    """Test the hash functionality of LangString."""
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", "en")
+    assert hash(lang_str1) == hash(lang_str2), "Hash values should be the same for identical LangString instances"
+
+
+def test_hash_consistency_with_flag_changes() -> None:
+    """
+    Test the consistency of the __hash__ method of LangString with changes in control flags.
+
+    :raises AssertionError: If the hash value changes with control flag settings.
+    """
+    lang_str = LangString("Hello", "en")
+    initial_hash = hash(lang_str)
+
+    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, not LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT))
+    assert hash(lang_str) == initial_hash, "Hash value should remain consistent despite changes in control flags"

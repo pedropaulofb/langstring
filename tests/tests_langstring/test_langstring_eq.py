@@ -1,6 +1,8 @@
 import pytest
 
 from langstring import LangString
+from langstring import LangStringControl
+from langstring import LangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -25,6 +27,7 @@ def test_eq_with_various_strings(text1: str, lang1: str, text2: str, lang2: str,
     :param lang2: Language for the second LangString object.
     :param expected: Expected result of the equality comparison.
     """
+    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
     lang_string1 = LangString(text1, lang1)
     lang_string2 = LangString(text2, lang2)
     assert (lang_string1 == lang_string2) is expected, (
@@ -126,3 +129,36 @@ def test_neq_with_different_type(langstring_en_hello) -> None:
 def test_neq_with_none(langstring_en_hello) -> None:
     """Test inequality when compared with None."""
     assert langstring_en_hello is not None, "LangString should be unequal to None"
+
+
+def test_langstring_equality() -> None:
+    """Test that two LangString instances with the same text and language are equal."""
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", "en")
+    assert lang_str1 == lang_str2, "LangString instances with the same text and language should be equal"
+
+
+def test_langstring_inequality() -> None:
+    """Test that LangString instances with different text or language are not equal."""
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", "fr")
+    lang_str3 = LangString("Bonjour", "en")
+    assert lang_str1 != lang_str2, "LangString instances with different languages should not be equal"
+    assert lang_str1 != lang_str3, "LangString instances with different text should not be equal"
+
+
+def test_eq_with_different_flag_settings() -> None:
+    """
+    Test the __eq__ method of LangString under different flag settings.
+
+    :raises AssertionError: If the equality comparison does not behave as expected under different flag settings.
+    """
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Hello", "en")
+    assert lang_str1 == lang_str2, "LangString objects should be equal under the same flag settings"
+    LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
+    assert lang_str1 == lang_str2, "LangString objects should be equal under different flag settings"
+    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    assert lang_str1 == lang_str2, "LangString objects should be equal under different flag settings"
+    LangStringControl.reset_flags()
+    assert lang_str1 == lang_str2, "LangString objects should be equal under different flag settings"

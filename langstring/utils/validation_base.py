@@ -74,11 +74,10 @@ class ValidationBase:
         """
         control, flags = self._get_control_and_flags_type()
 
-        if self.text == "":
-            if control.get_flag(flags.ENSURE_TEXT):
-                raise ValueError(
-                    f"ENSURE_TEXT enabled: {self.__class__.__name__}'s 'text' field cannot receive empty string."
-                )
+        if self.text == "" and control.get_flag(flags.ENSURE_TEXT):
+            raise ValueError(
+                f"ENSURE_TEXT enabled: {self.__class__.__name__}'s 'text' field cannot receive empty string."
+            )
 
     def _validate_ensure_any_lang(self) -> None:
         """Validate the 'lang' argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.
@@ -90,7 +89,7 @@ class ValidationBase:
         """
         control, flags = self._get_control_and_flags_type()
 
-        if self.lang == "":
+        if not self.lang:
             if control.get_flag(flags.ENSURE_ANY_LANG):
                 raise ValueError(
                     f"ENSURE_ANY_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."

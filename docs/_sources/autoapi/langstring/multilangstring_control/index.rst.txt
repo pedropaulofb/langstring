@@ -1,0 +1,90 @@
+:py:mod:`langstring.multilangstring_control`
+============================================
+
+.. py:module:: langstring.multilangstring_control
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   langstring.multilangstring_control.MultiLangStringFlag
+   langstring.multilangstring_control.MultiLangStringControl
+
+
+
+
+.. py:class:: MultiLangStringFlag(*args, **kwds)
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   Enumeration for LangString control flags.
+
+   This enum defines various flags that can be used to configure the behavior of the LangString class.
+
+   :cvar ENSURE_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a LangString.
+   :vartype ENSURE_TEXT: Enum
+   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a LangString.
+   :vartype ENSURE_ANY_LANG: Enum
+   :cvar ENSURE_VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
+   :vartype ENSURE_VALID_LANG: Enum
+   :cvar VERBOSE_MODE: Enables verbose mode for additional information during operations.
+   :vartype VERBOSE_MODE: Enum
+
+   .. py:attribute:: ENSURE_TEXT
+
+      
+
+   .. py:attribute:: ENSURE_ANY_LANG
+
+      
+
+   .. py:attribute:: ENSURE_VALID_LANG
+
+      
+
+
+.. py:class:: MultiLangStringControl
+
+
+   Bases: :py:obj:`utils.controls_base.ControlBase`
+
+   Base class for LangStringControl and MultiLangStringControl, providing common flag management functionalities.
+
+   This class serves as a base for both LangStringControl and MultiLangStringControl, offering methods to manage
+   configuration flags that affect the behavior of LangString and MultiLangString instances. It is designed to be
+   non-instantiable, acting as a utility class for flag management.
+
+   The class uses an abstract class variable `_flags` to store the state of each configuration flag. Subclasses are
+   expected to initialize this variable with a dictionary mapping flag types to their boolean states. This design
+   allows for a flexible yet consistent approach to managing configuration flags across different classes.
+
+   :cvar _flags: An abstract class variable that stores the state of each configuration flag. It should be initialized
+                by subclasses with a dictionary mapping flag types (LangStringFlag or MultiLangStringFlag) to their
+                boolean states. This variable plays a crucial role in managing the behavior of LangString and
+                MultiLangString instances based on the set flags.
+   :vartype _flags: dict[Union[type[LangStringFlag], type[MultiLangStringFlag]], bool]
+
+   .. py:attribute:: _flags
+
+      
+
+   .. py:method:: _get_flags_type()
+      :classmethod:
+
+      Retrieve the control class and its corresponding flags enumeration used in the LangString class.
+
+      This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)
+      that are used for configuring and validating the LangString instances. It is essential for the functioning of
+      the ValidationBase methods, which rely on these control settings.
+
+      :return: The LangStringFlag enumeration.
+      :rtype: type[MultiLangStringFlag]
+
+
+

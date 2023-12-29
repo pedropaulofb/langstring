@@ -27,7 +27,7 @@ Note:
 from enum import auto
 from enum import Enum
 
-from utils.controls_base import ControlBase
+from .utils.controls_base import ControlBase
 
 
 class MultiLangStringFlag(Enum):

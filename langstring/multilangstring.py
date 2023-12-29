@@ -45,10 +45,9 @@ the development of multilingual applications and facilitate the handling of text
 """
 from typing import Any
 
-from multilangstring_control import MultiLangStringControl
-from multilangstring_control import MultiLangStringFlag
-from utils.validation_base import ValidationBase
-
+from .multilangstring_control import MultiLangStringControl
+from .multilangstring_control import MultiLangStringFlag
+from .utils.validation_base import ValidationBase
 from langstring import LangString
 
 

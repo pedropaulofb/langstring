@@ -98,15 +98,17 @@ Classes
    configuration flags that affect the behavior of LangString and MultiLangString instances. It is designed to be
    non-instantiable, acting as a utility class for flag management.
 
-   The class uses an abstract class variable `_flags` to store the state of each configuration flag. Subclasses are
+   The class uses an "abstract" class variable `_flags` to store the state of each configuration flag. Subclasses are
    expected to initialize this variable with a dictionary mapping flag types to their boolean states. This design
    allows for a flexible yet consistent approach to managing configuration flags across different classes.
 
-   :cvar _flags: An abstract class variable that stores the state of each configuration flag. It should be initialized
-                by subclasses with a dictionary mapping flag types (LangStringFlag or MultiLangStringFlag) to their
-                boolean states. This variable plays a crucial role in managing the behavior of LangString and
-                MultiLangString instances based on the set flags.
+   :cvar _flags: An "abstract" class variable that stores the state of each configuration flag.
    :vartype _flags: dict[Union[type[LangStringFlag], type[MultiLangStringFlag]], bool]
+
+   .. py:attribute:: _flags
+      :type: dict[Union[type[LangStringFlag], type[MultiLangStringFlag]], bool]
+
+      
 
    .. py:method:: _get_flags_type()
       :classmethod:

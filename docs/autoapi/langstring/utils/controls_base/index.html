@@ -190,17 +190,19 @@ class that uses NonInstantiable as its metaclass.</p>
 <p>This class serves as a base for both LangStringControl and MultiLangStringControl, offering methods to manage
 configuration flags that affect the behavior of LangString and MultiLangString instances. It is designed to be
 non-instantiable, acting as a utility class for flag management.</p>
-<p>The class uses an abstract class variable <cite>_flags</cite> to store the state of each configuration flag. Subclasses are
+<p>The class uses an “abstract” class variable <cite>_flags</cite> to store the state of each configuration flag. Subclasses are
 expected to initialize this variable with a dictionary mapping flag types to their boolean states. This design
 allows for a flexible yet consistent approach to managing configuration flags across different classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_flags</strong> (<em>dict</em><em>[</em><em>Union</em><em>[</em><em>type</em><em>[</em><a class="reference internal" href="../../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>]</em><em>, </em><em>type</em><em>[</em><a class="reference internal" href="../../index.html#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – An abstract class variable that stores the state of each configuration flag. It should be initialized
-by subclasses with a dictionary mapping flag types (LangStringFlag or MultiLangStringFlag) to their
-boolean states. This variable plays a crucial role in managing the behavior of LangString and
-MultiLangString instances based on the set flags.</p>
+<dd class="field-odd"><p><strong>_flags</strong> (<em>dict</em><em>[</em><em>Union</em><em>[</em><em>type</em><em>[</em><a class="reference internal" href="../../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>]</em><em>, </em><em>type</em><em>[</em><a class="reference internal" href="../../index.html#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – An “abstract” class variable that stores the state of each configuration flag.</p>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.utils.controls_base.ControlBase._flags">
+<span class="sig-name descname"><span class="pre">_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag"><span class="pre">LangStringFlag</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../index.html#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><span class="pre">MultiLangStringFlag</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.utils.controls_base.ControlBase._flags" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.controls_base.ControlBase._get_flags_type">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.controls_base.ControlBase._get_flags_type" title="Link to this definition"></a></dt>

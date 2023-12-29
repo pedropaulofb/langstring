@@ -95,6 +95,29 @@
              
   <section id="module-langstring.multilangstring_control">
 <span id="langstring-multilangstring-control"></span><h1><a class="reference internal" href="#module-langstring.multilangstring_control" title="langstring.multilangstring_control"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.multilangstring_control</span></code></a><a class="headerlink" href="#module-langstring.multilangstring_control" title="Link to this heading"></a></h1>
+<p>This module defines the MultiLangStringFlag enumeration and MultiLangStringControl class.</p>
+<p>These classes are used for managing configuration flags related to the behavior of MultiLangString instances.</p>
+<p>The MultiLangStringFlag enumeration contains flags that influence how MultiLangString objects handle multilingual text,
+such as ensuring non-empty text or valid language codes. The MultiLangStringControl class, inheriting from ControlBase,
+provides methods to set, retrieve, and manage these flags globally, ensuring consistent behavior across all instances
+of MultiLangString.</p>
+<dl>
+<dt>Classes:</dt><dd><p>MultiLangStringFlag: An enumeration defining flags for configuring MultiLangString behavior.
+MultiLangStringControl: A control class for managing MultiLangString configuration flags.</p>
+</dd>
+<dt>Usage:</dt><dd><p>The MultiLangStringControl class is used to set and retrieve the state of configuration flags defined in
+MultiLangStringFlag. These flags determine how MultiLangString instances validate and handle multilingual text data.</p>
+</dd>
+<dt>Example:</dt><dd><p>MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, True)
+if MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_TEXT):</p>
+<blockquote>
+<div><p>print(“ENSURE_TEXT flag is enabled.”)</p>
+</div></blockquote>
+</dd>
+<dt>Note:</dt><dd><p>The MultiLangStringControl class is designed to be non-instantiable and acts as a static configuration manager.
+It should not be instantiated but used through its class methods.</p>
+</dd>
+</dl>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <section id="classes">
@@ -105,7 +128,7 @@
 <td><p>Enumeration for LangString control flags.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#langstring.multilangstring_control.MultiLangStringControl" title="langstring.multilangstring_control.MultiLangStringControl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiLangStringControl</span></code></a></p></td>
-<td><p>Base class for LangStringControl and MultiLangStringControl, providing common flag management functionalities.</p></td>
+<td><p>A control class for managing the configuration flags of MultiLangString instances.</p></td>
 </tr>
 </tbody>
 </table>
@@ -145,20 +168,28 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="langstring.multilangstring_control.MultiLangStringControl">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.multilangstring_control.</span></span><span class="sig-name descname"><span class="pre">MultiLangStringControl</span></span><a class="headerlink" href="#langstring.multilangstring_control.MultiLangStringControl" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">utils.controls_base.ControlBase</span></code></p>
-<p>Base class for LangStringControl and MultiLangStringControl, providing common flag management functionalities.</p>
-<p>This class serves as a base for both LangStringControl and MultiLangStringControl, offering methods to manage
-configuration flags that affect the behavior of LangString and MultiLangString instances. It is designed to be
-non-instantiable, acting as a utility class for flag management.</p>
-<p>The class uses an abstract class variable <cite>_flags</cite> to store the state of each configuration flag. Subclasses are
-expected to initialize this variable with a dictionary mapping flag types to their boolean states. This design
-allows for a flexible yet consistent approach to managing configuration flags across different classes.</p>
+<dd><p>Bases: <a class="reference internal" href="../utils/controls_base/index.html#langstring.utils.controls_base.ControlBase" title="langstring.utils.controls_base.ControlBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.controls_base.ControlBase</span></code></a></p>
+<p>A control class for managing the configuration flags of MultiLangString instances.</p>
+<p>Inherits from ControlBase and utilizes a static approach to manage global settings that influence the behavior
+of MultiLangString objects. This class is non-instantiable and operates through class methods to ensure a
+consistent configuration state across all MultiLangString instances.</p>
+<p>The class manages flags defined in the MultiLangStringFlag enumeration, allowing for dynamic control over
+various aspects of MultiLangString behavior, such as text validation and language code enforcement.</p>
+<dl class="simple">
+<dt>Usage:</dt><dd><p>MultiLangStringControl is used to configure global settings for MultiLangString instances. It affects how
+these instances validate and process multilingual text data based on the set flags.</p>
+</dd>
+<dt>Example:</dt><dd><p>MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
+is_valid_lang_enforced = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_VALID_LANG)
+print(f”ENSURE_VALID_LANG flag is set to {is_valid_lang_enforced}.”)</p>
+</dd>
+<dt>Note:</dt><dd><p>As a static configuration manager, MultiLangStringControl should not be instantiated. It is designed to
+provide a centralized way to manage settings for all MultiLangString instances.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_flags</strong> (<em>dict</em><em>[</em><em>Union</em><em>[</em><em>type</em><em>[</em><a class="reference internal" href="../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>]</em><em>, </em><em>type</em><em>[</em><a class="reference internal" href="#langstring.multilangstring_control.MultiLangStringFlag" title="langstring.multilangstring_control.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – An abstract class variable that stores the state of each configuration flag. It should be initialized
-by subclasses with a dictionary mapping flag types (LangStringFlag or MultiLangStringFlag) to their
-boolean states. This variable plays a crucial role in managing the behavior of LangString and
-MultiLangString instances based on the set flags.</p>
+<dd class="field-odd"><p><strong>_flags</strong> (<em>dict</em><em>[</em><a class="reference internal" href="#langstring.multilangstring_control.MultiLangStringFlag" title="langstring.multilangstring_control.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>, </em><em>bool</em><em>]</em>) – A class-level dictionary storing the state of each configuration flag for MultiLangString instances.</p>
 </dd>
 </dl>
 <dl class="py attribute">

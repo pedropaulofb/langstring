@@ -101,7 +101,7 @@ Classes
 .. py:class:: LangStringControl
 
 
-   Bases: :py:obj:`utils.controls_base.ControlBase`
+   Bases: :py:obj:`langstring.utils.controls_base.ControlBase`
 
    Control class for managing LangString configuration flags, designed to be non-instantiable.
 

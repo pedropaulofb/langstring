@@ -155,67 +155,82 @@ the subclass. The exact types of the control class and flags enumeration will de
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_arguments">
-<span class="sig-name descname"><span class="pre">_validate_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_arguments" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_validate_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_arguments" title="Link to this definition"></a></dt>
 <dd><p>Validate the types of the ‘text’ and ‘lang’ arguments.</p>
 <p>Ensures that ‘text’ is a string and ‘lang’ is either a string or None. Raises a TypeError if the types do not
 match the expected types. Additionally, checks if ‘text’ is not None.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – The text to be validated.</p></li>
+<li><p><strong>lang</strong> (<em>str</em><em> or </em><em>None</em>) – The language code to be validated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>TypeError</strong> – If ‘text’ is not a string or if ‘lang’ is provided and is not a string or None.</p></li>
 <li><p><strong>ValueError</strong> – If ‘text’ is None.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_ensure_text">
-<span class="sig-name descname"><span class="pre">_validate_ensure_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_text" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_validate_ensure_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_text" title="Link to this definition"></a></dt>
 <dd><p>Validate the ‘text’ argument based on the ENSURE_TEXT control flag.</p>
 <p>Checks if the ‘text’ field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT and
 VERBOSE_MODE flags set in the control class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – If ENSURE_TEXT is enabled and ‘text’ is an empty string.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text to be validated.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ENSURE_TEXT is enabled and ‘text’ is an empty string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_ensure_any_lang">
-<span class="sig-name descname"><span class="pre">_validate_ensure_any_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_any_lang" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_validate_ensure_any_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_any_lang" title="Link to this definition"></a></dt>
 <dd><p>Validate the ‘lang’ argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.</p>
 <p>Checks if the ‘lang’ field is empty and raises a ValueError or logs a warning depending on the ENSURE_ANY_LANG,
 ENSURE_VALID_LANG, and VERBOSE_MODE flags set in the control class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and ‘lang’ is an empty string.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language code to be validated.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and ‘lang’ is an empty string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_ensure_valid_lang">
-<span class="sig-name descname"><span class="pre">_validate_ensure_valid_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_valid_lang" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_validate_ensure_valid_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_valid_lang" title="Link to this definition"></a></dt>
 <dd><p>Validate the language tag for its validity.</p>
 <p>This method checks if the language tag is valid. If the tag is invalid, it raises a warning or an error
 depending on the control flags set in the control class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – If ENSURE_VALID_LANG is enabled and the language tag is invalid.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language code to be validated.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ENSURE_VALID_LANG is enabled and the language tag is invalid.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>

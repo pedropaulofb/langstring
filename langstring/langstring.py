@@ -65,10 +65,10 @@ class LangString(ValidationBase):
         self.text: str = text
         self.lang: Optional[str] = lang
 
-        self._validate_arguments()
-        self._validate_ensure_text()
-        self._validate_ensure_any_lang()
-        self._validate_ensure_valid_lang()
+        self._validate_arguments(self.text, self.lang)
+        self._validate_ensure_text(self.text)
+        self._validate_ensure_any_lang(self.lang)
+        self._validate_ensure_valid_lang(self.lang)
 
     def to_string(self) -> str:
         """Convert the LangString object to a string representation.

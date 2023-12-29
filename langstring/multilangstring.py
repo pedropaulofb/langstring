@@ -45,10 +45,10 @@ the development of multilingual applications and facilitate the handling of text
 """
 from typing import Any
 
+from .langstring import LangString
 from .multilangstring_control import MultiLangStringControl
 from .multilangstring_control import MultiLangStringFlag
 from .utils.validation_base import ValidationBase
-from langstring import LangString
 
 
 class MultiLangString(ValidationBase):
@@ -89,9 +89,9 @@ class MultiLangString(ValidationBase):
     def __init__(self, mls_dict: dict[str, set[str]] = None, pref_lang: str = "en") -> None:
         """Initialize a MultiLangString object with an optional dictionary and preferred language.
 
-        The MultiLangString can be initialized in two ways: by providing an existing dictionary (mls_dict) that
-        represents the internal structure (recommended for advanced cases), or by creating a new MultiLangString
-        with an empty dictionary for later addition of entries and LangStrings.
+        Validates the provided mls_dict against the current flag settings. If mls_dict is not provided, initializes
+        with an empty dictionary. The preferred language is set, which is used as a default when retrieving entries
+        or LangStrings.
 
         :param mls_dict: A dictionary representing the internal structure of the MultiLangString, where keys are
                          language codes (str) and values are sets of text entries (set[str]). If not provided, an
@@ -100,8 +100,17 @@ class MultiLangString(ValidationBase):
         :param pref_lang: The preferred language for this MultiLangString, used as a default when retrieving entries
                           or LangStrings. Defaults to "en".
         :type pref_lang: str
+        :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
-        if mls_dict is None:
+
+        if mls_dict and not isinstance(mls_dict, dict):
+            raise TypeError(f"Invalid type for argument mls_dict. Expected 'dict', received '{type(mls_dict)}'.")
+        if pref_lang and not isinstance(pref_lang, str):
+            raise TypeError(f"Invalid type for argument pref_lang. Expected 'str', received '{type(pref_lang)}'.")
+
+        if mls_dict is not None:
+            self._validate_mls_dict(mls_dict)
+        else:
             mls_dict = {}
         self.mls_dict: dict[str, set[str]] = mls_dict
 
@@ -133,16 +142,19 @@ class MultiLangString(ValidationBase):
     def add_entry(self, text: str, lang: str = "") -> None:
         """Add a text entry to the MultiLangString under a specified language.
 
-        This method adds a new text entry to the MultiLangString. If the specified language does not exist in the
-        mls_dict, a new set for that language is created. The text is then added to this set. If the language already
-        exists, the text is added to the existing set for that language.
+        Validates the provided text and language against the current flag settings before adding. If the specified
+        language does not exist in the mls_dict, a new set for that language is created. The text is then added to
+        this set. If the language already exists, the text is added to the existing set for that language.
 
         :param text: The text to be added to the MultiLangString.
         :type text: str
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
         """
-        self._validate_arguments()
+        self._validate_arguments(text, lang)
+        self._validate_ensure_text(text)
+        self._validate_ensure_any_lang(lang)
+        self._validate_ensure_valid_lang(lang)
 
         if lang not in self.mls_dict:
             self.mls_dict[lang] = set()
@@ -365,3 +377,31 @@ class MultiLangString(ValidationBase):
         """
         # Hashing the dictionary directly and converting sets to frozensets for consistent hashing
         return hash({lang: frozenset(texts) for lang, texts in self.mls_dict.items()})
+
+    def _validate_mls_dict(self, mls_dict: dict[str, set[str]]) -> None:
+        """
+        Validate all elements in the provided mls_dict against the current flags' values.
+
+        Iterates through each language and its associated texts in the mls_dict, applying validation methods to
+        ensure compliance with the current flag settings.
+
+        :param mls_dict: A dictionary where keys are language codes and values are sets of text entries.
+        :type mls_dict: dict[str, set[str]]
+        :raises TypeError: If any text or language in mls_dict does not comply with the expected types.
+        :raises ValueError: If any text or language in mls_dict violates the rules set by the control flags.
+        """
+        control, flags = self._get_control_and_flags_type()
+
+        for lang, texts in mls_dict.items():
+            if not isinstance(texts, set):
+                raise TypeError(f"Expected set of texts for language '{lang}', but got {type(texts).__name__}.")
+
+            for text in texts:
+                # Apply the validation methods to each text and language pair
+                self._validate_arguments(text, lang)
+                self._validate_ensure_text(text)
+
+                # Only validate language tag if it's not empty
+                if lang:
+                    self._validate_ensure_any_lang(lang)
+                    self._validate_ensure_valid_lang(lang)

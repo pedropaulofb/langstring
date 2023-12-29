@@ -46,50 +46,58 @@ class ValidationBase:
             - The flags enumeration that defines these flags.
         """
 
-    def _validate_arguments(self) -> None:
+    def _validate_arguments(self, text: str, lang: str) -> None:
         """Validate the types of the 'text' and 'lang' arguments.
 
         Ensures that 'text' is a string and 'lang' is either a string or None. Raises a TypeError if the types do not
         match the expected types. Additionally, checks if 'text' is not None.
 
+        :param text: The text to be validated.
+        :type text: str
+        :param lang: The language code to be validated.
+        :type lang: str or None
         :raises TypeError: If 'text' is not a string or if 'lang' is provided and is not a string or None.
         :raises ValueError: If 'text' is None.
         """
-        if not isinstance(self.text, str):
-            raise TypeError(f"Expected 'text' to be of type str, but got {type(self.text).__name__}.")
-        if self.lang is not None and not isinstance(self.lang, str):
-            raise TypeError(f"Expected 'lang' to be of type str, but got {type(self.lang).__name__}.")
+        if not isinstance(text, str):
+            raise TypeError(f"Expected 'text' to be of type str, but got {type(text).__name__}.")
+        if lang is not None and not isinstance(lang, str):
+            raise TypeError(f"Expected 'lang' to be of type str, but got {type(lang).__name__}.")
 
         # Text field cannot be None
-        if self.text is None:
+        if text is None:
             raise ValueError(f"{self.__class__.__name__}'s 'text' field cannot be None.")
 
-    def _validate_ensure_text(self) -> None:
+    def _validate_ensure_text(self, text: str) -> None:
         """Validate the 'text' argument based on the ENSURE_TEXT control flag.
 
         Checks if the 'text' field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT and
         VERBOSE_MODE flags set in the control class.
 
+        :param text: The text to be validated.
+        :type text: str
         :raises ValueError: If ENSURE_TEXT is enabled and 'text' is an empty string.
         """
         control, flags = self._get_control_and_flags_type()
 
-        if self.text == "" and control.get_flag(flags.ENSURE_TEXT):
+        if text == "" and control.get_flag(flags.ENSURE_TEXT):
             raise ValueError(
                 f"ENSURE_TEXT enabled: {self.__class__.__name__}'s 'text' field cannot receive empty string."
             )
 
-    def _validate_ensure_any_lang(self) -> None:
+    def _validate_ensure_any_lang(self, lang: str) -> None:
         """Validate the 'lang' argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.
 
         Checks if the 'lang' field is empty and raises a ValueError or logs a warning depending on the ENSURE_ANY_LANG,
         ENSURE_VALID_LANG, and VERBOSE_MODE flags set in the control class.
 
+        :param lang: The language code to be validated.
+        :type lang: str
         :raises ValueError: If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and 'lang' is an empty string.
         """
         control, flags = self._get_control_and_flags_type()
 
-        if not self.lang:
+        if not lang:
             if control.get_flag(flags.ENSURE_ANY_LANG):
                 raise ValueError(
                     f"ENSURE_ANY_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
@@ -99,17 +107,19 @@ class ValidationBase:
                     f"ENSURE_VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
                 )
 
-    def _validate_ensure_valid_lang(self) -> None:
+    def _validate_ensure_valid_lang(self, lang: str) -> None:
         """Validate the language tag for its validity.
 
         This method checks if the language tag is valid. If the tag is invalid, it raises a warning or an error
         depending on the control flags set in the control class.
 
+        :param lang: The language code to be validated.
+        :type lang: str
         :raises ValueError: If ENSURE_VALID_LANG is enabled and the language tag is invalid.
         """
         control, flags = self._get_control_and_flags_type()
 
-        if self.lang and not tag_is_valid(self.lang):
+        if lang and not tag_is_valid(lang):
             if control.get_flag(flags.ENSURE_VALID_LANG):
                 raise ValueError(
                     f"ENSURE_VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot be invalid."

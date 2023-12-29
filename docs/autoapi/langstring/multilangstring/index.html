@@ -96,7 +96,43 @@
              
   <section id="module-langstring.multilangstring">
 <span id="langstring-multilangstring"></span><h1><a class="reference internal" href="#module-langstring.multilangstring" title="langstring.multilangstring"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.multilangstring</span></code></a><a class="headerlink" href="#module-langstring.multilangstring" title="Link to this heading"></a></h1>
-<p>This module defines the <cite>MultiLangString</cite> class for handling multilingual text strings.</p>
+<p>The MultiLangString module provides a class for managing and manipulating multilingual text strings.</p>
+<p>It allows for the storage, retrieval, and manipulation of text strings in multiple languages, offering a flexible and
+efficient way to handle multilingual content in applications.</p>
+<p>The MultiLangString class utilizes a dictionary to store text entries associated with language tags, enabling the
+representation and handling of text in various languages. It supports adding new entries, removing entries, and
+retrieving entries in specific languages or across all languages. The class also allows setting a preferred language,
+which can be used as a default for operations that involve retrieving text entries.</p>
+<p>Key Features:
+- Store and manage text entries in multiple languages using language tags.
+- Add and remove text entries for specific languages.
+- Retrieve text entries for a specific language or all languages.
+- Set and get a preferred language for default text retrieval.
+- Support for equality comparison and hashing based on the content of the multilingual text entries.
+- Validation and control strategies for handling duplicate language tags and ensuring the integrity of text entries.</p>
+<p>This module is designed to be used in applications that require handling of text in multiple languages, providing a
+convenient and standardized way to store and manipulate multilingual text data.</p>
+<p>Classes:
+- MultiLangString: The main class for creating and managing multilingual text strings.</p>
+<p>Dependencies:
+- LangString: A class for representing individual text entries with associated language tags.
+- MultiLangStringControl and MultiLangStringFlag: for managing configuration and behavior of MultiLangString instances.
+- ValidationBase: A base class providing validation functionalities.</p>
+<p>Usage:
+The MultiLangString class can be used to create multilingual text containers, add text entries in various languages,
+retrieve entries based on language, and perform other operations related to multilingual text management. It is
+particularly useful in applications where content needs to be presented in multiple languages, such as websites,
+applications with internationalization support, and data processing tools that handle multilingual data.</p>
+<dl class="simple">
+<dt>Example:</dt><dd><p>mls_dict = {“en”: {“Hello”, “Good morning”}, “es”: {“Hola”, “Buenos días”}}
+mls = MultiLangString(mls_dict)
+mls.add_entry(“Bonjour”, “fr”)
+print(mls.get_strings_lang(“en”))  # Output: [‘Hello’, ‘Good morning’]
+print(mls)  # Output: “<a class="reference external" href="mailto:'Hello'&#37;&#52;&#48;en">’Hello’<span>&#64;</span>en</a>, ‘Good <a class="reference external" href="mailto:morning'&#37;&#52;&#48;en">morning’<span>&#64;</span>en</a>, <a class="reference external" href="mailto:'Hola'&#37;&#52;&#48;es">‘Hola’<span>&#64;</span>es</a>, ‘Buenos días’&#64;es, <a class="reference external" href="mailto:'Bonjour'&#37;&#52;&#48;fr">‘Bonjour’<span>&#64;</span>fr</a>”</p>
+</dd>
+</dl>
+<p>By providing a comprehensive set of methods for managing multilingual text, the MultiLangString class aims to simplify
+the development of multilingual applications and facilitate the handling of text in multiple languages.</p>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <section id="classes">
@@ -110,22 +146,19 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.multilangstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preferred_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">utils.validation_base.ValidationBase</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.multilangstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pref_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../utils/validation_base/index.html#langstring.utils.validation_base.ValidationBase" title="langstring.utils.validation_base.ValidationBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.validation_base.ValidationBase</span></code></a></p>
 <p>A class for managing multilingual text strings with various language tags.</p>
 <p>Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
 operations like adding, removing, and retrieving language strings in multiple languages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>langstrings</strong> – A dictionary of LangStrings indexed by language tag.</p></li>
-<li><p><strong>preferred_lang</strong> (<em>str</em>) – The preferred language for this MultiLangString. Defaults to “en”.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>pref_lang</strong> (<em>str</em>) – The preferred language for this MultiLangString. Defaults to “en”.</p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>mls_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>preferred_lang</strong> (<em>str</em>) – </p></li>
+<li><p><strong>pref_lang</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -180,11 +213,15 @@ It is essential for the functioning of the ValidationBase methods, which rely on
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.add_entry">
 <span class="sig-name descname"><span class="pre">add_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.add_entry" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Add a text entry to the MultiLangString under a specified language.</p>
+<p>Validates the provided text and language against the current flag settings before adding. If the specified
+language does not exist in the mls_dict, a new set for that language is created. The text is then added to
+this set. If the language already exists, the text is added to the existing set for that language.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>) – </p></li>
-<li><p><strong>lang</strong> (<em>str</em>) – </p></li>
+<li><p><strong>text</strong> (<em>str</em>) – The text to be added to the MultiLangString.</p></li>
+<li><p><strong>lang</strong> (<em>str</em>) – The language under which the text should be added. If not specified, defaults to an empty string.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -197,9 +234,6 @@ It is essential for the functioning of the ValidationBase methods, which rely on
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.add_langstring">
 <span class="sig-name descname"><span class="pre">add_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.add_langstring" title="Link to this definition"></a></dt>
 <dd><p>Add a LangString to the MultiLangString.</p>
-<p>Depending on the current global control strategy (e.g., ALLOW, OVERWRITE, BLOCK_WARN, BLOCK_ERROR), the behavior
-for handling duplicate language tags varies. For example, BLOCK_ERROR will prevent adding a LangString with a
-duplicate language tag. For ALLOW, it adds the LangString unless an identical one exists for the same language tag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>langstring</strong> (<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString"><em>LangString</em></a>) – The LangString object to be added, representing a text in a specific language.</p>
@@ -211,23 +245,120 @@ duplicate language tag. For ALLOW, it adds the LangString unless an identical on
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_langstring">
-<span class="sig-name descname"><span class="pre">get_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_langstring" title="Link to this definition"></a></dt>
-<dd><p>Get LangStrings for a specific language tag.</p>
-<p>Returns a list of LangStrings for the specified language tag. If the specified language tag is not present
-in the MultiLangString, an empty list is returned.</p>
-<dl class="simple">
-<dt>Example:</dt><dd><p>mls = MultiLangString()
-mls.add_langstring(LangString(“Hello”, “en”))
-print(mls.get_langstring(“en”))  # Output: [“Hello”]</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.remove_entry">
+<span class="sig-name descname"><span class="pre">remove_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.remove_entry" title="Link to this definition"></a></dt>
+<dd><p>Remove a single entry from the set of a given language key in the dictionary.</p>
+<p>If the specified language key exists and the text is in its set, the text is removed. If this results in an
+empty set for the language, the language key is also removed from the dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language tag to retrieve LangStrings for.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – The text to be removed.</p></li>
+<li><p><strong>lang</strong> (<em>str</em>) – The language key from which the text should be removed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.remove_lang">
+<span class="sig-name descname"><span class="pre">remove_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.remove_lang" title="Link to this definition"></a></dt>
+<dd><p>Remove all entries of a given language from the dictionary.</p>
+<p>If the specified language key exists, it and all its associated texts are removed from the dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to be removed along with all its texts.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_langstring">
+<span class="sig-name descname"><span class="pre">get_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_langstring" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a LangString object for a specific text and language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – The text of the LangString.</p></li>
+<li><p><strong>lang</strong> (<em>str</em>) – The language of the LangString.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of LangStrings for the specified language tag. Returns an empty list if not found.</p>
+<dd class="field-even"><p>A LangString object with the specified text and language.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the text/lang combination is not in mls_dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_langstrings_lang">
+<span class="sig-name descname"><span class="pre">get_langstrings_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_langstrings_lang" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a list of LangStrings for a given language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language for which to retrieve LangStrings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of LangStrings, each containing a single entry for the specified language.
+Returns an empty list if the specified language is not in mls_dict.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_langstrings_all">
+<span class="sig-name descname"><span class="pre">get_langstrings_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_langstrings_all" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a list of all LangStrings in mls_dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of LangStrings, each representing a single entry from mls_dict.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_langstrings_pref_lang">
+<span class="sig-name descname"><span class="pre">get_langstrings_pref_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_langstrings_pref_lang" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a list of LangStrings for the preferred language.</p>
+<p>This method returns LangStrings for the language specified in the pref_lang attribute. If pref_lang is not
+a key in mls_dict, an empty list is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of LangStrings for the preferred language.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_strings_lang">
+<span class="sig-name descname"><span class="pre">get_strings_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_strings_lang" title="Link to this definition"></a></dt>
+<dd><p>Retrieve all text entries for a specific language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to retrieve entries for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of text entries for the specified language.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[str]</p>
@@ -236,114 +367,121 @@ print(mls.get_langstring(“en”))  # Output: [“Hello”]</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_pref_langstring">
-<span class="sig-name descname"><span class="pre">get_pref_langstring</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_pref_langstring" title="Link to this definition"></a></dt>
-<dd><p>Get the preferred language’s LangString.</p>
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_strings_pref_lang">
+<span class="sig-name descname"><span class="pre">get_strings_pref_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_strings_pref_lang" title="Link to this definition"></a></dt>
+<dd><p>Retrieve all text entries for the preferred language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The LangString for the preferred language.</p>
+<dd class="field-odd"><p>A list of text entries for the specified language.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.remove_langstring">
-<span class="sig-name descname"><span class="pre">remove_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.remove_langstring" title="Link to this definition"></a></dt>
-<dd><p>Remove a specified LangString from the MultiLangString.</p>
-<p>Attempts to remove a LangString from the MultiLangString. If the LangString is found and successfully removed,
-the method returns True. If the LangString is not found, it returns False.</p>
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_strings_all">
+<span class="sig-name descname"><span class="pre">get_strings_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_strings_all" title="Link to this definition"></a></dt>
+<dd><p>Retrieve all text entries across all languages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of all text entries.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_strings_langstring_lang">
+<span class="sig-name descname"><span class="pre">get_strings_langstring_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_strings_langstring_lang" title="Link to this definition"></a></dt>
+<dd><p>Retrieve all text entries for a specific language, formatted as ‘“text”&#64;lang’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>langstring</strong> (<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString"><em>LangString</em></a>) – The LangString to be removed.</p>
+<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to retrieve entries for.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if the LangString was successfully removed, False otherwise.</p>
+<dd class="field-even"><p>A list of formatted text entries for the specified language.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If the provided argument is not an instance of LangString.</p>
+<dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.remove_language">
-<span class="sig-name descname"><span class="pre">remove_language</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language_code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.remove_language" title="Link to this definition"></a></dt>
-<dd><p>Remove all LangStrings associated with a specific language code from the MultiLangString.</p>
-<p>Attempts to remove all LangStrings that match a given language code. Returns True if the language code is found
-and the entries are successfully removed. Returns False if the language code is not found. Raises a ValueError
-for invalid language_code formats.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>language_code</strong> (<em>str</em>) – The language code (e.g., “en”, “fr”) for which to remove LangStrings.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if language entries were removed, False otherwise.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If the provided language_code is not a string or is invalid.</p></li>
-<li><p><strong>ValueError</strong> – If the provided language_code contains non-alphabetical characters.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.to_string">
-<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.to_string" title="Link to this definition"></a></dt>
-<dd><p>Convert the MultiLangString to a string. Syntactical sugar for self.__str()__.</p>
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_strings_langstring_pref_lang">
+<span class="sig-name descname"><span class="pre">get_strings_langstring_pref_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_strings_langstring_pref_lang" title="Link to this definition"></a></dt>
+<dd><p>Retrieve all text entries for the preferred language, formatted as ‘“text”&#64;lang’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The string representation of the MultiLangString.</p>
+<dd class="field-odd"><p>A list of formatted text entries for the specified language.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.to_string_list">
-<span class="sig-name descname"><span class="pre">to_string_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.to_string_list" title="Link to this definition"></a></dt>
-<dd><p>Convert the MultiLangString to a list of strings.</p>
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.get_strings_langstring_all">
+<span class="sig-name descname"><span class="pre">get_strings_langstring_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.get_strings_langstring_all" title="Link to this definition"></a></dt>
+<dd><p>Retrieve all text entries across all languages, formatted as ‘“text”&#64;lang’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of strings representing the MultiLangString.</p>
+<dd class="field-odd"><p>A list of formatted text entries for all languages.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list</p>
+<dd class="field-even"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.to_langstrings_all">
-<span class="sig-name descname"><span class="pre">to_langstrings_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.to_langstrings_all" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">langstring.LangString</a>]</p>
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.len_entries_all">
+<span class="sig-name descname"><span class="pre">len_entries_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.len_entries_all" title="Link to this definition"></a></dt>
+<dd><p>Calculate the total number of elements across all sets in the dictionary.</p>
+<p>Iterates through each set in the dictionary values and sums their lengths to get the total number of elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The total number of elements across all sets.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.to_langstrings_lang">
-<span class="sig-name descname"><span class="pre">to_langstrings_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.to_langstrings_lang" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.len_entries_lang">
+<span class="sig-name descname"><span class="pre">len_entries_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.len_entries_lang" title="Link to this definition"></a></dt>
+<dd><p>Calculate the number of entries of a given language in the dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of entries for a given language in a MultiLangString.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – </p>
 </dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.len_langs">
+<span class="sig-name descname"><span class="pre">len_langs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.len_langs" title="Link to this definition"></a></dt>
+<dd><p>Calculate the number of keys (languages) in the dictionary.</p>
+<p>This method returns the count of distinct keys in the dictionary, which represents the number of languages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of keys in the dictionary.</p>
+</dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">langstring.LangString</a>]</p>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -365,30 +503,11 @@ dictionary of language strings and the preferred language, making it useful for 
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__len__">
-<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__len__" title="Link to this definition"></a></dt>
-<dd><p>Return the total number of LangStrings stored in the MultiLangString.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The total number of LangStrings.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__str__">
 <span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__str__" title="Link to this definition"></a></dt>
 <dd><p>Return a string representation of the MultiLangString, including language tags.</p>
 <p>This method provides a concise string representation of the MultiLangString, listing each LangString with its
 associated language tag.</p>
-<dl class="simple">
-<dt>Example:</dt><dd><p>mls = MultiLangString(LangString(“Hello”, “en”), LangString(“Hola”, “es”))
-print(str(mls))  # Output: “<a class="reference external" href="mailto:'Hello'&#37;&#52;&#48;en">’Hello’<span>&#64;</span>en</a>, <a class="reference external" href="mailto:'Hola'&#37;&#52;&#48;es">‘Hola’<span>&#64;</span>es</a>”</p>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A string representation of the MultiLangString with language tags.</p>
@@ -403,14 +522,14 @@ print(str(mls))  # Output: “<a class="reference external" href="mailto:'Hello'
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__eq__">
 <span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__eq__" title="Link to this definition"></a></dt>
 <dd><p>Check equality of this MultiLangString with another MultiLangString.</p>
-<p>This method compares the ‘mls_dict’ attribute of the two MultiLangString objects. The comparison is based on
-the content of the MultiLangString objects, irrespective of their internal handling of duplicates and preferred language.</p>
+<p>Equality is determined based on the mls_dict attribute. The pref_lang attribute is not considered in the
+equality check.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>MultiLangString</em></a>) – Another MultiLangString object to compare with.</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – Another object to compare with.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if both MultiLangString objects have the same content, False otherwise.</p>
+<dd class="field-even"><p>True if both MultiLangString objects have the same mls_dict, False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -435,21 +554,23 @@ MultiLangString objects with the same content will have the same hash value.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._exist_in_mls_dict">
-<span class="sig-name descname"><span class="pre">_exist_in_mls_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_searched</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang_searched</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._exist_in_mls_dict" title="Link to this definition"></a></dt>
-<dd><p>Check if a given text is associated with a specified language in the dictionary.</p>
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._validate_mls_dict">
+<span class="sig-name descname"><span class="pre">_validate_mls_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._validate_mls_dict" title="Link to this definition"></a></dt>
+<dd><p>Validate all elements in the provided mls_dict against the current flags’ values.</p>
+<p>Iterates through each language and its associated texts in the mls_dict, applying validation methods to
+ensure compliance with the current flag settings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text_searched</strong> (<em>str</em>) – The text to search for in the dictionary.</p></li>
-<li><p><strong>lang_searched</strong> (<em>str</em>) – The language key to search under in the dictionary.</p></li>
+<dd class="field-odd"><p><strong>mls_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – A dictionary where keys are language codes and values are sets of text entries.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If any text or language in mls_dict does not comply with the expected types.</p></li>
+<li><p><strong>ValueError</strong> – If any text or language in mls_dict violates the rules set by the control flags.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if the text is found under the specified language, False otherwise.</p>
-</dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>

@@ -84,7 +84,7 @@ class ControlBase(metaclass=NonInstantiable):
     """
 
     # "Abstract" variable: must be implemented by ControlBase's subclasses
-    _flags: dict[Union[type["LangStringFlag"], type["MultiLangStringFlag"]], bool] = {}
+    _flags: dict[Union[type["LangStringFlag"], type["MultiLangStringFlag"]], bool] = {}  # noqa: F821
 
     @classmethod
     @abstractmethod
@@ -173,8 +173,7 @@ class ControlBase(metaclass=NonInstantiable):
 
     @classmethod
     def reset_flags(cls) -> None:
-        """
-        Reset all configuration flags for LangString or MultiLangString to their default values.
+        """Reset all configuration flags for LangString or MultiLangString to their default values.
 
         This class method resets the states of all flags to their default values. This is particularly useful for
         restoring the default behavior of the LangString and MultiLangString classes after temporary changes to the

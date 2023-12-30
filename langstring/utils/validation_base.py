@@ -71,8 +71,8 @@ class ValidationBase:
     def _validate_ensure_text(self, text: str) -> None:
         """Validate the 'text' argument based on the ENSURE_TEXT control flag.
 
-        Checks if the 'text' field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT and
-        VERBOSE_MODE flags set in the control class.
+        Checks if the 'text' field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT
+        flag set in the control class.
 
         :param text: The text to be validated.
         :type text: str
@@ -89,7 +89,7 @@ class ValidationBase:
         """Validate the 'lang' argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.
 
         Checks if the 'lang' field is empty and raises a ValueError or logs a warning depending on the ENSURE_ANY_LANG,
-        ENSURE_VALID_LANG, and VERBOSE_MODE flags set in the control class.
+        ENSURE_VALID_LANG flag set in the control class.
 
         :param lang: The language code to be validated.
         :type lang: str

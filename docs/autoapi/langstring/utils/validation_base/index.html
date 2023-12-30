@@ -182,8 +182,8 @@ match the expected types. Additionally, checks if ‘text’ is not None.</p>
 <dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_ensure_text">
 <span class="sig-name descname"><span class="pre">_validate_ensure_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_text" title="Link to this definition"></a></dt>
 <dd><p>Validate the ‘text’ argument based on the ENSURE_TEXT control flag.</p>
-<p>Checks if the ‘text’ field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT and
-VERBOSE_MODE flags set in the control class.</p>
+<p>Checks if the ‘text’ field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT
+flag set in the control class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text to be validated.</p>
@@ -202,7 +202,7 @@ VERBOSE_MODE flags set in the control class.</p>
 <span class="sig-name descname"><span class="pre">_validate_ensure_any_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_any_lang" title="Link to this definition"></a></dt>
 <dd><p>Validate the ‘lang’ argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.</p>
 <p>Checks if the ‘lang’ field is empty and raises a ValueError or logs a warning depending on the ENSURE_ANY_LANG,
-ENSURE_VALID_LANG, and VERBOSE_MODE flags set in the control class.</p>
+ENSURE_VALID_LANG flag set in the control class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language code to be validated.</p>

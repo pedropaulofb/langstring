@@ -102,7 +102,6 @@ class MultiLangString(ValidationBase):
         :type pref_lang: str
         :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
-
         if mls_dict and not isinstance(mls_dict, dict):
             raise TypeError(f"Invalid type for argument mls_dict. Expected 'dict', received '{type(mls_dict)}'.")
         if pref_lang and not isinstance(pref_lang, str):
@@ -315,7 +314,9 @@ class MultiLangString(ValidationBase):
         :return: The number of entries for a given language in a MultiLangString.
         :rtype: int
         """
-        return len(self.mls_dict[lang])
+        if lang in self.mls_dict.keys():
+            return len(self.mls_dict[lang])
+        return 0
 
     def len_langs(self) -> int:
         """Calculate the number of keys (languages) in the dictionary.
@@ -375,8 +376,9 @@ class MultiLangString(ValidationBase):
         :return: The hash value of the MultiLangString object.
         :rtype: int
         """
-        # Hashing the dictionary directly and converting sets to frozensets for consistent hashing
-        return hash({lang: frozenset(texts) for lang, texts in self.mls_dict.items()})
+        # Convert dictionary to a hashable form (tuple of tuples) for consistent hashing
+        hashable_mls_dict = tuple((lang, frozenset(texts)) for lang, texts in self.mls_dict.items())
+        return hash(hashable_mls_dict)
 
     def _validate_mls_dict(self, mls_dict: dict[str, set[str]]) -> None:
         """

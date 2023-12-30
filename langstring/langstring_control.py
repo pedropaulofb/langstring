@@ -11,8 +11,7 @@ Classes:
                                      application.
 
 The LangStringFlag enumeration includes flags such as ENSURE_TEXT, ENSURE_ANY_LANG, and ENSURE_VALID_LANG, each serving
-a specific purpose in controlling how LangString instances handle text and language tag validation. The VERBOSE_MODE
-flag can be used for debugging or logging purposes, providing additional information during operations.
+a specific purpose in controlling how LangString instances handle text and language tag validation.
 
 The LangStringControl class, inheriting from ControlBase, acts as a static configuration manager. It is designed to be
 non-instantiable, emphasizing its role in managing global configuration states rather than being used as an object. This
@@ -61,8 +60,6 @@ class LangStringFlag(Enum):
     :vartype ENSURE_ANY_LANG: Enum
     :cvar ENSURE_VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
     :vartype ENSURE_VALID_LANG: Enum
-    :cvar VERBOSE_MODE: Enables verbose mode for additional information during operations.
-    :vartype VERBOSE_MODE: Enum
     """
 
     ENSURE_TEXT = auto()

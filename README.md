@@ -28,67 +28,70 @@ For inquiries and further information, please refer to the [comprehensive docstr
 ## Contents
 
 <!-- TOC -->
-
 * [LangString Python Library](#langstring-python-library)
-    * [Contents](#contents)
-    * [LangString Library](#langstring-library)
-        * [Purpose and Contextualization](#purpose-and-contextualization)
-        * [Key Components](#key-components)
-        * [Practical Use Cases](#practical-use-cases)
-        * [Related Work and Differences](#related-work-and-differences)
-    * [LangStrings](#langstrings)
-        * [LangStrings’ Methods](#langstrings-methods)
-            * [`__init__` Method](#init-method)
-            * [`to_string` Method](#tostring-method)
-            * [`__str__` Method](#str-method)
-            * [`__eq__` Method](#eq-method)
-            * [`__hash__` Method](#hash-method)
-    * [MultiLangStrings](#multilangstrings)
-        * [MultiLangStrings’ Methods](#multilangstrings-methods)
-            * [`__init__` Method](#init-method-1)
-            * [`add_entry` Method](#addentry-method)
-            * [`add_langstring` Method](#addlangstring-method)
-            * [`remove_entry` Method](#removeentry-method)
-            * [`remove_lang` Method](#removelang-method)
-            * [`get_langstring` Method](#getlangstring-method)
-            * [`get_langstrings_lang` Method](#getlangstringslang-method)
-            * [`get_langstrings_all` Method](#getlangstringsall-method)
-            * [`get_langstrings_pref_lang` Method](#getlangstringspreflang-method)
-            * [`get_strings_lang` Method](#getstringslang-method)
-            * [`get_strings_pref_lang` Method](#getstringspreflang-method)
-            * [`get_strings_all` Method](#getstringsall-method)
-            * [`get_strings_langstring_lang` Method](#getstringslangstringlang-method)
-            * [`get_strings_langstring_pref_lang` Method](#getstringslangstringpreflang-method)
-            * [`get_strings_langstring_all` Method](#getstringslangstringall-method)
-            * [`len_entries_all` Method](#lenentriesall-method)
-            * [`len_entries_lang` Method](#lenentrieslang-method)
-            * [`len_langs` Method](#lenlangs-method)
-            * [`__repr__` Method](#repr-method)
-            * [`__str__` Method](#str-method-1)
-            * [`__eq__` Method](#eq-method-1)
-            * [`__hash__` Method](#hash-method-1)
-    * [Control and Flags](#control-and-flags)
-        * [Flags](#flags)
-        * [Control](#control)
-            * [LangString Control Examples](#langstring-control-examples)
-            * [MultiLangString Control Examples](#multilangstring-control-examples)
-            * [`set_flag` Method](#setflag-method)
-            * [`get_flag` Method](#getflag-method)
-            * [`reset_flags` Method](#resetflags-method)
-            * [`print_flags` Method](#printflags-method)
-    * [Code Testing](#code-testing)
-    * [Version 2: Key Differences and Improvements](#version-2-key-differences-and-improvements)
-    * [How to Contribute](#how-to-contribute)
-        * [Reporting Issues](#reporting-issues)
-        * [Code Contributions](#code-contributions)
-        * [Test Contributions](#test-contributions)
-        * [General Guidelines](#general-guidelines)
-    * [Dependencies](#dependencies)
-        * [Using Poetry](#using-poetry)
-        * [Using `requirements.txt`](#using-requirementstxt)
-    * [License](#license)
-    * [Author](#author)
-
+  * [Contents](#contents)
+  * [LangString Library](#langstring-library)
+    * [Purpose and Contextualization](#purpose-and-contextualization)
+    * [Key Components](#key-components)
+    * [Practical Use Cases](#practical-use-cases)
+    * [Related Work and Differences](#related-work-and-differences)
+    * [Installation and Use](#installation-and-use)
+  * [LangStrings](#langstrings)
+    * [LangStrings’ Methods](#langstrings-methods)
+      * [`__init__` Method](#init-method)
+      * [`to_string` Method](#tostring-method)
+      * [`__str__` Method](#str-method)
+      * [`__eq__` Method](#eq-method)
+      * [`__hash__` Method](#hash-method)
+  * [MultiLangStrings](#multilangstrings)
+    * [MultiLangStrings’ Methods](#multilangstrings-methods)
+      * [`__init__` Method](#init-method-1)
+      * [`add_entry` Method](#addentry-method)
+      * [`add_langstring` Method](#addlangstring-method)
+      * [`remove_entry` Method](#removeentry-method)
+      * [`remove_lang` Method](#removelang-method)
+      * [`get_langstring` Method](#getlangstring-method)
+      * [`get_langstrings_lang` Method](#getlangstringslang-method)
+      * [`get_langstrings_all` Method](#getlangstringsall-method)
+      * [`get_langstrings_pref_lang` Method](#getlangstringspreflang-method)
+      * [`get_strings_lang` Method](#getstringslang-method)
+      * [`get_strings_pref_lang` Method](#getstringspreflang-method)
+      * [`get_strings_all` Method](#getstringsall-method)
+      * [`get_strings_langstring_lang` Method](#getstringslangstringlang-method)
+      * [`get_strings_langstring_pref_lang` Method](#getstringslangstringpreflang-method)
+      * [`get_strings_langstring_all` Method](#getstringslangstringall-method)
+      * [`len_entries_all` Method](#lenentriesall-method)
+      * [`len_entries_lang` Method](#lenentrieslang-method)
+      * [`len_langs` Method](#lenlangs-method)
+      * [`__repr__` Method](#repr-method)
+      * [`__str__` Method](#str-method-1)
+      * [`__eq__` Method](#eq-method-1)
+      * [`__hash__` Method](#hash-method-1)
+  * [Control and Flags](#control-and-flags)
+    * [Flags](#flags)
+      * [`ENSURE_TEXT`](#ensuretext)
+      * [`ENSURE_ANY_LANG`](#ensureanylang)
+      * [`ENSURE_VALID_LANG`](#ensurevalidlang)
+    * [Example Usage of Flags](#example-usage-of-flags)
+    * [Control](#control)
+      * [`set_flag` Method](#setflag-method)
+      * [`get_flag` Method](#getflag-method)
+      * [`reset_flags` Method](#resetflags-method)
+      * [`print_flags` Method](#printflags-method)
+    * [LangString Control Examples](#langstring-control-examples)
+    * [MultiLangString Control Examples](#multilangstring-control-examples)
+  * [Code Testing](#code-testing)
+  * [Version 2: Key Differences and Improvements](#version-2-key-differences-and-improvements)
+  * [How to Contribute](#how-to-contribute)
+    * [Reporting Issues](#reporting-issues)
+    * [Code Contributions](#code-contributions)
+    * [Test Contributions](#test-contributions)
+    * [General Guidelines](#general-guidelines)
+  * [Dependencies](#dependencies)
+    * [Using Poetry](#using-poetry)
+    * [Using `requirements.txt`](#using-requirementstxt)
+  * [License](#license)
+  * [Author](#author)
 <!-- TOC -->
 
 ## LangString Library
@@ -260,7 +263,7 @@ The `MultiLangString` class is a key component of the LangString Library, design
 
 The `MultiLangString` class provides a suite of methods to facilitate the management of multilingual text. These methods enable the addition, removal, retrieval, and manipulation of text entries in multiple languages, as well as setting and getting a preferred language for default text retrieval.
 
-#### `__init__` Method
+#### `__init__`
 
 The `__init__` method initializes a new MultiLangString object. It accepts an optional dictionary (`mls_dict`) representing the internal structure of the MultiLangString, where keys are language codes and values are sets of text entries. It also accepts a `pref_lang` parameter for setting the preferred language.
 
@@ -278,7 +281,7 @@ mls = MultiLangString({"en": {"Hello", "Good morning"}})
 mls = MultiLangString(pref_lang="en")
 ```
 
-#### `add_entry` Method
+#### `add_entry`
 
 The `add_entry` method adds a text entry to the MultiLangString under a specified language. It ensures that the text and language comply with the set control flags.
 
@@ -295,7 +298,7 @@ mls.add_entry("Bonjour", "fr")
 print(mls.get_strings_all())  # Output: ['Hello', 'Good morning', 'Hola', 'Buenos días', 'Bonjour']
 ```
 
-#### `add_langstring` Method
+#### `add_langstring`
 
 This method adds a LangString object to the MultiLangString, allowing for the integration of LangString instances directly.
 
@@ -307,7 +310,7 @@ This method adds a LangString object to the MultiLangString, allowing for the in
 mls.add_langstring(LangString("Hola", "es"))
 ```
 
-#### `remove_entry` Method
+#### `remove_entry`
 
 The `remove_entry` method removes a specific text entry from a given language in the MultiLangString.
 
@@ -319,7 +322,7 @@ The `remove_entry` method removes a specific text entry from a given language in
 mls.remove_entry("Hello", "en")
 ```
 
-#### `remove_lang` Method
+#### `remove_lang`
 
 This method removes all entries of a given language from the MultiLangString.
 
@@ -344,7 +347,7 @@ print("en" in mls.mls_dict)  # Output: False (The key 'en' is no longer in the d
 
 In `MultiLangString`, when the last entry of a specific language is removed using the `remove_entry` method, the key corresponding to that language is also removed from the internal dictionary (`mls_dict`). This behavior ensures that the dictionary only contains languages with at least one text entry.
 
-#### `get_langstring` Method
+#### `get_langstring`
 
 The `get_langstring` method retrieves a LangString object for a specific text and language combination from the MultiLangString.
 
@@ -356,7 +359,7 @@ The `get_langstring` method retrieves a LangString object for a specific text an
 lang_str = mls.get_langstring("Hello", "en")
 ```
 
-#### `get_langstrings_lang` Method
+#### `get_langstrings_lang`
 
 This method retrieves a list of LangStrings for a given language from the MultiLangString.
 
@@ -368,7 +371,7 @@ This method retrieves a list of LangStrings for a given language from the MultiL
 lang_strings = mls.get_langstrings_lang("en")
 ```
 
-#### `get_langstrings_all` Method
+#### `get_langstrings_all`
 
 The `get_langstrings_all` method retrieves a list of all LangStrings in the MultiLangString.
 
@@ -380,7 +383,7 @@ The `get_langstrings_all` method retrieves a list of all LangStrings in the Mult
 all_lang_strings = mls.get_langstrings_all()
 ```
 
-#### `get_langstrings_pref_lang` Method
+#### `get_langstrings_pref_lang`
 
 This method retrieves a list of LangStrings for the preferred language set in the MultiLangString.
 
@@ -392,7 +395,7 @@ This method retrieves a list of LangStrings for the preferred language set in th
 pref_lang_strings = mls.get_langstrings_pref_lang()
 ```
 
-#### `get_strings_lang` Method
+#### `get_strings_lang`
 
 The `get_strings_lang` method retrieves all text entries for a specific language from the MultiLangString.
 
@@ -404,7 +407,7 @@ The `get_strings_lang` method retrieves all text entries for a specific language
 texts = mls.get_strings_lang("en")
 ```
 
-#### `get_strings_pref_lang` Method
+#### `get_strings_pref_lang`
 
 This method retrieves all text entries for the preferred language in the MultiLangString.
 
@@ -416,7 +419,7 @@ This method retrieves all text entries for the preferred language in the MultiLa
 pref_texts = mls.get_strings_pref_lang()
 ```
 
-#### `get_strings_all` Method
+#### `get_strings_all`
 
 The `get_strings_all` method retrieves all text entries across all languages in the MultiLangString.
 
@@ -428,7 +431,7 @@ The `get_strings_all` method retrieves all text entries across all languages in 
 all_texts = mls.get_strings_all()
 ```
 
-#### `get_strings_langstring_lang` Method
+#### `get_strings_langstring_lang`
 
 This method retrieves all text entries for a specific language, formatted as '"text"@lang', from the MultiLangString.
 
@@ -440,7 +443,7 @@ This method retrieves all text entries for a specific language, formatted as '"t
 formatted_texts = mls.get_strings_langstring_lang("en")
 ```
 
-#### `get_strings_langstring_pref_lang` Method
+#### `get_strings_langstring_pref_lang`
 
 The `get_strings_langstring_pref_lang` method retrieves all text entries for the preferred language, formatted as '"text"@lang'.
 
@@ -452,7 +455,7 @@ The `get_strings_langstring_pref_lang` method retrieves all text entries for the
 formatted_pref_texts = mls.get_strings_langstring_pref_lang()
 ```
 
-#### `get_strings_langstring_all` Method
+#### `get_strings_langstring_all`
 
 This method retrieves all text entries across all languages, formatted as '"text"@lang', in the MultiLangString.
 
@@ -464,7 +467,7 @@ This method retrieves all text entries across all languages, formatted as '"text
 all_formatted_texts = mls.get_strings_langstring_all()
 ```
 
-#### `len_entries_all` Method
+#### `len_entries_all`
 
 The `len_entries_all` method calculates the total number of text entries across all languages in the MultiLangString.
 
@@ -476,7 +479,7 @@ The `len_entries_all` method calculates the total number of text entries across 
 total_entries = mls.len_entries_all()
 ```
 
-#### `len_entries_lang` Method
+#### `len_entries_lang`
 
 This method calculates the number of text entries for a specific language in the MultiLangString.
 
@@ -488,7 +491,7 @@ This method calculates the number of text entries for a specific language in the
 num_entries = mls.len_entries_lang("en")
 ```
 
-#### `len_langs` Method
+#### `len_langs`
 
 The `len_langs` method calculates the number of distinct languages represented in the MultiLangString.
 
@@ -500,7 +503,7 @@ The `len_langs` method calculates the number of distinct languages represented i
 num_languages = mls.len_langs()
 ```
 
-#### `__repr__` Method
+#### `__repr__`
 
 The `__repr__` method returns a detailed string representation of the MultiLangString object, including the full dictionary of language strings and the preferred language.
 
@@ -512,7 +515,7 @@ The `__repr__` method returns a detailed string representation of the MultiLangS
 print(mls.__repr__())
 ```
 
-#### `__str__` Method
+#### `__str__`
 
 The `__str__` method defines the string representation of the MultiLangString, listing each text entry with its associated language tag.
 
@@ -524,7 +527,7 @@ The `__str__` method defines the string representation of the MultiLangString, l
 print(mls)
 ```
 
-#### `__eq__` Method
+#### `__eq__`
 
 The `__eq__` method checks the equality of the MultiLangString object with another object based on the `mls_dict` attribute.
 
@@ -547,7 +550,7 @@ mls2.add_entry("Bonjour", "fr")
 print(mls1 == mls2)  # Output: False
 ```
 
-#### `__hash__` Method
+#### `__hash__`
 
 The `__hash__` method generates a hash value for the MultiLangString object based on its `mls_dict` attribute.
 
@@ -613,7 +616,9 @@ These flags provide a flexible way to customize the behavior of `LangString` and
 
 The Control classes, namely `LangStringControl` and `MultiLangStringControl`, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of `LangString` and `MultiLangString`.
 
-#### `set_flag` Method
+#### Control Methods
+
+##### `set_flag`
 
 The `set_flag` method is used to enable or disable a specific flag for either LangString or MultiLangString. This method allows for dynamic configuration of behavior, such as enforcing non-empty text or valid language tags.
 
@@ -628,7 +633,7 @@ The `set_flag` method is used to enable or disable a specific flag for either La
   MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
   ```
 
-#### `get_flag` Method
+##### `get_flag`
 
 The `get_flag` method retrieves the current state (enabled or disabled) of a specified flag. It is useful for checking the configuration status of LangString or MultiLangString instances.
 
@@ -645,7 +650,7 @@ The `get_flag` method retrieves the current state (enabled or disabled) of a spe
   print(is_valid_lang_enforced)  # Output: True or False
   ```
 
-#### `reset_flags` Method
+##### `reset_flags`
 
 The `reset_flags` method resets all flags to their default values. This is particularly useful for restoring the default behavior after temporary changes to the configuration flags.
 
@@ -660,7 +665,7 @@ The `reset_flags` method resets all flags to their default values. This is parti
   MultiLangStringControl.reset_flags()
   ```
 
-#### `print_flags` Method
+##### `print_flags`
 
 The `print_flags` method prints the current state of all configuration flags to the console. It is a convenient tool for debugging or monitoring the current flag settings.
 

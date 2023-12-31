@@ -561,39 +561,57 @@ print(hash(mls))
 
 ## Control and Flags
 
-The Control and Flags system in the LangString Library is designed to manage and configure the behavior of LangString and MultiLangString instances. This system allows for dynamic control over various aspects of handling multilingual text, such as validation rules and representation formats.
+The Control and Flags system in the LangString Library plays a pivotal role in managing and configuring the behavior of `LangString` and `MultiLangString` instances.
+
+This system operates at a global, class-level context, meaning that the flags and controls applied have a uniform effect across all instances of these classes. In other words, when a flag is set or reset using the control classes, it impacts every instance of `LangString` and `MultiLangString` throughout the application. This ensures consistent behavior and validation rules across all instances, as individual instances cannot have differing flag values.
+
+In the following subsections, we will delve into the specifics of the available flags and the control methods. The flags define key aspects of how `LangString` and `MultiLangString` instances handle multilingual text, including validation rules and representation formats. Understanding these flags is crucial for effectively utilizing the library in various scenarios, especially those involving multilingual content.
+
+The control methods, shared between `LangStringControl` and `MultiLangStringControl`, provide the mechanisms to set, retrieve, and reset these flags. These methods ensure that you can dynamically configure the behavior of the library to suit your application's needs. We will explore each method in detail, providing insights into their usage and impact on the library's functionality.
 
 ### Flags
 
-Flags are enumeration types that define various control options for LangString and MultiLangString instances. They are used to toggle specific behaviors on or off, providing flexibility in how instances of these classes behave in different scenarios.
+The LangString and MultiLangString classes use a set of flags to control various aspects of their behavior. These flags are managed by `LangStringControl` and `MultiLangStringControl` respectively. The available flags and their effects are as follows:
+
+#### `ENSURE_TEXT`
+- **Description**: This flag ensures that the text provided to `LangString` or `MultiLangString` is not empty.
+- **Effect**: When set to `True`, attempting to create a `LangString` or add an entry to `MultiLangString` with an empty string will raise a `ValueError`. This is useful for enforcing the presence of meaningful content.
+- **Default Value**: `True`. By default, the library requires that text strings are not empty.
+
+
+#### `ENSURE_ANY_LANG`
+- **Description**: This flag mandates the presence of a language tag in `LangString` or `MultiLangString`.
+- **Effect**: If `True`, a `ValueError` is raised when a `LangString` is created or an entry is added to `MultiLangString` without a language tag. This flag is beneficial for scenarios where language context is crucial.
+- **Default Value**: `False`. By default, the library does not require a language tag to be present.
+
+
+#### `ENSURE_VALID_LANG`
+- **Description**: This flag ensures that the language tags used in `LangString` or `MultiLangString` are valid according to standard language codes (e.g., ISO 639-1).
+- **Effect**: When enabled, creating a `LangString` or adding an entry to `MultiLangString` with an invalid language tag results in a `ValueError`. This flag is essential for maintaining consistency and accuracy in language-specific data.
+- **Default Value**: `False`. By default, the library does not enforce the validity of language tags.
+
+These flags provide a flexible way to customize the behavior of `LangString` and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed.
+
+### Example Usage of Flags
+
+```python
+from langstring import LangString, LangStringControl, LangStringFlag
+
+# Enabling the ENSURE_TEXT flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+
+# Attempting to create a LangString with an empty string will now raise an error
+try:
+    lang_str = LangString("")
+except ValueError as e:
+    print(f"Error: {e}")  # Outputs an error message
+```
+
+These flags provide a flexible way to customize the behavior of `LangString` and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed.
 
 ### Control
 
-The Control classes, namely LangStringControl and MultiLangStringControl, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of LangString and MultiLangString.
-
-#### LangString Control Examples
-
-- Enabling a flag:
-  ```python
-  LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-  ```
-- Checking if a flag is enabled:
-  ```python
-  is_ensure_text_enabled = LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-  print(is_ensure_text_enabled)  # Output: True or False
-  ```
-
-#### MultiLangString Control Examples
-
-- Disabling a flag:
-  ```python
-  MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
-  ```
-- Retrieving the current state of a flag:
-  ```python
-  is_valid_lang_enforced = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_VALID_LANG)
-  print(is_valid_lang_enforced)  # Output: True or False
-  ```
+The Control classes, namely `LangStringControl` and `MultiLangStringControl`, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of `LangString` and `MultiLangString`.
 
 #### `set_flag` Method
 
@@ -659,6 +677,48 @@ The `print_flags` method prints the current state of all configuration flags to 
 
 This section provides an overview of the control and flag system in the LangString Library, including how to use the control classes and their methods to manage the behavior of LangString and MultiLangString instances. The examples illustrate practical use cases for these methods.
 
+### LangString Control Examples
+
+```python
+from langstring import LangString, LangStringControl, LangStringFlag
+
+# Example: Enabling the ENSURE_TEXT flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+
+# Trying to create a LangString with an empty string (will raise ValueError due to ENSURE_TEXT)
+try:
+    empty_string_lang = LangString("")
+except ValueError as e:
+    print(f"Error: {e}")
+
+# Checking if the ENSURE_TEXT flag is enabled
+is_ensure_text_enabled = LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
+print(f"ENSURE_TEXT flag is enabled: {is_ensure_text_enabled}")
+
+# Resetting all flags to default
+LangStringControl.reset_flags()
+```
+
+### MultiLangString Control Examples
+
+```python
+from langstring import MultiLangString, MultiLangStringControl, MultiLangStringFlag
+
+# Example: Disabling the ENSURE_VALID_LANG flag
+MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
+
+# Creating a MultiLangString instance with an invalid language code (no error due to flag being disabled)
+mls = MultiLangString({"xx": {"Hello"}})
+print(f"Created MultiLangString: {mls}")
+
+# Checking the current state of the ENSURE_VALID_LANG flag
+is_valid_lang_enforced = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_VALID_LANG)
+print(f"ENSURE_VALID_LANG flag is set to: {is_valid_lang_enforced}")
+
+# Resetting all flags to default for MultiLangString
+MultiLangStringControl.reset_flags()
+```
+
 ## Code Testing
 
 The code provided has undergone rigorous testing to ensure its reliability and correctness. The tests can be found in the 'tests' directory of the project. To run the tests, navigate to the project root directory and execute the following command:
@@ -669,7 +729,7 @@ langstring> pytest .\tests
 
 ## Version 2: Key Differences and Improvements
 
-The LangString Library has undergone significant enhancements from Version 1 (v1) to Version 2 (v2). These changes have improved the library's functionality and usability, particularly in terms of control mechanisms and handling multilingual strings. Below are the key differences and improvements:
+The LangString Library has undergone significant enhancements from Version 1 (V1) to Version 2 (V2). These changes have improved the library's functionality and usability, particularly in terms of control mechanisms and handling multilingual strings. Below are the key differences and improvements:
 
 - Global Control Availability
     - **V1**: Global control was not available for both `LangString` and `MultiLangString`.
@@ -696,7 +756,7 @@ These improvements in v2 of the LangString Library mark a significant step forwa
 
 ### Reporting Issues
 
-- If you encounter a bug or wish to suggest a feature, please [open a new issue](https://github.com/pedropaulofb/langstring/issues/new).
+- If you find a bug or wish to suggest a feature, please [open a new issue](https://github.com/pedropaulofb/langstring/issues/new).
 - If you notice any discrepancies in the documentation created with the aid of AI, feel free to [report them by opening an issue](https://github.com/pedropaulofb/langstring/issues/new).
 
 ### Code Contributions

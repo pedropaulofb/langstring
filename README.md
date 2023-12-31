@@ -182,13 +182,13 @@ The `__init__` method initializes a new LangString object. It accepts `text`, th
 
 **Examples**:
 
-- Without language
+- Creating a LangString instance without a language tag
 
 ```python
 greeting = LangString("Hello")
 ```
 
-- With language
+- Creating a LangString instance with a language tag
 
 ```python
 french_greeting = LangString("Bonjour", "fr")
@@ -225,10 +225,19 @@ The `__eq__` method checks the equality of the LangString object with another ob
 
 **Examples**:
 
+- Comparing two LangString instances
+
 ```python
-greeting1 = LangString("Hello", "en")
-greeting2 = LangString("Hello", "en")
-print(greeting1 == greeting2)  # Output: True
+greeting_en1 = LangString("Hello", "en")
+greeting_en2 = LangString("Hello", "en")
+print(greeting_en1 == greeting_en2)  # Output: True
+```
+
+- Comparing LangString instances with different texts or languages
+
+```python
+greeting_es = LangString("Hola", "es")
+print(greeting_en1 == greeting_es)  # Output: False
 ```
 
 #### `__hash__` Method
@@ -278,7 +287,12 @@ The `add_entry` method adds a text entry to the MultiLangString under a specifie
 - Adding an entry
 
 ```python
+# Initialize MultiLangString with multiple languages
+mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}})
+
+# Add a new entry in French
 mls.add_entry("Bonjour", "fr")
+print(mls.get_strings_all())  # Output: ['Hello', 'Good morning', 'Hola', 'Buenos días', 'Bonjour']
 ```
 
 #### `add_langstring` Method
@@ -314,8 +328,21 @@ This method removes all entries of a given language from the MultiLangString.
 - Removing a language
 
 ```python
-mls.remove_lang("en")
+mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}, "fr": {"Bonjour"}})
+
+# Remove an entry in English
+mls.remove_entry("Good morning", "en")
+print(mls.get_strings_lang("en"))  # Output: ['Hello']
 ```
+
+- Removing a language's last entry
+
+```python
+mls.remove_entry("Hello", "en")
+print("en" in mls.mls_dict)  # Output: False (The key 'en' is no longer in the dictionary)
+```
+
+In `MultiLangString`, when the last entry of a specific language is removed using the `remove_entry` method, the key corresponding to that language is also removed from the internal dictionary (`mls_dict`). This behavior ensures that the dictionary only contains languages with at least one text entry.
 
 #### `get_langstring` Method
 
@@ -419,12 +446,11 @@ The `get_strings_langstring_pref_lang` method retrieves all text entries for the
 
 **Examples**:
 
-```python
-
-```
-
 - Retrieving formatted text entries for the preferred language
-  formatted_pref_texts = mls.get_strings_langstring_pref_lang()
+
+```python
+formatted_pref_texts = mls.get_strings_langstring_pref_lang()
+```
 
 #### `get_strings_langstring_all` Method
 
@@ -507,7 +533,18 @@ The `__eq__` method checks the equality of the MultiLangString object with anoth
 - Comparing two MultiLangStrings
 
 ```python
-print(mls1 == mls2)
+# Create two MultiLangString instances with the same content but different preferred languages
+mls1 = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}, pref_lang="en")
+mls2 = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}, pref_lang="es")
+
+# Despite having different preferred languages, they are considered equal because their content (mls_dict) is the same
+print(mls1 == mls2)  # Output: True
+
+# Change the content of mls2
+mls2.add_entry("Bonjour", "fr")
+
+# Now mls1 and mls2 are not equal because their content differs
+print(mls1 == mls2)  # Output: False
 ```
 
 #### `__hash__` Method

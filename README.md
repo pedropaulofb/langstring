@@ -185,16 +185,17 @@ The `__init__` method initializes a new LangString object. It accepts `text`, th
 
 **Examples**:
 
-- Creating a LangString instance without a language tag
-
 ```python
+# Import necessary class
+from langstring import LangString
+
+# Creating a LangString instance without a language tag
 greeting = LangString("Hello")
-```
+print(greeting)  # Expected Output: '"Hello"'
 
-- Creating a LangString instance with a language tag
-
-```python
+# Creating a LangString instance with a language tag
 french_greeting = LangString("Bonjour", "fr")
+print(french_greeting)  # Expected Output: '"Bonjour"@fr'
 ```
 
 #### `to_string` Method
@@ -205,54 +206,62 @@ The `to_string` method converts the LangString object into a string representati
 **Examples**:
 
 ```python
+# Import necessary class
+from langstring import LangString
+
+# Creating and printing a LangString instance
 greeting = LangString("Hello", "en")
-print(greeting.to_string())  # Output: '"Hello"@en'
+print(greeting.to_string())  # Expected Output: '"Hello"@en'
 ```
 
-#### `__str__` Method
+#### `__str__`
 
-**Description**:
 The `__str__` method defines how a LangString object is converted to a string, typically used when the object is printed. It returns the text string, optionally followed by the language tag.
 
 **Examples**:
 
 ```python
+# Import necessary class
+from langstring import LangString
+
+# Creating and printing a LangString instance
 greeting = LangString("Hello", "en")
-print(greeting)  # Output: '"Hello"@en'
+print(greeting)  # Expected Output: '"Hello"@en'
 ```
 
 #### `__eq__` Method
 
-**Description**:
 The `__eq__` method checks the equality of the LangString object with another object. It compares both the text and the language tag to determine if two LangString objects are the same.
 
 **Examples**:
 
-- Comparing two LangString instances
-
 ```python
+# Import necessary class
+from langstring import LangString
+
+# Comparing two LangString instances
 greeting_en1 = LangString("Hello", "en")
 greeting_en2 = LangString("Hello", "en")
-print(greeting_en1 == greeting_en2)  # Output: True
-```
+print(greeting_en1 == greeting_en2)  # Expected Output: True
 
-- Comparing LangString instances with different texts or languages
-
-```python
+# Comparing LangString instances with different texts or languages
 greeting_es = LangString("Hola", "es")
-print(greeting_en1 == greeting_es)  # Output: False
+print(greeting_en1 == greeting_es)  # Expected Output: False
 ```
 
-#### `__hash__` Method
+#### `__hash__`
 
-**Description**:
 The `__hash__` method generates a hash value for the LangString object. This is particularly useful when LangString objects need to be used in hash-based collections like sets or dictionaries.
 
 **Examples**:
 
 ```python
+# Import necessary class
+from langstring import LangString
+
+# Creating a LangString instance and printing its hash value
 greeting = LangString("Hello", "en")
-print(hash(greeting))
+print(hash(greeting))  # Output: (hash value, e.g., 224086809330009634)
 ```
 
 ## MultiLangStrings
@@ -269,16 +278,24 @@ The `__init__` method initializes a new MultiLangString object. It accepts an op
 
 **Examples**:
 
-- Initializing with a dictionary:
-
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initializing with a dictionary
 mls = MultiLangString({"en": {"Hello", "Good morning"}})
-```
+print(mls)  # Expected Output: 'Good morning'@en, 'Hello'@en
 
-- Initializing with a preferred language
-
-```python
+# Initializing with a preferred language
 mls = MultiLangString(pref_lang="en")
+print(mls)  # Expected Output: nothing, as the created MultiLangString is empty.
+
+# Initializing MultiLangString with a dictionary and a preferred language
+mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}, pref_lang="en")
+print(mls)  # Expected Output: '"Hello"@en, "Good morning"@en, "Hola"@es, "Buenos días"@es'
+
+# Printing the preferred language
+print("Preferred language:", mls.preferred_lang)  # Expected Output: Preferred language: en
 ```
 
 #### `add_entry`
@@ -287,15 +304,17 @@ The `add_entry` method adds a text entry to the MultiLangString under a specifie
 
 **Examples**:
 
-- Adding an entry
-
 ```python
+# Import necessary classes
+from langstring import MultiLangString, LangString
+
 # Initialize MultiLangString with multiple languages
 mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}})
 
 # Add a new entry in French
 mls.add_entry("Bonjour", "fr")
-print(mls.get_strings_all())  # Output: ['Hello', 'Good morning', 'Hola', 'Buenos días', 'Bonjour']
+print(mls.get_strings_all())  # Expected Output: ['Hello', 'Good morning', 'Hola', 'Buenos días', 'Bonjour']
+
 ```
 
 #### `add_langstring`
@@ -304,22 +323,42 @@ This method adds a LangString object to the MultiLangString, allowing for the in
 
 **Examples**:
 
-- Adding a LangString
 
 ```python
+# Import necessary classes
+from langstring import MultiLangString, LangString
+
+# Initialize MultiLangString and add a LangString
+mls = MultiLangString()
 mls.add_langstring(LangString("Hola", "es"))
+print(mls)  # Expected Output: 'Hola'@es
 ```
 
 #### `remove_entry`
 
 The `remove_entry` method removes a specific text entry from a given language in the MultiLangString.
 
+In `MultiLangString`, when the last entry of a specific language is removed using the `remove_entry` method, the key corresponding to that language is also removed from the internal dictionary (`mls_dict`). This behavior ensures that the dictionary only contains languages with at least one text entry.
+
 **Examples**:
 
-- Removing an entry
-
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString with multiple languages
+mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}})
+
+# Remove an entry in English
+mls.remove_entry("Good morning", "en")
+print(mls)  # Expected Output: '"Hello"@en, "Hola"@es, "Buenos días"@es'
+
+# Remove the last entry in English
 mls.remove_entry("Hello", "en")
+print(mls)  # Expected Output: '"Hola"@es, "Buenos días"@es'
+
+# Check if the 'en' key is still present in the dictionary
+print("en" in mls.mls_dict)  # Expected Output: False (The key 'en' is no longer in the dictionary)
 ```
 
 #### `remove_lang`
@@ -328,24 +367,15 @@ This method removes all entries of a given language from the MultiLangString.
 
 **Examples**:
 
-- Removing a language
-
 ```python
-mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}, "fr": {"Bonjour"}})
+# Import necessary class
+from langstring import MultiLangString
 
-# Remove an entry in English
-mls.remove_entry("Good morning", "en")
-print(mls.get_strings_lang("en"))  # Output: ['Hello']
+# Initialize MultiLangString and remove a language
+mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}})
+mls.remove_lang("en")
+print(mls)  # Expected Output: 'Hola'@es, 'Buenos días'@es
 ```
-
-- Removing a language's last entry
-
-```python
-mls.remove_entry("Hello", "en")
-print("en" in mls.mls_dict)  # Output: False (The key 'en' is no longer in the dictionary)
-```
-
-In `MultiLangString`, when the last entry of a specific language is removed using the `remove_entry` method, the key corresponding to that language is also removed from the internal dictionary (`mls_dict`). This behavior ensures that the dictionary only contains languages with at least one text entry.
 
 #### `get_langstring`
 
@@ -353,10 +383,14 @@ The `get_langstring` method retrieves a LangString object for a specific text an
 
 **Examples**:
 
-- Retrieving a LangString
-
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve a LangString
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 lang_str = mls.get_langstring("Hello", "en")
+print(lang_str)  # Expected Output: '"Hello"@en'
 ```
 
 #### `get_langstrings_lang`
@@ -365,10 +399,14 @@ This method retrieves a list of LangStrings for a given language from the MultiL
 
 **Examples**:
 
-- Retrieving LangStrings for a language
-
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve LangStrings for a language
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 lang_strings = mls.get_langstrings_lang("en")
+print(', '.join(str(elem) for elem in lang_strings)) # Expected Output: "Hello"@en, "Good morning"@en
 ```
 
 #### `get_langstrings_all`
@@ -380,7 +418,13 @@ The `get_langstrings_all` method retrieves a list of all LangStrings in the Mult
 - Retrieving all LangStrings
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve all LangStrings
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 all_lang_strings = mls.get_langstrings_all()
+print(', '.join(str(elem) for elem in all_lang_strings))  # Expected Output: "Hello"@en, "Good morning"@en
 ```
 
 #### `get_langstrings_pref_lang`
@@ -389,10 +433,14 @@ This method retrieves a list of LangStrings for the preferred language set in th
 
 **Examples**:
 
-- Retrieving LangStrings for the preferred language
-
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve LangStrings for the preferred language
+mls = MultiLangString({"en": {"Hello", "Good morning"}}, pref_lang="en")
 pref_lang_strings = mls.get_langstrings_pref_lang()
+print(', '.join(str(elem) for elem in pref_lang_strings))  # Expected Output: "Hello"@en, "Good morning"@en
 ```
 
 #### `get_strings_lang`
@@ -404,7 +452,13 @@ The `get_strings_lang` method retrieves all text entries for a specific language
 - Retrieving text entries for a language
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve text entries for a language
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 texts = mls.get_strings_lang("en")
+print(texts)  # Expected Output: ['Hello', 'Good morning']
 ```
 
 #### `get_strings_pref_lang`

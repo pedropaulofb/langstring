@@ -1,5 +1,7 @@
-"""This package contains modules related to handling language-specific strings using the LangString and \
-MultiLangString classes."""
+"""The langstring package provides classes and utilities for handling multilingual text.
+
+It includes classes for single and multiple language strings, along with their control and validation mechanisms.
+"""
 from .langstring import LangString
 from .langstring_control import LangStringControl
 from .langstring_control import LangStringFlag

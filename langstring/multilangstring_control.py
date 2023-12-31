@@ -75,7 +75,8 @@ class MultiLangStringControl(ControlBase):
     :vartype _flags: dict[MultiLangStringFlag, bool]
     """
 
-    _flags = {
+    # Ignoring mypy error for practicality: subclasses narrow type for specific use, not affecting functionality.
+    _flags: dict[MultiLangStringFlag, bool] = {  # type: ignore
         MultiLangStringFlag.ENSURE_TEXT: True,
         MultiLangStringFlag.ENSURE_ANY_LANG: False,
         MultiLangStringFlag.ENSURE_VALID_LANG: False,

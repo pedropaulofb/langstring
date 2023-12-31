@@ -75,6 +75,8 @@ Classes
    Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
    operations like adding, removing, and retrieving language strings in multiple languages.
 
+   :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
+   :vartype mls_dict: Optional[dict[str, set[str]]]
    :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
    :vartype pref_lang: str
 

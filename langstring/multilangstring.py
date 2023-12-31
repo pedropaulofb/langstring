@@ -44,6 +44,7 @@ By providing a comprehensive set of methods for managing multilingual text, the 
 the development of multilingual applications and facilitate the handling of text in multiple languages.
 """
 from typing import Any
+from typing import Optional
 
 from .langstring import LangString
 from .multilangstring_control import MultiLangStringControl
@@ -57,11 +58,14 @@ class MultiLangString(ValidationBase):
     Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
     operations like adding, removing, and retrieving language strings in multiple languages.
 
+    :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
+    :vartype mls_dict: Optional[dict[str, set[str]]]
     :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
     :vartype pref_lang: str
     """
 
-    def _get_control_and_flags_type(self) -> tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]:
+    # Ignoring mypy error: subclasses narrow type for specific use, not affecting functionality.
+    def _get_control_and_flags_type(self) -> tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]:  # type: ignore # noqa: E501
         """Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.
 
         This method provides the specific control class (MultiLangStringControl) and the flags enumeration
@@ -86,7 +90,7 @@ class MultiLangString(ValidationBase):
                 f"received '{type(arg).__name__}' with value '{arg}'."
             )
 
-    def __init__(self, mls_dict: dict[str, set[str]] = None, pref_lang: str = "en") -> None:
+    def __init__(self, mls_dict: Optional[dict[str, set[str]]] = None, pref_lang: str = "en") -> None:
         """Initialize a MultiLangString object with an optional dictionary and preferred language.
 
         Validates the provided mls_dict against the current flag settings. If mls_dict is not provided, initializes
@@ -166,6 +170,7 @@ class MultiLangString(ValidationBase):
         :type langstring: LangString
         """
         self._validate_langstring_arg(langstring)
+        langstring.lang = "" if langstring.lang is None else langstring.lang
         self.add_entry(text=langstring.text, lang=langstring.lang)
 
     def remove_entry(self, text: str, lang: str) -> None:

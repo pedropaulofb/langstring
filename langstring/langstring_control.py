@@ -78,7 +78,8 @@ class LangStringControl(ControlBase):
     :vartype _flags: dict[LangStringFlag, bool]
     """
 
-    _flags = {
+    # Ignoring mypy error for practicality: subclasses narrow type for specific use, not affecting functionality.
+    _flags: dict[LangStringFlag, bool] = {  # type: ignore
         LangStringFlag.ENSURE_TEXT: True,
         LangStringFlag.ENSURE_ANY_LANG: False,
         LangStringFlag.ENSURE_VALID_LANG: False,

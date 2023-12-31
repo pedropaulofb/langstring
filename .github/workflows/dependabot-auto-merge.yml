@@ -1,19 +1,16 @@
-name: bots-auto-merge
+name: dependabot-auto-merge
 
 on:
   pull_request:
 
 jobs:
-  auto-merge:
+  auto-merge-dependabot:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        bot: ['dependabot', 'pre-commit-ci']
     steps:
     - uses: actions/checkout@v4
-    - name: Auto merge ${{ matrix.bot }}
+    - name: Auto merge dependabot
       uses: ahmadnassri/action-dependabot-auto-merge@v2.6.6
       with:
         target: all
-        botName: ${{ matrix.bot }}
+        botName: dependabot
         github-token: ${{ secrets.SECRET_AUTO_MERGE }}

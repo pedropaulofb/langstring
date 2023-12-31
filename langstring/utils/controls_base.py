@@ -42,8 +42,12 @@ Example:
     MultiLangStringControl.reset_flags()
 """
 from abc import abstractmethod
-from enum import Enum
+from typing import TYPE_CHECKING
 from typing import Union
+
+if TYPE_CHECKING:
+    from ..langstring_control import LangStringFlag
+    from ..multilangstring_control import MultiLangStringFlag
 
 
 class NonInstantiable(type):
@@ -84,22 +88,22 @@ class ControlBase(metaclass=NonInstantiable):
     """
 
     # "Abstract" variable: must be implemented by ControlBase's subclasses
-    _flags: dict[Union[type["LangStringFlag"], type["MultiLangStringFlag"]], bool] = {}  # noqa: F821
+    _flags: dict[Union["LangStringFlag", "MultiLangStringFlag"], bool] = {}
 
     @classmethod
     @abstractmethod
-    def _get_flags_type(cls) -> type[Enum]:
+    def _get_flags_type(cls) -> type[Union["LangStringFlag", "MultiLangStringFlag"]]:
         """Retrieve the type of the enumeration used for configuration flags.
 
         This abstract method should be implemented in subclasses to return the specific enumeration type
         used for managing configuration flags for either LangString or MultiLangString.
 
         :return: The type of the enumeration used for flags, either LangStringFlag or MultiLangStringFlag.
-        :rtype: type[Enum]
+        :rtype: type["LangStringFlag", "MultiLangStringFlag"]
         """
 
     @classmethod
-    def set_flag(cls, flag: Union["LangStringFlag", "MultiLangStringFlag"], state: bool) -> None:  # noqa: F821
+    def set_flag(cls, flag: Union["LangStringFlag", "MultiLangStringFlag"], state: bool) -> None:
         """Set the state of a specified configuration flag for LangString or MultiLangString.
 
         This class method allows setting the state of a flag globally, affecting the behavior of both LangString and
@@ -124,7 +128,7 @@ class ControlBase(metaclass=NonInstantiable):
         cls._flags[flag] = state
 
     @classmethod
-    def get_flag(cls, flag: Union["LangStringFlag", "MultiLangStringFlag"]) -> bool:  # noqa: F821
+    def get_flag(cls, flag: Union["LangStringFlag", "MultiLangStringFlag"]) -> bool:
         """Retrieve the current state of a specified configuration flag for LangString or MultiLangString.
 
         This class method provides a way to access the state of a flag globally for both LangString and
@@ -145,7 +149,7 @@ class ControlBase(metaclass=NonInstantiable):
         return cls._flags.get(flag, False)
 
     @classmethod
-    def get_flags(cls) -> dict[Union["LangStringFlag", "MultiLangStringFlag"], bool]:  # noqa: F821
+    def get_flags(cls) -> dict[Union["LangStringFlag", "MultiLangStringFlag"], bool]:
         """Retrieve the current state of all configuration flags for LangString or MultiLangString.
 
         This class method provides a way to access the states of all flags globally for both LangString and

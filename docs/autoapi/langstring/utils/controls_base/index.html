@@ -200,7 +200,7 @@ allows for a flexible yet consistent approach to managing configuration flags ac
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="langstring.utils.controls_base.ControlBase._flags">
-<span class="sig-name descname"><span class="pre">_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag"><span class="pre">LangStringFlag</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../index.html#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><span class="pre">MultiLangStringFlag</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.utils.controls_base.ControlBase._flags" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../langstring_control/index.html#langstring.langstring_control.LangStringFlag" title="langstring.langstring_control.LangStringFlag"><span class="pre">langstring.langstring_control.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../multilangstring_control/index.html#langstring.multilangstring_control.MultiLangStringFlag" title="langstring.multilangstring_control.MultiLangStringFlag"><span class="pre">langstring.multilangstring_control.MultiLangStringFlag</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.utils.controls_base.ControlBase._flags" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -214,7 +214,7 @@ used for managing configuration flags for either LangString or MultiLangString.<
 <dd class="field-odd"><p>The type of the enumeration used for flags, either LangStringFlag or MultiLangStringFlag.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>type[Enum]</p>
+<dd class="field-even"><p>type[“LangStringFlag”, “MultiLangStringFlag”]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -251,7 +251,7 @@ defined in LangStringFlag and MultiLangStringFlag enums.</p>
 MultiLangString classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="../../index.html#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be retrieved,</p>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../../langstring_control/index.html#langstring.langstring_control.LangStringFlag" title="langstring.langstring_control.LangStringFlag"><em>langstring.langstring_control.LangStringFlag</em></a><em>, </em><a class="reference internal" href="../../multilangstring_control/index.html#langstring.multilangstring_control.MultiLangStringFlag" title="langstring.multilangstring_control.MultiLangStringFlag"><em>langstring.multilangstring_control.MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be retrieved,</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>

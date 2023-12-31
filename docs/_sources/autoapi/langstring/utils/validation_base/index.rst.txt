@@ -73,9 +73,9 @@ Classes
       match the expected types. Additionally, checks if 'text' is not None.
 
       :param text: The text to be validated.
-      :type text: str
+      :type text: Optional[str]
       :param lang: The language code to be validated.
-      :type lang: str or None
+      :type lang: Optional[str]
       :raises TypeError: If 'text' is not a string or if 'lang' is provided and is not a string or None.
       :raises ValueError: If 'text' is None.
 
@@ -88,7 +88,7 @@ Classes
       flag set in the control class.
 
       :param text: The text to be validated.
-      :type text: str
+      :type text: Optional[str]
       :raises ValueError: If ENSURE_TEXT is enabled and 'text' is an empty string.
 
 
@@ -100,7 +100,7 @@ Classes
       ENSURE_VALID_LANG flag set in the control class.
 
       :param lang: The language code to be validated.
-      :type lang: str
+      :type lang: Optional[str]
       :raises ValueError: If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and 'lang' is an empty string.
 
 
@@ -112,7 +112,7 @@ Classes
       depending on the control flags set in the control class.
 
       :param lang: The language code to be validated.
-      :type lang: str
+      :type lang: Optional[str]
       :raises ValueError: If ENSURE_VALID_LANG is enabled and the language tag is invalid.
 
 

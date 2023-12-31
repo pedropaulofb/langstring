@@ -106,7 +106,7 @@ Classes
    :vartype _flags: dict[Union[type[LangStringFlag], type[MultiLangStringFlag]], bool]
 
    .. py:attribute:: _flags
-      :type: dict[Union[type[LangStringFlag], type[MultiLangStringFlag]], bool]
+      :type: dict[Union[langstring.langstring_control.LangStringFlag, langstring.multilangstring_control.MultiLangStringFlag], bool]
 
       
 
@@ -120,7 +120,7 @@ Classes
       used for managing configuration flags for either LangString or MultiLangString.
 
       :return: The type of the enumeration used for flags, either LangStringFlag or MultiLangStringFlag.
-      :rtype: type[Enum]
+      :rtype: type["LangStringFlag", "MultiLangStringFlag"]
 
 
    .. py:method:: set_flag(flag, state)

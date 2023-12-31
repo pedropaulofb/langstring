@@ -36,7 +36,8 @@ class LangString(ValidationBase):
     :vartype lang: Optional[str]
     """
 
-    def _get_control_and_flags_type(self) -> tuple[type[LangStringControl], type[LangStringFlag]]:
+    # Ignoring mypy error for practicality: subclasses narrow type for specific use, not affecting functionality.
+    def _get_control_and_flags_type(self) -> tuple[type[LangStringControl], type[LangStringFlag]]:  # type: ignore
         """Retrieve the control class and its corresponding flags enumeration used in the LangString class.
 
         This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)

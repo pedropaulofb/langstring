@@ -107,6 +107,7 @@ Classes
    :vartype _flags: dict[MultiLangStringFlag, bool]
 
    .. py:attribute:: _flags
+      :type: dict[MultiLangStringFlag, bool]
 
       
 

@@ -110,6 +110,7 @@ Classes
    :vartype _flags: dict[LangStringFlag, bool]
 
    .. py:attribute:: _flags
+      :type: dict[LangStringFlag, bool]
 
       
 

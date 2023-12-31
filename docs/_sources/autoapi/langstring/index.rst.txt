@@ -5,7 +5,9 @@
 
 .. autoapi-nested-parse::
 
-   This package contains modules related to handling language-specific strings using the LangString and MultiLangString classes.
+   The langstring package provides classes and utilities for handling multilingual text.
+
+   It includes classes for single and multiple language strings, along with their control and validation mechanisms.
 
 
 
@@ -128,6 +130,7 @@ Classes
    :vartype _flags: dict[LangStringFlag, bool]
 
    .. py:attribute:: _flags
+      :type: dict[LangStringFlag, bool]
 
       
 
@@ -184,6 +187,8 @@ Classes
    Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
    operations like adding, removing, and retrieving language strings in multiple languages.
 
+   :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
+   :vartype mls_dict: Optional[dict[str, set[str]]]
    :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
    :vartype pref_lang: str
 
@@ -475,6 +480,7 @@ Classes
    :vartype _flags: dict[MultiLangStringFlag, bool]
 
    .. py:attribute:: _flags
+      :type: dict[MultiLangStringFlag, bool]
 
       
 

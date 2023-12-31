@@ -148,7 +148,7 @@ the subclass. The exact types of the control class and flags enumeration will de
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p>tuple[Union[<a class="reference internal" href="../../langstring_control/index.html#langstring.langstring_control.LangStringControl" title="langstring.langstring_control.LangStringControl">langstring.langstring_control.LangStringControl</a>, <a class="reference internal" href="../../multilangstring_control/index.html#langstring.multilangstring_control.MultiLangStringControl" title="langstring.multilangstring_control.MultiLangStringControl">langstring.multilangstring_control.MultiLangStringControl</a>], Union[<a class="reference internal" href="../../langstring_control/index.html#langstring.langstring_control.LangStringFlag" title="langstring.langstring_control.LangStringFlag">langstring.langstring_control.LangStringFlag</a>, <a class="reference internal" href="../../multilangstring_control/index.html#langstring.multilangstring_control.MultiLangStringFlag" title="langstring.multilangstring_control.MultiLangStringFlag">langstring.multilangstring_control.MultiLangStringFlag</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -162,8 +162,8 @@ match the expected types. Additionally, checks if ‘text’ is not None.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>) – The text to be validated.</p></li>
-<li><p><strong>lang</strong> (<em>str</em><em> or </em><em>None</em>) – The language code to be validated.</p></li>
+<li><p><strong>text</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The text to be validated.</p></li>
+<li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language code to be validated.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -186,7 +186,7 @@ match the expected types. Additionally, checks if ‘text’ is not None.</p>
 flag set in the control class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text to be validated.</p>
+<dd class="field-odd"><p><strong>text</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The text to be validated.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If ENSURE_TEXT is enabled and ‘text’ is an empty string.</p>
@@ -205,7 +205,7 @@ flag set in the control class.</p>
 ENSURE_VALID_LANG flag set in the control class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language code to be validated.</p>
+<dd class="field-odd"><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language code to be validated.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and ‘lang’ is an empty string.</p>
@@ -224,7 +224,7 @@ ENSURE_VALID_LANG flag set in the control class.</p>
 depending on the control flags set in the control class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language code to be validated.</p>
+<dd class="field-odd"><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language code to be validated.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If ENSURE_VALID_LANG is enabled and the language tag is invalid.</p>

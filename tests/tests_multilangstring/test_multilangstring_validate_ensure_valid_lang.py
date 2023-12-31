@@ -27,7 +27,7 @@ def test_validate_ensure_valid_lang(lang, flag_state, is_valid_lang, expected_ex
     mls = MultiLangString()
 
     # Mocking the tag_is_valid function based on is_valid_lang
-    mls.tag_is_valid = lambda x: is_valid_lang
+    mls.tag_is_valid = lambda _: is_valid_lang
 
     # Directly accessing the protected method for testing purposes
     if expected_exception:

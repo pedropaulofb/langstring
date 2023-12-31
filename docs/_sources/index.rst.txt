@@ -1,5 +1,3 @@
-.. ontouml-py code documentation master file
-
 Welcome to langstring's code documentation!
 =============================================
 

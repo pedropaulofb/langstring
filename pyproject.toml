@@ -23,6 +23,7 @@ python = "^3.09"
 [tool.poetry.group.dev.dependencies]
 # General
 loguru = "^0.7.2"
+mypy = "^1.7.0"
 poetry = "^1.7.1"
 pre-commit = "^3.4.0"
 pytest = "^7.4.2"
@@ -66,20 +67,6 @@ min_confidence = 61
 [tool.mypy]
 exclude = ['tests']
 strict = true
-plugins = "pydantic.mypy"
-
-follow_imports = "silent"
-warn_redundant_casts = true
-warn_unused_ignores = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = true
-disallow_untyped_defs = true
-
-[tool.pydantic-mypy]
-init_forbid_extra = true
-init_typed = true
-warn_required_dynamic_aliases = true
 
 [tool.pylint]
 ignore-paths = '^(tests|docs|sphinx)'

@@ -39,7 +39,7 @@
             langstring
           </a>
               <div class="version">
-                1.1.1
+                2.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -128,7 +128,7 @@ applications with internationalization support, and data processing tools that h
 mls = MultiLangString(mls_dict)
 mls.add_entry(“Bonjour”, “fr”)
 print(mls.get_strings_lang(“en”))  # Output: [‘Hello’, ‘Good morning’]
-print(mls)  # Output: “<a class="reference external" href="mailto:'Hello'&#37;&#52;&#48;en">’Hello’<span>&#64;</span>en</a>, ‘Good <a class="reference external" href="mailto:morning'&#37;&#52;&#48;en">morning’<span>&#64;</span>en</a>, <a class="reference external" href="mailto:'Hola'&#37;&#52;&#48;es">‘Hola’<span>&#64;</span>es</a>, ‘Buenos días’&#64;es, <a class="reference external" href="mailto:'Bonjour'&#37;&#52;&#48;fr">‘Bonjour’<span>&#64;</span>fr</a>”</p>
+print(mls)  # Output: ‘“Hello”&#64;en, “Good morning”&#64;en, “Hola”&#64;es, “Buenos días”&#64;es, “Bonjour”fr’</p>
 </dd>
 </dl>
 <p>By providing a comprehensive set of methods for managing multilingual text, the MultiLangString class aims to simplify
@@ -509,7 +509,7 @@ dictionary of language strings and the preferred language, making it useful for 
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__str__">
 <span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__str__" title="Link to this definition"></a></dt>
 <dd><p>Return a string representation of the MultiLangString, including language tags.</p>
-<p>This method provides a concise string representation of the MultiLangString, listing each LangString with its
+<p>This method provides a concise string representation of the MultiLangString, listing each text entry with its
 associated language tag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>

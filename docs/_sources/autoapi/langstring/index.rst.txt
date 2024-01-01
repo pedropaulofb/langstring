@@ -92,7 +92,7 @@ Classes
 
       Define the string representation of the LangString object.
 
-      :return: The string representation of the LangString object. Format: '"text"@lang' or '"text"' if lang is None.
+      :return: The string representation of the LangString object. Format: '"text"@lang' or 'text' if lang is None.
       :rtype: str
 
 
@@ -404,7 +404,7 @@ Classes
 
       Return a string representation of the MultiLangString, including language tags.
 
-      This method provides a concise string representation of the MultiLangString, listing each LangString with its
+      This method provides a concise string representation of the MultiLangString, listing each text entry with its
       associated language tag.
 
       :return: A string representation of the MultiLangString with language tags.

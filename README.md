@@ -904,6 +904,8 @@ We appreciate your time and expertise in contributing to this project!
 
 ## Dependencies
 
+The LangString Python Library is designed with simplicity and ease of use in mind. To achieve this, we have minimized external dependencies. The library relies only on the [langcodes](https://pypi.org/project/langcodes/) package.
+
 This project can be set up using either Poetry or `requirements.txt`. Both are kept in sync to ensure consistency in dependencies.
 
 ### Using Poetry

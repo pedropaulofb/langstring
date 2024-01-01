@@ -38,48 +38,46 @@ For inquiries and further information, please refer to the [comprehensive docstr
     * [Installation and Use](#installation-and-use)
   * [LangStrings](#langstrings)
     * [LangStrings’ Methods](#langstrings-methods)
-      * [`__init__` Method](#init-method)
-      * [`to_string` Method](#tostring-method)
-      * [`__str__` Method](#str-method)
-      * [`__eq__` Method](#eq-method)
-      * [`__hash__` Method](#hash-method)
+      * [`__init__`](#init)
+      * [`to_string`](#tostring)
+      * [`__str__`](#str)
+      * [`__eq__`](#eq)
+      * [`__hash__`](#hash)
   * [MultiLangStrings](#multilangstrings)
     * [MultiLangStrings’ Methods](#multilangstrings-methods)
-      * [`__init__` Method](#init-method-1)
-      * [`add_entry` Method](#addentry-method)
-      * [`add_langstring` Method](#addlangstring-method)
-      * [`remove_entry` Method](#removeentry-method)
-      * [`remove_lang` Method](#removelang-method)
-      * [`get_langstring` Method](#getlangstring-method)
-      * [`get_langstrings_lang` Method](#getlangstringslang-method)
-      * [`get_langstrings_all` Method](#getlangstringsall-method)
-      * [`get_langstrings_pref_lang` Method](#getlangstringspreflang-method)
-      * [`get_strings_lang` Method](#getstringslang-method)
-      * [`get_strings_pref_lang` Method](#getstringspreflang-method)
-      * [`get_strings_all` Method](#getstringsall-method)
-      * [`get_strings_langstring_lang` Method](#getstringslangstringlang-method)
-      * [`get_strings_langstring_pref_lang` Method](#getstringslangstringpreflang-method)
-      * [`get_strings_langstring_all` Method](#getstringslangstringall-method)
-      * [`len_entries_all` Method](#lenentriesall-method)
-      * [`len_entries_lang` Method](#lenentrieslang-method)
-      * [`len_langs` Method](#lenlangs-method)
-      * [`__repr__` Method](#repr-method)
-      * [`__str__` Method](#str-method-1)
-      * [`__eq__` Method](#eq-method-1)
-      * [`__hash__` Method](#hash-method-1)
+      * [`__init__`](#init-1)
+      * [`add_entry`](#addentry)
+      * [`add_langstring`](#addlangstring)
+      * [`remove_entry`](#removeentry)
+      * [`remove_lang`](#removelang)
+      * [`get_langstring`](#getlangstring)
+      * [`get_langstrings_lang`](#getlangstringslang)
+      * [`get_langstrings_all`](#getlangstringsall)
+      * [`get_langstrings_pref_lang`](#getlangstringspreflang)
+      * [`get_strings_lang`](#getstringslang)
+      * [`get_strings_pref_lang`](#getstringspreflang)
+      * [`get_strings_all`](#getstringsall)
+      * [`get_strings_langstring_lang`](#getstringslangstringlang)
+      * [`get_strings_langstring_pref_lang`](#getstringslangstringpreflang)
+      * [`get_strings_langstring_all`](#getstringslangstringall)
+      * [`len_entries_all`](#lenentriesall)
+      * [`len_entries_lang`](#lenentrieslang)
+      * [`len_langs`](#lenlangs)
+      * [`__repr__`](#repr)
+      * [`__str__`](#str-1)
+      * [`__eq__`](#eq-1)
+      * [`__hash__`](#hash-1)
   * [Control and Flags](#control-and-flags)
     * [Flags](#flags)
       * [`ENSURE_TEXT`](#ensuretext)
       * [`ENSURE_ANY_LANG`](#ensureanylang)
       * [`ENSURE_VALID_LANG`](#ensurevalidlang)
-    * [Example Usage of Flags](#example-usage-of-flags)
     * [Control](#control)
-      * [`set_flag` Method](#setflag-method)
-      * [`get_flag` Method](#getflag-method)
-      * [`reset_flags` Method](#resetflags-method)
-      * [`print_flags` Method](#printflags-method)
-    * [LangString Control Examples](#langstring-control-examples)
-    * [MultiLangString Control Examples](#multilangstring-control-examples)
+      * [Control Methods](#control-methods)
+        * [`set_flag`](#setflag)
+        * [`get_flag`](#getflag)
+        * [`reset_flags`](#resetflags)
+        * [`print_flags`](#printflags)
   * [Code Testing](#code-testing)
   * [Version 2: Key Differences and Improvements](#version-2-key-differences-and-improvements)
   * [How to Contribute](#how-to-contribute)
@@ -761,23 +759,6 @@ ls = LangString("Hello", "invalid-lang-code")
 print("Created LangString with ENSURE_VALID_LANG=False:", ls)  # Expected Output: LangString object with an invalid language tag
 ```
 
-#### Example Usage of Flags
-
-```python
-from langstring import LangString, LangStringControl, LangStringFlag
-
-# Enabling the ENSURE_TEXT flag
-LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-
-# Attempting to create a LangString with an empty string will now raise an error
-try:
-    lang_str = LangString("")
-except ValueError as e:
-    print(f"Error: {e}")  # Outputs an error message
-```
-
-These flags provide a flexible way to customize the behavior of `LangString` and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed.
-
 ### Control
 
 The Control classes, namely `LangStringControl` and `MultiLangStringControl`, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of `LangString` and `MultiLangString`.
@@ -790,14 +771,17 @@ The `set_flag` method is used to enable or disable a specific flag for either La
 
 Example:
 
-- Enabling the ENSURE_TEXT flag for LangString:
-  ```python
-  LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-  ```
-- Disabling the ENSURE_VALID_LANG flag for MultiLangString:
-  ```python
-  MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
-  ```
+```python
+from langstring import LangStringControl, LangStringFlag
+
+# Setting a flag in LangStringControl
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+print("ENSURE_TEXT flag set to:", LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: True
+
+# Resetting the flag to a different value
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+print("ENSURE_TEXT flag reset to:", LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: False
+```
 
 ##### `get_flag`
 
@@ -805,16 +789,16 @@ The `get_flag` method retrieves the current state (enabled or disabled) of a spe
 
 Example:
 
-- Checking if ENSURE_TEXT is enabled for LangString:
-  ```python
-  is_text_ensured = LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-  print(is_text_ensured)  # Output: True or False
-  ```
-- Checking if ENSURE_VALID_LANG is enabled for MultiLangString:
-  ```python
-  is_valid_lang_enforced = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_VALID_LANG)
-  print(is_valid_lang_enforced)  # Output: True or False
-  ```
+```python
+from langstring import MultiLangStringControl, MultiLangStringFlag
+
+# Setting the ENSURE_TEXT flag to a known state
+MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
+
+# Retrieving the state of the ENSURE_TEXT flag in MultiLangStringControl
+is_ensure_text_enabled = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_TEXT)
+print("ENSURE_TEXT flag is:", is_ensure_text_enabled)  # Expected Output: False
+```
 
 ##### `reset_flags`
 
@@ -822,14 +806,22 @@ The `reset_flags` method resets all flags to their default values. This is parti
 
 Example:
 
-- Resetting all flags for LangString:
-  ```python
-  LangStringControl.reset_flags()
-  ```
-- Resetting all flags for MultiLangString:
-  ```python
-  MultiLangStringControl.reset_flags()
-  ```
+```python
+from langstring import LangStringControl, LangStringFlag
+
+# Setting the flags to a non-default state
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
+LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+
+# Resetting all flags to default in LangStringControl
+LangStringControl.reset_flags()
+print("Flags after reset:")
+LangStringControl.print_flags()  # Expected Output: Default states of all flags, as follows:
+# LangStringFlag.ENSURE_TEXT = True
+# LangStringFlag.ENSURE_ANY_LANG = False
+# LangStringFlag.ENSURE_VALID_LANG = False
+```
 
 ##### `print_flags`
 
@@ -837,57 +829,18 @@ The `print_flags` method prints the current state of all configuration flags to 
 
 Example:
 
-- Printing all flags for LangString:
-  ```python
-  LangStringControl.print_flags()
-  ```
-- Printing all flags for MultiLangString:
-  ```python
-  MultiLangStringControl.print_flags()
-  ```
-
-This section provides an overview of the control and flag system in the LangString Library, including how to use the control classes and their methods to manage the behavior of LangString and MultiLangString instances. The examples illustrate practical use cases for these methods.
-
-### LangString Control Examples
-
 ```python
-from langstring import LangString, LangStringControl, LangStringFlag
+from langstring import MultiLangStringControl
 
-# Example: Enabling the ENSURE_TEXT flag
-LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-
-# Trying to create a LangString with an empty string (will raise ValueError due to ENSURE_TEXT)
-try:
-    empty_string_lang = LangString("")
-except ValueError as e:
-    print(f"Error: {e}")
-
-# Checking if the ENSURE_TEXT flag is enabled
-is_ensure_text_enabled = LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-print(f"ENSURE_TEXT flag is enabled: {is_ensure_text_enabled}")
-
-# Resetting all flags to default
-LangStringControl.reset_flags()
-```
-
-### MultiLangString Control Examples
-
-```python
-from langstring import MultiLangString, MultiLangStringControl, MultiLangStringFlag
-
-# Example: Disabling the ENSURE_VALID_LANG flag
-MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
-
-# Creating a MultiLangString instance with an invalid language code (no error due to flag being disabled)
-mls = MultiLangString({"xx": {"Hello"}})
-print(f"Created MultiLangString: {mls}")
-
-# Checking the current state of the ENSURE_VALID_LANG flag
-is_valid_lang_enforced = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_VALID_LANG)
-print(f"ENSURE_VALID_LANG flag is set to: {is_valid_lang_enforced}")
-
-# Resetting all flags to default for MultiLangString
+# Resetting flags to ensure a known state
 MultiLangStringControl.reset_flags()
+
+# Printing the current state of all configuration flags in MultiLangStringControl
+print("Current flag states in MultiLangStringControl:")
+MultiLangStringControl.print_flags()  # Expected Output: Default states of all flags, as follows:
+# MultiLangStringFlag.ENSURE_TEXT = True
+# MultiLangStringFlag.ENSURE_ANY_LANG = False
+# MultiLangStringFlag.ENSURE_VALID_LANG = False
 ```
 
 ## Code Testing

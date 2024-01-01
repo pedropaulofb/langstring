@@ -733,7 +733,7 @@ print("Added entry with ENSURE_ANY_LANG=False:", mls)  # Expected Output: MultiL
 
 #### `ENSURE_VALID_LANG`
 
-This flag ensures that the language tags used in `LangString` or `MultiLangString` are valid according to standard language codes (e.g., ISO 639-1). When enabled, creating a `LangString` or adding an entry to `MultiLangString` with an invalid language tag results in a `ValueError`. This flag is essential for maintaining consistency and accuracy in language-specific data.
+This flag ensures that the language tags used in `LangString` or `MultiLangString` are valid according to standard language codes (e.g., ISO 639-1).The LangString Library uses the [langcodes package](https://pypi.org/project/langcodes/) to validate language tags. When enabled, creating a `LangString` or adding an entry to `MultiLangString` with an invalid language tag results in a `ValueError`. This flag is essential for maintaining consistency and accuracy in language-specific data.
 
 Has `False` by default, indicating that the library does not enforce the validity of language tags.
 
@@ -904,7 +904,9 @@ We appreciate your time and expertise in contributing to this project!
 
 ## Dependencies
 
-The LangString Python Library is designed with simplicity and ease of use in mind. To achieve this, we have minimized external dependencies. The library relies only on the [langcodes](https://pypi.org/project/langcodes/) package.
+The LangString Python Library is designed with simplicity and ease of use in mind. To achieve this, we have minimized external dependencies.
+
+The LangString Library depends only on the [langcodes package](https://pypi.org/project/langcodes/), particularly for validating language tags when the `ENSURE_VALID_LANG` flag is enabled. This dependency is crucial for ensuring that language tags used in `LangString` and `MultiLangString` instances are valid and conform to international standards, thereby maintaining the integrity and reliability of multilingual text processing.
 
 This project can be set up using either Poetry or `requirements.txt`. Both are kept in sync to ensure consistency in dependencies.
 

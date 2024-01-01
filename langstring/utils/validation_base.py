@@ -25,7 +25,7 @@ from typing import Optional
 from typing import TYPE_CHECKING
 from typing import Union
 
-from langcodes import tag_is_valid
+from langcodes import tag_is_valid  # type: ignore
 
 if TYPE_CHECKING:
     from ..langstring_control import LangStringControl, LangStringFlag

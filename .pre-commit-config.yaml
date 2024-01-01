@@ -77,7 +77,7 @@ repos:
     hooks:
     -   id: mypy
         args: [ -p=langstring ]
-        language: system
+        language: python
         types: [ python ]
         pass_filenames: false
   - repo: https://github.com/pycqa/pydocstyle

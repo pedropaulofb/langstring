@@ -174,16 +174,17 @@ from langstring import LangString, MultiLangString, LangStringControl, LangStrin
 
 The `LangString` class is a fundamental component of the LangString Library, designed to encapsulate a single string along with its associated language information. It is primarily used in scenarios where the language context of a text string is crucial, such as in multilingual applications, content management systems, or any software that deals with language-specific data. The class provides a structured way to manage text strings, ensuring that each piece of text is correctly associated with its respective language.
 
+In the LangString class, the string representation format varies based on the presence of a language tag. When a language tag is provided, the format is `text`. Without a language tag, it is formatted as `"text"@lang`, where lang is the language code.
+
 ### LangStrings’ Methods
 
 The `LangString` class offers a range of methods to efficiently handle language-specific text. These methods enable the initialization, representation, comparison, and validation of text strings in their language context.
 
-#### `__init__` Method
+#### `__init__`
 
-**Description**:
-The `__init__` method initializes a new LangString object. It accepts `text`, the string to be encapsulated, and an optional `lang` parameter, which is the language tag associated with the text. This method is essential for creating LangString instances, tying the text to its language context.
+Initializes a new LangString object, encapsulating a given text string with an associated language tag. The `text` parameter is the string to be encapsulated, and `lang` is an optional parameter specifying the language tag (e.g., 'en' for English). This method forms the core of the LangString class, allowing for the creation of language-aware string objects.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -191,19 +192,18 @@ from langstring import LangString
 
 # Creating a LangString instance without a language tag
 greeting = LangString("Hello")
-print(greeting)  # Expected Output: '"Hello"'
+print(greeting)  # Expected Output: Hello
 
 # Creating a LangString instance with a language tag
 french_greeting = LangString("Bonjour", "fr")
-print(french_greeting)  # Expected Output: '"Bonjour"@fr'
+print(french_greeting)  # Expected Output: "Bonjour"@fr
 ```
 
-#### `to_string` Method
+#### `to_string`
 
-**Description**:
-The `to_string` method converts the LangString object into a string representation, including the language tag if present. This method is useful for displaying or logging the content of a LangString object in a human-readable format.
+Converts the LangString object into a human-readable string representation, including the language tag if present. This method is particularly useful for displaying or logging LangString objects, providing a clear and concise view of their content and associated language.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -211,14 +211,14 @@ from langstring import LangString
 
 # Creating and printing a LangString instance
 greeting = LangString("Hello", "en")
-print(greeting.to_string())  # Expected Output: '"Hello"@en'
+print(greeting.to_string())  # Expected Output: "Hello"@en
 ```
 
 #### `__str__`
 
-The `__str__` method defines how a LangString object is converted to a string, typically used when the object is printed. It returns the text string, optionally followed by the language tag.
+Defines how the LangString object is represented as a string when printed or converted to a string. This method returns the encapsulated text, optionally followed by the language tag, providing a standard way to view and understand the LangString's content.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -226,14 +226,14 @@ from langstring import LangString
 
 # Creating and printing a LangString instance
 greeting = LangString("Hello", "en")
-print(greeting)  # Expected Output: '"Hello"@en'
+print(greeting)  # Expected Output: "Hello"@en
 ```
 
-#### `__eq__` Method
+#### `__eq__`
 
-The `__eq__` method checks the equality of the LangString object with another object. It compares both the text and the language tag to determine if two LangString objects are the same.
+Determines whether two LangString objects are equal by comparing both their text and language tags. This method is essential for identifying identical language-specific strings, ensuring accurate comparisons in contexts like sorting, filtering, or deduplication.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -251,9 +251,9 @@ print(greeting_en1 == greeting_es)  # Expected Output: False
 
 #### `__hash__`
 
-The `__hash__` method generates a hash value for the LangString object. This is particularly useful when LangString objects need to be used in hash-based collections like sets or dictionaries.
+Generates a unique hash value for the LangString object, enabling its use in hash-based collections like sets or dictionaries. This method ensures that LangString objects can be efficiently stored and retrieved in data structures that rely on hashing.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -272,11 +272,13 @@ The `MultiLangString` class is a key component of the LangString Library, design
 
 The `MultiLangString` class provides a suite of methods to facilitate the management of multilingual text. These methods enable the addition, removal, retrieval, and manipulation of text entries in multiple languages, as well as setting and getting a preferred language for default text retrieval.
 
+For MultiLangString instances, the string representation also depends on whether a language tag is associated with each text entry. Entries without a language tag are simply displayed as `text`. Entries with a language tag are presented in the format `"text"@lang`, clearly indicating their language context.
+
 #### `__init__`
 
-The `__init__` method initializes a new MultiLangString object. It accepts an optional dictionary (`mls_dict`) representing the internal structure of the MultiLangString, where keys are language codes and values are sets of text entries. It also accepts a `pref_lang` parameter for setting the preferred language.
+Initializes a new MultiLangString object, optionally accepting a dictionary (`mls_dict`) representing the internal structure, where keys are language codes and values are sets of text entries. The `pref_lang` parameter sets the preferred language for default text retrieval. This method lays the foundation for managing and manipulating multilingual text strings.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -284,7 +286,7 @@ from langstring import MultiLangString
 
 # Initializing with a dictionary
 mls = MultiLangString({"en": {"Hello", "Good morning"}})
-print(mls)  # Expected Output: 'Good morning'@en, 'Hello'@en
+print(mls)  # Expected Output: "Good morning"@en, "Hello"@en
 
 # Initializing with a preferred language
 mls = MultiLangString(pref_lang="en")
@@ -292,7 +294,7 @@ print(mls)  # Expected Output: nothing, as the created MultiLangString is empty.
 
 # Initializing MultiLangString with a dictionary and a preferred language
 mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}, pref_lang="en")
-print(mls)  # Expected Output: '"Hello"@en, "Good morning"@en, "Hola"@es, "Buenos días"@es'
+print(mls)  # Expected Output: "Hello"@en, "Good morning"@en, "Hola"@es, "Buenos días"@es
 
 # Printing the preferred language
 print("Preferred language:", mls.preferred_lang)  # Expected Output: Preferred language: en
@@ -300,13 +302,13 @@ print("Preferred language:", mls.preferred_lang)  # Expected Output: Preferred l
 
 #### `add_entry`
 
-The `add_entry` method adds a text entry to the MultiLangString under a specified language. It ensures that the text and language comply with the set control flags.
+Adds a new text entry to the MultiLangString under a specified language code. This method ensures that the added text complies with the set control flags, such as non-empty strings or valid language tags, facilitating the dynamic and controlled addition of multilingual content.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary classes
-from langstring import MultiLangString, LangString
+from langstring import MultiLangString
 
 # Initialize MultiLangString with multiple languages
 mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}})
@@ -319,9 +321,9 @@ print(mls.get_strings_all())  # Expected Output: ['Hello', 'Good morning', 'Hola
 
 #### `add_langstring`
 
-This method adds a LangString object to the MultiLangString, allowing for the integration of LangString instances directly.
+Incorporates a LangString object directly into the MultiLangString, allowing for the seamless integration of pre-existing LangString instances. This method enhances the flexibility of MultiLangString by enabling the addition of language-specific strings already encapsulated in LangString objects.
 
-**Examples**:
+Example:
 
 
 ```python
@@ -331,16 +333,14 @@ from langstring import MultiLangString, LangString
 # Initialize MultiLangString and add a LangString
 mls = MultiLangString()
 mls.add_langstring(LangString("Hola", "es"))
-print(mls)  # Expected Output: 'Hola'@es
+print(mls)  # Expected Output: "Hola"@es
 ```
 
 #### `remove_entry`
 
-The `remove_entry` method removes a specific text entry from a given language in the MultiLangString.
+Removes a specified text entry from the set associated with a given language in the MultiLangString. If the removal results in an empty set for that language, the language key is also removed from the internal dictionary, maintaining the integrity of the multilingual data.
 
-In `MultiLangString`, when the last entry of a specific language is removed using the `remove_entry` method, the key corresponding to that language is also removed from the internal dictionary (`mls_dict`). This behavior ensures that the dictionary only contains languages with at least one text entry.
-
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -351,11 +351,11 @@ mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos d
 
 # Remove an entry in English
 mls.remove_entry("Good morning", "en")
-print(mls)  # Expected Output: '"Hello"@en, "Hola"@es, "Buenos días"@es'
+print(mls)  # Expected Output: "Hello"@en, "Hola"@es, "Buenos días"@es
 
 # Remove the last entry in English
 mls.remove_entry("Hello", "en")
-print(mls)  # Expected Output: '"Hola"@es, "Buenos días"@es'
+print(mls)  # Expected Output: "Hola"@es, "Buenos días"@es
 
 # Check if the 'en' key is still present in the dictionary
 print("en" in mls.mls_dict)  # Expected Output: False (The key 'en' is no longer in the dictionary)
@@ -363,9 +363,9 @@ print("en" in mls.mls_dict)  # Expected Output: False (The key 'en' is no longer
 
 #### `remove_lang`
 
-This method removes all entries of a given language from the MultiLangString.
+Eliminates all text entries associated with a specific language from the MultiLangString. This method is useful for scenarios where an entire language's content needs to be cleared, ensuring that the MultiLangString only contains relevant and active language data.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -374,14 +374,14 @@ from langstring import MultiLangString
 # Initialize MultiLangString and remove a language
 mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}})
 mls.remove_lang("en")
-print(mls)  # Expected Output: 'Hola'@es, 'Buenos días'@es
+print(mls)  # Expected Output: "Hola"@es, "Buenos días"@es
 ```
 
 #### `get_langstring`
 
-The `get_langstring` method retrieves a LangString object for a specific text and language combination from the MultiLangString.
+Retrieves a LangString object representing a specific text and language combination from the MultiLangString. This method is crucial for accessing individual language-specific strings within the MultiLangString, allowing users to work with or manipulate these strings as separate LangString instances.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -390,14 +390,14 @@ from langstring import MultiLangString
 # Initialize MultiLangString and retrieve a LangString
 mls = MultiLangString({"en": {"Hello", "Good morning"}})
 lang_str = mls.get_langstring("Hello", "en")
-print(lang_str)  # Expected Output: '"Hello"@en'
+print(lang_str)  # Expected Output: "Hello"@en
 ```
 
 #### `get_langstrings_lang`
 
-This method retrieves a list of LangStrings for a given language from the MultiLangString.
+Generates a list of LangString objects for all text entries associated with a specified language in the MultiLangString. This method is ideal for extracting all language-specific strings as separate LangString instances, facilitating operations like language-based filtering or processing.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -411,11 +411,9 @@ print(', '.join(str(elem) for elem in lang_strings)) # Expected Output: "Hello"@
 
 #### `get_langstrings_all`
 
-The `get_langstrings_all` method retrieves a list of all LangStrings in the MultiLangString.
+Compiles a comprehensive list of all LangString objects contained within the MultiLangString, covering every language and text entry. This method provides a complete overview of the multilingual content, useful for scenarios requiring a full audit or export of the stored data.
 
-**Examples**:
-
-- Retrieving all LangStrings
+Example:
 
 ```python
 # Import necessary class
@@ -429,9 +427,9 @@ print(', '.join(str(elem) for elem in all_lang_strings))  # Expected Output: "He
 
 #### `get_langstrings_pref_lang`
 
-This method retrieves a list of LangStrings for the preferred language set in the MultiLangString.
+Fetches all LangString objects corresponding to the preferred language set in the MultiLangString. This method streamlines access to the most relevant or frequently used language, simplifying tasks like default content display or language-specific analyses.
 
-**Examples**:
+Example:
 
 ```python
 # Import necessary class
@@ -445,11 +443,9 @@ print(', '.join(str(elem) for elem in pref_lang_strings))  # Expected Output: "H
 
 #### `get_strings_lang`
 
-The `get_strings_lang` method retrieves all text entries for a specific language from the MultiLangString.
+Returns a list of all text strings associated with a particular language code in the MultiLangString. This method is useful for scenarios where only the text content (without language tags) is needed for a specific language, such as generating language-specific reports or content.
 
-**Examples**:
-
-- Retrieving text entries for a language
+Example:
 
 ```python
 # Import necessary class
@@ -463,157 +459,202 @@ print(texts)  # Expected Output: ['Hello', 'Good morning']
 
 #### `get_strings_pref_lang`
 
-This method retrieves all text entries for the preferred language in the MultiLangString.
+Gathers all text entries corresponding to the preferred language in the MultiLangString. This method is particularly beneficial for applications where a default language is frequently accessed, providing quick retrieval of all relevant text content.
 
-**Examples**:
-
-- Retrieving text entries for the preferred language
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve text entries for the preferred language
+mls = MultiLangString({"en": {"Hello", "Good morning"}}, pref_lang="en")
 pref_texts = mls.get_strings_pref_lang()
+print(pref_texts)  # Expected Output: ['Hello', 'Good morning']
 ```
 
 #### `get_strings_all`
 
-The `get_strings_all` method retrieves all text entries across all languages in the MultiLangString.
+Collects every text entry from every language present in the MultiLangString. This method offers a complete aggregation of the multilingual content, ideal for comprehensive data analysis or creating a full backup of the text data.
 
-**Examples**:
-
-- Retrieving all text entries
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve all text entries
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 all_texts = mls.get_strings_all()
+print(all_texts)  # Expected Output: ['Hello', 'Good morning']
 ```
 
 #### `get_strings_langstring_lang`
 
-This method retrieves all text entries for a specific language, formatted as '"text"@lang', from the MultiLangString.
+Produces a list of formatted text entries for a specified language, with each entry followed by its language tag. This method is valuable for presenting or exporting language-specific data in a format that explicitly includes the language context.
 
-**Examples**:
-
-- Retrieving formatted text entries for a language
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve formatted text entries for a language
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 formatted_texts = mls.get_strings_langstring_lang("en")
+print(formatted_texts)  # Expected Output: ['"Good morning"@en', '"Hello"@en']
 ```
 
 #### `get_strings_langstring_pref_lang`
 
-The `get_strings_langstring_pref_lang` method retrieves all text entries for the preferred language, formatted as '"text"@lang'.
+Generates a list of formatted text entries for the preferred language, each accompanied by the language tag. This method simplifies the process of accessing and displaying the default language content in a format that maintains language awareness.
 
-**Examples**:
-
-- Retrieving formatted text entries for the preferred language
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve formatted text entries for the preferred language
+mls = MultiLangString({"en": {"Hello", "Good morning"}}, pref_lang="en")
 formatted_pref_texts = mls.get_strings_langstring_pref_lang()
+print(formatted_pref_texts)  # Expected Output: ['"Hello"@en', '"Good morning"@en']
 ```
 
 #### `get_strings_langstring_all`
 
-This method retrieves all text entries across all languages, formatted as '"text"@lang', in the MultiLangString.
+Compiles a comprehensive list of all text entries from the MultiLangString, each formatted with its respective language tag. This method is ideal for creating detailed reports or exports where maintaining the association between text and language is crucial.
 
-**Examples**:
-
-- Retrieving all formatted text entries
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and retrieve all formatted text entries
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 all_formatted_texts = mls.get_strings_langstring_all()
+print(all_formatted_texts)  # Expected Output: ['"Hello"@en', '"Good morning"@en']
 ```
 
 #### `len_entries_all`
 
-The `len_entries_all` method calculates the total number of text entries across all languages in the MultiLangString.
+Calculates the total number of text entries across all languages within the MultiLangString. This method provides a quick way to assess the volume of multilingual content stored, useful for data management and analysis purposes.
 
-**Examples**:
-
-- Getting the total number of entries
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and get the total number of entries
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 total_entries = mls.len_entries_all()
+print(total_entries)  # Expected Output: 2
 ```
 
 #### `len_entries_lang`
 
-This method calculates the number of text entries for a specific language in the MultiLangString.
+Determines the number of text entries associated with a specific language in the MultiLangString. This method is useful for evaluating the extent of content available in a particular language, aiding in language-specific content planning and analysis.
 
-**Examples**:
-
-- Getting the number of entries for a language
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and get the number of entries for a language
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 num_entries = mls.len_entries_lang("en")
+print(num_entries)  # Expected Output: 2
 ```
 
 #### `len_langs`
 
-The `len_langs` method calculates the number of distinct languages represented in the MultiLangString.
+Counts the number of distinct languages represented in the MultiLangString. This method is essential for understanding the linguistic diversity of the stored content, providing insights into the range of languages covered in the multilingual data.
 
-**Examples**:
-
-- Getting the number of languages
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and get the number of languages
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
 num_languages = mls.len_langs()
+print(num_languages)  # Expected Output: 1
 ```
 
 #### `__repr__`
 
-The `__repr__` method returns a detailed string representation of the MultiLangString object, including the full dictionary of language strings and the preferred language.
+Provides a detailed and unambiguous string representation of the MultiLangString object, including its internal dictionary structure and the preferred language. This method is particularly useful for debugging and logging purposes, as it gives a clear snapshot of the object's current state, showing all its contents and configurations in a format that is helpful for developers.
 
-**Examples**:
-
-- Printing the representation
+Example:
 
 ```python
-print(mls.__repr__())
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and print its representation
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
+print(mls.__repr__())  # Expected Output: MultiLangString({'en': {'Hello', 'Good morning'}}, pref_lang='en')
 ```
 
 #### `__str__`
 
-The `__str__` method defines the string representation of the MultiLangString, listing each text entry with its associated language tag.
+Generates a user-friendly string representation of the MultiLangString object, listing each text entry along with its associated language tag. This method is designed for readability and ease of understanding, making it suitable for displaying the multilingual content in a concise and clear format. It's particularly useful for user interfaces, reports, or any scenario where a straightforward overview of the multilingual data is needed.
 
-**Examples**:
-
-- Printing the MultiLangString
+Example:
 
 ```python
-print(mls)
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and print it
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
+print(mls)  # Expected Output: "Good morning"@en, "Hello"@en
+# Adding new entry without language tag and printing the result
+mls.add_entry("Olá")
+print(mls)  # Expected Output: "Good morning"@en, "Hello"@en, Olá
 ```
 
 #### `__eq__`
 
-The `__eq__` method checks the equality of the MultiLangString object with another object based on the `mls_dict` attribute.
+Determines whether two MultiLangString objects are equal by comparing their internal dictionaries (`mls_dict`). This method is crucial for assessing the equivalence of multilingual content, ignoring the preferred language settings. It ensures that two MultiLangString instances are considered equal only if they contain the same set of language strings, making it a vital tool for data comparison and deduplication processes.
 
-**Examples**:
-
-- Comparing two MultiLangStrings
+Example:
 
 ```python
+# Import necessary class
+from langstring import MultiLangString
+
 # Create two MultiLangString instances with the same content but different preferred languages
 mls1 = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}, pref_lang="en")
 mls2 = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}, pref_lang="es")
 
 # Despite having different preferred languages, they are considered equal because their content (mls_dict) is the same
-print(mls1 == mls2)  # Output: True
+print(mls1 == mls2)  # Expected Output: True
 
 # Change the content of mls2
 mls2.add_entry("Bonjour", "fr")
 
 # Now mls1 and mls2 are not equal because their content differs
-print(mls1 == mls2)  # Output: False
+print(mls1 == mls2)  # Expected Output: False
 ```
 
 #### `__hash__`
 
-The `__hash__` method generates a hash value for the MultiLangString object based on its `mls_dict` attribute.
+Computes a unique hash value for the MultiLangString object based on its internal dictionary of language strings. This method enables the use of MultiLangString instances in hash-based data structures like sets and dictionaries. By providing a consistent hash value, it ensures that MultiLangString objects can be efficiently used as keys or stored in collections that rely on hashing mechanisms.
 
-**Examples**:
-
-- Generating a hash value
+Example:
 
 ```python
-print(hash(mls))
+# Import necessary class
+from langstring import MultiLangString
+
+# Initialize MultiLangString and generate a hash value
+mls = MultiLangString({"en": {"Hello", "Good morning"}})
+print(hash(mls))  # Expected Output: (hash value, e.g., 3786478500744739392)
 ```
 
 ## Control and Flags
@@ -676,7 +717,7 @@ The Control classes, namely `LangStringControl` and `MultiLangStringControl`, ac
 
 The `set_flag` method is used to enable or disable a specific flag for either LangString or MultiLangString. This method allows for dynamic configuration of behavior, such as enforcing non-empty text or valid language tags.
 
-**Examples**:
+Example:
 
 - Enabling the ENSURE_TEXT flag for LangString:
   ```python
@@ -691,7 +732,7 @@ The `set_flag` method is used to enable or disable a specific flag for either La
 
 The `get_flag` method retrieves the current state (enabled or disabled) of a specified flag. It is useful for checking the configuration status of LangString or MultiLangString instances.
 
-**Examples**:
+Example:
 
 - Checking if ENSURE_TEXT is enabled for LangString:
   ```python
@@ -708,7 +749,7 @@ The `get_flag` method retrieves the current state (enabled or disabled) of a spe
 
 The `reset_flags` method resets all flags to their default values. This is particularly useful for restoring the default behavior after temporary changes to the configuration flags.
 
-**Examples**:
+Example:
 
 - Resetting all flags for LangString:
   ```python
@@ -723,7 +764,7 @@ The `reset_flags` method resets all flags to their default values. This is parti
 
 The `print_flags` method prints the current state of all configuration flags to the console. It is a convenient tool for debugging or monitoring the current flag settings.
 
-**Examples**:
+Example:
 
 - Printing all flags for LangString:
   ```python

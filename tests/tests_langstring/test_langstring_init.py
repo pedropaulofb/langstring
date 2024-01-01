@@ -59,7 +59,7 @@ def test_very_long_string() -> None:
     long_string = "a" * 10000  # 10,000 characters
     ls = LangString(long_string)
     assert ls.text == long_string, f"Unexpected text: {ls.text}"
-    assert ls.to_string() == f'"{long_string}"', f"Unexpected string representation: {ls.to_string()}"
+    assert ls.to_string() == f"{long_string}", f"Unexpected string representation: {ls.to_string()}"
 
 
 def test_no_warning_on_valid_language_tag() -> None:

@@ -10,7 +10,7 @@ from langstring import LangStringFlag
 def test_to_string() -> None:
     """Test the to_string method to ensure it returns the correct string representation of the LangString object."""
     ls = LangString("hello")
-    assert ls.to_string() == '"hello"', f'Expected to_string() to return "hello", but got {ls.to_string()}'
+    assert ls.to_string() == "hello", f"Expected to_string() to return 'hello', but got {ls.to_string()}"
 
 
 def test_to_string_invalid_argument() -> None:
@@ -56,7 +56,7 @@ def test_langstring_string_representation() -> None:
     lang_str1 = LangString("Hello", "en")
     lang_str2 = LangString("Hello", None)
     assert str(lang_str1) == '"Hello"@en', "String representation with language should be correct"
-    assert str(lang_str2) == '"Hello"', "String representation without language should be correct"
+    assert str(lang_str2) == "Hello", "String representation without language should be correct"
 
 
 def test_to_string_with_different_flag_settings() -> None:

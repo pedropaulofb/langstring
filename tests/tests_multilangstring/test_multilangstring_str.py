@@ -14,7 +14,7 @@ def test_str_for_multilangstring_with_content():
     Test the __str__ method for a MultiLangString object with content.
     """
     mls = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
-    expected_str = "'Hello'@en, 'Bonjour'@fr"  # Adjusted to single quotes
+    expected_str = '"Hello"@en, "Bonjour"@fr'  # Adjusted to single quotes
     assert str(mls) == expected_str, "The __str__ output should match the expected format with content"
 
 
@@ -24,7 +24,7 @@ def test_str_for_multilangstring_with_multiple_entries_per_language():
     """
     mls = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour", "Salut"}})
     result_str = str(mls)
-    expected_entries = {"'Hello'@en", "'Hi'@en", "'Bonjour'@fr", "'Salut'@fr"}
+    expected_entries = {'"Hello"@en', '"Hi"@en', '"Bonjour"@fr', '"Salut"@fr'}
     result_entries = set(result_str.split(", "))
     assert (
         result_entries == expected_entries

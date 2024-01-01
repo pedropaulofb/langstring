@@ -38,7 +38,7 @@ Example:
     mls = MultiLangString(mls_dict)
     mls.add_entry("Bonjour", "fr")
     print(mls.get_strings_lang("en"))  # Output: ['Hello', 'Good morning']
-    print(mls)  # Output: "'Hello'@en, 'Good morning'@en, 'Hola'@es, 'Buenos días'@es, 'Bonjour'@fr"
+    print(mls)  # Output: '"Hello"@en, "Good morning"@en, "Hola"@es, "Buenos días"@es, "Bonjour"fr'
 
 By providing a comprehensive set of methods for managing multilingual text, the MultiLangString class aims to simplify
 the development of multilingual applications and facilitate the handling of text in multiple languages.
@@ -347,15 +347,20 @@ class MultiLangString(ValidationBase):
     def __str__(self) -> str:
         """Return a string representation of the MultiLangString, including language tags.
 
-        This method provides a concise string representation of the MultiLangString, listing each LangString with its
+        This method provides a concise string representation of the MultiLangString, listing each text entry with its
         associated language tag.
 
         :return: A string representation of the MultiLangString with language tags.
         :rtype: str
         """
-        return ", ".join(
-            f"{repr(langstring)}@{lang}" for lang, langstrings in self.mls_dict.items() for langstring in langstrings
-        )
+        entries = []
+        for lang, texts in self.mls_dict.items():
+            for text in texts:
+                if lang:  # If there is a language tag
+                    entries.append(f'"{text}"@{lang}')
+                else:  # If there is no language tag
+                    entries.append(text)
+        return ", ".join(entries)
 
     def __eq__(self, other: object) -> bool:
         """Check equality of this MultiLangString with another MultiLangString.

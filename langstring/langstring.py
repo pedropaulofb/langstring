@@ -84,11 +84,11 @@ class LangString(ValidationBase):
     def __str__(self) -> str:
         """Define the string representation of the LangString object.
 
-        :return: The string representation of the LangString object. Format: '"text"@lang' or '"text"' if lang is None.
+        :return: The string representation of the LangString object. Format: '"text"@lang' or 'text' if lang is None.
         :rtype: str
         """
         if self.lang is None:
-            return f'"{self.text}"'
+            return f"{self.text}"
         return f'"{self.text}"@{self.lang}'
 
     def __eq__(self, other: object) -> bool:

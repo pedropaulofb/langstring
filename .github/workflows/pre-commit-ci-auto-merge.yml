@@ -31,4 +31,4 @@ jobs:
               pull_number: context.issue.number,
               merge_method: 'squash' # Other options are: 'merge' or 'rebase'
             })
-          github-token: ${{ secrets.SECRET_AUTO_MERGE }}
+          github-token: ${{ secrets.AUTO_MERGE_LANGSTRING_PRE_COMMIT_CI }}

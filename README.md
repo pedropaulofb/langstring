@@ -669,28 +669,99 @@ The control methods, shared between `LangStringControl` and `MultiLangStringCont
 
 ### Flags
 
-The LangString and MultiLangString classes use a set of flags to control various aspects of their behavior. These flags are managed by `LangStringControl` and `MultiLangStringControl` respectively. The available flags and their effects are as follows:
+The LangString and MultiLangString classes use a set of flags to control various aspects of their behavior. These flags are managed by `LangStringControl` and `MultiLangStringControl` respectively. The flags provide a flexible way to customize the behavior of `LangString` and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed. The available flags and their effects are as follows.
 
 #### `ENSURE_TEXT`
-- **Description**: This flag ensures that the text provided to `LangString` or `MultiLangString` is not empty.
-- **Effect**: When set to `True`, attempting to create a `LangString` or add an entry to `MultiLangString` with an empty string will raise a `ValueError`. This is useful for enforcing the presence of meaningful content.
-- **Default Value**: `True`. By default, the library requires that text strings are not empty.
+
+This flag ensures that the text provided to `LangString` or `MultiLangString` is not empty. When set to `True`, attempting to create a `LangString` or add an entry to `MultiLangString` with an empty string will raise a `ValueError`. This is useful for enforcing the presence of meaningful content.
+
+By default, the library has `True` as default value, indicating that it requires that text strings are not empty.
+
+Example:
+
+```python
+from langstring import LangString, LangStringControl, LangStringFlag
+
+# Enabling the ENSURE_TEXT flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+
+# Attempting to create a LangString with an empty string will raise an error
+try:
+    LangString("", "en")
+except ValueError as e:
+    print("Error with ENSURE_TEXT=True:", e)  # Expected Output: Error message about empty text
+
+# Disabling the ENSURE_TEXT flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+
+# Creating a LangString with an empty string will now succeed
+try:
+    ls = LangString("", "en")
+    print("Created LangString with ENSURE_TEXT=False:", ls)  # Expected Output: LangString object with empty text
+except ValueError as e:
+    print("Error with ENSURE_TEXT=False:", e)
+```
 
 
 #### `ENSURE_ANY_LANG`
-- **Description**: This flag mandates the presence of a language tag in `LangString` or `MultiLangString`.
-- **Effect**: If `True`, a `ValueError` is raised when a `LangString` is created or an entry is added to `MultiLangString` without a language tag. This flag is beneficial for scenarios where language context is crucial.
-- **Default Value**: `False`. By default, the library does not require a language tag to be present.
+
+This flag mandates the presence of a language tag in `LangString` or `MultiLangString`. If `True`, a `ValueError` is raised when a `LangString` is created or an entry is added to `MultiLangString` without a language tag. This flag is beneficial for scenarios where language context is crucial.
+
+Has `False` by default, indicating that the library does not require a language tag to be present.
+
+Example
+
+```python
+from langstring import MultiLangString, MultiLangStringControl, MultiLangStringFlag
+
+# Enabling the ENSURE_ANY_LANG flag
+MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_ANY_LANG, True)
+
+# Attempting to add an entry to MultiLangString without a language tag will raise an error
+mls = MultiLangString()
+try:
+    mls.add_entry("Hello")
+except ValueError as e:
+    print("Error with ENSURE_ANY_LANG=True:", e)  # Expected Output: Error message about missing language tag
+
+# Disabling the ENSURE_ANY_LANG flag
+MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_ANY_LANG, False)
+
+# Adding an entry without a language tag will now succeed
+mls.add_entry("Hello")
+print("Added entry with ENSURE_ANY_LANG=False:", mls)  # Expected Output: MultiLangString object with the entry without a language tag
+```
 
 
 #### `ENSURE_VALID_LANG`
-- **Description**: This flag ensures that the language tags used in `LangString` or `MultiLangString` are valid according to standard language codes (e.g., ISO 639-1).
-- **Effect**: When enabled, creating a `LangString` or adding an entry to `MultiLangString` with an invalid language tag results in a `ValueError`. This flag is essential for maintaining consistency and accuracy in language-specific data.
-- **Default Value**: `False`. By default, the library does not enforce the validity of language tags.
 
-These flags provide a flexible way to customize the behavior of `LangString` and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed.
+This flag ensures that the language tags used in `LangString` or `MultiLangString` are valid according to standard language codes (e.g., ISO 639-1). When enabled, creating a `LangString` or adding an entry to `MultiLangString` with an invalid language tag results in a `ValueError`. This flag is essential for maintaining consistency and accuracy in language-specific data.
 
-### Example Usage of Flags
+Has `False` by default, indicating that the library does not enforce the validity of language tags.
+
+Example:
+
+```python
+from langstring import LangStringControl, LangStringFlag, LangString
+
+# Enabling the ENSURE_VALID_LANG flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+
+# Attempting to create a LangString with an invalid language tag will raise an error
+try:
+    LangString("Hello", "invalid-lang-code")
+except ValueError as e:
+    print("Error with ENSURE_VALID_LANG=True:", e)  # Expected Output: Error message about invalid language tag
+
+# Disabling the ENSURE_VALID_LANG flag
+LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
+
+# Creating a LangString with an invalid language tag will now succeed
+ls = LangString("Hello", "invalid-lang-code")
+print("Created LangString with ENSURE_VALID_LANG=False:", ls)  # Expected Output: LangString object with an invalid language tag
+```
+
+#### Example Usage of Flags
 
 ```python
 from langstring import LangString, LangStringControl, LangStringFlag

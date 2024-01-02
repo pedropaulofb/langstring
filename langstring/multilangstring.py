@@ -45,6 +45,8 @@ the development of multilingual applications and facilitate the handling of text
 """
 from typing import Any
 from typing import Optional
+from deep_translator import GoogleTranslator
+from langcodes import Language
 
 from .langstring import LangString
 from .multilangstring_control import MultiLangStringControl
@@ -118,6 +120,8 @@ class MultiLangString(ValidationBase):
         self.mls_dict: dict[str, set[str]] = mls_dict
 
         self._pref_lang: str = pref_lang
+
+        self._translator = None
 
     # pref_lang GETTER
     @property
@@ -417,3 +421,92 @@ class MultiLangString(ValidationBase):
                 if lang:
                     self._validate_ensure_any_lang(lang)
                     self._validate_ensure_valid_lang(lang)
+
+    def add_entry_and_translations(self, text: str, lang: str, target_langs: list[str]):
+        """
+        Add a text entry in a specified language and its translations to multiple target languages.
+
+        This method adds a text entry to the MultiLangString in the specified language and then translates
+        and adds the same text to the MultiLangString in each of the target languages provided.
+
+        :param text: The text to be added and translated.
+        :type text: str
+        :param lang: The original language of the text.
+        :type lang: str
+        :param target_langs: A list of target languages to which the text will be translated.
+        :type target_langs: list[str]
+        """
+        std_in_lang = Language.get(lang).language
+
+        self._set_translator()
+        self._translator.source = std_in_lang
+
+        # Translate an existing entry to (possibly) multiple langs
+        self.add_entry(text, lang)
+
+        for target_lang in target_langs:
+            std_out_lang = Language.get(target_lang).language
+            self._translator.target = std_out_lang
+            translated_text = self._translator.translate(text=text)
+            self.add_entry(translated_text, target_lang)
+
+        # TODO (@pedropaulofb):
+        #  Treat to receive target_langs as str or list of strings
+        #  how to deal with empty lang? allow? use auto identification? add as identified or as empty?
+        #  enable selection of multiple translation tools? if so, do this via control.
+        #  Check options return_all=True and translate_words
+
+    def add_langstring_and_translations(self, langstring: LangString, target_langs: list[str]):
+        """
+        Add a LangString and its translations to multiple target languages.
+
+        This method adds a LangString to the MultiLangString and then translates
+        and adds the same text to the MultiLangString in each of the target languages provided.
+
+        :param langstring: The LangString object to be added and translated.
+        :type langstring: LangString
+        :param target_langs: A list of target languages to which the LangString's text will be translated.
+        :type target_langs: list[str]
+        """
+        self.add_entry_and_translations(langstring.text, langstring.lang, target_langs)
+
+    def add_translations_lang(self, lang: str, target_langs: list[str]):
+        """Translate all entries of a specific language to multiple target languages.
+
+        This method translates all text entries of a given language in the MultiLangString to each of the
+        target languages provided and adds these translations to the MultiLangString.
+
+        :param lang: The language of the entries to be translated.
+        :type lang: str
+        :param target_langs: A list of target languages to which the entries will be translated.
+        :type target_langs: list[str]
+        :raises ValueError: If there are no entries for the specified language in the MultiLangString.
+        """
+        if lang not in self.mls_dict:
+            raise ValueError(f"The MultiLangString has no entries for the language '{lang}'.")
+
+        # Getting all entries of a given language as list of LangString
+        langstrings = self.get_langstrings_lang(lang)
+
+        for langstring in langstrings:
+            self.add_langstring_and_translations(langstring, target_langs)
+
+    def add_translations_pref_lang(self, target_langs: list[str]):
+        """
+        Translate all entries of the preferred language to multiple target languages.
+
+        This method translates all text entries of the preferred language in the MultiLangString to each of the
+        target languages provided and adds these translations to the MultiLangString.
+
+        :param target_langs: A list of target languages to which the entries will be translated.
+        :type target_langs: list[str]
+        """
+        self.add_translations_lang(lang=self._pref_lang, target_langs=target_langs)
+
+    def is_entry(self, text, lang):
+        return lang in self.mls_dict and text in self.mls_dict[lang]
+
+    def _set_translator(self):
+        if not self._translator:
+            std_out_lang = Language.get(self._pref_lang).language
+            self._translator = GoogleTranslator(source="auto", target=std_out_lang)

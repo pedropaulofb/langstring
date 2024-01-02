@@ -8,6 +8,7 @@ from .langstring_control import LangStringFlag
 from .multilangstring import MultiLangString
 from .multilangstring_control import MultiLangStringControl
 from .multilangstring_control import MultiLangStringFlag
+from .synset import SynSet
 
 __all__ = [
     "LangString",
@@ -16,4 +17,5 @@ __all__ = [
     "LangStringControl",
     "MultiLangStringFlag",
     "MultiLangStringControl",
+    "SynSet"
 ]

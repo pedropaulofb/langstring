@@ -18,6 +18,11 @@ text and valid language tags. These flags can be set externally to alter the beh
 """
 from typing import Optional
 
+import nltk
+from langcodes import Language
+from nltk.corpus import wordnet
+
+from setlangstring import SetLangString
 from .langstring_control import LangStringControl
 from .langstring_control import LangStringFlag
 from .utils.validation_base import ValidationBase
@@ -110,3 +115,19 @@ class LangString(ValidationBase):
         :rtype: int
         """
         return hash((self.text, self.lang))
+
+    def get_synsets(self) -> list[SetLangString]:
+
+        # Check if this is expensive
+        nltk.download("omw-1.4", quiet=True)
+
+        synsets_list: list[SetLangString] = []
+
+        std_lang = Language.get(self.lang).to_alpha3()
+        synsets = wordnet.synonyms(self.text, lang=std_lang)
+
+        for synset in synsets:
+            if synset:
+                synsets_list.append(SetLangString(synset, self.lang))
+
+        return synsets_list

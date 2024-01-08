@@ -36,7 +36,7 @@ sphinx-rtd-theme = "^2.0.0"
 sphinx-toolbox = "^3.5.0"
 myst-parser = "^2.0.0"
 # Flake8 and plugins
-flake8 = "^6.1.0"
+flake8 = ">=6.1,<8.0"
 flake8-broken-line = "^1.0.0"
 flake8-fixme = "^1.1.1"
 flake8-implicit-str-concat = "^0.4.0"

@@ -134,4 +134,3 @@ ci:
   autoupdate_schedule: weekly
   skip: [ pytest ] # pytest is not necessary as there is already a workflow for that
   submodules: false
- 

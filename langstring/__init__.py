@@ -17,5 +17,5 @@ __all__ = [
     "LangStringControl",
     "MultiLangStringFlag",
     "MultiLangStringControl",
-    "SetLangString"
+    "SetLangString",
 ]

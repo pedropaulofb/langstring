@@ -941,3 +941,64 @@ This project is an initiative of the [Semantics, Cybersecurity & Services (SCS) 
 - Pedro Paulo Favato Barcelos [[GitHub](https://github.com/pedropaulofb)] [[LinkedIn](https://www.linkedin.com/in/pedro-paulo-favato-barcelos/)]
 
 Feel free to reach out using the provided links. For inquiries, contributions, or to report any issues, you can [open a new issue](https://github.com/pedropaulofb/langstring/issues/new) on this repository.
+
+```mermaid
+flowchart TD
+    subgraph TransformationEntities ["Transformation Entities"]
+    direction TB
+    Translator
+    Conversor
+    SynsetCreator
+    end
+
+    subgraph LinguisticStructures ["Linguistic Structures"]
+    direction TB
+    MultiLangString
+    SetLangString
+    LangString
+    end
+
+    subgraph ControlEntities ["Control Entities"]
+    direction TB
+    Controller
+    GlobalFlag
+    LangStringFlag
+    SetLangStringFlag
+    MultiLangStringFlag
+    end
+
+    %% Relations between groups
+    TransformationEntities --> LinguisticStructures
+
+    %% Relations between LS and Control Entities
+    MultiLangString --> Controller
+    MultiLangString --> MultiLangStringFlag
+
+    SetLangString --> Controller
+    SetLangString --> SetLangStringFlag
+
+    LangString --> Controller
+    LangString --> LangStringFlag
+
+    %% Internal relations between LS
+    MultiLangString --> SetLangString
+    SetLangString --> LangString
+
+    %% Internal relations within Control Entities
+    Controller --> GlobalFlag
+    Controller --> LangStringFlag
+    Controller --> SetLangStringFlag
+    Controller --> MultiLangStringFlag
+
+    classDef group1 fill:#ffcccb,stroke:#d6336c,stroke-width:2px,color:black,font-weight:bold;
+    classDef group2 fill:#c2f0c2,stroke:#28a745,stroke-width:2px,color:black,font-weight:bold;
+    classDef group3 fill:#fdfd96,stroke:#ffc107,stroke-width:2px,color:black,font-weight:bold;
+    classDef nodeStyle fill:#add8e6,stroke:#007bff,stroke-width:1px,color:#333;
+    classDef edgeStyle stroke:#e03838,stroke-width:2px;
+    linkStyle default stroke:#e03838,stroke-width:2px;
+
+    class Translator,Conversor,SynsetCreator,MultiLangString,SetLangString,LangString,Controller,GlobalFlag,LangStringFlag,SetLangStringFlag,MultiLangStringFlag nodeStyle;
+    class TransformationEntities group1;
+    class LinguisticStructures group2;
+    class ControlEntities group3;
+```

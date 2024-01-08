@@ -21,8 +21,8 @@ from typing import Optional
 import nltk
 from langcodes import Language
 from nltk.corpus import wordnet
-
 from setlangstring import SetLangString
+
 from .langstring_control import LangStringControl
 from .langstring_control import LangStringFlag
 from .utils.validation_base import ValidationBase
@@ -117,7 +117,6 @@ class LangString(ValidationBase):
         return hash((self.text, self.lang))
 
     def get_synsets(self) -> list[SetLangString]:
-
         # Check if this is expensive
         nltk.download("omw-1.4", quiet=True)
 

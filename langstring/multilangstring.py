@@ -45,6 +45,7 @@ the development of multilingual applications and facilitate the handling of text
 """
 from typing import Any
 from typing import Optional
+
 from deep_translator import GoogleTranslator
 from langcodes import Language
 

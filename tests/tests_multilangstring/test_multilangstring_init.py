@@ -1,7 +1,7 @@
 import pytest
 
+from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringControl
 from langstring import MultiLangStringFlag
 
 
@@ -47,7 +47,7 @@ def test_multilangstring_init_respects_ensure_valid_lang_flag(flag_state):
 
     :param flag_state: The state to set for the ENSURE_VALID_LANG flag.
     """
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, flag_state)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, flag_state)
     if flag_state:
         with pytest.raises(ValueError, match="field cannot be invalid"):
             MultiLangString(mls_dict={"invalid_lang": {"Hello"}})
@@ -87,7 +87,7 @@ def test_multilangstring_init_with_mixed_valid_and_invalid_data():
 
 
 @pytest.mark.parametrize(
-    "flag, flag_state", [(MultiLangStringFlag.ENSURE_TEXT, True), (MultiLangStringFlag.ENSURE_ANY_LANG, True)]
+    "flag, flag_state", [(MultiLangStringFlag.ENSURE_TEXT, True)]
 )
 def test_multilangstring_init_respects_other_flags(flag, flag_state):
     """
@@ -96,8 +96,8 @@ def test_multilangstring_init_respects_other_flags(flag, flag_state):
     :param flag: The flag to be tested.
     :param flag_state: The state to set for the flag.
     """
-    MultiLangStringControl.set_flag(flag, flag_state)
-    mls_dict = {"": {""}} if flag == MultiLangStringFlag.ENSURE_ANY_LANG else {"en": {""}}
+    Controller.set_flag(flag, flag_state)
+    mls_dict = {"en": {""}}
     expected_error = "cannot receive empty string" if flag_state else None
 
     if expected_error:

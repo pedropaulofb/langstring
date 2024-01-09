@@ -5,7 +5,6 @@ from langstring import Converter
 from langstring import LangString
 from langstring import LangStringFlag
 from langstring import MultiLangString
-from langstring import MultiLangStringControl
 from langstring import MultiLangStringFlag
 
 
@@ -13,7 +12,6 @@ from langstring import MultiLangStringFlag
     "flag, flag_state",
     [
         (MultiLangStringFlag.ENSURE_TEXT, False),
-        (MultiLangStringFlag.ENSURE_ANY_LANG, True),
         (MultiLangStringFlag.ENSURE_VALID_LANG, True),
     ],
 )
@@ -24,7 +22,7 @@ def test_flag_setting_impact_on_multilangstring_methods(flag, flag_state):
     :param flag: The flag to be tested.
     :param flag_state: The state to set for the flag.
     """
-    MultiLangStringControl.set_flag(flag, flag_state)
+    Controller.set_flag(flag, flag_state)
     mls = MultiLangString()
 
     # Test the impact on add_entry method
@@ -50,9 +48,8 @@ def test_add_entry_and_add_langstring_with_validations():
     Test the add_entry and add_langstring methods with different validation scenarios.
     """
     mls = MultiLangString()
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, True)
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_ANY_LANG, True)
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, True)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
 
     # Test add_entry with invalid data
     with pytest.raises(ValueError):
@@ -67,9 +64,8 @@ def test_add_entry_and_add_langstring_with_validations():
         mls.add_langstring(langstring)
 
     # Reset flags and test with valid data
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_ANY_LANG, False)
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
     mls.add_entry("Hello", "en")  # Should not raise an exception
     assert "Hello" in mls.get_strings_lang("en"), "Entry 'Hello' should be added under 'en'"
 

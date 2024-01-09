@@ -22,8 +22,7 @@ import nltk
 from langcodes import Language
 from nltk.corpus import wordnet
 
-from .controller import Controller
-from .controller import LangStringFlag
+from .flags import LangStringFlag
 from .setlangstring import SetLangString
 from .utils.validation_base import ValidationBase
 
@@ -41,18 +40,20 @@ class LangString(ValidationBase):
     :vartype lang: Optional[str]
     """
 
+    # TODO (pedropaulofb): Implement mandatory lang not None and lang not ""
+
     # Ignoring mypy error for practicality: subclasses narrow type for specific use, not affecting functionality.
-    def _get_control_and_flags_type(self) -> tuple[type[Controller], type[LangStringFlag]]:  # type: ignore
+    def _get_flags_type(self) -> type[LangStringFlag]:  # type: ignore
         """Retrieve the control class and its corresponding flags enumeration used in the LangString class.
 
-        This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)
+        This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
         that are used for configuring and validating the LangString instances. It is essential for the functioning of
         the ValidationBase methods, which rely on these control settings.
 
-        :return: A tuple containing the LangStringControl class and the LangStringFlag enumeration.
+        :return: A tuple containing the Controller class and the LangStringFlag enumeration.
         :rtype: tuple[type[Controller], type[LangStringFlag]]
         """
-        return Controller, LangStringFlag
+        return LangStringFlag
 
     def __init__(self, text: str = "", lang: Optional[str] = None) -> None:
         """Initialize a new LangString object with text and an optional language tag.

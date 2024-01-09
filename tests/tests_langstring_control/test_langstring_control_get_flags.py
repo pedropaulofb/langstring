@@ -8,7 +8,6 @@ def test_get_flags() -> None:
     """Test retrieving the states of all flags."""
     expected_flags = {
         LangStringFlag.ENSURE_TEXT: True,
-        LangStringFlag.ENSURE_ANY_LANG: False,
         LangStringFlag.ENSURE_VALID_LANG: False,
     }
     assert Controller.get_flags() == expected_flags, "All flags should be retrieved correctly"
@@ -32,7 +31,6 @@ def test_get_flags_after_reset() -> None:
     Controller.reset_flags_all()
     expected_flags = {
         LangStringFlag.ENSURE_TEXT: True,
-        LangStringFlag.ENSURE_ANY_LANG: False,
         LangStringFlag.ENSURE_VALID_LANG: False,
     }
     assert Controller.get_flags() == expected_flags, "Flags should return to default states after reset"
@@ -42,7 +40,6 @@ def test_get_flags_after_reset() -> None:
     "flag, state",
     [
         (LangStringFlag.ENSURE_TEXT, False),
-        (LangStringFlag.ENSURE_ANY_LANG, True),
         (LangStringFlag.ENSURE_VALID_LANG, True),
     ],
 )

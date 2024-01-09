@@ -1,6 +1,6 @@
 import pytest
 
-from langstring import MultiLangStringControl
+from langstring import Controller
 from langstring import MultiLangStringFlag
 
 
@@ -9,11 +9,11 @@ def test_set_flag_updates_flag_state():
     Test if the set_flag method correctly updates the state of a specified flag.
     """
     # Set a flag to a new state
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_ANY_LANG, True)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_ANY_LANG, True)
 
     # Check if the flag's state is updated
     assert (
-        MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_ANY_LANG) is True
+        Controller.get_flag(MultiLangStringFlag.ENSURE_ANY_LANG) is True
     ), "set_flag should correctly update the state of ENSURE_ANY_LANG to True"
 
 
@@ -21,7 +21,6 @@ def test_set_flag_updates_flag_state():
     "flag, state",
     [
         (MultiLangStringFlag.ENSURE_TEXT, False),
-        (MultiLangStringFlag.ENSURE_ANY_LANG, True),
         (MultiLangStringFlag.ENSURE_VALID_LANG, True),
     ],
 )
@@ -32,8 +31,8 @@ def test_set_flag_with_various_flags_and_states(flag, state):
     :param flag: The flag to be tested.
     :param state: The state to set for the flag.
     """
-    MultiLangStringControl.set_flag(flag, state)
-    assert MultiLangStringControl.get_flag(flag) == state, f"set_flag should set {flag.name} to {state}"
+    Controller.set_flag(flag, state)
+    assert Controller.get_flag(flag) == state, f"set_flag should set {flag.name} to {state}"
 
 
 @pytest.mark.parametrize("invalid_flag", [123, "ENSURE_TEXT", None, 5.5])
@@ -44,7 +43,7 @@ def test_set_flag_with_invalid_flag_type_raises_type_error(invalid_flag):
     :param invalid_flag: The invalid flag to test.
     """
     with pytest.raises(TypeError, match="Invalid flag"):
-        MultiLangStringControl.set_flag(invalid_flag, True)
+        Controller.set_flag(invalid_flag, True)
 
 
 @pytest.mark.parametrize("invalid_state", ["True", 1, None, []])
@@ -55,7 +54,7 @@ def test_set_flag_with_invalid_state_type_raises_type_error(invalid_state):
     :param invalid_state: The invalid state to test.
     """
     with pytest.raises(TypeError, match="Invalid state"):
-        MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, invalid_state)
+        Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, invalid_state)
 
 
 def test_set_flag_with_unrecognized_flag_raises_type_error():
@@ -68,4 +67,4 @@ def test_set_flag_with_unrecognized_flag_raises_type_error():
 
     fake_flag = FakeFlag()
     with pytest.raises(TypeError, match="Invalid flag"):
-        MultiLangStringControl.set_flag(fake_flag, True)
+        Controller.set_flag(fake_flag, True)

@@ -8,7 +8,6 @@ from langstring import LangStringFlag
     "flag",
     [
         LangStringFlag.ENSURE_TEXT,
-        LangStringFlag.ENSURE_ANY_LANG,
         LangStringFlag.ENSURE_VALID_LANG,
     ],
 )
@@ -18,7 +17,6 @@ def test_default_flag_state(flag: LangStringFlag) -> None:
     :param flag: The LangStringFlag to check the default state for.
     """
     assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
     assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
 
 
@@ -69,11 +67,9 @@ def test_multiple_flag_modifications_integrity() -> None:
     :raises AssertionError: If the state of any flag is not as expected after multiple modifications.
     """
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, False)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     assert Controller.get_flag(LangStringFlag.ENSURE_TEXT), "ENSURE_TEXT flag should be True"
-    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG), "ENSURE_ANY_LANG flag should be False"
     assert Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG), "ENSURE_VALID_LANG flag should be True"
 
     Controller.reset_flags_all()  # Reset flags to default after test

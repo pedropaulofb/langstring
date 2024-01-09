@@ -2,6 +2,9 @@ from .utils.validation_base import ValidationBase
 
 
 class SetLangString(ValidationBase):
+
+    # TODO (pedropaulofb): Implement mandatory lang not None and lang not ""
+
     def __init__(self, texts: set[str], lang: str) -> None:
         if texts and not isinstance(texts, set):
             raise TypeError(f"Invalid type of argument texts. Expected 'set', got '{type(lang).__name__}'.")

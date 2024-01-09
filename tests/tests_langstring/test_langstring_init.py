@@ -93,7 +93,6 @@ def test_no_warning_on_no_language_tag() -> None:
 def test_langstring_with_special_characters(text, lang) -> None:
     """Test LangString initialization with various special character sets."""
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     lang_str = LangString(text, lang)
@@ -106,7 +105,6 @@ def test_langstring_with_long_string_input() -> None:
     """Test LangString initialization with a very long string input."""
     long_text = "a" * 10000  # 10,000 characters long
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     lang_str = LangString(long_text, "en")
@@ -136,7 +134,6 @@ def test_langstring_init_with_flags(
     :param expected_exception: The expected exception type, if any.
     """
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, ensure_text)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, ensure_any_lang)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, ensure_valid_lang)
 
     if expected_exception:
@@ -150,7 +147,6 @@ def test_langstring_init_with_flags(
 def test_langstring_with_all_flags_enabled_valid_inputs() -> None:
     """Test LangString initialization with all flags enabled and valid inputs."""
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     assert LangString("Hello", "en")
@@ -159,7 +155,6 @@ def test_langstring_with_all_flags_enabled_valid_inputs() -> None:
 def test_langstring_with_all_flags_enabled_invalid_language() -> None:
     """Test LangString initialization with all flags enabled and invalid language."""
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
@@ -169,7 +164,6 @@ def test_langstring_with_all_flags_enabled_invalid_language() -> None:
 def test_langstring_with_all_flags_enabled_empty_text() -> None:
     """Test LangString initialization with all flags enabled and empty text."""
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     with pytest.raises(ValueError, match="ENSURE_TEXT enabled: LangString's 'text' field cannot"):
@@ -179,7 +173,6 @@ def test_langstring_with_all_flags_enabled_empty_text() -> None:
 def test_langstring_with_all_flags_enabled_empty_language() -> None:
     """Test LangString initialization with all flags enabled and empty language."""
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     with pytest.raises(ValueError, match="ENSURE_ANY_LANG enabled: LangString's 'lang' field cannot"):
@@ -189,7 +182,6 @@ def test_langstring_with_all_flags_enabled_empty_language() -> None:
 def test_langstring_with_mixed_flags() -> None:
     """Test LangString initialization with ENSURE_TEXT and ENSURE_VALID_LANG enabled, but ENSURE_ANY_LANG disabled."""
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, False)
     Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang'"):
@@ -203,7 +195,6 @@ def test_empty_text_and_language_with_flags_enabled() -> None:
     :raises AssertionError: If LangString initialization does not raise an exception as expected.
     """
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     with pytest.raises(ValueError, match="ENSURE_TEXT enabled: LangString's 'text' field cannot"):
         LangString("", "")
 

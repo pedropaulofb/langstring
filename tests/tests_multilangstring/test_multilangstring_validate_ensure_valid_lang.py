@@ -1,7 +1,7 @@
 import pytest
 
+from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringControl
 from langstring import MultiLangStringFlag
 
 
@@ -23,7 +23,7 @@ def test_validate_ensure_valid_lang(lang, flag_state, is_valid_lang, expected_ex
     :param is_valid_lang: Indicates if the language code is valid.
     :param expected_exception: The expected exception, if any.
     """
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, flag_state)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, flag_state)
     mls = MultiLangString()
 
     # Mocking the tag_is_valid function based on is_valid_lang

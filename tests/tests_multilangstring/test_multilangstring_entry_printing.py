@@ -1,5 +1,5 @@
+from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringControl
 from langstring import MultiLangStringFlag
 
 
@@ -92,7 +92,7 @@ def test_empty_string_entries():
     """
     Test the behavior of MultiLangString with empty string entries.
     """
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
     mls = MultiLangString(mls_dict={"en": {""}, "": {""}})
     assert str(mls) == '""@en, ', "Empty strings should be correctly represented"
 

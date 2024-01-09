@@ -8,7 +8,6 @@ from langstring import LangStringFlag
     "flag, state",
     [
         (LangStringFlag.ENSURE_TEXT, True),
-        (LangStringFlag.ENSURE_ANY_LANG, False),
         (LangStringFlag.ENSURE_VALID_LANG, True),
     ],
 )
@@ -29,7 +28,6 @@ def test_set_flag_invalid(flag, state) -> None:
     "flag, state",
     [
         (LangStringFlag.ENSURE_TEXT, None),
-        (LangStringFlag.ENSURE_ANY_LANG, "True"),
         (LangStringFlag.ENSURE_VALID_LANG, 1),
     ],
 )
@@ -47,7 +45,6 @@ def test_set_flag_invalid_state_type(flag: LangStringFlag, state) -> None:
     "flag, initial_state, new_state",
     [
         (LangStringFlag.ENSURE_TEXT, False, True),
-        (LangStringFlag.ENSURE_ANY_LANG, True, False),
         (LangStringFlag.ENSURE_VALID_LANG, False, True),
     ],
 )
@@ -67,7 +64,6 @@ def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state:
 @pytest.mark.parametrize(
     "flag_sequence, state_sequence",
     [
-        ([LangStringFlag.ENSURE_TEXT, LangStringFlag.ENSURE_ANY_LANG], [True, False]),
         ([LangStringFlag.ENSURE_VALID_LANG, LangStringFlag.ENSURE_TEXT], [True, False]),
     ],
 )
@@ -88,7 +84,6 @@ def test_set_multiple_flags_sequentially(flag_sequence: list[LangStringFlag], st
     "flag, state",
     [
         (LangStringFlag.ENSURE_TEXT, True),
-        (LangStringFlag.ENSURE_ANY_LANG, False),
     ],
 )
 def test_set_flag_same_value_multiple_times(flag: LangStringFlag, state: bool) -> None:

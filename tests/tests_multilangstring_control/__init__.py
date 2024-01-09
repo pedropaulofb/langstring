@@ -1,1 +1,1 @@
-"""Tests for MultiLangStringControl class, its methods and usage."""
+"""Tests for Controller class, its methods and usage."""

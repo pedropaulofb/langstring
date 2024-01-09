@@ -25,7 +25,7 @@ from typing import Union
 from .langstring import LangString
 from .multilangstring import MultiLangString
 from .setlangstring import SetLangString
-from .utils.controls_base import NonInstantiable
+from .utils.non_instantiable import NonInstantiable
 
 
 class Converter(metaclass=NonInstantiable):

@@ -4,28 +4,7 @@ from .flags import GlobalFlag
 from .flags import LangStringFlag
 from .flags import MultiLangStringFlag
 from .flags import SetLangStringFlag
-
-
-class NonInstantiable(type):
-    """A metaclass that prevents the instantiation of any class that uses it.
-
-    When a class is defined with NonInstantiable as its metaclass, any attempt to instantiate that class will result
-    in a TypeError. This is useful for creating classes that are meant to be used as namespaces or containers for
-    static methods and class variables, without the intention of creating instances.
-
-    Methods:
-        __call__: Overrides the default call behavior to prevent instantiation.
-    """
-
-    def __call__(cls) -> None:
-        """Override the default call behavior to prevent instantiation of the class.
-
-        When this method is called, it raises a TypeError, effectively preventing the creation of an instance of the
-        class that uses NonInstantiable as its metaclass.
-
-        :raises TypeError: Always, to indicate that the class cannot be instantiated.
-        """
-        raise TypeError(f"{cls.__name__} class cannot be instantiated.")
+from .utils.non_instantiable import NonInstantiable
 
 
 class Controller(metaclass=NonInstantiable):
@@ -40,6 +19,7 @@ class Controller(metaclass=NonInstantiable):
     :cvar flags: Stores the current state of each flag.
     :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
     """
+
     # Define the default values as a class-level constant
     DEFAULT_FLAGS = {  # type: ignore
         # Default values for GlobalFlags
@@ -68,8 +48,6 @@ class Controller(metaclass=NonInstantiable):
         MultiLangStringFlag.ENSURE_LOWER_LANG: False,
     }
 
-    # TODO (@pedropaulofb): GlobalFlag behavior still to be implemented.
-
     # Initialize the flags with the default values
     flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = DEFAULT_FLAGS.copy()
 
@@ -79,9 +57,8 @@ class Controller(metaclass=NonInstantiable):
     ) -> None:
         """Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.
 
-        This class method allows setting the state of a flag globally, affecting the behavior of LangString,
-        SetLangString, and MultiLangString instances. It is used to configure aspects of these classes that are
-        controlled by the flags defined in the respective flag enums.
+        If a GlobalFlag is set, it also sets the corresponding flags in LangStringFlag, SetLangStringFlag,
+        and MultiLangStringFlag to the same state.
 
         :param flag: The flag to be set, either an instance of one of the flag enums.
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
@@ -97,7 +74,14 @@ class Controller(metaclass=NonInstantiable):
                 f"Invalid flag type. Expected LangStringFlag or MultiLangStringFlag, got {type(flag).__name__}."
             )
 
-        cls.flags[flag] = state
+        if isinstance(flag, GlobalFlag):
+            # Set the state for all flags that match the name of the global flag
+            for key in cls.flags:
+                if key.name == flag.name:
+                    cls.flags[key] = state
+        else:
+            # Set the state for the specific flag
+            cls.flags[flag] = state
 
     @classmethod
     def get_flag(cls, flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]) -> bool:
@@ -162,3 +146,22 @@ class Controller(metaclass=NonInstantiable):
         """
 
         cls.flags = cls.DEFAULT_FLAGS.copy()
+
+    @classmethod
+    def reset_flags_type(
+        cls, flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
+    ) -> None:
+        """Reset configuration flags of a specific type to their default values.
+
+        This method resets only the flags of the specified type (e.g., LangStringFlag) to their default values.
+
+        :param flag_type: The type of the flags to reset.
+        :type flag_type: Type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
+        """
+
+        if isinstance(flag_type, GlobalFlag):
+            cls.reset_flags_all()
+        else:
+            for flag, default_value in cls.DEFAULT_FLAGS.items():
+                if isinstance(flag, flag_type):
+                    cls.flags[flag] = default_value

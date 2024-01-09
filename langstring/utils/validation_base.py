@@ -5,7 +5,7 @@ It includes methods to validate argument types, ensure text and language require
 language tags based on configurable control flags.
 
 The mixin is designed to be used with classes that handle language strings and need to enforce specific validation
-rules. It leverages control flags from a control class (like Controller or MultiLangStringControl) to
+rules. It leverages control flags from a control class (like Controller or Controller) to
 determine the validation behavior.
 
 Classes:
@@ -22,14 +22,10 @@ Example Usage:
 """
 from abc import abstractmethod
 from typing import Optional
-from typing import TYPE_CHECKING
 from typing import Union
+from ..controller import Controller
 
 from langcodes import tag_is_valid  # type: ignore
-
-if TYPE_CHECKING:
-    from ..controller import Controller, LangStringFlag
-    from ..multilangstring_control import MultiLangStringControl, MultiLangStringFlag
 
 
 class ValidationBase:
@@ -40,9 +36,9 @@ class ValidationBase:
     """
 
     @abstractmethod
-    def _get_control_and_flags_type(
+    def _get_flags_type(
         self,
-    ) -> tuple[Union["Controller", "MultiLangStringControl"], Union["LangStringFlag", "MultiLangStringFlag"]]:
+    ) -> Union["LangStringFlag", "SetLangStringFlag", "MultiLangStringFlag"]:
         """Abstract method that must be implemented by subclasses.
 
         It should return the control class and its flags enumeration used for validation.
@@ -87,10 +83,10 @@ class ValidationBase:
         :type text: Optional[str]
         :raises ValueError: If ENSURE_TEXT is enabled and 'text' is an empty string.
         """
-        control, flags = self._get_control_and_flags_type()
+        flags = self._get_flags_type()
 
         # ignore added to bypass mypy's false positive on enums
-        if text == "" and control.get_flag(flags.ENSURE_TEXT):  # type: ignore
+        if text == "" and Controller.get_flag(flags.ENSURE_TEXT):  # type: ignore
             raise ValueError(
                 f"ENSURE_TEXT enabled: {self.__class__.__name__}'s 'text' field cannot receive empty string."
             )
@@ -105,16 +101,16 @@ class ValidationBase:
         :type lang: Optional[str]
         :raises ValueError: If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and 'lang' is an empty string.
         """
-        control, flags = self._get_control_and_flags_type()
+        flags = self._get_flags_type()
 
         if not lang:
             # ignore added to bypass mypy's false positive on enums
-            if control.get_flag(flags.ENSURE_ANY_LANG):  # type: ignore
+            if Controller.get_flag(flags.ENSURE_ANY_LANG):  # type: ignore
                 raise ValueError(
                     f"ENSURE_ANY_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
                 )
             # ignore added to bypass mypy's false positive on enums
-            if control.get_flag(flags.ENSURE_VALID_LANG):  # type: ignore
+            if Controller.get_flag(flags.ENSURE_VALID_LANG):  # type: ignore
                 raise ValueError(
                     f"ENSURE_VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
                 )
@@ -129,11 +125,11 @@ class ValidationBase:
         :type lang: Optional[str]
         :raises ValueError: If ENSURE_VALID_LANG is enabled and the language tag is invalid.
         """
-        control, flags = self._get_control_and_flags_type()
+        flags = self._get_flags_type()
 
         if lang and not tag_is_valid(lang):
             # ignore added to bypass mypy's false positive on enums
-            if control.get_flag(flags.ENSURE_VALID_LANG):  # type: ignore
+            if Controller.get_flag(flags.ENSURE_VALID_LANG):  # type: ignore
                 raise ValueError(
                     f"ENSURE_VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot be invalid."
                 )

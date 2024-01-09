@@ -1,7 +1,7 @@
 import pytest
 
+from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringControl
 from langstring import MultiLangStringFlag
 
 
@@ -16,7 +16,7 @@ def test_validate_ensure_text(text, flag_state, expected_exception):
     :param flag_state: The state of the ENSURE_TEXT flag.
     :param expected_exception: The expected exception, if any.
     """
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, flag_state)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, flag_state)
     mls = MultiLangString()
 
     # Directly accessing the protected method for testing purposes

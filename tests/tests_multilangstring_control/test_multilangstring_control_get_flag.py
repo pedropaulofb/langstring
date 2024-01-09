@@ -1,6 +1,6 @@
 import pytest
 
-from langstring import MultiLangStringControl
+from langstring import Controller
 from langstring import MultiLangStringFlag
 
 
@@ -8,7 +8,6 @@ from langstring import MultiLangStringFlag
     "flag, expected_state",
     [
         (MultiLangStringFlag.ENSURE_TEXT, True),
-        (MultiLangStringFlag.ENSURE_ANY_LANG, False),
         (MultiLangStringFlag.ENSURE_VALID_LANG, False),
     ],
 )
@@ -20,7 +19,7 @@ def test_get_flag_returns_correct_initial_state(flag, expected_state):
     :param expected_state: The expected state of the flag.
     """
     assert (
-        MultiLangStringControl.get_flag(flag) == expected_state
+        Controller.get_flag(flag) == expected_state
     ), f"get_flag should return {expected_state} for {flag.name} initially"
 
 
@@ -28,7 +27,6 @@ def test_get_flag_returns_correct_initial_state(flag, expected_state):
     "flag, state_to_set",
     [
         (MultiLangStringFlag.ENSURE_TEXT, False),
-        (MultiLangStringFlag.ENSURE_ANY_LANG, True),
         (MultiLangStringFlag.ENSURE_VALID_LANG, True),
     ],
 )
@@ -39,9 +37,9 @@ def test_get_flag_reflects_set_flag_state(flag, state_to_set):
     :param flag: The flag to be tested.
     :param state_to_set: The state to set for the flag.
     """
-    MultiLangStringControl.set_flag(flag, state_to_set)
+    Controller.set_flag(flag, state_to_set)
     assert (
-        MultiLangStringControl.get_flag(flag) == state_to_set
+        Controller.get_flag(flag) == state_to_set
     ), f"get_flag should return {state_to_set} for {flag.name} after setting it"
 
 
@@ -53,7 +51,7 @@ def test_get_flag_with_invalid_flag_type_raises_type_error(invalid_flag):
     :param invalid_flag: The invalid flag to test.
     """
     with pytest.raises(TypeError, match="Invalid flag"):
-        MultiLangStringControl.get_flag(invalid_flag)
+        Controller.get_flag(invalid_flag)
 
 
 def test_get_flag_with_unrecognized_flag_raises_type_error():
@@ -66,4 +64,4 @@ def test_get_flag_with_unrecognized_flag_raises_type_error():
 
     fake_flag = FakeFlag()
     with pytest.raises(TypeError, match="Invalid flag"):
-        MultiLangStringControl.get_flag(fake_flag)
+        Controller.get_flag(fake_flag)

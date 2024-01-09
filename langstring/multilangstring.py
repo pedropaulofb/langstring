@@ -24,7 +24,7 @@ Classes:
 
 Dependencies:
 - LangString: A class for representing individual text entries with associated language tags.
-- MultiLangStringControl and MultiLangStringFlag: for managing configuration and behavior of MultiLangString instances.
+- Controller and MultiLangStringFlag: for managing configuration and behavior of MultiLangString instances.
 - ValidationBase: A base class providing validation functionalities.
 
 Usage:
@@ -49,6 +49,7 @@ from typing import Optional
 from deep_translator import GoogleTranslator
 from langcodes import Language
 
+from .flags import MultiLangStringFlag
 from .langstring import LangString
 from .utils.validation_base import ValidationBase
 
@@ -56,7 +57,7 @@ from .utils.validation_base import ValidationBase
 class MultiLangString(ValidationBase):
     """A class for managing multilingual text strings with various language tags.
 
-    Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
+    Utilizes a global control strategy set in Controller to handle duplicate language tags. Supports
     operations like adding, removing, and retrieving language strings in multiple languages.
 
     :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
@@ -65,16 +66,18 @@ class MultiLangString(ValidationBase):
     :vartype pref_lang: str
     """
 
+    # TODO (pedropaulofb): Implement mandatory lang not None and lang not ""
+
     # Ignoring mypy error: subclasses narrow type for specific use, not affecting functionality.
-    def _get_control_and_flags_type(self) -> tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]:  # type: ignore # noqa: E501
+    def _get_flags_type(self) -> type[MultiLangStringFlag]:  # type: ignore # noqa: E501
         """Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.
 
-        This method provides the specific control class (MultiLangStringControl) and the flags enumeration
+        This method provides the specific control class (Controller) and the flags enumeration
         (MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
         It is essential for the functioning of the ValidationBase methods, which rely on these control settings.
 
-        :return: A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.
-        :rtype: tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]
+        :return: A tuple containing the Controller class and the MultiLangStringFlag enumeration.
+        :rtype: tuple[type[Controller], type[MultiLangStringFlag]]
         """
         return MultiLangStringFlag
 
@@ -358,7 +361,6 @@ class MultiLangString(ValidationBase):
         :raises TypeError: If any text or language in mls_dict does not comply with the expected types.
         :raises ValueError: If any text or language in mls_dict violates the rules set by the control flags.
         """
-        control, flags = self._get_control_and_flags_type()
 
         for lang, texts in mls_dict.items():
             if not isinstance(texts, set):

@@ -5,7 +5,6 @@ from langstring import Converter
 from langstring import LangString
 from langstring import LangStringFlag
 from langstring import MultiLangString
-from langstring import MultiLangStringControl
 from langstring import MultiLangStringFlag
 
 
@@ -50,7 +49,7 @@ def test_convert_langstring_to_multilangstring_empty_string():
     :return: None
     """
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
     lang_string = LangString(text="", lang="en")
     result = Converter.convert_langstring_to_multilangstring(lang_string)
     assert result == MultiLangString(
@@ -76,7 +75,7 @@ def test_convert_langstring_to_multilangstring_empty_langstring():
     :return: None
     """
     Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
-    MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
     lang_string = LangString()
     result = Converter.convert_langstring_to_multilangstring(lang_string)
     assert result == MultiLangString(

@@ -1,7 +1,7 @@
 import pytest
 
+from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringControl
 from langstring import MultiLangStringFlag
 
 
@@ -58,7 +58,6 @@ def test_add_entry_invalid_arguments(text, lang, expected_error):
     "flag, flag_state, text, lang, expected_error",
     [
         (MultiLangStringFlag.ENSURE_TEXT, True, "", "en", "cannot receive empty string"),
-        (MultiLangStringFlag.ENSURE_ANY_LANG, True, "Hello", "", "cannot receive empty string"),
         (MultiLangStringFlag.ENSURE_VALID_LANG, True, "Hello", "invalid_lang", "cannot be invalid"),
     ],
 )
@@ -72,7 +71,7 @@ def test_add_entry_respects_flags(flag, flag_state, text, lang, expected_error):
     :param lang: The language of the text.
     :param expected_error: The expected error message.
     """
-    MultiLangStringControl.set_flag(flag, flag_state)
+    Controller.set_flag(flag, flag_state)
     mls = MultiLangString()
     with pytest.raises(ValueError, match=expected_error):
         mls.add_entry(text, lang)

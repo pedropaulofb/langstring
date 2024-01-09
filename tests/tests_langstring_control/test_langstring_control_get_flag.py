@@ -7,7 +7,6 @@ from langstring import LangStringFlag
     "flag",
     [
         LangStringFlag.ENSURE_TEXT,
-        LangStringFlag.ENSURE_ANY_LANG,
         LangStringFlag.ENSURE_VALID_LANG,
     ],
 )
@@ -31,7 +30,6 @@ from langstring import Controller, LangStringFlag
     "flag, expected_state",
     [
         (LangStringFlag.ENSURE_TEXT, True),
-        (LangStringFlag.ENSURE_ANY_LANG, False),
         (LangStringFlag.ENSURE_VALID_LANG, False),
     ],
 )
@@ -49,7 +47,6 @@ def test_get_flag_default_states(flag: LangStringFlag, expected_state: bool) -> 
     "flag, state_to_set",
     [
         (LangStringFlag.ENSURE_TEXT, False),
-        (LangStringFlag.ENSURE_ANY_LANG, True),
         (LangStringFlag.ENSURE_VALID_LANG, True),
     ],
 )

@@ -376,7 +376,7 @@ class MultiLangString(ValidationBase):
                     self._validate_ensure_any_lang(lang)
                     self._validate_ensure_valid_lang(lang)
 
-    def add_entry_and_translations(self, text: str, lang: str, target_langs: list[str])->None:
+    def add_entry_and_translations(self, text: str, lang: str, target_langs: list[str]) -> None:
         """
         Add a text entry in a specified language and its translations to multiple target languages.
 
@@ -410,7 +410,7 @@ class MultiLangString(ValidationBase):
         #  enable selection of multiple translation tools? if so, do this via control.
         #  Check options return_all=True and translate_words
 
-    def add_langstring_and_translations(self, langstring: LangString, target_langs: list[str])->None:
+    def add_langstring_and_translations(self, langstring: LangString, target_langs: list[str]) -> None:
         """
         Add a LangString and its translations to multiple target languages.
 
@@ -424,7 +424,7 @@ class MultiLangString(ValidationBase):
         """
         self.add_entry_and_translations(langstring.text, langstring.lang, target_langs)
 
-    def add_translations_lang(self, lang: str, target_langs: list[str])->None:
+    def add_translations_lang(self, lang: str, target_langs: list[str]) -> None:
         """Translate all entries of a specific language to multiple target languages.
 
         This method translates all text entries of a given language in the MultiLangString to each of the
@@ -445,7 +445,7 @@ class MultiLangString(ValidationBase):
         for langstring in langstrings:
             self.add_langstring_and_translations(langstring, target_langs)
 
-    def add_translations_pref_lang(self, target_langs: list[str])->None:
+    def add_translations_pref_lang(self, target_langs: list[str]) -> None:
         """
         Translate all entries of the preferred language to multiple target languages.
 
@@ -457,7 +457,7 @@ class MultiLangString(ValidationBase):
         """
         self.add_translations_lang(lang=self._pref_lang, target_langs=target_langs)
 
-    def is_entry(self, text, lang)->bool:
+    def is_entry(self, text, lang) -> bool:
         return lang in self.mls_dict and text in self.mls_dict[lang]
 
     def _set_translator(self):

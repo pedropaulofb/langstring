@@ -1,6 +1,7 @@
 import pytest
 
-from langstring import LangString, Converter
+from langstring import Converter
+from langstring import LangString
 from langstring import LangStringControl
 from langstring import LangStringFlag
 from langstring import MultiLangString
@@ -89,4 +90,6 @@ def test_removal_methods_impact_on_retrieval_methods():
 
     # Remove a language and test retrieval
     mls.remove_lang("fr")
-    assert "fr" not in Converter.convert_multilangstring_to_langstrings(mls), "Removed language should not be in the retrieved data"
+    assert "fr" not in Converter.convert_multilangstring_to_langstrings(
+        mls
+    ), "Removed language should not be in the retrieved data"

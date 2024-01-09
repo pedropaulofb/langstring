@@ -2,6 +2,7 @@
 
 It includes classes for single and multiple language strings, along with their control and validation mechanisms.
 """
+from .converter import Converter
 from .langstring import LangString
 from .langstring_control import LangStringControl
 from .langstring_control import LangStringFlag
@@ -9,7 +10,6 @@ from .multilangstring import MultiLangString
 from .multilangstring_control import MultiLangStringControl
 from .multilangstring_control import MultiLangStringFlag
 from .setlangstring import SetLangString
-from .converter import Converter
 
 __all__ = [
     "LangString",
@@ -19,5 +19,5 @@ __all__ = [
     "MultiLangStringFlag",
     "MultiLangStringControl",
     "SetLangString",
-    "Converter"
+    "Converter",
 ]

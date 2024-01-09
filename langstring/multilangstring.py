@@ -209,53 +209,6 @@ class MultiLangString(ValidationBase):
         else:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
 
-    def get_langstring(self, text: str, lang: str) -> LangString:
-        """Retrieve a LangString object for a specific text and language.
-
-        :param text: The text of the LangString.
-        :type text: str
-        :param lang: The language of the LangString.
-        :type lang: str
-        :return: A LangString object with the specified text and language.
-        :rtype: LangString
-        :raises ValueError: If the text/lang combination is not in mls_dict.
-        """
-        if lang in self.mls_dict and text in self.mls_dict[lang]:
-            return LangString(text, lang)
-        raise ValueError(f"Text '{text}' with language '{lang}' not found in mls_dict.")
-
-    def get_langstrings_lang(self, lang: str) -> list[LangString]:
-        """Retrieve a list of LangStrings for a given language.
-
-        :param lang: The language for which to retrieve LangStrings.
-        :type lang: str
-        :return: A list of LangStrings, each containing a single entry for the specified language.
-                 Returns an empty list if the specified language is not in mls_dict.
-        :rtype: list[LangString]
-        """
-        if lang in self.mls_dict:
-            return [LangString(text, lang) for text in self.mls_dict[lang]]
-        return []
-
-    def get_langstrings_all(self) -> list[LangString]:
-        """Retrieve a list of all LangStrings in mls_dict.
-
-        :return: A list of LangStrings, each representing a single entry from mls_dict.
-        :rtype: list[LangString]
-        """
-        return [LangString(text, lang) for lang, texts in self.mls_dict.items() for text in texts]
-
-    def get_langstrings_pref_lang(self) -> list[LangString]:
-        """Retrieve a list of LangStrings for the preferred language.
-
-        This method returns LangStrings for the language specified in the pref_lang attribute. If pref_lang is not
-        a key in mls_dict, an empty list is returned.
-
-        :return: A list of LangStrings for the preferred language.
-        :rtype: list[LangString]
-        """
-        return self.get_langstrings_lang(self._pref_lang)
-
     def get_strings_lang(self, lang: str) -> list[str]:
         """Retrieve all text entries for a specific language.
 
@@ -423,7 +376,7 @@ class MultiLangString(ValidationBase):
                     self._validate_ensure_any_lang(lang)
                     self._validate_ensure_valid_lang(lang)
 
-    def add_entry_and_translations(self, text: str, lang: str, target_langs: list[str]):
+    def add_entry_and_translations(self, text: str, lang: str, target_langs: list[str])->None:
         """
         Add a text entry in a specified language and its translations to multiple target languages.
 
@@ -457,7 +410,7 @@ class MultiLangString(ValidationBase):
         #  enable selection of multiple translation tools? if so, do this via control.
         #  Check options return_all=True and translate_words
 
-    def add_langstring_and_translations(self, langstring: LangString, target_langs: list[str]):
+    def add_langstring_and_translations(self, langstring: LangString, target_langs: list[str])->None:
         """
         Add a LangString and its translations to multiple target languages.
 
@@ -471,7 +424,7 @@ class MultiLangString(ValidationBase):
         """
         self.add_entry_and_translations(langstring.text, langstring.lang, target_langs)
 
-    def add_translations_lang(self, lang: str, target_langs: list[str]):
+    def add_translations_lang(self, lang: str, target_langs: list[str])->None:
         """Translate all entries of a specific language to multiple target languages.
 
         This method translates all text entries of a given language in the MultiLangString to each of the
@@ -492,7 +445,7 @@ class MultiLangString(ValidationBase):
         for langstring in langstrings:
             self.add_langstring_and_translations(langstring, target_langs)
 
-    def add_translations_pref_lang(self, target_langs: list[str]):
+    def add_translations_pref_lang(self, target_langs: list[str])->None:
         """
         Translate all entries of the preferred language to multiple target languages.
 
@@ -504,7 +457,7 @@ class MultiLangString(ValidationBase):
         """
         self.add_translations_lang(lang=self._pref_lang, target_langs=target_langs)
 
-    def is_entry(self, text, lang):
+    def is_entry(self, text, lang)->bool:
         return lang in self.mls_dict and text in self.mls_dict[lang]
 
     def _set_translator(self):

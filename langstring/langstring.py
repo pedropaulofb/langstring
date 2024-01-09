@@ -21,8 +21,8 @@ from typing import Optional
 import nltk
 from langcodes import Language
 from nltk.corpus import wordnet
-from setlangstring import SetLangString
 
+from .setlangstring import SetLangString
 from .langstring_control import LangStringControl
 from .langstring_control import LangStringFlag
 from .utils.validation_base import ValidationBase

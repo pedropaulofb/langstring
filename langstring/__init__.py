@@ -9,6 +9,7 @@ from .multilangstring import MultiLangString
 from .multilangstring_control import MultiLangStringControl
 from .multilangstring_control import MultiLangStringFlag
 from .setlangstring import SetLangString
+from .converter import Converter
 
 __all__ = [
     "LangString",
@@ -18,4 +19,5 @@ __all__ = [
     "MultiLangStringFlag",
     "MultiLangStringControl",
     "SetLangString",
+    "Converter"
 ]

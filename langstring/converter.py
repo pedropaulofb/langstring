@@ -16,7 +16,7 @@ class Converter(metaclass=NonInstantiable):
             return cls.convert_multilangstring_to_langstrings(input)
 
         raise TypeError(
-            f"Invalid input argument type. " f"Expected SetLangString or MultiLangString, got {type(input).__name__}."
+            f"Invalid input argument type. Expected SetLangString or MultiLangString, got {type(input).__name__}."
         )
 
     @classmethod

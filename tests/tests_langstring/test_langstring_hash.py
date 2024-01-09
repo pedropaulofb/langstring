@@ -1,7 +1,7 @@
 import pytest
 
+from langstring import Controller
 from langstring import LangString
-from langstring import LangStringControl
 from langstring import LangStringFlag
 
 
@@ -92,5 +92,5 @@ def test_hash_consistency_with_flag_changes() -> None:
     lang_str = LangString("Hello", "en")
     initial_hash = hash(lang_str)
 
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, not LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT))
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, not Controller.get_flag(LangStringFlag.ENSURE_TEXT))
     assert hash(lang_str) == initial_hash, "Hash value should remain consistent despite changes in control flags"

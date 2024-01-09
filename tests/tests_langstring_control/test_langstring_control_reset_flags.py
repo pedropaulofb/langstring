@@ -1,4 +1,4 @@
-from langstring import LangStringControl
+from langstring import Controller
 from langstring import LangStringFlag
 
 
@@ -9,15 +9,15 @@ def test_reset_flags_to_default() -> None:
     """
     # Set all flags to True for testing
     for flag in LangStringFlag:
-        LangStringControl.set_flag(flag, True)
+        Controller.set_flag(flag, True)
 
     # Reset all flags
-    LangStringControl.reset_flags()
+    Controller.reset_flags_all()
 
     # Assert that all flags are reset to False
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
 
 
 def test_reset_flags_idempotence() -> None:
@@ -27,12 +27,12 @@ def test_reset_flags_idempotence() -> None:
     should remain in their default state (False) after multiple resets.
     """
     # Reset flags twice
-    LangStringControl.reset_flags()
-    LangStringControl.reset_flags()
+    Controller.reset_flags_all()
+    Controller.reset_flags_all()
 
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
 
 
 def test_reset_flags_effectiveness() -> None:
@@ -43,15 +43,15 @@ def test_reset_flags_effectiveness() -> None:
     :raises AssertionError: If any flag does not reset to False after calling reset_flags.
     """
     # Inverting the values of all flags
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
-    LangStringControl.reset_flags()
+    Controller.reset_flags_all()
 
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
 
 
 def test_reset_flags_changes_state() -> None:
@@ -62,19 +62,19 @@ def test_reset_flags_changes_state() -> None:
     reset to their default values.
     """
     # Modify the state of the flags
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
     # Ensure flags are modified
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
+    assert Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
 
     # Reset flags
-    LangStringControl.reset_flags()
+    Controller.reset_flags_all()
 
     # Check if flags are reset to default
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)

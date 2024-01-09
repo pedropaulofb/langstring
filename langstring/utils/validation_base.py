@@ -5,7 +5,7 @@ It includes methods to validate argument types, ensure text and language require
 language tags based on configurable control flags.
 
 The mixin is designed to be used with classes that handle language strings and need to enforce specific validation
-rules. It leverages control flags from a control class (like LangStringControl or MultiLangStringControl) to
+rules. It leverages control flags from a control class (like Controller or MultiLangStringControl) to
 determine the validation behavior.
 
 Classes:
@@ -28,7 +28,7 @@ from typing import Union
 from langcodes import tag_is_valid  # type: ignore
 
 if TYPE_CHECKING:
-    from ..langstring_control import LangStringControl, LangStringFlag
+    from ..controller import Controller, LangStringFlag
     from ..multilangstring_control import MultiLangStringControl, MultiLangStringFlag
 
 
@@ -42,7 +42,7 @@ class ValidationBase:
     @abstractmethod
     def _get_control_and_flags_type(
         self,
-    ) -> tuple[Union["LangStringControl", "MultiLangStringControl"], Union["LangStringFlag", "MultiLangStringFlag"]]:
+    ) -> tuple[Union["Controller", "MultiLangStringControl"], Union["LangStringFlag", "MultiLangStringFlag"]]:
         """Abstract method that must be implemented by subclasses.
 
         It should return the control class and its flags enumeration used for validation.

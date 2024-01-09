@@ -10,7 +10,7 @@ def test_reset_flags_resets_all_flags_to_default():
     MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_ANY_LANG, True)
 
     # Reset flags to default
-    MultiLangStringControl.reset_flags()
+    MultiLangStringControl.reset_flags_all()
     flags_after_reset = MultiLangStringControl.get_flags()
 
     # Define the expected default states for all flags
@@ -33,7 +33,7 @@ def test_reset_flags_effect_persists_after_multiple_set_flag_calls():
     MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
 
     # Reset flags to default
-    MultiLangStringControl.reset_flags()
+    MultiLangStringControl.reset_flags_all()
     flags_after_reset = MultiLangStringControl.get_flags()
 
     # Define the expected default states for all flags

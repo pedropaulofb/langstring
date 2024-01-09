@@ -5,7 +5,7 @@ consistent setup and teardown processes across multiple tests, ensuring a clean 
 """
 import pytest
 
-from langstring import LangStringControl
+from langstring import Controller
 from langstring import MultiLangStringControl
 
 
@@ -13,12 +13,12 @@ from langstring import MultiLangStringControl
 def reset_configurations() -> None:
     """Reset automatically all controllable configurations before each test.
 
-    Resets configurations in the LangStringControl and MultiLangStringControl to False before each test.
+    Resets configurations in the Controller and MultiLangStringControl to False before each test.
 
     This fixture ensures that each test starts with a clean state regarding the flags used in the
     LangString and MultiLangString modules. It is applied to all tests automatically due to the 'autouse=True' setting.
     """
     # Reset all LangString's flags to False before each test
-    LangStringControl.reset_flags()
+    Controller.reset_flags_all()
     # Reset all LangString's flags to False before each test
-    MultiLangStringControl.reset_flags()
+    MultiLangStringControl.reset_flags_all()

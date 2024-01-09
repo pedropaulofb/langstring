@@ -1,8 +1,8 @@
 import pytest
 
+from langstring import Controller
 from langstring import Converter
 from langstring import LangString
-from langstring import LangStringControl
 from langstring import LangStringFlag
 from langstring import SetLangString
 
@@ -45,7 +45,7 @@ def test_convert_langstring_to_setlangstring_empty_string():
 
     :return: None
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
     lang_string = LangString(text="", lang="en")
     result = Converter.convert_langstring_to_setlangstring(lang_string)
     assert result == SetLangString(
@@ -70,7 +70,7 @@ def test_convert_langstring_to_setlangstring_empty_langstring():
 
     :return: None
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
     lang_string = LangString()
     result = Converter.convert_langstring_to_setlangstring(lang_string)
     assert result == SetLangString(

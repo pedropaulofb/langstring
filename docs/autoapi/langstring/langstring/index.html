@@ -129,7 +129,7 @@ print(lang_str.to_string())  # Output: ‘“Hello, World!”&#64;en’</p>
 <p>A class to encapsulate a string with its language information.</p>
 <p>This class provides functionality to associate a text string with a language tag, offering methods for string
 representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
-from the LangStringControl class, which can enforce non-empty text, valid language tags, and other constraints.</p>
+from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -148,15 +148,15 @@ from the LangStringControl class, which can enforce non-empty text, valid langua
 <dt class="sig sig-object py" id="langstring.langstring.LangString._get_control_and_flags_type">
 <span class="sig-name descname"><span class="pre">_get_control_and_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString._get_control_and_flags_type" title="Link to this definition"></a></dt>
 <dd><p>Retrieve the control class and its corresponding flags enumeration used in the LangString class.</p>
-<p>This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)
+<p>This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
 that are used for configuring and validating the LangString instances. It is essential for the functioning of
 the ValidationBase methods, which rely on these control settings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A tuple containing the LangStringControl class and the LangStringFlag enumeration.</p>
+<dd class="field-odd"><p>A tuple containing the Controller class and the LangStringFlag enumeration.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[type[<a class="reference internal" href="../index.html#langstring.LangStringControl" title="langstring.LangStringControl">LangStringControl</a>], type[<a class="reference internal" href="../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag">LangStringFlag</a>]]</p>
+<dd class="field-even"><p>tuple[type[<a class="reference internal" href="../index.html#langstring.Controller" title="langstring.Controller">Controller</a>], type[<a class="reference internal" href="../index.html#langstring.LangStringFlag" title="langstring.LangStringFlag">LangStringFlag</a>]]</p>
 </dd>
 </dl>
 </dd></dl>

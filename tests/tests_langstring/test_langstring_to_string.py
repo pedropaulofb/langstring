@@ -2,8 +2,8 @@ from typing import Optional
 
 import pytest
 
+from langstring import Controller
 from langstring import LangString
-from langstring import LangStringControl
 from langstring import LangStringFlag
 
 
@@ -45,7 +45,7 @@ def test_langstring_string_representation(text: str, lang: Optional[str], expect
     :param expected_str: Expected string representation.
     :type expected_str: str
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
     lang_str = LangString(text, lang)
     assert str(lang_str) == expected_str, "LangString string representation is incorrect"
     assert lang_str.to_string() == expected_str, "LangString to_string method returned incorrect representation"
@@ -65,9 +65,9 @@ def test_to_string_with_different_flag_settings() -> None:
 
     :raises AssertionError: If the string representation does not match the expected output under different flag settings.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
     lang_str = LangString("Hello", "en")
     assert lang_str.to_string() == '"Hello"@en', "String representation should be correct with ENSURE_TEXT enabled"
 
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
     assert lang_str.to_string() == '"Hello"@en', "String representation should remain correct with ENSURE_TEXT disabled"

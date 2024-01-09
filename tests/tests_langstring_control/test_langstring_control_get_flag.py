@@ -13,18 +13,18 @@ from langstring import LangStringFlag
 )
 def test_get_flag_valid(flag: LangStringFlag) -> None:
     """Test retrieving the state of a valid flag."""
-    LangStringControl.set_flag(flag, True)  # Set flag to True for testing
-    assert LangStringControl.get_flag(flag) is True, "Flag state should be retrievable"
+    Controller.set_flag(flag, True)  # Set flag to True for testing
+    assert Controller.get_flag(flag) is True, "Flag state should be retrievable"
 
 
 def test_get_flag_invalid() -> None:
     """Test retrieving the state of an invalid flag."""
     with pytest.raises(TypeError, match="received. Valid flags are members of"):
-        LangStringControl.get_flag("InvalidFlag")
+        Controller.get_flag("InvalidFlag")
 
 
 import pytest
-from langstring import LangStringControl, LangStringFlag
+from langstring import Controller, LangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -42,9 +42,7 @@ def test_get_flag_default_states(flag: LangStringFlag, expected_state: bool) -> 
     :param flag: The flag to be tested.
     :param expected_state: The expected default state of the flag.
     """
-    assert (
-        LangStringControl.get_flag(flag) == expected_state
-    ), f"Default state of {flag.name} should be {expected_state}"
+    assert Controller.get_flag(flag) == expected_state, f"Default state of {flag.name} should be {expected_state}"
 
 
 @pytest.mark.parametrize(
@@ -62,10 +60,8 @@ def test_get_flag_after_setting_state(flag: LangStringFlag, state_to_set: bool) 
     :param flag: The flag to be tested.
     :param state_to_set: The state to set for the flag.
     """
-    LangStringControl.set_flag(flag, state_to_set)
-    assert (
-        LangStringControl.get_flag(flag) == state_to_set
-    ), f"State of {flag.name} should be {state_to_set} after setting"
+    Controller.set_flag(flag, state_to_set)
+    assert Controller.get_flag(flag) == state_to_set, f"State of {flag.name} should be {state_to_set} after setting"
 
 
 def test_get_flag_nonexistent() -> None:
@@ -73,7 +69,7 @@ def test_get_flag_nonexistent() -> None:
     Test retrieving the state of a nonexistent flag.
     """
     with pytest.raises(TypeError, match="Invalid flag .* received. Valid flags are members of LangStringFlag."):
-        LangStringControl.get_flag("NonexistentFlag")
+        Controller.get_flag("NonexistentFlag")
 
 
 @pytest.mark.parametrize("invalid_flag", [123, 4.5, None, [], {}])
@@ -84,4 +80,4 @@ def test_get_flag_invalid_type(invalid_flag) -> None:
     :param invalid_flag: An invalid flag type to be tested.
     """
     with pytest.raises(TypeError, match="Invalid flag .* received. Valid flags are members of LangStringFlag."):
-        LangStringControl.get_flag(invalid_flag)
+        Controller.get_flag(invalid_flag)

@@ -1,6 +1,6 @@
 import pytest
 
-from langstring import LangStringControl
+from langstring import Controller
 from langstring import LangStringFlag
 
 
@@ -14,15 +14,15 @@ from langstring import LangStringFlag
 )
 def test_set_flag_valid(flag: LangStringFlag, state: bool) -> None:
     """Test setting a flag with valid values."""
-    LangStringControl.set_flag(flag, state)
-    assert LangStringControl.get_flag(flag) == state, "Flag state should be updated correctly"
+    Controller.set_flag(flag, state)
+    assert Controller.get_flag(flag) == state, "Flag state should be updated correctly"
 
 
 @pytest.mark.parametrize("flag, state", [("InvalidFlag", True), (123, False)])
 def test_set_flag_invalid(flag, state) -> None:
     """Test setting a flag with invalid flag values."""
     with pytest.raises(TypeError, match="received. Valid flags are members of"):
-        LangStringControl.set_flag(flag, state)
+        Controller.set_flag(flag, state)
 
 
 @pytest.mark.parametrize(
@@ -40,7 +40,7 @@ def test_set_flag_invalid_state_type(flag: LangStringFlag, state) -> None:
     :param state: The invalid state type to set for the flag.
     """
     with pytest.raises(TypeError, match="State must be a boolean"):
-        LangStringControl.set_flag(flag, state)
+        Controller.set_flag(flag, state)
 
 
 @pytest.mark.parametrize(
@@ -58,10 +58,10 @@ def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state:
     :param initial_state: The initial state to set for the flag.
     :param new_state: The new state to set for the flag.
     """
-    LangStringControl.set_flag(flag, initial_state)
-    assert LangStringControl.get_flag(flag) == initial_state, "Initial flag state should be set correctly"
-    LangStringControl.set_flag(flag, new_state)
-    assert LangStringControl.get_flag(flag) == new_state, "Flag state should be toggled correctly"
+    Controller.set_flag(flag, initial_state)
+    assert Controller.get_flag(flag) == initial_state, "Initial flag state should be set correctly"
+    Controller.set_flag(flag, new_state)
+    assert Controller.get_flag(flag) == new_state, "Flag state should be toggled correctly"
 
 
 @pytest.mark.parametrize(
@@ -79,9 +79,9 @@ def test_set_multiple_flags_sequentially(flag_sequence: list[LangStringFlag], st
     :param state_sequence: A sequence of states corresponding to the flags in flag_sequence.
     """
     for flag, state in zip(flag_sequence, state_sequence):
-        LangStringControl.set_flag(flag, state)
+        Controller.set_flag(flag, state)
     for flag, state in zip(flag_sequence, state_sequence):
-        assert LangStringControl.get_flag(flag) == state, f"Flag {flag.name} should be set to {state}"
+        assert Controller.get_flag(flag) == state, f"Flag {flag.name} should be set to {state}"
 
 
 @pytest.mark.parametrize(
@@ -99,5 +99,5 @@ def test_set_flag_same_value_multiple_times(flag: LangStringFlag, state: bool) -
     :param state: The state to set for the flag.
     """
     for _ in range(3):  # Set the same state multiple times
-        LangStringControl.set_flag(flag, state)
-    assert LangStringControl.get_flag(flag) == state, f"Flag {flag.name} should remain {state} after multiple settings"
+        Controller.set_flag(flag, state)
+    assert Controller.get_flag(flag) == state, f"Flag {flag.name} should remain {state} after multiple settings"

@@ -50,8 +50,6 @@ from deep_translator import GoogleTranslator
 from langcodes import Language
 
 from .langstring import LangString
-from .multilangstring_control import MultiLangStringControl
-from .multilangstring_control import MultiLangStringFlag
 from .utils.validation_base import ValidationBase
 
 
@@ -78,7 +76,7 @@ class MultiLangString(ValidationBase):
         :return: A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.
         :rtype: tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]
         """
-        return MultiLangStringControl, MultiLangStringFlag
+        return MultiLangStringFlag
 
     def _validate_langstring_arg(self, arg: Any) -> None:
         """Private helper method to validate if the argument is a LangString.

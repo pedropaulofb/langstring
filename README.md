@@ -165,7 +165,7 @@ Then, encapsulate strings with their language tags as shown in the examples abov
 After installation, you can use the `LangString` and `MultiLangString` classes in your project. Simply import the classes and start encapsulating strings with their language tags.
 
 ```python
-from langstring import LangString, MultiLangString, LangStringControl, LangStringFlag, MultiLangStringControl, MultiLangStringFlag
+from langstring import LangString, MultiLangString, Controller, LangStringFlag, MultiLangStringControl, MultiLangStringFlag
 ```
 
 ## LangStrings
@@ -663,11 +663,11 @@ This system operates at a global, class-level context, meaning that the flags an
 
 In the following subsections, we will delve into the specifics of the available flags and the control methods. The flags define key aspects of how `LangString` and `MultiLangString` instances handle multilingual text, including validation rules and representation formats. Understanding these flags is crucial for effectively utilizing the library in various scenarios, especially those involving multilingual content.
 
-The control methods, shared between `LangStringControl` and `MultiLangStringControl`, provide the mechanisms to set, retrieve, and reset these flags. These methods ensure that you can dynamically configure the behavior of the library to suit your application's needs. We will explore each method in detail, providing insights into their usage and impact on the library's functionality.
+The control methods, shared between `Controller` and `MultiLangStringControl`, provide the mechanisms to set, retrieve, and reset these flags. These methods ensure that you can dynamically configure the behavior of the library to suit your application's needs. We will explore each method in detail, providing insights into their usage and impact on the library's functionality.
 
 ### Flags
 
-The LangString and MultiLangString classes use a set of flags to control various aspects of their behavior. These flags are managed by `LangStringControl` and `MultiLangStringControl` respectively. The flags provide a flexible way to customize the behavior of `LangString` and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed. The available flags and their effects are as follows.
+The LangString and MultiLangString classes use a set of flags to control various aspects of their behavior. These flags are managed by `Controller` and `MultiLangStringControl` respectively. The flags provide a flexible way to customize the behavior of `LangString` and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed. The available flags and their effects are as follows.
 
 #### `ENSURE_TEXT`
 
@@ -678,26 +678,26 @@ By default, the library has `True` as default value, indicating that it requires
 Example:
 
 ```python
-from langstring import LangString, LangStringControl, LangStringFlag
+from langstring import LangString, Controller, LangStringFlag
 
 # Enabling the ENSURE_TEXT flag
-LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
+Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
 
 # Attempting to create a LangString with an empty string will raise an error
 try:
-    LangString("", "en")
+  LangString("", "en")
 except ValueError as e:
-    print("Error with ENSURE_TEXT=True:", e)  # Expected Output: Error message about empty text
+  print("Error with ENSURE_TEXT=True:", e)  # Expected Output: Error message about empty text
 
 # Disabling the ENSURE_TEXT flag
-LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
 
 # Creating a LangString with an empty string will now succeed
 try:
-    ls = LangString("", "en")
-    print("Created LangString with ENSURE_TEXT=False:", ls)  # Expected Output: LangString object with empty text
+  ls = LangString("", "en")
+  print("Created LangString with ENSURE_TEXT=False:", ls)  # Expected Output: LangString object with empty text
 except ValueError as e:
-    print("Error with ENSURE_TEXT=False:", e)
+  print("Error with ENSURE_TEXT=False:", e)
 ```
 
 
@@ -740,19 +740,19 @@ Has `False` by default, indicating that the library does not enforce the validit
 Example:
 
 ```python
-from langstring import LangStringControl, LangStringFlag, LangString
+from langstring import Controller, LangStringFlag, LangString
 
 # Enabling the ENSURE_VALID_LANG flag
-LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
 # Attempting to create a LangString with an invalid language tag will raise an error
 try:
-    LangString("Hello", "invalid-lang-code")
+  LangString("Hello", "invalid-lang-code")
 except ValueError as e:
-    print("Error with ENSURE_VALID_LANG=True:", e)  # Expected Output: Error message about invalid language tag
+  print("Error with ENSURE_VALID_LANG=True:", e)  # Expected Output: Error message about invalid language tag
 
 # Disabling the ENSURE_VALID_LANG flag
-LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
+Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
 
 # Creating a LangString with an invalid language tag will now succeed
 ls = LangString("Hello", "invalid-lang-code")
@@ -761,7 +761,7 @@ print("Created LangString with ENSURE_VALID_LANG=False:", ls)  # Expected Output
 
 ### Control
 
-The Control classes, namely `LangStringControl` and `MultiLangStringControl`, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of `LangString` and `MultiLangString`.
+The Control classes, namely `Controller` and `MultiLangStringControl`, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of `LangString` and `MultiLangString`.
 
 #### Control Methods
 
@@ -772,15 +772,15 @@ The `set_flag` method is used to enable or disable a specific flag for either La
 Example:
 
 ```python
-from langstring import LangStringControl, LangStringFlag
+from langstring import Controller, LangStringFlag
 
-# Setting a flag in LangStringControl
-LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-print("ENSURE_TEXT flag set to:", LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: True
+# Setting a flag in Controller
+Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
+print("ENSURE_TEXT flag set to:", Controller.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: True
 
 # Resetting the flag to a different value
-LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
-print("ENSURE_TEXT flag reset to:", LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: False
+Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+print("ENSURE_TEXT flag reset to:", Controller.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: False
 ```
 
 ##### `get_flag`
@@ -807,17 +807,17 @@ The `reset_flags` method resets all flags to their default values. This is parti
 Example:
 
 ```python
-from langstring import LangStringControl, LangStringFlag
+from langstring import Controller, LangStringFlag
 
 # Setting the flags to a non-default state
-LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
-LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
-LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
+Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
-# Resetting all flags to default in LangStringControl
-LangStringControl.reset_flags()
+# Resetting all flags to default in Controller
+Controller.reset_flags_all()
 print("Flags after reset:")
-LangStringControl.print_flags()  # Expected Output: Default states of all flags, as follows:
+Controller.print_flags()  # Expected Output: Default states of all flags, as follows:
 # LangStringFlag.ENSURE_TEXT = True
 # LangStringFlag.ENSURE_ANY_LANG = False
 # LangStringFlag.ENSURE_VALID_LANG = False
@@ -833,7 +833,7 @@ Example:
 from langstring import MultiLangStringControl
 
 # Resetting flags to ensure a known state
-MultiLangStringControl.reset_flags()
+MultiLangStringControl.reset_flags_all()
 
 # Printing the current state of all configuration flags in MultiLangStringControl
 print("Current flag states in MultiLangStringControl:")

@@ -1,13 +1,13 @@
 import pytest
 
+from langstring import Controller
 from langstring import LangString
-from langstring import LangStringControl
 from langstring import LangStringFlag
 
 
 def test_langstring_init_invalid_lang_without_ensure_valid_lang_flag() -> None:
     """Test LangString initialization with an invalid language tag but without ENSURE_VALID_LANG flag."""
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
     lang_str = LangString("Hello", "invalid-lang")
     assert (
         lang_str.lang == "invalid-lang"
@@ -35,7 +35,7 @@ def test_validate_ensure_valid_lang(lang: str, is_valid: bool) -> None:
     :param lang: The language code to test.
     :param is_valid: Expected validity of the language code.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
         # No exception expected for valid language codes
         try:
@@ -50,7 +50,7 @@ def test_validate_ensure_valid_lang(lang: str, is_valid: bool) -> None:
 
 def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled() -> None:
     """Test LangString initialization with an invalid language tag with ENSURE_VALID_LANG flag disabled."""
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, False)
     lang_str = LangString("Hello", "invalid-lang")
     assert (
         lang_str.lang == "invalid-lang"
@@ -66,7 +66,7 @@ def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled() -> 
 )
 def test_validate_ensure_valid_lang_mixed_case(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_valid_lang method for mixed case language codes."""
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
         LangString("Test", lang)
     else:
@@ -83,7 +83,7 @@ def test_validate_ensure_valid_lang_mixed_case(lang: str, is_valid: bool) -> Non
 )
 def test_validate_ensure_valid_lang_extended(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_valid_lang method for extended language tags."""
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
         LangString("Test", lang)
     else:
@@ -100,7 +100,7 @@ def test_validate_ensure_valid_lang_extended(lang: str, is_valid: bool) -> None:
 )
 def test_validate_ensure_valid_lang_whitespace(lang: str, is_valid: bool) -> None:
     """Test the _validate_ensure_valid_lang method for language codes with whitespace."""
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
         LangString("Test", lang)
     else:
@@ -117,8 +117,8 @@ def test_validate_ensure_valid_lang_whitespace(lang: str, is_valid: bool) -> Non
 )
 def test_langstring_init_empty_text(lang: str, is_valid: bool) -> None:
     """Test LangString initialization with empty text and various language codes."""
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     if is_valid:
         assert LangString("", lang), "Should be possible to create when both flags are enabled."
     else:
@@ -143,7 +143,7 @@ def test_validate_ensure_valid_lang_non_standard_codes(lang: str) -> None:
     :param lang: The language code to test.
     :raises AssertionError: If LangString accepts a non-standard language code when ENSURE_VALID_LANG is enabled.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
         LangString("Test", lang)
 
@@ -159,6 +159,6 @@ def test_validate_ensure_valid_lang_null_or_undefined(lang) -> None:
     :param lang: The language code to test (None or "undefined").
     :raises AssertionError: If LangString accepts null or undefined language codes when ENSURE_VALID_LANG is enabled.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
     with pytest.raises(ValueError, match="ENSURE_VALID_LANG enabled: LangString's 'lang' field cannot"):
         LangString("Test", lang)

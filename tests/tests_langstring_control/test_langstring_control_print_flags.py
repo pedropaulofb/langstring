@@ -1,4 +1,4 @@
-from langstring import LangStringControl
+from langstring import Controller
 from langstring import LangStringFlag
 
 
@@ -8,7 +8,7 @@ def test_print_flags_default(capfd) -> None:
 
     :param capfd: Pytest fixture to capture file descriptors.
     """
-    LangStringControl.print_flags()
+    Controller.print_flags()
     out, _ = capfd.readouterr()
     expected_output = (
         "LangStringFlag.ENSURE_TEXT = True\n"
@@ -24,9 +24,9 @@ def test_print_flags_after_modification(capfd) -> None:
 
     :param capfd: Pytest fixture to capture file descriptors.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
-    LangStringControl.print_flags()
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
+    Controller.print_flags()
     out, _ = capfd.readouterr()
     expected_output = (
         "LangStringFlag.ENSURE_TEXT = False\n"
@@ -34,7 +34,7 @@ def test_print_flags_after_modification(capfd) -> None:
         "LangStringFlag.ENSURE_VALID_LANG = False\n"
     )
     assert out == expected_output, "Modified flag settings should be printed correctly"
-    LangStringControl.reset_flags()  # Reset flags to default after test
+    Controller.reset_flags_all()  # Reset flags to default after test
 
 
 def test_print_flags_after_reset(capfd) -> None:
@@ -43,9 +43,9 @@ def test_print_flags_after_reset(capfd) -> None:
 
     :param capfd: Pytest fixture to capture file descriptors.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
-    LangStringControl.reset_flags()
-    LangStringControl.print_flags()
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.reset_flags_all()
+    Controller.print_flags()
     out, _ = capfd.readouterr()
     expected_output = (
         "LangStringFlag.ENSURE_TEXT = True\n"

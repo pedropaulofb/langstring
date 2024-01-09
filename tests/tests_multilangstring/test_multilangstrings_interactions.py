@@ -1,8 +1,8 @@
 import pytest
 
+from langstring import Controller
 from langstring import Converter
 from langstring import LangString
-from langstring import LangStringControl
 from langstring import LangStringFlag
 from langstring import MultiLangString
 from langstring import MultiLangStringControl
@@ -59,7 +59,7 @@ def test_add_entry_and_add_langstring_with_validations():
         mls.add_entry("", "invalid-lang")
 
     # Temporarily disable ENSURE_TEXT for creating LangString with empty text
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
     langstring = LangString(text="", lang="invalid-lang")
 
     # Test add_langstring with invalid data

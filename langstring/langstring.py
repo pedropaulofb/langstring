@@ -22,8 +22,8 @@ import nltk
 from langcodes import Language
 from nltk.corpus import wordnet
 
-from .langstring_control import LangStringControl
-from .langstring_control import LangStringFlag
+from .controller import Controller
+from .controller import LangStringFlag
 from .setlangstring import SetLangString
 from .utils.validation_base import ValidationBase
 
@@ -33,7 +33,7 @@ class LangString(ValidationBase):
 
     This class provides functionality to associate a text string with a language tag, offering methods for string
     representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
-    from the LangStringControl class, which can enforce non-empty text, valid language tags, and other constraints.
+    from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.
 
     :ivar text: The text string.
     :vartype text: Optional[str]
@@ -42,7 +42,7 @@ class LangString(ValidationBase):
     """
 
     # Ignoring mypy error for practicality: subclasses narrow type for specific use, not affecting functionality.
-    def _get_control_and_flags_type(self) -> tuple[type[LangStringControl], type[LangStringFlag]]:  # type: ignore
+    def _get_control_and_flags_type(self) -> tuple[type[Controller], type[LangStringFlag]]:  # type: ignore
         """Retrieve the control class and its corresponding flags enumeration used in the LangString class.
 
         This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)
@@ -50,14 +50,14 @@ class LangString(ValidationBase):
         the ValidationBase methods, which rely on these control settings.
 
         :return: A tuple containing the LangStringControl class and the LangStringFlag enumeration.
-        :rtype: tuple[type[LangStringControl], type[LangStringFlag]]
+        :rtype: tuple[type[Controller], type[LangStringFlag]]
         """
-        return LangStringControl, LangStringFlag
+        return Controller, LangStringFlag
 
     def __init__(self, text: str = "", lang: Optional[str] = None) -> None:
         """Initialize a new LangString object with text and an optional language tag.
 
-        The behavior of this method is influenced by control flags set in LangStringControl. For instance, if the
+        The behavior of this method is influenced by control flags set in Controller. For instance, if the
         ENSURE_TEXT flag is enabled, an empty 'text' string will raise a ValueError.
 
         :param text: The text string, defaults to an empty string.

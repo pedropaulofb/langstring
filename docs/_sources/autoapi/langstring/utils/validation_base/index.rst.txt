@@ -12,7 +12,7 @@
    language tags based on configurable control flags.
 
    The mixin is designed to be used with classes that handle language strings and need to enforce specific validation
-   rules. It leverages control flags from a control class (like LangStringControl or MultiLangStringControl) to
+   rules. It leverages control flags from a control class (like Controller or MultiLangStringControl) to
    determine the validation behavior.
 
    Classes:

@@ -116,7 +116,7 @@ Classes
 
       Retrieve the control class and its corresponding flags enumeration used in the LangString class.
 
-      This method provides the specific control class (LangStringControl) and the flags enumeration (LangStringFlag)
+      This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
       that are used for configuring and validating the LangString instances. It is essential for the functioning of
       the ValidationBase methods, which rely on these control settings.
 

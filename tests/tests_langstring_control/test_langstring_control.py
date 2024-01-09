@@ -1,6 +1,6 @@
 import pytest
 
-from langstring import LangStringControl
+from langstring import Controller
 from langstring import LangStringFlag
 
 
@@ -17,22 +17,22 @@ def test_default_flag_state(flag: LangStringFlag) -> None:
 
     :param flag: The LangStringFlag to check the default state for.
     """
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
+    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
 
 
 def test_instantiation_of_langstringcontrol() -> None:
     """
-    Test that instantiation of LangStringControl raises a TypeError.
+    Test that instantiation of Controller raises a TypeError.
 
-    This test ensures that LangStringControl, being a static configuration manager, cannot be instantiated due to
+    This test ensures that Controller, being a static configuration manager, cannot be instantiated due to
     the NonInstantiable metaclass.
 
-    :raises AssertionError: If LangStringControl can be instantiated without raising a TypeError.
+    :raises AssertionError: If Controller can be instantiated without raising a TypeError.
     """
-    with pytest.raises(TypeError, match="LangStringControl class cannot be instantiated."):
-        LangStringControl()
+    with pytest.raises(TypeError, match="Controller class cannot be instantiated."):
+        Controller()
 
 
 @pytest.mark.parametrize(
@@ -53,11 +53,11 @@ def test_flag_state_persistence(initial_state: bool, new_state: bool) -> None:
     :raises AssertionError: If the flag state does not persist as expected.
     """
     flag = LangStringFlag.ENSURE_TEXT
-    LangStringControl.set_flag(flag, initial_state)
-    assert LangStringControl.get_flag(flag) == initial_state, "Initial flag state should persist"
+    Controller.set_flag(flag, initial_state)
+    assert Controller.get_flag(flag) == initial_state, "Initial flag state should persist"
 
-    LangStringControl.set_flag(flag, new_state)
-    assert LangStringControl.get_flag(flag) == new_state, "Modified flag state should persist"
+    Controller.set_flag(flag, new_state)
+    assert Controller.get_flag(flag) == new_state, "Modified flag state should persist"
 
 
 def test_multiple_flag_modifications_integrity() -> None:
@@ -68,15 +68,15 @@ def test_multiple_flag_modifications_integrity() -> None:
 
     :raises AssertionError: If the state of any flag is not as expected after multiple modifications.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_ANY_LANG, False)
-    LangStringControl.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
+    Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, False)
+    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT), "ENSURE_TEXT flag should be True"
-    assert not LangStringControl.get_flag(LangStringFlag.ENSURE_ANY_LANG), "ENSURE_ANY_LANG flag should be False"
-    assert LangStringControl.get_flag(LangStringFlag.ENSURE_VALID_LANG), "ENSURE_VALID_LANG flag should be True"
+    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT), "ENSURE_TEXT flag should be True"
+    assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG), "ENSURE_ANY_LANG flag should be False"
+    assert Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG), "ENSURE_VALID_LANG flag should be True"
 
-    LangStringControl.reset_flags()  # Reset flags to default after test
+    Controller.reset_flags_all()  # Reset flags to default after test
 
 
 def test_flag_state_consistency_across_methods() -> None:
@@ -87,11 +87,11 @@ def test_flag_state_consistency_across_methods() -> None:
 
     :raises AssertionError: If the flag states are inconsistent across different methods.
     """
-    LangStringControl.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    all_flags = LangStringControl.get_flags()
+    Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
+    all_flags = Controller.get_flags()
 
     assert (
-        LangStringControl.get_flag(LangStringFlag.ENSURE_TEXT) == all_flags[LangStringFlag.ENSURE_TEXT]
+        Controller.get_flag(LangStringFlag.ENSURE_TEXT) == all_flags[LangStringFlag.ENSURE_TEXT]
     ), "Flag state should be consistent across get_flag and get_flags methods"
 
-    LangStringControl.reset_flags()  # Reset flags to default after test
+    Controller.reset_flags_all()  # Reset flags to default after test

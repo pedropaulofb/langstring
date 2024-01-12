@@ -22,6 +22,6 @@ def test_validate_ensure_text(text, flag_state, expected_exception):
     # Directly accessing the protected method for testing purposes
     if expected_exception:
         with pytest.raises(expected_exception, match="cannot receive empty string"):
-            mls._validate_ensure_text(text)
+            mls._validate_text(text)
     else:
-        mls._validate_ensure_text(text)  # Should not raise an exception
+        mls._validate_text(text)  # Should not raise an exception

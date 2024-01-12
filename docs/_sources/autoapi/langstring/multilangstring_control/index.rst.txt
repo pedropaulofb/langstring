@@ -118,7 +118,7 @@ Classes
 
       This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
       that are used for configuring and validating the LangString instances. It is essential for the functioning of
-      the ValidationBase methods, which rely on these control settings.
+      the Validator methods, which rely on these control settings.
 
       :return: The LangStringFlag enumeration.
       :rtype: type[MultiLangStringFlag]

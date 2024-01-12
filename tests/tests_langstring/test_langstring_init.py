@@ -117,13 +117,11 @@ def test_langstring_with_long_string_input() -> None:
         ("Hello", "en", False, False, None),
         ("", "en", True, False, ValueError),
         ("Hello", "", False, False, ValueError),
-        ("Hello", "invalid-lang", False,  True, ValueError),
+        ("Hello", "invalid-lang", False, True, ValueError),
         ("", "", True, False, ValueError),
     ],
 )
-def test_langstring_init_with_flags(
-    text, lang, ensure_text, ensure_valid_lang, expected_exception
-) -> None:
+def test_langstring_init_with_flags(text, lang, ensure_text, ensure_valid_lang, expected_exception) -> None:
     """Test LangString initialization with various flag settings.
 
     :param text: The text to initialize the LangString with.

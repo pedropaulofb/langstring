@@ -87,10 +87,10 @@ def test_hash_consistency_with_flag_changes() -> None:
     """
     Test the consistency of the __hash__ method of LangString with changes in control flags.
 
-    :raises AssertionError: If the hash value changes with control flag settings.
+    :raises AssertionError: If the hash new_text changes with control flag settings.
     """
     lang_str = LangString("Hello", "en")
     initial_hash = hash(lang_str)
 
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, not Controller.get_flag(LangStringFlag.DEFINED_TEXT))
-    assert hash(lang_str) == initial_hash, "Hash value should remain consistent despite changes in control flags"
+    assert hash(lang_str) == initial_hash, "Hash new_text should remain consistent despite changes in control flags"

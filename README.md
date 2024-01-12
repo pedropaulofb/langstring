@@ -257,9 +257,9 @@ Example:
 # Import necessary class
 from langstring import LangString
 
-# Creating a LangString instance and printing its hash value
+# Creating a LangString instance and printing its hash new_text
 greeting = LangString("Hello", "en")
-print(hash(greeting))  # Output: (hash value, e.g., 224086809330009634)
+print(hash(greeting))  # Output: (hash new_text, e.g., 224086809330009634)
 ```
 
 ## MultiLangStrings
@@ -295,7 +295,7 @@ mls = MultiLangString({"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos d
 print(mls)  # Expected Output: "Hello"@en, "Good morning"@en, "Hola"@es, "Buenos días"@es
 
 # Printing the preferred language
-print("Preferred language:", mls.preferred_lang)  # Expected Output: Preferred language: en
+print("Preferred language:", mls.pref_lang)  # Expected Output: Preferred language: en
 ```
 
 #### `add_entry`
@@ -650,9 +650,9 @@ Example:
 # Import necessary class
 from langstring import MultiLangString
 
-# Initialize MultiLangString and generate a hash value
+# Initialize MultiLangString and generate a hash new_text
 mls = MultiLangString({"en": {"Hello", "Good morning"}})
-print(hash(mls))  # Expected Output: (hash value, e.g., 3786478500744739392)
+print(hash(mls))  # Expected Output: (hash new_text, e.g., 3786478500744739392)
 ```
 
 ## Control and Flags
@@ -778,7 +778,7 @@ from langstring import Controller, LangStringFlag
 Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
 print("ENSURE_TEXT flag set to:", Controller.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: True
 
-# Resetting the flag to a different value
+# Resetting the flag to a different new_text
 Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
 print("ENSURE_TEXT flag reset to:", Controller.get_flag(LangStringFlag.ENSURE_TEXT))  # Expected Output: False
 ```

@@ -9,9 +9,7 @@ def test_langstring_init_invalid_lang_without_ensure_valid_lang_flag() -> None:
     """Test LangString initialization with an invalid language tag but without VALID_LANG flag."""
     Controller.set_flag(LangStringFlag.VALID_LANG, False)
     lang_str = LangString("Hello", "invalid-lang")
-    assert (
-        lang_str.lang == "invalid-lang"
-    ), "LangString should accept invalid language tag when VALID_LANG is not set"
+    assert lang_str.lang == "invalid-lang", "LangString should accept invalid language tag when VALID_LANG is not set"
 
 
 # Test cases for _validate_ensure_valid_lang method of LangString class
@@ -52,9 +50,7 @@ def test_langstring_init_invalid_lang_with_ensure_valid_lang_flag_disabled() -> 
     """Test LangString initialization with an invalid language tag with VALID_LANG flag disabled."""
     Controller.set_flag(LangStringFlag.VALID_LANG, False)
     lang_str = LangString("Hello", "invalid-lang")
-    assert (
-        lang_str.lang == "invalid-lang"
-    ), "LangString should accept invalid language tag when VALID_LANG is disabled"
+    assert lang_str.lang == "invalid-lang", "LangString should accept invalid language tag when VALID_LANG is disabled"
 
 
 @pytest.mark.parametrize(

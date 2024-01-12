@@ -117,7 +117,7 @@ convenient and standardized way to store and manipulate multilingual text data.<
 <p>Dependencies:
 - LangString: A class for representing individual text entries with associated language tags.
 - MultiLangStringControl and MultiLangStringFlag: for managing configuration and behavior of MultiLangString instances.
-- ValidationBase: A base class providing validation functionalities.</p>
+- Validator: A base class providing validation functionalities.</p>
 <p>Usage:
 The MultiLangString class can be used to create multilingual text containers, add text entries in various languages,
 retrieve entries based on language, and perform other operations related to multilingual text management. It is
@@ -147,7 +147,7 @@ the development of multilingual applications and facilitate the handling of text
 <dl class="py class">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.multilangstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pref_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../utils/validation_base/index.html#langstring.utils.validation_base.ValidationBase" title="langstring.utils.validation_base.ValidationBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.validation_base.ValidationBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../utils/validation_base/index.html#langstring.utils.validation_base.Validator" title="langstring.utils.validation_base.Validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.validation_base.Validator</span></code></a></p>
 <p>A class for managing multilingual text strings with various language tags.</p>
 <p>Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
 operations like adding, removing, and retrieving language strings in multiple languages.</p>
@@ -185,7 +185,7 @@ operations like adding, removing, and retrieving language strings in multiple la
 <dd><p>Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.</p>
 <p>This method provides the specific control class (MultiLangStringControl) and the flags enumeration
 (MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
-It is essential for the functioning of the ValidationBase methods, which rely on these control settings.</p>
+It is essential for the functioning of the Validator methods, which rely on these control settings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.</p>

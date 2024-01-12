@@ -53,7 +53,7 @@ Classes
 .. py:class:: LangString(text = '', lang = None)
 
 
-   Bases: :py:obj:`langstring.utils.validation_base.ValidationBase`
+   Bases: :py:obj:`langstring.utils.validation_base.Validator`
 
    A class to encapsulate a string with its language information.
 
@@ -72,7 +72,7 @@ Classes
 
       This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
       that are used for configuring and validating the LangString instances. It is essential for the functioning of
-      the ValidationBase methods, which rely on these control settings.
+      the Validator methods, which rely on these control settings.
 
       :return: A tuple containing the Controller class and the LangStringFlag enumeration.
       :rtype: tuple[type[Controller], type[LangStringFlag]]
@@ -141,7 +141,7 @@ Classes
 
       This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
       that are used for configuring and validating the LangString instances. It is essential for the functioning of
-      the ValidationBase methods, which rely on these control settings.
+      the Validator methods, which rely on these control settings.
 
       :return: The LangStringFlag enumeration.
       :rtype: type[LangStringFlag]
@@ -180,7 +180,7 @@ Classes
 .. py:class:: MultiLangString(mls_dict = None, pref_lang = 'en')
 
 
-   Bases: :py:obj:`langstring.utils.validation_base.ValidationBase`
+   Bases: :py:obj:`langstring.utils.validation_base.Validator`
 
    A class for managing multilingual text strings with various language tags.
 
@@ -206,7 +206,7 @@ Classes
 
       This method provides the specific control class (MultiLangStringControl) and the flags enumeration
       (MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
-      It is essential for the functioning of the ValidationBase methods, which rely on these control settings.
+      It is essential for the functioning of the Validator methods, which rely on these control settings.
 
       :return: A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.
       :rtype: tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]
@@ -491,7 +491,7 @@ Classes
 
       This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
       that are used for configuring and validating the LangString instances. It is essential for the functioning of
-      the ValidationBase methods, which rely on these control settings.
+      the Validator methods, which rely on these control settings.
 
       :return: The LangStringFlag enumeration.
       :rtype: type[MultiLangStringFlag]

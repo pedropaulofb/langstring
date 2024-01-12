@@ -88,7 +88,7 @@ def test_set_multiple_flags_sequentially(flag_sequence: list[LangStringFlag], st
 )
 def test_set_flag_same_value_multiple_times(flag: LangStringFlag, state: bool) -> None:
     """
-    Test setting a flag to the same value multiple times to ensure it does not cause any issues.
+    Test setting a flag to the same new_text multiple times to ensure it does not cause any issues.
 
     :param flag: The LangStringFlag to be set.
     :param state: The state to set for the flag.

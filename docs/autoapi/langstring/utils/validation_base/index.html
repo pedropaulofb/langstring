@@ -94,21 +94,21 @@
              
   <section id="module-langstring.utils.validation_base">
 <span id="langstring-utils-validation-base"></span><h1><a class="reference internal" href="#module-langstring.utils.validation_base" title="langstring.utils.validation_base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.utils.validation_base</span></code></a><a class="headerlink" href="#module-langstring.utils.validation_base" title="Link to this heading"></a></h1>
-<p>This module defines the ValidationBase class.</p>
-<p>The ValidationBase provides validation functionalities for LangString and MultiLangString classes.
+<p>This module defines the Validator class.</p>
+<p>The Validator provides validation functionalities for LangString and MultiLangString classes.
 It includes methods to validate argument types, ensure text and language requirements, and check the validity of
 language tags based on configurable control flags.</p>
 <p>The mixin is designed to be used with classes that handle language strings and need to enforce specific validation
 rules. It leverages control flags from a control class (like Controller or MultiLangStringControl) to
 determine the validation behavior.</p>
 <dl class="simple">
-<dt>Classes:</dt><dd><p>ValidationBase: A mixin class providing validation methods for LangString and MultiLangString classes.</p>
+<dt>Classes:</dt><dd><p>Validator: A mixin class providing validation methods for LangString and MultiLangString classes.</p>
 </dd>
 <dt>Example Usage:</dt><dd><dl class="simple">
-<dt>class LangString(ValidationBase):</dt><dd><p># LangString implementation
+<dt>class LangString(Validator):</dt><dd><p># LangString implementation
 …</p>
 </dd>
-<dt>class MultiLangString(ValidationBase):</dt><dd><p># MultiLangString implementation
+<dt>class MultiLangString(Validator):</dt><dd><p># MultiLangString implementation
 …</p>
 </dd>
 </dl>
@@ -120,20 +120,20 @@ determine the validation behavior.</p>
 <h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.utils.validation_base.ValidationBase" title="langstring.utils.validation_base.ValidationBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValidationBase</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.utils.validation_base.Validator" title="langstring.utils.validation_base.Validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Validator</span></code></a></p></td>
 <td><p>A mixin class that provides validation methods for classes handling language strings.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
-<dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.utils.validation_base.</span></span><span class="sig-name descname"><span class="pre">ValidationBase</span></span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validation_base.Validator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.utils.validation_base.</span></span><span class="sig-name descname"><span class="pre">Validator</span></span><a class="headerlink" href="#langstring.utils.validation_base.Validator" title="Link to this definition"></a></dt>
 <dd><p>A mixin class that provides validation methods for classes handling language strings.</p>
 <p>It ensures that the text and language arguments meet specific criteria, such as type correctness, non-emptiness,
 and language tag validity. The validation rules are determined by control flags from a control class.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._get_control_and_flags_type">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_control_and_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._get_control_and_flags_type" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validation_base.Validator._get_control_and_flags_type">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_control_and_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.Validator._get_control_and_flags_type" title="Link to this definition"></a></dt>
 <dd><p>Abstract method that must be implemented by subclasses.</p>
 <p>It should return the control class and its flags enumeration used for validation.
 This method is intended to be overridden in subclasses to return a tuple containing the specific control
@@ -154,8 +154,8 @@ the subclass. The exact types of the control class and flags enumeration will de
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_arguments">
-<span class="sig-name descname"><span class="pre">_validate_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_arguments" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validation_base.Validator._validate_arguments">
+<span class="sig-name descname"><span class="pre">_validate_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.Validator._validate_arguments" title="Link to this definition"></a></dt>
 <dd><p>Validate the types of the ‘text’ and ‘lang’ arguments.</p>
 <p>Ensures that ‘text’ is a string and ‘lang’ is either a string or None. Raises a TypeError if the types do not
 match the expected types. Additionally, checks if ‘text’ is not None.</p>
@@ -179,8 +179,8 @@ match the expected types. Additionally, checks if ‘text’ is not None.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_ensure_text">
-<span class="sig-name descname"><span class="pre">_validate_ensure_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_text" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validation_base.Validator._validate_ensure_text">
+<span class="sig-name descname"><span class="pre">_validate_ensure_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.Validator._validate_ensure_text" title="Link to this definition"></a></dt>
 <dd><p>Validate the ‘text’ argument based on the ENSURE_TEXT control flag.</p>
 <p>Checks if the ‘text’ field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT
 flag set in the control class.</p>
@@ -198,8 +198,8 @@ flag set in the control class.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_ensure_any_lang">
-<span class="sig-name descname"><span class="pre">_validate_ensure_any_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_any_lang" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validation_base.Validator._validate_ensure_any_lang">
+<span class="sig-name descname"><span class="pre">_validate_ensure_any_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.Validator._validate_ensure_any_lang" title="Link to this definition"></a></dt>
 <dd><p>Validate the ‘lang’ argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.</p>
 <p>Checks if the ‘lang’ field is empty and raises a ValueError or logs a warning depending on the ENSURE_ANY_LANG,
 ENSURE_VALID_LANG flag set in the control class.</p>
@@ -217,8 +217,8 @@ ENSURE_VALID_LANG flag set in the control class.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validation_base.ValidationBase._validate_ensure_valid_lang">
-<span class="sig-name descname"><span class="pre">_validate_ensure_valid_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.ValidationBase._validate_ensure_valid_lang" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validation_base.Validator._validate_ensure_valid_lang">
+<span class="sig-name descname"><span class="pre">_validate_ensure_valid_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validation_base.Validator._validate_ensure_valid_lang" title="Link to this definition"></a></dt>
 <dd><p>Validate the language tag for its validity.</p>
 <p>This method checks if the language tag is valid. If the tag is invalid, it raises a warning or an error
 depending on the control flags set in the control class.</p>

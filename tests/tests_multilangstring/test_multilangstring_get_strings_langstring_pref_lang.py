@@ -41,5 +41,5 @@ def test_get_strings_langstring_pref_lang_with_invalid_pref_lang_type():
     """
     mls = MultiLangString(mls_dict={"en": {"Hello"}})
     with pytest.raises(TypeError, match="Invalid pref_lang type"):
-        mls.preferred_lang = 123
+        mls.pref_lang = 123
         mls.get_strings_langstring_pref_lang()

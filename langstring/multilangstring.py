@@ -19,42 +19,23 @@ Key Features:
 This module is designed to be used in applications that require handling of text in multiple languages, providing a
 convenient and standardized way to store and manipulate multilingual text data.
 
-Classes:
-- MultiLangString: The main class for creating and managing multilingual text strings.
-
-Dependencies:
-- LangString: A class for representing individual text entries with associated language tags.
-- Controller and MultiLangStringFlag: for managing configuration and behavior of MultiLangString instances.
-- ValidationBase: A base class providing validation functionalities.
-
 Usage:
 The MultiLangString class can be used to create multilingual text containers, add text entries in various languages,
 retrieve entries based on language, and perform other operations related to multilingual text management. It is
 particularly useful in applications where content needs to be presented in multiple languages, such as websites,
 applications with internationalization support, and data processing tools that handle multilingual data.
 
-Example:
-    mls_dict = {"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}
-    mls = MultiLangString(mls_dict)
-    mls.add_entry("Bonjour", "fr")
-    print(mls.get_strings_lang("en"))  # Output: ['Hello', 'Good morning']
-    print(mls)  # Output: '"Hello"@en, "Good morning"@en, "Hola"@es, "Buenos días"@es, "Bonjour"fr'
-
 By providing a comprehensive set of methods for managing multilingual text, the MultiLangString class aims to simplify
 the development of multilingual applications and facilitate the handling of text in multiple languages.
 """
-from typing import Any
 from typing import Optional
-
-from deep_translator import GoogleTranslator
-from langcodes import Language
 
 from .flags import MultiLangStringFlag
 from .langstring import LangString
-from .utils.validation_base import ValidationBase
+from .utils.validator import Validator
 
 
-class MultiLangString(ValidationBase):
+class MultiLangString:
     """A class for managing multilingual text strings with various language tags.
 
     Utilizes a global control strategy set in Controller to handle duplicate language tags. Supports
@@ -65,34 +46,6 @@ class MultiLangString(ValidationBase):
     :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
     :vartype pref_lang: str
     """
-
-    # TODO (pedropaulofb): Implement mandatory lang not None and lang not ""
-
-    # Ignoring mypy error: subclasses narrow type for specific use, not affecting functionality.
-    def _get_flags_type(self) -> type[MultiLangStringFlag]:  # type: ignore # noqa: E501
-        """Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.
-
-        This method provides the specific control class (Controller) and the flags enumeration
-        (MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
-        It is essential for the functioning of the ValidationBase methods, which rely on these control settings.
-
-        :return: A tuple containing the Controller class and the MultiLangStringFlag enumeration.
-        :rtype: tuple[type[Controller], type[MultiLangStringFlag]]
-        """
-        return MultiLangStringFlag
-
-    def _validate_langstring_arg(self, arg: Any) -> None:
-        """Private helper method to validate if the argument is a LangString.
-
-        :param arg: Argument to be checked.
-        :type arg: Any
-        :raises TypeError: If the passed argument is not an instance of LangString.
-        """
-        if not isinstance(arg, LangString):
-            raise TypeError(
-                f"MultiLangString received invalid argument. Expected a LangString but "
-                f"received '{type(arg).__name__}' with value '{arg}'."
-            )
 
     def __init__(self, mls_dict: Optional[dict[str, set[str]]] = None, pref_lang: str = "en") -> None:
         """Initialize a MultiLangString object with an optional dictionary and preferred language.
@@ -110,43 +63,61 @@ class MultiLangString(ValidationBase):
         :type pref_lang: str
         :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
-        if mls_dict and not isinstance(mls_dict, dict):
-            raise TypeError(f"Invalid type for argument mls_dict. Expected 'dict', received '{type(mls_dict)}'.")
-        if pref_lang and not isinstance(pref_lang, str):
-            raise TypeError(f"Invalid type for argument pref_lang. Expected 'str', received '{type(pref_lang)}'.")
 
-        if mls_dict is not None:
-            self._validate_mls_dict(mls_dict)
-        else:
-            mls_dict = {}
-        self.mls_dict: dict[str, set[str]] = mls_dict
+        self.mls_dict: dict[str, set[str]] = mls_dict if (mls_dict is not None) else {}
+        self.pref_lang: str = pref_lang
 
-        self._pref_lang: str = pref_lang
-
-        self._translator = None
-
-    # pref_lang GETTER
     @property
-    def preferred_lang(self) -> str:
+    def mls_dict(self) -> dict[str, set[str]]:
+        """Getter for texts."""
+        return self._mls_dict
+
+    @mls_dict.setter
+    def mls_dict(self, new_mls_dict: dict[str, set[str]]) -> None:
+        """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
+
+        msg = f"Invalid type of 'mls_dict' received ('{new_mls_dict}')."
+        if not isinstance(new_mls_dict, dict):
+            raise TypeError(f"{msg}'). Expected 'dict', got {type(new_mls_dict).__name__}.")
+
+        temp_dict: dict[str, set[str]] = {}
+        for lang, texts in new_mls_dict.items():
+            validated_key = Validator.validate_lang(MultiLangStringFlag, lang)
+            temp_dict[validated_key] = set()
+            for text in texts:
+                validated_value = Validator.validate_text(MultiLangStringFlag, text)
+                temp_dict[validated_key].add(validated_value)
+
+        self._mls_dict = temp_dict
+
+    @mls_dict.setter
+    def mls_dict(self, new_mls_dict: dict[str, set[str]]) -> None:
+        """Setter for texts."""
+
+        msg = f"Invalid type of 'mls_dict' received ('{new_mls_dict}')."
+        if not isinstance(new_mls_dict, set):
+            raise TypeError(f"{msg}'). Expected 'dict', got {type(new_mls_dict).__name__}.")
+
+        self._mls_dict = {}
+        for text_value in new_mls_dict:
+            self._mls_dict.add(Validator.validate_text(MultiLangStringFlag, text_value))
+
+    @property
+    def pref_lang(self) -> str:
         """Get the preferred language for this MultiLangString.
 
         :return: The preferred language as a string.
         """
         return self._pref_lang
 
-    # pref_lang SETTER
-    @preferred_lang.setter
-    def preferred_lang(self, preferred_lang_value: str) -> None:
+    @pref_lang.setter
+    def pref_lang(self, new_pref_lang: str) -> None:
         """Set the preferred language for this MultiLangString.
 
-        :param preferred_lang_value: The preferred language as a string.
-        :type preferred_lang_value: str
-        :raises TypeError: If preferred_lang_value is not a string.
+        :param new_pref_lang: The preferred language as a string.
+        :type new_pref_lang: str
         """
-        if isinstance(preferred_lang_value, str):
-            self._pref_lang = preferred_lang_value
-        else:
-            raise TypeError(f"Invalid pref_lang type. Should be 'str', but is '{type(preferred_lang_value)}'.")
+        self._pref_lang = Validator.validate_text(MultiLangStringFlag, new_pref_lang)
 
     def add_entry(self, text: str, lang: str = "") -> None:
         """Add a text entry to the MultiLangString under a specified language.
@@ -160,10 +131,6 @@ class MultiLangString(ValidationBase):
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
         """
-        self._validate_arguments(text, lang)
-        self._validate_ensure_text(text)
-        self._validate_ensure_any_lang(lang)
-        self._validate_ensure_valid_lang(lang)
 
         if lang not in self.mls_dict:
             self.mls_dict[lang] = set()
@@ -175,11 +142,13 @@ class MultiLangString(ValidationBase):
         :param langstring: The LangString object to be added, representing a text in a specific language.
         :type langstring: LangString
         """
-        self._validate_langstring_arg(langstring)
+        if not isinstance(langstring, LangString):
+            raise TypeError(f"Invalid argument type. Expected 'LangString' type, got {type(langstring).__name__}")
+
         langstring.lang = "" if langstring.lang is None else langstring.lang
         self.add_entry(text=langstring.text, lang=langstring.lang)
 
-    def remove_entry(self, text: str, lang: str) -> None:
+    def remove_entry(self, text: str, lang: str, clear_empty: bool = False) -> None:
         """Remove a single entry from the set of a given language key in the dictionary.
 
         If the specified language key exists and the text is in its set, the text is removed. If this results in an
@@ -192,10 +161,15 @@ class MultiLangString(ValidationBase):
         """
         if lang in self.mls_dict and text in self.mls_dict[lang]:
             self.mls_dict[lang].remove(text)
-            if len(self.mls_dict[lang]) == 0:
+            if len(self.mls_dict[lang]) == 0 and clear_empty:
                 del self.mls_dict[lang]
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
+
+    def clear_empty(self) -> None:
+        empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
+        for lang in empty_langs:
+            del self.mls_dict[lang]
 
     def remove_lang(self, lang: str) -> None:
         """Remove all entries of a given language from the dictionary.
@@ -301,7 +275,7 @@ class MultiLangString(ValidationBase):
         :return: A detailed string representation of the MultiLangString.
         :rtype: str
         """
-        return f"MultiLangString({self.mls_dict}, pref_lang='{self.preferred_lang}')"
+        return f"MultiLangString({self.mls_dict}, pref_lang='{self.pref_lang}')"
 
     def __str__(self) -> str:
         """Return a string representation of the MultiLangString, including language tags.
@@ -337,130 +311,17 @@ class MultiLangString(ValidationBase):
         return self.mls_dict == other.mls_dict
 
     def __hash__(self) -> int:
-        """Generate a hash value for a MultiLangString object.
+        """Generate a hash new_text for a MultiLangString object.
 
         The hash is computed based on the 'mls_dict' attribute of the MultiLangString. This approach ensures that
-        MultiLangString objects with the same content will have the same hash value.
+        MultiLangString objects with the same content will have the same hash new_text.
 
-        :return: The hash value of the MultiLangString object.
+        :return: The hash new_text of the MultiLangString object.
         :rtype: int
         """
         # Convert dictionary to a hashable form (tuple of tuples) for consistent hashing
         hashable_mls_dict = tuple((lang, frozenset(texts)) for lang, texts in self.mls_dict.items())
         return hash(hashable_mls_dict)
 
-    def _validate_mls_dict(self, mls_dict: dict[str, set[str]]) -> None:
-        """
-        Validate all elements in the provided mls_dict against the current flags' values.
-
-        Iterates through each language and its associated texts in the mls_dict, applying validation methods to
-        ensure compliance with the current flag settings.
-
-        :param mls_dict: A dictionary where keys are language codes and values are sets of text entries.
-        :type mls_dict: dict[str, set[str]]
-        :raises TypeError: If any text or language in mls_dict does not comply with the expected types.
-        :raises ValueError: If any text or language in mls_dict violates the rules set by the control flags.
-        """
-
-        for lang, texts in mls_dict.items():
-            if not isinstance(texts, set):
-                raise TypeError(f"Expected set of texts for language '{lang}', but got {type(texts).__name__}.")
-
-            for text in texts:
-                # Apply the validation methods to each text and language pair
-                self._validate_arguments(text, lang)
-                self._validate_ensure_text(text)
-
-                # Only validate language tag if it's not empty
-                if lang:
-                    self._validate_ensure_any_lang(lang)
-                    self._validate_ensure_valid_lang(lang)
-
-    def add_entry_and_translations(self, text: str, lang: str, target_langs: list[str]) -> None:
-        """
-        Add a text entry in a specified language and its translations to multiple target languages.
-
-        This method adds a text entry to the MultiLangString in the specified language and then translates
-        and adds the same text to the MultiLangString in each of the target languages provided.
-
-        :param text: The text to be added and translated.
-        :type text: str
-        :param lang: The original language of the text.
-        :type lang: str
-        :param target_langs: A list of target languages to which the text will be translated.
-        :type target_langs: list[str]
-        """
-        std_in_lang = Language.get(lang).language
-
-        self._set_translator()
-        self._translator.source = std_in_lang
-
-        # Translate an existing entry to (possibly) multiple langs
-        self.add_entry(text, lang)
-
-        for target_lang in target_langs:
-            std_out_lang = Language.get(target_lang).language
-            self._translator.target = std_out_lang
-            translated_text = self._translator.translate(text=text)
-            self.add_entry(translated_text, target_lang)
-
-        # TODO (@pedropaulofb):
-        #  Treat to receive target_langs as str or list of strings
-        #  how to deal with empty lang? allow? use auto identification? add as identified or as empty?
-        #  enable selection of multiple translation tools? if so, do this via control.
-        #  Check options return_all=True and translate_words
-
-    def add_langstring_and_translations(self, langstring: LangString, target_langs: list[str]) -> None:
-        """
-        Add a LangString and its translations to multiple target languages.
-
-        This method adds a LangString to the MultiLangString and then translates
-        and adds the same text to the MultiLangString in each of the target languages provided.
-
-        :param langstring: The LangString object to be added and translated.
-        :type langstring: LangString
-        :param target_langs: A list of target languages to which the LangString's text will be translated.
-        :type target_langs: list[str]
-        """
-        self.add_entry_and_translations(langstring.text, langstring.lang, target_langs)
-
-    def add_translations_lang(self, lang: str, target_langs: list[str]) -> None:
-        """Translate all entries of a specific language to multiple target languages.
-
-        This method translates all text entries of a given language in the MultiLangString to each of the
-        target languages provided and adds these translations to the MultiLangString.
-
-        :param lang: The language of the entries to be translated.
-        :type lang: str
-        :param target_langs: A list of target languages to which the entries will be translated.
-        :type target_langs: list[str]
-        :raises ValueError: If there are no entries for the specified language in the MultiLangString.
-        """
-        if lang not in self.mls_dict:
-            raise ValueError(f"The MultiLangString has no entries for the language '{lang}'.")
-
-        # Getting all entries of a given language as list of LangString
-        langstrings = self.get_langstrings_lang(lang)
-
-        for langstring in langstrings:
-            self.add_langstring_and_translations(langstring, target_langs)
-
-    def add_translations_pref_lang(self, target_langs: list[str]) -> None:
-        """
-        Translate all entries of the preferred language to multiple target languages.
-
-        This method translates all text entries of the preferred language in the MultiLangString to each of the
-        target languages provided and adds these translations to the MultiLangString.
-
-        :param target_langs: A list of target languages to which the entries will be translated.
-        :type target_langs: list[str]
-        """
-        self.add_translations_lang(lang=self._pref_lang, target_langs=target_langs)
-
-    def is_entry(self, text, lang) -> bool:
+    def is_entry(self, text: str, lang: str) -> bool:
         return lang in self.mls_dict and text in self.mls_dict[lang]
-
-    def _set_translator(self):
-        if not self._translator:
-            std_out_lang = Language.get(self._pref_lang).language
-            self._translator = GoogleTranslator(source="auto", target=std_out_lang)

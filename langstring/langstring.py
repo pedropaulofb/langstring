@@ -16,16 +16,11 @@ text and valid language tags. These flags can be set externally to alter the beh
     # Print the string representation
     print(lang_str.to_string())  # Output: '"Hello, World!"@en'
 """
-import nltk
-from langcodes import Language
-from nltk.corpus import wordnet
-
 from .flags import LangStringFlag
-from .setlangstring import SetLangString
-from .utils.validation_base import ValidationBase
+from .utils.validator import Validator
 
 
-class LangString(ValidationBase):
+class LangString:
     """A class to encapsulate a string with its language information.
 
     This class provides functionality to associate a text string with a language tag, offering methods for string
@@ -38,51 +33,47 @@ class LangString(ValidationBase):
     :vartype lang: str
     """
 
-    # Ignoring mypy error for practicality: subclasses narrow type for specific use, not affecting functionality.
-    def _get_flags_type(self) -> type[LangStringFlag]:  # type: ignore
-        """Retrieve the control class and its corresponding flags enumeration used in the LangString class.
-
-        This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
-        that are used for configuring and validating the LangString instances. It is essential for the functioning of
-        the ValidationBase methods, which rely on these control settings.
-
-        :return: A tuple containing the Controller class and the LangStringFlag enumeration.
-        :rtype: tuple[type[Controller], type[LangStringFlag]]
-        """
-        return LangStringFlag
-
-    def __init__(self, text: str = "", lang: str = None) -> None:
+    def __init__(self, text: str = "", lang: str = "") -> None:
         """Initialize a new LangString object with text and an optional language tag.
 
         The behavior of this method is influenced by control flags set in Controller. For instance, if the
         DEFINED_TEXT flag is enabled, an empty 'text' string will raise a ValueError.
 
-        :param text: The text string, defaults to an empty string.
+        :param text: The text string.
         :type text: Optional[str]
         :param lang: The language tag of the text.
         :type lang: str
-        :raises TypeError: If 'text' is not a string, or 'lang' is not a string or None.
-        :raises ValueError: If 'text' is empty and DEFINED_TEXT is enabled; if 'lang' is empty and ENSURE_ANY_LANG is
-                            enabled; or if 'lang' is invalid and VALID_LANG is enabled.
         """
+
         self.text: str = text
+        self.lang: str = lang
 
-        if lang:
-            self.lang: str = lang
-        else:
-            raise ValueError("Language not defined. LangStrings are expected to have an associated language.")
+    @property
+    def text(self) -> str:
+        """Getter for text."""
+        return self._text
 
-        self._validate_arguments(self.text, self.lang)
-        self._validate_ensure_text(self.text)
-        self._validate_ensure_any_lang(self.lang)
-        self._validate_ensure_valid_lang(self.lang)
+    @text.setter
+    def text(self, new_text: str) -> None:
+        """Setter for text."""
+        self._text = Validator.validate_text(LangStringFlag, new_text)
+
+    @property
+    def lang(self) -> str:
+        """Getter for lang."""
+        return self._lang
+
+    @lang.setter
+    def lang(self, new_lang: str) -> None:
+        """Setter for lang."""
+        self._lang = Validator.validate_lang(LangStringFlag, new_lang)
 
     def to_string(self) -> str:
         """Convert the LangString object to a string representation.
 
         This method is a convenience wrapper for the __str__ method.
 
-        :return: The string representation of the LangString object, including the language tag if present.
+        :return: The string representation of the LangString object, including the language tag.
         :rtype: str
         """
         return self.__str__()
@@ -90,11 +81,9 @@ class LangString(ValidationBase):
     def __str__(self) -> str:
         """Define the string representation of the LangString object.
 
-        :return: The string representation of the LangString object. Format: '"text"@lang' or 'text' if lang is None.
+        :return: The string representation of the LangString object. Format: '"text"@lang'.
         :rtype: str
         """
-        if self.lang is None:
-            return f"{self.text}"
         return f'"{self.text}"@{self.lang}'
 
     def __eq__(self, other: object) -> bool:
@@ -110,24 +99,9 @@ class LangString(ValidationBase):
         return self.text == other.text and self.lang == other.lang
 
     def __hash__(self) -> int:
-        """Generate a hash value for a LangString object.
+        """Generate a hash new_text for a LangString object.
 
-        :return: The hash value of the LangString object, based on its text and language tag.
+        :return: The hash new_text of the LangString object, based on its text and language tag.
         :rtype: int
         """
         return hash((self.text, self.lang))
-
-    def get_synsets(self) -> list[SetLangString]:
-        # Check if this is expensive
-        nltk.download("omw-1.4", quiet=True)
-
-        synsets_list: list[SetLangString] = []
-
-        std_lang = Language.get(self.lang).to_alpha3()
-        synsets = wordnet.synonyms(self.text, lang=std_lang)
-
-        for synset in synsets:
-            if synset:
-                synsets_list.append(SetLangString(synset, self.lang))
-
-        return synsets_list

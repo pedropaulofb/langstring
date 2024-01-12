@@ -16,11 +16,11 @@ class GlobalFlag(Enum):
     """
 
     DEFINED_TEXT = auto()
-    ENSURE_ANY_LANG = auto()
-    VALID_LANG = auto()
+    DEFINED_LANG = auto()
     STRIP_TEXT = auto()
     STRIP_LANG = auto()
     LOWERCASE_LANG = auto()
+    VALID_LANG = auto()
 
 
 class LangStringFlag(Enum):
@@ -37,10 +37,11 @@ class LangStringFlag(Enum):
     """
 
     DEFINED_TEXT = auto()
-    VALID_LANG = auto()
+    DEFINED_LANG = auto()
     STRIP_TEXT = auto()
     STRIP_LANG = auto()
     LOWERCASE_LANG = auto()
+    VALID_LANG = auto()
 
 
 class SetLangStringFlag(Enum):
@@ -57,10 +58,11 @@ class SetLangStringFlag(Enum):
     """
 
     DEFINED_TEXT = auto()
-    VALID_LANG = auto()
+    DEFINED_LANG = auto()
     STRIP_TEXT = auto()
     STRIP_LANG = auto()
     LOWERCASE_LANG = auto()
+    VALID_LANG = auto()
 
 
 class MultiLangStringFlag(Enum):
@@ -76,8 +78,11 @@ class MultiLangStringFlag(Enum):
     :vartype VALID_LANG: Enum
     """
 
+    # Applied to both lang and pref_lang attributes.
+
     DEFINED_TEXT = auto()
-    VALID_LANG = auto()
+    DEFINED_LANG = auto()
     STRIP_TEXT = auto()
     STRIP_LANG = auto()
     LOWERCASE_LANG = auto()
+    VALID_LANG = auto()

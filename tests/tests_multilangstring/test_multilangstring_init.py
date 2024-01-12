@@ -11,7 +11,7 @@ def test_multilangstring_init_with_default_parameters():
     """
     mls = MultiLangString()
     assert mls.mls_dict == {}, "MultiLangString initialized with default parameters should have an empty mls_dict"
-    assert mls.preferred_lang == "en", "Default preferred language should be 'en'"
+    assert mls.pref_lang == "en", "Default preferred language should be 'en'"
 
 
 def test_multilangstring_init_with_custom_parameters():
@@ -21,7 +21,7 @@ def test_multilangstring_init_with_custom_parameters():
     custom_dict = {"en": {"Hello"}, "fr": {"Bonjour"}}
     mls = MultiLangString(mls_dict=custom_dict, pref_lang="fr")
     assert mls.mls_dict == custom_dict, "MultiLangString should initialize with the provided mls_dict"
-    assert mls.preferred_lang == "fr", "Preferred language should be set to the provided value"
+    assert mls.pref_lang == "fr", "Preferred language should be set to the provided new_text"
 
 
 def test_multilangstring_init_with_invalid_mls_dict_type():

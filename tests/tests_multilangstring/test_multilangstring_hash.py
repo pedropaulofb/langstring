@@ -3,11 +3,11 @@ from langstring import MultiLangString
 
 def test_hash_equality_for_identical_multilangstrings():
     """
-    Test if two MultiLangString objects with identical content have the same hash value.
+    Test if two MultiLangString objects with identical content have the same hash new_text.
     """
     mls1 = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
     mls2 = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
-    assert hash(mls1) == hash(mls2), "Identical MultiLangString objects should have the same hash value"
+    assert hash(mls1) == hash(mls2), "Identical MultiLangString objects should have the same hash new_text"
 
 
 def test_hash_inequality_for_different_multilangstrings():
@@ -21,9 +21,9 @@ def test_hash_inequality_for_different_multilangstrings():
 
 def test_hash_consistency_for_same_multilangstring():
     """
-    Test if the hash value of a MultiLangString object remains consistent across calls.
+    Test if the hash new_text of a MultiLangString object remains consistent across calls.
     """
     mls = MultiLangString(mls_dict={"en": {"Hello"}})
     hash1 = hash(mls)
     hash2 = hash(mls)
-    assert hash1 == hash2, "The hash value of a MultiLangString object should remain consistent across calls"
+    assert hash1 == hash2, "The hash new_text of a MultiLangString object should remain consistent across calls"

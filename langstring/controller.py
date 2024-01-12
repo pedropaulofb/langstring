@@ -21,27 +21,31 @@ class Controller(metaclass=NonInstantiable):
     """
 
     # Define the default values as a class-level constant
-    DEFAULT_FLAGS = {  # type: ignore
+    DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = {
         # Default values for GlobalFlags
         GlobalFlag.DEFINED_TEXT: True,
+        GlobalFlag.DEFINED_LANG: True,
         GlobalFlag.VALID_LANG: False,
         GlobalFlag.STRIP_TEXT: False,
         GlobalFlag.STRIP_LANG: False,
         GlobalFlag.LOWERCASE_LANG: False,
         # Default values for LangStringFlags
         LangStringFlag.DEFINED_TEXT: True,
+        LangStringFlag.DEFINED_LANG: True,
         LangStringFlag.VALID_LANG: False,
         LangStringFlag.STRIP_TEXT: False,
         LangStringFlag.STRIP_LANG: False,
         LangStringFlag.LOWERCASE_LANG: False,
         # Default values for SetLangStringFlags
         SetLangStringFlag.DEFINED_TEXT: True,
+        SetLangStringFlag.DEFINED_LANG: True,
         SetLangStringFlag.VALID_LANG: False,
         SetLangStringFlag.STRIP_TEXT: False,
         SetLangStringFlag.STRIP_LANG: False,
         SetLangStringFlag.LOWERCASE_LANG: False,
         # Default values for MultiLangStringFlags
         MultiLangStringFlag.DEFINED_TEXT: True,
+        MultiLangStringFlag.DEFINED_LANG: True,
         MultiLangStringFlag.VALID_LANG: False,
         MultiLangStringFlag.STRIP_TEXT: False,
         MultiLangStringFlag.STRIP_LANG: False,
@@ -67,7 +71,7 @@ class Controller(metaclass=NonInstantiable):
         :raises TypeError: If 'flag' is not an instance of one of the flag enums, or if 'state' is not a Boolean.
         """
         if not isinstance(state, bool):
-            raise TypeError("Invalid state received. State must be a boolean value.")
+            raise TypeError("Invalid state received. State must be a boolean new_text.")
 
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
@@ -144,7 +148,6 @@ class Controller(metaclass=NonInstantiable):
             After calling this method, all flags will be set to their default state, as defined in the respective
             flag enums. Flags are managed globally.
         """
-
         cls.flags = cls.DEFAULT_FLAGS.copy()
 
     @classmethod
@@ -158,7 +161,6 @@ class Controller(metaclass=NonInstantiable):
         :param flag_type: The type of the flags to reset.
         :type flag_type: Type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
         """
-
         if isinstance(flag_type, GlobalFlag):
             cls.reset_flags_all()
         else:

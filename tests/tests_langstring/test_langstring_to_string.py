@@ -70,4 +70,6 @@ def test_to_string_with_different_flag_settings() -> None:
     assert lang_str.to_string() == '"Hello"@en', "String representation should be correct with DEFINED_TEXT enabled"
 
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
-    assert lang_str.to_string() == '"Hello"@en', "String representation should remain correct with DEFINED_TEXT disabled"
+    assert (
+        lang_str.to_string() == '"Hello"@en'
+    ), "String representation should remain correct with DEFINED_TEXT disabled"

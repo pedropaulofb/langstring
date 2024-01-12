@@ -33,9 +33,7 @@ def test_flag_setting_impact_on_multilangstring_methods(flag, flag_state):
             mls.add_entry("", "en")
 
     # Test the impact on add_langstring method
-    langstring = LangString(
-        text="Hello", lang="invalid-lang" if flag == MultiLangStringFlag.VALID_LANG else "en"
-    )
+    langstring = LangString(text="Hello", lang="invalid-lang" if flag == MultiLangStringFlag.VALID_LANG else "en")
     if flag == MultiLangStringFlag.VALID_LANG and flag_state:
         with pytest.raises(ValueError):
             mls.add_langstring(langstring)

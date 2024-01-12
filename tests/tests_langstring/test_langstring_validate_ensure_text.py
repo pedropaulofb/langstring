@@ -17,7 +17,9 @@ def test_validate_ensure_text_with_non_empty_text() -> None:
 def test_validate_ensure_text_with_empty_text_flag_enabled() -> None:
     """Test _validate_ensure_text method with empty text and DEFINED_TEXT flag enabled."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
-    with pytest.raises(ValueError, match="DEFINED_TEXT enabled: LangString's 'text' field cannot receive empty string."):
+    with pytest.raises(
+        ValueError, match="DEFINED_TEXT enabled: LangString's 'text' field cannot receive empty string."
+    ):
         LangString("", "en")
 
 

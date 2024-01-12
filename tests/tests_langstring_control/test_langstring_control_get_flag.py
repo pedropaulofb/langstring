@@ -52,7 +52,7 @@ def test_get_flag_default_states(flag: LangStringFlag, expected_state: bool) -> 
 )
 def test_get_flag_after_setting_state(flag: LangStringFlag, state_to_set: bool) -> None:
     """
-    Test retrieving the state of a flag after setting it to a specific value.
+    Test retrieving the state of a flag after setting it to a specific new_text.
 
     :param flag: The flag to be tested.
     :param state_to_set: The state to set for the flag.

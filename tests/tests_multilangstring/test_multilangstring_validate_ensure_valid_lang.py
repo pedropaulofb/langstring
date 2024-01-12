@@ -19,11 +19,11 @@ def test_validate_ensure_valid_lang(lang, flag_state, is_valid_lang, expected_ex
     Test the _validate_ensure_valid_lang method under different flag settings and language inputs.
 
     :param lang: The language code to test.
-    :param flag_state: The state of the ENSURE_VALID_LANG flag.
+    :param flag_state: The state of the VALID_LANG flag.
     :param is_valid_lang: Indicates if the language code is valid.
     :param expected_exception: The expected exception, if any.
     """
-    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, flag_state)
+    Controller.set_flag(MultiLangStringFlag.VALID_LANG, flag_state)
     mls = MultiLangString()
 
     # Mocking the tag_is_valid function based on is_valid_lang

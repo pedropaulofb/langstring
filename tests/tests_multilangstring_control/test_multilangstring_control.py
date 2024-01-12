@@ -16,8 +16,8 @@ def test_multilangstringcontrol_initial_flag_states():
     Test if the initial flag states in Controller are set to their default values.
     """
     expected_default_states = {
-        Controller._get_flags_type().ENSURE_TEXT: True,
-        Controller._get_flags_type().ENSURE_VALID_LANG: False,
+        Controller._get_flags_type().DEFINED_TEXT: True,
+        Controller._get_flags_type().VALID_LANG: False,
     }
     assert (
         Controller.get_flags() == expected_default_states

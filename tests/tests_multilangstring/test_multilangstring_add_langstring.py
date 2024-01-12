@@ -48,8 +48,8 @@ def test_add_langstring_invalid_type():
 @pytest.mark.parametrize(
     "flag, flag_state, text, lang, expected_error",
     [
-        (MultiLangStringFlag.ENSURE_TEXT, True, "", "en", "cannot receive empty string"),
-        (MultiLangStringFlag.ENSURE_VALID_LANG, True, "Hello", "invalid_lang", "cannot be invalid"),
+        (MultiLangStringFlag.DEFINED_TEXT, True, "", "en", "cannot receive empty string"),
+        (MultiLangStringFlag.VALID_LANG, True, "Hello", "invalid_lang", "cannot be invalid"),
     ],
 )
 def test_add_langstring_respects_flags(flag, flag_state, text, lang, expected_error):

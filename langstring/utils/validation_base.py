@@ -23,9 +23,10 @@ Example Usage:
 from abc import abstractmethod
 from typing import Optional
 from typing import Union
-from ..controller import Controller
 
 from langcodes import tag_is_valid  # type: ignore
+
+from ..controller import Controller
 
 
 class ValidationBase:
@@ -74,32 +75,32 @@ class ValidationBase:
             raise ValueError(f"{self.__class__.__name__}'s 'text' field cannot be None.")
 
     def _validate_ensure_text(self, text: Optional[str]) -> None:
-        """Validate the 'text' argument based on the ENSURE_TEXT control flag.
+        """Validate the 'text' argument based on the DEFINED_TEXT control flag.
 
-        Checks if the 'text' field is empty and raises a ValueError or logs a warning depending on the ENSURE_TEXT
+        Checks if the 'text' field is empty and raises a ValueError or logs a warning depending on the DEFINED_TEXT
         flag set in the control class.
 
         :param text: The text to be validated.
         :type text: Optional[str]
-        :raises ValueError: If ENSURE_TEXT is enabled and 'text' is an empty string.
+        :raises ValueError: If DEFINED_TEXT is enabled and 'text' is an empty string.
         """
         flags = self._get_flags_type()
 
         # ignore added to bypass mypy's false positive on enums
-        if text == "" and Controller.get_flag(flags.ENSURE_TEXT):  # type: ignore
+        if text == "" and Controller.get_flag(flags.DEFINED_TEXT):  # type: ignore
             raise ValueError(
-                f"ENSURE_TEXT enabled: {self.__class__.__name__}'s 'text' field cannot receive empty string."
+                f"DEFINED_TEXT enabled: {self.__class__.__name__}'s 'text' field cannot receive empty string."
             )
 
     def _validate_ensure_any_lang(self, lang: Optional[str]) -> None:
-        """Validate the 'lang' argument based on the ENSURE_ANY_LANG and ENSURE_VALID_LANG control flags.
+        """Validate the 'lang' argument based on the ENSURE_ANY_LANG and VALID_LANG control flags.
 
         Checks if the 'lang' field is empty and raises a ValueError or logs a warning depending on the ENSURE_ANY_LANG,
-        ENSURE_VALID_LANG flag set in the control class.
+        VALID_LANG flag set in the control class.
 
         :param lang: The language code to be validated.
         :type lang: Optional[str]
-        :raises ValueError: If ENSURE_ANY_LANG or ENSURE_VALID_LANG is enabled and 'lang' is an empty string.
+        :raises ValueError: If ENSURE_ANY_LANG or VALID_LANG is enabled and 'lang' is an empty string.
         """
         flags = self._get_flags_type()
 
@@ -110,9 +111,9 @@ class ValidationBase:
                     f"ENSURE_ANY_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
                 )
             # ignore added to bypass mypy's false positive on enums
-            if Controller.get_flag(flags.ENSURE_VALID_LANG):  # type: ignore
+            if Controller.get_flag(flags.VALID_LANG):  # type: ignore
                 raise ValueError(
-                    f"ENSURE_VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
+                    f"VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot receive empty string."
                 )
 
     def _validate_ensure_valid_lang(self, lang: Optional[str]) -> None:
@@ -123,13 +124,13 @@ class ValidationBase:
 
         :param lang: The language code to be validated.
         :type lang: Optional[str]
-        :raises ValueError: If ENSURE_VALID_LANG is enabled and the language tag is invalid.
+        :raises ValueError: If VALID_LANG is enabled and the language tag is invalid.
         """
         flags = self._get_flags_type()
 
         if lang and not tag_is_valid(lang):
             # ignore added to bypass mypy's false positive on enums
-            if Controller.get_flag(flags.ENSURE_VALID_LANG):  # type: ignore
+            if Controller.get_flag(flags.VALID_LANG):  # type: ignore
                 raise ValueError(
-                    f"ENSURE_VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot be invalid."
+                    f"VALID_LANG enabled: {self.__class__.__name__}'s 'lang' field cannot be invalid."
                 )

@@ -11,8 +11,8 @@ from langstring import MultiLangStringFlag
 @pytest.mark.parametrize(
     "flag, flag_state",
     [
-        (MultiLangStringFlag.ENSURE_TEXT, False),
-        (MultiLangStringFlag.ENSURE_VALID_LANG, True),
+        (MultiLangStringFlag.DEFINED_TEXT, False),
+        (MultiLangStringFlag.VALID_LANG, True),
     ],
 )
 def test_flag_setting_impact_on_multilangstring_methods(flag, flag_state):
@@ -26,7 +26,7 @@ def test_flag_setting_impact_on_multilangstring_methods(flag, flag_state):
     mls = MultiLangString()
 
     # Test the impact on add_entry method
-    if flag == MultiLangStringFlag.ENSURE_TEXT and not flag_state:
+    if flag == MultiLangStringFlag.DEFINED_TEXT and not flag_state:
         mls.add_entry("", "en")  # Should not raise an exception
     else:
         with pytest.raises(ValueError):
@@ -34,9 +34,9 @@ def test_flag_setting_impact_on_multilangstring_methods(flag, flag_state):
 
     # Test the impact on add_langstring method
     langstring = LangString(
-        text="Hello", lang="invalid-lang" if flag == MultiLangStringFlag.ENSURE_VALID_LANG else "en"
+        text="Hello", lang="invalid-lang" if flag == MultiLangStringFlag.VALID_LANG else "en"
     )
-    if flag == MultiLangStringFlag.ENSURE_VALID_LANG and flag_state:
+    if flag == MultiLangStringFlag.VALID_LANG and flag_state:
         with pytest.raises(ValueError):
             mls.add_langstring(langstring)
     else:
@@ -48,15 +48,15 @@ def test_add_entry_and_add_langstring_with_validations():
     Test the add_entry and add_langstring methods with different validation scenarios.
     """
     mls = MultiLangString()
-    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(MultiLangStringFlag.DEFINED_TEXT, True)
+    Controller.set_flag(MultiLangStringFlag.VALID_LANG, True)
 
     # Test add_entry with invalid data
     with pytest.raises(ValueError):
         mls.add_entry("", "invalid-lang")
 
-    # Temporarily disable ENSURE_TEXT for creating LangString with empty text
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    # Temporarily disable DEFINED_TEXT for creating LangString with empty text
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     langstring = LangString(text="", lang="invalid-lang")
 
     # Test add_langstring with invalid data
@@ -64,8 +64,8 @@ def test_add_entry_and_add_langstring_with_validations():
         mls.add_langstring(langstring)
 
     # Reset flags and test with valid data
-    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
-    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, False)
+    Controller.set_flag(MultiLangStringFlag.DEFINED_TEXT, False)
+    Controller.set_flag(MultiLangStringFlag.VALID_LANG, False)
     mls.add_entry("Hello", "en")  # Should not raise an exception
     assert "Hello" in mls.get_strings_lang("en"), "Entry 'Hello' should be added under 'en'"
 

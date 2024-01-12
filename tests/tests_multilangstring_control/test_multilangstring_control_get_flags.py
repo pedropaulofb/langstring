@@ -7,8 +7,8 @@ def test_get_flags_returns_current_flag_states():
     Test if the get_flags method returns a dictionary with the current states of all flags.
     """
     expected_flags = {
-        MultiLangStringFlag.ENSURE_TEXT: True,
-        MultiLangStringFlag.ENSURE_VALID_LANG: False,
+        MultiLangStringFlag.DEFINED_TEXT: True,
+        MultiLangStringFlag.VALID_LANG: False,
     }
     assert Controller.get_flags() == expected_flags, "get_flags should return the correct initial states for all flags"
 
@@ -30,7 +30,7 @@ def test_get_flags_returns_copy_of_flag_states():
     """
     original_flags = Controller.get_flags()
     flags_copy = Controller.get_flags()
-    flags_copy[MultiLangStringFlag.ENSURE_TEXT] = False
+    flags_copy[MultiLangStringFlag.DEFINED_TEXT] = False
     assert (
         Controller.get_flags() == original_flags
     ), "Modifying the dictionary returned by get_flags should not affect the original flag states"

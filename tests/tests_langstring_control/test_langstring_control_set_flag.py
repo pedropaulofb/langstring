@@ -7,8 +7,8 @@ from langstring import LangStringFlag
 @pytest.mark.parametrize(
     "flag, state",
     [
-        (LangStringFlag.ENSURE_TEXT, True),
-        (LangStringFlag.ENSURE_VALID_LANG, True),
+        (LangStringFlag.DEFINED_TEXT, True),
+        (LangStringFlag.VALID_LANG, True),
     ],
 )
 def test_set_flag_valid(flag: LangStringFlag, state: bool) -> None:
@@ -27,8 +27,8 @@ def test_set_flag_invalid(flag, state) -> None:
 @pytest.mark.parametrize(
     "flag, state",
     [
-        (LangStringFlag.ENSURE_TEXT, None),
-        (LangStringFlag.ENSURE_VALID_LANG, 1),
+        (LangStringFlag.DEFINED_TEXT, None),
+        (LangStringFlag.VALID_LANG, 1),
     ],
 )
 def test_set_flag_invalid_state_type(flag: LangStringFlag, state) -> None:
@@ -44,8 +44,8 @@ def test_set_flag_invalid_state_type(flag: LangStringFlag, state) -> None:
 @pytest.mark.parametrize(
     "flag, initial_state, new_state",
     [
-        (LangStringFlag.ENSURE_TEXT, False, True),
-        (LangStringFlag.ENSURE_VALID_LANG, False, True),
+        (LangStringFlag.DEFINED_TEXT, False, True),
+        (LangStringFlag.VALID_LANG, False, True),
     ],
 )
 def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state: bool) -> None:
@@ -64,7 +64,7 @@ def test_toggle_flag_state(flag: LangStringFlag, initial_state: bool, new_state:
 @pytest.mark.parametrize(
     "flag_sequence, state_sequence",
     [
-        ([LangStringFlag.ENSURE_VALID_LANG, LangStringFlag.ENSURE_TEXT], [True, False]),
+        ([LangStringFlag.VALID_LANG, LangStringFlag.DEFINED_TEXT], [True, False]),
     ],
 )
 def test_set_multiple_flags_sequentially(flag_sequence: list[LangStringFlag], state_sequence: list[bool]) -> None:
@@ -83,7 +83,7 @@ def test_set_multiple_flags_sequentially(flag_sequence: list[LangStringFlag], st
 @pytest.mark.parametrize(
     "flag, state",
     [
-        (LangStringFlag.ENSURE_TEXT, True),
+        (LangStringFlag.DEFINED_TEXT, True),
     ],
 )
 def test_set_flag_same_value_multiple_times(flag: LangStringFlag, state: bool) -> None:

@@ -7,8 +7,8 @@ from langstring import MultiLangStringFlag
 @pytest.mark.parametrize(
     "flag, expected_state",
     [
-        (MultiLangStringFlag.ENSURE_TEXT, True),
-        (MultiLangStringFlag.ENSURE_VALID_LANG, False),
+        (MultiLangStringFlag.DEFINED_TEXT, True),
+        (MultiLangStringFlag.VALID_LANG, False),
     ],
 )
 def test_get_flag_returns_correct_initial_state(flag, expected_state):
@@ -26,8 +26,8 @@ def test_get_flag_returns_correct_initial_state(flag, expected_state):
 @pytest.mark.parametrize(
     "flag, state_to_set",
     [
-        (MultiLangStringFlag.ENSURE_TEXT, False),
-        (MultiLangStringFlag.ENSURE_VALID_LANG, True),
+        (MultiLangStringFlag.DEFINED_TEXT, False),
+        (MultiLangStringFlag.VALID_LANG, True),
     ],
 )
 def test_get_flag_reflects_set_flag_state(flag, state_to_set):
@@ -43,7 +43,7 @@ def test_get_flag_reflects_set_flag_state(flag, state_to_set):
     ), f"get_flag should return {state_to_set} for {flag.name} after setting it"
 
 
-@pytest.mark.parametrize("invalid_flag", [123, "ENSURE_TEXT", None, 5.5])
+@pytest.mark.parametrize("invalid_flag", [123, "DEFINED_TEXT", None, 5.5])
 def test_get_flag_with_invalid_flag_type_raises_type_error(invalid_flag):
     """
     Test if the get_flag method raises TypeError when an invalid flag type is passed.

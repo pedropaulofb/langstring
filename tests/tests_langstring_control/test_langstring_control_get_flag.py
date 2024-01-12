@@ -6,8 +6,8 @@ from langstring import LangStringFlag
 @pytest.mark.parametrize(
     "flag",
     [
-        LangStringFlag.ENSURE_TEXT,
-        LangStringFlag.ENSURE_VALID_LANG,
+        LangStringFlag.DEFINED_TEXT,
+        LangStringFlag.VALID_LANG,
     ],
 )
 def test_get_flag_valid(flag: LangStringFlag) -> None:
@@ -29,8 +29,8 @@ from langstring import Controller, LangStringFlag
 @pytest.mark.parametrize(
     "flag, expected_state",
     [
-        (LangStringFlag.ENSURE_TEXT, True),
-        (LangStringFlag.ENSURE_VALID_LANG, False),
+        (LangStringFlag.DEFINED_TEXT, True),
+        (LangStringFlag.VALID_LANG, False),
     ],
 )
 def test_get_flag_default_states(flag: LangStringFlag, expected_state: bool) -> None:
@@ -46,8 +46,8 @@ def test_get_flag_default_states(flag: LangStringFlag, expected_state: bool) -> 
 @pytest.mark.parametrize(
     "flag, state_to_set",
     [
-        (LangStringFlag.ENSURE_TEXT, False),
-        (LangStringFlag.ENSURE_VALID_LANG, True),
+        (LangStringFlag.DEFINED_TEXT, False),
+        (LangStringFlag.VALID_LANG, True),
     ],
 )
 def test_get_flag_after_setting_state(flag: LangStringFlag, state_to_set: bool) -> None:

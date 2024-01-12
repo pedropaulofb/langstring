@@ -38,7 +38,7 @@ def test_add_entry_with_new_language():
         (123, "en", "Expected 'text' to be of type str"),
         ("Hello", 123, "Expected 'lang' to be of type str"),
         (None, "en", "Expected 'text' to be of type str"),
-        ("", "en", "cannot receive empty string"),  # Assuming ENSURE_TEXT flag is True
+        ("", "en", "cannot receive empty string"),  # Assuming DEFINED_TEXT flag is True
     ],
 )
 def test_add_entry_invalid_arguments(text, lang, expected_error):
@@ -57,8 +57,8 @@ def test_add_entry_invalid_arguments(text, lang, expected_error):
 @pytest.mark.parametrize(
     "flag, flag_state, text, lang, expected_error",
     [
-        (MultiLangStringFlag.ENSURE_TEXT, True, "", "en", "cannot receive empty string"),
-        (MultiLangStringFlag.ENSURE_VALID_LANG, True, "Hello", "invalid_lang", "cannot be invalid"),
+        (MultiLangStringFlag.DEFINED_TEXT, True, "", "en", "cannot receive empty string"),
+        (MultiLangStringFlag.VALID_LANG, True, "Hello", "invalid_lang", "cannot be invalid"),
     ],
 )
 def test_add_entry_respects_flags(flag, flag_state, text, lang, expected_error):

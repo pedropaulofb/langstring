@@ -20,8 +20,8 @@ def test_set_flag_updates_flag_state():
 @pytest.mark.parametrize(
     "flag, state",
     [
-        (MultiLangStringFlag.ENSURE_TEXT, False),
-        (MultiLangStringFlag.ENSURE_VALID_LANG, True),
+        (MultiLangStringFlag.DEFINED_TEXT, False),
+        (MultiLangStringFlag.VALID_LANG, True),
     ],
 )
 def test_set_flag_with_various_flags_and_states(flag, state):
@@ -35,7 +35,7 @@ def test_set_flag_with_various_flags_and_states(flag, state):
     assert Controller.get_flag(flag) == state, f"set_flag should set {flag.name} to {state}"
 
 
-@pytest.mark.parametrize("invalid_flag", [123, "ENSURE_TEXT", None, 5.5])
+@pytest.mark.parametrize("invalid_flag", [123, "DEFINED_TEXT", None, 5.5])
 def test_set_flag_with_invalid_flag_type_raises_type_error(invalid_flag):
     """
     Test if the set_flag method raises TypeError when an invalid flag type is passed.
@@ -54,7 +54,7 @@ def test_set_flag_with_invalid_state_type_raises_type_error(invalid_state):
     :param invalid_state: The invalid state to test.
     """
     with pytest.raises(TypeError, match="Invalid state"):
-        Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, invalid_state)
+        Controller.set_flag(MultiLangStringFlag.DEFINED_TEXT, invalid_state)
 
 
 def test_set_flag_with_unrecognized_flag_raises_type_error():

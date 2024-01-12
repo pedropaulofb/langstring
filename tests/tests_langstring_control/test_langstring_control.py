@@ -7,8 +7,8 @@ from langstring import LangStringFlag
 @pytest.mark.parametrize(
     "flag",
     [
-        LangStringFlag.ENSURE_TEXT,
-        LangStringFlag.ENSURE_VALID_LANG,
+        LangStringFlag.DEFINED_TEXT,
+        LangStringFlag.VALID_LANG,
     ],
 )
 def test_default_flag_state(flag: LangStringFlag) -> None:
@@ -16,8 +16,8 @@ def test_default_flag_state(flag: LangStringFlag) -> None:
 
     :param flag: The LangStringFlag to check the default state for.
     """
-    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
-    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert Controller.get_flag(LangStringFlag.DEFINED_TEXT)
+    assert not Controller.get_flag(LangStringFlag.VALID_LANG)
 
 
 def test_instantiation_of_langstringcontrol() -> None:
@@ -50,7 +50,7 @@ def test_flag_state_persistence(initial_state: bool, new_state: bool) -> None:
     :param new_state: The new state to set for the same flag.
     :raises AssertionError: If the flag state does not persist as expected.
     """
-    flag = LangStringFlag.ENSURE_TEXT
+    flag = LangStringFlag.DEFINED_TEXT
     Controller.set_flag(flag, initial_state)
     assert Controller.get_flag(flag) == initial_state, "Initial flag state should persist"
 
@@ -66,11 +66,11 @@ def test_multiple_flag_modifications_integrity() -> None:
 
     :raises AssertionError: If the state of any flag is not as expected after multiple modifications.
     """
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
-    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
+    Controller.set_flag(LangStringFlag.VALID_LANG, True)
 
-    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT), "ENSURE_TEXT flag should be True"
-    assert Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG), "ENSURE_VALID_LANG flag should be True"
+    assert Controller.get_flag(LangStringFlag.DEFINED_TEXT), "DEFINED_TEXT flag should be True"
+    assert Controller.get_flag(LangStringFlag.VALID_LANG), "VALID_LANG flag should be True"
 
     Controller.reset_flags_all()  # Reset flags to default after test
 
@@ -83,11 +83,11 @@ def test_flag_state_consistency_across_methods() -> None:
 
     :raises AssertionError: If the flag states are inconsistent across different methods.
     """
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     all_flags = Controller.get_flags()
 
     assert (
-        Controller.get_flag(LangStringFlag.ENSURE_TEXT) == all_flags[LangStringFlag.ENSURE_TEXT]
+        Controller.get_flag(LangStringFlag.DEFINED_TEXT) == all_flags[LangStringFlag.DEFINED_TEXT]
     ), "Flag state should be consistent across get_flag and get_flags methods"
 
     Controller.reset_flags_all()  # Reset flags to default after test

@@ -15,9 +15,9 @@ def test_reset_flags_to_default() -> None:
     Controller.reset_flags_all()
 
     # Assert that all flags are reset to False
-    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert Controller.get_flag(LangStringFlag.DEFINED_TEXT)
     assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert not Controller.get_flag(LangStringFlag.VALID_LANG)
 
 
 def test_reset_flags_idempotence() -> None:
@@ -30,9 +30,9 @@ def test_reset_flags_idempotence() -> None:
     Controller.reset_flags_all()
     Controller.reset_flags_all()
 
-    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert Controller.get_flag(LangStringFlag.DEFINED_TEXT)
     assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert not Controller.get_flag(LangStringFlag.VALID_LANG)
 
 
 def test_reset_flags_effectiveness() -> None:
@@ -43,15 +43,15 @@ def test_reset_flags_effectiveness() -> None:
     :raises AssertionError: If any flag does not reset to False after calling reset_flags.
     """
     # Inverting the values of all flags
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
-    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.VALID_LANG, True)
 
     Controller.reset_flags_all()
 
-    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert Controller.get_flag(LangStringFlag.DEFINED_TEXT)
     assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert not Controller.get_flag(LangStringFlag.VALID_LANG)
 
 
 def test_reset_flags_changes_state() -> None:
@@ -62,19 +62,19 @@ def test_reset_flags_changes_state() -> None:
     reset to their default values.
     """
     # Modify the state of the flags
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
-    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.VALID_LANG, True)
 
     # Ensure flags are modified
-    assert not Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert not Controller.get_flag(LangStringFlag.DEFINED_TEXT)
     assert Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert Controller.get_flag(LangStringFlag.VALID_LANG)
 
     # Reset flags
     Controller.reset_flags_all()
 
     # Check if flags are reset to default
-    assert Controller.get_flag(LangStringFlag.ENSURE_TEXT)
+    assert Controller.get_flag(LangStringFlag.DEFINED_TEXT)
     assert not Controller.get_flag(LangStringFlag.ENSURE_ANY_LANG)
-    assert not Controller.get_flag(LangStringFlag.ENSURE_VALID_LANG)
+    assert not Controller.get_flag(LangStringFlag.VALID_LANG)

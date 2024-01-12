@@ -16,8 +16,6 @@ text and valid language tags. These flags can be set externally to alter the beh
     # Print the string representation
     print(lang_str.to_string())  # Output: '"Hello, World!"@en'
 """
-from typing import Optional
-
 import nltk
 from langcodes import Language
 from nltk.corpus import wordnet
@@ -36,11 +34,9 @@ class LangString(ValidationBase):
 
     :ivar text: The text string.
     :vartype text: Optional[str]
-    :ivar lang: The language tag of the text, or None if not specified.
-    :vartype lang: Optional[str]
+    :ivar lang: The language tag of the text.
+    :vartype lang: str
     """
-
-    # TODO (pedropaulofb): Implement mandatory lang not None and lang not ""
 
     # Ignoring mypy error for practicality: subclasses narrow type for specific use, not affecting functionality.
     def _get_flags_type(self) -> type[LangStringFlag]:  # type: ignore
@@ -55,22 +51,26 @@ class LangString(ValidationBase):
         """
         return LangStringFlag
 
-    def __init__(self, text: str = "", lang: Optional[str] = None) -> None:
+    def __init__(self, text: str = "", lang: str = None) -> None:
         """Initialize a new LangString object with text and an optional language tag.
 
         The behavior of this method is influenced by control flags set in Controller. For instance, if the
-        ENSURE_TEXT flag is enabled, an empty 'text' string will raise a ValueError.
+        DEFINED_TEXT flag is enabled, an empty 'text' string will raise a ValueError.
 
         :param text: The text string, defaults to an empty string.
         :type text: Optional[str]
-        :param lang: The language tag of the text, defaults to None.
-        :type lang: Optional[str]
+        :param lang: The language tag of the text.
+        :type lang: str
         :raises TypeError: If 'text' is not a string, or 'lang' is not a string or None.
-        :raises ValueError: If 'text' is empty and ENSURE_TEXT is enabled; if 'lang' is empty and ENSURE_ANY_LANG is
-                            enabled; or if 'lang' is invalid and ENSURE_VALID_LANG is enabled.
+        :raises ValueError: If 'text' is empty and DEFINED_TEXT is enabled; if 'lang' is empty and ENSURE_ANY_LANG is
+                            enabled; or if 'lang' is invalid and VALID_LANG is enabled.
         """
         self.text: str = text
-        self.lang: Optional[str] = lang
+
+        if lang:
+            self.lang: str = lang
+        else:
+            raise ValueError("Language not defined. LangStrings are expected to have an associated language.")
 
         self._validate_arguments(self.text, self.lang)
         self._validate_ensure_text(self.text)

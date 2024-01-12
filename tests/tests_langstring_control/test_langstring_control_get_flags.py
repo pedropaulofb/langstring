@@ -7,19 +7,19 @@ from langstring import LangStringFlag
 def test_get_flags() -> None:
     """Test retrieving the states of all flags."""
     expected_flags = {
-        LangStringFlag.ENSURE_TEXT: True,
-        LangStringFlag.ENSURE_VALID_LANG: False,
+        LangStringFlag.DEFINED_TEXT: True,
+        LangStringFlag.VALID_LANG: False,
     }
     assert Controller.get_flags() == expected_flags, "All flags should be retrieved correctly"
 
 
 def test_get_flags_after_modification() -> None:
     """Test retrieving the states of all flags after modification."""
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, True)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     flags = Controller.get_flags()
-    assert flags[LangStringFlag.ENSURE_TEXT] is True, "Modified flag should reflect the new state"
+    assert flags[LangStringFlag.DEFINED_TEXT] is True, "Modified flag should reflect the new state"
     assert all(
-        flags[flag] is False for flag in LangStringFlag if flag != LangStringFlag.ENSURE_TEXT
+        flags[flag] is False for flag in LangStringFlag if flag != LangStringFlag.DEFINED_TEXT
     ), "Unmodified flags should remain in their default state"
 
 
@@ -27,11 +27,11 @@ def test_get_flags_after_reset() -> None:
     """
     Test retrieving the states of all flags after resetting them to their default values.
     """
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     Controller.reset_flags_all()
     expected_flags = {
-        LangStringFlag.ENSURE_TEXT: True,
-        LangStringFlag.ENSURE_VALID_LANG: False,
+        LangStringFlag.DEFINED_TEXT: True,
+        LangStringFlag.VALID_LANG: False,
     }
     assert Controller.get_flags() == expected_flags, "Flags should return to default states after reset"
 
@@ -39,8 +39,8 @@ def test_get_flags_after_reset() -> None:
 @pytest.mark.parametrize(
     "flag, state",
     [
-        (LangStringFlag.ENSURE_TEXT, False),
-        (LangStringFlag.ENSURE_VALID_LANG, True),
+        (LangStringFlag.DEFINED_TEXT, False),
+        (LangStringFlag.VALID_LANG, True),
     ],
 )
 def test_get_flags_individual_modifications(flag: LangStringFlag, state: bool) -> None:
@@ -62,7 +62,7 @@ def test_get_flags_immutable_return() -> None:
     """
     original_flags = Controller.get_flags()
     modified_flags = Controller.get_flags()
-    modified_flags[LangStringFlag.ENSURE_TEXT] = not original_flags[LangStringFlag.ENSURE_TEXT]
+    modified_flags[LangStringFlag.DEFINED_TEXT] = not original_flags[LangStringFlag.DEFINED_TEXT]
     assert (
         Controller.get_flags() == original_flags
     ), "Modifying the returned dictionary should not affect original flags"

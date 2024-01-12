@@ -27,7 +27,7 @@ def test_eq_with_various_strings(text1: str, lang1: str, text2: str, lang2: str,
     :param lang2: Language for the second LangString object.
     :param expected: Expected result of the equality comparison.
     """
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     lang_string1 = LangString(text1, lang1)
     lang_string2 = LangString(text2, lang2)
     assert (lang_string1 == lang_string2) is expected, (
@@ -158,7 +158,7 @@ def test_eq_with_different_flag_settings() -> None:
     assert lang_str1 == lang_str2, "LangString objects should be equal under the same flag settings"
     Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
     assert lang_str1 == lang_str2, "LangString objects should be equal under different flag settings"
-    Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(LangStringFlag.VALID_LANG, True)
     assert lang_str1 == lang_str2, "LangString objects should be equal under different flag settings"
     Controller.reset_flags_all()
     assert lang_str1 == lang_str2, "LangString objects should be equal under different flag settings"

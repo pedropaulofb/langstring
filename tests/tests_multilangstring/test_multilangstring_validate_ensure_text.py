@@ -13,10 +13,10 @@ def test_validate_ensure_text(text, flag_state, expected_exception):
     Test the _validate_ensure_text method under different flag settings and text inputs.
 
     :param text: The text to test.
-    :param flag_state: The state of the ENSURE_TEXT flag.
+    :param flag_state: The state of the DEFINED_TEXT flag.
     :param expected_exception: The expected exception, if any.
     """
-    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, flag_state)
+    Controller.set_flag(MultiLangStringFlag.DEFINED_TEXT, flag_state)
     mls = MultiLangString()
 
     # Directly accessing the protected method for testing purposes

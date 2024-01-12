@@ -1,5 +1,4 @@
 from langstring import Controller
-from langstring import MultiLangStringFlag
 
 
 def test_print_flags_outputs_current_flag_states(capsys):
@@ -11,8 +10,5 @@ def test_print_flags_outputs_current_flag_states(capsys):
     captured = capsys.readouterr()
 
     # Check if the output contains the correct information
-    expected_output = (
-        "MultiLangStringFlag.ENSURE_TEXT = True\n"
-        "MultiLangStringFlag.ENSURE_VALID_LANG = False\n"
-    )
+    expected_output = "MultiLangStringFlag.DEFINED_TEXT = True\n" "MultiLangStringFlag.VALID_LANG = False\n"
     assert captured.out == expected_output, "print_flags should output the current states of all flags correctly"

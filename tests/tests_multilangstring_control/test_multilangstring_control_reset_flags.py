@@ -15,8 +15,8 @@ def test_reset_flags_resets_all_flags_to_default():
 
     # Define the expected default states for all flags
     expected_default_states = {
-        MultiLangStringFlag.ENSURE_TEXT: True,
-        MultiLangStringFlag.ENSURE_VALID_LANG: False,
+        MultiLangStringFlag.DEFINED_TEXT: True,
+        MultiLangStringFlag.VALID_LANG: False,
     }
 
     assert flags_after_reset == expected_default_states, "reset_flags should reset all flags to their default values"
@@ -27,8 +27,8 @@ def test_reset_flags_effect_persists_after_multiple_set_flag_calls():
     Test if the effect of reset_flags persists after multiple calls to set_flag.
     """
     # Change the state of flags multiple times
-    Controller.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
-    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
+    Controller.set_flag(MultiLangStringFlag.DEFINED_TEXT, False)
+    Controller.set_flag(MultiLangStringFlag.VALID_LANG, True)
 
     # Reset flags to default
     Controller.reset_flags_all()
@@ -36,8 +36,8 @@ def test_reset_flags_effect_persists_after_multiple_set_flag_calls():
 
     # Define the expected default states for all flags
     expected_default_states = {
-        MultiLangStringFlag.ENSURE_TEXT: True,
-        MultiLangStringFlag.ENSURE_VALID_LANG: False,
+        MultiLangStringFlag.DEFINED_TEXT: True,
+        MultiLangStringFlag.VALID_LANG: False,
     }
 
     assert (

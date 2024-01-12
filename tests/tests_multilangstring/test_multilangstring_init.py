@@ -43,11 +43,11 @@ def test_multilangstring_init_with_invalid_pref_lang_type():
 @pytest.mark.parametrize("flag_state", [True, False])
 def test_multilangstring_init_respects_ensure_valid_lang_flag(flag_state):
     """
-    Test if MultiLangString initialization respects the ENSURE_VALID_LANG flag.
+    Test if MultiLangString initialization respects the VALID_LANG flag.
 
-    :param flag_state: The state to set for the ENSURE_VALID_LANG flag.
+    :param flag_state: The state to set for the VALID_LANG flag.
     """
-    Controller.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, flag_state)
+    Controller.set_flag(MultiLangStringFlag.VALID_LANG, flag_state)
     if flag_state:
         with pytest.raises(ValueError, match="field cannot be invalid"):
             MultiLangString(mls_dict={"invalid_lang": {"Hello"}})
@@ -55,7 +55,7 @@ def test_multilangstring_init_respects_ensure_valid_lang_flag(flag_state):
         mls = MultiLangString(mls_dict={"invalid_lang": {"Hello"}})
         assert (
             "invalid_lang" in mls.mls_dict
-        ), "MultiLangString should allow invalid language codes when ENSURE_VALID_LANG is False"
+        ), "MultiLangString should allow invalid language codes when VALID_LANG is False"
 
 
 def test_multilangstring_init_with_non_string_texts():
@@ -86,12 +86,10 @@ def test_multilangstring_init_with_mixed_valid_and_invalid_data():
         MultiLangString(mls_dict=mls_dict)
 
 
-@pytest.mark.parametrize(
-    "flag, flag_state", [(MultiLangStringFlag.ENSURE_TEXT, True)]
-)
+@pytest.mark.parametrize("flag, flag_state", [(MultiLangStringFlag.DEFINED_TEXT, True)])
 def test_multilangstring_init_respects_other_flags(flag, flag_state):
     """
-    Test if MultiLangString initialization respects other flags like ENSURE_TEXT or ENSURE_ANY_LANG.
+    Test if MultiLangString initialization respects other flags like DEFINED_TEXT or ENSURE_ANY_LANG.
 
     :param flag: The flag to be tested.
     :param flag_state: The state to set for the flag.

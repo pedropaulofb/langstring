@@ -45,7 +45,7 @@ def test_convert_langstring_to_setlangstring_empty_string():
 
     :return: None
     """
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     lang_string = LangString(text="", lang="en")
     result = Converter.convert_langstring_to_setlangstring(lang_string)
     assert result == SetLangString(
@@ -70,7 +70,7 @@ def test_convert_langstring_to_setlangstring_empty_langstring():
 
     :return: None
     """
-    Controller.set_flag(LangStringFlag.ENSURE_TEXT, False)
+    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     lang_string = LangString()
     result = Converter.convert_langstring_to_setlangstring(lang_string)
     assert result == SetLangString(

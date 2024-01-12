@@ -23,29 +23,29 @@ class Controller(metaclass=NonInstantiable):
     # Define the default values as a class-level constant
     DEFAULT_FLAGS = {  # type: ignore
         # Default values for GlobalFlags
-        GlobalFlag.ENSURE_TEXT: True,
-        GlobalFlag.ENSURE_VALID_LANG: False,
-        GlobalFlag.ENSURE_STRIP_TEXT: False,
-        GlobalFlag.ENSURE_STRIP_LANG: False,
-        GlobalFlag.ENSURE_LOWER_LANG: False,
+        GlobalFlag.DEFINED_TEXT: True,
+        GlobalFlag.VALID_LANG: False,
+        GlobalFlag.STRIP_TEXT: False,
+        GlobalFlag.STRIP_LANG: False,
+        GlobalFlag.LOWERCASE_LANG: False,
         # Default values for LangStringFlags
-        LangStringFlag.ENSURE_TEXT: True,
-        LangStringFlag.ENSURE_VALID_LANG: False,
-        LangStringFlag.ENSURE_STRIP_TEXT: False,
-        LangStringFlag.ENSURE_STRIP_LANG: False,
-        LangStringFlag.ENSURE_LOWER_LANG: False,
+        LangStringFlag.DEFINED_TEXT: True,
+        LangStringFlag.VALID_LANG: False,
+        LangStringFlag.STRIP_TEXT: False,
+        LangStringFlag.STRIP_LANG: False,
+        LangStringFlag.LOWERCASE_LANG: False,
         # Default values for SetLangStringFlags
-        SetLangStringFlag.ENSURE_TEXT: True,
-        SetLangStringFlag.ENSURE_VALID_LANG: False,
-        SetLangStringFlag.ENSURE_STRIP_TEXT: False,
-        SetLangStringFlag.ENSURE_STRIP_LANG: False,
-        SetLangStringFlag.ENSURE_LOWER_LANG: False,
+        SetLangStringFlag.DEFINED_TEXT: True,
+        SetLangStringFlag.VALID_LANG: False,
+        SetLangStringFlag.STRIP_TEXT: False,
+        SetLangStringFlag.STRIP_LANG: False,
+        SetLangStringFlag.LOWERCASE_LANG: False,
         # Default values for MultiLangStringFlags
-        MultiLangStringFlag.ENSURE_TEXT: True,
-        MultiLangStringFlag.ENSURE_VALID_LANG: False,
-        MultiLangStringFlag.ENSURE_STRIP_TEXT: False,
-        MultiLangStringFlag.ENSURE_STRIP_LANG: False,
-        MultiLangStringFlag.ENSURE_LOWER_LANG: False,
+        MultiLangStringFlag.DEFINED_TEXT: True,
+        MultiLangStringFlag.VALID_LANG: False,
+        MultiLangStringFlag.STRIP_TEXT: False,
+        MultiLangStringFlag.STRIP_LANG: False,
+        MultiLangStringFlag.LOWERCASE_LANG: False,
     }
 
     # Initialize the flags with the default values

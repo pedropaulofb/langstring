@@ -36,6 +36,8 @@ class Controller(metaclass=NonInstantiable):
         LangStringFlag.STRIP_TEXT: False,
         LangStringFlag.STRIP_LANG: False,
         LangStringFlag.LOWERCASE_LANG: False,
+        LangStringFlag.PRINT_WITH_QUOTES: True,
+        LangStringFlag.PRINT_WITH_LANG: True,
         # Default values for SetLangStringFlags
         SetLangStringFlag.DEFINED_TEXT: True,
         SetLangStringFlag.DEFINED_LANG: True,

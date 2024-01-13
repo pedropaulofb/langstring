@@ -42,6 +42,8 @@ class LangStringFlag(Enum):
     STRIP_LANG = auto()
     LOWERCASE_LANG = auto()
     VALID_LANG = auto()
+    PRINT_WITH_QUOTES = auto()
+    PRINT_WITH_LANG = auto()
 
 
 class SetLangStringFlag(Enum):

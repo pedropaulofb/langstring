@@ -20,7 +20,7 @@ class SetLangString:
         """Setter for texts."""
         msg = f"Invalid 'texts' value received ('{new_texts}')."
         if not isinstance(new_texts, set):
-            raise TypeError(f"{msg}'). Expected 'set', got {type(new_texts).__name__}.")
+            raise TypeError(f"{msg}'). Expected 'set', got '{type(new_texts).__name__}'.")
 
         self._texts = set()
         for text_value in new_texts:

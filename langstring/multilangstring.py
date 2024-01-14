@@ -78,7 +78,7 @@ class MultiLangString:
 
         msg = f"Invalid type of 'mls_dict' received ('{new_mls_dict}')."
         if not isinstance(new_mls_dict, dict):
-            raise TypeError(f"{msg}'). Expected 'dict', got {type(new_mls_dict).__name__}.")
+            raise TypeError(f"{msg}'). Expected 'dict', got '{type(new_mls_dict).__name__}'.")
 
         temp_dict: dict[str, set[str]] = {}
         for lang, texts in new_mls_dict.items():
@@ -89,18 +89,6 @@ class MultiLangString:
                 temp_dict[validated_key].add(validated_value)
 
         self._mls_dict = temp_dict
-
-    @mls_dict.setter
-    def mls_dict(self, new_mls_dict: dict[str, set[str]]) -> None:
-        """Setter for texts."""
-
-        msg = f"Invalid type of 'mls_dict' received ('{new_mls_dict}')."
-        if not isinstance(new_mls_dict, set):
-            raise TypeError(f"{msg}'). Expected 'dict', got {type(new_mls_dict).__name__}.")
-
-        self._mls_dict = {}
-        for text_value in new_mls_dict:
-            self._mls_dict.add(Validator.validate_text(MultiLangStringFlag, text_value))
 
     @property
     def pref_lang(self) -> str:
@@ -143,7 +131,7 @@ class MultiLangString:
         :type langstring: LangString
         """
         if not isinstance(langstring, LangString):
-            raise TypeError(f"Invalid argument type. Expected 'LangString' type, got {type(langstring).__name__}")
+            raise TypeError(f"Invalid argument type. Expected type 'LangString', got '{type(langstring).__name__}'")
 
         langstring.lang = "" if langstring.lang is None else langstring.lang
         self.add_entry(text=langstring.text, lang=langstring.lang)

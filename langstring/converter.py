@@ -52,7 +52,7 @@ class Converter(metaclass=NonInstantiable):
             return cls.convert_multilangstring_to_langstrings(input)
 
         raise TypeError(
-            f"Invalid input argument type. Expected SetLangString or MultiLangString, got {type(input).__name__}."
+            f"Invalid input argument type. Expected SetLangString or MultiLangString, got '{type(input).__name__}'."
         )
 
     @classmethod
@@ -74,7 +74,7 @@ class Converter(metaclass=NonInstantiable):
             return cls.convert_multilangstring_to_setlangstrings(input)
 
         raise TypeError(
-            f"Invalid input argument type. Expected LangString or MultiLangString, got {type(input).__name__}."
+            f"Invalid input argument type. Expected LangString or MultiLangString, got '{type(input).__name__}'."
         )
 
     @classmethod
@@ -94,7 +94,7 @@ class Converter(metaclass=NonInstantiable):
             return cls.convert_setlangstring_to_multilangstring(input)
 
         raise TypeError(
-            f"Invalid input argument type. Expected LangString or SetLangString, got {type(input).__name__}."
+            f"Invalid input argument type. Expected LangString or SetLangString, got '{type(input).__name__}'."
         )
 
     @classmethod
@@ -112,7 +112,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input is not of type LangString.
         """
         if not isinstance(input, LangString):
-            raise TypeError(f"Invalid input argument type. Expected LangString, got {type(input).__name__}.")
+            raise TypeError(f"Invalid input argument type. Expected LangString, got '{type(input).__name__}'.")
 
         return SetLangString(texts={input.text}, lang=input.lang)
 
@@ -130,7 +130,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input is not of type LangString.
         """
         if not isinstance(input, LangString):
-            raise TypeError(f"Invalid input argument type. Expected LangString, got {type(input).__name__}.")
+            raise TypeError(f"Invalid input argument type. Expected LangString, got '{type(input).__name__}'.")
 
         new_mls_dict: dict[str, set[str]] = {input.lang: {input.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
@@ -149,7 +149,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input is not of type SetLangString.
         """
         if not isinstance(input, SetLangString):
-            raise TypeError(f"Invalid input argument type. Expected SetLangString, got {type(input).__name__}.")
+            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
 
         return_list = []
 
@@ -172,7 +172,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input is not of type SetLangString.
         """
         if not isinstance(input, SetLangString):
-            raise TypeError(f"Invalid input argument type. Expected SetLangString, got {type(input).__name__}.")
+            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
 
         new_mls_dict: dict[str, set[str]] = {input.lang: input.texts}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
@@ -191,7 +191,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input is not of type MultiLangString.
         """
         if not isinstance(input, MultiLangString):
-            raise TypeError(f"Invalid input argument type. Expected MultiLangString, got {type(input).__name__}.")
+            raise TypeError(f"Invalid input argument type. Expected MultiLangString, got '{type(input).__name__}'.")
 
         return [LangString(text, lang) for lang, texts in input.mls_dict.items() for text in texts]
 
@@ -209,7 +209,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input is not of type MultiLangString.
         """
         if not isinstance(input, MultiLangString):
-            raise TypeError(f"Invalid input argument type. Expected MultiLangString, got {type(input).__name__}.")
+            raise TypeError(f"Invalid input argument type. Expected MultiLangString, got '{type(input).__name__}'.")
 
         return_list = []
 

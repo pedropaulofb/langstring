@@ -25,6 +25,7 @@ from typing import Optional
 
 from langcodes import tag_is_valid
 
+from langstring import Controller
 from .non_instantiable import NonInstantiable
 
 
@@ -37,28 +38,31 @@ class Validator(metaclass=NonInstantiable):
 
     @staticmethod
     def validate_text(flag_type: type[Enum], text: Optional[str]) -> str:
+        Controller.print_flags()
+
         msg = f"Invalid 'text' value received ('{text}')."
         if not isinstance(text, str):
-            raise TypeError(f"{msg} Expected 'str', got {type(text).__name__}.")
+            raise TypeError(f"{msg} Expected 'str', got '{type(text).__name__}'.")
 
-        if getattr(flag_type, "DEFINED_TEXT") and not text:
+        if Controller.get_flag(flag_type.DEFINED_TEXT) and not text:
+            print(Controller.get_flag(flag_type.DEFINED_TEXT))
             raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_TEXT' is enabled. Expected non-empty 'str'.")
 
-        return text if not getattr(flag_type, "STRIP_TEXT") else text.strip()
+        return text if not Controller.get_flag(flag_type.STRIP_TEXT) else text.strip()
 
     @staticmethod
     def validate_lang(flag_type: type[Enum], lang: Optional[str]) -> str:
         msg = f"Invalid 'lang' value received ('{lang}')."
 
         if not isinstance(lang, str):
-            raise TypeError(f"{msg} Expected 'str', got {type(lang).__name__}.")
+            raise TypeError(f"{msg} Expected 'str', got '{type(lang).__name__}'.")
 
-        if getattr(flag_type, "DEFINED_LANG") and not lang:
+        if Controller.get_flag(flag_type.DEFINED_LANG) and not lang:
             raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_LANG' is enabled. Expected non-empty 'str'.")
 
         # Validation is performed on lowercase language, according to RDF definition
-        if getattr(flag_type, "VALID_LANG") and not tag_is_valid(lang.lower()):
+        if Controller.get_flag(flag_type.VALID_LANG) and not tag_is_valid(lang.lower()):
             raise ValueError(f"{msg} '{flag_type.__name__}.VALID_LANG' is enabled. Expected valid language code.")
 
-        lang = lang if not getattr(flag_type, "STRIP_LANG") else lang.strip()
-        return lang if not getattr(flag_type, "LOWERCASE_LANG") else lang.lower()
+        lang = lang if not Controller.get_flag(flag_type.STRIP_LANG) else lang.strip()
+        return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.lower()

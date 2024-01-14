@@ -23,31 +23,31 @@ class Controller(metaclass=NonInstantiable):
     # Define the default values as a class-level constant
     DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = {
         # Default values for GlobalFlags
-        GlobalFlag.DEFINED_TEXT: True,
-        GlobalFlag.DEFINED_LANG: True,
+        GlobalFlag.DEFINED_TEXT: False,
+        GlobalFlag.DEFINED_LANG: False,
         GlobalFlag.VALID_LANG: False,
         GlobalFlag.STRIP_TEXT: False,
         GlobalFlag.STRIP_LANG: False,
         GlobalFlag.LOWERCASE_LANG: False,
         # Default values for LangStringFlags
-        LangStringFlag.DEFINED_TEXT: True,
-        LangStringFlag.DEFINED_LANG: True,
+        LangStringFlag.DEFINED_TEXT: False,
+        LangStringFlag.DEFINED_LANG: False,
         LangStringFlag.VALID_LANG: False,
         LangStringFlag.STRIP_TEXT: False,
         LangStringFlag.STRIP_LANG: False,
         LangStringFlag.LOWERCASE_LANG: False,
-        LangStringFlag.PRINT_WITH_QUOTES: True,
-        LangStringFlag.PRINT_WITH_LANG: True,
+        LangStringFlag.PRINT_WITH_QUOTES: False,
+        LangStringFlag.PRINT_WITH_LANG: False,
         # Default values for SetLangStringFlags
-        SetLangStringFlag.DEFINED_TEXT: True,
-        SetLangStringFlag.DEFINED_LANG: True,
+        SetLangStringFlag.DEFINED_TEXT: False,
+        SetLangStringFlag.DEFINED_LANG: False,
         SetLangStringFlag.VALID_LANG: False,
         SetLangStringFlag.STRIP_TEXT: False,
         SetLangStringFlag.STRIP_LANG: False,
         SetLangStringFlag.LOWERCASE_LANG: False,
         # Default values for MultiLangStringFlags
-        MultiLangStringFlag.DEFINED_TEXT: True,
-        MultiLangStringFlag.DEFINED_LANG: True,
+        MultiLangStringFlag.DEFINED_TEXT: False,
+        MultiLangStringFlag.DEFINED_LANG: False,
         MultiLangStringFlag.VALID_LANG: False,
         MultiLangStringFlag.STRIP_TEXT: False,
         MultiLangStringFlag.STRIP_LANG: False,
@@ -77,7 +77,7 @@ class Controller(metaclass=NonInstantiable):
 
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
-                f"Invalid flag type. Expected LangStringFlag or MultiLangStringFlag, got {type(flag).__name__}."
+                f"Invalid flag type. Expected LangStringFlag or MultiLangStringFlag, got '{type(flag).__name__}'."
             )
 
         if isinstance(flag, GlobalFlag):
@@ -106,7 +106,7 @@ class Controller(metaclass=NonInstantiable):
 
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
-                f"Invalid flag type. Expected LangStringFlag or MultiLangStringFlag, got {type(flag).__name__}."
+                f"Invalid flag type. Expected LangStringFlag or MultiLangStringFlag, got '{type(flag).__name__}'."
             )
 
         return cls.flags.get(flag, False)

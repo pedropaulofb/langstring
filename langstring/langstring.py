@@ -48,6 +48,8 @@ class LangString:
         self.text: str = text
         self.lang: str = lang
 
+    # GETTERS AND SETTERS
+
     @property
     def text(self) -> str:
         """Getter for text."""
@@ -67,16 +69,6 @@ class LangString:
     def lang(self, new_lang: str) -> None:
         """Setter for lang."""
         self._lang = Validator.validate_lang(LangStringFlag, new_lang)
-
-    def to_string(self) -> str:
-        """Convert the LangString object to a string representation.
-
-        This method is a convenience wrapper for the __str__ method.
-
-        :return: The string representation of the LangString object, including the language tag.
-        :rtype: str
-        """
-        return self.__str__()
 
     # OVERWRITING BUILT-IN STRING METHODS
 
@@ -233,6 +225,8 @@ class LangString:
 
     def zfill(self, width: int) -> "LangString":
         return LangString(self.text.zfill(width), self.lang)
+
+    # OVERWRITING BUILT-IN STRING DUNDER METHODS
 
     def __add__(self, other):
         """Add another LangString or a string to this LangString.

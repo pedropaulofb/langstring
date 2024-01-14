@@ -44,7 +44,6 @@ class LangString:
         :param lang: The language tag of the text.
         :type lang: str
         """
-
         self.text: str = text
         self.lang: str = lang
 

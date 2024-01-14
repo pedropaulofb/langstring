@@ -25,8 +25,8 @@ from typing import Optional
 
 from langcodes import tag_is_valid
 
-from langstring import Controller
 from .non_instantiable import NonInstantiable
+from langstring import Controller
 
 
 class Validator(metaclass=NonInstantiable):
@@ -38,8 +38,6 @@ class Validator(metaclass=NonInstantiable):
 
     @staticmethod
     def validate_text(flag_type: type[Enum], text: Optional[str]) -> str:
-        Controller.print_flags()
-
         msg = f"Invalid 'text' value received ('{text}')."
         if not isinstance(text, str):
             raise TypeError(f"{msg} Expected 'str', got '{type(text).__name__}'.")

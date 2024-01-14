@@ -1,6 +1,7 @@
 import pytest
 
-from langstring import Controller, GlobalFlag
+from langstring import Controller
+from langstring import GlobalFlag
 from langstring import LangString
 from langstring import LangStringFlag
 
@@ -136,6 +137,7 @@ def test_langstring_init_with_global_defined_flags(text, lang, error, match):
     with pytest.raises(error, match=match):
         LangString(text, lang)
 
+
 @pytest.mark.parametrize(
     "text, lang, expected_text, expected_lang",
     [
@@ -152,11 +154,12 @@ def test_langstring_init_with_combined_flags(text, lang, expected_text, expected
     assert lang_string.text == expected_text, "LangString text should be stripped and unchanged"
     assert lang_string.lang == expected_lang, "LangString language should be stripped and lowercase"
 
+
 @pytest.mark.parametrize(
     "text, lang",
     [
         ("", ""),  # Empty strings
-        (" "*1000, "en"),  # Very long string
+        (" " * 1000, "en"),  # Very long string
         ("Hello\nWorld", "en"),  # Newline characters
         ("Hello\tWorld", "en"),  # Tab characters
         ("👋🌍", "en"),  # Unicode characters
@@ -168,6 +171,7 @@ def test_langstring_init_edge_cases(text, lang):
     assert lang_string.text == text, "LangString text should match input text"
     assert lang_string.lang == lang, "LangString language should match input language"
 
+
 def test_langstring_init_resetting_flags():
     """Test the __init__ method behavior after resetting flags."""
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
@@ -178,6 +182,7 @@ def test_langstring_init_resetting_flags():
     lang_string = LangString(text, lang)
     assert lang_string.text == text, "LangString text should be unchanged after resetting flags"
     assert lang_string.lang == lang, "LangString language should be unchanged after resetting flags"
+
 
 @pytest.mark.parametrize(
     "text, lang",
@@ -194,6 +199,7 @@ def test_langstring_init_unusual_valid_inputs(text, lang):
     assert lang_string.text == text, "LangString text should match input text"
     assert lang_string.lang == lang, "LangString language should match input language"
 
+
 @pytest.mark.parametrize(
     "text, lang",
     [
@@ -207,6 +213,7 @@ def test_langstring_init_with_varied_language_codes(text, lang):
     lang_string = LangString(text, lang)
     assert lang_string.lang == lang, "LangString language should match input language"
 
+
 @pytest.mark.parametrize(
     "text, lang",
     [
@@ -219,6 +226,7 @@ def test_langstring_init_with_special_characters(text, lang):
     lang_string = LangString(text, lang)
     assert lang_string.text == text, "LangString text should match input text"
 
+
 @pytest.mark.parametrize(
     "text, lang",
     [
@@ -230,6 +238,7 @@ def test_langstring_init_with_boundary_values(text, lang):
     """Test the __init__ method with boundary value strings."""
     lang_string = LangString(text, lang)
     assert lang_string.text == text, "LangString text should match input text"
+
 
 @pytest.mark.parametrize(
     "text, lang, expected_text, match",
@@ -244,3 +253,88 @@ def test_langstring_init_with_combined_unusual_flags(text, lang, expected_text, 
 
     with pytest.raises(ValueError, match=match):
         LangString(text, lang)
+
+
+@pytest.mark.parametrize(
+    "text, lang, expected_text, expected_lang",
+    [
+        ("שלום", "he", "שלום", "he"),  # Hebrew
+        ("नमस्ते", "hi", "नमस्ते", "hi"),  # Hindi
+        ("مرحبا", "ar", "مرحبا", "ar"),  # Arabic
+        ("Привет", "ru", "Привет", "ru"),  # Russian
+        ("안녕하세요", "ko", "안녕하세요", "ko"),  # Korean
+    ],
+)
+def test_langstring_init_valid_inputs_extended(text, lang, expected_text, expected_lang):
+    lang_string = LangString(text, lang)
+    assert lang_string.text == expected_text
+    assert lang_string.lang == expected_lang
+
+
+@pytest.mark.parametrize(
+    "text, lang, error, match",
+    [
+        (3.14, "en", TypeError, "Expected 'str', got 'float'"),
+        (True, "en", TypeError, "Expected 'str', got 'bool'"),
+        ({"greeting": "hello"}, "en", TypeError, "Expected 'str', got 'dict'"),
+        (None, "en", TypeError, "Expected 'str', got 'NoneType'"),
+    ],
+)
+def test_langstring_init_with_various_types(text, lang, error, match):
+    with pytest.raises(error, match=match):
+        LangString(text, lang)
+
+
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        ("Hello", "zh-Hant"),  # Traditional Chinese
+        ("Bonjour", "fr-CA"),  # Canadian French
+        ("Saluton", "eo"),  # Esperanto
+        ("Sawubona", "zu"),  # Zulu
+    ],
+)
+def test_langstring_init_with_more_varied_language_codes(text, lang):
+    lang_string = LangString(text, lang)
+    assert lang_string.lang == lang
+
+
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        ("Hello-こんにちは", "en-ja"),  # English and Japanese
+        ("123-abc-👍", "en"),  # Numbers, English letters, and emoji
+        ("Hello-Привет", "en-ru"),  # Combining English and Russian
+        ("123-bonjour-@", "fr"),  # Combining numbers, French, and symbols
+    ],
+)
+def test_langstring_init_with_mixed_characters(text, lang):
+    lang_string = LangString(text, lang)
+    assert lang_string.text == text
+
+
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        (" " * 1000, "en"),  # Long string of spaces
+        ("a" * 1, "en"),  # Single character
+        ("x" * 10000, "en"),  # Very long string
+    ],
+)
+def test_langstring_init_with_additional_boundary_values(text, lang):
+    lang_string = LangString(text, lang)
+    assert lang_string.text == text
+
+
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        ("    ", "en"),  # String with only spaces
+        ("\u200B\u200C\u200D", "en"),  # Zero-width characters
+        ("Hello\nWorld", "en"),  # String with newline characters
+        ("\t \n \r", "en"),  # String with various whitespace characters
+    ],
+)
+def test_langstring_init_with_more_edge_cases(text, lang):
+    lang_string = LangString(text, lang)
+    assert lang_string.text == text

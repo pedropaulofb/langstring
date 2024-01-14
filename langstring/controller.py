@@ -36,8 +36,8 @@ class Controller(metaclass=NonInstantiable):
         LangStringFlag.STRIP_TEXT: False,
         LangStringFlag.STRIP_LANG: False,
         LangStringFlag.LOWERCASE_LANG: False,
-        LangStringFlag.PRINT_WITH_QUOTES: False,
-        LangStringFlag.PRINT_WITH_LANG: False,
+        LangStringFlag.PRINT_WITH_QUOTES: True,
+        LangStringFlag.PRINT_WITH_LANG: True,
         # Default values for SetLangStringFlags
         SetLangStringFlag.DEFINED_TEXT: False,
         SetLangStringFlag.DEFINED_LANG: False,
@@ -103,7 +103,6 @@ class Controller(metaclass=NonInstantiable):
         :rtype: bool
         :raises TypeError: If 'flag' is not a member of LangStringFlag or MultiLangStringFlag.
         """
-
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
                 f"Invalid flag type. Expected LangStringFlag or MultiLangStringFlag, got '{type(flag).__name__}'."

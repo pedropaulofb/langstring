@@ -63,7 +63,6 @@ class MultiLangString:
         :type pref_lang: str
         :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
-
         self.mls_dict: dict[str, set[str]] = mls_dict if (mls_dict is not None) else {}
         self.pref_lang: str = pref_lang
 
@@ -75,7 +74,6 @@ class MultiLangString:
     @mls_dict.setter
     def mls_dict(self, new_mls_dict: dict[str, set[str]]) -> None:
         """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
-
         msg = f"Invalid type of 'mls_dict' received ('{new_mls_dict}')."
         if not isinstance(new_mls_dict, dict):
             raise TypeError(f"{msg}'). Expected 'dict', got '{type(new_mls_dict).__name__}'.")
@@ -119,7 +117,6 @@ class MultiLangString:
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
         """
-
         if lang not in self.mls_dict:
             self.mls_dict[lang] = set()
         self.mls_dict[lang].add(text)

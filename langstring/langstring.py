@@ -265,11 +265,11 @@ class LangString:
         """
         if not isinstance(other, LangString):
             return NotImplemented
-        return self.text == other.text and self.lang == other.lang
+        return self.text == other.text and self.lang.lower() == other.lang.lower()
 
     def __ge__(self, other: object) -> bool:
         """Check if this LangString is greater than or equal to another LangString object."""
-        if not isinstance(other, LangString) or self.lang != other.lang:
+        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
             return NotImplemented
         return self.text >= other.text
 
@@ -279,7 +279,7 @@ class LangString:
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
-        if not isinstance(other, LangString) or self.lang != other.lang:
+        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
             return NotImplemented
         return self.text > other.text
 
@@ -289,11 +289,11 @@ class LangString:
         :return: The hash new_text of the LangString object, based on its text and language tag.
         :rtype: int
         """
-        return hash((self.text, self.lang))
+        return hash((self.text, self.lang.lower()))
 
     def __iadd__(self, other):
         """Implement in-place addition."""
-        if isinstance(other, LangString) and self.lang == other.lang:
+        if isinstance(other, LangString) and self.lang.lower() == other.lang.lower():
             self.text += other.text
         elif isinstance(other, str):
             self.text += other
@@ -315,7 +315,7 @@ class LangString:
 
     def __le__(self, other: object) -> bool:
         """Check if this LangString is less than or equal to another LangString object."""
-        if not isinstance(other, LangString) or self.lang != other.lang:
+        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
             return NotImplemented
         return self.text <= other.text
 
@@ -325,7 +325,7 @@ class LangString:
 
     def __lt__(self, other: object) -> bool:
         """Check if this LangString is less than another LangString object."""
-        if not isinstance(other, LangString) or self.lang != other.lang:
+        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
             return NotImplemented
         return self.text < other.text
 

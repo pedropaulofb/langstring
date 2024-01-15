@@ -17,4 +17,4 @@ def reset_configurations() -> None:
     This fixture ensures that each test starts with a clean state regarding the flags used in the
     LangString and MultiLangString modules. It is applied to all tests automatically due to the 'autouse=True' setting.
     """
-    Controller.reset_flags_all()
+    Controller.reset_flags()

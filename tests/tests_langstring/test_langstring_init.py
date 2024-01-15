@@ -176,7 +176,7 @@ def test_langstring_init_resetting_flags():
     """Test the __init__ method behavior after resetting flags."""
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
     Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
-    Controller.reset_flags_all()
+    Controller.reset_flags()
 
     text, lang = "  Hello  ", "EN  "
     lang_string = LangString(text, lang)

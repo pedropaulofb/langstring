@@ -815,7 +815,7 @@ Controller.set_flag(LangStringFlag.ENSURE_ANY_LANG, True)
 Controller.set_flag(LangStringFlag.ENSURE_VALID_LANG, True)
 
 # Resetting all flags to default in Controller
-Controller.reset_flags_all()
+Controller.reset_flags()
 print("Flags after reset:")
 Controller.print_flags()  # Expected Output: Default states of all flags, as follows:
 # LangStringFlag.ENSURE_TEXT = True
@@ -833,7 +833,7 @@ Example:
 from langstring import MultiLangStringControl
 
 # Resetting flags to ensure a known state
-MultiLangStringControl.reset_flags_all()
+MultiLangStringControl.reset_flags()
 
 # Printing the current state of all configuration flags in MultiLangStringControl
 print("Current flag states in MultiLangStringControl:")

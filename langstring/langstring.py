@@ -81,7 +81,7 @@ class LangString:
         return LangString(self.text.center(width, fillchar), self.lang)
 
     def count(self, sub: str, start: int = 0, end: int = None) -> int:
-        return self.text.count(sub, start, end)
+        return (self.text).count(sub, start, end)
 
     def encode(self, encoding: str = "utf-8", errors: str = "strict") -> bytes:
         return self.text.encode(encoding, errors)

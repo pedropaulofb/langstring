@@ -83,6 +83,7 @@ class LangString:
     def count(self, sub: str, start: int = 0, end: int = None) -> int:
         return (self.text).count(sub, start, end)
 
+    # TODO (@pedropaulofb): Does it make sense to implement this? Return type byte!
     def encode(self, encoding: str = "utf-8", errors: str = "strict") -> bytes:
         return self.text.encode(encoding, errors)
 
@@ -169,6 +170,38 @@ class LangString:
     def replace(self, old: str, new: str, count: int = -1) -> "LangString":
         return LangString(self.text.replace(old, new, count), self.lang)
 
+    def removeprefix(self, prefix: str) -> "LangString":
+        """
+        Remove the specified prefix from the LangString's text.
+
+        If the text starts with the prefix string, return a new LangString with the prefix string removed.
+        Otherwise, return a copy of the original LangString.
+
+        :param prefix: The prefix to remove from the text.
+        :return: A new LangString with the prefix removed.
+        """
+        if self.text.startswith(prefix):
+            new_text = self.text[len(prefix):]
+        else:
+            new_text = self.text
+        return LangString(new_text, self.lang)
+
+    def removesuffix(self, suffix: str) -> "LangString":
+        """
+        Remove the specified suffix from the LangString's text.
+
+        If the text ends with the suffix string, return a new LangString with the suffix string removed.
+        Otherwise, return a copy of the original LangString.
+
+        :param suffix: The suffix to remove from the text.
+        :return: A new LangString with the suffix removed.
+        """
+        if self.text.endswith(suffix):
+            new_text = self.text[:-len(suffix)]
+        else:
+            new_text = self.text
+        return LangString(new_text, self.lang)
+
     def rfind(self, sub: str, start: int = 0, end: int = None) -> int:
         return self.text.rfind(sub, start, end)
 
@@ -251,10 +284,6 @@ class LangString:
         """Check if a substring exists within the LangString's text."""
         return item in self.text
 
-    def __delitem__(self, key):
-        """Delete a slice or a character from the text."""
-        self.text = self.text[:key] + self.text[key + 1 :]
-
     def __eq__(self, other: object) -> bool:
         """Check equality of this LangString with another object.
 
@@ -273,9 +302,15 @@ class LangString:
             return NotImplemented
         return self.text >= other.text
 
-    def __getitem__(self, key: slice) -> "LangString":
-        """Retrieve a substring from the LangString's text."""
-        return LangString(self.text[key], self.lang)
+    def __getitem__(self, key):
+        """Retrieve a substring or a reversed string from the LangString's text."""
+        if isinstance(key, slice):
+            # Handle slicing
+            sliced_text = self.text[key]
+            return LangString(sliced_text, self.lang)
+        else:
+            # Handle single index access
+            return LangString(self.text[key], self.lang)
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
@@ -358,16 +393,9 @@ class LangString:
             raise TypeError(f"Unsupported operand type(s) for +: '{type(other).__name__}' and 'LangString'")
         return LangString(other + self.text, self.lang)
 
-
-    def __reversed__(self):
-        """Reverse the text."""
-        return LangString(self.text[::-1], self.lang)
-
-    def __setitem__(self, key, value):
-        """Set a slice or a character in the text."""
-        if not isinstance(value, str):
-            raise TypeError("Assignment value must be a string")
-        self.text = self.text[:key] + value + self.text[key + 1 :]
+    def __repr__(self) -> str:
+        """Return an unambiguous string representation of the LangString."""
+        return f'LangString({repr(self.text)}, {repr(self.lang)})'
 
     def __str__(self) -> str:
         """Define the string representation of the LangString object.

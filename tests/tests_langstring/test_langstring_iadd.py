@@ -63,3 +63,33 @@ def test_iadd_langstrings_case_insensitive_and_strip_lang(initial_lang, add_lang
         assert lang_str1.text == "HelloWorld" and lang_str1.lang == initial_lang.lower()
 
     Controller.reset_flags()
+
+@pytest.mark.parametrize("initial_text, add_obj, expected_text, expected_error", [
+    ("Hello", None, "", TypeError),
+    ("", LangString("", "en"), "", None),
+    ("Hello", LangString("", "en"), "Hello", None),
+    ("Hello", LangString("World", "en"), "HelloWorld", None),
+])
+def test_iadd_langstring_with_various_values(initial_text, add_obj, expected_text, expected_error):
+    """Test in-place addition of LangString with various values including empty and None."""
+    lang_str = LangString(initial_text, "en")
+    if expected_error:
+        with pytest.raises(expected_error):
+            lang_str += add_obj
+    else:
+        lang_str += add_obj
+        assert lang_str.text == expected_text
+
+@pytest.mark.parametrize("strip_text_flag, initial_text, add_text, expected_text", [
+    (True, "Hello ", "World", "HelloWorld"),
+    (False, "Hello ", "World", "Hello World"),
+])
+def test_iadd_langstrings_with_strip_text_effect(strip_text_flag, initial_text, add_text, expected_text):
+    """Test in-place addition of LangString objects with STRIP_TEXT flag effect."""
+    Controller.set_flag(LangStringFlag.STRIP_TEXT, strip_text_flag)
+    lang_str1 = LangString(initial_text, "en")
+    lang_str2 = LangString(add_text, "en")
+    lang_str1 += lang_str2
+    assert lang_str1.text == expected_text
+    Controller.reset_flags()
+

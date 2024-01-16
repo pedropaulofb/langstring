@@ -59,8 +59,8 @@ class Validator(metaclass=NonInstantiable):
             raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_LANG' is enabled. Expected non-empty 'str'.")
 
         # Validation is performed on lowercase language, according to RDF definition
-        if Controller.get_flag(flag_type.VALID_LANG) and not tag_is_valid(lang.lower()):
+        if Controller.get_flag(flag_type.VALID_LANG) and not tag_is_valid(lang.casefold()):
             raise ValueError(f"{msg} '{flag_type.__name__}.VALID_LANG' is enabled. Expected valid language code.")
 
         lang = lang if not Controller.get_flag(flag_type.STRIP_LANG) else lang.strip()
-        return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.lower()
+        return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.casefold()

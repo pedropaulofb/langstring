@@ -239,7 +239,7 @@ class LangString:
         :raises TypeError: If the objects are not compatible for addition.
         """
         if isinstance(other, LangString):
-            if (self.lang).lower() != (other.lang).lower():
+            if (self.lang).casefold() != (other.lang).casefold():
                 raise ValueError("Cannot add LangString objects with different language tags.")
             return LangString(self.text + other.text, self.lang)
         elif isinstance(other, str):
@@ -265,11 +265,11 @@ class LangString:
         """
         if not isinstance(other, LangString):
             return NotImplemented
-        return self.text == other.text and self.lang.lower() == other.lang.lower()
+        return self.text == other.text and self.lang.casefold() == other.lang.casefold()
 
     def __ge__(self, other: object) -> bool:
         """Check if this LangString is greater than or equal to another LangString object."""
-        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
+        if not isinstance(other, LangString) or self.lang.casefold() != other.lang.casefold():
             return NotImplemented
         return self.text >= other.text
 
@@ -279,7 +279,7 @@ class LangString:
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
-        if not isinstance(other, LangString) or (self.lang).lower() != (other.lang).lower():
+        if not isinstance(other, LangString) or (self.lang).casefold() != (other.lang).casefold():
             return NotImplemented
         return self.text > other.text
 
@@ -289,12 +289,12 @@ class LangString:
         :return: The hash new_text of the LangString object, based on its text and language tag.
         :rtype: int
         """
-        return hash((self.text, self.lang.lower()))
+        return hash((self.text, self.lang.casefold()))
 
     def __iadd__(self, other):
         """Implement in-place addition."""
         if isinstance(other, LangString):
-            if self.lang.lower() != other.lang.lower():
+            if self.lang.casefold() != other.lang.casefold():
                 raise ValueError("Cannot add LangString objects with different language tags.")
             self.text += other.text
         elif isinstance(other, str):
@@ -317,7 +317,7 @@ class LangString:
 
     def __le__(self, other: object) -> bool:
         """Check if this LangString is less than or equal to another LangString object."""
-        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
+        if not isinstance(other, LangString) or self.lang.casefold() != other.lang.casefold():
             return NotImplemented
         return self.text <= other.text
 
@@ -327,7 +327,7 @@ class LangString:
 
     def __lt__(self, other: object) -> bool:
         """Check if this LangString is less than another LangString object."""
-        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
+        if not isinstance(other, LangString) or self.lang.casefold() != other.lang.casefold():
             return NotImplemented
         return self.text < other.text
 

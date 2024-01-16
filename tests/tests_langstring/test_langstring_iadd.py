@@ -1,0 +1,65 @@
+import pytest
+from langstring import Controller, LangStringFlag
+from langstring.langstring import LangString
+
+@pytest.mark.parametrize("initial_text, add_text, expected_text", [
+    ("Hello", " World", "Hello World"),
+    ("Bonjour", " le monde", "Bonjour le monde"),
+])
+def test_iadd_langstring_with_string(initial_text, add_text, expected_text):
+    """Test in-place addition of a string to a LangString object."""
+    lang_str = LangString(initial_text, "en")
+    lang_str += add_text
+    assert lang_str.text == expected_text and lang_str.lang == "en"
+
+@pytest.mark.parametrize("initial_text, initial_lang, add_text, add_lang, expected_text, expected_lang", [
+    ("Hello", "en", " World", "en", "Hello World", "en"),
+    ("Hola", "es", " Mundo", "es", "Hola Mundo", "es"),
+])
+def test_iadd_two_langstrings_same_lang(initial_text, initial_lang, add_text, add_lang, expected_text, expected_lang):
+    """Test in-place addition of two LangString objects with the same language."""
+    lang_str1 = LangString(initial_text, initial_lang)
+    lang_str2 = LangString(add_text, add_lang)
+    lang_str1 += lang_str2
+    assert lang_str1.text == expected_text and lang_str1.lang == expected_lang
+
+@pytest.mark.parametrize("strip_lang_flag, should_raise_error", [
+    (True, False),
+    (False, True),
+])
+def test_iadd_langstrings_with_strip_lang_effect(strip_lang_flag, should_raise_error):
+    """Test in-place addition of LangString objects with language tags affected by the STRIP_LANG flag."""
+    Controller.set_flag(LangStringFlag.STRIP_LANG, strip_lang_flag)
+
+    lang_str1 = LangString("Hello", "en")
+    lang_str2 = LangString("Bonjour", " en")
+
+    if should_raise_error:
+        with pytest.raises(ValueError, match="Cannot add LangString objects with different language tags."):
+            lang_str1 += lang_str2
+    else:
+        lang_str1 += lang_str2
+        assert lang_str1.text == "HelloBonjour" and lang_str1.lang == "en"
+
+    Controller.reset_flags()
+
+@pytest.mark.parametrize("initial_lang, add_lang, expected_error", [
+    ("en", "en", False),
+    ("en", "EN", False),
+    ("en", " en", True),  # Leading space in add_lang, should raise error if STRIP_LANG is False
+    ("en", "en-us", True), # Different language tags, should raise error
+    ])
+def test_iadd_langstrings_case_insensitive_and_strip_lang(initial_lang, add_lang, expected_error):
+    """Test in-place addition of LangString objects with case-insensitive language tags and STRIP_LANG flag effect."""
+    Controller.set_flag(LangStringFlag.STRIP_LANG, not expected_error)
+    lang_str1 = LangString("Hello", initial_lang)
+    lang_str2 = LangString("World", add_lang)
+
+    if expected_error:
+        with pytest.raises(ValueError, match="Cannot add LangString objects with different language tags."):
+            lang_str1 += lang_str2
+    else:
+        lang_str1 += lang_str2
+        assert lang_str1.text == "HelloWorld" and lang_str1.lang == initial_lang.lower()
+
+    Controller.reset_flags()

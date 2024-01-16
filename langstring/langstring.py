@@ -239,7 +239,7 @@ class LangString:
         :raises TypeError: If the objects are not compatible for addition.
         """
         if isinstance(other, LangString):
-            if self.lang != other.lang:
+            if (self.lang).lower() != (other.lang).lower():
                 raise ValueError("Cannot add LangString objects with different language tags.")
             return LangString(self.text + other.text, self.lang)
         elif isinstance(other, str):
@@ -279,7 +279,7 @@ class LangString:
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
-        if not isinstance(other, LangString) or self.lang.lower() != other.lang.lower():
+        if not isinstance(other, LangString) or (self.lang).lower() != (other.lang).lower():
             return NotImplemented
         return self.text > other.text
 
@@ -293,12 +293,14 @@ class LangString:
 
     def __iadd__(self, other):
         """Implement in-place addition."""
-        if isinstance(other, LangString) and self.lang.lower() == other.lang.lower():
+        if isinstance(other, LangString):
+            if self.lang.lower() != other.lang.lower():
+                raise ValueError("Cannot add LangString objects with different language tags.")
             self.text += other.text
         elif isinstance(other, str):
             self.text += other
         else:
-            raise TypeError("Unsupported operand type(s) for +=: 'LangString' and '{}'".format(type(other).__name__))
+            raise TypeError(f"Unsupported operand type(s) for +=: 'LangString' and '{type(other).__name__}'")
         return self
 
     def __imul__(self, other):
@@ -340,6 +342,22 @@ class LangString:
         if not isinstance(other, LangString):
             return NotImplemented
         return not (self.text == other.text and self.lang == other.lang)
+
+    def __radd__(self, other):
+        """Handle concatenation when LangString is on the right side of the '+' operator.
+
+        This method allows a string to be added to the beginning of the LangString's text.
+
+        :param other: The string to be concatenated to the beginning of this LangString's text.
+        :type other: str
+        :return: A new LangString with the concatenated text.
+        :rtype: LangString
+        :raises TypeError: If 'other' is not a string.
+        """
+        if not isinstance(other, str):
+            raise TypeError(f"Unsupported operand type(s) for +: '{type(other).__name__}' and 'LangString'")
+        return LangString(other + self.text, self.lang)
+
 
     def __reversed__(self):
         """Reverse the text."""

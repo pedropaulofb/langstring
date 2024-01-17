@@ -364,7 +364,7 @@ class LangString:
         """Check inequality of this LangString with another object."""
         if not isinstance(other, LangString):
             return NotImplemented
-        return not (self.text == other.text and self.lang == other.lang)
+        return not (self.text == other.text and (self.lang).casefold() == (other.lang).casefold())
 
     def __radd__(self, other):
         """Handle concatenation when LangString is on the right side of the '+' operator.

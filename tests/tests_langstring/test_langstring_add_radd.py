@@ -1,8 +1,6 @@
 import pytest
 
-from langstring import Controller
 from langstring import LangString
-from langstring import LangStringFlag
 
 
 # Test cases for adding two LangString objects

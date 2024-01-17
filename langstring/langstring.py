@@ -331,7 +331,7 @@ class LangString:
         if isinstance(other, int):
             self.text *= other
         else:
-            raise TypeError("Unsupported operand type(s) for *=: 'LangString' and '{}'".format(type(other).__name__))
+            raise TypeError(f"Unsupported operand type(s) for *=: 'LangString' and '{type(other).__name__}'")
         return self
 
     def __iter__(self):
@@ -384,6 +384,23 @@ class LangString:
     def __repr__(self) -> str:
         """Return an unambiguous string representation of the LangString."""
         return f"LangString({repr(self.text)}, {repr(self.lang)})"
+
+    def __rmul__(self, other: int) -> "LangString":
+        """
+        Implement right multiplication.
+
+        This method is called for the reversed operation of multiplication, i.e., when LangString is on the right side.
+        It is typically used for repeating the LangString's text a specified number of times.
+
+        :param other: The number of times the LangString's text should be repeated.
+        :type other: int
+        :return: A new LangString with the text repeated.
+        :rtype: LangString
+        :raises TypeError: If 'other' is not an integer.
+        """
+        if not isinstance(other, int):
+            raise TypeError("Can only multiply LangString by an integer on the right side")
+        return LangString(self.text * other, self.lang)
 
     def __str__(self) -> str:
         """Define the string representation of the LangString object.

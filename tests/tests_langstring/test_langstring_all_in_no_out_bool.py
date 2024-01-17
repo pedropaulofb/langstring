@@ -1,9 +1,21 @@
+import copy
+
 import pytest
 from langstring import LangString
 
 methods_to_test = [
-    "isalnum", "isalpha", "isascii", "isdecimal", "isdigit", "isidentifier",
-    "islower", "isnumeric", "isprintable", "isspace", "istitle", "isupper"
+    "isalnum",
+    "isalpha",
+    "isascii",
+    "isdecimal",
+    "isdigit",
+    "isidentifier",
+    "islower",
+    "isnumeric",
+    "isprintable",
+    "isspace",
+    "istitle",
+    "isupper",
 ]
 
 
@@ -42,6 +54,8 @@ test_cases = [
     StringTestCase("HelloWorld"),
     StringTestCase("HELLO"),
     StringTestCase("hello"),
+    StringTestCase(" hello"),
+    StringTestCase("hello "),
     StringTestCase("Hello World"),
     StringTestCase("1234567890"),
     StringTestCase("こんにちは123"),
@@ -95,33 +109,22 @@ test_cases = [
     StringTestCase("👍👎"),
     StringTestCase("a̐éö̲"),
     StringTestCase("12345!@#$%"),
-
 ]
+
 
 @pytest.mark.parametrize("test_case, method", [(tc, m) for tc in test_cases for m in methods_to_test])
 def test_string_methods(test_case, method):
     lang_string = LangString(test_case.string, "en")
+    lang_string_before = copy.deepcopy(lang_string)
     expected_result = getattr(test_case.string, method)()
     actual_result = getattr(lang_string, method)()
     assert actual_result == expected_result, f"Failed for method '{method}' with input '{test_case.string}'"
+    assert lang_string_before == lang_string, "The original LangString cannot be modified by the called method."
 
-import pytest
-from langstring import LangString
+# Invalid arguments to test with
+invalid_args = [123, 12.34, [], {}, None, True, False]
 
-# ... [previous code] ...
-
-invalid_test_cases = [
-    123,  # Integer
-    123.45,  # Float
-    True,  # Boolean
-    None,  # NoneType
-    [],  # List
-    {},  # Dictionary
-    (),  # Tuple
-    set(),  # Set
-]
-
-@pytest.mark.parametrize("invalid_input", invalid_test_cases)
-def test_invalid_input_types(invalid_input):
-    with pytest.raises(TypeError):
-        _ = LangString(invalid_input, "en")
+@pytest.mark.parametrize("method, invalid_arg", [(m, ia) for m in methods_to_test for ia in invalid_args])
+def test_methods_invalid(method, invalid_arg):
+    with pytest.raises(TypeError, match="takes 1 positional argument but 2 were given"):
+        getattr(LangString("hello world", "en"), method)(invalid_arg)  # Pass invalid argument

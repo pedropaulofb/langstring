@@ -1,6 +1,11 @@
 import pytest
 from langstring import LangString
 
+methods_to_test = [
+    "isalnum", "isalpha", "isascii", "isdecimal", "isdigit", "isidentifier",
+    "islower", "isnumeric", "isprintable", "isspace", "istitle", "isupper"
+]
+
 
 class StringTestCase:
     def __init__(self, string):
@@ -65,14 +70,58 @@ test_cases = [
     StringTestCase("1234567890a\f"),
     StringTestCase("1234567890a\v"),
     StringTestCase("1234567890a "),
+    StringTestCase("HelloWorld123"),
+    StringTestCase("AbCdEfG123"),
+    StringTestCase("hello@world.com"),
+    StringTestCase("pass!word123"),
+    StringTestCase("123#abc!"),
+    StringTestCase("Привет"),
+    StringTestCase("مرحبا"),
+    StringTestCase("नमस्ते"),
+    StringTestCase("中文测试"),
+    StringTestCase("\nNewLine"),
+    StringTestCase("\tTabbed"),
+    StringTestCase("FirstLine\\nSecondLine"),
+    StringTestCase("a"),
+    StringTestCase("Z"),
+    StringTestCase("1"),
+    StringTestCase("9"),
+    StringTestCase("@"),
+    StringTestCase("#"),
+    StringTestCase("     "),
+    StringTestCase(" 1234 "),
+    StringTestCase("Line1\nLine2"),
+    StringTestCase("Column1\tColumn2"),
+    StringTestCase("👍👎"),
+    StringTestCase("a̐éö̲"),
+    StringTestCase("12345!@#$%"),
+
 ]
 
-@pytest.mark.parametrize("test_case", test_cases)
-def test_isalnum(test_case):
+@pytest.mark.parametrize("test_case, method", [(tc, m) for tc in test_cases for m in methods_to_test])
+def test_string_methods(test_case, method):
     lang_string = LangString(test_case.string, "en")
-    assert lang_string.isalnum() == test_case.expected_results["isalnum"]
+    expected_result = getattr(test_case.string, method)()
+    actual_result = getattr(lang_string, method)()
+    assert actual_result == expected_result, f"Failed for method '{method}' with input '{test_case.string}'"
 
-@pytest.mark.parametrize("test_case", test_cases)
-def test_isalpha(test_case):
-    lang_string = LangString(test_case.string, "en")
-    assert lang_string.isalpha() == test_case.expected_results["isalpha"]
+import pytest
+from langstring import LangString
+
+# ... [previous code] ...
+
+invalid_test_cases = [
+    123,  # Integer
+    123.45,  # Float
+    True,  # Boolean
+    None,  # NoneType
+    [],  # List
+    {},  # Dictionary
+    (),  # Tuple
+    set(),  # Set
+]
+
+@pytest.mark.parametrize("invalid_input", invalid_test_cases)
+def test_invalid_input_types(invalid_input):
+    with pytest.raises(TypeError):
+        _ = LangString(invalid_input, "en")

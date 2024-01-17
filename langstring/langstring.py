@@ -83,10 +83,6 @@ class LangString:
     def count(self, sub: str, start: int = 0, end: int = None) -> int:
         return (self.text).count(sub, start, end)
 
-    # TODO (@pedropaulofb): Does it make sense to implement this? Return type byte!
-    def encode(self, encoding: str = "utf-8", errors: str = "strict") -> bytes:
-        return self.text.encode(encoding, errors)
-
     def endswith(self, suffix, start: int = 0, end: int = None) -> bool:
         return self.text.endswith(suffix, start, end)
 
@@ -180,11 +176,7 @@ class LangString:
         :param prefix: The prefix to remove from the text.
         :return: A new LangString with the prefix removed.
         """
-        if self.text.startswith(prefix):
-            new_text = self.text[len(prefix):]
-        else:
-            new_text = self.text
-        return LangString(new_text, self.lang)
+        return LangString((self.text).removeprefix(prefix), self.lang)
 
     def removesuffix(self, suffix: str) -> "LangString":
         """
@@ -196,11 +188,7 @@ class LangString:
         :param suffix: The suffix to remove from the text.
         :return: A new LangString with the suffix removed.
         """
-        if self.text.endswith(suffix):
-            new_text = self.text[:-len(suffix)]
-        else:
-            new_text = self.text
-        return LangString(new_text, self.lang)
+        return LangString((self.text).removesuffix(suffix), self.lang)
 
     def rfind(self, sub: str, start: int = 0, end: int = None) -> int:
         return self.text.rfind(sub, start, end)
@@ -395,7 +383,7 @@ class LangString:
 
     def __repr__(self) -> str:
         """Return an unambiguous string representation of the LangString."""
-        return f'LangString({repr(self.text)}, {repr(self.lang)})'
+        return f"LangString({repr(self.text)}, {repr(self.lang)})"
 
     def __str__(self) -> str:
         """Define the string representation of the LangString object.

@@ -15,6 +15,7 @@ all_flags = (
     + list(GlobalFlag.__members__.values())
 )
 
+
 @pytest.mark.parametrize("flag_class", flag_classes)
 def test_reset_specific_flag_type_to_default(flag_class):
     # Set all flags to a non-default state for testing

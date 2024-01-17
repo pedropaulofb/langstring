@@ -217,3 +217,15 @@ class Converter(metaclass=NonInstantiable):
             return_list.append(SetLangString(texts=input.mls_dict[lang], lang=lang))
 
         return return_list
+
+    def convert_string_to_langstring(self, input: str) -> LangString:
+        if not isinstance(input, str):
+            raise TypeError(f"Invalid input argument type. Expected 'str', got '{type(input).__name__}'.")
+        # Identify last @, get left part as text and right as lang. If not @, all to text.
+
+    def convert_strings_to_multilangstring(self, input: Union[set[str], list[str]]) -> MultiLangString:
+        if not isinstance(input, MultiLangString):
+            raise TypeError(
+                f"Invalid input argument type. Expected 'list[str]' or 'set[str]', got '{type(input).__name__}'."
+            )
+        # Identify last @ of each element, get left part as text and right as lang. If not @, all to text.

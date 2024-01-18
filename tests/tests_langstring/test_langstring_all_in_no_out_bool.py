@@ -1,6 +1,7 @@
 import copy
 
 import pytest
+
 from langstring import LangString
 
 methods_to_test = [
@@ -121,8 +122,10 @@ def test_string_methods(test_case, method):
     assert actual_result == expected_result, f"Failed for method '{method}' with input '{test_case.string}'"
     assert lang_string_before == lang_string, "The original LangString cannot be modified by the called method."
 
+
 # Invalid arguments to test with
 invalid_args = [123, 12.34, [], {}, None, True, False]
+
 
 @pytest.mark.parametrize("method, invalid_arg", [(m, ia) for m in methods_to_test for ia in invalid_args])
 def test_methods_invalid(method, invalid_arg):

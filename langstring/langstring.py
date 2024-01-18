@@ -16,6 +16,8 @@ text and valid language tags. These flags can be set externally to alter the beh
     # Print the string representation
     print(lang_str.to_string())  # Output: '"Hello, World!"@en'
 """
+from typing import Optional, Any, Iterable, Union, Iterator
+
 from .flags import LangStringFlag
 from .utils.validator import Validator
 
@@ -80,25 +82,25 @@ class LangString:
     def center(self, width: int, fillchar: str = " ") -> "LangString":
         return LangString(self.text.center(width, fillchar), self.lang)
 
-    def count(self, sub: str, start: int = 0, end: int = None) -> int:
+    def count(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
         return (self.text).count(sub, start, end)
 
-    def endswith(self, suffix, start: int = 0, end: int = None) -> bool:
+    def endswith(self, suffix: str, start: int = 0, end: Optional[int] = None) -> bool:
         return self.text.endswith(suffix, start, end)
 
     def expandtabs(self, tabsize: int = 8) -> "LangString":
         return LangString(self.text.expandtabs(tabsize), self.lang)
 
-    def find(self, sub: str, start: int = 0, end: int = None) -> int:
+    def find(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
         return self.text.find(sub, start, end)
 
-    def format(self, *args, **kwargs) -> "LangString":
+    def format(self, *args: Any, **kwargs: Any) -> "LangString":
         return LangString(self.text.format(*args, **kwargs), self.lang)
 
-    def format_map(self, mapping) -> "LangString":
+    def format_map(self, mapping: dict[Any, Any]) -> "LangString":
         return LangString(self.text.format_map(mapping), self.lang)
 
-    def index(self, sub: str, start: int = 0, end: int = None) -> int:
+    def index(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
         return self.text.index(sub, start, end)
 
     def isalnum(self) -> bool:
@@ -137,7 +139,7 @@ class LangString:
     def isupper(self) -> bool:
         return (self.text).isupper()
 
-    def join(self, iterable) -> "LangString":
+    def join(self, iterable: Iterable[str]) -> "LangString":
         """Join an iterable with the text of the LangString."""
         joined_text = self.text.join(iterable)
         return LangString(joined_text, self.lang)
@@ -150,15 +152,15 @@ class LangString:
     def lower(self) -> "LangString":
         return LangString(self.text.lower(), self.lang)
 
-    def lstrip(self, chars: str = None) -> "LangString":
+    def lstrip(self, chars: Optional[str] = None) -> "LangString":
         return LangString(self.text.lstrip(chars), self.lang)
 
     @staticmethod
-    def maketrans(intab, outtab):
+    def maketrans(intab: str, outtab: str) -> dict[int, str]:
         """Create a translation table."""
         return str.maketrans(intab, outtab)
 
-    def partition(self, sep: str) -> tuple:
+    def partition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """Partition the text."""
         parts = self.text.partition(sep)
         return tuple(LangString(part, self.lang) for part in parts)
@@ -190,10 +192,10 @@ class LangString:
         """
         return LangString((self.text).removesuffix(suffix), self.lang)
 
-    def rfind(self, sub: str, start: int = 0, end: int = None) -> int:
+    def rfind(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
         return self.text.rfind(sub, start, end)
 
-    def rindex(self, sub: str, start: int = 0, end: int = None) -> int:
+    def rindex(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
         return self.text.rindex(sub, start, end)
 
     def rjust(self, width: int, fillchar: str = " ") -> "LangString":
@@ -201,33 +203,33 @@ class LangString:
         justified_text = self.text.rjust(width, fillchar)
         return LangString(justified_text, self.lang)
 
-    def rpartition(self, sep: str) -> tuple:
+    def rpartition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """Partition the text from the right."""
         parts = self.text.rpartition(sep)
         return tuple(LangString(part, self.lang) for part in parts)
 
-    def rsplit(self, sep: str = None, maxsplit: int = -1) -> list:
+    def rsplit(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:
         """Split the text from the right."""
         split_texts = self.text.rsplit(sep, maxsplit)
         return [LangString(part, self.lang) for part in split_texts]
 
-    def rstrip(self, chars: str = None) -> "LangString":
+    def rstrip(self, chars: Optional[str] = None) -> "LangString":
         return LangString(self.text.rstrip(chars), self.lang)
 
-    def split(self, sep: str = None, maxsplit: int = -1) -> list:
+    def split(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:
         """Split the text."""
         split_texts = self.text.split(sep, maxsplit)
         return [LangString(part, self.lang) for part in split_texts]
 
-    def splitlines(self, keepends: bool = False) -> list:
+    def splitlines(self, keepends: bool = False) -> list["LangString"]:
         """Split the text into lines."""
         lines = self.text.splitlines(keepends)
         return [LangString(line, self.lang) for line in lines]
 
-    def startswith(self, prefix, start: int = 0, end: int = None) -> bool:
+    def startswith(self, prefix: str, start: int = 0, end: Optional[int] = None) -> bool:
         return self.text.startswith(prefix, start, end)
 
-    def strip(self, chars: str = None) -> "LangString":
+    def strip(self, chars: Optional[str] = None) -> "LangString":
         return LangString(self.text.strip(chars), self.lang)
 
     def swapcase(self) -> "LangString":
@@ -236,7 +238,7 @@ class LangString:
     def title(self) -> "LangString":
         return LangString(self.text.title(), self.lang)
 
-    def translate(self, table):
+    def translate(self, table: dict[int, str]) -> "LangString":
         """Translate the text using a translation table."""
         return LangString(self.text.translate(table), self.lang)
 
@@ -248,7 +250,7 @@ class LangString:
 
     # OVERWRITING BUILT-IN STRING DUNDER METHODS
 
-    def __add__(self, other):
+    def __add__(self, other: Union["LangString", str])-> "LangString":
         """Add another LangString or a string to this LangString.
 
         The operation can only be performed if:
@@ -263,10 +265,11 @@ class LangString:
             if (self.lang).casefold() != (other.lang).casefold():
                 raise ValueError("Cannot add LangString objects with different language tags.")
             return LangString(self.text + other.text, self.lang)
-        elif isinstance(other, str):
+
+        if isinstance(other, str):
             return LangString(self.text + other, self.lang)
-        else:
-            raise TypeError(f"Unsupported operand type(s) for +: 'LangString' and '{type(other).__name__}'")
+
+        raise TypeError(f"Unsupported operand type(s) for +: 'LangString' and '{type(other).__name__}'")
 
     def __contains__(self, item: str) -> bool:
         """Check if a substring exists within the LangString's text."""
@@ -286,24 +289,32 @@ class LangString:
 
     def __ge__(self, other: object) -> bool:
         """Check if this LangString is greater than or equal to another LangString object."""
-        if not isinstance(other, LangString) or self.lang.casefold() != other.lang.casefold():
+        if not isinstance(other, LangString):
             return NotImplemented
+
+        if self.lang.casefold() != other.lang.casefold():
+            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
+
         return self.text >= other.text
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Union[int, slice]) -> "LangString":
         """Retrieve a substring or a reversed string from the LangString's text."""
         if isinstance(key, slice):
             # Handle slicing
             sliced_text = self.text[key]
             return LangString(sliced_text, self.lang)
-        else:
-            # Handle single index access
-            return LangString(self.text[key], self.lang)
+
+        # Handle single index access
+        return LangString(self.text[key], self.lang)
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
-        if not isinstance(other, LangString) or (self.lang).casefold() != (other.lang).casefold():
+        if not isinstance(other, LangString):
             return NotImplemented
+
+        if self.lang.casefold() != other.lang.casefold():
+            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
+
         return self.text > other.text
 
     def __hash__(self) -> int:
@@ -314,7 +325,7 @@ class LangString:
         """
         return hash((self.text, self.lang.casefold()))
 
-    def __iadd__(self, other):
+    def __iadd__(self, other: Union["LangString", str])-> "LangString":
         """Implement in-place addition."""
         if isinstance(other, LangString):
             if self.lang.casefold() != other.lang.casefold():
@@ -326,7 +337,7 @@ class LangString:
             raise TypeError(f"Unsupported operand type(s) for +=: 'LangString' and '{type(other).__name__}'")
         return self
 
-    def __imul__(self, other):
+    def __imul__(self, other: int) -> "LangString":
         """Implement in-place multiplication."""
         if isinstance(other, int):
             self.text *= other
@@ -334,14 +345,18 @@ class LangString:
             raise TypeError(f"Unsupported operand type(s) for *=: 'LangString' and '{type(other).__name__}'")
         return self
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         """Enable iteration over the text part of the LangString."""
         return iter(self.text)
 
     def __le__(self, other: object) -> bool:
         """Check if this LangString is less than or equal to another LangString object."""
-        if not isinstance(other, LangString) or self.lang.casefold() != other.lang.casefold():
+        if not isinstance(other, LangString):
             return NotImplemented
+
+        if self.lang.casefold() != other.lang.casefold():
+            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
+
         return self.text <= other.text
 
     def __len__(self) -> int:
@@ -350,8 +365,12 @@ class LangString:
 
     def __lt__(self, other: object) -> bool:
         """Check if this LangString is less than another LangString object."""
-        if not isinstance(other, LangString) or self.lang.casefold() != other.lang.casefold():
+        if not isinstance(other, LangString):
             return NotImplemented
+
+        if self.lang.casefold() != other.lang.casefold():
+            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
+
         return self.text < other.text
 
     def __mul__(self, other: int) -> "LangString":
@@ -366,7 +385,7 @@ class LangString:
             return NotImplemented
         return not (self.text == other.text and (self.lang).casefold() == (other.lang).casefold())
 
-    def __radd__(self, other):
+    def __radd__(self, other: Union["LangString", str]) -> "LangString":
         """Handle concatenation when LangString is on the right side of the '+' operator.
 
         This method allows a string to be added to the beginning of the LangString's text.

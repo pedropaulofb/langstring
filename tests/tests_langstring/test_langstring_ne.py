@@ -1,6 +1,8 @@
 import pytest
 
-from langstring import LangString, Controller, LangStringFlag
+from langstring import Controller
+from langstring import LangString
+from langstring import LangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -50,7 +52,7 @@ def test_ne_with_different_object_types(lang_string_text: str, other_object) -> 
     :return: None
     """
     lang_string = LangString(lang_string_text, "en")
-    assert (lang_string != other_object), f"LangString should not be equal to object of type {type(other_object)}"
+    assert lang_string != other_object, f"LangString should not be equal to object of type {type(other_object)}"
 
 
 @pytest.mark.parametrize(

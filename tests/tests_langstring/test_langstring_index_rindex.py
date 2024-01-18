@@ -66,6 +66,7 @@ index_rindex_test_cases = [
     StringMethodFindIndexTestCase("unicode 😊 test", "😊", 8, None),  # Specific start, None for end]
 ]
 
+
 @pytest.mark.parametrize(
     "test_case, method", [(tc, m) for tc in index_rindex_test_cases for m in index_methods_to_test]
 )

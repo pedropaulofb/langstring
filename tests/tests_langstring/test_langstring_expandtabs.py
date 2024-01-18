@@ -103,6 +103,7 @@ def test_expandtabs_preserve_lang(input_string: str, tabsize: int, lang: str):
     result = lang_string.expandtabs(tabsize)
     assert result.lang == lang, f"Language tag changed after expandtabs({tabsize}) for '{input_string}'"
 
+
 @pytest.mark.parametrize(
     "input_string, tabsize, expected_output",
     [

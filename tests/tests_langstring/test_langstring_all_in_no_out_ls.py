@@ -1,9 +1,11 @@
 import copy
 
 import pytest
+
 from langstring import LangString
 
 methods_to_test = ["capitalize", "casefold", "lower", "title", "swapcase", "upper"]
+
 
 class StringMethodTestCase:
     def __init__(self, input_string):
@@ -19,6 +21,7 @@ class StringMethodTestCase:
             "swapcase": self.input_string.swapcase(),
             "upper": self.input_string.upper(),
         }
+
 
 # Valid test cases
 valid_test_cases = [

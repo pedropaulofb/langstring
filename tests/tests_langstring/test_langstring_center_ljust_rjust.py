@@ -1,5 +1,7 @@
 import copy
+
 import pytest
+
 from langstring import LangString
 
 methods_to_test = ["center", "ljust", "rjust"]
@@ -41,6 +43,7 @@ test_cases = [
     StringMethodSingleArgTestCase("python", 10, None),  # Empty string as fill character
 ]
 
+
 @pytest.mark.parametrize("test_case, method", [(tc, m) for tc in test_cases for m in methods_to_test])
 def test_string_methods_single_arg(test_case, method):
     lang_string = LangString(test_case.input_string, "en")
@@ -73,7 +76,6 @@ invalid_arg_test_cases = [
 ]
 
 
-
 @pytest.mark.parametrize("invalid_arg1, invalid_arg2", invalid_arg_test_cases)
 @pytest.mark.parametrize("method", methods_to_test)
 def test_string_methods_invalid_args(invalid_arg1, invalid_arg2, method):
@@ -84,12 +86,14 @@ def test_string_methods_invalid_args(invalid_arg1, invalid_arg2, method):
         else:
             getattr(lang_string, method)(invalid_arg1)
 
+
 @pytest.mark.parametrize("method", methods_to_test)
 @pytest.mark.parametrize("invalid_fillchar", ["", "  ", "xx", "😊😊", "ab"])
 def test_string_methods_invalid_fillchar(method, invalid_fillchar):
     lang_string = LangString("hello", "en")
     with pytest.raises(TypeError, match="The fill character must be exactly one character long"):
         getattr(lang_string, method)(10, invalid_fillchar)
+
 
 @pytest.mark.parametrize("method", methods_to_test)
 @pytest.mark.parametrize("invalid_fillchar", [123, None, True, ["*"], {"*": 1}])

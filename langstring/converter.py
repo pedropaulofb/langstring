@@ -218,14 +218,34 @@ class Converter(metaclass=NonInstantiable):
 
         return return_list
 
-    def convert_string_to_langstring(self, input: str) -> LangString:
+    def convert_string_to_langstring(self, input_string: str) -> LangString:
+        """Convert a string into a LangString.
+
+        If the string contains '@', it splits the string into text (left part) and lang (right part).
+        If there is no '@', the entire string is set as text and lang is set to an empty string.
+
+        :param input_string: The input string to be converted.
+        :return: A LangString
+        """
         if not isinstance(input, str):
             raise TypeError(f"Invalid input argument type. Expected 'str', got '{type(input).__name__}'.")
-        # Identify last @, get left part as text and right as lang. If not @, all to text.
+
+        if "@" in input_string:
+            parts = input_string.rsplit("@", 1)
+            text, lang = parts[0], parts[1]
+        else:
+            text, lang = input_string, ""
+
+        return LangString(text, lang)
 
     def convert_strings_to_multilangstring(self, input: Union[set[str], list[str]]) -> MultiLangString:
-        if not isinstance(input, MultiLangString):
+        if not (isinstance(input, set) or isinstance(input, list)):
             raise TypeError(
                 f"Invalid input argument type. Expected 'list[str]' or 'set[str]', got '{type(input).__name__}'."
             )
-        # Identify last @ of each element, get left part as text and right as lang. If not @, all to text.
+        new_mls = MultiLangString()
+
+        for element in input:
+            new_mls.add_langstring(self.convert_string_to_langstring(element))
+
+        return new_mls

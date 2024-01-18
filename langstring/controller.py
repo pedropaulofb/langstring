@@ -92,7 +92,9 @@ class Controller(metaclass=NonInstantiable):
 
     @classmethod
     def get_flag(cls, flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]) -> bool:
-        """Retrieve the current state of a specified configuration flag for LangString or MultiLangString.
+        """Retrieve the current state of a specified configuration flag.
+
+        Available for GlobalFlag, LangString, SetLangString, or MultiLangString.
 
         This class method provides a way to access the state of a flag globally for both LangString and
         MultiLangString classes.
@@ -114,7 +116,9 @@ class Controller(metaclass=NonInstantiable):
 
     @classmethod
     def get_flags(cls) -> dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]:
-        """Retrieve the current state of all configuration flags for LangString or MultiLangString.
+        """Retrieve the current state of all configuration flags.
+
+        Available for GlobalFlag, LangString, SetLangString, or MultiLangString.
 
         This class method provides a way to access the states of all flags globally for both LangString and
         MultiLangString classes. It returns a copy of the flags dictionary, ensuring that the original data is not

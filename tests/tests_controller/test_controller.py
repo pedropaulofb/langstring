@@ -1,5 +1,4 @@
 import pytest
-from icecream import ic
 
 from langstring import Controller
 from langstring import GlobalFlag
@@ -31,7 +30,6 @@ def test_instantiation_of_langstringcontrol():
 
 @pytest.mark.parametrize("initial_state, new_state", [(False, True), (True, False)])
 def test_flag_state_persistence(initial_state: bool, new_state: bool):
-    ic(all_flags)
     for flag in all_flags:
         Controller.set_flag(flag, initial_state)
         assert Controller.get_flag(flag) == initial_state

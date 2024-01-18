@@ -16,7 +16,11 @@ text and valid language tags. These flags can be set externally to alter the beh
     # Print the string representation
     print(lang_str.to_string())  # Output: '"Hello, World!"@en'
 """
-from typing import Optional, Any, Iterable, Union, Iterator
+from typing import Any
+from typing import Iterable
+from typing import Iterator
+from typing import Optional
+from typing import Union
 
 from .flags import LangStringFlag
 from .utils.validator import Validator
@@ -155,15 +159,10 @@ class LangString:
     def lstrip(self, chars: Optional[str] = None) -> "LangString":
         return LangString(self.text.lstrip(chars), self.lang)
 
-    @staticmethod
-    def maketrans(intab: str, outtab: str) -> dict[int, str]:
-        """Create a translation table."""
-        return str.maketrans(intab, outtab)
-
     def partition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """Partition the text."""
-        parts = self.text.partition(sep)
-        return tuple(LangString(part, self.lang) for part in parts)
+        before, sep, after = self.text.partition(sep)
+        return LangString(before, self.lang), LangString(sep, self.lang), LangString(after, self.lang)
 
     def replace(self, old: str, new: str, count: int = -1) -> "LangString":
         return LangString(self.text.replace(old, new, count), self.lang)
@@ -205,8 +204,8 @@ class LangString:
 
     def rpartition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """Partition the text from the right."""
-        parts = self.text.rpartition(sep)
-        return tuple(LangString(part, self.lang) for part in parts)
+        before, sep, after = self.text.rpartition(sep)
+        return LangString(before, self.lang), LangString(sep, self.lang), LangString(after, self.lang)
 
     def rsplit(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:
         """Split the text from the right."""
@@ -250,7 +249,7 @@ class LangString:
 
     # OVERWRITING BUILT-IN STRING DUNDER METHODS
 
-    def __add__(self, other: Union["LangString", str])-> "LangString":
+    def __add__(self, other: Union["LangString", str]) -> "LangString":
         """Add another LangString or a string to this LangString.
 
         The operation can only be performed if:
@@ -325,7 +324,7 @@ class LangString:
         """
         return hash((self.text, self.lang.casefold()))
 
-    def __iadd__(self, other: Union["LangString", str])-> "LangString":
+    def __iadd__(self, other: Union["LangString", str]) -> "LangString":
         """Implement in-place addition."""
         if isinstance(other, LangString):
             if self.lang.casefold() != other.lang.casefold():
@@ -427,8 +426,10 @@ class LangString:
         :return: The string representation of the LangString object.
         :rtype: str
         """
-        text_representation = f'"{self.text}"' if LangStringFlag.PRINT_WITH_QUOTES else self.text
+        print_with_quotes = Validator.get_flag_from_controller(LangStringFlag.PRINT_WITH_QUOTES)
+        print_with_lang = Validator.get_flag_from_controller(LangStringFlag.PRINT_WITH_LANG)
 
-        if LangStringFlag.PRINT_WITH_LANG:
-            return f"{text_representation}@{self.lang}"
-        return text_representation
+        text_representation = f'"{self.text}"' if print_with_quotes else self.text
+        lang_representation = f"@{self.lang}" if print_with_lang else ""
+
+        return text_representation + lang_representation

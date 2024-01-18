@@ -796,7 +796,7 @@ from langstring import MultiLangStringControl, MultiLangStringFlag
 MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_TEXT, False)
 
 # Retrieving the state of the ENSURE_TEXT flag in MultiLangStringControl
-is_ensure_text_enabled = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_TEXT)
+is_ensure_text_enabled = MultiLangStringControl.get_flag_from_controller(MultiLangStringFlag.ENSURE_TEXT)
 print("ENSURE_TEXT flag is:", is_ensure_text_enabled)  # Expected Output: False
 ```
 

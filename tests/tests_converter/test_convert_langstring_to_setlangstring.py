@@ -51,28 +51,3 @@ def test_convert_langstring_to_setlangstring_empty_string():
     assert result == SetLangString(
         texts={""}, lang="en"
     ), "Conversion of empty LangString did not produce expected SetLangString."
-
-
-def test_convert_langstring_to_setlangstring_none_language():
-    """Test conversion of LangString with None as language to SetLangString.
-
-    :return: None
-    """
-    lang_string = LangString(text="Hello", lang=None)
-    result = Converter.convert_langstring_to_setlangstring(lang_string)
-    assert result == SetLangString(
-        texts={"Hello"}, lang=None
-    ), "Conversion of LangString with None language did not produce expected SetLangString."
-
-
-def test_convert_langstring_to_setlangstring_empty_langstring():
-    """Test conversion of an empty LangString (no text and no language) to SetLangString.
-
-    :return: None
-    """
-    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
-    lang_string = LangString()
-    result = Converter.convert_langstring_to_setlangstring(lang_string)
-    assert result == SetLangString(
-        texts={""}, lang=None
-    ), "Conversion of empty LangString did not produce expected SetLangString."

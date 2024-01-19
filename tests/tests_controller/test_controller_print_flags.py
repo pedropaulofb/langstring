@@ -47,3 +47,33 @@ def test_print_flags_after_reset(capfd):
     out, _ = capfd.readouterr()
     expected_output = construct_expected_output()
     assert out == expected_output, "Flag settings should be reset and printed correctly"
+
+def test_print_flags_consistent_order(capfd):
+    """
+    Test that the output order of flags is consistent across multiple calls.
+    """
+    Controller.print_flags()
+    out1, _ = capfd.readouterr()
+    Controller.print_flags()
+    out2, _ = capfd.readouterr()
+    assert out1 == out2, "The output order of flags should be consistent across calls"
+
+def test_print_flags_all_modified(capfd):
+    """
+    Test the output format when all flags are modified to a non-default state.
+    """
+    # Set all flags to a specific state (True or False)
+    set_state = True  # You can choose True or False here
+    for flag in all_flags:
+        Controller.set_flag(flag, set_state)
+
+    Controller.print_flags()
+    out, _ = capfd.readouterr()
+
+    # Construct the expected output based on the current state of flags
+    expected_output = ""
+    for flag, state in Controller.flags.items():
+        flag_class_name = flag.__class__.__name__
+        expected_output += f"{flag_class_name}.{flag.name} = {state}\n"
+
+    assert out == expected_output, "All flags should be printed with their current states"

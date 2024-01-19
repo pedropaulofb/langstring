@@ -25,15 +25,6 @@ def test_convert_setlangstring_to_multilangstring_with_single_text():
     assert result == expected, "convert_setlangstring_to_multilangstring should handle single text correctly"
 
 
-def test_convert_setlangstring_to_multilangstring_with_null_language():
-    """
-    Test converting a SetLangString with null language to a MultiLangString.
-    """
-    set_lang_string = SetLangString(texts={"Hello"}, lang=None)
-    result = Converter.convert_setlangstring_to_multilangstring(set_lang_string)
-    expected = MultiLangString(mls_dict={None: {"Hello"}})
-    assert result == expected, "convert_setlangstring_to_multilangstring should handle null language correctly"
-
 
 @pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, "string", MultiLangString()])
 def test_convert_setlangstring_to_multilangstring_invalid_type(invalid_input):

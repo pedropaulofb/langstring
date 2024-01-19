@@ -60,3 +60,30 @@ def test_get_flags_immutable_return() -> None:
     assert (
         Controller.get_flags() == original_flags
     ), "Modifying the returned dictionary should not affect original flags"
+
+def test_get_flags_consistency() -> None:
+    """
+    Test that multiple calls to get_flags return consistent results.
+    """
+    flags_first_call = Controller.get_flags()
+    flags_second_call = Controller.get_flags()
+    assert flags_first_call == flags_second_call, "Multiple calls to get_flags should return consistent results"
+
+def test_get_flags_complete_mapping() -> None:
+    """
+    Test that get_flags returns a dictionary with all known flags and boolean values.
+    """
+    flags = Controller.get_flags()
+    for flag in all_flags:
+        assert flag in flags, f"Flag {flag.name} should be present in the returned dictionary"
+        assert isinstance(flags[flag], bool), f"The value for flag {flag.name} should be a boolean"
+
+def test_get_flags_no_direct_reference() -> None:
+    """
+    Test that the dictionary returned by get_flags is not a direct reference to the internal flag storage.
+    """
+    flags_before_modification = Controller.get_flags()
+    flags_after_modification = Controller.get_flags()
+    flags_after_modification[next(iter(all_flags))] = not flags_before_modification[next(iter(all_flags))]
+    assert Controller.get_flags() == flags_before_modification, "Modifying the returned dictionary should not affect the internal flag storage"
+

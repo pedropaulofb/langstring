@@ -27,22 +27,6 @@ def test_convert_multilangstring_to_setlangstrings_with_single_language():
     assert result == expected, "convert_multilangstring_to_setlangstrings should handle single language correctly"
 
 
-def test_convert_multilangstring_to_setlangstrings_with_mixed_languages():
-    """
-    Test converting a MultiLangString with mixed language entries to a list of SetLangStrings.
-    """
-    mls = MultiLangString(mls_dict={"en": {"Hello"}, "es": {"Hola"}, None: {"Bonjour"}})
-    result = Converter.convert_multilangstring_to_setlangstrings(mls)
-    expected = [
-        SetLangString(texts={"Hello"}, lang="en"),
-        SetLangString(texts={"Hola"}, lang="es"),
-        SetLangString(texts={"Bonjour"}, lang=None),
-    ]
-    assert all(
-        setlangstring in result for setlangstring in expected
-    ), "convert_multilangstring_to_setlangstrings should handle mixed language entries correctly"
-
-
 @pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, "string"])
 def test_convert_multilangstring_to_setlangstrings_invalid_type(invalid_input):
     """

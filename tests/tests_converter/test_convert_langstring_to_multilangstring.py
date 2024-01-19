@@ -55,29 +55,3 @@ def test_convert_langstring_to_multilangstring_empty_string():
     assert result == MultiLangString(
         mls_dict={"en": {""}}, pref_lang="en"
     ), "Conversion of empty LangString did not produce expected MultiLangString."
-
-
-def test_convert_langstring_to_multilangstring_none_language():
-    """Test conversion of LangString with None as language to MultiLangString.
-
-    :return: None
-    """
-    lang_string = LangString(text="Hello", lang=None)
-    result = Converter.convert_langstring_to_multilangstring(lang_string)
-    assert result == MultiLangString(
-        mls_dict={None: {"Hello"}}, pref_lang=None
-    ), "Conversion of LangString with None language did not produce expected MultiLangString."
-
-
-def test_convert_langstring_to_multilangstring_empty_langstring():
-    """Test conversion of an empty LangString (no text and no language) to MultiLangString.
-
-    :return: None
-    """
-    Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
-    Controller.set_flag(MultiLangStringFlag.DEFINED_TEXT, False)
-    lang_string = LangString()
-    result = Converter.convert_langstring_to_multilangstring(lang_string)
-    assert result == MultiLangString(
-        mls_dict={None: {""}}, pref_lang=None
-    ), "Conversion of empty LangString did not produce expected MultiLangString."

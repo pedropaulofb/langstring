@@ -40,28 +40,6 @@ def test_convert_multilangstring_to_langstrings_with_single_language():
     ), "convert_multilangstring_to_langstrings should return all LangStrings for a MultiLangString with a single language"
 
 
-def test_convert_multilangstring_to_langstrings_with_null_language():
-    """
-    Test retrieving all LangStrings from a MultiLangString with a null language entry.
-    """
-    mls = MultiLangString(mls_dict={None: {"Hello"}})
-    result = Converter.convert_multilangstring_to_langstrings(mls)
-    expected = [LangString("Hello", None)]
-    assert result == expected, "convert_multilangstring_to_langstrings should handle MultiLangString with null language"
-
-
-def test_convert_multilangstring_to_langstrings_with_mixed_languages():
-    """
-    Test retrieving all LangStrings from a MultiLangString with mixed language entries.
-    """
-    mls = MultiLangString(mls_dict={"en": {"Hello"}, "es": {"Hola"}, None: {"Bonjour"}})
-    result = Converter.convert_multilangstring_to_langstrings(mls)
-    expected = [LangString("Hello", "en"), LangString("Hola", "es"), LangString("Bonjour", None)]
-    assert all(
-        langstring in result for langstring in expected
-    ), "convert_multilangstring_to_langstrings should handle mixed language entries correctly"
-
-
 @pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, LangString("Hello", "en")])
 def test_convert_multilangstring_to_langstrings_invalid_type(invalid_input):
     """

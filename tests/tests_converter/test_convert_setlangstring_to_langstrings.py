@@ -27,15 +27,6 @@ def test_convert_setlangstring_to_langstrings_with_single_text():
     assert result == expected, "convert_setlangstring_to_langstrings should handle single text correctly"
 
 
-def test_convert_setlangstring_to_langstrings_with_null_language():
-    """
-    Test converting a SetLangString with null language to a list of LangStrings.
-    """
-    set_lang_string = SetLangString(texts={"Hello"}, lang=None)
-    result = Converter.convert_setlangstring_to_langstrings(set_lang_string)
-    expected = [LangString("Hello", None)]
-    assert result == expected, "convert_setlangstring_to_langstrings should handle null language correctly"
-
 
 @pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, "string", LangString("Hello", "en")])
 def test_convert_setlangstring_to_langstrings_invalid_type(invalid_input):

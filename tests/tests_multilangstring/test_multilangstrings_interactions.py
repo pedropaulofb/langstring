@@ -84,6 +84,6 @@ def test_removal_methods_impact_on_retrieval_methods():
 
     # Remove a language and test retrieval
     mls.remove_lang("fr")
-    assert "fr" not in Converter.convert_multilangstring_to_langstrings(
+    assert "fr" not in Converter.from_multilangstring_to_langstrings(
         mls
     ), "Removed language should not be in the retrieved data"

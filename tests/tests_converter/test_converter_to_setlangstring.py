@@ -13,7 +13,7 @@ from langstring import SetLangString
         (MultiLangString(mls_dict={"en": {"Hello", "Hi"}}), [SetLangString(texts={"Hello", "Hi"}, lang="en")]),
     ],
 )
-def test_convert_to_setlangstring_valid(input_data, expected_output):
+def test_to_setlangstring_valid(input_data, expected_output):
     """
     Test converting valid LangString or MultiLangString to SetLangString or list of SetLangStrings.
 
@@ -21,16 +21,16 @@ def test_convert_to_setlangstring_valid(input_data, expected_output):
     :param expected_output: The expected SetLangString or list of SetLangStrings.
     :return: None
     """
-    result = Converter.convert_to_setlangstring(input_data)
+    result = Converter.to_setlangstring(input_data)
     assert (
         result == expected_output
-    ), "convert_to_setlangstring should return correct SetLangString or list of SetLangStrings for valid input"
+    ), "to_setlangstring should return correct SetLangString or list of SetLangStrings for valid input"
 
 
 @pytest.mark.parametrize(
     "invalid_input", [123, 5.5, True, None, [], {}, "string", SetLangString(texts={"Hello"}, lang="en")]
 )
-def test_convert_to_setlangstring_invalid_type(invalid_input):
+def test_to_setlangstring_invalid_type(invalid_input):
     """
     Test conversion with invalid input types, expecting a TypeError.
 
@@ -39,4 +39,4 @@ def test_convert_to_setlangstring_invalid_type(invalid_input):
     :raises TypeError: If input is not of type LangString or MultiLangString.
     """
     with pytest.raises(TypeError, match="Invalid input argument type. Expected LangString or MultiLangString, got"):
-        Converter.convert_to_setlangstring(invalid_input)
+        Converter.to_setlangstring(invalid_input)

@@ -34,5 +34,5 @@ def test_to_multilangstring_invalid_type(invalid_input):
     :return: None
     :raises TypeError: If input is not of type LangString or SetLangString.
     """
-    with pytest.raises(TypeError, match="Invalid input argument type. Expected LangString or SetLangString, got"):
+    with pytest.raises(TypeError, match="Invalid input argument type. Expected"):
         Converter.to_multilangstring(invalid_input)

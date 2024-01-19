@@ -21,6 +21,8 @@ class GlobalFlag(Enum):
     STRIP_LANG = auto()
     LOWERCASE_LANG = auto()
     VALID_LANG = auto()
+    PRINT_WITH_QUOTES = auto()
+    PRINT_WITH_LANG = auto()
 
 
 class LangStringFlag(Enum):
@@ -65,6 +67,7 @@ class SetLangStringFlag(Enum):
     STRIP_LANG = auto()
     LOWERCASE_LANG = auto()
     VALID_LANG = auto()
+    PRINT_WITH_LANG = auto()
 
 
 class MultiLangStringFlag(Enum):

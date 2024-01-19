@@ -68,7 +68,18 @@ def test_print_flag_default_state(flag):
     sys.stdout = sys.__stdout__
 
     # Check if the output is as expected
-    default_state = "True" if flag in [LangStringFlag.PRINT_WITH_QUOTES, LangStringFlag.PRINT_WITH_LANG] else "False"
+    default_state = (
+        "True"
+        if flag
+        in [
+            GlobalFlag.PRINT_WITH_LANG,
+            GlobalFlag.PRINT_WITH_QUOTES,
+            LangStringFlag.PRINT_WITH_QUOTES,
+            LangStringFlag.PRINT_WITH_LANG,
+            SetLangStringFlag.PRINT_WITH_LANG,
+        ]
+        else "False"
+    )
     expected_output = f"{flag.__class__.__name__}.{flag.name} = {default_state}\n"
     assert captured_output.getvalue() == expected_output
 
@@ -93,6 +104,7 @@ def test_print_flag_nonexistent(flag):
     expected_output = f"{flag.__class__.__name__}.{flag.name} = False\n"
     assert captured_output.getvalue() == expected_output, "Non-existent flags should print as False"
 
+
 @pytest.mark.parametrize("flag, state", [(flag, state) for flag in all_flags for state in [True, False]])
 def test_print_flag_output_format(flag, state: bool):
     """
@@ -111,4 +123,6 @@ def test_print_flag_output_format(flag, state: bool):
 
     # Check if the output format is as expected
     expected_output = f"{flag.__class__.__name__}.{flag.name} = {state}\n"
-    assert captured_output.getvalue() == expected_output, f"Output format for {flag.name} should be '{expected_output.strip()}'"
+    assert (
+        captured_output.getvalue() == expected_output
+    ), f"Output format for {flag.name} should be '{expected_output.strip()}'"

@@ -24,6 +24,7 @@ from typing import Union
 
 from .flags import LangStringFlag
 from .utils.validator import Validator
+from langstring import Controller
 
 
 class LangString:
@@ -426,8 +427,8 @@ class LangString:
         :return: The string representation of the LangString object.
         :rtype: str
         """
-        print_with_quotes = Validator.get_flag_from_controller(LangStringFlag.PRINT_WITH_QUOTES)
-        print_with_lang = Validator.get_flag_from_controller(LangStringFlag.PRINT_WITH_LANG)
+        print_with_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
+        print_with_lang = Controller.get_flag(LangStringFlag.PRINT_WITH_LANG)
 
         text_representation = f'"{self.text}"' if print_with_quotes else self.text
         lang_representation = f"@{self.lang}" if print_with_lang else ""

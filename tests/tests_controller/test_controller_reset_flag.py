@@ -6,8 +6,7 @@ from langstring import LangStringFlag
 from langstring import MultiLangStringFlag
 from langstring import SetLangStringFlag
 
-flag_classes = [GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-
+# Combine all flag types into a single list for parametrization
 all_flags = (
     list(LangStringFlag.__members__.values())
     + list(SetLangStringFlag.__members__.values())
@@ -16,49 +15,59 @@ all_flags = (
 )
 
 
-@pytest.mark.parametrize("flag_class", flag_classes)
-def test_reset_specific_flag_type_to_default(flag_class):
-    # Set all flags to a non-default state for testing
-    for flag in all_flags:
-        Controller.set_flag(flag, not Controller.DEFAULT_FLAGS[flag])
-
-    # Reset flags of the specific type
-    Controller.reset_flag(flag_class)
-
-    # Assert that flags of the specific type are reset to their default state
-    for flag in flag_class:
-        assert Controller.get_flag(flag) == Controller.DEFAULT_FLAGS[flag]
-
-    # If GlobalFlag is reset, all flags should be reset to default
-    if flag_class == GlobalFlag:
-        for flag in all_flags:
-            assert Controller.get_flag(flag) == Controller.DEFAULT_FLAGS[flag]
-    else:
-        # Assert that flags of other types are not affected (remain in the non-default state)
-        for other_class in flag_classes:
-            if other_class != flag_class:
-                for flag in other_class:
-                    assert Controller.get_flag(flag) == (not Controller.DEFAULT_FLAGS[flag])
+@pytest.mark.parametrize("flag", all_flags)
+def test_reset_specific_flag(flag):
+    """Test resetting a specific flag to its default value."""
+    # Set the flag to a non-default state and then reset it
+    non_default_state = not Controller.DEFAULT_FLAGS[flag]
+    Controller.set_flag(flag, non_default_state)
+    Controller.reset_flag(flag)
+    assert Controller.get_flag(flag) == Controller.DEFAULT_FLAGS[flag], f"{flag} should be reset to its default state"
 
 
-@pytest.mark.parametrize("flag_class", flag_classes)
-def test_reset_flag_type_idempotence(flag_class):
-    """
-    Test the idempotence of the reset_flag method for a specific flag type.
-    """
-    # Reset flags of the specific type twice
-    Controller.reset_flag(flag_class)
-    Controller.reset_flag(flag_class)
-
-    # Assert that flags remain in their default state after multiple resets
-    for flag in flag_class:
-        assert Controller.get_flag(flag) == Controller.DEFAULT_FLAGS[flag], f"{flag} should remain in default state"
+@pytest.mark.parametrize("invalid_flag", [0, "invalid_flag", None, 123.456])
+def test_reset_flag_invalid_type(invalid_flag):
+    """Test resetting a flag with an invalid type."""
+    with pytest.raises(TypeError, match="Invalid flag."):
+        Controller.reset_flag(invalid_flag)
 
 
-@pytest.mark.parametrize("invalid_flag_class", [123, "InvalidType", 4.5, None, []])
-def test_reset_flag_invalid_type(invalid_flag_class):
-    """
-    Test resetting flags with an invalid type.
-    """
-    with pytest.raises(TypeError, match="Invalid flag type"):
-        Controller.reset_flag(invalid_flag_class)
+@pytest.mark.parametrize("flag", all_flags)
+def test_reset_flag_idempotence(flag):
+    """Test the idempotence of resetting a flag."""
+    Controller.reset_flag(flag)
+    initial_state = Controller.get_flag(flag)
+    Controller.reset_flag(flag)
+    assert Controller.get_flag(flag) == initial_state, f"Resetting {flag} multiple times should not change its state"
+
+
+def test_reset_flag_affects_only_specified_flag():
+    """Test that resetting one flag does not affect the state of other flags."""
+    # Set all flags to a non-default state
+    for f in all_flags:
+        Controller.set_flag(f, not Controller.DEFAULT_FLAGS[f])
+
+    # Reset one flag
+    test_flag = GlobalFlag.DEFINED_TEXT
+    Controller.reset_flag(test_flag)
+
+    # Check that only the reset flag and its equivalents are affected
+    for f in all_flags:
+        if f.name == test_flag.name:
+            expected_state = Controller.DEFAULT_FLAGS[f]  # Reset to default
+        else:
+            expected_state = not Controller.DEFAULT_FLAGS[f]  # Remain unchanged
+        assert Controller.get_flag(f) == expected_state, f"Flag {f} was incorrectly affected by resetting {test_flag}"
+
+
+@pytest.mark.parametrize("flag", all_flags)
+def test_reset_flag_already_in_default_state(flag):
+    """Test resetting a flag that is already in its default state."""
+    # Ensure the flag is in its default state
+    Controller.reset_flag(flag)
+    initial_state = Controller.get_flag(flag)
+    # Reset again and check if the state remains unchanged
+    Controller.reset_flag(flag)
+    assert (
+        Controller.get_flag(flag) == initial_state
+    ), f"Resetting {flag} already in default state should not change its state"

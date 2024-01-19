@@ -25,7 +25,6 @@ def test_convert_setlangstring_to_multilangstring_with_single_text():
     assert result == expected, "convert_setlangstring_to_multilangstring should handle single text correctly"
 
 
-
 @pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, "string", MultiLangString()])
 def test_convert_setlangstring_to_multilangstring_invalid_type(invalid_input):
     """

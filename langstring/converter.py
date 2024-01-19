@@ -97,8 +97,8 @@ class Converter(metaclass=NonInstantiable):
             f"Invalid input argument type. Expected LangString or SetLangString, got '{type(input).__name__}'."
         )
 
-    @classmethod
-    def convert_langstring_to_setlangstring(cls, input: LangString) -> SetLangString:
+    @staticmethod
+    def convert_langstring_to_setlangstring(input: LangString) -> SetLangString:
         """
         Convert a LangString to a SetLangString.
 
@@ -116,8 +116,8 @@ class Converter(metaclass=NonInstantiable):
 
         return SetLangString(texts={input.text}, lang=input.lang)
 
-    @classmethod
-    def convert_langstring_to_multilangstring(cls, input: LangString) -> MultiLangString:
+    @staticmethod
+    def convert_langstring_to_multilangstring(input: LangString) -> MultiLangString:
         """Convert a LangString to a MultiLangString.
 
         This method takes a single LangString and converts it into a MultiLangString. The resulting MultiLangString
@@ -135,8 +135,8 @@ class Converter(metaclass=NonInstantiable):
         new_mls_dict: dict[str, set[str]] = {input.lang: {input.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
 
-    @classmethod
-    def convert_setlangstring_to_langstrings(cls, input: SetLangString) -> list[LangString]:
+    @staticmethod
+    def convert_setlangstring_to_langstrings(input: SetLangString) -> list[LangString]:
         """Convert a SetLangString to a list of LangStrings.
 
         This method takes a SetLangString and converts it into a list of LangStrings, each containing one of the texts
@@ -158,8 +158,8 @@ class Converter(metaclass=NonInstantiable):
 
         return return_list
 
-    @classmethod
-    def convert_setlangstring_to_multilangstring(cls, input: SetLangString) -> MultiLangString:
+    @staticmethod
+    def convert_setlangstring_to_multilangstring(input: SetLangString) -> MultiLangString:
         """Convert a SetLangString to a MultiLangString.
 
         This method creates a MultiLangString from a SetLangString. The resulting MultiLangString contains all texts
@@ -177,8 +177,8 @@ class Converter(metaclass=NonInstantiable):
         new_mls_dict: dict[str, set[str]] = {input.lang: input.texts}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
 
-    @classmethod
-    def convert_multilangstring_to_langstrings(cls, input: MultiLangString) -> list[LangString]:
+    @staticmethod
+    def convert_multilangstring_to_langstrings(input: MultiLangString) -> list[LangString]:
         """Convert a MultiLangString to a list of LangStrings.
 
         This method takes a MultiLangString and converts it into a list of LangStrings, each representing one of the
@@ -195,8 +195,8 @@ class Converter(metaclass=NonInstantiable):
 
         return [LangString(text, lang) for lang, texts in input.mls_dict.items() for text in texts]
 
-    @classmethod
-    def convert_multilangstring_to_setlangstrings(cls, input: MultiLangString) -> list[SetLangString]:
+    @staticmethod
+    def convert_multilangstring_to_setlangstrings(input: MultiLangString) -> list[SetLangString]:
         """Convert a MultiLangString to a list of SetLangStrings.
 
         This method creates a list of SetLangStrings from a MultiLangString. Each SetLangString in the list contains
@@ -218,7 +218,8 @@ class Converter(metaclass=NonInstantiable):
 
         return return_list
 
-    def convert_string_to_langstring(self, input_string: str) -> LangString:
+    @staticmethod
+    def convert_string_to_langstring(input_string: str) -> LangString:
         """Convert a string into a LangString.
 
         If the string contains '@', it splits the string into text (left part) and lang (right part).

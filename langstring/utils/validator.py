@@ -25,8 +25,8 @@ from typing import Optional
 
 from langcodes import tag_is_valid
 
+from ..controller import Controller
 from .non_instantiable import NonInstantiable
-from langstring import Controller
 
 
 class Validator(metaclass=NonInstantiable):
@@ -64,7 +64,3 @@ class Validator(metaclass=NonInstantiable):
 
         lang = lang if not Controller.get_flag(flag_type.STRIP_LANG) else lang.strip()
         return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.casefold()
-
-    @staticmethod
-    def get_flag_from_controller(flag_name) -> bool:
-        return Controller.get_flag(flag_name)

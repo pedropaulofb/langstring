@@ -29,9 +29,11 @@ By providing a comprehensive set of methods for managing multilingual text, the 
 the development of multilingual applications and facilitate the handling of text in multiple languages.
 """
 from typing import Optional
+from typing import Union
 
 from .flags import MultiLangStringFlag
 from .langstring import LangString
+from .setlangstring import SetLangString
 from .utils.validator import Validator
 
 
@@ -105,6 +107,10 @@ class MultiLangString:
         """
         self._pref_lang = Validator.validate_text(MultiLangStringFlag, new_pref_lang)
 
+    def add(self, input: Union[str, LangString, SetLangString]):
+        # TODO: to be implemented.
+        pass
+
     def add_entry(self, text: str, lang: str = "") -> None:
         """Add a text entry to the MultiLangString under a specified language.
 
@@ -133,6 +139,19 @@ class MultiLangString:
         langstring.lang = "" if langstring.lang is None else langstring.lang
         self.add_entry(text=langstring.text, lang=langstring.lang)
 
+    def add_setlangstring(self, setlangstring: SetLangString) -> None:
+        """Add a SetLangString to the MultiLangString.
+
+        :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
+        :type setlangstring: SetLangString
+        """
+        if not isinstance(setlangstring, SetLangString):
+            raise TypeError(
+                f"Invalid argument type. Expected type 'SetLangString', got '{type(setlangstring).__name__}'"
+            )
+
+        # TODO: To be implemented.
+
     def remove_entry(self, text: str, lang: str, clear_empty: bool = False) -> None:
         """Remove a single entry from the set of a given language key in the dictionary.
 
@@ -151,11 +170,6 @@ class MultiLangString:
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
 
-    def clear_empty(self) -> None:
-        empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
-        for lang in empty_langs:
-            del self.mls_dict[lang]
-
     def remove_lang(self, lang: str) -> None:
         """Remove all entries of a given language from the dictionary.
 
@@ -168,6 +182,11 @@ class MultiLangString:
             del self.mls_dict[lang]
         else:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
+
+    def clear_empty(self) -> None:
+        empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
+        for lang in empty_langs:
+            del self.mls_dict[lang]
 
     def get_strings_lang(self, lang: str) -> list[str]:
         """Retrieve all text entries for a specific language.

@@ -26,7 +26,13 @@ def test_get_flag_valid(flag) -> None:
 def test_get_flag_default_states(flag, expected_state: bool) -> None:
     """Test retrieving the default state of each flag."""
     # Handle exceptions where the default state is not False
-    if flag in [LangStringFlag.PRINT_WITH_QUOTES, LangStringFlag.PRINT_WITH_LANG]:
+    if flag in [
+        GlobalFlag.PRINT_WITH_LANG,
+        GlobalFlag.PRINT_WITH_QUOTES,
+        LangStringFlag.PRINT_WITH_QUOTES,
+        LangStringFlag.PRINT_WITH_LANG,
+        SetLangStringFlag.PRINT_WITH_LANG,
+    ]:
         expected_state = True
     assert Controller.get_flag(flag) == expected_state
 
@@ -56,6 +62,7 @@ def test_get_flag_invalid_type(invalid_flag) -> None:
     ):
         Controller.get_flag(invalid_flag)
 
+
 @pytest.mark.parametrize("flag, state_to_set", [(flag, False) for flag in all_flags])
 def test_get_flag_after_setting_state_to_false(flag, state_to_set: bool) -> None:
     """
@@ -68,6 +75,7 @@ def test_get_flag_after_setting_state_to_false(flag, state_to_set: bool) -> None
     """
     Controller.set_flag(flag, state_to_set)
     assert Controller.get_flag(flag) == state_to_set, f"State of {flag.name} should be {state_to_set} after setting"
+
 
 @pytest.mark.parametrize("flag, invalid_state", [(flag, "invalid") for flag in all_flags])
 def test_get_flag_setting_invalid_state(flag, invalid_state: str) -> None:
@@ -85,6 +93,7 @@ def test_get_flag_setting_invalid_state(flag, invalid_state: str) -> None:
     ):
         Controller.set_flag(flag, invalid_state)
 
+
 @pytest.mark.parametrize("flag", all_flags)
 def test_get_flag_after_resetting(flag) -> None:
     """
@@ -96,6 +105,7 @@ def test_get_flag_after_resetting(flag) -> None:
     Controller.set_flag(flag, True)
     Controller.set_flag(flag, False)
     assert Controller.get_flag(flag) is False, f"State of {flag.name} should be False after resetting"
+
 
 @pytest.mark.parametrize("flag", all_flags)
 def test_get_flag_under_high_load(flag) -> None:
@@ -111,6 +121,7 @@ def test_get_flag_under_high_load(flag) -> None:
         Controller.set_flag(flag, False)
         assert Controller.get_flag(flag) is False
 
+
 def test_get_flag_with_high_volume_of_flags() -> None:
     """
     Test the performance of get_flag method under a high volume of flags.
@@ -123,4 +134,3 @@ def test_get_flag_with_high_volume_of_flags() -> None:
         assert Controller.get_flag(flag) is True, f"Failed to retrieve state for {flag}"
         Controller.set_flag(flag, False)
         assert Controller.get_flag(flag) is False, f"Failed to retrieve state for {flag}"
-

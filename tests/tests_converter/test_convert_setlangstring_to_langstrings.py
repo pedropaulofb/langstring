@@ -27,7 +27,6 @@ def test_convert_setlangstring_to_langstrings_with_single_text():
     assert result == expected, "convert_setlangstring_to_langstrings should handle single text correctly"
 
 
-
 @pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, "string", LangString("Hello", "en")])
 def test_convert_setlangstring_to_langstrings_invalid_type(invalid_input):
     """

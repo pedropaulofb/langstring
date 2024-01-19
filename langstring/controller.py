@@ -1,3 +1,4 @@
+from typing import Optional
 from typing import Union
 
 from .flags import GlobalFlag
@@ -29,6 +30,8 @@ class Controller(metaclass=NonInstantiable):
         GlobalFlag.STRIP_TEXT: False,
         GlobalFlag.STRIP_LANG: False,
         GlobalFlag.LOWERCASE_LANG: False,
+        GlobalFlag.PRINT_WITH_QUOTES: True,
+        GlobalFlag.PRINT_WITH_LANG: True,
         # Default values for LangStringFlags
         LangStringFlag.DEFINED_TEXT: False,
         LangStringFlag.DEFINED_LANG: False,
@@ -45,6 +48,7 @@ class Controller(metaclass=NonInstantiable):
         SetLangStringFlag.STRIP_TEXT: False,
         SetLangStringFlag.STRIP_LANG: False,
         SetLangStringFlag.LOWERCASE_LANG: False,
+        SetLangStringFlag.PRINT_WITH_LANG: True,
         # Default values for MultiLangStringFlags
         MultiLangStringFlag.DEFINED_TEXT: False,
         MultiLangStringFlag.DEFINED_LANG: False,
@@ -130,23 +134,8 @@ class Controller(metaclass=NonInstantiable):
         return cls.flags.copy()
 
     @classmethod
-    def print_flags(cls) -> None:
-        """Print the current state of all configuration flags for LangString or MultiLangString.
-
-        This class method prints the state of each flag in the flags dictionary to the console. It provides a quick
-        way to view the current configuration settings for both LangString and MultiLangString classes.
-
-        Note:
-            This method is typically used for debugging or quick monitoring purposes to display the current flag info.
-        """
-        for flag, state in cls.flags.items():
-            flag_class_name = flag.__class__.__name__
-            print(f"{flag_class_name}.{flag.name} = {state}")
-
-    @classmethod
     def print_flag(cls, flag: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]) -> None:
-        """
-        Print the current state of a specific configuration flag.
+        """Print the current state of a specific configuration flag.
 
         This class method prints the state of the specified flag to the console. It is useful for checking the state of
         an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.
@@ -167,34 +156,76 @@ class Controller(metaclass=NonInstantiable):
         print(f"{flag.__class__.__name__}.{flag.name} = {flag_state}")
 
     @classmethod
-    def reset_flags(cls) -> None:
-        """Reset all configuration flags for LangString or MultiLangString to their default values.
-
-        This class method resets the states of all flags to their default values. This is particularly useful for
-        restoring the default behavior of the LangString and MultiLangString classes after temporary changes to the
-        configuration flags.
-
-        Note:
-            After calling this method, all flags will be set to their default state, as defined in the respective
-            flag enums. Flags are managed globally.
+    def print_flags(cls, flag_type: Optional[type] = None) -> None:
         """
-        cls.flags = cls.DEFAULT_FLAGS.copy()
+        Print the current state of configuration flags in alphabetical order.
+
+        If a flag type is specified, only flags of that type are printed.
+        If no flag type is specified, all flags are printed.
+
+        :param flag_type: The type of flags to print (e.g., GlobalFlag, LangStringFlag).
+                          If None, all flags are printed.
+        :type flag_type: Optional[Type]
+        """
+        if flag_type:
+            if not isinstance(flag_type, type):
+                raise TypeError(f"Invalid flag type. Expected a class type, got '{type(flag_type).__name__}'.")
+            if not issubclass(flag_type, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
+                raise TypeError(
+                    f"Invalid flag type. "
+                    f"Expected GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag, "
+                    f"got '{flag_type.__name__}'."
+                )
+
+        sorted_flags = sorted(cls.flags.items(), key=lambda item: item[0].__class__.__name__ + "." + item[0].name)
+        for flag, state in sorted_flags:
+            if flag_type is None or isinstance(flag, flag_type):
+                print(f"{flag.__class__.__name__}.{flag.name} = {state}")
 
     @classmethod
-    def reset_flag(cls, flag_type: type) -> None:
-        """Reset configuration flags of a specific type to their default values."""
-        if not isinstance(flag_type, type):
+    def reset_flag(cls, flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]) -> None:
+        """Reset a specific flag to its default value.
+
+        If the flag is of type GlobalFlag, reset all equivalent flags of other types.
+        E.g., reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT,
+        LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.
+        """
+        all_flag_types = (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)
+
+        if not isinstance(flag, all_flag_types):
             raise TypeError(
-                "Invalid flag type. Expected GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag"
+                f"Invalid flag. Expected GlobalFlag, LangStringFlag, SetLangStringFlag, "
+                f"or MultiLangStringFlag, but got {type(flag).__name__}."
+            )
+
+        if isinstance(flag, GlobalFlag):
+            flag_name = flag.name
+            for flag_type in all_flag_types:
+                # Check if the flag_type has an attribute with the name of the GlobalFlag
+                if hasattr(flag_type, flag_name):
+                    # Access the specific member of the flag_type using its name
+                    matching_flag = getattr(flag_type, flag_name)
+                    cls.flags[matching_flag] = cls.DEFAULT_FLAGS[matching_flag]
+        else:
+            cls.flags[flag] = cls.DEFAULT_FLAGS[flag]
+
+    @classmethod
+    def reset_flags(cls, flag_type: Optional[type] = GlobalFlag) -> None:
+        """Reset all flags of a specific type to their default values."""
+
+        if flag_type is not None and not isinstance(flag_type, type):
+            raise TypeError("Invalid flag type. Expected a class type.")
+
+        if not flag_type or not issubclass(
+            flag_type, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)
+        ):
+            raise TypeError(
+                "Invalid flag type. Expected GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag."
             )
 
         if flag_type == GlobalFlag:
-            cls.reset_flags()
-        elif flag_type in [LangStringFlag, SetLangStringFlag, MultiLangStringFlag]:
+            cls.flags = cls.DEFAULT_FLAGS.copy()
+        else:
             for flag, default_value in cls.DEFAULT_FLAGS.items():
                 if isinstance(flag, flag_type):
                     cls.flags[flag] = default_value
-        else:
-            raise TypeError(
-                "Invalid flag type. Expected GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag"
-            )

@@ -12,6 +12,7 @@ def test_validate_lang_valid_codes(lang):
     Controller.set_flag(LangStringFlag.VALID_LANG, True)
     assert Validator.validate_lang(LangStringFlag, lang) == lang, f"Valid language code '{lang}' should be accepted."
 
+
 # Test invalid language codes
 @pytest.mark.parametrize("invalid_lang", ["invalid-lang", "123", ""])
 def test_validate_lang_invalid_codes(invalid_lang):
@@ -20,6 +21,7 @@ def test_validate_lang_invalid_codes(invalid_lang):
     with pytest.raises(ValueError, match="Expected valid language code."):
         Validator.validate_lang(LangStringFlag, invalid_lang)
 
+
 # Test non-string inputs
 @pytest.mark.parametrize("non_string", [123, 5.5, True, None, [], {}])
 def test_validate_lang_non_string_input(non_string):
@@ -27,12 +29,14 @@ def test_validate_lang_non_string_input(non_string):
     with pytest.raises(TypeError, match="Expected 'str', got"):
         Validator.validate_lang(LangStringFlag, non_string)
 
+
 # Test empty string with DEFINED_LANG flag
 def test_validate_lang_empty_string_defined_lang():
     """Test validate_lang with empty string when DEFINED_LANG flag is enabled."""
     Controller.set_flag(LangStringFlag.DEFINED_LANG, True)
     with pytest.raises(ValueError, match="Expected non-empty 'str'."):
         Validator.validate_lang(LangStringFlag, "")
+
 
 # Test stripping whitespace
 @pytest.mark.parametrize("lang_with_space", [" en ", "fr ", " es"])
@@ -49,14 +53,20 @@ def test_validate_lang_invalid_whitespace(lang_with_space):
 def test_validate_lang_lowercase_conversion(uppercase_lang):
     """Test validate_lang with uppercase language codes."""
     Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
-    assert Validator.validate_lang(LangStringFlag, uppercase_lang) == uppercase_lang.lower(), "Language code should be converted to lowercase."
+    assert (
+        Validator.validate_lang(LangStringFlag, uppercase_lang) == uppercase_lang.lower()
+    ), "Language code should be converted to lowercase."
+
 
 # Test without VALID_LANG flag
 @pytest.mark.parametrize("lang", ["en", "invalid-lang"])
 def test_validate_lang_without_valid_lang_flag(lang):
     """Test validate_lang without VALID_LANG flag."""
     Controller.set_flag(LangStringFlag.VALID_LANG, False)
-    assert Validator.validate_lang(LangStringFlag, lang) == lang, "Language code should be accepted without VALID_LANG flag."
+    assert (
+        Validator.validate_lang(LangStringFlag, lang) == lang
+    ), "Language code should be accepted without VALID_LANG flag."
+
 
 @pytest.mark.parametrize("lang_with_space", [" en ", "fr ", " es"])
 def test_validate_lang_whitespace_invalid(lang_with_space):

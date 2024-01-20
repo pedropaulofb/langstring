@@ -1,4 +1,5 @@
 import pytest
+
 from langstring import SetLangString
 
 
@@ -166,4 +167,3 @@ def test_setlangstring_comparison_methods_with_set(test_case, method_name, stric
         result = getattr(set_lang_string, method_name)(regular_set, strict=strict)
         expected = test_case.expected_results[method_name]
         assert result == expected, f"Failed {method_name} comparison for {set_lang_string} and {regular_set}"
-

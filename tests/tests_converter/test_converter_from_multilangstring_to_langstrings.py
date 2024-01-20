@@ -23,9 +23,7 @@ def test_multilangstring_to_langstrings_with_empty_multilangstring():
     """
     mls = MultiLangString()
     result = Converter.from_multilangstring_to_langstrings(mls)
-    assert (
-        result == []
-    ), "multilangstring_to_langstrings should return an empty list for an empty MultiLangString"
+    assert result == [], "multilangstring_to_langstrings should return an empty list for an empty MultiLangString"
 
 
 def test_multilangstring_to_langstrings_with_single_language():

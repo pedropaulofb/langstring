@@ -16,9 +16,7 @@ from langstring import MultiLangStringFlag
         ("Bonjour", "fr", MultiLangString(mls_dict={"fr": {"Bonjour"}}, pref_lang="fr")),
     ],
 )
-def test_langstring_to_multilangstring_valid(
-    input_text: str, input_lang: str, expected_output: MultiLangString
-):
+def test_langstring_to_multilangstring_valid(input_text: str, input_lang: str, expected_output: MultiLangString):
     """Test conversion of valid LangString to MultiLangString.
 
     :param input_text: The text of the LangString.
@@ -105,6 +103,7 @@ def test_langstring_to_multilangstring_with_custom_langstring():
 
     :return: None
     """
+
     class CustomLangString(LangString):
         pass
 

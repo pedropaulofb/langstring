@@ -1,4 +1,5 @@
 import pytest
+
 from langstring import SetLangString
 
 
@@ -30,7 +31,6 @@ class SetLangStringOperationTestCase:
             return method(self.set2, strict=strict)
         else:
             return method(self.set2)
-
 
 
 operation_test_cases_same_lang = [
@@ -117,7 +117,8 @@ operation_test_cases_same_lang = [
 
 @pytest.mark.parametrize("test_case", operation_test_cases_same_lang)
 @pytest.mark.parametrize(
-    "method_name", ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"]
+    "method_name",
+    ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"],
 )
 @pytest.mark.parametrize("strict", [None, False, True])
 def test_setlangstring_operation_methods(test_case, method_name, strict):
@@ -126,14 +127,19 @@ def test_setlangstring_operation_methods(test_case, method_name, strict):
 
     # Compare the contents of the SetLangString object with the expected set
     if isinstance(result, SetLangString):
-        assert set(result.texts) == expected, f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={strict}"
+        assert (
+            set(result.texts) == expected
+        ), f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={strict}"
     else:
-        assert result == expected, f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={strict}"
+        assert (
+            result == expected
+        ), f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={strict}"
 
 
 @pytest.mark.parametrize("test_case", operation_test_cases_same_lang)
 @pytest.mark.parametrize(
-    "method_name", ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"]
+    "method_name",
+    ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"],
 )
 @pytest.mark.parametrize("strict", [None, False, True])
 def test_setlangstring_comparison_methods_with_different_lang(test_case, method_name, strict):
@@ -150,7 +156,8 @@ def test_setlangstring_comparison_methods_with_different_lang(test_case, method_
 
 @pytest.mark.parametrize("test_case", operation_test_cases_same_lang)
 @pytest.mark.parametrize(
-    "method_name", ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"]
+    "method_name",
+    ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"],
 )
 @pytest.mark.parametrize("strict", [None, False, True])
 def test_setlangstring_comparison_methods_with_set(test_case, method_name, strict):

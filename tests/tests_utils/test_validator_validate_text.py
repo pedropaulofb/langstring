@@ -1,4 +1,5 @@
 import pytest
+
 from langstring.controller import Controller
 from langstring.langstring import LangStringFlag
 from langstring.utils.validator import Validator
@@ -12,12 +13,14 @@ def test_validate_text_valid(text, expected):
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
     assert Validator.validate_text(LangStringFlag, text) == expected, "Valid text should be validated correctly."
 
+
 # Test cases for invalid text input
 @pytest.mark.parametrize("invalid_text", [123, None, 5.5, [], {}])
 def test_validate_text_invalid_type(invalid_text):
     """Test validate_text with invalid input types."""
     with pytest.raises(TypeError, match="Expected 'str', got"):
         Validator.validate_text(LangStringFlag, invalid_text)
+
 
 # Test cases for empty text with DEFINED_TEXT flag enabled
 def test_validate_text_empty_with_defined_text_flag():
@@ -26,11 +29,13 @@ def test_validate_text_empty_with_defined_text_flag():
     with pytest.raises(ValueError, match="Expected non-empty 'str'"):
         Validator.validate_text(LangStringFlag, "")
 
+
 # Test cases for non-empty text with DEFINED_TEXT flag enabled
 def test_validate_text_non_empty_with_defined_text_flag():
     """Test validate_text with non-empty string and DEFINED_TEXT flag enabled."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     assert Validator.validate_text(LangStringFlag, "Hello") == "Hello", "Non-empty text should be validated correctly."
+
 
 # Test cases for stripping text
 @pytest.mark.parametrize("text, expected", [(" Hello ", "Hello"), ("Hello", "Hello")])
@@ -39,6 +44,7 @@ def test_validate_text_strip_text(text, expected):
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
     assert Validator.validate_text(LangStringFlag, text) == expected, "Text should be stripped correctly."
 
+
 # Test cases for not stripping text
 @pytest.mark.parametrize("text, expected", [(" Hello ", " Hello "), ("Hello", "Hello")])
 def test_validate_text_no_strip_text(text, expected):
@@ -46,10 +52,12 @@ def test_validate_text_no_strip_text(text, expected):
     Controller.set_flag(LangStringFlag.STRIP_TEXT, False)
     assert Validator.validate_text(LangStringFlag, text) == expected, "Text should not be stripped."
 
+
 # Reset flags after tests
 def teardown_module(module):
     """Reset flags to default after tests."""
     Controller.reset_flags()
+
 
 # Test cases for strings with only whitespace
 @pytest.mark.parametrize("whitespace_text", [" ", "   ", "\t", "\n"])
@@ -57,7 +65,10 @@ def test_validate_text_whitespace_only(whitespace_text):
     """Test validate_text with strings containing only whitespace."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
-    assert Validator.validate_text(LangStringFlag, whitespace_text) == "", "Whitespace-only text should be handled correctly."
+    assert (
+        Validator.validate_text(LangStringFlag, whitespace_text) == ""
+    ), "Whitespace-only text should be handled correctly."
+
 
 # Test cases for unusual but valid strings
 @pytest.mark.parametrize("unusual_text", ["特殊字符", "1234567890" * 100, "!@#$%^&*()"])
@@ -65,4 +76,6 @@ def test_validate_text_unusual_valid_strings(unusual_text):
     """Test validate_text with unusual but valid strings."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     Controller.set_flag(LangStringFlag.STRIP_TEXT, False)
-    assert Validator.validate_text(LangStringFlag, unusual_text) == unusual_text, "Unusual but valid text should be validated correctly."
+    assert (
+        Validator.validate_text(LangStringFlag, unusual_text) == unusual_text
+    ), "Unusual but valid text should be validated correctly."

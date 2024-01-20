@@ -52,6 +52,7 @@ def test_langstring_to_setlangstring_empty_string():
         texts={""}, lang="en"
     ), "Conversion of empty LangString did not produce expected SetLangString."
 
+
 @pytest.mark.parametrize(
     "input_text, input_lang",
     [
@@ -100,6 +101,7 @@ def test_langstring_to_setlangstring_with_custom_langstring():
 
     :return: None
     """
+
     class CustomLangString(LangString):
         pass
 

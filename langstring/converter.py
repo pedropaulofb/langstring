@@ -60,9 +60,7 @@ class Converter(metaclass=NonInstantiable):
         )
 
     @classmethod
-    def to_setlangstring(
-        cls, input: Union[LangString, MultiLangString]
-    ) -> Union[SetLangString, list[SetLangString]]:
+    def to_setlangstring(cls, input: Union[LangString, MultiLangString]) -> Union[SetLangString, list[SetLangString]]:
         """Convert a LangString or MultiLangString to a SetLangString or a list of SetLangStrings.
 
         :param input: The LangString or MultiLangString to be converted.

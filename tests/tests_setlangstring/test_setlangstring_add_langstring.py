@@ -1,5 +1,8 @@
 import pytest
-from langstring import SetLangString, LangString
+
+from langstring import LangString
+from langstring import SetLangString
+
 
 def calculate_expected_result(texts, langstring):
     """
@@ -14,18 +17,22 @@ def calculate_expected_result(texts, langstring):
         expected_texts.add(langstring.text)
     return expected_texts
 
-@pytest.mark.parametrize("texts, lang, langstring_text, langstring_lang, expected_exception", [
-    # Adding compatible LangString
-    ({"hello"}, "en", "world", "en", None),
-    # Adding LangString with different language
-    ({"hello"}, "en", "world", "fr", ValueError),
-    # Adding LangString with empty text
-    ({"hello"}, "en", "", "en", None),
-    # Adding LangString to empty SetLangString
-    (set(), "en", "world", "en", None),
-    # Adding LangString with uppercase language code
-    ({"hello"}, "EN", "world", "EN", None),
-])
+
+@pytest.mark.parametrize(
+    "texts, lang, langstring_text, langstring_lang, expected_exception",
+    [
+        # Adding compatible LangString
+        ({"hello"}, "en", "world", "en", None),
+        # Adding LangString with different language
+        ({"hello"}, "en", "world", "fr", ValueError),
+        # Adding LangString with empty text
+        ({"hello"}, "en", "", "en", None),
+        # Adding LangString to empty SetLangString
+        (set(), "en", "world", "en", None),
+        # Adding LangString with uppercase language code
+        ({"hello"}, "EN", "world", "EN", None),
+    ],
+)
 def test_add_langstring(texts, lang, langstring_text, langstring_lang, expected_exception):
     """
     Test the add_langstring method.
@@ -45,4 +52,6 @@ def test_add_langstring(texts, lang, langstring_text, langstring_lang, expected_
             set_lang_string.add_langstring(langstring)
     else:
         set_lang_string.add_langstring(langstring)
-        assert set_lang_string.texts == expected_texts, f"Texts mismatch: expected {expected_texts}, got {set_lang_string.texts}"
+        assert (
+            set_lang_string.texts == expected_texts
+        ), f"Texts mismatch: expected {expected_texts}, got {set_lang_string.texts}"

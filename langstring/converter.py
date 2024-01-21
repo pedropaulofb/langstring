@@ -45,7 +45,6 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[LangString]
         :raises TypeError: If the input is not of type SetLangString or MultiLangString.
         """
-
         if isinstance(input, str):
             return cls.from_string_to_langstring(input)
 
@@ -56,7 +55,8 @@ class Converter(metaclass=NonInstantiable):
             return cls.from_multilangstring_to_langstrings(input)
 
         raise TypeError(
-            f"Invalid input argument type. Expected str, SetLangString or MultiLangString, got '{type(input).__name__}'."
+            f"Invalid input argument type. Expected str, SetLangString or MultiLangString, "
+            f"got '{type(input).__name__}'."
         )
 
     @classmethod
@@ -89,7 +89,6 @@ class Converter(metaclass=NonInstantiable):
         :rtype: MultiLangString
         :raises TypeError: If the input is not of type LangString or SetLangString.
         """
-
         if isinstance(input, set) or isinstance(input, list):
             return cls.from_strings_to_multilangstring(input)
 

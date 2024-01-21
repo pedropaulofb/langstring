@@ -1,50 +1,66 @@
 import pytest
 
+from langstring import Controller
 from langstring import LangString
 from langstring import SetLangString
+from langstring import SetLangStringFlag
+
+
+def calculate_expected_result(texts, lang, element, strict_mode):
+    # Check for type compatibility
+    if not isinstance(element, (str, LangString)):
+        return TypeError
+
+    # Check for language compatibility
+    if isinstance(element, LangString):
+        if element.lang != lang:
+            return ValueError
+        return element.text in texts
+
+    # Check for strict mode and type of element
+    if strict_mode and not isinstance(element, LangString):
+        return TypeError
+
+    # For string elements
+    return element in texts
 
 
 # Test cases for the __contains__ method
 @pytest.mark.parametrize(
-    "texts, lang, element, expected_result",
+    "texts, lang, element",
     [
         # String in SetLangString
-        ({"hello", "world"}, "en", "hello", True),
+        ({"hello", "world"}, "en", "hello"),
         # String not in SetLangString
-        ({"hello", "world"}, "en", "goodbye", False),
+        ({"hello", "world"}, "en", "goodbye"),
         # LangString with same language in SetLangString
-        ({"hello", "world"}, "en", LangString("hello", "en"), True),
+        ({"hello", "world"}, "en", LangString("hello", "en")),
         # LangString with same language not in SetLangString
-        ({"hello", "world"}, "en", LangString("goodbye", "en"), False),
+        ({"hello", "world"}, "en", LangString("goodbye", "en")),
         # LangString with different language
-        ({"hello", "world"}, "en", LangString("hello", "fr"), ValueError),
+        ({"hello", "world"}, "en", LangString("hello", "fr")),
         # Non-string, non-LangString type
-        ({"hello", "world"}, "en", 5, TypeError),
+        ({"hello", "world"}, "en", 5),
         # Empty SetLangString
-        (set(), "en", "hello", False),
+        (set(), "en", "hello"),
         # Checking with empty string
-        ({"hello", "world"}, "en", "", False),
+        ({"hello", "world"}, "en", ""),
         # Special characters in SetLangString
-        ({"!", "@"}, "en", "!", True),
+        ({"!", "@"}, "en", "!"),
         # Emoji in SetLangString
-        ({"😊", "😂"}, "en", "😊", True),
+        ({"😊", "😂"}, "en", "😊"),
         # Mixed content in SetLangString
-        ({"hello", "1", "😊"}, "en", "1", True),
+        ({"hello", "1", "😊"}, "en", "1"),
     ],
 )
-def test_setlangstring_contains(texts, lang, element, expected_result):
-    """
-    Test the __contains__ method of SetLangString.
-
-    :param texts: A set of texts for the SetLangString.
-    :param lang: The language of the SetLangString.
-    :param element: The element to check for containment.
-    :param expected_result: The expected result of the containment check.
-    """
+@pytest.mark.parametrize("strict_mode", [True, False])
+def test_setlangstring_contains(texts, lang, element, strict_mode):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict_mode)
+    expected_result = calculate_expected_result(texts, lang, element, strict_mode)
     set_lang_string = SetLangString(texts=texts, lang=lang)
 
     if isinstance(expected_result, type) and issubclass(expected_result, Exception):
-        with pytest.raises(expected_result, match=f".*{type(element).__name__}.*"):
+        with pytest.raises(expected_result):
             _ = element in set_lang_string
     else:
         assert (
@@ -56,31 +72,26 @@ def test_setlangstring_contains(texts, lang, element, expected_result):
 
 # Additional test cases for the __contains__ method
 @pytest.mark.parametrize(
-    "texts, lang, element, expected_result",
+    "texts, lang, element",
     [
         # Null value (None) as element
-        ({"hello", "world"}, "en", None, TypeError),
+        ({"hello", "world"}, "en", None),
         # Empty LangString with same language
-        ({"hello", "world"}, "en", LangString("", "en"), False),
+        ({"hello", "world"}, "en", LangString("", "en")),
         # LangString with empty text but different language
-        ({"hello", "world"}, "en", LangString("", "fr"), ValueError),
+        ({"hello", "world"}, "en", LangString("", "fr")),
         # SetLangString with mixed types and checking for a non-existent complex string
-        ({"hello", "1", "😊"}, "en", "hello world", False),
+        ({"hello", "1", "😊"}, "en", "hello world"),
     ],
 )
-def test_setlangstring_contains_additional(texts, lang, element, expected_result):
-    """
-    Additional tests for the __contains__ method of SetLangString.
-
-    :param texts: A set of texts for the SetLangString.
-    :param lang: The language of the SetLangString.
-    :param element: The element to check for containment.
-    :param expected_result: The expected result of the containment check.
-    """
+@pytest.mark.parametrize("strict_mode", [True, False])
+def test_setlangstring_contains_additional(texts, lang, element, strict_mode):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict_mode)
+    expected_result = calculate_expected_result(texts, lang, element, strict_mode)
     set_lang_string = SetLangString(texts=texts, lang=lang)
 
     if isinstance(expected_result, type) and issubclass(expected_result, Exception):
-        with pytest.raises(expected_result, match=f".*{type(element).__name__}.*"):
+        with pytest.raises(expected_result):
             _ = element in set_lang_string
     else:
         assert (

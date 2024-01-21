@@ -1,6 +1,8 @@
 import pytest
 
+from langstring import Controller
 from langstring import SetLangString
+from langstring import SetLangStringFlag
 
 
 class SetLangStringOperationTestCase:
@@ -23,14 +25,11 @@ class SetLangStringOperationTestCase:
             "symmetric_difference": texts1.symmetric_difference(texts2),
         }
 
-    def run_test(self, method_name, strict=False):
+    def run_test(self, method_name):
         # Create a copy of set1 for in-place operations
         set1_copy = SetLangString(texts=self.texts1, lang=self.lang1)
         method = getattr(set1_copy, method_name)
-        if strict is not None:
-            return method(self.set2, strict=strict)
-        else:
-            return method(self.set2)
+        return method(self.set2)
 
 
 operation_test_cases_same_lang = [
@@ -120,20 +119,22 @@ operation_test_cases_same_lang = [
     "method_name",
     ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"],
 )
-@pytest.mark.parametrize("strict", [None, False, True])
+@pytest.mark.parametrize("strict", [False, True])
 def test_setlangstring_operation_methods(test_case, method_name, strict):
-    result = test_case.run_test(method_name, strict)
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict)
+    got_strict = Controller.get_flag(SetLangStringFlag.METHODS_MATCH_TYPES)
+    result = test_case.run_test(method_name)
     expected = test_case.expected_results[method_name]
 
     # Compare the contents of the SetLangString object with the expected set
     if isinstance(result, SetLangString):
         assert (
             set(result.texts) == expected
-        ), f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={strict}"
+        ), f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={got_strict}"
     else:
         assert (
             result == expected
-        ), f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={strict}"
+        ), f"Failed {method_name} for {test_case.set1} and {test_case.set2} with strict={got_strict}"
 
 
 @pytest.mark.parametrize("test_case", operation_test_cases_same_lang)
@@ -141,17 +142,15 @@ def test_setlangstring_operation_methods(test_case, method_name, strict):
     "method_name",
     ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"],
 )
-@pytest.mark.parametrize("strict", [None, False, True])
+@pytest.mark.parametrize("strict", [False, True])
 def test_setlangstring_comparison_methods_with_different_lang(test_case, method_name, strict):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict)
     # Modify lang2 to be different from lang1
     test_case.set2.lang = "different_lang"
 
     # Run the test and expect a ValueError
     with pytest.raises(ValueError):
-        if strict is None:
-            test_case.run_test(method_name)
-        else:
-            test_case.run_test(method_name, strict=strict)
+        test_case.run_test(method_name)
 
 
 @pytest.mark.parametrize("test_case", operation_test_cases_same_lang)
@@ -159,8 +158,9 @@ def test_setlangstring_comparison_methods_with_different_lang(test_case, method_
     "method_name",
     ["__and__", "__or__", "__sub__", "__xor__", "__iand__", "__ior__", "__isub__", "__ixor__", "symmetric_difference"],
 )
-@pytest.mark.parametrize("strict", [None, False, True])
+@pytest.mark.parametrize("strict", [False, True])
 def test_setlangstring_comparison_methods_with_set(test_case, method_name, strict):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict)
     # Use texts1 and lang1 to build a SetLangString
     set_lang_string = SetLangString(texts=test_case.texts1, lang=test_case.lang1)
 
@@ -171,9 +171,9 @@ def test_setlangstring_comparison_methods_with_set(test_case, method_name, stric
     if strict is True:
         # Expect a TypeError when strict is True
         with pytest.raises(TypeError):
-            getattr(set_lang_string, method_name)(regular_set, strict=strict)
+            getattr(set_lang_string, method_name)(regular_set)
     else:
         # Expect the test to pass when strict is None or False
-        result = getattr(set_lang_string, method_name)(regular_set, strict=strict)
+        result = getattr(set_lang_string, method_name)(regular_set)
         expected = test_case.expected_results[method_name]
         assert result.texts == expected, f"Failed {method_name} comparison for {set_lang_string} and {regular_set}"

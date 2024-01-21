@@ -1,6 +1,8 @@
 import pytest
 
+from langstring import Controller
 from langstring import SetLangString
+from langstring import SetLangStringFlag
 
 
 class SetLangStringSymDiffUpdateTestCase:
@@ -68,8 +70,9 @@ sym_diff_update_test_cases = [
 
 
 @pytest.mark.parametrize("test_case", sym_diff_update_test_cases)
-@pytest.mark.parametrize("strict", [None, False, True])
+@pytest.mark.parametrize("strict", [False, True])
 def test_setlangstring_symmetric_difference_update(test_case, strict):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict)
     test_case.recreate_set_lang_strings()  # Recreate SetLangString instances
-    test_case.set1.symmetric_difference_update(test_case.set2, strict)
+    test_case.set1.symmetric_difference_update(test_case.set2)
     assert test_case.set1.texts == test_case.expected_result, "Symmetric difference update result mismatch"

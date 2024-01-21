@@ -1,6 +1,7 @@
 import pytest
 
-from langstring import LangString, SetLangString
+from langstring import LangString
+from langstring import SetLangString
 
 
 def calculate_expected_result_for_add(texts, lang, new_element):

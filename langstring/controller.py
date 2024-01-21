@@ -24,38 +24,41 @@ class Controller(metaclass=NonInstantiable):
     # Define the default values as a class-level constant
     DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = {
         # Default values for GlobalFlags
-        GlobalFlag.DEFINED_TEXT: False,
         GlobalFlag.DEFINED_LANG: False,
-        GlobalFlag.VALID_LANG: False,
-        GlobalFlag.STRIP_TEXT: False,
-        GlobalFlag.STRIP_LANG: False,
+        GlobalFlag.DEFINED_TEXT: False,
         GlobalFlag.LOWERCASE_LANG: False,
-        GlobalFlag.PRINT_WITH_QUOTES: True,
+        GlobalFlag.METHODS_MATCH_TYPES: False,
         GlobalFlag.PRINT_WITH_LANG: True,
+        GlobalFlag.PRINT_WITH_QUOTES: True,
+        GlobalFlag.STRIP_LANG: False,
+        GlobalFlag.STRIP_TEXT: False,
+        GlobalFlag.VALID_LANG: False,
         # Default values for LangStringFlags
-        LangStringFlag.DEFINED_TEXT: False,
         LangStringFlag.DEFINED_LANG: False,
-        LangStringFlag.VALID_LANG: False,
-        LangStringFlag.STRIP_TEXT: False,
-        LangStringFlag.STRIP_LANG: False,
+        LangStringFlag.DEFINED_TEXT: False,
         LangStringFlag.LOWERCASE_LANG: False,
-        LangStringFlag.PRINT_WITH_QUOTES: True,
+        LangStringFlag.METHODS_MATCH_TYPES: False,
         LangStringFlag.PRINT_WITH_LANG: True,
+        LangStringFlag.PRINT_WITH_QUOTES: True,
+        LangStringFlag.STRIP_LANG: False,
+        LangStringFlag.STRIP_TEXT: False,
+        LangStringFlag.VALID_LANG: False,
         # Default values for SetLangStringFlags
-        SetLangStringFlag.DEFINED_TEXT: False,
         SetLangStringFlag.DEFINED_LANG: False,
-        SetLangStringFlag.VALID_LANG: False,
-        SetLangStringFlag.STRIP_TEXT: False,
-        SetLangStringFlag.STRIP_LANG: False,
+        SetLangStringFlag.DEFINED_TEXT: False,
         SetLangStringFlag.LOWERCASE_LANG: False,
+        SetLangStringFlag.METHODS_MATCH_TYPES: False,
         SetLangStringFlag.PRINT_WITH_LANG: True,
+        SetLangStringFlag.STRIP_LANG: False,
+        SetLangStringFlag.STRIP_TEXT: False,
+        SetLangStringFlag.VALID_LANG: False,
         # Default values for MultiLangStringFlags
-        MultiLangStringFlag.DEFINED_TEXT: False,
         MultiLangStringFlag.DEFINED_LANG: False,
-        MultiLangStringFlag.VALID_LANG: False,
-        MultiLangStringFlag.STRIP_TEXT: False,
-        MultiLangStringFlag.STRIP_LANG: False,
+        MultiLangStringFlag.DEFINED_TEXT: False,
         MultiLangStringFlag.LOWERCASE_LANG: False,
+        MultiLangStringFlag.STRIP_LANG: False,
+        MultiLangStringFlag.STRIP_TEXT: False,
+        MultiLangStringFlag.VALID_LANG: False,
     }
 
     # Initialize the flags with the default values
@@ -212,7 +215,6 @@ class Controller(metaclass=NonInstantiable):
     @classmethod
     def reset_flags(cls, flag_type: Optional[type] = GlobalFlag) -> None:
         """Reset all flags of a specific type to their default values."""
-
         if flag_type is not None and not isinstance(flag_type, type):
             raise TypeError("Invalid flag type. Expected a class type.")
 

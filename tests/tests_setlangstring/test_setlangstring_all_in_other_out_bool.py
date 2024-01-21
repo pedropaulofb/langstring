@@ -1,6 +1,8 @@
 import pytest
 
+from langstring import Controller
 from langstring import SetLangString
+from langstring import SetLangStringFlag
 
 
 class SetLangStringComparisonTestCase:
@@ -21,12 +23,9 @@ class SetLangStringComparisonTestCase:
             "issuperset": texts1.issuperset(texts2),
         }
 
-    def run_test(self, method_name, strict=False):
+    def run_test(self, method_name):
         method = getattr(self.set1, method_name)
-        if strict is not None:
-            return method(self.set2, strict=strict)
-        else:
-            return method(self.set2)
+        return method(self.set2)
 
 
 comparison_test_cases_same_lang = [
@@ -115,13 +114,11 @@ comparison_test_cases_same_lang = [
 @pytest.mark.parametrize(
     "method_name", ["__ge__", "__gt__", "__le__", "__lt__", "isdisjoint", "issubset", "issuperset"]
 )
-@pytest.mark.parametrize("strict", [None, False, True])
+@pytest.mark.parametrize("strict", [False, True])
 def test_setlangstring_comparison_methods(test_case, method_name, strict):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict)
     # Adjust the method call based on the strict value
-    if strict is None:
-        result = test_case.run_test(method_name)
-    else:
-        result = test_case.run_test(method_name, strict=strict)
+    result = test_case.run_test(method_name)
 
     assert (
         result == test_case.expected_results[method_name]
@@ -132,25 +129,25 @@ def test_setlangstring_comparison_methods(test_case, method_name, strict):
 @pytest.mark.parametrize(
     "method_name", ["__ge__", "__gt__", "__le__", "__lt__", "isdisjoint", "issubset", "issuperset"]
 )
-@pytest.mark.parametrize("strict", [None, False, True])
+@pytest.mark.parametrize("strict", [False, True])
 def test_setlangstring_comparison_methods_with_different_lang(test_case, method_name, strict):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict)
     # Modify lang2 to be different from lang1
     test_case.set2.lang = "different_lang"
 
     # Run the test and expect a ValueError
     with pytest.raises(ValueError):
-        if strict is None:
-            test_case.run_test(method_name)
-        else:
-            test_case.run_test(method_name, strict=strict)
+        test_case.run_test(method_name)
 
 
 @pytest.mark.parametrize("test_case", comparison_test_cases_same_lang)
 @pytest.mark.parametrize(
     "method_name", ["__ge__", "__gt__", "__le__", "__lt__", "isdisjoint", "issubset", "issuperset"]
 )
-@pytest.mark.parametrize("strict", [None, False, True])
+@pytest.mark.parametrize("strict", [False, True])
 def test_setlangstring_comparison_methods_with_set(test_case, method_name, strict):
+    Controller.set_flag(SetLangStringFlag.METHODS_MATCH_TYPES, strict)
+    strict = Controller.get_flag(SetLangStringFlag.METHODS_MATCH_TYPES)
     # Use texts1 and lang1 to build a SetLangString
     set_lang_string = SetLangString(texts=test_case.texts1, lang=test_case.lang1)
 
@@ -161,9 +158,9 @@ def test_setlangstring_comparison_methods_with_set(test_case, method_name, stric
     if strict is True:
         # Expect a TypeError when strict is True
         with pytest.raises(TypeError):
-            getattr(set_lang_string, method_name)(regular_set, strict=strict)
+            getattr(set_lang_string, method_name)(regular_set)
     else:
-        # Expect the test to pass when strict is None or False
-        result = getattr(set_lang_string, method_name)(regular_set, strict=strict)
+        # Expect the test to pass when strict is False
+        result = getattr(set_lang_string, method_name)(regular_set)
         expected = test_case.expected_results[method_name]
         assert result == expected, f"Failed {method_name} comparison for {set_lang_string} and {regular_set}"

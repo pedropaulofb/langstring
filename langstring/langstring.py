@@ -54,7 +54,9 @@ class LangString:
         self.text: str = text
         self.lang: str = lang
 
-    # GETTERS AND SETTERS
+    # -------------------------------------------
+    # Getters and Setters
+    # -------------------------------------------
 
     @property
     def text(self) -> str:
@@ -76,7 +78,9 @@ class LangString:
         """Setter for lang."""
         self._lang = Validator.validate_lang(LangStringFlag, new_lang)
 
-    # OVERWRITING BUILT-IN STRING METHODS
+    # -------------------------------------------
+    # Overwritten Built-in String Regular Methods
+    # -------------------------------------------
 
     def capitalize(self) -> "LangString":
         return LangString(self.text.capitalize(), self.lang)
@@ -248,7 +252,9 @@ class LangString:
     def zfill(self, width: int) -> "LangString":
         return LangString(self.text.zfill(width), self.lang)
 
-    # OVERWRITING BUILT-IN STRING DUNDER METHODS
+    # -------------------------------------------
+    # Overwritten Built-in String Dunder Methods
+    # -------------------------------------------
 
     def __add__(self, other: Union["LangString", str]) -> "LangString":
         """Add another LangString or a string to this LangString.

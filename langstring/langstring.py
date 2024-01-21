@@ -22,9 +22,9 @@ from typing import Iterator
 from typing import Optional
 from typing import Union
 
+from .controller import Controller
 from .flags import LangStringFlag
 from .utils.validator import Validator
-from langstring import Controller
 
 
 class LangString:
@@ -54,9 +54,9 @@ class LangString:
         self.text: str = text
         self.lang: str = lang
 
-    # -------------------------------------------
+    # ---------------------------------------------
     # Getters and Setters
-    # -------------------------------------------
+    # ---------------------------------------------
 
     @property
     def text(self) -> str:
@@ -78,9 +78,9 @@ class LangString:
         """Setter for lang."""
         self._lang = Validator.validate_lang(LangStringFlag, new_lang)
 
-    # -------------------------------------------
-    # Overwritten Built-in String Regular Methods
-    # -------------------------------------------
+    # ---------------------------------------------
+    # Overwritten String's Built-in Regular Methods
+    # ---------------------------------------------
 
     def capitalize(self) -> "LangString":
         return LangString(self.text.capitalize(), self.lang)
@@ -252,9 +252,9 @@ class LangString:
     def zfill(self, width: int) -> "LangString":
         return LangString(self.text.zfill(width), self.lang)
 
-    # -------------------------------------------
-    # Overwritten Built-in String Dunder Methods
-    # -------------------------------------------
+    # ---------------------------------------------
+    # Overwritten String's Built-in Dunder Methods
+    # ---------------------------------------------
 
     def __add__(self, other: Union["LangString", str]) -> "LangString":
         """Add another LangString or a string to this LangString.
@@ -267,9 +267,9 @@ class LangString:
         :return: A new LangString with the concatenated text.
         :raises TypeError: If the objects are not compatible for addition.
         """
+        self._validate_methods_match_types(other)
+
         if isinstance(other, LangString):
-            if (self.lang).casefold() != (other.lang).casefold():
-                raise ValueError("Cannot add LangString objects with different language tags.")
             return LangString(self.text + other.text, self.lang)
 
         if isinstance(other, str):
@@ -295,6 +295,7 @@ class LangString:
 
     def __ge__(self, other: object) -> bool:
         """Check if this LangString is greater than or equal to another LangString object."""
+        # TODO: Check possible METHODS_MATCH_TYPES flag usage
         if not isinstance(other, LangString):
             return NotImplemented
 
@@ -315,6 +316,7 @@ class LangString:
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
+        # TODO: Check possible METHODS_MATCH_TYPES flag usage
         if not isinstance(other, LangString):
             return NotImplemented
 
@@ -333,9 +335,10 @@ class LangString:
 
     def __iadd__(self, other: Union["LangString", str]) -> "LangString":
         """Implement in-place addition."""
+
+        self._validate_methods_match_types(other)
+
         if isinstance(other, LangString):
-            if self.lang.casefold() != other.lang.casefold():
-                raise ValueError("Cannot add LangString objects with different language tags.")
             self.text += other.text
         elif isinstance(other, str):
             self.text += other
@@ -357,6 +360,7 @@ class LangString:
 
     def __le__(self, other: object) -> bool:
         """Check if this LangString is less than or equal to another LangString object."""
+        # TODO: Check possible METHODS_MATCH_TYPES flag usage
         if not isinstance(other, LangString):
             return NotImplemented
 
@@ -371,6 +375,7 @@ class LangString:
 
     def __lt__(self, other: object) -> bool:
         """Check if this LangString is less than another LangString object."""
+        # TODO: Check possible METHODS_MATCH_TYPES flag usage
         if not isinstance(other, LangString):
             return NotImplemented
 
@@ -440,3 +445,27 @@ class LangString:
         lang_representation = f"@{self.lang}" if print_with_lang else ""
 
         return text_representation + lang_representation
+
+    # -------------------------------------------
+    # Private Methods
+    # -------------------------------------------
+
+    def _validate_methods_match_types(self, other: Union[str, "LangString"], overwrite_strict: bool = False) -> None:
+        strict = Controller.get_flag(LangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
+
+        # If strict mode is enabled, only allow LangString type
+        if strict and not isinstance(other, LangString):
+            raise TypeError(
+                f"Strict mode is enabled. Operand must be of type LangString, but got {type(other).__name__}."
+            )
+
+        # Check language compatibility for LangString type
+        if isinstance(other, LangString) and self.lang.casefold() != other.lang.casefold():
+            raise ValueError(
+                f"Operation cannot be performed. "
+                f"Incompatible languages between LangString and {type(other).__name__} object."
+            )
+
+
+# __eq__, __ne__
+# __lt__, __le__, __gt__, __ge__

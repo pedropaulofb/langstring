@@ -268,6 +268,7 @@ class LangString:
         :raises TypeError: If the objects are not compatible for addition.
         """
         self._validate_methods_match_types(other)
+        self._validate_methods_match_langs(other)
 
         if isinstance(other, LangString):
             return LangString(self.text + other.text, self.lang)
@@ -286,23 +287,30 @@ class LangString:
 
         :param other: Another object to compare with.
         :type other: object
-        :return: True if 'other' is a LangString object with the same text and language tag, False otherwise.
+        :return:
         :rtype: bool
         """
-        if not isinstance(other, LangString):
+        self._validate_methods_match_types(other)
+
+        if not isinstance(other, (str, LangString)):
             return NotImplemented
-        return self.text == other.text and self.lang.casefold() == other.lang.casefold()
+        if isinstance(other, str):
+            return self.text == other
+        if isinstance(other, LangString):
+            return self.text == other.text and self.lang.casefold() == other.lang.casefold()
 
     def __ge__(self, other: object) -> bool:
-        """Check if this LangString is greater than or equal to another LangString object."""
-        # TODO: Check possible METHODS_MATCH_TYPES flag usage
-        if not isinstance(other, LangString):
+        """Check if this LangString is greater than or equal to another str or LangString object."""
+
+        self._validate_methods_match_langs(other)  # remove diff langs
+        self._validate_methods_match_types(other)  # case strict is true, remove str
+
+        if not isinstance(other, (str, LangString)):
             return NotImplemented
-
-        if self.lang.casefold() != other.lang.casefold():
-            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
-
-        return self.text >= other.text
+        if isinstance(other, str):
+            return self.text >= other
+        if isinstance(other, LangString):
+            return self.text >= other.text
 
     def __getitem__(self, key: Union[int, slice]) -> "LangString":
         """Retrieve a substring or a reversed string from the LangString's text."""
@@ -316,14 +324,15 @@ class LangString:
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
-        # TODO: Check possible METHODS_MATCH_TYPES flag usage
-        if not isinstance(other, LangString):
+        self._validate_methods_match_langs(other)
+        self._validate_methods_match_types(other)
+
+        if not isinstance(other, (str, LangString)):
             return NotImplemented
-
-        if self.lang.casefold() != other.lang.casefold():
-            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
-
-        return self.text > other.text
+        if isinstance(other, str):
+            return self.text > other
+        if isinstance(other, LangString):
+            return self.text > other.text
 
     def __hash__(self) -> int:
         """Generate a hash new_text for a LangString object.
@@ -337,6 +346,7 @@ class LangString:
         """Implement in-place addition."""
 
         self._validate_methods_match_types(other)
+        self._validate_methods_match_langs(other)
 
         if isinstance(other, LangString):
             self.text += other.text
@@ -360,14 +370,15 @@ class LangString:
 
     def __le__(self, other: object) -> bool:
         """Check if this LangString is less than or equal to another LangString object."""
-        # TODO: Check possible METHODS_MATCH_TYPES flag usage
-        if not isinstance(other, LangString):
+        self._validate_methods_match_langs(other)
+        self._validate_methods_match_types(other)
+
+        if not isinstance(other, (str, LangString)):
             return NotImplemented
-
-        if self.lang.casefold() != other.lang.casefold():
-            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
-
-        return self.text <= other.text
+        if isinstance(other, str):
+            return self.text <= other
+        if isinstance(other, LangString):
+            return self.text <= other.text
 
     def __len__(self) -> int:
         """Return the length of the LangString's text."""
@@ -375,14 +386,15 @@ class LangString:
 
     def __lt__(self, other: object) -> bool:
         """Check if this LangString is less than another LangString object."""
-        # TODO: Check possible METHODS_MATCH_TYPES flag usage
-        if not isinstance(other, LangString):
+        self._validate_methods_match_langs(other)
+        self._validate_methods_match_types(other)
+
+        if not isinstance(other, (str, LangString)):
             return NotImplemented
-
-        if self.lang.casefold() != other.lang.casefold():
-            raise ValueError("Comparison can only be performed on LangStrings of the same language.")
-
-        return self.text < other.text
+        if isinstance(other, str):
+            return self.text < other
+        if isinstance(other, LangString):
+            return self.text < other.text
 
     def __mul__(self, other: int) -> "LangString":
         """Repeat the LangString's text a specified number of times."""
@@ -392,9 +404,14 @@ class LangString:
 
     def __ne__(self, other: object) -> bool:
         """Check inequality of this LangString with another object."""
-        if not isinstance(other, LangString):
+        self._validate_methods_match_types(other)
+
+        if not isinstance(other, (str, LangString)):
             return NotImplemented
-        return not (self.text == other.text and (self.lang).casefold() == (other.lang).casefold())
+        if isinstance(other, str):
+            return self.text != other
+        if isinstance(other, LangString):
+            return (self.text != other.text) or (self.lang.casefold() != other.lang.casefold())
 
     def __radd__(self, other: Union["LangString", str]) -> "LangString":
         """Handle concatenation when LangString is on the right side of the '+' operator.
@@ -459,13 +476,10 @@ class LangString:
                 f"Strict mode is enabled. Operand must be of type LangString, but got {type(other).__name__}."
             )
 
+    def _validate_methods_match_langs(self, other: Union[str, "LangString"]) -> None:
         # Check language compatibility for LangString type
         if isinstance(other, LangString) and self.lang.casefold() != other.lang.casefold():
             raise ValueError(
                 f"Operation cannot be performed. "
                 f"Incompatible languages between LangString and {type(other).__name__} object."
             )
-
-
-# __eq__, __ne__
-# __lt__, __le__, __gt__, __ge__

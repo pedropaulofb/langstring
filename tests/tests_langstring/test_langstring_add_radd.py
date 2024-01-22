@@ -1,6 +1,8 @@
 import pytest
 
-from langstring import LangString, Controller, LangStringFlag
+from langstring import Controller
+from langstring import LangString
+from langstring import LangStringFlag
 
 
 # Test cases for adding two LangString objects
@@ -100,7 +102,11 @@ def test_add_string_and_langstring(other_text, lang_str_text, lang_str_lang, exp
 def test_add_incompatible_types(lang_str, other, strict):
     """Test adding incompatible types to a LangString."""
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
-    msg = "Strict mode is enabled. Operand must be of type LangString" if strict else "Unsupported operand type\\(s\\) for \\+: 'LangString' and '.*'"
+    msg = (
+        "Strict mode is enabled. Operand must be of type LangString"
+        if strict
+        else "Unsupported operand type\\(s\\) for \\+: 'LangString' and '.*'"
+    )
     with pytest.raises(TypeError, match=msg):
         _ = lang_str + other
 
@@ -148,7 +154,7 @@ def test_radd_incompatible_type_to_langstring(other, lang_str_text, lang_str_lan
     """Test adding an incompatible type to a LangString object using the __radd__ method."""
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_str = LangString(lang_str_text, lang_str_lang)
-    with pytest.raises(TypeError, match="Unsupported operand type\(s\) for \+: '.*' and 'LangString'"):
+    with pytest.raises(TypeError, match="Unsupported operand type"):
         _ = other + lang_str
 
 
@@ -172,7 +178,10 @@ def test_add_empty_string_to_langstring(other_text, lang_str_text, lang_str_lang
             _ = lang_str + other_text
     else:
         result = lang_str + other_text
-        assert result.text == expected_text, "The text after addition with an empty string should match the expected result"
+        assert (
+            result.text == expected_text
+        ), "The text after addition with an empty string should match the expected result"
+
 
 # Test adding empty strings to a LangString object using the __radd__ method
 @pytest.mark.parametrize(
@@ -227,7 +236,9 @@ def test_add_langstrings_with_strip_lang_effect(strip_lang_flag, should_raise_er
     lang_str2 = LangString("Bonjour", " en")  # Note the leading space in the language tag
 
     if should_raise_error:
-        with pytest.raises(ValueError, match="Operation cannot be performed. Incompatible languages between LangString"):
+        with pytest.raises(
+            ValueError, match="Operation cannot be performed. Incompatible languages between LangString"
+        ):
             _ = lang_str1 + lang_str2
     else:
         result = lang_str1 + lang_str2

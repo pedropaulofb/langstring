@@ -1,8 +1,10 @@
 import pytest
 
+from langstring import Controller
 from langstring import LangString
+from langstring import LangStringFlag
 
-comparison_methods_to_test = ["__lt__", "__le__", "__gt__", "__ge__"]
+comparison_methods_to_test = ["__eq__", "__ne__", "__lt__", "__le__", "__gt__", "__ge__"]
 
 
 class StringMethodComparisonTestCase:
@@ -15,20 +17,31 @@ class StringMethodComparisonTestCase:
 
     def compute_expected_results(self):
         results = {}
-        # Skip computation if either input is not a string
-        if not isinstance(self.input_string1, str) or not isinstance(self.input_string2, str):
+        # Check if input is not a string or LangString
+        if not isinstance(self.input_string1, (str, LangString)) or not isinstance(
+            self.input_string2, (str, LangString)
+        ):
             return {method: NotImplemented for method in comparison_methods_to_test}
 
         lang_string1 = LangString(self.input_string1, self.lang1)
         lang_string2 = LangString(self.input_string2, self.lang2)
 
-        if self.lang1.casefold() == self.lang2.casefold():
+        # For __eq__ and __ne__, compare both text and language
+        results["__eq__"] = (lang_string1.text == lang_string2.text) and (
+            lang_string1.lang.casefold() == lang_string2.lang.casefold()
+        )
+        results["__ne__"] = (lang_string1.text != lang_string2.text) or (
+            lang_string1.lang.casefold() != lang_string2.lang.casefold()
+        )
+
+        # For other methods, raise ValueError if languages do not match
+        if lang_string1.lang.casefold() != lang_string2.lang.casefold():
+            results.update({method: ValueError for method in ["__lt__", "__le__", "__gt__", "__ge__"]})
+        else:
             results["__lt__"] = lang_string1.text < lang_string2.text
             results["__le__"] = lang_string1.text <= lang_string2.text
             results["__gt__"] = lang_string1.text > lang_string2.text
             results["__ge__"] = lang_string1.text >= lang_string2.text
-        else:
-            results = {method: False for method in comparison_methods_to_test}
 
         return results
 
@@ -76,7 +89,9 @@ valid_comparison_test_cases = [
 @pytest.mark.parametrize(
     "test_case, method", [(tc, m) for tc in valid_comparison_test_cases for m in comparison_methods_to_test]
 )
-def test_string_methods_valid_comparison(test_case, method):
+@pytest.mark.parametrize("strict", [True, False])
+def test_string_methods_valid_comparison(test_case, method, strict):
+    Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     actual_result = test_case.perform_comparison(method)
     expected_result = test_case.expected_results[method]
     assert (
@@ -100,7 +115,9 @@ invalid_comparison_test_cases = [
 @pytest.mark.parametrize(
     "test_case, method", [(tc, m) for tc in invalid_comparison_test_cases for m in comparison_methods_to_test]
 )
-def test_string_methods_invalid_comparison(test_case, method):
+@pytest.mark.parametrize("strict", [True, False])
+def test_string_methods_invalid_comparison(test_case, method, strict):
+    Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     actual_result = test_case.perform_comparison(method)
     assert actual_result is NotImplemented, f"{method} did not return NotImplemented for invalid comparison"
 
@@ -126,8 +143,16 @@ incompatible_language_test_cases = [
 @pytest.mark.parametrize(
     "test_case, method", [(tc, m) for tc in incompatible_language_test_cases for m in comparison_methods_to_test]
 )
-def test_string_methods_incompatible_language_comparison(test_case, method):
+@pytest.mark.parametrize("strict", [True, False])
+def test_string_methods_incompatible_language_comparison(test_case, method, strict):
+    Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_string1 = LangString(test_case.input_string1, test_case.lang1)
     lang_string2 = LangString(test_case.input_string2, test_case.lang2)
-    with pytest.raises(ValueError, match="Comparison can only be performed on LangStrings of the same language."):
-        getattr(lang_string1, method)(lang_string2)
+
+    if method in ["__eq__", "__ne__"]:
+        expected_result = test_case.compute_expected_results()[method]
+        actual_result = getattr(lang_string1, method)(lang_string2)
+        assert actual_result == expected_result
+    else:
+        with pytest.raises(ValueError, match="Incompatible languages"):
+            getattr(lang_string1, method)(lang_string2)

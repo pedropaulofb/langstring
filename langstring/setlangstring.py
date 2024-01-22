@@ -44,7 +44,7 @@ class SetLangString:
         self._lang = Validator.validate_lang(SetLangStringFlag, new_lang)
 
     # -------------------------------------------
-    # Overwritten Built-in Set Regular Methods
+    # Overwritten Set's Built-in Regular Methods
     # -------------------------------------------
 
     def add(self, new_element: Union[str, LangString]) -> None:
@@ -146,7 +146,7 @@ class SetLangString:
         self.texts.update(*others_texts)
 
     # -------------------------------------------
-    # SetLangString Regular Methods
+    # SetLangString's Regular Methods
     # -------------------------------------------
 
     def add_langstring(self, langstring: LangString) -> None:
@@ -171,7 +171,7 @@ class SetLangString:
         self.texts.remove(text)
 
     # -------------------------------------------
-    # Overwritten Built-in Set Dunder Methods
+    # Overwritten Set's Built-in Dunder Methods
     # -------------------------------------------
 
     def __and__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":

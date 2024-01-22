@@ -1,0 +1,61 @@
+:py:mod:`langstring.utils.validator`
+====================================
+
+.. py:module:: langstring.utils.validator
+
+.. autoapi-nested-parse::
+
+   This module defines the Validator class.
+
+   The Validator provides validation functionalities for LangString and MultiLangString classes.
+   It includes methods to validate argument types, ensure text and language requirements, and check the validity of
+   language tags based on configurable control flags.
+
+   The mixin is designed to be used with classes that handle language strings and need to enforce specific validation
+   rules. It leverages control flags from a control class (like Controller or Controller) to
+   determine the validation behavior.
+
+   Classes:
+       Validator: A mixin class providing validation methods for LangString and MultiLangString classes.
+
+   Example Usage:
+       class LangString(Validator):
+           # LangString implementation
+           ...
+
+       class MultiLangString(Validator):
+           # MultiLangString implementation
+           ...
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   langstring.utils.validator.Validator
+
+
+
+
+.. py:class:: Validator
+
+
+   A mixin class that provides validation methods for classes handling language strings.
+
+   It ensures that the text and language arguments meet specific criteria, such as type correctness, non-emptiness,
+   and language tag validity. The validation rules are determined by control flags from a control class.
+
+   .. py:method:: validate_text(flag_type, text)
+      :staticmethod:
+
+
+   .. py:method:: validate_lang(flag_type, lang)
+      :staticmethod:
+
+
+

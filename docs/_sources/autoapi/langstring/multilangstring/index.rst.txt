@@ -26,26 +26,11 @@
    This module is designed to be used in applications that require handling of text in multiple languages, providing a
    convenient and standardized way to store and manipulate multilingual text data.
 
-   Classes:
-   - MultiLangString: The main class for creating and managing multilingual text strings.
-
-   Dependencies:
-   - LangString: A class for representing individual text entries with associated language tags.
-   - MultiLangStringControl and MultiLangStringFlag: for managing configuration and behavior of MultiLangString instances.
-   - Validator: A base class providing validation functionalities.
-
    Usage:
    The MultiLangString class can be used to create multilingual text containers, add text entries in various languages,
    retrieve entries based on language, and perform other operations related to multilingual text management. It is
    particularly useful in applications where content needs to be presented in multiple languages, such as websites,
    applications with internationalization support, and data processing tools that handle multilingual data.
-
-   Example:
-       mls_dict = {"en": {"Hello", "Good morning"}, "es": {"Hola", "Buenos días"}}
-       mls = MultiLangString(mls_dict)
-       mls.add_entry("Bonjour", "fr")
-       print(mls.get_strings_lang("en"))  # Output: ['Hello', 'Good morning']
-       print(mls)  # Output: '"Hello"@en, "Good morning"@en, "Hola"@es, "Buenos días"@es, "Bonjour"fr'
 
    By providing a comprehensive set of methods for managing multilingual text, the MultiLangString class aims to simplify
    the development of multilingual applications and facilitate the handling of text in multiple languages.
@@ -68,11 +53,9 @@ Classes
 .. py:class:: MultiLangString(mls_dict = None, pref_lang = 'en')
 
 
-   Bases: :py:obj:`langstring.utils.validation_base.Validator`
-
    A class for managing multilingual text strings with various language tags.
 
-   Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
+   Utilizes a global control strategy set in Controller to handle duplicate language tags. Supports
    operations like adding, removing, and retrieving language strings in multiple languages.
 
    :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
@@ -80,7 +63,13 @@ Classes
    :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
    :vartype pref_lang: str
 
-   .. py:property:: preferred_lang
+   .. py:property:: mls_dict
+      :type: dict[str, set[str]]
+
+      Getter for texts.
+
+
+   .. py:property:: pref_lang
       :type: str
 
       Get the preferred language for this MultiLangString.
@@ -88,25 +77,7 @@ Classes
       :return: The preferred language as a string.
 
 
-   .. py:method:: _get_control_and_flags_type()
-
-      Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.
-
-      This method provides the specific control class (MultiLangStringControl) and the flags enumeration
-      (MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
-      It is essential for the functioning of the Validator methods, which rely on these control settings.
-
-      :return: A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.
-      :rtype: tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]
-
-
-   .. py:method:: _validate_langstring_arg(arg)
-
-      Private helper method to validate if the argument is a LangString.
-
-      :param arg: Argument to be checked.
-      :type arg: Any
-      :raises TypeError: If the passed argument is not an instance of LangString.
+   .. py:method:: add(input)
 
 
    .. py:method:: add_entry(text, lang = '')
@@ -131,7 +102,15 @@ Classes
       :type langstring: LangString
 
 
-   .. py:method:: remove_entry(text, lang)
+   .. py:method:: add_setlangstring(setlangstring)
+
+      Add a SetLangString to the MultiLangString.
+
+      :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
+      :type setlangstring: SetLangString
+
+
+   .. py:method:: remove_entry(text, lang, clear_empty = False)
 
       Remove a single entry from the set of a given language key in the dictionary.
 
@@ -144,6 +123,9 @@ Classes
       :type lang: str
 
 
+   .. py:method:: remove_langstring(langstring)
+
+
    .. py:method:: remove_lang(lang)
 
       Remove all entries of a given language from the dictionary.
@@ -154,47 +136,7 @@ Classes
       :type lang: str
 
 
-   .. py:method:: get_langstring(text, lang)
-
-      Retrieve a LangString object for a specific text and language.
-
-      :param text: The text of the LangString.
-      :type text: str
-      :param lang: The language of the LangString.
-      :type lang: str
-      :return: A LangString object with the specified text and language.
-      :rtype: LangString
-      :raises ValueError: If the text/lang combination is not in mls_dict.
-
-
-   .. py:method:: get_langstrings_lang(lang)
-
-      Retrieve a list of LangStrings for a given language.
-
-      :param lang: The language for which to retrieve LangStrings.
-      :type lang: str
-      :return: A list of LangStrings, each containing a single entry for the specified language.
-               Returns an empty list if the specified language is not in mls_dict.
-      :rtype: list[LangString]
-
-
-   .. py:method:: get_langstrings_all()
-
-      Retrieve a list of all LangStrings in mls_dict.
-
-      :return: A list of LangStrings, each representing a single entry from mls_dict.
-      :rtype: list[LangString]
-
-
-   .. py:method:: get_langstrings_pref_lang()
-
-      Retrieve a list of LangStrings for the preferred language.
-
-      This method returns LangStrings for the language specified in the pref_lang attribute. If pref_lang is not
-      a key in mls_dict, an empty list is returned.
-
-      :return: A list of LangStrings for the preferred language.
-      :rtype: list[LangString]
+   .. py:method:: clear_empty()
 
 
    .. py:method:: get_strings_lang(lang)
@@ -277,6 +219,39 @@ Classes
       :rtype: int
 
 
+   .. py:method:: is_entry(text, lang)
+
+
+   .. py:method:: to_langstrings()
+
+
+   .. py:method:: to_setlangstrings()
+
+
+   .. py:method:: __eq__(other)
+
+      Check equality of this MultiLangString with another MultiLangString.
+
+      Equality is determined based on the mls_dict attribute. The pref_lang attribute is not considered in the
+      equality check.
+
+      :param other: Another object to compare with.
+      :type other: object
+      :return: True if both MultiLangString objects have the same mls_dict, False otherwise.
+      :rtype: bool
+
+
+   .. py:method:: __hash__()
+
+      Generate a hash new_text for a MultiLangString object.
+
+      The hash is computed based on the 'mls_dict' attribute of the MultiLangString. This approach ensures that
+      MultiLangString objects with the same content will have the same hash new_text.
+
+      :return: The hash new_text of the MultiLangString object.
+      :rtype: int
+
+
    .. py:method:: __repr__()
 
       Return a detailed string representation of the MultiLangString object.
@@ -297,43 +272,6 @@ Classes
 
       :return: A string representation of the MultiLangString with language tags.
       :rtype: str
-
-
-   .. py:method:: __eq__(other)
-
-      Check equality of this MultiLangString with another MultiLangString.
-
-      Equality is determined based on the mls_dict attribute. The pref_lang attribute is not considered in the
-      equality check.
-
-      :param other: Another object to compare with.
-      :type other: object
-      :return: True if both MultiLangString objects have the same mls_dict, False otherwise.
-      :rtype: bool
-
-
-   .. py:method:: __hash__()
-
-      Generate a hash value for a MultiLangString object.
-
-      The hash is computed based on the 'mls_dict' attribute of the MultiLangString. This approach ensures that
-      MultiLangString objects with the same content will have the same hash value.
-
-      :return: The hash value of the MultiLangString object.
-      :rtype: int
-
-
-   .. py:method:: _validate_mls_dict(mls_dict)
-
-      Validate all elements in the provided mls_dict against the current flags' values.
-
-      Iterates through each language and its associated texts in the mls_dict, applying validation methods to
-      ensure compliance with the current flag settings.
-
-      :param mls_dict: A dictionary where keys are language codes and values are sets of text entries.
-      :type mls_dict: dict[str, set[str]]
-      :raises TypeError: If any text or language in mls_dict does not comply with the expected types.
-      :raises ValueError: If any text or language in mls_dict violates the rules set by the control flags.
 
 
 

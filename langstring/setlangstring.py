@@ -83,66 +83,66 @@ class SetLangString:
     def difference(self, *others: Union[set[str], "SetLangString"]) -> "SetLangString":
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
-            self._validate_methods_match_types(other)
+            self._validate_match_types_and_langs(other)
         difference_texts = self.texts.difference(*others_texts)
         return SetLangString(texts=difference_texts, lang=self.lang)
 
     def difference_update(self, *others: Union[set[str], "SetLangString"]) -> None:
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
-            self._validate_methods_match_types(other)
+            self._validate_match_types_and_langs(other)
         self.texts.difference_update(*others_texts)
 
     def isdisjoint(self, other: Union[set[str], "SetLangString"]) -> bool:
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts.isdisjoint(other_texts)
 
     def issubset(self, other: Union[set[str], "SetLangString"]) -> bool:
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts.issubset(other_texts)
 
     def issuperset(self, other: Union[set[str], "SetLangString"]) -> bool:
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts.issuperset(other_texts)
 
     def intersection(self, *others: Union[set[str], "SetLangString"]) -> "SetLangString":
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
-            self._validate_methods_match_types(other)
+            self._validate_match_types_and_langs(other)
         intersection_texts = self.texts.intersection(*others_texts)
         return SetLangString(texts=intersection_texts, lang=self.lang)
 
     def intersection_update(self, *others: Union[set[str], "SetLangString"]) -> None:
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
-            self._validate_methods_match_types(other)
+            self._validate_match_types_and_langs(other)
         self.texts.intersection_update(*others_texts)
 
     def symmetric_difference(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
         other_texts = self._extract_texts(other)
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         sym_diff_texts = self.texts.symmetric_difference(other_texts)
         return SetLangString(texts=sym_diff_texts, lang=self.lang)
 
     def symmetric_difference_update(self, other: Union[set[str], "SetLangString"]) -> None:
         other_texts = self._extract_texts(other)
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         self.texts.symmetric_difference_update(other_texts)
 
     def union(self, *others: Union[set[str], "SetLangString"]) -> "SetLangString":
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
-            self._validate_methods_match_types(other)
+            self._validate_match_types_and_langs(other)
         union_texts = self.texts.union(*others_texts)
         return SetLangString(texts=union_texts, lang=self.lang)
 
     def update(self, *others: Union[set[str], "SetLangString"]) -> None:
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
-            self._validate_methods_match_types(other)
+            self._validate_match_types_and_langs(other)
         self.texts.update(*others_texts)
 
     # -------------------------------------------
@@ -150,25 +150,32 @@ class SetLangString:
     # -------------------------------------------
 
     def add_langstring(self, langstring: LangString) -> None:
-        self._validate_methods_match_types(langstring, True)
+        self._validate_match_types_and_langs(langstring, True)
         self.texts.add(Validator.validate_text(SetLangStringFlag, langstring.text))
 
     def add_text(self, text: str) -> None:
         self.texts.add(Validator.validate_text(SetLangStringFlag, text))
 
     def discard_langstring(self, langstring: LangString) -> None:
-        self._validate_methods_match_types(langstring, True)
+        self._validate_match_types_and_langs(langstring, True)
         self.texts.discard(langstring.text)
 
     def discard_text(self, text: str) -> None:
         self.texts.discard(text)
 
     def remove_langstring(self, langstring: LangString) -> None:
-        self._validate_methods_match_types(langstring, True)
+        self._validate_match_types_and_langs(langstring, True)
         self.texts.remove(langstring.text)
 
     def remove_text(self, text: str) -> None:
         self.texts.remove(text)
+
+    def to_langstrings(self) -> list[LangString]:
+        # TO BE TESTED
+        langstrings = []
+        for text in self.texts:
+            langstrings.append(LangString(text=text, lang=self.lang))
+        return langstrings
 
     # -------------------------------------------
     # Overwritten Set's Built-in Dunder Methods
@@ -183,7 +190,7 @@ class SetLangString:
             raise TypeError(f"Invalid type received. Expected 'str' or 'LangString', got {type(element).__name__}.")
 
         # Check language compatibility
-        self._validate_methods_match_types(element)
+        self._validate_match_types_and_langs(element)
 
         # If element is a string, check if it's in the texts
         if isinstance(element, str):
@@ -194,20 +201,19 @@ class SetLangString:
             return element.text in self.texts
 
     def __eq__(self, other: object) -> bool:
-        # TODO: Check possible METHODS_MATCH_TYPES flag usage
         if not isinstance(other, SetLangString):
             return NotImplemented
         return self.texts == other.texts and self.lang.casefold() == other.lang.casefold()
 
     def __ge__(self, other: Union[set[str], "SetLangString"]) -> bool:
         """Check if self is a superset of another."""
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts >= other_texts
 
     def __gt__(self, other: Union[set[str], "SetLangString"]) -> bool:
         """Check if self is a proper superset of other."""
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts > other_texts
 
@@ -237,7 +243,7 @@ class SetLangString:
 
     def __le__(self, other: Union[set[str], "SetLangString"]) -> bool:
         """Check if self is a subset of other."""
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts <= other_texts
 
@@ -246,12 +252,11 @@ class SetLangString:
 
     def __lt__(self, other: Union[set[str], "SetLangString"]) -> bool:
         """Check if self is a proper subset of other."""
-        self._validate_methods_match_types(other)
+        self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts < other_texts
 
     def __ne__(self, other: object) -> bool:
-        # TODO: Check possible METHODS_MATCH_TYPES flag usage
         if not isinstance(other, SetLangString):
             return NotImplemented
         return self.texts != other.texts or self.lang.casefold() != other.lang.casefold()
@@ -286,7 +291,7 @@ class SetLangString:
     # Private Methods
     # -------------------------------------------
 
-    def _validate_methods_match_types(
+    def _validate_match_types_and_langs(
         self, other: Union[str, set[str], "SetLangString", "LangString"], overwrite_strict: bool = False
     ) -> None:
         strict = (
@@ -300,7 +305,8 @@ class SetLangString:
         # Check language compatibility for LangString and SetLangString types
         if isinstance(other, (LangString, SetLangString)) and self.lang.casefold() != other.lang.casefold():
             raise ValueError(
-                f"Operation cannot be performed. Incompatible languages between SetLangString and {type(other).__name__} object."
+                f"Operation cannot be performed. "
+                f"Incompatible languages between SetLangString and {type(other).__name__} object."
             )
 
     def _extract_texts(self, other: Union[set[str], "SetLangString"]) -> set[str]:

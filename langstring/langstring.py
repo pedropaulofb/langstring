@@ -267,8 +267,8 @@ class LangString:
         :return: A new LangString with the concatenated text.
         :raises TypeError: If the objects are not compatible for addition.
         """
-        self._validate_methods_match_types(other)
-        self._validate_methods_match_langs(other)
+        self._validate_match_types(other)
+        self._validate_match_langs(other)
 
         if isinstance(other, LangString):
             return LangString(self.text + other.text, self.lang)
@@ -290,7 +290,7 @@ class LangString:
         :return:
         :rtype: bool
         """
-        self._validate_methods_match_types(other)
+        self._validate_match_types(other)
 
         if not isinstance(other, (str, LangString)):
             return NotImplemented
@@ -302,8 +302,8 @@ class LangString:
     def __ge__(self, other: object) -> bool:
         """Check if this LangString is greater than or equal to another str or LangString object."""
 
-        self._validate_methods_match_langs(other)  # remove diff langs
-        self._validate_methods_match_types(other)  # case strict is true, remove str
+        self._validate_match_langs(other)  # remove diff langs
+        self._validate_match_types(other)  # case strict is true, remove str
 
         if not isinstance(other, (str, LangString)):
             return NotImplemented
@@ -324,8 +324,8 @@ class LangString:
 
     def __gt__(self, other: object) -> bool:
         """Check if this LangString is greater than another LangString object."""
-        self._validate_methods_match_langs(other)
-        self._validate_methods_match_types(other)
+        self._validate_match_langs(other)
+        self._validate_match_types(other)
 
         if not isinstance(other, (str, LangString)):
             return NotImplemented
@@ -345,8 +345,8 @@ class LangString:
     def __iadd__(self, other: Union["LangString", str]) -> "LangString":
         """Implement in-place addition."""
 
-        self._validate_methods_match_types(other)
-        self._validate_methods_match_langs(other)
+        self._validate_match_types(other)
+        self._validate_match_langs(other)
 
         if isinstance(other, LangString):
             self.text += other.text
@@ -370,8 +370,8 @@ class LangString:
 
     def __le__(self, other: object) -> bool:
         """Check if this LangString is less than or equal to another LangString object."""
-        self._validate_methods_match_langs(other)
-        self._validate_methods_match_types(other)
+        self._validate_match_langs(other)
+        self._validate_match_types(other)
 
         if not isinstance(other, (str, LangString)):
             return NotImplemented
@@ -386,8 +386,8 @@ class LangString:
 
     def __lt__(self, other: object) -> bool:
         """Check if this LangString is less than another LangString object."""
-        self._validate_methods_match_langs(other)
-        self._validate_methods_match_types(other)
+        self._validate_match_langs(other)
+        self._validate_match_types(other)
 
         if not isinstance(other, (str, LangString)):
             return NotImplemented
@@ -404,7 +404,7 @@ class LangString:
 
     def __ne__(self, other: object) -> bool:
         """Check inequality of this LangString with another object."""
-        self._validate_methods_match_types(other)
+        self._validate_match_types(other)
 
         if not isinstance(other, (str, LangString)):
             return NotImplemented
@@ -463,11 +463,11 @@ class LangString:
 
         return text_representation + lang_representation
 
-    # -------------------------------------------
+    # ---------------------------------------------
     # Private Methods
-    # -------------------------------------------
+    # ---------------------------------------------
 
-    def _validate_methods_match_types(self, other: Union[str, "LangString"], overwrite_strict: bool = False) -> None:
+    def _validate_match_types(self, other: Union[str, "LangString"], overwrite_strict: bool = False) -> None:
         strict = Controller.get_flag(LangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
 
         # If strict mode is enabled, only allow LangString type
@@ -476,7 +476,7 @@ class LangString:
                 f"Strict mode is enabled. Operand must be of type LangString, but got {type(other).__name__}."
             )
 
-    def _validate_methods_match_langs(self, other: Union[str, "LangString"]) -> None:
+    def _validate_match_langs(self, other: Union[str, "LangString"]) -> None:
         # Check language compatibility for LangString type
         if isinstance(other, LangString) and self.lang.casefold() != other.lang.casefold():
             raise ValueError(

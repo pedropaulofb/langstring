@@ -1,0 +1,194 @@
+:py:mod:`langstring.setlangstring`
+==================================
+
+.. py:module:: langstring.setlangstring
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   langstring.setlangstring.SetLangString
+
+
+
+
+.. py:class:: SetLangString(texts = None, lang = '')
+
+
+   .. py:property:: texts
+      :type: set[str]
+
+      Getter for texts.
+
+
+   .. py:property:: lang
+      :type: str
+
+      Getter for lang.
+
+
+   .. py:method:: add(new_element)
+
+
+   .. py:method:: clear()
+
+
+   .. py:method:: copy()
+
+
+   .. py:method:: discard(element)
+
+
+   .. py:method:: pop()
+
+
+   .. py:method:: remove(element)
+
+
+   .. py:method:: difference(*others)
+
+
+   .. py:method:: difference_update(*others)
+
+
+   .. py:method:: isdisjoint(other)
+
+
+   .. py:method:: issubset(other)
+
+
+   .. py:method:: issuperset(other)
+
+
+   .. py:method:: intersection(*others)
+
+
+   .. py:method:: intersection_update(*others)
+
+
+   .. py:method:: symmetric_difference(other)
+
+
+   .. py:method:: symmetric_difference_update(other)
+
+
+   .. py:method:: union(*others)
+
+
+   .. py:method:: update(*others)
+
+
+   .. py:method:: add_langstring(langstring)
+
+
+   .. py:method:: add_text(text)
+
+
+   .. py:method:: discard_langstring(langstring)
+
+
+   .. py:method:: discard_text(text)
+
+
+   .. py:method:: remove_langstring(langstring)
+
+
+   .. py:method:: remove_text(text)
+
+
+   .. py:method:: to_langstrings()
+
+
+   .. py:method:: __and__(other)
+
+
+   .. py:method:: __contains__(element)
+
+
+   .. py:method:: __eq__(other)
+
+      Return self==value.
+
+
+   .. py:method:: __ge__(other)
+
+      Check if self is a superset of another.
+
+
+   .. py:method:: __gt__(other)
+
+      Check if self is a proper superset of other.
+
+
+   .. py:method:: __hash__()
+
+      Generate a hash for a SetLangString object.
+
+
+   .. py:method:: __iand__(other)
+
+
+   .. py:method:: __ior__(other)
+
+
+   .. py:method:: __isub__(other)
+
+
+   .. py:method:: __iter__()
+
+
+   .. py:method:: __ixor__(other)
+
+
+   .. py:method:: __le__(other)
+
+      Check if self is a subset of other.
+
+
+   .. py:method:: __len__()
+
+
+   .. py:method:: __lt__(other)
+
+      Check if self is a proper subset of other.
+
+
+   .. py:method:: __ne__(other)
+
+      Return self!=value.
+
+
+   .. py:method:: __or__(other)
+
+
+   .. py:method:: __repr__()
+
+      Return the official string representation of the SetLangString object.
+
+
+   .. py:method:: __str__()
+
+      Define the string representation of the LangString object.
+
+      :return: The string representation of the LangString object.
+      :rtype: str
+
+
+   .. py:method:: __sub__(other)
+
+
+   .. py:method:: __xor__(other)
+
+
+   .. py:method:: _validate_match_types_and_langs(other, overwrite_strict = False)
+
+
+   .. py:method:: _extract_texts(other)
+
+
+

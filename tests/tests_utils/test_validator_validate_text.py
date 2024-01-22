@@ -53,12 +53,6 @@ def test_validate_text_no_strip_text(text, expected):
     assert Validator.validate_text(LangStringFlag, text) == expected, "Text should not be stripped."
 
 
-# Reset flags after tests
-def teardown_module(module):
-    """Reset flags to default after tests."""
-    Controller.reset_flags()
-
-
 # Test cases for strings with only whitespace
 @pytest.mark.parametrize("whitespace_text", [" ", "   ", "\t", "\n"])
 def test_validate_text_whitespace_only(whitespace_text):

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>langstring &mdash; langstring  documentation</title>
@@ -39,7 +39,7 @@
             langstring
           </a>
               <div class="version">
-                2.0.0
+                3.0.0-dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -58,10 +58,12 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="controller/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.controller</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="converter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.converter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="flags/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.flags</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="langstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.langstring</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="langstring_control/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.langstring_control</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="multilangstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.multilangstring</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="multilangstring_control/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.multilangstring_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="setlangstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.setlangstring</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
@@ -108,8 +110,8 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.utils</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils/controls_base/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.utils.controls_base</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/validation_base/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.utils.validation_base</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/non_instantiable/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.utils.non_instantiable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/validator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.utils.validator</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -119,10 +121,12 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="controller/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.controller</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="converter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.converter</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="flags/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.flags</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="langstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.langstring</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="langstring_control/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.langstring_control</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="multilangstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.multilangstring</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="multilangstring_control/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.multilangstring_control</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="setlangstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.setlangstring</span></code></a></li>
 </ul>
 </div>
 </section>
@@ -132,31 +136,415 @@
 <h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LangString</span></code></a></p></td>
-<td><p>A class to encapsulate a string with its language information.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.Controller" title="langstring.Controller"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Controller</span></code></a></p></td>
+<td><p>Control class for managing configuration flags, designed to be non-instantiable.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langstring.Controller" title="langstring.Controller"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Controller</span></code></a></p></td>
-<td><p>Control class for managing LangString configuration flags, designed to be non-instantiable.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GlobalFlag</span></code></a></p></td>
+<td><p>Enumeration for global control flags.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LangStringFlag</span></code></a></p></td>
 <td><p>Enumeration for LangString control flags.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiLangString</span></code></a></p></td>
-<td><p>A class for managing multilingual text strings with various language tags.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.MultiLangStringControl" title="langstring.MultiLangStringControl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiLangStringControl</span></code></a></p></td>
-<td><p>A control class for managing the configuration flags of MultiLangString instances.</p></td>
-</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiLangStringFlag</span></code></a></p></td>
-<td><p>Enumeration for LangString control flags.</p></td>
+<td><p>Enumeration for MultiLangString control flags.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetLangStringFlag</span></code></a></p></td>
+<td><p>Enumeration for SetLangString control flags.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LangString</span></code></a></p></td>
+<td><p>A class to encapsulate a string with its language information.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
+<dt class="sig sig-object py" id="langstring.Controller">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><a class="headerlink" href="#langstring.Controller" title="Link to this definition"></a></dt>
+<dd><p>Control class for managing configuration flags, designed to be non-instantiable.</p>
+<p>This class uses class methods to set and retrieve configuration flags for language classes’ behavior, ensuring a
+consistent global configuration state. It is made non-instantiable by using the NonInstantiable metaclass,
+emphasizing its role as a static configuration manager rather than an object to be instantiated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DEFAULT_FLAGS</strong> (<em>dict</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>, </em><em>bool</em><em>]</em>) – The default state of each flag.</p></li>
+<li><p><strong>flags</strong> (<em>dict</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>, </em><em>bool</em><em>]</em>) – Stores the current state of each flag.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.Controller.DEFAULT_FLAGS">
+<span class="sig-name descname"><span class="pre">DEFAULT_FLAGS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.Controller.DEFAULT_FLAGS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.Controller.flags">
+<span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.Controller.flags" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.Controller.set_flag">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.set_flag" title="Link to this definition"></a></dt>
+<dd><p>Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.</p>
+<p>If a GlobalFlag is set, it also sets the corresponding flags in LangStringFlag, SetLangStringFlag,
+and MultiLangStringFlag to the same state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag to be set, either an instance of one of the flag enums.</p></li>
+<li><p><strong>state</strong> (<em>bool</em>) – Setting this to True or False will enable or disable the flag, respectively.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums, or if ‘state’ is not a Boolean.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.Controller.get_flag">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.get_flag" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the current state of a specified configuration flag.</p>
+<p>Available for GlobalFlag, LangString, SetLangString, or MultiLangString.</p>
+<p>This class method provides a way to access the state of a flag globally for both LangString and
+MultiLangString classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>langstring.flags.GlobalFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>langstring.flags.LangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>langstring.flags.SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>langstring.flags.MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be retrieved,</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<p>either an instance of LangStringFlag or MultiLangStringFlag.
+:type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+:return: The current state of the flag.
+:rtype: bool
+:raises TypeError: If ‘flag’ is not a member of LangStringFlag or MultiLangStringFlag.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.Controller.get_flags">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.get_flags" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the current state of all configuration flags.</p>
+<p>Available for GlobalFlag, LangString, SetLangString, or MultiLangString.</p>
+<p>This class method provides a way to access the states of all flags globally for both LangString and
+MultiLangString classes. It returns a copy of the flags dictionary, ensuring that the original data is not
+modified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary mapping each flag to its boolean state, either for LangStringFlag or MultiLangStringFlag.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[Union[<a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag">GlobalFlag</a>, <a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag">LangStringFlag</a>, <a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag">SetLangStringFlag</a>, <a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag">MultiLangStringFlag</a>], bool]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.Controller.print_flag">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.print_flag" title="Link to this definition"></a></dt>
+<dd><p>Print the current state of a specific configuration flag.</p>
+<p>This class method prints the state of the specified flag to the console. It is useful for checking the state of
+an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be printed.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Note:</dt><dd><p>This method is typically used for debugging or quick monitoring, to display the state of a specific flag.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.Controller.print_flags">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.print_flags" title="Link to this definition"></a></dt>
+<dd><p>Print the current state of configuration flags in alphabetical order.</p>
+<p>If a flag type is specified, only flags of that type are printed.
+If no flag type is specified, all flags are printed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>Type</em><em>]</em>) – The type of flags to print (e.g., GlobalFlag, LangStringFlag).
+If None, all flags are printed.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.Controller.reset_flag">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.reset_flag" title="Link to this definition"></a></dt>
+<dd><p>Reset a specific flag to its default value.</p>
+<p>If the flag is of type GlobalFlag, reset all equivalent flags of other types.
+E.g., reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT,
+LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>langstring.flags.GlobalFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>langstring.flags.LangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>langstring.flags.SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>langstring.flags.MultiLangStringFlag</em></a><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.Controller.reset_flags">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">GlobalFlag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.reset_flags" title="Link to this definition"></a></dt>
+<dd><p>Reset all flags of a specific type to their default values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>type</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="langstring.GlobalFlag">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">GlobalFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.GlobalFlag" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumeration for global control flags.</p>
+<p>This enum defines various flags that can be used to configure the behavior of all classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DEFINED_TEXT</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘text’ of all classes.</p></li>
+<li><p><strong>ENSURE_ANY_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘lang’ of all classes.</p></li>
+<li><p><strong>VALID_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a valid language code string for all classes’ field ‘lang’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.DEFINED_TEXT">
+<span class="sig-name descname"><span class="pre">DEFINED_TEXT</span></span><a class="headerlink" href="#langstring.GlobalFlag.DEFINED_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.DEFINED_LANG">
+<span class="sig-name descname"><span class="pre">DEFINED_LANG</span></span><a class="headerlink" href="#langstring.GlobalFlag.DEFINED_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.STRIP_TEXT">
+<span class="sig-name descname"><span class="pre">STRIP_TEXT</span></span><a class="headerlink" href="#langstring.GlobalFlag.STRIP_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.STRIP_LANG">
+<span class="sig-name descname"><span class="pre">STRIP_LANG</span></span><a class="headerlink" href="#langstring.GlobalFlag.STRIP_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.LOWERCASE_LANG">
+<span class="sig-name descname"><span class="pre">LOWERCASE_LANG</span></span><a class="headerlink" href="#langstring.GlobalFlag.LOWERCASE_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.VALID_LANG">
+<span class="sig-name descname"><span class="pre">VALID_LANG</span></span><a class="headerlink" href="#langstring.GlobalFlag.VALID_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.PRINT_WITH_QUOTES">
+<span class="sig-name descname"><span class="pre">PRINT_WITH_QUOTES</span></span><a class="headerlink" href="#langstring.GlobalFlag.PRINT_WITH_QUOTES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.PRINT_WITH_LANG">
+<span class="sig-name descname"><span class="pre">PRINT_WITH_LANG</span></span><a class="headerlink" href="#langstring.GlobalFlag.PRINT_WITH_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.GlobalFlag.METHODS_MATCH_TYPES">
+<span class="sig-name descname"><span class="pre">METHODS_MATCH_TYPES</span></span><a class="headerlink" href="#langstring.GlobalFlag.METHODS_MATCH_TYPES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="langstring.LangStringFlag">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">LangStringFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangStringFlag" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumeration for LangString control flags.</p>
+<p>This enum defines various flags that can be used to configure the behavior of the LangString class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DEFINED_TEXT</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘text’ of a LangString.</p></li>
+<li><p><strong>ENSURE_ANY_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘lang’ of a LangString.</p></li>
+<li><p><strong>VALID_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a valid language code string for the LangString’s field ‘lang’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.DEFINED_TEXT">
+<span class="sig-name descname"><span class="pre">DEFINED_TEXT</span></span><a class="headerlink" href="#langstring.LangStringFlag.DEFINED_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.DEFINED_LANG">
+<span class="sig-name descname"><span class="pre">DEFINED_LANG</span></span><a class="headerlink" href="#langstring.LangStringFlag.DEFINED_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.STRIP_TEXT">
+<span class="sig-name descname"><span class="pre">STRIP_TEXT</span></span><a class="headerlink" href="#langstring.LangStringFlag.STRIP_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.STRIP_LANG">
+<span class="sig-name descname"><span class="pre">STRIP_LANG</span></span><a class="headerlink" href="#langstring.LangStringFlag.STRIP_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.LOWERCASE_LANG">
+<span class="sig-name descname"><span class="pre">LOWERCASE_LANG</span></span><a class="headerlink" href="#langstring.LangStringFlag.LOWERCASE_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.VALID_LANG">
+<span class="sig-name descname"><span class="pre">VALID_LANG</span></span><a class="headerlink" href="#langstring.LangStringFlag.VALID_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.PRINT_WITH_QUOTES">
+<span class="sig-name descname"><span class="pre">PRINT_WITH_QUOTES</span></span><a class="headerlink" href="#langstring.LangStringFlag.PRINT_WITH_QUOTES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.PRINT_WITH_LANG">
+<span class="sig-name descname"><span class="pre">PRINT_WITH_LANG</span></span><a class="headerlink" href="#langstring.LangStringFlag.PRINT_WITH_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.LangStringFlag.METHODS_MATCH_TYPES">
+<span class="sig-name descname"><span class="pre">METHODS_MATCH_TYPES</span></span><a class="headerlink" href="#langstring.LangStringFlag.METHODS_MATCH_TYPES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="langstring.MultiLangStringFlag">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangStringFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangStringFlag" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumeration for MultiLangString control flags.</p>
+<p>This enum defines various flags that can be used to configure the behavior of the MultiLangString class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DEFINED_TEXT</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘text’ of a MultiLangString.</p></li>
+<li><p><strong>ENSURE_ANY_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘lang’ of a MultiLangString.</p></li>
+<li><p><strong>VALID_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a valid language code string for the MultiLangString’s field ‘lang’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.DEFINED_TEXT">
+<span class="sig-name descname"><span class="pre">DEFINED_TEXT</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.DEFINED_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.DEFINED_LANG">
+<span class="sig-name descname"><span class="pre">DEFINED_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.DEFINED_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.STRIP_TEXT">
+<span class="sig-name descname"><span class="pre">STRIP_TEXT</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.STRIP_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.STRIP_LANG">
+<span class="sig-name descname"><span class="pre">STRIP_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.STRIP_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.LOWERCASE_LANG">
+<span class="sig-name descname"><span class="pre">LOWERCASE_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.LOWERCASE_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.VALID_LANG">
+<span class="sig-name descname"><span class="pre">VALID_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.VALID_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">SetLangStringFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangStringFlag" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumeration for SetLangString control flags.</p>
+<p>This enum defines various flags that can be used to configure the behavior of the SetLangString class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DEFINED_TEXT</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘text’ of a SetLangString.</p></li>
+<li><p><strong>ENSURE_ANY_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘lang’ of a SetLangString.</p></li>
+<li><p><strong>VALID_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a valid language code string for the SetLangString’s field ‘lang’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.DEFINED_TEXT">
+<span class="sig-name descname"><span class="pre">DEFINED_TEXT</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.DEFINED_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.DEFINED_LANG">
+<span class="sig-name descname"><span class="pre">DEFINED_LANG</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.DEFINED_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.STRIP_TEXT">
+<span class="sig-name descname"><span class="pre">STRIP_TEXT</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.STRIP_TEXT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.STRIP_LANG">
+<span class="sig-name descname"><span class="pre">STRIP_LANG</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.STRIP_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.LOWERCASE_LANG">
+<span class="sig-name descname"><span class="pre">LOWERCASE_LANG</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.LOWERCASE_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.VALID_LANG">
+<span class="sig-name descname"><span class="pre">VALID_LANG</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.VALID_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.PRINT_WITH_LANG">
+<span class="sig-name descname"><span class="pre">PRINT_WITH_LANG</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.PRINT_WITH_LANG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="langstring.SetLangStringFlag.METHODS_MATCH_TYPES">
+<span class="sig-name descname"><span class="pre">METHODS_MATCH_TYPES</span></span><a class="headerlink" href="#langstring.SetLangStringFlag.METHODS_MATCH_TYPES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="langstring.LangString">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">LangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="utils/validation_base/index.html#langstring.utils.validation_base.Validator" title="langstring.utils.validation_base.Validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.validation_base.Validator</span></code></a></p>
-<p>A class to encapsulate a string with its language information.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">LangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString" title="Link to this definition"></a></dt>
+<dd><p>A class to encapsulate a string with its language information.</p>
 <p>This class provides functionality to associate a text string with a language tag, offering methods for string
 representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
 from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.</p>
@@ -164,58 +552,673 @@ from the Controller class, which can enforce non-empty text, valid language tags
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The text string.</p></li>
-<li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language tag of the text, or None if not specified.</p></li>
+<li><p><strong>lang</strong> (<em>str</em>) – The language tag of the text.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>text</strong> (<em>str</em>) – </p></li>
-<li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>lang</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.LangString._get_control_and_flags_type">
-<span class="sig-name descname"><span class="pre">_get_control_and_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString._get_control_and_flags_type" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the control class and its corresponding flags enumeration used in the LangString class.</p>
-<p>This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
-that are used for configuring and validating the LangString instances. It is essential for the functioning of
-the Validator methods, which rely on these control settings.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="langstring.LangString.text">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#langstring.LangString.text" title="Link to this definition"></a></dt>
+<dd><p>Getter for text.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A tuple containing the Controller class and the LangStringFlag enumeration.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[type[<a class="reference internal" href="#langstring.Controller" title="langstring.Controller">Controller</a>], type[<a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag">LangStringFlag</a>]]</p>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="langstring.LangString.lang">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lang</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#langstring.LangString.lang" title="Link to this definition"></a></dt>
+<dd><p>Getter for lang.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.LangString.to_string">
-<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.to_string" title="Link to this definition"></a></dt>
-<dd><p>Convert the LangString object to a string representation.</p>
-<p>This method is a convenience wrapper for the __str__ method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The string representation of the LangString object, including the language tag if present.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="sig sig-object py" id="langstring.LangString.capitalize">
+<span class="sig-name descname"><span class="pre">capitalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.capitalize" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.LangString.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__str__" title="Link to this definition"></a></dt>
-<dd><p>Define the string representation of the LangString object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The string representation of the LangString object. Format: ‘“text”&#64;lang’ or ‘text’ if lang is None.</p>
+<dt class="sig sig-object py" id="langstring.LangString.casefold">
+<span class="sig-name descname"><span class="pre">casefold</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.casefold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.center">
+<span class="sig-name descname"><span class="pre">center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillchar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.center" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>int</em>) – </p></li>
+<li><p><strong>fillchar</strong> (<em>str</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.endswith">
+<span class="sig-name descname"><span class="pre">endswith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suffix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.endswith" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>suffix</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.expandtabs">
+<span class="sig-name descname"><span class="pre">expandtabs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tabsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.expandtabs" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tabsize</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.find">
+<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.find" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.format" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.format_map">
+<span class="sig-name descname"><span class="pre">format_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.format_map" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mapping</strong> (<em>dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.index">
+<span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.index" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isalnum">
+<span class="sig-name descname"><span class="pre">isalnum</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isalnum" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isalpha">
+<span class="sig-name descname"><span class="pre">isalpha</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isalpha" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isascii">
+<span class="sig-name descname"><span class="pre">isascii</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isascii" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isdecimal">
+<span class="sig-name descname"><span class="pre">isdecimal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isdecimal" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isdigit">
+<span class="sig-name descname"><span class="pre">isdigit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isdigit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isidentifier">
+<span class="sig-name descname"><span class="pre">isidentifier</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isidentifier" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.islower">
+<span class="sig-name descname"><span class="pre">islower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.islower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isnumeric">
+<span class="sig-name descname"><span class="pre">isnumeric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isnumeric" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isprintable">
+<span class="sig-name descname"><span class="pre">isprintable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isprintable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isspace">
+<span class="sig-name descname"><span class="pre">isspace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isspace" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.istitle">
+<span class="sig-name descname"><span class="pre">istitle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.istitle" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.isupper">
+<span class="sig-name descname"><span class="pre">isupper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isupper" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.join">
+<span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.join" title="Link to this definition"></a></dt>
+<dd><p>Join an iterable with the text of the LangString.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iterable</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.ljust">
+<span class="sig-name descname"><span class="pre">ljust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillchar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.ljust" title="Link to this definition"></a></dt>
+<dd><p>Left justify the text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>int</em>) – </p></li>
+<li><p><strong>fillchar</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.lower">
+<span class="sig-name descname"><span class="pre">lower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.lower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.lstrip">
+<span class="sig-name descname"><span class="pre">lstrip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.lstrip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.partition">
+<span class="sig-name descname"><span class="pre">partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.partition" title="Link to this definition"></a></dt>
+<dd><p>Partition the text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sep</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.replace">
+<span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.replace" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>old</strong> (<em>str</em>) – </p></li>
+<li><p><strong>new</strong> (<em>str</em>) – </p></li>
+<li><p><strong>count</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.removeprefix">
+<span class="sig-name descname"><span class="pre">removeprefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.removeprefix" title="Link to this definition"></a></dt>
+<dd><p>Remove the specified prefix from the LangString’s text.</p>
+<p>If the text starts with the prefix string, return a new LangString with the prefix string removed.
+Otherwise, return a copy of the original LangString.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prefix</strong> (<em>str</em>) – The prefix to remove from the text.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with the prefix removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.removesuffix">
+<span class="sig-name descname"><span class="pre">removesuffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suffix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.removesuffix" title="Link to this definition"></a></dt>
+<dd><p>Remove the specified suffix from the LangString’s text.</p>
+<p>If the text ends with the suffix string, return a new LangString with the suffix string removed.
+Otherwise, return a copy of the original LangString.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>suffix</strong> (<em>str</em>) – The suffix to remove from the text.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with the suffix removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.rfind">
+<span class="sig-name descname"><span class="pre">rfind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rfind" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.rindex">
+<span class="sig-name descname"><span class="pre">rindex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rindex" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.rjust">
+<span class="sig-name descname"><span class="pre">rjust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillchar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rjust" title="Link to this definition"></a></dt>
+<dd><p>Right justify the text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>int</em>) – </p></li>
+<li><p><strong>fillchar</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.rpartition">
+<span class="sig-name descname"><span class="pre">rpartition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rpartition" title="Link to this definition"></a></dt>
+<dd><p>Partition the text from the right.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sep</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.rsplit">
+<span class="sig-name descname"><span class="pre">rsplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rsplit" title="Link to this definition"></a></dt>
+<dd><p>Split the text from the right.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sep</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>maxsplit</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.rstrip">
+<span class="sig-name descname"><span class="pre">rstrip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rstrip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.split" title="Link to this definition"></a></dt>
+<dd><p>Split the text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sep</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>maxsplit</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.splitlines">
+<span class="sig-name descname"><span class="pre">splitlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keepends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.splitlines" title="Link to this definition"></a></dt>
+<dd><p>Split the text into lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keepends</strong> (<em>bool</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.startswith">
+<span class="sig-name descname"><span class="pre">startswith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.startswith" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prefix</strong> (<em>str</em>) – </p></li>
+<li><p><strong>start</strong> (<em>int</em>) – </p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.strip">
+<span class="sig-name descname"><span class="pre">strip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.strip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.swapcase">
+<span class="sig-name descname"><span class="pre">swapcase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.swapcase" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.title">
+<span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.title" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.translate">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.translate" title="Link to this definition"></a></dt>
+<dd><p>Translate the text using a translation table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.upper">
+<span class="sig-name descname"><span class="pre">upper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.upper" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.zfill">
+<span class="sig-name descname"><span class="pre">zfill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.zfill" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>width</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__add__">
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__add__" title="Link to this definition"></a></dt>
+<dd><p>Add another LangString or a string to this LangString.</p>
+<p>The operation can only be performed if:
+- Both are LangString objects with the same language tag.
+- The other is a string, which will be concatenated to the text of this LangString.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><em>str</em><em>]</em>) – The LangString or string to add.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with the concatenated text.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – If the objects are not compatible for addition.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__contains__">
+<span class="sig-name descname"><span class="pre">__contains__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__contains__" title="Link to this definition"></a></dt>
+<dd><p>Check if a substring exists within the LangString’s text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -229,10 +1232,52 @@ the Validator methods, which rely on these control settings.</p>
 <dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – Another object to compare with.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if ‘other’ is a LangString object with the same text and language tag, False otherwise.</p>
+<dd class="field-even"><p></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__ge__">
+<span class="sig-name descname"><span class="pre">__ge__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__ge__" title="Link to this definition"></a></dt>
+<dd><p>Check if this LangString is greater than or equal to another str or LangString object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__getitem__" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a substring or a reversed string from the LangString’s text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>slice</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__gt__">
+<span class="sig-name descname"><span class="pre">__gt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__gt__" title="Link to this definition"></a></dt>
+<dd><p>Check if this LangString is greater than another LangString object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -240,10 +1285,10 @@ the Validator methods, which rely on these control settings.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__hash__">
 <span class="sig-name descname"><span class="pre">__hash__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__hash__" title="Link to this definition"></a></dt>
-<dd><p>Generate a hash value for a LangString object.</p>
+<dd><p>Generate a hash new_text for a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The hash value of the LangString object, based on its text and language tag.</p>
+<dd class="field-odd"><p>The hash new_text of the LangString object, based on its text and language tag.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
@@ -251,593 +1296,208 @@ the Validator methods, which rely on these control settings.</p>
 </dl>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="langstring.Controller">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><a class="headerlink" href="#langstring.Controller" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="utils/controls_base/index.html#langstring.utils.controls_base.ControlBase" title="langstring.utils.controls_base.ControlBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.controls_base.ControlBase</span></code></a></p>
-<p>Control class for managing LangString configuration flags, designed to be non-instantiable.</p>
-<p>This class uses class methods to set and retrieve configuration flags for LangString behavior, ensuring a
-consistent global configuration state. It is made non-instantiable by using the NonInstantiable metaclass,
-emphasizing its role as a static configuration manager rather than an object to be instantiated.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_flags</strong> (<em>dict</em><em>[</em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><em>bool</em><em>]</em>) – Stores the state of each LangStringFlag.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.Controller._flags">
-<span class="sig-name descname"><span class="pre">_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><span class="pre">LangStringFlag</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.Controller._flags" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.Controller._get_flags_type">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller._get_flags_type" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the control class and its corresponding flags enumeration used in the LangString class.</p>
-<p>This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
-that are used for configuring and validating the LangString instances. It is essential for the functioning of
-the Validator methods, which rely on these control settings.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The LangStringFlag enumeration.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>type[<a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag">LangStringFlag</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="langstring.LangStringFlag">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">LangStringFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangStringFlag" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>Enumeration for LangString control flags.</p>
-<p>This enum defines various flags that can be used to configure the behavior of the LangString class.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ENSURE_TEXT</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘text’ of a LangString.</p></li>
-<li><p><strong>ENSURE_ANY_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘lang’ of a LangString.</p></li>
-<li><p><strong>ENSURE_VALID_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a valid language code string for the LangString’s field ‘lang’.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.LangStringFlag.ENSURE_TEXT">
-<span class="sig-name descname"><span class="pre">ENSURE_TEXT</span></span><a class="headerlink" href="#langstring.LangStringFlag.ENSURE_TEXT" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.LangStringFlag.ENSURE_ANY_LANG">
-<span class="sig-name descname"><span class="pre">ENSURE_ANY_LANG</span></span><a class="headerlink" href="#langstring.LangStringFlag.ENSURE_ANY_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.LangStringFlag.ENSURE_VALID_LANG">
-<span class="sig-name descname"><span class="pre">ENSURE_VALID_LANG</span></span><a class="headerlink" href="#langstring.LangStringFlag.ENSURE_VALID_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="langstring.MultiLangString">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pref_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="utils/validation_base/index.html#langstring.utils.validation_base.Validator" title="langstring.utils.validation_base.Validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.validation_base.Validator</span></code></a></p>
-<p>A class for managing multilingual text strings with various language tags.</p>
-<p>Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
-operations like adding, removing, and retrieving language strings in multiple languages.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mls_dict</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A dictionary representing the internal structure of the MultiLangString.</p></li>
-<li><p><strong>pref_lang</strong> (<em>str</em>) – The preferred language for this MultiLangString. Defaults to “en”.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>mls_dict</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>pref_lang</strong> (<em>str</em>) – </p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="langstring.MultiLangString.preferred_lang">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preferred_lang</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#langstring.MultiLangString.preferred_lang" title="Link to this definition"></a></dt>
-<dd><p>Get the preferred language for this MultiLangString.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The preferred language as a string.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString._get_control_and_flags_type">
-<span class="sig-name descname"><span class="pre">_get_control_and_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString._get_control_and_flags_type" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.</p>
-<p>This method provides the specific control class (MultiLangStringControl) and the flags enumeration
-(MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
-It is essential for the functioning of the Validator methods, which rely on these control settings.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[type[<a class="reference internal" href="#langstring.MultiLangStringControl" title="langstring.MultiLangStringControl">MultiLangStringControl</a>], type[<a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag">MultiLangStringFlag</a>]]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString._validate_langstring_arg">
-<span class="sig-name descname"><span class="pre">_validate_langstring_arg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString._validate_langstring_arg" title="Link to this definition"></a></dt>
-<dd><p>Private helper method to validate if the argument is a LangString.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__iadd__">
+<span class="sig-name descname"><span class="pre">__iadd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__iadd__" title="Link to this definition"></a></dt>
+<dd><p>Implement in-place addition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>Any</em>) – Argument to be checked.</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><em>str</em><em>]</em>) – </p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If the passed argument is not an instance of LangString.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__imul__">
+<span class="sig-name descname"><span class="pre">__imul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__imul__" title="Link to this definition"></a></dt>
+<dd><p>Implement in-place multiplication.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__iter__" title="Link to this definition"></a></dt>
+<dd><p>Enable iteration over the text part of the LangString.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p>Iterator[str]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.add_entry">
-<span class="sig-name descname"><span class="pre">add_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.add_entry" title="Link to this definition"></a></dt>
-<dd><p>Add a text entry to the MultiLangString under a specified language.</p>
-<p>Validates the provided text and language against the current flag settings before adding. If the specified
-language does not exist in the mls_dict, a new set for that language is created. The text is then added to
-this set. If the language already exists, the text is added to the existing set for that language.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__le__">
+<span class="sig-name descname"><span class="pre">__le__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__le__" title="Link to this definition"></a></dt>
+<dd><p>Check if this LangString is less than or equal to another LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>) – The text to be added to the MultiLangString.</p></li>
-<li><p><strong>lang</strong> (<em>str</em>) – The language under which the text should be added. If not specified, defaults to an empty string.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.add_langstring">
-<span class="sig-name descname"><span class="pre">add_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.add_langstring" title="Link to this definition"></a></dt>
-<dd><p>Add a LangString to the MultiLangString.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__len__" title="Link to this definition"></a></dt>
+<dd><p>Return the length of the LangString’s text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__lt__">
+<span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__lt__" title="Link to this definition"></a></dt>
+<dd><p>Check if this LangString is less than another LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>langstring</strong> (<a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a>) – The LangString object to be added, representing a text in a specific language.</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.remove_entry">
-<span class="sig-name descname"><span class="pre">remove_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_entry" title="Link to this definition"></a></dt>
-<dd><p>Remove a single entry from the set of a given language key in the dictionary.</p>
-<p>If the specified language key exists and the text is in its set, the text is removed. If this results in an
-empty set for the language, the language key is also removed from the dictionary.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__mul__">
+<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__mul__" title="Link to this definition"></a></dt>
+<dd><p>Repeat the LangString’s text a specified number of times.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>) – The text to be removed.</p></li>
-<li><p><strong>lang</strong> (<em>str</em>) – The language key from which the text should be removed.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>other</strong> (<em>int</em>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.remove_lang">
-<span class="sig-name descname"><span class="pre">remove_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_lang" title="Link to this definition"></a></dt>
-<dd><p>Remove all entries of a given language from the dictionary.</p>
-<p>If the specified language key exists, it and all its associated texts are removed from the dictionary.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__ne__">
+<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__ne__" title="Link to this definition"></a></dt>
+<dd><p>Check inequality of this LangString with another object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to be removed along with all its texts.</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_langstring">
-<span class="sig-name descname"><span class="pre">get_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_langstring" title="Link to this definition"></a></dt>
-<dd><p>Retrieve a LangString object for a specific text and language.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__radd__">
+<span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__radd__" title="Link to this definition"></a></dt>
+<dd><p>Handle concatenation when LangString is on the right side of the ‘+’ operator.</p>
+<p>This method allows a string to be added to the beginning of the LangString’s text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>) – The text of the LangString.</p></li>
-<li><p><strong>lang</strong> (<em>str</em>) – The language of the LangString.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>other</strong> (<em>str</em>) – The string to be concatenated to the beginning of this LangString’s text.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A LangString object with the specified text and language.</p>
+<dd class="field-even"><p>A new LangString with the concatenated text.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the text/lang combination is not in mls_dict.</p>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘other’ is not a string.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_langstrings_lang">
-<span class="sig-name descname"><span class="pre">get_langstrings_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_langstrings_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve a list of LangStrings for a given language.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__repr__" title="Link to this definition"></a></dt>
+<dd><p>Return an unambiguous string representation of the LangString.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.__rmul__">
+<span class="sig-name descname"><span class="pre">__rmul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__rmul__" title="Link to this definition"></a></dt>
+<dd><p>Implement right multiplication.</p>
+<p>This method is called for the reversed operation of multiplication, i.e., when LangString is on the right side.
+It is typically used for repeating the LangString’s text a specified number of times.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language for which to retrieve LangStrings.</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>int</em>) – The number of times the LangString’s text should be repeated.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of LangStrings, each containing a single entry for the specified language.
-Returns an empty list if the specified language is not in mls_dict.</p>
+<dd class="field-even"><p>A new LangString with the text repeated.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_langstrings_all">
-<span class="sig-name descname"><span class="pre">get_langstrings_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_langstrings_all" title="Link to this definition"></a></dt>
-<dd><p>Retrieve a list of all LangStrings in mls_dict.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of LangStrings, each representing a single entry from mls_dict.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_langstrings_pref_lang">
-<span class="sig-name descname"><span class="pre">get_langstrings_pref_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_langstrings_pref_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve a list of LangStrings for the preferred language.</p>
-<p>This method returns LangStrings for the language specified in the pref_lang attribute. If pref_lang is not
-a key in mls_dict, an empty list is returned.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of LangStrings for the preferred language.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_strings_lang">
-<span class="sig-name descname"><span class="pre">get_strings_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_strings_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve all text entries for a specific language.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to retrieve entries for.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of text entries for the specified language.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_strings_pref_lang">
-<span class="sig-name descname"><span class="pre">get_strings_pref_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_strings_pref_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve all text entries for the preferred language.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of text entries for the specified language.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_strings_all">
-<span class="sig-name descname"><span class="pre">get_strings_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_strings_all" title="Link to this definition"></a></dt>
-<dd><p>Retrieve all text entries across all languages.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of all text entries.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_strings_langstring_lang">
-<span class="sig-name descname"><span class="pre">get_strings_langstring_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_strings_langstring_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve all text entries for a specific language, formatted as ‘“text”&#64;lang’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to retrieve entries for.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of formatted text entries for the specified language.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_strings_langstring_pref_lang">
-<span class="sig-name descname"><span class="pre">get_strings_langstring_pref_lang</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_strings_langstring_pref_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve all text entries for the preferred language, formatted as ‘“text”&#64;lang’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of formatted text entries for the specified language.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.get_strings_langstring_all">
-<span class="sig-name descname"><span class="pre">get_strings_langstring_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.get_strings_langstring_all" title="Link to this definition"></a></dt>
-<dd><p>Retrieve all text entries across all languages, formatted as ‘“text”&#64;lang’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of formatted text entries for all languages.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.len_entries_all">
-<span class="sig-name descname"><span class="pre">len_entries_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.len_entries_all" title="Link to this definition"></a></dt>
-<dd><p>Calculate the total number of elements across all sets in the dictionary.</p>
-<p>Iterates through each set in the dictionary values and sums their lengths to get the total number of elements.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The total number of elements across all sets.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.len_entries_lang">
-<span class="sig-name descname"><span class="pre">len_entries_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.len_entries_lang" title="Link to this definition"></a></dt>
-<dd><p>Calculate the number of entries of a given language in the dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The number of entries for a given language in a MultiLangString.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.len_langs">
-<span class="sig-name descname"><span class="pre">len_langs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.len_langs" title="Link to this definition"></a></dt>
-<dd><p>Calculate the number of keys (languages) in the dictionary.</p>
-<p>This method returns the count of distinct keys in the dictionary, which represents the number of languages.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The number of keys in the dictionary.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.__repr__">
-<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.__repr__" title="Link to this definition"></a></dt>
-<dd><p>Return a detailed string representation of the MultiLangString object.</p>
-<p>This method provides a more verbose string representation of the MultiLangString, which includes the full
-dictionary of language strings and the preferred language, making it useful for debugging.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A detailed string representation of the MultiLangString.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.__str__" title="Link to this definition"></a></dt>
-<dd><p>Return a string representation of the MultiLangString, including language tags.</p>
-<p>This method provides a concise string representation of the MultiLangString, listing each text entry with its
-associated language tag.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A string representation of the MultiLangString with language tags.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.__eq__">
-<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.__eq__" title="Link to this definition"></a></dt>
-<dd><p>Check equality of this MultiLangString with another MultiLangString.</p>
-<p>Equality is determined based on the mls_dict attribute. The pref_lang attribute is not considered in the
-equality check.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – Another object to compare with.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if both MultiLangString objects have the same mls_dict, False otherwise.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.__hash__">
-<span class="sig-name descname"><span class="pre">__hash__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.__hash__" title="Link to this definition"></a></dt>
-<dd><p>Generate a hash value for a MultiLangString object.</p>
-<p>The hash is computed based on the ‘mls_dict’ attribute of the MultiLangString. This approach ensures that
-MultiLangString objects with the same content will have the same hash value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The hash value of the MultiLangString object.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString._validate_mls_dict">
-<span class="sig-name descname"><span class="pre">_validate_mls_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString._validate_mls_dict" title="Link to this definition"></a></dt>
-<dd><p>Validate all elements in the provided mls_dict against the current flags’ values.</p>
-<p>Iterates through each language and its associated texts in the mls_dict, applying validation methods to
-ensure compliance with the current flag settings.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mls_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – A dictionary where keys are language codes and values are sets of text entries.</p>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If any text or language in mls_dict does not comply with the expected types.</p></li>
-<li><p><strong>ValueError</strong> – If any text or language in mls_dict violates the rules set by the control flags.</p></li>
-</ul>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘other’ is not an integer.</p>
 </dd>
 </dl>
 </dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="langstring.MultiLangStringControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangStringControl</span></span><a class="headerlink" href="#langstring.MultiLangStringControl" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="utils/controls_base/index.html#langstring.utils.controls_base.ControlBase" title="langstring.utils.controls_base.ControlBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">langstring.utils.controls_base.ControlBase</span></code></a></p>
-<p>A control class for managing the configuration flags of MultiLangString instances.</p>
-<p>Inherits from ControlBase and utilizes a static approach to manage global settings that influence the behavior
-of MultiLangString objects. This class is non-instantiable and operates through class methods to ensure a
-consistent configuration state across all MultiLangString instances.</p>
-<p>The class manages flags defined in the MultiLangStringFlag enumeration, allowing for dynamic control over
-various aspects of MultiLangString behavior, such as text validation and language code enforcement.</p>
-<dl class="simple">
-<dt>Usage:</dt><dd><p>MultiLangStringControl is used to configure global settings for MultiLangString instances. It affects how
-these instances validate and process multilingual text data based on the set flags.</p>
-</dd>
-<dt>Example:</dt><dd><p>MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
-is_valid_lang_enforced = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_VALID_LANG)
-print(f”ENSURE_VALID_LANG flag is set to {is_valid_lang_enforced}.”)</p>
-</dd>
-<dt>Note:</dt><dd><p>As a static configuration manager, MultiLangStringControl should not be instantiated. It is designed to
-provide a centralized way to manage settings for all MultiLangString instances.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_flags</strong> (<em>dict</em><em>[</em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>, </em><em>bool</em><em>]</em>) – A class-level dictionary storing the state of each configuration flag for MultiLangString instances.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.MultiLangStringControl._flags">
-<span class="sig-name descname"><span class="pre">_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><span class="pre">MultiLangStringFlag</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.MultiLangStringControl._flags" title="Link to this definition"></a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangStringControl._get_flags_type">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_flags_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangStringControl._get_flags_type" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the control class and its corresponding flags enumeration used in the LangString class.</p>
-<p>This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
-that are used for configuring and validating the LangString instances. It is essential for the functioning of
-the Validator methods, which rely on these control settings.</p>
+<dt class="sig sig-object py" id="langstring.LangString.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__str__" title="Link to this definition"></a></dt>
+<dd><p>Define the string representation of the LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The LangStringFlag enumeration.</p>
+<dd class="field-odd"><p>The string representation of the LangString object.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>type[<a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag">MultiLangStringFlag</a>]</p>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="langstring.MultiLangStringFlag">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">MultiLangStringFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangStringFlag" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>Enumeration for LangString control flags.</p>
-<p>This enum defines various flags that can be used to configure the behavior of the LangString class.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString._validate_match_types">
+<span class="sig-name descname"><span class="pre">_validate_match_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString._validate_match_types" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ENSURE_TEXT</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘text’ of a LangString.</p></li>
-<li><p><strong>ENSURE_ANY_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a non-empty string for the field ‘lang’ of a LangString.</p></li>
-<li><p><strong>ENSURE_VALID_LANG</strong> (<em>Enum</em>) – Makes mandatory the use of a valid language code string for the LangString’s field ‘lang’.</p></li>
+<li><p><strong>other</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – </p></li>
+<li><p><strong>overwrite_strict</strong> (<em>bool</em>) – </p></li>
 </ul>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
 </dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.ENSURE_TEXT">
-<span class="sig-name descname"><span class="pre">ENSURE_TEXT</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.ENSURE_TEXT" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.ENSURE_ANY_LANG">
-<span class="sig-name descname"><span class="pre">ENSURE_ANY_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.ENSURE_ANY_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.ENSURE_VALID_LANG">
-<span class="sig-name descname"><span class="pre">ENSURE_VALID_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.ENSURE_VALID_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString._validate_match_langs">
+<span class="sig-name descname"><span class="pre">_validate_match_langs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString._validate_match_langs" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

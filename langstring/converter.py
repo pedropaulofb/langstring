@@ -156,12 +156,7 @@ class Converter(metaclass=NonInstantiable):
         if not isinstance(input, SetLangString):
             raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
 
-        return_list = []
-
-        for text in input.texts:
-            return_list.append(LangString(text=text, lang=input.lang))
-
-        return return_list
+        return input.to_langstrings()
 
     @staticmethod
     def from_setlangstring_to_multilangstring(input: SetLangString) -> MultiLangString:

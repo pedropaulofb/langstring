@@ -26,10 +26,12 @@ Submodules
    :titlesonly:
    :maxdepth: 1
 
+   controller/index.rst
+   converter/index.rst
+   flags/index.rst
    langstring/index.rst
-   langstring_control/index.rst
    multilangstring/index.rst
-   multilangstring_control/index.rst
+   setlangstring/index.rst
 
 
 Package Contents
@@ -40,112 +42,184 @@ Classes
 
 .. autoapisummary::
 
-   langstring.LangString
    langstring.Controller
+   langstring.GlobalFlag
    langstring.LangStringFlag
-   langstring.MultiLangString
-   langstring.MultiLangStringControl
    langstring.MultiLangStringFlag
+   langstring.SetLangStringFlag
+   langstring.LangString
 
-
-
-
-.. py:class:: LangString(text = '', lang = None)
-
-
-   Bases: :py:obj:`langstring.utils.validation_base.Validator`
-
-   A class to encapsulate a string with its language information.
-
-   This class provides functionality to associate a text string with a language tag, offering methods for string
-   representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
-   from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.
-
-   :ivar text: The text string.
-   :vartype text: Optional[str]
-   :ivar lang: The language tag of the text, or None if not specified.
-   :vartype lang: Optional[str]
-
-   .. py:method:: _get_control_and_flags_type()
-
-      Retrieve the control class and its corresponding flags enumeration used in the LangString class.
-
-      This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
-      that are used for configuring and validating the LangString instances. It is essential for the functioning of
-      the Validator methods, which rely on these control settings.
-
-      :return: A tuple containing the Controller class and the LangStringFlag enumeration.
-      :rtype: tuple[type[Controller], type[LangStringFlag]]
-
-
-   .. py:method:: to_string()
-
-      Convert the LangString object to a string representation.
-
-      This method is a convenience wrapper for the __str__ method.
-
-      :return: The string representation of the LangString object, including the language tag if present.
-      :rtype: str
-
-
-   .. py:method:: __str__()
-
-      Define the string representation of the LangString object.
-
-      :return: The string representation of the LangString object. Format: '"text"@lang' or 'text' if lang is None.
-      :rtype: str
-
-
-   .. py:method:: __eq__(other)
-
-      Check equality of this LangString with another object.
-
-      :param other: Another object to compare with.
-      :type other: object
-      :return: True if 'other' is a LangString object with the same text and language tag, False otherwise.
-      :rtype: bool
-
-
-   .. py:method:: __hash__()
-
-      Generate a hash value for a LangString object.
-
-      :return: The hash value of the LangString object, based on its text and language tag.
-      :rtype: int
 
 
 
 .. py:class:: Controller
 
 
-   Bases: :py:obj:`langstring.utils.controls_base.ControlBase`
+   Control class for managing configuration flags, designed to be non-instantiable.
 
-   Control class for managing LangString configuration flags, designed to be non-instantiable.
-
-   This class uses class methods to set and retrieve configuration flags for LangString behavior, ensuring a
+   This class uses class methods to set and retrieve configuration flags for language classes' behavior, ensuring a
    consistent global configuration state. It is made non-instantiable by using the NonInstantiable metaclass,
    emphasizing its role as a static configuration manager rather than an object to be instantiated.
 
-   :cvar _flags: Stores the state of each LangStringFlag.
-   :vartype _flags: dict[LangStringFlag, bool]
+   :cvar DEFAULT_FLAGS: The default state of each flag.
+   :vartype DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
+   :cvar flags: Stores the current state of each flag.
+   :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
 
-   .. py:attribute:: _flags
-      :type: dict[LangStringFlag, bool]
+   .. py:attribute:: DEFAULT_FLAGS
+      :type: dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
 
       
 
-   .. py:method:: _get_flags_type()
+   .. py:attribute:: flags
+      :type: dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
+
+      
+
+   .. py:method:: set_flag(flag, state)
       :classmethod:
 
-      Retrieve the control class and its corresponding flags enumeration used in the LangString class.
+      Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.
 
-      This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
-      that are used for configuring and validating the LangString instances. It is essential for the functioning of
-      the Validator methods, which rely on these control settings.
+      If a GlobalFlag is set, it also sets the corresponding flags in LangStringFlag, SetLangStringFlag,
+      and MultiLangStringFlag to the same state.
 
-      :return: The LangStringFlag enumeration.
-      :rtype: type[LangStringFlag]
+      :param flag: The flag to be set, either an instance of one of the flag enums.
+      :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+      :param state: Setting this to True or False will enable or disable the flag, respectively.
+      :type state: bool
+      :raises TypeError: If 'flag' is not an instance of one of the flag enums, or if 'state' is not a Boolean.
 
+
+   .. py:method:: get_flag(flag)
+      :classmethod:
+
+      Retrieve the current state of a specified configuration flag.
+
+      Available for GlobalFlag, LangString, SetLangString, or MultiLangString.
+
+      This class method provides a way to access the state of a flag globally for both LangString and
+      MultiLangString classes.
+
+      :param flag: The flag whose state is to be retrieved,
+      either an instance of LangStringFlag or MultiLangStringFlag.
+      :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+      :return: The current state of the flag.
+      :rtype: bool
+      :raises TypeError: If 'flag' is not a member of LangStringFlag or MultiLangStringFlag.
+
+
+   .. py:method:: get_flags()
+      :classmethod:
+
+      Retrieve the current state of all configuration flags.
+
+      Available for GlobalFlag, LangString, SetLangString, or MultiLangString.
+
+      This class method provides a way to access the states of all flags globally for both LangString and
+      MultiLangString classes. It returns a copy of the flags dictionary, ensuring that the original data is not
+      modified.
+
+      :return: A dictionary mapping each flag to its boolean state, either for LangStringFlag or MultiLangStringFlag.
+      :rtype: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
+
+
+   .. py:method:: print_flag(flag)
+      :classmethod:
+
+      Print the current state of a specific configuration flag.
+
+      This class method prints the state of the specified flag to the console. It is useful for checking the state of
+      an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.
+
+      :param flag: The flag whose state is to be printed.
+      :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+
+      Note:
+          This method is typically used for debugging or quick monitoring, to display the state of a specific flag.
+
+
+   .. py:method:: print_flags(flag_type = None)
+      :classmethod:
+
+      Print the current state of configuration flags in alphabetical order.
+
+      If a flag type is specified, only flags of that type are printed.
+      If no flag type is specified, all flags are printed.
+
+      :param flag_type: The type of flags to print (e.g., GlobalFlag, LangStringFlag).
+                        If None, all flags are printed.
+      :type flag_type: Optional[Type]
+
+
+   .. py:method:: reset_flag(flag)
+      :classmethod:
+
+      Reset a specific flag to its default value.
+
+      If the flag is of type GlobalFlag, reset all equivalent flags of other types.
+      E.g., reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT,
+      LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.
+
+
+   .. py:method:: reset_flags(flag_type = GlobalFlag)
+      :classmethod:
+
+      Reset all flags of a specific type to their default values.
+
+
+
+.. py:class:: GlobalFlag(*args, **kwds)
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   Enumeration for global control flags.
+
+   This enum defines various flags that can be used to configure the behavior of all classes.
+
+   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of all classes.
+   :vartype DEFINED_TEXT: Enum
+   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of all classes.
+   :vartype ENSURE_ANY_LANG: Enum
+   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
+   :vartype VALID_LANG: Enum
+
+   .. py:attribute:: DEFINED_TEXT
+
+      
+
+   .. py:attribute:: DEFINED_LANG
+
+      
+
+   .. py:attribute:: STRIP_TEXT
+
+      
+
+   .. py:attribute:: STRIP_LANG
+
+      
+
+   .. py:attribute:: LOWERCASE_LANG
+
+      
+
+   .. py:attribute:: VALID_LANG
+
+      
+
+   .. py:attribute:: PRINT_WITH_QUOTES
+
+      
+
+   .. py:attribute:: PRINT_WITH_LANG
+
+      
+
+   .. py:attribute:: METHODS_MATCH_TYPES
+
+      
 
 
 .. py:class:: LangStringFlag(*args, **kwds)
@@ -157,345 +231,48 @@ Classes
 
    This enum defines various flags that can be used to configure the behavior of the LangString class.
 
-   :cvar ENSURE_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a LangString.
-   :vartype ENSURE_TEXT: Enum
+   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a LangString.
+   :vartype DEFINED_TEXT: Enum
    :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a LangString.
    :vartype ENSURE_ANY_LANG: Enum
-   :cvar ENSURE_VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
-   :vartype ENSURE_VALID_LANG: Enum
+   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
+   :vartype VALID_LANG: Enum
 
-   .. py:attribute:: ENSURE_TEXT
-
-      
-
-   .. py:attribute:: ENSURE_ANY_LANG
+   .. py:attribute:: DEFINED_TEXT
 
       
 
-   .. py:attribute:: ENSURE_VALID_LANG
+   .. py:attribute:: DEFINED_LANG
 
       
 
-
-.. py:class:: MultiLangString(mls_dict = None, pref_lang = 'en')
-
-
-   Bases: :py:obj:`langstring.utils.validation_base.Validator`
-
-   A class for managing multilingual text strings with various language tags.
-
-   Utilizes a global control strategy set in MultiLangStringControl to handle duplicate language tags. Supports
-   operations like adding, removing, and retrieving language strings in multiple languages.
-
-   :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
-   :vartype mls_dict: Optional[dict[str, set[str]]]
-   :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
-   :vartype pref_lang: str
-
-   .. py:property:: preferred_lang
-      :type: str
-
-      Get the preferred language for this MultiLangString.
-
-      :return: The preferred language as a string.
-
-
-   .. py:method:: _get_control_and_flags_type()
-
-      Retrieve the control class and its corresponding flags enumeration used in the MultiLangString class.
-
-      This method provides the specific control class (MultiLangStringControl) and the flags enumeration
-      (MultiLangStringFlag) that are used for configuring and validating the MultiLangString instances.
-      It is essential for the functioning of the Validator methods, which rely on these control settings.
-
-      :return: A tuple containing the MultiLangStringControl class and the MultiLangStringFlag enumeration.
-      :rtype: tuple[type[MultiLangStringControl], type[MultiLangStringFlag]]
-
-
-   .. py:method:: _validate_langstring_arg(arg)
-
-      Private helper method to validate if the argument is a LangString.
-
-      :param arg: Argument to be checked.
-      :type arg: Any
-      :raises TypeError: If the passed argument is not an instance of LangString.
-
-
-   .. py:method:: add_entry(text, lang = '')
-
-      Add a text entry to the MultiLangString under a specified language.
-
-      Validates the provided text and language against the current flag settings before adding. If the specified
-      language does not exist in the mls_dict, a new set for that language is created. The text is then added to
-      this set. If the language already exists, the text is added to the existing set for that language.
-
-      :param text: The text to be added to the MultiLangString.
-      :type text: str
-      :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
-      :type lang: str
-
-
-   .. py:method:: add_langstring(langstring)
-
-      Add a LangString to the MultiLangString.
-
-      :param langstring: The LangString object to be added, representing a text in a specific language.
-      :type langstring: LangString
-
-
-   .. py:method:: remove_entry(text, lang)
-
-      Remove a single entry from the set of a given language key in the dictionary.
-
-      If the specified language key exists and the text is in its set, the text is removed. If this results in an
-      empty set for the language, the language key is also removed from the dictionary.
-
-      :param text: The text to be removed.
-      :type text: str
-      :param lang: The language key from which the text should be removed.
-      :type lang: str
-
-
-   .. py:method:: remove_lang(lang)
-
-      Remove all entries of a given language from the dictionary.
-
-      If the specified language key exists, it and all its associated texts are removed from the dictionary.
-
-      :param lang: The language key to be removed along with all its texts.
-      :type lang: str
-
-
-   .. py:method:: get_langstring(text, lang)
-
-      Retrieve a LangString object for a specific text and language.
-
-      :param text: The text of the LangString.
-      :type text: str
-      :param lang: The language of the LangString.
-      :type lang: str
-      :return: A LangString object with the specified text and language.
-      :rtype: LangString
-      :raises ValueError: If the text/lang combination is not in mls_dict.
-
-
-   .. py:method:: get_langstrings_lang(lang)
-
-      Retrieve a list of LangStrings for a given language.
-
-      :param lang: The language for which to retrieve LangStrings.
-      :type lang: str
-      :return: A list of LangStrings, each containing a single entry for the specified language.
-               Returns an empty list if the specified language is not in mls_dict.
-      :rtype: list[LangString]
-
-
-   .. py:method:: get_langstrings_all()
-
-      Retrieve a list of all LangStrings in mls_dict.
-
-      :return: A list of LangStrings, each representing a single entry from mls_dict.
-      :rtype: list[LangString]
-
-
-   .. py:method:: get_langstrings_pref_lang()
-
-      Retrieve a list of LangStrings for the preferred language.
-
-      This method returns LangStrings for the language specified in the pref_lang attribute. If pref_lang is not
-      a key in mls_dict, an empty list is returned.
-
-      :return: A list of LangStrings for the preferred language.
-      :rtype: list[LangString]
-
-
-   .. py:method:: get_strings_lang(lang)
-
-      Retrieve all text entries for a specific language.
-
-      :param lang: The language key to retrieve entries for.
-      :type lang: str
-      :return: A list of text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_pref_lang()
-
-      Retrieve all text entries for the preferred language.
-
-      :return: A list of text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_all()
-
-      Retrieve all text entries across all languages.
-
-      :return: A list of all text entries.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_langstring_lang(lang)
-
-      Retrieve all text entries for a specific language, formatted as '"text"@lang'.
-
-      :param lang: The language key to retrieve entries for.
-      :type lang: str
-      :return: A list of formatted text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_langstring_pref_lang()
-
-      Retrieve all text entries for the preferred language, formatted as '"text"@lang'.
-
-      :return: A list of formatted text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_langstring_all()
-
-      Retrieve all text entries across all languages, formatted as '"text"@lang'.
-
-      :return: A list of formatted text entries for all languages.
-      :rtype: list[str]
-
-
-   .. py:method:: len_entries_all()
-
-      Calculate the total number of elements across all sets in the dictionary.
-
-      Iterates through each set in the dictionary values and sums their lengths to get the total number of elements.
-
-      :return: The total number of elements across all sets.
-      :rtype: int
-
-
-   .. py:method:: len_entries_lang(lang)
-
-      Calculate the number of entries of a given language in the dictionary.
-
-      :return: The number of entries for a given language in a MultiLangString.
-      :rtype: int
-
-
-   .. py:method:: len_langs()
-
-      Calculate the number of keys (languages) in the dictionary.
-
-      This method returns the count of distinct keys in the dictionary, which represents the number of languages.
-
-      :return: The number of keys in the dictionary.
-      :rtype: int
-
-
-   .. py:method:: __repr__()
-
-      Return a detailed string representation of the MultiLangString object.
-
-      This method provides a more verbose string representation of the MultiLangString, which includes the full
-      dictionary of language strings and the preferred language, making it useful for debugging.
-
-      :return: A detailed string representation of the MultiLangString.
-      :rtype: str
-
-
-   .. py:method:: __str__()
-
-      Return a string representation of the MultiLangString, including language tags.
-
-      This method provides a concise string representation of the MultiLangString, listing each text entry with its
-      associated language tag.
-
-      :return: A string representation of the MultiLangString with language tags.
-      :rtype: str
-
-
-   .. py:method:: __eq__(other)
-
-      Check equality of this MultiLangString with another MultiLangString.
-
-      Equality is determined based on the mls_dict attribute. The pref_lang attribute is not considered in the
-      equality check.
-
-      :param other: Another object to compare with.
-      :type other: object
-      :return: True if both MultiLangString objects have the same mls_dict, False otherwise.
-      :rtype: bool
-
-
-   .. py:method:: __hash__()
-
-      Generate a hash value for a MultiLangString object.
-
-      The hash is computed based on the 'mls_dict' attribute of the MultiLangString. This approach ensures that
-      MultiLangString objects with the same content will have the same hash value.
-
-      :return: The hash value of the MultiLangString object.
-      :rtype: int
-
-
-   .. py:method:: _validate_mls_dict(mls_dict)
-
-      Validate all elements in the provided mls_dict against the current flags' values.
-
-      Iterates through each language and its associated texts in the mls_dict, applying validation methods to
-      ensure compliance with the current flag settings.
-
-      :param mls_dict: A dictionary where keys are language codes and values are sets of text entries.
-      :type mls_dict: dict[str, set[str]]
-      :raises TypeError: If any text or language in mls_dict does not comply with the expected types.
-      :raises ValueError: If any text or language in mls_dict violates the rules set by the control flags.
-
-
-
-.. py:class:: MultiLangStringControl
-
-
-   Bases: :py:obj:`langstring.utils.controls_base.ControlBase`
-
-   A control class for managing the configuration flags of MultiLangString instances.
-
-   Inherits from ControlBase and utilizes a static approach to manage global settings that influence the behavior
-   of MultiLangString objects. This class is non-instantiable and operates through class methods to ensure a
-   consistent configuration state across all MultiLangString instances.
-
-   The class manages flags defined in the MultiLangStringFlag enumeration, allowing for dynamic control over
-   various aspects of MultiLangString behavior, such as text validation and language code enforcement.
-
-   Usage:
-       MultiLangStringControl is used to configure global settings for MultiLangString instances. It affects how
-       these instances validate and process multilingual text data based on the set flags.
-
-   Example:
-       MultiLangStringControl.set_flag(MultiLangStringFlag.ENSURE_VALID_LANG, True)
-       is_valid_lang_enforced = MultiLangStringControl.get_flag(MultiLangStringFlag.ENSURE_VALID_LANG)
-       print(f"ENSURE_VALID_LANG flag is set to {is_valid_lang_enforced}.")
-
-   Note:
-       As a static configuration manager, MultiLangStringControl should not be instantiated. It is designed to
-       provide a centralized way to manage settings for all MultiLangString instances.
-
-   :cvar _flags: A class-level dictionary storing the state of each configuration flag for MultiLangString instances.
-   :vartype _flags: dict[MultiLangStringFlag, bool]
-
-   .. py:attribute:: _flags
-      :type: dict[MultiLangStringFlag, bool]
+   .. py:attribute:: STRIP_TEXT
 
       
 
-   .. py:method:: _get_flags_type()
-      :classmethod:
+   .. py:attribute:: STRIP_LANG
 
-      Retrieve the control class and its corresponding flags enumeration used in the LangString class.
+      
 
-      This method provides the specific control class (Controller) and the flags enumeration (LangStringFlag)
-      that are used for configuring and validating the LangString instances. It is essential for the functioning of
-      the Validator methods, which rely on these control settings.
+   .. py:attribute:: LOWERCASE_LANG
 
-      :return: The LangStringFlag enumeration.
-      :rtype: type[MultiLangStringFlag]
+      
 
+   .. py:attribute:: VALID_LANG
+
+      
+
+   .. py:attribute:: PRINT_WITH_QUOTES
+
+      
+
+   .. py:attribute:: PRINT_WITH_LANG
+
+      
+
+   .. py:attribute:: METHODS_MATCH_TYPES
+
+      
 
 
 .. py:class:: MultiLangStringFlag(*args, **kwds)
@@ -503,27 +280,421 @@ Classes
 
    Bases: :py:obj:`enum.Enum`
 
-   Enumeration for LangString control flags.
+   Enumeration for MultiLangString control flags.
 
-   This enum defines various flags that can be used to configure the behavior of the LangString class.
+   This enum defines various flags that can be used to configure the behavior of the MultiLangString class.
 
-   :cvar ENSURE_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a LangString.
-   :vartype ENSURE_TEXT: Enum
-   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a LangString.
+   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a MultiLangString.
+   :vartype DEFINED_TEXT: Enum
+   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a MultiLangString.
    :vartype ENSURE_ANY_LANG: Enum
-   :cvar ENSURE_VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
-   :vartype ENSURE_VALID_LANG: Enum
+   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
+   :vartype VALID_LANG: Enum
 
-   .. py:attribute:: ENSURE_TEXT
-
-      
-
-   .. py:attribute:: ENSURE_ANY_LANG
+   .. py:attribute:: DEFINED_TEXT
 
       
 
-   .. py:attribute:: ENSURE_VALID_LANG
+   .. py:attribute:: DEFINED_LANG
 
       
+
+   .. py:attribute:: STRIP_TEXT
+
+      
+
+   .. py:attribute:: STRIP_LANG
+
+      
+
+   .. py:attribute:: LOWERCASE_LANG
+
+      
+
+   .. py:attribute:: VALID_LANG
+
+      
+
+
+.. py:class:: SetLangStringFlag(*args, **kwds)
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   Enumeration for SetLangString control flags.
+
+   This enum defines various flags that can be used to configure the behavior of the SetLangString class.
+
+   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a SetLangString.
+   :vartype DEFINED_TEXT: Enum
+   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a SetLangString.
+   :vartype ENSURE_ANY_LANG: Enum
+   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the SetLangString's field 'lang'.
+   :vartype VALID_LANG: Enum
+
+   .. py:attribute:: DEFINED_TEXT
+
+      
+
+   .. py:attribute:: DEFINED_LANG
+
+      
+
+   .. py:attribute:: STRIP_TEXT
+
+      
+
+   .. py:attribute:: STRIP_LANG
+
+      
+
+   .. py:attribute:: LOWERCASE_LANG
+
+      
+
+   .. py:attribute:: VALID_LANG
+
+      
+
+   .. py:attribute:: PRINT_WITH_LANG
+
+      
+
+   .. py:attribute:: METHODS_MATCH_TYPES
+
+      
+
+
+.. py:class:: LangString(text = '', lang = '')
+
+
+   A class to encapsulate a string with its language information.
+
+   This class provides functionality to associate a text string with a language tag, offering methods for string
+   representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
+   from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.
+
+   :ivar text: The text string.
+   :vartype text: Optional[str]
+   :ivar lang: The language tag of the text.
+   :vartype lang: str
+
+   .. py:property:: text
+      :type: str
+
+      Getter for text.
+
+
+   .. py:property:: lang
+      :type: str
+
+      Getter for lang.
+
+
+   .. py:method:: capitalize()
+
+
+   .. py:method:: casefold()
+
+
+   .. py:method:: center(width, fillchar = ' ')
+
+
+   .. py:method:: count(sub, start = 0, end = None)
+
+
+   .. py:method:: endswith(suffix, start = 0, end = None)
+
+
+   .. py:method:: expandtabs(tabsize = 8)
+
+
+   .. py:method:: find(sub, start = 0, end = None)
+
+
+   .. py:method:: format(*args, **kwargs)
+
+
+   .. py:method:: format_map(mapping)
+
+
+   .. py:method:: index(sub, start = 0, end = None)
+
+
+   .. py:method:: isalnum()
+
+
+   .. py:method:: isalpha()
+
+
+   .. py:method:: isascii()
+
+
+   .. py:method:: isdecimal()
+
+
+   .. py:method:: isdigit()
+
+
+   .. py:method:: isidentifier()
+
+
+   .. py:method:: islower()
+
+
+   .. py:method:: isnumeric()
+
+
+   .. py:method:: isprintable()
+
+
+   .. py:method:: isspace()
+
+
+   .. py:method:: istitle()
+
+
+   .. py:method:: isupper()
+
+
+   .. py:method:: join(iterable)
+
+      Join an iterable with the text of the LangString.
+
+
+   .. py:method:: ljust(width, fillchar = ' ')
+
+      Left justify the text.
+
+
+   .. py:method:: lower()
+
+
+   .. py:method:: lstrip(chars = None)
+
+
+   .. py:method:: partition(sep)
+
+      Partition the text.
+
+
+   .. py:method:: replace(old, new, count = -1)
+
+
+   .. py:method:: removeprefix(prefix)
+
+      Remove the specified prefix from the LangString's text.
+
+      If the text starts with the prefix string, return a new LangString with the prefix string removed.
+      Otherwise, return a copy of the original LangString.
+
+      :param prefix: The prefix to remove from the text.
+      :return: A new LangString with the prefix removed.
+
+
+   .. py:method:: removesuffix(suffix)
+
+      Remove the specified suffix from the LangString's text.
+
+      If the text ends with the suffix string, return a new LangString with the suffix string removed.
+      Otherwise, return a copy of the original LangString.
+
+      :param suffix: The suffix to remove from the text.
+      :return: A new LangString with the suffix removed.
+
+
+   .. py:method:: rfind(sub, start = 0, end = None)
+
+
+   .. py:method:: rindex(sub, start = 0, end = None)
+
+
+   .. py:method:: rjust(width, fillchar = ' ')
+
+      Right justify the text.
+
+
+   .. py:method:: rpartition(sep)
+
+      Partition the text from the right.
+
+
+   .. py:method:: rsplit(sep = None, maxsplit = -1)
+
+      Split the text from the right.
+
+
+   .. py:method:: rstrip(chars = None)
+
+
+   .. py:method:: split(sep = None, maxsplit = -1)
+
+      Split the text.
+
+
+   .. py:method:: splitlines(keepends = False)
+
+      Split the text into lines.
+
+
+   .. py:method:: startswith(prefix, start = 0, end = None)
+
+
+   .. py:method:: strip(chars = None)
+
+
+   .. py:method:: swapcase()
+
+
+   .. py:method:: title()
+
+
+   .. py:method:: translate(table)
+
+      Translate the text using a translation table.
+
+
+   .. py:method:: upper()
+
+
+   .. py:method:: zfill(width)
+
+
+   .. py:method:: __add__(other)
+
+      Add another LangString or a string to this LangString.
+
+      The operation can only be performed if:
+      - Both are LangString objects with the same language tag.
+      - The other is a string, which will be concatenated to the text of this LangString.
+
+      :param other: The LangString or string to add.
+      :return: A new LangString with the concatenated text.
+      :raises TypeError: If the objects are not compatible for addition.
+
+
+   .. py:method:: __contains__(item)
+
+      Check if a substring exists within the LangString's text.
+
+
+   .. py:method:: __eq__(other)
+
+      Check equality of this LangString with another object.
+
+      :param other: Another object to compare with.
+      :type other: object
+      :return:
+      :rtype: bool
+
+
+   .. py:method:: __ge__(other)
+
+      Check if this LangString is greater than or equal to another str or LangString object.
+
+
+   .. py:method:: __getitem__(key)
+
+      Retrieve a substring or a reversed string from the LangString's text.
+
+
+   .. py:method:: __gt__(other)
+
+      Check if this LangString is greater than another LangString object.
+
+
+   .. py:method:: __hash__()
+
+      Generate a hash new_text for a LangString object.
+
+      :return: The hash new_text of the LangString object, based on its text and language tag.
+      :rtype: int
+
+
+   .. py:method:: __iadd__(other)
+
+      Implement in-place addition.
+
+
+   .. py:method:: __imul__(other)
+
+      Implement in-place multiplication.
+
+
+   .. py:method:: __iter__()
+
+      Enable iteration over the text part of the LangString.
+
+
+   .. py:method:: __le__(other)
+
+      Check if this LangString is less than or equal to another LangString object.
+
+
+   .. py:method:: __len__()
+
+      Return the length of the LangString's text.
+
+
+   .. py:method:: __lt__(other)
+
+      Check if this LangString is less than another LangString object.
+
+
+   .. py:method:: __mul__(other)
+
+      Repeat the LangString's text a specified number of times.
+
+
+   .. py:method:: __ne__(other)
+
+      Check inequality of this LangString with another object.
+
+
+   .. py:method:: __radd__(other)
+
+      Handle concatenation when LangString is on the right side of the '+' operator.
+
+      This method allows a string to be added to the beginning of the LangString's text.
+
+      :param other: The string to be concatenated to the beginning of this LangString's text.
+      :type other: str
+      :return: A new LangString with the concatenated text.
+      :rtype: LangString
+      :raises TypeError: If 'other' is not a string.
+
+
+   .. py:method:: __repr__()
+
+      Return an unambiguous string representation of the LangString.
+
+
+   .. py:method:: __rmul__(other)
+
+      Implement right multiplication.
+
+      This method is called for the reversed operation of multiplication, i.e., when LangString is on the right side.
+      It is typically used for repeating the LangString's text a specified number of times.
+
+      :param other: The number of times the LangString's text should be repeated.
+      :type other: int
+      :return: A new LangString with the text repeated.
+      :rtype: LangString
+      :raises TypeError: If 'other' is not an integer.
+
+
+   .. py:method:: __str__()
+
+      Define the string representation of the LangString object.
+
+      :return: The string representation of the LangString object.
+      :rtype: str
+
+
+   .. py:method:: _validate_match_types(other, overwrite_strict = False)
+
+
+   .. py:method:: _validate_match_langs(other)
+
 
 

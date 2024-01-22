@@ -68,6 +68,10 @@ class MultiLangString:
         self.mls_dict: dict[str, set[str]] = mls_dict if (mls_dict is not None) else {}
         self.pref_lang: str = pref_lang
 
+    # ---------------------------------------------
+    # Getters and Setters
+    # ---------------------------------------------
+
     @property
     def mls_dict(self) -> dict[str, set[str]]:
         """Getter for texts."""
@@ -106,6 +110,10 @@ class MultiLangString:
         :type new_pref_lang: str
         """
         self._pref_lang = Validator.validate_text(MultiLangStringFlag, new_pref_lang)
+
+    # ---------------------------------------------
+    # MultiLangString's Regular Methods
+    # ---------------------------------------------
 
     def add(self, input: Union[str, LangString, SetLangString]):
         # TODO: to be implemented.
@@ -170,6 +178,10 @@ class MultiLangString:
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
 
+    def remove_langstring(self, langstring: LangString) -> None:
+        # TODO: To be implemented
+        pass
+
     def remove_lang(self, lang: str) -> None:
         """Remove all entries of a given language from the dictionary.
 
@@ -182,6 +194,8 @@ class MultiLangString:
             del self.mls_dict[lang]
         else:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
+
+    # TODO: create discard (do not raise error). See implementation for SLSs.
 
     def clear_empty(self) -> None:
         empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
@@ -270,34 +284,20 @@ class MultiLangString:
         """
         return len(self.mls_dict)
 
-    def __repr__(self) -> str:
-        """Return a detailed string representation of the MultiLangString object.
+    def is_entry(self, text: str, lang: str) -> bool:
+        return lang in self.mls_dict and text in self.mls_dict[lang]
 
-        This method provides a more verbose string representation of the MultiLangString, which includes the full
-        dictionary of language strings and the preferred language, making it useful for debugging.
+    def to_langstrings(self) -> list[LangString]:
+        # TODO: To be implemented
+        pass
 
-        :return: A detailed string representation of the MultiLangString.
-        :rtype: str
-        """
-        return f"MultiLangString({self.mls_dict}, pref_lang='{self.pref_lang}')"
+    def to_setlangstrings(self) -> list[SetLangString]:
+        # TODO: To be implemented
+        pass
 
-    def __str__(self) -> str:
-        """Return a string representation of the MultiLangString, including language tags.
-
-        This method provides a concise string representation of the MultiLangString, listing each text entry with its
-        associated language tag.
-
-        :return: A string representation of the MultiLangString with language tags.
-        :rtype: str
-        """
-        entries = []
-        for lang, texts in self.mls_dict.items():
-            for text in texts:
-                if lang:  # If there is a language tag
-                    entries.append(f'"{text}"@{lang}')
-                else:  # If there is no language tag
-                    entries.append(text)
-        return ", ".join(entries)
+    # ---------------------------------------------
+    # MultiLangString's Dunder Methods
+    # ---------------------------------------------
 
     def __eq__(self, other: object) -> bool:
         """Check equality of this MultiLangString with another MultiLangString.
@@ -327,5 +327,31 @@ class MultiLangString:
         hashable_mls_dict = tuple((lang, frozenset(texts)) for lang, texts in self.mls_dict.items())
         return hash(hashable_mls_dict)
 
-    def is_entry(self, text: str, lang: str) -> bool:
-        return lang in self.mls_dict and text in self.mls_dict[lang]
+    def __repr__(self) -> str:
+        """Return a detailed string representation of the MultiLangString object.
+
+        This method provides a more verbose string representation of the MultiLangString, which includes the full
+        dictionary of language strings and the preferred language, making it useful for debugging.
+
+        :return: A detailed string representation of the MultiLangString.
+        :rtype: str
+        """
+        return f"MultiLangString({self.mls_dict}, pref_lang='{self.pref_lang}')"
+
+    def __str__(self) -> str:
+        """Return a string representation of the MultiLangString, including language tags.
+
+        This method provides a concise string representation of the MultiLangString, listing each text entry with its
+        associated language tag.
+
+        :return: A string representation of the MultiLangString with language tags.
+        :rtype: str
+        """
+        entries = []
+        for lang, texts in self.mls_dict.items():
+            for text in texts:
+                if lang:  # If there is a language tag
+                    entries.append(f'"{text}"@{lang}')
+                else:  # If there is no language tag
+                    entries.append(text)
+        return ", ".join(entries)

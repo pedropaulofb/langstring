@@ -17,7 +17,7 @@ Submodules
    :titlesonly:
    :maxdepth: 1
 
-   controls_base/index.rst
-   validation_base/index.rst
+   non_instantiable/index.rst
+   validator/index.rst
 
 

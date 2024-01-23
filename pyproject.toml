@@ -17,8 +17,10 @@ packages = [{ include = "langstring" },
 "PyPi Project" = "https://pypi.org/project/langstring/"
 
 [tool.poetry.dependencies]
-langcodes = "^3.3.0"
 python = "^3.09"
+
+[tool.poetry.group.extras.dependencies]
+langcodes = "^3.3.0"
 
 [tool.poetry.group.dev.dependencies]
 # General

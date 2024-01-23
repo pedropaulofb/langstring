@@ -14,6 +14,7 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pedropaulofb/langstring/main.svg)](https://results.pre-commit.ci/latest/github/pedropaulofb/langstring/main)
 ![Website](https://img.shields.io/website/http/pedropaulofb.github.io/langstring.svg)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/pedropaulofb/langstring/code_testing.yml)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8328/badge)](https://www.bestpractices.dev/projects/8328)
 
 # LangString Python Library
 

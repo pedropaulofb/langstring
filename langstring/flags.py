@@ -15,15 +15,16 @@ class GlobalFlag(Enum):
     :vartype VALID_LANG: Enum
     """
 
-    DEFINED_TEXT = auto()
     DEFINED_LANG = auto()
-    STRIP_TEXT = auto()
-    STRIP_LANG = auto()
+    DEFINED_TEXT = auto()
+    ENFORCE_EXTRA_DEPEND = auto()
     LOWERCASE_LANG = auto()
-    VALID_LANG = auto()
-    PRINT_WITH_QUOTES = auto()
-    PRINT_WITH_LANG = auto()
     METHODS_MATCH_TYPES = auto()
+    PRINT_WITH_LANG = auto()
+    PRINT_WITH_QUOTES = auto()
+    STRIP_LANG = auto()
+    STRIP_TEXT = auto()
+    VALID_LANG = auto()
 
 
 class LangStringFlag(Enum):
@@ -39,15 +40,15 @@ class LangStringFlag(Enum):
     :vartype VALID_LANG: Enum
     """
 
-    DEFINED_TEXT = auto()
     DEFINED_LANG = auto()
-    STRIP_TEXT = auto()
-    STRIP_LANG = auto()
+    DEFINED_TEXT = auto()
     LOWERCASE_LANG = auto()
-    VALID_LANG = auto()
-    PRINT_WITH_QUOTES = auto()
-    PRINT_WITH_LANG = auto()
     METHODS_MATCH_TYPES = auto()
+    PRINT_WITH_LANG = auto()
+    PRINT_WITH_QUOTES = auto()
+    STRIP_LANG = auto()
+    STRIP_TEXT = auto()
+    VALID_LANG = auto()
 
 
 class SetLangStringFlag(Enum):
@@ -63,14 +64,15 @@ class SetLangStringFlag(Enum):
     :vartype VALID_LANG: Enum
     """
 
-    DEFINED_TEXT = auto()
     DEFINED_LANG = auto()
-    STRIP_TEXT = auto()
-    STRIP_LANG = auto()
+    DEFINED_TEXT = auto()
     LOWERCASE_LANG = auto()
-    VALID_LANG = auto()
-    PRINT_WITH_LANG = auto()
     METHODS_MATCH_TYPES = auto()
+    PRINT_WITH_LANG = auto()
+    PRINT_WITH_QUOTES = auto()
+    STRIP_LANG = auto()
+    STRIP_TEXT = auto()
+    VALID_LANG = auto()
 
 
 class MultiLangStringFlag(Enum):
@@ -88,9 +90,9 @@ class MultiLangStringFlag(Enum):
 
     # Applied to both lang and pref_lang attributes.
 
-    DEFINED_TEXT = auto()
     DEFINED_LANG = auto()
-    STRIP_TEXT = auto()
-    STRIP_LANG = auto()
+    DEFINED_TEXT = auto()
     LOWERCASE_LANG = auto()
+    STRIP_LANG = auto()
+    STRIP_TEXT = auto()
     VALID_LANG = auto()

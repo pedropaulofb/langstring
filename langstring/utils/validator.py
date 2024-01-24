@@ -24,6 +24,7 @@ import warnings
 from enum import Enum
 from typing import Optional
 
+from ..flags import GlobalFlag
 from ..controller import Controller
 from .non_instantiable import NonInstantiable
 
@@ -61,17 +62,21 @@ class Validator(metaclass=NonInstantiable):
         if Controller.get_flag(flag_type.VALID_LANG):
             try:
                 from langcodes import tag_is_valid
-
                 if not tag_is_valid(lang.casefold()):
                     raise ValueError(
                         f"{msg} '{flag_type.__name__}.VALID_LANG' is enabled. Expected valid language code."
                     )
-            except ImportError:
-                warnings.warn(
-                    "Language validation skipped. VALID_LANG functionality requires the 'langcodes' library. "
-                    "Install it with 'pip install langstring[extras]' to enable this feature.",
-                    UserWarning,
-                )
+            except ImportError as e:
+                if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
+                    error_message = str(e) + ". VALID_LANG functionality requires the 'langcodes' library. Install it with 'pip install langstring[extras]'."
+                    raise ImportError(error_message) from e
+                else:
+                        warnings.warn(
+                            "Language validation skipped. VALID_LANG functionality requires the 'langcodes' library. "
+                            "Install it with 'pip install langstring[extras]' to enable this feature.",
+                            UserWarning,
+                        )
+
 
         lang = lang if not Controller.get_flag(flag_type.STRIP_LANG) else lang.strip()
         return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.casefold()

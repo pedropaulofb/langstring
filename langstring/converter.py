@@ -37,6 +37,7 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def to_langstring(cls, input: Union[str, SetLangString, MultiLangString]) -> Union[LangString, list[LangString]]:
+        # TODO: Add TO_STRING
         """Convert a SetLangString or MultiLangString to a list of LangStrings.
 
         :param input: The SetLangString or MultiLangString to be converted.
@@ -61,6 +62,7 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def to_setlangstring(cls, input: Union[LangString, MultiLangString]) -> Union[SetLangString, list[SetLangString]]:
+        # TODO: Add TO_STRING
         """Convert a LangString or MultiLangString to a SetLangString or a list of SetLangStrings.
 
         :param input: The LangString or MultiLangString to be converted.
@@ -81,6 +83,7 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def to_multilangstring(cls, input: Union[set[str], list[str], LangString, SetLangString]) -> MultiLangString:
+        # TODO: Add TO_STRING
         """Convert a LangString or SetLangString to a MultiLangString.
 
         :param input: The LangString or SetLangString to be converted.
@@ -101,6 +104,13 @@ class Converter(metaclass=NonInstantiable):
         raise TypeError(
             f"Invalid input argument type. Expected str, LangString or SetLangString, got '{type(input).__name__}'."
         )
+
+
+    @staticmethod
+    def from_langstring_to_string(input: LangString) -> str:
+        if not isinstance(input, LangString):
+            raise TypeError(f"Invalid input argument type. Expected LangString, got '{type(input).__name__}'.")
+        return input.__str__()
 
     @staticmethod
     def from_langstring_to_setlangstring(input: LangString) -> SetLangString:
@@ -139,6 +149,18 @@ class Converter(metaclass=NonInstantiable):
 
         new_mls_dict: dict[str, set[str]] = {input.lang: {input.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
+
+    @staticmethod
+    def from_setlangstring_to_string(input: SetLangString) -> str:
+        if not isinstance(input, SetLangString):
+            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
+        return input.__str__()
+
+    @staticmethod
+    def from_setlangstring_to_strings(input: SetLangString) -> list[str]:
+        if not isinstance(input, SetLangString):
+            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
+        return input.to_strings()
 
     @staticmethod
     def from_setlangstring_to_langstrings(input: SetLangString) -> list[LangString]:

@@ -26,6 +26,7 @@ class Controller(metaclass=NonInstantiable):
         # Default values for GlobalFlags
         GlobalFlag.DEFINED_LANG: False,
         GlobalFlag.DEFINED_TEXT: False,
+        GlobalFlag.ENFORCE_EXTRA_DEPEND: False,
         GlobalFlag.LOWERCASE_LANG: False,
         GlobalFlag.METHODS_MATCH_TYPES: False,
         GlobalFlag.PRINT_WITH_LANG: True,
@@ -49,6 +50,7 @@ class Controller(metaclass=NonInstantiable):
         SetLangStringFlag.LOWERCASE_LANG: False,
         SetLangStringFlag.METHODS_MATCH_TYPES: False,
         SetLangStringFlag.PRINT_WITH_LANG: True,
+        SetLangStringFlag.PRINT_WITH_QUOTES: True,
         SetLangStringFlag.STRIP_LANG: False,
         SetLangStringFlag.STRIP_TEXT: False,
         SetLangStringFlag.VALID_LANG: False,

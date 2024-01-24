@@ -177,6 +177,15 @@ class SetLangString:
             langstrings.append(LangString(text=text, lang=self.lang))
         return langstrings
 
+    def to_strings(self) -> list[str]:
+        # TO BE TESTED
+        strings = []
+        for text in self.texts:
+            new_text = f'"{text}"' if Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES) else text
+            new_lang = f"@{self.lang}" if Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG) else ""
+            strings.append(f"{new_text}{new_lang}")
+        return strings
+
     # -------------------------------------------
     # Overwritten Set's Built-in Dunder Methods
     # -------------------------------------------

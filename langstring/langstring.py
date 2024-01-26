@@ -257,14 +257,13 @@ class LangString:
     # ---------------------------------------------
 
     def to_string(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> str:
-
         if not (isinstance(print_quotes, bool) and isinstance(separator, str) and isinstance(print_lang, bool)):
             raise TypeError("Invalid type received for LangString's to_string arguments.")
 
-        print_text = f'"{self.text}"' if print_quotes else self.text
-        print_lang = f"{separator}{self.lang}" if print_lang else ""
+        text_value: str = f'"{self.text}"' if print_quotes else f"{self.text}"
+        lang_value: str = f"{separator}{self.lang}" if print_lang else ""
 
-        return print_text + print_lang
+        return text_value + lang_value
 
     # ---------------------------------------------
     # Overwritten String's Built-in Dunder Methods
@@ -315,7 +314,6 @@ class LangString:
 
     def __ge__(self, other: object) -> bool:
         """Check if this LangString is greater than or equal to another str or LangString object."""
-
         self._validate_match_langs(other)  # remove diff langs
         self._validate_match_types(other)  # case strict is true, remove str
 
@@ -358,7 +356,6 @@ class LangString:
 
     def __iadd__(self, other: Union["LangString", str]) -> "LangString":
         """Implement in-place addition."""
-
         self._validate_match_types(other)
         self._validate_match_langs(other)
 
@@ -481,7 +478,7 @@ class LangString:
     # Private Methods
     # ---------------------------------------------
 
-    def _validate_match_types(self, other: Union[str, "LangString"], overwrite_strict: bool = False) -> None:
+    def _validate_match_types(self, other: Union[object, str, "LangString"], overwrite_strict: bool = False) -> None:
         strict = Controller.get_flag(LangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
 
         # If strict mode is enabled, only allow LangString type
@@ -490,7 +487,7 @@ class LangString:
                 f"Strict mode is enabled. Operand must be of type LangString, but got {type(other).__name__}."
             )
 
-    def _validate_match_langs(self, other: Union[str, "LangString"]) -> None:
+    def _validate_match_langs(self, other: object) -> None:
         # Check language compatibility for LangString type
         if isinstance(other, LangString) and self.lang.casefold() != other.lang.casefold():
             raise ValueError(

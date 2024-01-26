@@ -64,8 +64,7 @@ class Converter(metaclass=NonInstantiable):
             return cls.from_multilangstring_to_strings(input)
 
         raise TypeError(
-            f"Invalid input argument type. Expected SetLangString or MultiLangString, "
-            f"got '{type(input).__name__}'."
+            f"Invalid input argument type. Expected SetLangString or MultiLangString, " f"got '{type(input).__name__}'."
         )
 
     @classmethod
@@ -139,7 +138,6 @@ class Converter(metaclass=NonInstantiable):
     # Strings' Conversion Methods
     # ---------------------------------------------
 
-
     @staticmethod
     def from_string_to_langstring(input_string: str) -> LangString:
         """Convert a string into a LangString.
@@ -178,7 +176,6 @@ class Converter(metaclass=NonInstantiable):
             new_mls.add_langstring(cls.from_string_to_langstring(element))
 
         return new_mls
-
 
     # ---------------------------------------------
     # LangStrings' Conversion Methods
@@ -231,7 +228,6 @@ class Converter(metaclass=NonInstantiable):
 
         new_mls_dict: dict[str, set[str]] = {input.lang: {input.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
-
 
     def from_langstrings_to_multilangstring(input: LangString) -> SetLangString:
         # TODO: TO BE IMPLEMENTED
@@ -294,7 +290,6 @@ class Converter(metaclass=NonInstantiable):
     # MultiLangStrings' Conversion Methods
     # ---------------------------------------------
 
-
     @staticmethod
     def from_multilangstring_to_langstrings(input: MultiLangString) -> list[LangString]:
         """Convert a MultiLangString to a list of LangStrings.
@@ -335,5 +330,3 @@ class Converter(metaclass=NonInstantiable):
             return_list.append(SetLangString(texts=input.mls_dict[lang], lang=lang))
 
         return return_list
-
-

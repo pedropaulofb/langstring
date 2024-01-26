@@ -19,7 +19,7 @@ repos:
           - pre-push
       - id: pytest
         name: pytest ./tests
-        entry: pytest --no-header --no-summary --cov=langstring --cov-report=html ./tests
+        entry: pytest --disable-warnings --no-header --no-summary --cov=langstring --cov-report=html ./tests
         language: system
         pass_filenames: false
       - id: update_requirements

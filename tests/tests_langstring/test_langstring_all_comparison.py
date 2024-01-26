@@ -156,3 +156,56 @@ def test_string_methods_incompatible_language_comparison(test_case, method, stri
     else:
         with pytest.raises(ValueError, match="Incompatible languages"):
             getattr(lang_string1, method)(lang_string2)
+
+
+not_impl_test_cases = [
+    ["apple", "en", 123],  # int
+    ["apple", "en", 123.45],  # float
+    ["apple", "en", True],  # bool
+    ["apple", "en", ["apple"]],  # list
+    ["apple", "en", {"apple": 1}],  # dict
+]
+
+
+@pytest.mark.parametrize("test_case", not_impl_test_cases)
+@pytest.mark.parametrize("method", ["__eq__", "__ne__", "__ge__", "__gt__", "__le__", "__lt__"])
+def test_not_implemented_comparisons(test_case, method):
+    """Test the comparison methods of the LangString class with non-string and non-LangString objects.
+
+    :param test_case: A test case for the __eq__ and __ne__ methods.
+    :type test_case: list
+    :param method: The method to test (__eq__ or __ne__).
+    :type method: str
+    """
+    ls = LangString(
+        test_case[0], test_case[1]
+    )  # Create LangString from pos 0 and 1 from lists inside not_impl_test_cases
+    other = test_case[2]  # Get the object to compare from pos 2 from lists inside not_impl_test_cases
+    actual_result = getattr(ls, method)(other)  # Perform comparison between ls and other
+    assert actual_result is NotImplemented, f"{method} did not return NotImplemented for invalid comparison"
+
+
+cases_ls_string = [
+    ["apple", "en", "apple"],
+    ["apple", "en", "ap ple"],
+    ["apple", "en", " apple"],
+    ["apple", "en", "Apple"],
+    ["apple", "en", "APPLE"],
+]
+
+@pytest.mark.parametrize("test_case", cases_ls_string)
+@pytest.mark.parametrize("method", ["__eq__", "__ne__", "__ge__", "__gt__", "__le__", "__lt__"])
+def test_langstring_string_comparisons(test_case, method):
+    """Test the comparison methods of the LangString class with non-string and non-LangString objects.
+
+    :param test_case: A test case for the __eq__ and __ne__ methods.
+    :type test_case: list
+    :param method: The method to test (__eq__ or __ne__).
+    :type method: str
+    """
+    ls = LangString(
+        test_case[0], test_case[1]
+    )  # Create LangString from pos 0 and 1 from lists inside not_impl_test_cases
+    other = test_case[2]  # Get the object to compare from pos 2 from lists inside not_impl_test_cases
+    actual_result = getattr(ls, method)(other)  # Perform comparison between ls and other
+    assert actual_result in [True, False], f"{method} did return NotImplemented for invalid comparison"

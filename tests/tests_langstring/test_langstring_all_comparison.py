@@ -187,7 +187,7 @@ def test_not_implemented_comparisons(test_case, method):
 
 cases_ls_string = [
     ["apple", "en", "apple"],
-    ["apple", "en", "ap ple"],
+    ["apple", "en", "apple "],
     ["apple", "en", " apple"],
     ["apple", "en", "Apple"],
     ["apple", "en", "APPLE"],

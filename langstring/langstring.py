@@ -265,6 +265,27 @@ class LangString:
 
         return text_value + lang_value
 
+    def equals(self, other:Union[str,"LangString"])->bool:
+        if isinstance(other, str):
+            return self.equals_str(other)
+
+        if isinstance(other, LangString):
+            return self.equals_langstring(other)
+
+        raise TypeError(f"Operand must be of type 'str' or 'LangString', but got '{type(other).__name__}'.")
+
+    def equals_str(self, other:str)->bool:
+        if not isinstance(other,str):
+            raise TypeError(f"Operand must be of type 'str', but got '{type(other).__name__}'.")
+
+        return self.text == other
+
+    def equals_langstring(self, other:"LangString")->bool:
+        if not isinstance(other,LangString):
+            raise TypeError(f"Operand must be of type 'LangString', but got '{type(other).__name__}'.")
+
+        return self.text == other.text and self.lang.casefold() == other.lang.casefold()
+
     # ---------------------------------------------
     # Overwritten String's Built-in Dunder Methods
     # ---------------------------------------------

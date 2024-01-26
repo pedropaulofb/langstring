@@ -35,9 +35,41 @@ class Converter(metaclass=NonInstantiable):
     It is designed to be non-instantiable as it serves as a utility class with class methods only.
     """
 
+    # ---------------------------------------------
+    # General Conversion Methods
+    # ---------------------------------------------
+
+    @classmethod
+    def to_string(cls, input: Union[LangString, SetLangString, MultiLangString]) -> str:
+        if isinstance(input, LangString):
+            return cls.from_langstring_to_string(input)
+
+        if isinstance(input, SetLangString):
+            return cls.from_setlangstring_to_string(input)
+
+        if isinstance(input, MultiLangString):
+            return cls.from_multilangstring_to_string(input)
+
+        raise TypeError(
+            f"Invalid input argument type. Expected LangString, SetLangString or MultiLangString, "
+            f"got '{type(input).__name__}'."
+        )
+
+    @classmethod
+    def to_strings(cls, input: Union[SetLangString, MultiLangString]) -> list[str]:
+        if isinstance(input, SetLangString):
+            return cls.from_setlangstring_to_strings(input)
+
+        if isinstance(input, MultiLangString):
+            return cls.from_multilangstring_to_strings(input)
+
+        raise TypeError(
+            f"Invalid input argument type. Expected SetLangString or MultiLangString, "
+            f"got '{type(input).__name__}'."
+        )
+
     @classmethod
     def to_langstring(cls, input: Union[str, SetLangString, MultiLangString]) -> Union[LangString, list[LangString]]:
-        # TODO: Add TO_STRING
         """Convert a SetLangString or MultiLangString to a list of LangStrings.
 
         :param input: The SetLangString or MultiLangString to be converted.
@@ -62,7 +94,6 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def to_setlangstring(cls, input: Union[LangString, MultiLangString]) -> Union[SetLangString, list[SetLangString]]:
-        # TODO: Add TO_STRING
         """Convert a LangString or MultiLangString to a SetLangString or a list of SetLangStrings.
 
         :param input: The LangString or MultiLangString to be converted.
@@ -83,7 +114,6 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def to_multilangstring(cls, input: Union[set[str], list[str], LangString, SetLangString]) -> MultiLangString:
-        # TODO: Add TO_STRING
         """Convert a LangString or SetLangString to a MultiLangString.
 
         :param input: The LangString or SetLangString to be converted.
@@ -105,6 +135,54 @@ class Converter(metaclass=NonInstantiable):
             f"Invalid input argument type. Expected str, LangString or SetLangString, got '{type(input).__name__}'."
         )
 
+    # ---------------------------------------------
+    # Strings' Conversion Methods
+    # ---------------------------------------------
+
+
+    @staticmethod
+    def from_string_to_langstring(input_string: str) -> LangString:
+        """Convert a string into a LangString.
+
+        If the string contains '@', it splits the string into text (left part) and lang (right part).
+        If there is no '@', the entire string is set as text and lang is set to an empty string.
+
+        :param input_string: The input string to be converted.
+        :return: A LangString
+        """
+        if not isinstance(input, str):
+            raise TypeError(f"Invalid input argument type. Expected 'str', got '{type(input).__name__}'.")
+
+        if "@" in input_string:
+            parts = input_string.rsplit("@", 1)
+            text, lang = parts[0], parts[1]
+        else:
+            text, lang = input_string, ""
+
+        return LangString(text, lang)
+
+    @classmethod
+    def from_strings_to_setlangstring(cls, input: Union[set[str], list[str]]) -> SetLangString:
+        # TODO: TO BE IMPLEMENTED
+        pass
+
+    @classmethod
+    def from_strings_to_multilangstring(cls, input: Union[set[str], list[str]]) -> MultiLangString:
+        if not (isinstance(input, set) or isinstance(input, list)):
+            raise TypeError(
+                f"Invalid input argument type. Expected 'list[str]' or 'set[str]', got '{type(input).__name__}'."
+            )
+        new_mls = MultiLangString()
+
+        for element in input:
+            new_mls.add_langstring(cls.from_string_to_langstring(element))
+
+        return new_mls
+
+
+    # ---------------------------------------------
+    # LangStrings' Conversion Methods
+    # ---------------------------------------------
 
     @staticmethod
     def from_langstring_to_string(input: LangString) -> str:
@@ -131,6 +209,10 @@ class Converter(metaclass=NonInstantiable):
 
         return SetLangString(texts={input.text}, lang=input.lang)
 
+    def from_langstrings_to_setlangstring(input: LangString) -> SetLangString:
+        # TODO: TO BE IMPLEMENTED
+        pass
+
     @staticmethod
     def from_langstring_to_multilangstring(input: LangString) -> MultiLangString:
         """Convert a LangString to a MultiLangString.
@@ -149,6 +231,15 @@ class Converter(metaclass=NonInstantiable):
 
         new_mls_dict: dict[str, set[str]] = {input.lang: {input.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
+
+
+    def from_langstrings_to_multilangstring(input: LangString) -> SetLangString:
+        # TODO: TO BE IMPLEMENTED
+        pass
+
+    # ---------------------------------------------
+    # SetLangStrings' Conversion Methods
+    # ---------------------------------------------
 
     @staticmethod
     def from_setlangstring_to_string(input: SetLangString) -> str:
@@ -199,6 +290,11 @@ class Converter(metaclass=NonInstantiable):
         new_mls_dict: dict[str, set[str]] = {input.lang: input.texts}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
 
+    # ---------------------------------------------
+    # MultiLangStrings' Conversion Methods
+    # ---------------------------------------------
+
+
     @staticmethod
     def from_multilangstring_to_langstrings(input: MultiLangString) -> list[LangString]:
         """Convert a MultiLangString to a list of LangStrings.
@@ -240,36 +336,4 @@ class Converter(metaclass=NonInstantiable):
 
         return return_list
 
-    @staticmethod
-    def from_string_to_langstring(input_string: str) -> LangString:
-        """Convert a string into a LangString.
 
-        If the string contains '@', it splits the string into text (left part) and lang (right part).
-        If there is no '@', the entire string is set as text and lang is set to an empty string.
-
-        :param input_string: The input string to be converted.
-        :return: A LangString
-        """
-        if not isinstance(input, str):
-            raise TypeError(f"Invalid input argument type. Expected 'str', got '{type(input).__name__}'.")
-
-        if "@" in input_string:
-            parts = input_string.rsplit("@", 1)
-            text, lang = parts[0], parts[1]
-        else:
-            text, lang = input_string, ""
-
-        return LangString(text, lang)
-
-    @classmethod
-    def from_strings_to_multilangstring(cls, input: Union[set[str], list[str]]) -> MultiLangString:
-        if not (isinstance(input, set) or isinstance(input, list)):
-            raise TypeError(
-                f"Invalid input argument type. Expected 'list[str]' or 'set[str]', got '{type(input).__name__}'."
-            )
-        new_mls = MultiLangString()
-
-        for element in input:
-            new_mls.add_langstring(cls.from_string_to_langstring(element))
-
-        return new_mls

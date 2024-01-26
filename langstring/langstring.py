@@ -253,6 +253,20 @@ class LangString:
         return LangString(self.text.zfill(width), self.lang)
 
     # ---------------------------------------------
+    # LangString's Regular Methods
+    # ---------------------------------------------
+
+    def to_string(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> str:
+
+        if not (isinstance(print_quotes, bool) and isinstance(separator, str) and isinstance(print_lang, bool)):
+            raise TypeError("Invalid type received for LangString's to_string arguments.")
+
+        print_text = f'"{self.text}"' if print_quotes else self.text
+        print_lang = f"{separator}{self.lang}" if print_lang else ""
+
+        return print_text + print_lang
+
+    # ---------------------------------------------
     # Overwritten String's Built-in Dunder Methods
     # ---------------------------------------------
 

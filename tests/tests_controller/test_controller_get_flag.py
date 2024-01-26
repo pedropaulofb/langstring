@@ -31,6 +31,7 @@ def test_get_flag_default_states(flag, expected_state: bool) -> None:
         GlobalFlag.PRINT_WITH_QUOTES,
         LangStringFlag.PRINT_WITH_QUOTES,
         LangStringFlag.PRINT_WITH_LANG,
+        SetLangStringFlag.PRINT_WITH_QUOTES,
         SetLangStringFlag.PRINT_WITH_LANG,
     ]:
         expected_state = True

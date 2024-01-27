@@ -26,6 +26,7 @@ from .langstring import LangString
 from .multilangstring import MultiLangString
 from .setlangstring import SetLangString
 from .utils.non_instantiable import NonInstantiable
+from .utils.validator import Validator
 
 
 class Converter(metaclass=NonInstantiable):
@@ -206,10 +207,12 @@ class Converter(metaclass=NonInstantiable):
 
         return SetLangString(texts={input.text}, lang=input.lang)
 
+    @staticmethod
     def from_langstrings_to_setlangstring(input: LangString) -> SetLangString:
         # TODO: TO BE IMPLEMENTED
         pass
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_langstring_to_multilangstring(input: LangString) -> MultiLangString:
         """Convert a LangString to a MultiLangString.
@@ -223,9 +226,6 @@ class Converter(metaclass=NonInstantiable):
         :rtype: MultiLangString
         :raises TypeError: If the input is not of type LangString.
         """
-        if not isinstance(input, LangString):
-            raise TypeError(f"Invalid input argument type. Expected LangString, got '{type(input).__name__}'.")
-
         new_mls_dict: dict[str, set[str]] = {input.lang: {input.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
 

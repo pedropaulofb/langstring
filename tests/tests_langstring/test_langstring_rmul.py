@@ -30,7 +30,7 @@ def test_rmul_with_invalid_multiplier(invalid_multiplier) -> None:
     :param invalid_multiplier: An invalid multiplier type.
     """
     lang_string = LangString("Hello", "en")
-    with pytest.raises(TypeError, match="Can only multiply LangString by an integer on the right side"):
+    with pytest.raises(TypeError, match="Argument '.+' must be of type 'int', but got"):
         _ = invalid_multiplier * lang_string
 
 

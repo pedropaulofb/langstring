@@ -20,13 +20,24 @@ Example Usage:
         # MultiLangString implementation
         ...
 """
+import inspect
 import warnings
 from enum import Enum
+from functools import wraps
+from typing import Any
+from typing import Callable
+from typing import get_args
+from typing import get_origin
+from typing import get_type_hints
 from typing import Optional
+from typing import TypeVar
+from typing import Union
 
 from ..controller import Controller
 from ..flags import GlobalFlag
 from .non_instantiable import NonInstantiable
+
+T = TypeVar("T")
 
 
 class Validator(metaclass=NonInstantiable):
@@ -70,16 +81,92 @@ class Validator(metaclass=NonInstantiable):
             except ImportError as e:
                 if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
                     error_message = (
-                        str(e)
-                        + ". VALID_LANG functionality requires the 'langcodes' library. Install it with 'pip install langstring[extras]'."
+                        str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
+                        "Install it with 'pip install langstring[extras]'."
                     )
                     raise ImportError(error_message) from e
-                else:
-                    warnings.warn(
-                        "Language validation skipped. VALID_LANG functionality requires the 'langcodes' library. "
-                        "Install it with 'pip install langstring[extras]' to enable this feature.",
-                        UserWarning,
-                    )
+
+                warnings.warn(
+                    "Language validation skipped. VALID_LANG functionality requires the 'langcodes' library. "
+                    "Install it with 'pip install langstring[extras]' to enable this feature.",
+                    UserWarning,
+                )
 
         lang = lang if not Controller.get_flag(flag_type.STRIP_LANG) else lang.strip()
         return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.casefold()
+
+    @classmethod
+    def validate_simple_type(cls, func: Callable[..., T]) -> Callable[..., T]:
+        """Validate the types of arguments passed to a function or method based on their type hints. Used as decorator.
+
+        This method checks if each argument's type matches its corresponding type hint. It is intended for use with
+        functions or class methods where explicit type hints are provided for all arguments.
+
+        Note:
+            This decorator should not be used with instance methods or setters in classes, as it will attempt to
+            validate the `self` parameter, leading to incorrect behavior. For such methods, manual type validation
+            is recommended.
+
+        :param func: The function or method to be decorated.
+        :type func: Callable[..., T]
+        :return: The decorated function or method with type validation applied.
+        :rtype: Callable[..., T]
+        :raises TypeError: If an argument's type does not match its type hint.
+        """
+
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            # Get type hints of the function (excluding 'return')
+            type_hints = {k: v for k, v in get_type_hints(func).items() if k != "return"}
+            param_names = list(inspect.signature(func).parameters)
+
+            # Determine if the function is an instance method
+            is_instance_method = "self" in param_names and len(args) > 0 and isinstance(args[0], args[0].__class__)
+
+            # Skip 'self' in type checking if it's an instance method
+            if is_instance_method:
+                param_names.remove("self")
+                type_hints.pop("self", None)
+                args_to_check = args[1:]  # Adjust args to exclude 'self'
+            else:
+                args_to_check = args
+
+            # Function to check if the argument matches the type hint
+            def check_arg(arg: Any, hint: type[Any]) -> bool:
+                """Check if the argument matches the type hint."""
+                if get_origin(hint) is Union:
+                    if not any(isinstance(arg, t) for t in get_args(hint)):
+                        allowed_types = " or ".join(f"'{t.__name__}'" for t in get_args(hint))
+                        raise TypeError(
+                            f"Argument '{arg}' must be of types {allowed_types}, " f"but got '{type(arg).__name__}'."
+                        )
+                    return True
+
+                if not isinstance(arg, hint):
+                    raise TypeError(
+                        f"Argument '{arg}' must be of type '{hint.__name__}', " f"but got '{type(arg).__name__}'."
+                    )
+
+                return True
+
+            # Validate positional arguments
+            for arg, (name, hint) in zip(args_to_check, zip(param_names, type_hints.values())):
+                if not check_arg(arg, hint):
+                    raise TypeError(f"Argument '{arg}' must be of type '{hint}', but got '{type(arg)}'.")
+
+            # Validate keyword arguments
+            for kwarg, hint in type_hints.items():
+                if kwarg in kwargs and not check_arg(kwargs[kwarg], hint):
+                    raise TypeError(f"Argument '{kwarg}' must be of type '{hint}', but got '{type(kwargs[kwarg])}'.")
+
+            return func(*args, **kwargs)
+
+        return wrapper
+
+    @staticmethod
+    def _get_origin(tp: Any) -> Any:
+        return getattr(tp, "__origin__", None)
+
+    @staticmethod
+    def _get_args(tp: Any) -> tuple[Any, ...]:
+        return getattr(tp, "__args__", ())

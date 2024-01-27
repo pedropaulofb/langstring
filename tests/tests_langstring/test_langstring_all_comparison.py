@@ -193,6 +193,7 @@ cases_ls_string = [
     ["apple", "en", "APPLE"],
 ]
 
+
 @pytest.mark.parametrize("test_case", cases_ls_string)
 @pytest.mark.parametrize("method", ["__eq__", "__ne__", "__ge__", "__gt__", "__le__", "__lt__"])
 def test_langstring_string_comparisons(test_case, method):

@@ -256,34 +256,19 @@ class LangString:
     # LangString's Regular Methods
     # ---------------------------------------------
 
+    @Validator.validate_simple_type
     def to_string(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> str:
-        if not (isinstance(print_quotes, bool) and isinstance(separator, str) and isinstance(print_lang, bool)):
-            raise TypeError("Invalid type received for LangString's to_string arguments.")
-
         text_value: str = f'"{self.text}"' if print_quotes else f"{self.text}"
         lang_value: str = f"{separator}{self.lang}" if print_lang else ""
 
         return text_value + lang_value
 
-    def equals(self, other:Union[str,"LangString"])->bool:
-        if isinstance(other, str):
-            return self.equals_str(other)
-
-        if isinstance(other, LangString):
-            return self.equals_langstring(other)
-
-        raise TypeError(f"Operand must be of type 'str' or 'LangString', but got '{type(other).__name__}'.")
-
-    def equals_str(self, other:str)->bool:
-        if not isinstance(other,str):
-            raise TypeError(f"Operand must be of type 'str', but got '{type(other).__name__}'.")
-
+    @Validator.validate_simple_type
+    def equals_str(self, other: str) -> bool:
         return self.text == other
 
-    def equals_langstring(self, other:"LangString")->bool:
-        if not isinstance(other,LangString):
-            raise TypeError(f"Operand must be of type 'LangString', but got '{type(other).__name__}'.")
-
+    @Validator.validate_simple_type
+    def equals_langstring(self, other: "LangString") -> bool:
         return self.text == other.text and self.lang.casefold() == other.lang.casefold()
 
     # ---------------------------------------------
@@ -388,12 +373,16 @@ class LangString:
             raise TypeError(f"Unsupported operand type(s) for +=: 'LangString' and '{type(other).__name__}'")
         return self
 
+    @Validator.validate_simple_type
     def __imul__(self, other: int) -> "LangString":
-        """Implement in-place multiplication."""
-        if isinstance(other, int):
-            self.text *= other
-        else:
-            raise TypeError(f"Unsupported operand type(s) for *=: 'LangString' and '{type(other).__name__}'")
+        """In-place multiplication of the LangString's text.
+
+        :param other: The number of times to repeat the text.
+        :type other: int
+        :return: The same LangString instance with the text repeated.
+        :rtype: LangString
+        """
+        self.text *= other
         return self
 
     def __iter__(self) -> Iterator[str]:
@@ -428,10 +417,15 @@ class LangString:
         if isinstance(other, LangString):
             return self.text < other.text
 
+    @Validator.validate_simple_type
     def __mul__(self, other: int) -> "LangString":
-        """Repeat the LangString's text a specified number of times."""
-        if not isinstance(other, int):
-            raise TypeError("Can only multiply LangString by an integer")
+        """Multiply the LangString's text a specified number of times.
+
+        :param other: The number of times to repeat the text.
+        :type other: int
+        :return: A new LangString with the text repeated.
+        :rtype: LangString
+        """
         return LangString(self.text * other, self.lang)
 
     def __ne__(self, other: object) -> bool:
@@ -464,6 +458,7 @@ class LangString:
         """Return an unambiguous string representation of the LangString."""
         return f"LangString({repr(self.text)}, {repr(self.lang)})"
 
+    @Validator.validate_simple_type
     def __rmul__(self, other: int) -> "LangString":
         """
         Implement right multiplication.
@@ -477,8 +472,6 @@ class LangString:
         :rtype: LangString
         :raises TypeError: If 'other' is not an integer.
         """
-        if not isinstance(other, int):
-            raise TypeError("Can only multiply LangString by an integer on the right side")
         return LangString(self.text * other, self.lang)
 
     def __str__(self) -> str:

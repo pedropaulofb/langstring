@@ -90,5 +90,5 @@ def test_to_string_invalid_types(text, lang, print_quotes, separator, print_lang
     :type expected: str
     """
     ls = LangString(text, lang)
-    with pytest.raises(expected, match="Invalid type"):
+    with pytest.raises(expected, match="Argument '.+' must be of type"):
         ls.to_string(print_quotes, separator, print_lang)

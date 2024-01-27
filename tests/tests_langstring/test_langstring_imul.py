@@ -30,7 +30,7 @@ def test_imul_with_invalid_multiplier(invalid_multiplier) -> None:
     :param invalid_multiplier: An invalid multiplier type.
     """
     lang_string = LangString("Hello", "en")
-    with pytest.raises(TypeError, match="Unsupported operand type"):
+    with pytest.raises(TypeError, match="Argument '.+' must be of type 'int', but got"):
         lang_string *= invalid_multiplier
 
 

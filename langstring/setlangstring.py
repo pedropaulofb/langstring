@@ -2,10 +2,10 @@ from typing import Iterator
 from typing import Optional
 from typing import Union
 
+from .controller import Controller
 from .flags import SetLangStringFlag
 from .langstring import LangString
 from .utils.validator import Validator
-from langstring import Controller
 
 
 class SetLangString:
@@ -193,11 +193,8 @@ class SetLangString:
     def __and__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
         return self.intersection(other)
 
+    @Validator.validate_simple_type
     def __contains__(self, element: Union[str, LangString]) -> bool:
-        # Check if the element is neither a str nor a LangString
-        if not isinstance(element, (str, LangString)):
-            raise TypeError(f"Invalid type received. Expected 'str' or 'LangString', got {type(element).__name__}.")
-
         # Check language compatibility
         self._validate_match_types_and_langs(element)
 

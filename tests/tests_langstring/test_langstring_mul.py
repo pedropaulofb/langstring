@@ -28,7 +28,7 @@ def test_mul_with_invalid_multiplier(invalid_multiplier) -> None:
     :param invalid_multiplier: An invalid multiplier type.
     """
     lang_string = LangString("Hello", "en")
-    with pytest.raises(TypeError, match="Can only multiply LangString by an integer"):
+    with pytest.raises(TypeError, match="Argument '.+' must be of type 'int', but got"):
         _ = lang_string * invalid_multiplier
 
 

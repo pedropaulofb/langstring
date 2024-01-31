@@ -16,6 +16,7 @@ text and valid language tags. These flags can be set externally to alter the beh
     # Print the string representation
     print(lang_str.to_string())  # Output: '"Hello, World!"@en'
 """
+
 from typing import Optional
 
 from .langstring_control import LangStringControl

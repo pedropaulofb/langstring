@@ -20,6 +20,7 @@ Example Usage:
         # MultiLangString implementation
         ...
 """
+
 from abc import abstractmethod
 from typing import Optional
 from typing import TYPE_CHECKING

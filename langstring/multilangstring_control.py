@@ -24,6 +24,7 @@ Note:
     The MultiLangStringControl class is designed to be non-instantiable and acts as a static configuration manager.
     It should not be instantiated but used through its class methods.
 """
+
 from enum import auto
 from enum import Enum
 

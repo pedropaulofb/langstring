@@ -43,6 +43,7 @@ Example:
 By providing a comprehensive set of methods for managing multilingual text, the MultiLangString class aims to simplify
 the development of multilingual applications and facilitate the handling of text in multiple languages.
 """
+
 from typing import Any
 from typing import Optional
 

@@ -41,6 +41,7 @@ Example:
     # Resetting all flags to default in MultiLangStringControl
     MultiLangStringControl.reset_flags()
 """
+
 from abc import abstractmethod
 from typing import TYPE_CHECKING
 from typing import Union

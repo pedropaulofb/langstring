@@ -2,6 +2,7 @@
 
 It includes classes for single and multiple language strings, along with their control and validation mechanisms.
 """
+
 from .langstring import LangString
 from .langstring_control import LangStringControl
 from .langstring_control import LangStringFlag

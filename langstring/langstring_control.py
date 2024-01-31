@@ -43,6 +43,7 @@ Note:
     The LangStringControl class should not be instantiated directly. Instead, its class methods should be used to
     interact with the control flags.
 """
+
 from enum import auto
 from enum import Enum
 

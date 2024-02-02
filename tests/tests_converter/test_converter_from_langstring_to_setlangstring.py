@@ -1,6 +1,6 @@
 import pytest
 
-from langstring import Controller
+from langstring import Controller, SetLangStringFlag
 from langstring import Converter
 from langstring import LangString
 from langstring import LangStringFlag
@@ -122,3 +122,57 @@ def test_langstring_to_setlangstring_with_duplicate_text():
     expected_output = SetLangString(texts={"Duplicate"}, lang="en")
 
     assert result == expected_output, "Conversion did not handle duplicate text correctly."
+
+
+@pytest.mark.parametrize(
+    "flag, expected_lang",
+    [
+        (LangStringFlag.LOWERCASE_LANG, "en"),  # Test lowercase language flag effect
+        (LangStringFlag.STRIP_LANG, "en "),  # Test strip language flag, expecting no effect because flag does not apply
+    ],
+)
+def test_langstring_to_setlangstring_flags_effect_on_language(flag: LangStringFlag, expected_lang: str):
+    """Test the effect of specific LangString flags on the language attribute during conversion.
+
+    :param flag: The LangStringFlag to test.
+    :param expected_lang: The expected language code in the SetLangString after conversion.
+    :return: None
+    """
+    Controller.set_flag(flag, True)
+    Controller.set_flag(SetLangStringFlag.STRIP_LANG, True)
+    lang_string = LangString(text="Text", lang=" EN ")
+    result = Converter.from_langstring_to_setlangstring(lang_string)
+    expected_output = SetLangString(texts={"Text"}, lang=expected_lang.strip())
+    assert result == expected_output, f"Conversion did not respect the '{flag.name}' flag correctly."
+
+
+@pytest.mark.parametrize("text, lang", [
+    (None, "en"),  # Test handling None as text
+    ("Text", None),  # Test handling None as lang
+])
+def test_langstring_to_setlangstring_none_values(text, lang):
+    """Test conversion with None values for text or lang, expecting TypeError due to invalid type.
+
+    :param text: The text of the LangString, possibly None.
+    :param lang: The language code of the LangString, possibly None.
+    :return: None
+    :raises TypeError: If text or lang is None, violating type expectations.
+    """
+    with pytest.raises(TypeError, match="Expected 'str', got 'NoneType'"):
+        Converter.from_langstring_to_setlangstring(LangString(text=text, lang=lang))
+
+
+@pytest.mark.parametrize("text, expected_output", [
+    ("\n", SetLangString(texts={"\n"}, lang="en")),  # Test newline character as text
+    (" ", SetLangString(texts={" "}, lang="en")),  # Test space as text
+])
+def test_langstring_to_setlangstring_unusual_valid_usage(text: str, expected_output: SetLangString):
+    """Test conversion of LangString with unusual, but valid, text values to SetLangString.
+
+    :param text: The text of the LangString, including newline or space.
+    :param expected_output: The expected SetLangString output.
+    :return: None
+    """
+    lang_string = LangString(text=text, lang="en")
+    result = Converter.from_langstring_to_setlangstring(lang_string)
+    assert result == expected_output, "Conversion did not handle unusual, but valid, text values correctly."

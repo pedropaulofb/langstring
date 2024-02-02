@@ -259,18 +259,17 @@ class Converter(metaclass=NonInstantiable):
     # SetLangStrings' Conversion Methods
     # ---------------------------------------------
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_setlangstring_to_string(input: SetLangString) -> str:
-        if not isinstance(input, SetLangString):
-            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
         return input.__str__()
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_setlangstring_to_strings(input: SetLangString) -> list[str]:
-        if not isinstance(input, SetLangString):
-            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
         return input.to_strings()
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_setlangstring_to_langstrings(input: SetLangString) -> list[LangString]:
         """Convert a SetLangString to a list of LangStrings.
@@ -284,11 +283,9 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[LangString]
         :raises TypeError: If the input is not of type SetLangString.
         """
-        if not isinstance(input, SetLangString):
-            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
-
         return input.to_langstrings()
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_setlangstring_to_multilangstring(input: SetLangString) -> MultiLangString:
         """Convert a SetLangString to a MultiLangString.
@@ -302,9 +299,6 @@ class Converter(metaclass=NonInstantiable):
         :rtype: MultiLangString
         :raises TypeError: If the input is not of type SetLangString.
         """
-        if not isinstance(input, SetLangString):
-            raise TypeError(f"Invalid input argument type. Expected SetLangString, got '{type(input).__name__}'.")
-
         new_mls_dict: dict[str, set[str]] = {input.lang: input.texts}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
 
@@ -312,6 +306,7 @@ class Converter(metaclass=NonInstantiable):
     # MultiLangStrings' Conversion Methods
     # ---------------------------------------------
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_multilangstring_to_langstrings(input: MultiLangString) -> list[LangString]:
         """Convert a MultiLangString to a list of LangStrings.
@@ -325,11 +320,9 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[LangString]
         :raises TypeError: If the input is not of type MultiLangString.
         """
-        if not isinstance(input, MultiLangString):
-            raise TypeError(f"Invalid input argument type. Expected MultiLangString, got '{type(input).__name__}'.")
-
         return [LangString(text, lang) for lang, texts in input.mls_dict.items() for text in texts]
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_multilangstring_to_setlangstrings(input: MultiLangString) -> list[SetLangString]:
         """Convert a MultiLangString to a list of SetLangStrings.
@@ -343,9 +336,6 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[SetLangString]
         :raises TypeError: If the input is not of type MultiLangString.
         """
-        if not isinstance(input, MultiLangString):
-            raise TypeError(f"Invalid input argument type. Expected MultiLangString, got '{type(input).__name__}'.")
-
         return_list = []
 
         for lang in input.mls_dict.keys():

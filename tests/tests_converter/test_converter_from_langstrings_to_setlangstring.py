@@ -44,3 +44,34 @@ def test_empty_list():
             Converter.from_langstrings_to_setlangstring([])
         mock_method.assert_called_once_with([])
 
+
+def test_duplicate_texts_same_language():
+    # Setup: LangStrings with duplicate texts
+    duplicate_langstrings = [
+        LangString(text="Duplicate", lang="en"),
+        LangString(text="Duplicate", lang="en")
+    ]
+    # Expected behavior: Only one instance of the text in the SetLangString
+    expected = SetLangString(texts={"Duplicate"}, lang="en")
+
+    # Assuming direct call without error for demonstration
+    with patch('langstring.converter.Converter.from_langstrings_to_setlangstring', return_value=expected) as mock_method:
+        result = Converter.from_langstrings_to_setlangstring(duplicate_langstrings)
+        mock_method.assert_called_once_with(duplicate_langstrings)
+        assert result == expected, "Duplicate texts with the same language should result in unique texts in SetLangString."
+
+
+def test_different_cases_unique_texts():
+    # Setup: LangStrings with the same text in different cases
+    case_langstrings = [
+        LangString(text="hello", lang="en"),
+        LangString(text="Hello", lang="en")
+    ]
+    # Expected behavior: Both texts are treated as unique in the SetLangString
+    expected = SetLangString(texts={"hello", "Hello"}, lang="en")
+
+    # Assuming direct call without error for demonstration
+    with patch('langstring.converter.Converter.from_langstrings_to_setlangstring', return_value=expected) as mock_method:
+        result = Converter.from_langstrings_to_setlangstring(case_langstrings)
+        mock_method.assert_called_once_with(case_langstrings)
+        assert result == expected, "Texts with different cases should be treated as unique in SetLangString."

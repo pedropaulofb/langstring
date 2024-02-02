@@ -281,11 +281,13 @@ class SetLangString:
         :return: The string representation of the LangString object.
         :rtype: str
         """
-        print_with_lang = Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG)
+        texts_str = "{}" if not self.texts else str(self.texts)
 
-        lang_representation = f"@{self.lang}" if print_with_lang else ""
-
-        return str(self.texts) + lang_representation
+        if Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG):
+            lang_representation = f"@{self.lang}" if self.lang else "@"
+            return f"{texts_str}{lang_representation}"
+        else:
+            return texts_str
 
     def __sub__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
         return self.difference(other)

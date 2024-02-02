@@ -2,6 +2,7 @@
 
 It includes classes for single and multiple language strings, along with their control and validation mechanisms.
 """
+
 from .controller import Controller
 from .converter import Converter
 from .flags import GlobalFlag

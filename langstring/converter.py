@@ -20,6 +20,7 @@ Note:
 This module is part of a larger package dealing with language processing and RDF data manipulation, providing
 foundational tools for handling multilingual text data in various formats.
 """
+
 from typing import Union
 
 from .langstring import LangString

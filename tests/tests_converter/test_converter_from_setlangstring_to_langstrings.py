@@ -1,8 +1,10 @@
 import pytest
 
-from langstring import Converter, SetLangStringFlag, Controller
+from langstring import Controller
+from langstring import Converter
 from langstring import LangString
 from langstring import SetLangString
+from langstring import SetLangStringFlag
 
 
 def test_setlangstring_to_langstrings_with_multiple_texts():
@@ -110,10 +112,13 @@ def test_setlangstring_to_langstrings_empty_set():
     assert not result, "Converting an empty SetLangString should result in an empty list of LangStrings"
 
 
-@pytest.mark.parametrize("lang, flag, expected_effect", [
-    (" en ", SetLangStringFlag.STRIP_LANG, True),  # Assuming STRIP_LANG trims whitespace from language codes
-])
-def test_setlangstring_to_langstrings_flag_effects(lang: str, flag: SetLangStringFlag, expected_effect: bool):
+@pytest.mark.parametrize(
+    "lang, flag",
+    [
+        (" en ", SetLangStringFlag.STRIP_LANG),  # Assuming STRIP_LANG trims whitespace from language codes
+    ],
+)
+def test_setlangstring_to_langstrings_flag_effects(lang: str, flag: SetLangStringFlag):
     """Test the effects of SetLangString flags on the lang attribute during conversion to LangStrings.
 
     :param lang: A sample language code to include in the SetLangString.
@@ -127,5 +132,6 @@ def test_setlangstring_to_langstrings_flag_effects(lang: str, flag: SetLangStrin
     Controller.reset_flags()  # Reset flags to avoid side effects
 
     trimmed_lang = lang.strip()  # Expected lang attribute after applying STRIP_LANG
-    assert all(langstring.lang == trimmed_lang for langstring in result), f"Flag {flag.name} did not have the expected effect on lang"
-
+    assert all(
+        langstring.lang == trimmed_lang for langstring in result
+    ), f"Flag {flag.name} did not have the expected effect on lang"

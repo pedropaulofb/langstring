@@ -233,6 +233,15 @@ Classes
    .. py:method:: zfill(width)
 
 
+   .. py:method:: to_string(print_quotes = True, separator = '@', print_lang = True)
+
+
+   .. py:method:: equals_str(other)
+
+
+   .. py:method:: equals_langstring(other)
+
+
    .. py:method:: __add__(other)
 
       Add another LangString or a string to this LangString.
@@ -291,7 +300,12 @@ Classes
 
    .. py:method:: __imul__(other)
 
-      Implement in-place multiplication.
+      In-place multiplication of the LangString's text.
+
+      :param other: The number of times to repeat the text.
+      :type other: int
+      :return: The same LangString instance with the text repeated.
+      :rtype: LangString
 
 
    .. py:method:: __iter__()
@@ -316,7 +330,12 @@ Classes
 
    .. py:method:: __mul__(other)
 
-      Repeat the LangString's text a specified number of times.
+      Multiply the LangString's text a specified number of times.
+
+      :param other: The number of times to repeat the text.
+      :type other: int
+      :return: A new LangString with the text repeated.
+      :rtype: LangString
 
 
    .. py:method:: __ne__(other)

@@ -50,6 +50,14 @@ Classes
    This class provides methods to convert between `LangString`, `SetLangString`, and `MultiLangString` types.
    It is designed to be non-instantiable as it serves as a utility class with class methods only.
 
+   .. py:method:: to_string(input)
+      :classmethod:
+
+
+   .. py:method:: to_strings(input)
+      :classmethod:
+
+
    .. py:method:: to_langstring(input)
       :classmethod:
 
@@ -86,6 +94,34 @@ Classes
       :raises TypeError: If the input is not of type LangString or SetLangString.
 
 
+   .. py:method:: from_string_to_langstring(input_string)
+      :staticmethod:
+
+      Convert a string into a LangString.
+
+      If the string contains '@', it splits the string into text (left part) and lang (right part).
+      If there is no '@', the entire string is set as text and lang is set to an empty string.
+
+      :param input_string: The input string to be converted.
+      :return: A LangString
+
+
+   .. py:method:: from_strings_to_langstrings(input, lang)
+      :staticmethod:
+
+
+   .. py:method:: from_strings_to_setlangstring(input, lang)
+      :staticmethod:
+
+
+   .. py:method:: from_strings_to_multilangstring(input)
+      :classmethod:
+
+
+   .. py:method:: from_langstring_to_string(input)
+      :staticmethod:
+
+
    .. py:method:: from_langstring_to_setlangstring(input)
       :staticmethod:
 
@@ -101,6 +137,10 @@ Classes
       :raises TypeError: If the input is not of type LangString.
 
 
+   .. py:method:: from_langstrings_to_setlangstring(input)
+      :staticmethod:
+
+
    .. py:method:: from_langstring_to_multilangstring(input)
       :staticmethod:
 
@@ -114,6 +154,17 @@ Classes
       :return: A MultiLangString containing the text and language from the input LangString.
       :rtype: MultiLangString
       :raises TypeError: If the input is not of type LangString.
+
+
+   .. py:method:: from_langstrings_to_multilangstring()
+
+
+   .. py:method:: from_setlangstring_to_string(input)
+      :staticmethod:
+
+
+   .. py:method:: from_setlangstring_to_strings(input)
+      :staticmethod:
 
 
    .. py:method:: from_setlangstring_to_langstrings(input)
@@ -174,22 +225,6 @@ Classes
       :return: A list of SetLangStrings, each containing texts of a single language from the input MultiLangString.
       :rtype: list[SetLangString]
       :raises TypeError: If the input is not of type MultiLangString.
-
-
-   .. py:method:: from_string_to_langstring(input_string)
-      :staticmethod:
-
-      Convert a string into a LangString.
-
-      If the string contains '@', it splits the string into text (left part) and lang (right part).
-      If there is no '@', the entire string is set as text and lang is set to an empty string.
-
-      :param input_string: The input string to be converted.
-      :return: A LangString
-
-
-   .. py:method:: from_strings_to_multilangstring(input)
-      :classmethod:
 
 
 

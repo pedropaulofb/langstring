@@ -3,6 +3,7 @@
 The fixtures defined here are automatically discovered and utilized by pytest in all test modules. This allows for
 consistent setup and teardown processes across multiple tests, ensuring a clean testing environment.
 """
+
 import pytest
 
 from langstring import Controller

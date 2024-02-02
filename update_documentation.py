@@ -4,6 +4,7 @@ It includes functions for generating, cleaning, and copying Sphinx documentation
 
 The module is designed for software developers and maintainers to streamline documentation tasks.
 """
+
 import os
 import shutil
 import subprocess

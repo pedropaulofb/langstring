@@ -1,10 +1,11 @@
 import pytest
 
-from langstring import Controller, SetLangStringFlag
+from langstring import Controller
 from langstring import Converter
 from langstring import LangString
 from langstring import LangStringFlag
 from langstring import SetLangString
+from langstring import SetLangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -146,10 +147,13 @@ def test_langstring_to_setlangstring_flags_effect_on_language(flag: LangStringFl
     assert result == expected_output, f"Conversion did not respect the '{flag.name}' flag correctly."
 
 
-@pytest.mark.parametrize("text, lang", [
-    (None, "en"),  # Test handling None as text
-    ("Text", None),  # Test handling None as lang
-])
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        (None, "en"),  # Test handling None as text
+        ("Text", None),  # Test handling None as lang
+    ],
+)
 def test_langstring_to_setlangstring_none_values(text, lang):
     """Test conversion with None values for text or lang, expecting TypeError due to invalid type.
 
@@ -162,10 +166,13 @@ def test_langstring_to_setlangstring_none_values(text, lang):
         Converter.from_langstring_to_setlangstring(LangString(text=text, lang=lang))
 
 
-@pytest.mark.parametrize("text, expected_output", [
-    ("\n", SetLangString(texts={"\n"}, lang="en")),  # Test newline character as text
-    (" ", SetLangString(texts={" "}, lang="en")),  # Test space as text
-])
+@pytest.mark.parametrize(
+    "text, expected_output",
+    [
+        ("\n", SetLangString(texts={"\n"}, lang="en")),  # Test newline character as text
+        (" ", SetLangString(texts={" "}, lang="en")),  # Test space as text
+    ],
+)
 def test_langstring_to_setlangstring_unusual_valid_usage(text: str, expected_output: SetLangString):
     """Test conversion of LangString with unusual, but valid, text values to SetLangString.
 

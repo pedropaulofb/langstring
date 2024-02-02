@@ -36,19 +36,15 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
    :vartype VALID_LANG: Enum
 
-   .. py:attribute:: DEFINED_TEXT
-
-      
-
    .. py:attribute:: DEFINED_LANG
 
       
 
-   .. py:attribute:: STRIP_TEXT
+   .. py:attribute:: DEFINED_TEXT
 
       
 
-   .. py:attribute:: STRIP_LANG
+   .. py:attribute:: ENFORCE_EXTRA_DEPEND
 
       
 
@@ -56,11 +52,7 @@ Classes
 
       
 
-   .. py:attribute:: VALID_LANG
-
-      
-
-   .. py:attribute:: PRINT_WITH_QUOTES
+   .. py:attribute:: METHODS_MATCH_TYPES
 
       
 
@@ -68,7 +60,19 @@ Classes
 
       
 
-   .. py:attribute:: METHODS_MATCH_TYPES
+   .. py:attribute:: PRINT_WITH_QUOTES
+
+      
+
+   .. py:attribute:: STRIP_LANG
+
+      
+
+   .. py:attribute:: STRIP_TEXT
+
+      
+
+   .. py:attribute:: VALID_LANG
 
       
 
@@ -89,19 +93,11 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
-   .. py:attribute:: DEFINED_TEXT
-
-      
-
    .. py:attribute:: DEFINED_LANG
 
       
 
-   .. py:attribute:: STRIP_TEXT
-
-      
-
-   .. py:attribute:: STRIP_LANG
+   .. py:attribute:: DEFINED_TEXT
 
       
 
@@ -109,11 +105,7 @@ Classes
 
       
 
-   .. py:attribute:: VALID_LANG
-
-      
-
-   .. py:attribute:: PRINT_WITH_QUOTES
+   .. py:attribute:: METHODS_MATCH_TYPES
 
       
 
@@ -121,7 +113,19 @@ Classes
 
       
 
-   .. py:attribute:: METHODS_MATCH_TYPES
+   .. py:attribute:: PRINT_WITH_QUOTES
+
+      
+
+   .. py:attribute:: STRIP_LANG
+
+      
+
+   .. py:attribute:: STRIP_TEXT
+
+      
+
+   .. py:attribute:: VALID_LANG
 
       
 
@@ -142,19 +146,11 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the SetLangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
-   .. py:attribute:: DEFINED_TEXT
-
-      
-
    .. py:attribute:: DEFINED_LANG
 
       
 
-   .. py:attribute:: STRIP_TEXT
-
-      
-
-   .. py:attribute:: STRIP_LANG
+   .. py:attribute:: DEFINED_TEXT
 
       
 
@@ -162,7 +158,7 @@ Classes
 
       
 
-   .. py:attribute:: VALID_LANG
+   .. py:attribute:: METHODS_MATCH_TYPES
 
       
 
@@ -170,7 +166,19 @@ Classes
 
       
 
-   .. py:attribute:: METHODS_MATCH_TYPES
+   .. py:attribute:: PRINT_WITH_QUOTES
+
+      
+
+   .. py:attribute:: STRIP_LANG
+
+      
+
+   .. py:attribute:: STRIP_TEXT
+
+      
+
+   .. py:attribute:: VALID_LANG
 
       
 
@@ -191,15 +199,15 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
-   .. py:attribute:: DEFINED_TEXT
-
-      
-
    .. py:attribute:: DEFINED_LANG
 
       
 
-   .. py:attribute:: STRIP_TEXT
+   .. py:attribute:: DEFINED_TEXT
+
+      
+
+   .. py:attribute:: LOWERCASE_LANG
 
       
 
@@ -207,7 +215,7 @@ Classes
 
       
 
-   .. py:attribute:: LOWERCASE_LANG
+   .. py:attribute:: STRIP_TEXT
 
       
 

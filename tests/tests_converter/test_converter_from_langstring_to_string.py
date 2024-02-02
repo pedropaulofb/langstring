@@ -1,5 +1,7 @@
 import pytest
-from langstring import Converter, LangString
+
+from langstring import Converter
+from langstring import LangString
 
 
 @pytest.mark.parametrize(

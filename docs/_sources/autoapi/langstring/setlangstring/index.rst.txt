@@ -104,6 +104,9 @@ Classes
    .. py:method:: to_langstrings()
 
 
+   .. py:method:: to_strings()
+
+
    .. py:method:: __and__(other)
 
 

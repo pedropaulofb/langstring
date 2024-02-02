@@ -20,6 +20,7 @@ Example Usage:
         # MultiLangString implementation
         ...
 """
+
 import inspect
 import warnings
 from enum import Enum

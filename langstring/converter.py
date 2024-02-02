@@ -139,6 +139,7 @@ class Converter(metaclass=NonInstantiable):
     # Strings' Conversion Methods
     # ---------------------------------------------
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_string_to_langstring(input_string: str) -> LangString:
         """Convert a string into a LangString.
@@ -149,8 +150,6 @@ class Converter(metaclass=NonInstantiable):
         :param input_string: The input string to be converted.
         :return: A LangString
         """
-        if not isinstance(input, str):
-            raise TypeError(f"Invalid input argument type. Expected 'str', got '{type(input).__name__}'.")
 
         if "@" in input_string:
             parts = input_string.rsplit("@", 1)
@@ -160,10 +159,23 @@ class Converter(metaclass=NonInstantiable):
 
         return LangString(text, lang)
 
-    @classmethod
-    def from_strings_to_setlangstring(cls, input: Union[set[str], list[str]]) -> SetLangString:
-        # TODO: TO BE IMPLEMENTED
-        pass
+    @Validator.validate_simple_type
+    @staticmethod
+    def from_strings_to_langstrings(input: Union[set[str], list[str]], lang: str) -> list[LangString]:
+        output = []
+        for text in input:
+            output.append(LangString(text=text, lang=lang))
+        return output
+
+    @Validator.validate_simple_type
+    @staticmethod
+    def from_strings_to_setlangstring(input: Union[set[str], list[str]], lang: str) -> SetLangString:
+        texts = set()
+
+        for text in input:
+            texts.add(text)
+
+        return SetLangString(texts=texts, lang=lang)
 
     @classmethod
     def from_strings_to_multilangstring(cls, input: Union[set[str], list[str]]) -> MultiLangString:
@@ -182,12 +194,12 @@ class Converter(metaclass=NonInstantiable):
     # LangStrings' Conversion Methods
     # ---------------------------------------------
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_langstring_to_string(input: LangString) -> str:
-        if not isinstance(input, LangString):
-            raise TypeError(f"Invalid input argument type. Expected LangString, got '{type(input).__name__}'.")
         return input.__str__()
 
+    @Validator.validate_simple_type
     @staticmethod
     def from_langstring_to_setlangstring(input: LangString) -> SetLangString:
         """
@@ -202,15 +214,24 @@ class Converter(metaclass=NonInstantiable):
         :rtype: SetLangString
         :raises TypeError: If the input is not of type LangString.
         """
-        if not isinstance(input, LangString):
-            raise TypeError(f"Invalid input argument type. Expected LangString, got '{type(input).__name__}'.")
-
         return SetLangString(texts={input.text}, lang=input.lang)
 
+    @Validator.validate_simple_type
     @staticmethod
-    def from_langstrings_to_setlangstring(input: LangString) -> SetLangString:
-        # TODO: TO BE IMPLEMENTED
-        pass
+    def from_langstrings_to_setlangstring(input: list[LangString]) -> SetLangString:
+        new_texts = set()
+        new_lang = set()
+
+        for langstring in input:
+            new_texts.add(langstring.text)
+            new_lang.add(langstring.lang)
+
+        if len(new_lang) > 1:
+            raise ValueError(
+                "Operation error. The conversion can only be performed from a LangStrings " "with the same language."
+            )
+
+        return SetLangString(texts=new_texts, lang=new_lang.pop())
 
     @Validator.validate_simple_type
     @staticmethod

@@ -275,6 +275,7 @@ class LangString:
     # Overwritten String's Built-in Dunder Methods
     # ---------------------------------------------
 
+    @Validator.validate_simple_type
     def __add__(self, other: Union["LangString", str]) -> "LangString":
         """Add another LangString or a string to this LangString.
 
@@ -295,8 +296,7 @@ class LangString:
         if isinstance(other, str):
             return LangString(self.text + other, self.lang)
 
-        raise TypeError(f"Unsupported operand type(s) for +: 'LangString' and '{type(other).__name__}'")
-
+    @Validator.validate_simple_type
     def __contains__(self, item: str) -> bool:
         """Check if a substring exists within the LangString's text."""
         return item in self.text
@@ -360,6 +360,7 @@ class LangString:
         """
         return hash((self.text, self.lang.casefold()))
 
+    @Validator.validate_simple_type
     def __iadd__(self, other: Union["LangString", str]) -> "LangString":
         """Implement in-place addition."""
         self._validate_match_types(other)
@@ -369,8 +370,7 @@ class LangString:
             self.text += other.text
         elif isinstance(other, str):
             self.text += other
-        else:
-            raise TypeError(f"Unsupported operand type(s) for +=: 'LangString' and '{type(other).__name__}'")
+
         return self
 
     @Validator.validate_simple_type
@@ -439,6 +439,7 @@ class LangString:
         if isinstance(other, LangString):
             return (self.text != other.text) or (self.lang.casefold() != other.lang.casefold())
 
+    @Validator.validate_simple_type
     def __radd__(self, other: Union["LangString", str]) -> "LangString":
         """Handle concatenation when LangString is on the right side of the '+' operator.
 
@@ -450,8 +451,6 @@ class LangString:
         :rtype: LangString
         :raises TypeError: If 'other' is not a string.
         """
-        if not isinstance(other, str):
-            raise TypeError(f"Unsupported operand type(s) for +: '{type(other).__name__}' and 'LangString'")
         return LangString(other + self.text, self.lang)
 
     def __repr__(self) -> str:

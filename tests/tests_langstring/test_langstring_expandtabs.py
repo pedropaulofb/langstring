@@ -79,7 +79,7 @@ def test_expandtabs_invalid_tabsize_type(input_string: str, invalid_tabsize):
     :raises TypeError: If tabsize is not an integer.
     """
     lang_string = LangString(input_string, "en")
-    with pytest.raises(TypeError, match="object cannot be interpreted as an integer"):
+    with pytest.raises(TypeError, match=".+ object cannot be interpreted as an integer"):
         lang_string.expandtabs(invalid_tabsize)
 
 

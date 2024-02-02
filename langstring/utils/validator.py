@@ -103,9 +103,12 @@ class Validator(metaclass=NonInstantiable):
         functions or class methods where explicit type hints are provided for all arguments.
 
         Note:
-            This decorator should not be used with instance methods or setters in classes, as it will attempt to
-            validate the `self` parameter, leading to incorrect behavior. For such methods, manual type validation
-            is recommended.
+            This decorator is designed for use with functions, instance methods, and static methods where explicit
+            type hints are provided for all arguments. It automatically adjusts for the 'self' parameter in instance
+            methods. However, it is not suitable for class methods or setters in classes, as it does not handle
+            the 'cls' parameter in class methods and may lead to incorrect behavior with setters. For class methods
+            and setters, manual type validation is recommended.
+
 
         :param func: The function or method to be decorated.
         :type func: Callable[..., T]

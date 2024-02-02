@@ -30,7 +30,7 @@ def test_to_langstring_valid(input_data, expected_output):
     ), "to_langstring should return correct LangStrings for valid input"
 
 
-@pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, "string", LangString("Hello", "en")])
+@pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, LangString("Hello", "en")])
 def test_to_langstring_invalid_type(invalid_input):
     """
     Test conversion with invalid input types, expecting a TypeError.

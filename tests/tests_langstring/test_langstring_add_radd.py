@@ -102,12 +102,7 @@ def test_add_string_and_langstring(other_text, lang_str_text, lang_str_lang, exp
 def test_add_incompatible_types(lang_str, other, strict):
     """Test adding incompatible types to a LangString."""
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
-    msg = (
-        "Strict mode is enabled. Operand must be of type LangString"
-        if strict
-        else "Unsupported operand type\\(s\\) for \\+: 'LangString' and '.*'"
-    )
-    with pytest.raises(TypeError, match=msg):
+    with pytest.raises(TypeError, match="Argument '.+' must be of types 'LangString' or 'str', but got"):
         _ = lang_str + other
 
 
@@ -154,7 +149,7 @@ def test_radd_incompatible_type_to_langstring(other, lang_str_text, lang_str_lan
     """Test adding an incompatible type to a LangString object using the __radd__ method."""
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_str = LangString(lang_str_text, lang_str_lang)
-    with pytest.raises(TypeError, match="Unsupported operand type"):
+    with pytest.raises(TypeError, match="Argument '.+' must be of types 'LangString' or 'str', but got"):
         _ = other + lang_str
 
 

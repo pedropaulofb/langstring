@@ -65,7 +65,7 @@ class Converter(metaclass=NonInstantiable):
             return cls.from_multilangstring_to_strings(input)
 
         raise TypeError(
-            f"Invalid input argument type. Expected SetLangString or MultiLangString, " f"got '{type(input).__name__}'."
+            f"Invalid input argument type. Expected SetLangString or MultiLangString, got '{type(input).__name__}'."
         )
 
     @classmethod
@@ -228,7 +228,7 @@ class Converter(metaclass=NonInstantiable):
 
         if len(new_lang) > 1:
             raise ValueError(
-                "Operation error. The conversion can only be performed from a LangStrings " "with the same language."
+                "Operation error. The conversion can only be performed from a LangStrings with the same language."
             )
 
         return SetLangString(texts=new_texts, lang=new_lang.pop())

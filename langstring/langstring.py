@@ -452,7 +452,12 @@ class LangString:
         :rtype: LangString
         :raises TypeError: If 'other' is not a string.
         """
-        return LangString(other + self.text, self.lang)
+
+        if isinstance(other, LangString):
+            other_text = other.text
+        else:
+            other_text = other
+        return LangString(other_text + self.text, self.lang)
 
     def __repr__(self) -> str:
         """Return an unambiguous string representation of the LangString."""

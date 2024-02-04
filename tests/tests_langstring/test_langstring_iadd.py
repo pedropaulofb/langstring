@@ -69,8 +69,6 @@ def test_iadd_langstrings_with_strip_lang_effect(strip_lang_flag, should_raise_e
         lang_str1 += lang_str2
         assert lang_str1.text == "HelloBonjour" and lang_str1.lang == "en"
 
-    Controller.reset_flags()
-
 
 @pytest.mark.parametrize(
     "initial_lang, add_lang, expected_error",
@@ -97,8 +95,6 @@ def test_iadd_langstrings_case_insensitive_and_strip_lang(initial_lang, add_lang
     else:
         lang_str1 += lang_str2
         assert lang_str1.text == "HelloWorld" and lang_str1.lang == initial_lang.lower()
-
-    Controller.reset_flags()
 
 
 @pytest.mark.parametrize(
@@ -139,4 +135,3 @@ def test_iadd_langstrings_with_strip_text_effect(strip_text_flag, initial_text, 
     lang_str2 = LangString(add_text, "en")
     lang_str1 += lang_str2
     assert lang_str1.text == expected_text
-    Controller.reset_flags()

@@ -38,7 +38,7 @@ def test_setlangstring_to_langstrings_invalid_type(invalid_input):
     :return: None
     :raises TypeError: If input is not of type SetLangString.
     """
-    with pytest.raises(TypeError, match="Invalid input argument type. Expected SetLangString, got"):
+    with pytest.raises(TypeError, match="Argument '.+' must be of type 'SetLangString', but"):
         Converter.from_setlangstring_to_langstrings(invalid_input)
 
 

@@ -142,7 +142,7 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_simple_type
     @staticmethod
-    def from_string_to_langstring(input_string: str) -> LangString:
+    def from_string_to_langstring(input_string: str, ignore_at_sign: bool = False) -> LangString:
         """Convert a string into a LangString.
 
         If the string contains '@', it splits the string into text (left part) and lang (right part).
@@ -152,7 +152,7 @@ class Converter(metaclass=NonInstantiable):
         :return: A LangString
         """
 
-        if "@" in input_string:
+        if "@" in input_string and not ignore_at_sign:
             parts = input_string.rsplit("@", 1)
             text, lang = parts[0], parts[1]
         else:
@@ -160,17 +160,24 @@ class Converter(metaclass=NonInstantiable):
 
         return LangString(text, lang)
 
-    @Validator.validate_simple_type
     @staticmethod
     def from_strings_to_langstrings(input: Union[set[str], list[str]], lang: str) -> list[LangString]:
+        if not (isinstance(input, set) or isinstance(input, list)):
+            raise TypeError(
+                f"Argument '{input}' must be of types 'set[str]' or 'list[str]', " f"but got '{type(input).__name__}'."
+            )
+
         output = []
         for text in input:
             output.append(LangString(text=text, lang=lang))
         return output
 
-    @Validator.validate_simple_type
     @staticmethod
     def from_strings_to_setlangstring(input: Union[set[str], list[str]], lang: str) -> SetLangString:
+        if not (isinstance(input, set) or isinstance(input, list)):
+            raise TypeError(
+                f"Argument '{input}' must be of types 'set[str]' or 'list[str]', " f"but got '{type(input).__name__}'."
+            )
         texts = set()
 
         for text in input:
@@ -217,20 +224,26 @@ class Converter(metaclass=NonInstantiable):
         """
         return SetLangString(texts={input.text}, lang=input.lang)
 
-    @Validator.validate_simple_type
     @staticmethod
     def from_langstrings_to_setlangstring(input: list[LangString]) -> SetLangString:
+        if not isinstance(input, list):
+            raise TypeError(f"Invalid input argument type. Expected 'list', got '{type(input).__name__}'.")
+
         new_texts = set()
         new_lang = set()
 
         for langstring in input:
+            if not isinstance(langstring, LangString):
+                raise TypeError(
+                    f"Invalid element type inside input list. " f"Expected 'LangString', got '{type(input).__name__}'."
+                )
             new_texts.add(langstring.text)
             new_lang.add(langstring.lang)
 
         if len(new_lang) > 1:
-            raise ValueError(
-                "Operation error. The conversion can only be performed from a LangStrings with the same language."
-            )
+            raise ValueError("The conversion can only be performed from LangStrings with the same language.")
+        if not new_lang:
+            raise ValueError("Cannot convert an empty list to a SetLangString.")
 
         return SetLangString(texts=new_texts, lang=new_lang.pop())
 

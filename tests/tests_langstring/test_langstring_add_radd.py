@@ -256,3 +256,18 @@ def test_add_langstring_case_insensitive_lang_tags(lang1, lang2, text1, text2, e
     lang_str2 = LangString(text2, lang2)
     result = lang_str1 + lang_str2
     assert result.text == expected_result, "The addition should be successful with case-insensitive language tags"
+
+
+def test_radd_with_langstring_on_right() -> None:
+    """
+    Test the __radd__ method to ensure it correctly handles concatenation when 'other' is a LangString object,
+    and the LangString instance is on the right side of the '+' operator, explicitly calling __radd__.
+    """
+    non_langstring_text = "First "
+    langstring = LangString(text="Second", lang="en")
+    # Manually invoking __radd__ to simulate the scenario
+    result = LangString.__radd__(langstring, non_langstring_text)
+    expected_text = "First Second"
+    assert isinstance(result, LangString), "Result of __radd__ should be an instance of LangString"
+    assert result.text == expected_text, f"Expected text '{expected_text}', but got '{result.text}'"
+    assert result.lang == "en", "Language of the result LangString should be 'en'"

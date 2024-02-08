@@ -444,20 +444,24 @@ class LangString:
     def __radd__(self, other: Union["LangString", str]) -> "LangString":
         """Handle concatenation when LangString is on the right side of the '+' operator.
 
-        This method allows a string to be added to the beginning of the LangString's text.
+        This method allows a string or another LangString to be added to the beginning of this LangString's text,
+        ensuring that the operation behaves as expected regardless of the order of the operands.
 
-        :param other: The string to be concatenated to the beginning of this LangString's text.
-        :type other: str
+        :param other: The string or LangString to be concatenated to the beginning of this LangString's text.
+        :type other: Union[str, "LangString"]
         :return: A new LangString with the concatenated text.
         :rtype: LangString
-        :raises TypeError: If 'other' is not a string.
         """
+        # Ensure the type and language matches are appropriate; may need adjustment based on actual type and language handling requirements.
+        self._validate_match_types(other)
+        self._validate_match_langs(other)
 
         if isinstance(other, LangString):
-            other_text = other.text
-        else:
-            other_text = other
-        return LangString(other_text + self.text, self.lang)
+            concatenated_text = other.text + self.text
+        elif isinstance(other, str):
+            concatenated_text = other + self.text
+
+        return LangString(concatenated_text, self.lang)
 
     def __repr__(self) -> str:
         """Return an unambiguous string representation of the LangString."""

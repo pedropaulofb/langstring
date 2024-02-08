@@ -85,6 +85,11 @@ Attributes
           the 'cls' parameter in class methods and may lead to incorrect behavior with setters. For class methods
           and setters, manual type validation is recommended.
 
+          The decorator should not be used with methods that have parameters of generic types, such as `list`, `set`,
+          or other collections that are parameterized with type variables (e.g., `list[str]` or `set[MyClass]`).
+          This limitation stems from the dynamic nature of generic types in Python, which can lead to runtime errors
+          when attempting to check against a parameterized type. Therefore, it is recommended to avoid applying this
+          decorator to methods where the parameters or return types involve generic collections directly.
 
       :param func: The function or method to be decorated.
       :type func: Callable[..., T]

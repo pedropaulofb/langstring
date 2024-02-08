@@ -94,7 +94,7 @@ Classes
       :raises TypeError: If the input is not of type LangString or SetLangString.
 
 
-   .. py:method:: from_string_to_langstring(input_string)
+   .. py:method:: from_string_to_langstring(input_string, ignore_at_sign = False)
       :staticmethod:
 
       Convert a string into a LangString.
@@ -156,7 +156,8 @@ Classes
       :raises TypeError: If the input is not of type LangString.
 
 
-   .. py:method:: from_langstrings_to_multilangstring()
+   .. py:method:: from_langstrings_to_multilangstring(input)
+      :staticmethod:
 
 
    .. py:method:: from_setlangstring_to_string(input)

@@ -104,7 +104,7 @@ Classes
    .. py:method:: to_langstrings()
 
 
-   .. py:method:: to_strings()
+   .. py:method:: to_strings(print_quotes = True, separator = '@', print_lang = True)
 
 
    .. py:method:: __and__(other)

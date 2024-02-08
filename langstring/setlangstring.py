@@ -171,18 +171,16 @@ class SetLangString:
         self.texts.remove(text)
 
     def to_langstrings(self) -> list[LangString]:
-        # TODO: TO BE TESTED
         langstrings = []
         for text in self.texts:
             langstrings.append(LangString(text=text, lang=self.lang))
         return langstrings
 
-    def to_strings(self) -> list[str]:
-        # TODO: TO BE TESTED
+    def to_strings(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> list[str]:
         strings = []
         for text in self.texts:
-            new_text = f'"{text}"' if Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES) else text
-            new_lang = f"@{self.lang}" if Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG) else ""
+            new_text = f'"{text}"' if print_quotes else text
+            new_lang = f"{separator}{self.lang}" if print_lang else ""
             strings.append(f"{new_text}{new_lang}")
         return strings
 

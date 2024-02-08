@@ -151,7 +151,6 @@ class Converter(metaclass=NonInstantiable):
         :param input_string: The input string to be converted.
         :return: A LangString
         """
-
         if "@" in input_string and not ignore_at_sign:
             parts = input_string.rsplit("@", 1)
             text, lang = parts[0], parts[1]
@@ -174,13 +173,19 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_strings_to_setlangstring(input: Union[set[str], list[str]], lang: str) -> SetLangString:
+        if not input:
+            raise ValueError("Cannot convert the empty input to a SetLangString.")
         if not (isinstance(input, set) or isinstance(input, list)):
             raise TypeError(
-                f"Argument '{input}' must be of types 'set[str]' or 'list[str]', " f"but got '{type(input).__name__}'."
+                f"Argument '{input}' must be of types 'set[str]' or 'list[str]' but got '{type(input).__name__}'."
             )
         texts = set()
 
         for text in input:
+            if not isinstance(text, str):
+                raise TypeError(
+                    f"Invalid element type inside input argument. " f"Expected 'str', got '{type(text).__name__}'."
+                )
             texts.add(text)
 
         return SetLangString(texts=texts, lang=lang)
@@ -228,6 +233,8 @@ class Converter(metaclass=NonInstantiable):
     def from_langstrings_to_setlangstring(input: list[LangString]) -> SetLangString:
         if not isinstance(input, list):
             raise TypeError(f"Invalid input argument type. Expected 'list', got '{type(input).__name__}'.")
+        if not input:
+            raise ValueError("Cannot convert an empty list to a SetLangString.")
 
         new_texts = set()
         new_lang = set()
@@ -235,15 +242,14 @@ class Converter(metaclass=NonInstantiable):
         for langstring in input:
             if not isinstance(langstring, LangString):
                 raise TypeError(
-                    f"Invalid element type inside input list. " f"Expected 'LangString', got '{type(input).__name__}'."
+                    f"Invalid element type inside input argument. "
+                    f"Expected 'LangString', got '{type(langstring).__name__}'."
                 )
             new_texts.add(langstring.text)
             new_lang.add(langstring.lang)
 
         if len(new_lang) > 1:
             raise ValueError("The conversion can only be performed from LangStrings with the same language.")
-        if not new_lang:
-            raise ValueError("Cannot convert an empty list to a SetLangString.")
 
         return SetLangString(texts=new_texts, lang=new_lang.pop())
 
@@ -264,6 +270,8 @@ class Converter(metaclass=NonInstantiable):
         new_mls_dict: dict[str, set[str]] = {input.lang: {input.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
 
+    @Validator.validate_simple_type
+    @staticmethod
     def from_langstrings_to_multilangstring(input: LangString) -> SetLangString:
         # TODO: TO BE IMPLEMENTED
         pass

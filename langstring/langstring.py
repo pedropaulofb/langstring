@@ -441,27 +441,15 @@ class LangString:
             return (self.text != other.text) or (self.lang.casefold() != other.lang.casefold())
 
     @Validator.validate_simple_type
-    def __radd__(self, other: Union["LangString", str]) -> "LangString":
+    def __radd__(self, other: str) -> str:
         """Handle concatenation when LangString is on the right side of the '+' operator.
 
-        This method allows a string or another LangString to be added to the beginning of this LangString's text,
-        ensuring that the operation behaves as expected regardless of the order of the operands.
+        Only defined to 'other' of type string because the __add__ method is used when 'other' is a LangString.
 
-        :param other: The string or LangString to be concatenated to the beginning of this LangString's text.
-        :type other: Union[str, "LangString"]
-        :return: A new LangString with the concatenated text.
-        :rtype: LangString
+        As it concatenates other's text to the LangString's text (in this order), it returns a string and, consequently,
+        the result looses its language tag.
         """
-        # Ensure the type and language matches are appropriate; may need adjustment based on actual type and language handling requirements.
-        self._validate_match_types(other)
-        self._validate_match_langs(other)
-
-        if isinstance(other, LangString):
-            concatenated_text = other.text + self.text
-        elif isinstance(other, str):
-            concatenated_text = other + self.text
-
-        return LangString(concatenated_text, self.lang)
+        return other + self.text
 
     def __repr__(self) -> str:
         """Return an unambiguous string representation of the LangString."""

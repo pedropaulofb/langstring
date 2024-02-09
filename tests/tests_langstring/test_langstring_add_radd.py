@@ -85,7 +85,7 @@ def test_add_string_and_langstring(other_text, lang_str_text, lang_str_lang, exp
     lang_str = LangString(lang_str_text, lang_str_lang)
     result = other_text + lang_str
     assert (
-        result.text == expected_text and result.lang == lang_str_lang
+        result == expected_text
     ), "Adding a string to a LangString should concatenate the text"
 
 
@@ -132,7 +132,7 @@ def test_radd_string_to_langstring(other_text, lang_str_text, lang_str_lang, exp
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_str = LangString(lang_str_text, lang_str_lang)
     result = other_text + lang_str
-    assert result.text == expected_text, "The text after addition should match the expected result"
+    assert result == expected_text, "The text after addition should match the expected result"
 
 
 # Test adding an incompatible type to a LangString object using the __radd__ method
@@ -149,7 +149,7 @@ def test_radd_incompatible_type_to_langstring(other, lang_str_text, lang_str_lan
     """Test adding an incompatible type to a LangString object using the __radd__ method."""
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_str = LangString(lang_str_text, lang_str_lang)
-    with pytest.raises(TypeError, match="Argument '.+' must be of types 'LangString' or 'str', but got"):
+    with pytest.raises(TypeError, match="Argument '.+' must be of type 'str', but got"):
         _ = other + lang_str
 
 
@@ -193,7 +193,7 @@ def test_radd_empty_string_to_langstring(other_text, lang_str_text, lang_str_lan
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_str = LangString(lang_str_text, lang_str_lang)
     result = other_text + lang_str
-    assert result.text == expected_text, "The text after addition with an empty string should match the expected result"
+    assert result == expected_text, "The text after addition with an empty string should match the expected result"
 
 
 @pytest.mark.parametrize(
@@ -257,17 +257,3 @@ def test_add_langstring_case_insensitive_lang_tags(lang1, lang2, text1, text2, e
     result = lang_str1 + lang_str2
     assert result.text == expected_result, "The addition should be successful with case-insensitive language tags"
 
-
-def test_radd_with_langstring_on_right() -> None:
-    """
-    Test the __radd__ method to ensure it correctly handles concatenation when 'other' is a LangString object,
-    and the LangString instance is on the right side of the '+' operator, explicitly calling __radd__.
-    """
-    non_langstring_text = "First "
-    langstring = LangString(text="Second", lang="en")
-    # Manually invoking __radd__ to simulate the scenario
-    result = LangString.__radd__(langstring, non_langstring_text)
-    expected_text = "First Second"
-    assert isinstance(result, LangString), "Result of __radd__ should be an instance of LangString"
-    assert result.text == expected_text, f"Expected text '{expected_text}', but got '{result.text}'"
-    assert result.lang == "en", "Language of the result LangString should be 'en'"

@@ -63,5 +63,5 @@ html_theme_options = {"display_version": True}
 sphinx_rtd_size_width = "100%"
 
 html_css_files = [
-    'logo_resize.css',
+    "logo_resize.css",
 ]

@@ -1,31 +1,50 @@
 import pytest
 
-from langstring import Controller
 from langstring import Converter
+from langstring import LangString
 from langstring import SetLangString
-from langstring import SetLangStringFlag
 
 
 @pytest.mark.parametrize(
-    "texts, lang, flags, expected",
+    "texts, lang, print_quotes, separator, print_lang, expected",
     [
-        ({"Hello", "World"}, "en", (False, False), ["Hello", "World"]),
-        ({"Bonjour", "Monde"}, "fr", (True, False), ['"Bonjour"', '"Monde"']),
-        ({"Hola", "Mundo"}, "es", (False, True), ["Hola@es", "Mundo@es"]),
-        ({"Ciao", "Mondo"}, "it", (True, True), ['"Ciao"@it', '"Mondo"@it']),
+        ({"Hello", "World"}, "en", False, "@", False, ["Hello", "World"]),
+        ({"Hello", "World"}, "en", True, "@", False, ['"Hello"', '"World"']),
+        ({"Hello", "World"}, "en", False, "@", True, ["Hello@en", "World@en"]),
+        ({"Hello", "World"}, "en", True, "@", True, ['"Hello"@en', '"World"@en']),
+        (set(), "en", True, "@", True, []),
+        ({"Emoji", "👍"}, "emoji", True, "~", True, ['"Emoji"~emoji', '"👍"~emoji']),
+        ({"Mixed", "123"}, "num", False, "#", True, ["Mixed#num", "123#num"]),
     ],
 )
-def test_from_setlangstring_to_strings_flags(texts, lang, flags, expected):
-    Controller.set_flag(SetLangStringFlag.PRINT_WITH_QUOTES, flags[0])
-    Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, flags[1])
+def test_from_setlangstring_to_strings_variations(
+    texts: set, lang: str, print_quotes: bool, separator: str, print_lang: bool, expected: list[str]
+) -> None:
+    """
+    Test the `from_setlangstring_to_strings` method with various combinations of inputs and flags to ensure it
+    correctly formats the strings according to the given parameters.
+
+    :param texts: A set of texts to initialize the SetLangString object.
+    :param lang: The language tag to be associated with the SetLangString object.
+    :param print_quotes: Flag indicating whether the output strings should be enclosed in quotes.
+    :param separator: The separator to be used between the text and the language tag in the output strings.
+    :param print_lang: Flag indicating whether the language tag should be included in the output strings.
+    :param expected: The expected list of formatted strings.
+    """
     set_lang_string = SetLangString(texts=texts, lang=lang)
-    result = Converter.from_setlangstring_to_strings(set_lang_string)
-    assert sorted(result) == sorted(expected), f"Expected {expected} but got {result} under flags {flags}."
+    result = Converter.from_setlangstring_to_strings(
+        set_lang_string, print_quotes=print_quotes, separator=separator, print_lang=print_lang
+    )
+    assert sorted(result) == sorted(expected), (
+        f"Expected {expected} but got {result} with configuration "
+        f"(print_quotes={print_quotes}, separator='{separator}', "
+        f"print_lang={print_lang})."
+    )
 
 
 @pytest.mark.parametrize(
     "invalid_input",
-    [123, "not a SetLangString", None],
+    [123, 1.2, LangString("a", "b"), "not a SetLangString", None, {}, []],
 )
 def test_from_setlangstring_to_strings_invalid_input(invalid_input):
     """Test from_setlangstring_to_strings with various invalid input types.
@@ -35,26 +54,3 @@ def test_from_setlangstring_to_strings_invalid_input(invalid_input):
     """
     with pytest.raises(TypeError, match="Argument '.+' must be of type 'SetLangString', but got"):
         Converter.from_setlangstring_to_strings(invalid_input)
-
-
-@pytest.mark.parametrize(
-    "texts, lang, expected",
-    [
-        (set(), "en", []),  # Testing with an empty set
-        ({"123", "456"}, "en", ["123", "456"]),  # Numeric strings
-        ({"👋🌍"}, "emoji", ["👋🌍"]),  # Emojis
-        ({"This is a very long string" * 10}, "en", ["This is a very long string" * 10]),  # Long string
-    ],
-)
-def test_from_setlangstring_to_strings_edge_cases(texts, lang, expected):
-    """Test from_setlangstring_to_strings with various edge cases.
-
-    :param texts: A set of strings to be included in the SetLangString.
-    :param lang: The language tag associated with the texts. Can be None.
-    :param expected: The expected list of strings after conversion.
-    """
-    Controller.set_flag(SetLangStringFlag.PRINT_WITH_QUOTES, False)
-    Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, False)
-    set_lang_string = SetLangString(texts=texts, lang=lang)
-    result = Converter.from_setlangstring_to_strings(set_lang_string)
-    assert sorted(result) == sorted(expected), f"Expected {expected}, got {result}."

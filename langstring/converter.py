@@ -287,8 +287,10 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_simple_type
     @staticmethod
-    def from_setlangstring_to_strings(input: SetLangString) -> list[str]:
-        return input.to_strings()
+    def from_setlangstring_to_strings(
+        input: SetLangString, print_quotes: bool = True, separator: str = "@", print_lang: bool = True
+    ) -> list[str]:
+        return input.to_strings(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
     @Validator.validate_simple_type
     @staticmethod
@@ -322,6 +324,10 @@ class Converter(metaclass=NonInstantiable):
         """
         new_mls_dict: dict[str, set[str]] = {input.lang: input.texts}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=input.lang)
+
+    def from_setlangstrings_to_multilangstring(input: list[SetLangString]) -> MultiLangString:
+        # TODO: To be implemented
+        pass
 
     # ---------------------------------------------
     # MultiLangStrings' Conversion Methods
@@ -363,3 +369,11 @@ class Converter(metaclass=NonInstantiable):
             return_list.append(SetLangString(texts=input.mls_dict[lang], lang=lang))
 
         return return_list
+
+    def from_multilangstring_to_string(self) -> str:
+        # TODO: To be implemented
+        pass
+
+    def from_multilangstring_to_strings(self) -> list[str]:
+        # TODO: To be implemented
+        pass

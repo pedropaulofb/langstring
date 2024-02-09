@@ -84,9 +84,7 @@ def test_add_string_and_langstring(other_text, lang_str_text, lang_str_lang, exp
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_str = LangString(lang_str_text, lang_str_lang)
     result = other_text + lang_str
-    assert (
-        result == expected_text
-    ), "Adding a string to a LangString should concatenate the text"
+    assert result == expected_text, "Adding a string to a LangString should concatenate the text"
 
 
 # Test adding incompatible types
@@ -256,4 +254,3 @@ def test_add_langstring_case_insensitive_lang_tags(lang1, lang2, text1, text2, e
     lang_str2 = LangString(text2, lang2)
     result = lang_str1 + lang_str2
     assert result.text == expected_result, "The addition should be successful with case-insensitive language tags"
-

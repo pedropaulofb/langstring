@@ -183,6 +183,10 @@ class MultiLangString:
         # TODO: To be implemented
         pass
 
+    def remove_setlangstring(self, langstring: LangString) -> None:
+        # TODO: To be implemented
+        pass
+
     def remove_lang(self, lang: str) -> None:
         """Remove all entries of a given language from the dictionary.
 
@@ -293,6 +297,14 @@ class MultiLangString:
         pass
 
     def to_setlangstrings(self) -> list[SetLangString]:
+        # TODO: To be implemented
+        pass
+
+    def to_string(self) -> str:
+        # TODO: To be implemented
+        pass
+
+    def to_strings(self) -> list[str]:
         # TODO: To be implemented
         pass
 

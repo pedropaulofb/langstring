@@ -147,13 +147,13 @@ class Validator(metaclass=NonInstantiable):
                     if not any(isinstance(arg, t) for t in get_args(hint)):
                         allowed_types = " or ".join(f"'{t.__name__}'" for t in get_args(hint))
                         raise TypeError(
-                            f"Argument '{arg}' must be of types {allowed_types}, " f"but got '{type(arg).__name__}'."
+                            f"Argument '{arg}' must be of types {allowed_types}, but got '{type(arg).__name__}'."
                         )
                     return True
 
                 if not isinstance(arg, hint):
                     raise TypeError(
-                        f"Argument '{arg}' must be of type '{hint.__name__}', " f"but got '{type(arg).__name__}'."
+                        f"Argument '{arg}' must be of type '{hint.__name__}', but got '{type(arg).__name__}'."
                     )
 
                 return True

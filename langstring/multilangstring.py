@@ -69,9 +69,9 @@ class MultiLangString:
         self.mls_dict: dict[str, set[str]] = mls_dict if (mls_dict is not None) else {}
         self.pref_lang: str = pref_lang
 
-    # ---------------------------------------------
+    # --------------------------------------------------
     # Getters and Setters
-    # ---------------------------------------------
+    # --------------------------------------------------
 
     @property
     def mls_dict(self) -> dict[str, set[str]]:
@@ -112,14 +112,29 @@ class MultiLangString:
         """
         self._pref_lang = Validator.validate_text(MultiLangStringFlag, new_pref_lang)
 
-    # ---------------------------------------------
+    # --------------------------------------------------
     # MultiLangString's Regular Methods
-    # ---------------------------------------------
+    # --------------------------------------------------
 
-    def add(self, input: Union[str, LangString, SetLangString]):
-        # TODO: to be implemented.
-        pass
+    def add(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, LangString):
+            self.add_langstring(arg)
+            return
 
+        if isinstance(arg, SetLangString):
+            self.add_setlangstring(arg)
+            return
+
+        if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
+            self.add_entry(arg[0], arg[1])
+            return
+
+        raise TypeError(
+            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"but got '{type(arg).__name__}'."
+        )
+
+    @Validator.validate_simple_type
     def add_entry(self, text: str, lang: str = "") -> None:
         """Add a text entry to the MultiLangString under a specified language.
 
@@ -136,6 +151,7 @@ class MultiLangString:
             self.mls_dict[lang] = set()
         self.mls_dict[lang].add(text)
 
+    @Validator.validate_simple_type
     def add_langstring(self, langstring: LangString) -> None:
         """Add a LangString to the MultiLangString.
 
@@ -148,6 +164,7 @@ class MultiLangString:
         langstring.lang = "" if langstring.lang is None else langstring.lang
         self.add_entry(text=langstring.text, lang=langstring.lang)
 
+    @Validator.validate_simple_type
     def add_setlangstring(self, setlangstring: SetLangString) -> None:
         """Add a SetLangString to the MultiLangString.
 
@@ -161,7 +178,26 @@ class MultiLangString:
 
         # TODO: To be implemented.
 
-    def remove_entry(self, text: str, lang: str, clear_empty: bool = False) -> None:
+    def remove(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, LangString):
+            self.remove_langstring(arg)
+            return
+
+        if isinstance(arg, SetLangString):
+            self.remove_setlangstring(arg)
+            return
+
+        if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
+            self.remove_entry(arg[0], arg[1])
+            return
+
+        raise TypeError(
+            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"but got '{type(arg).__name__}'."
+        )
+
+    @Validator.validate_simple_type
+    def remove_entry(self, text: str, lang: str, clear_empty_lang: bool = False) -> None:
         """Remove a single entry from the set of a given language key in the dictionary.
 
         If the specified language key exists and the text is in its set, the text is removed. If this results in an
@@ -172,21 +208,24 @@ class MultiLangString:
         :param lang: The language key from which the text should be removed.
         :type lang: str
         """
-        if lang in self.mls_dict and text in self.mls_dict[lang]:
-            self.mls_dict[lang].remove(text)
-            if len(self.mls_dict[lang]) == 0 and clear_empty:
-                del self.mls_dict[lang]
+        # TODO: Verify if it is better to use clear_empty_lang as a flag instead of a parameter.
+        #  It is applied to all remove and discard methods.
+
+        if self.is_entry(text, lang):
+            self.discard_entry(text, lang, clear_empty_lang)
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
 
+    @Validator.validate_simple_type
     def remove_langstring(self, langstring: LangString) -> None:
-        # TODO: To be implemented
-        pass
+        self.remove_entry(langstring.text, langstring.lang)
 
-    def remove_setlangstring(self, langstring: LangString) -> None:
-        # TODO: To be implemented
-        pass
+    @Validator.validate_simple_type
+    def remove_setlangstring(self, setlangstring: SetLangString) -> None:
+        for text in setlangstring.texts:
+            self.remove_entry(text, setlangstring.lang)
 
+    @Validator.validate_simple_type
     def remove_lang(self, lang: str) -> None:
         """Remove all entries of a given language from the dictionary.
 
@@ -200,7 +239,44 @@ class MultiLangString:
         else:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
 
-    # TODO: create discard (do not raise error). See implementation for SLSs.
+    def discard(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, LangString):
+            self.discard_langstring(arg)
+            return
+
+        if isinstance(arg, SetLangString):
+            self.discard_setlangstring(arg)
+            return
+
+        if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
+            self.discard_entry(arg[0], arg[1])
+            return
+
+        raise TypeError(
+            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"but got '{type(arg).__name__}'."
+        )
+
+    @Validator.validate_simple_type
+    def discard_entry(self, text: str, lang: str, clear_empty_lang: bool = False) -> None:
+        if lang in self.mls_dict and text in self.mls_dict[lang]:
+            self.mls_dict[lang].remove(text)
+            if len(self.mls_dict[lang]) == 0 and clear_empty_lang:
+                del self.mls_dict[lang]
+
+    @Validator.validate_simple_type
+    def discard_langstring(self, langstring: LangString) -> None:
+        self.discard_entry(text=langstring.text, lang=langstring.lang)
+
+    @Validator.validate_simple_type
+    def discard_setlangstring(self, setlangstring: SetLangString) -> None:
+        for text in setlangstring.texts:
+            self.discard_entry(text=text, lang=setlangstring.lang)
+
+    @Validator.validate_simple_type
+    def discard_lang(self, lang: str) -> None:
+        if lang in self.mls_dict:
+            del self.mls_dict[lang]
 
     def clear_empty(self) -> None:
         empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
@@ -300,17 +376,39 @@ class MultiLangString:
         # TODO: To be implemented
         pass
 
-    def to_string(self) -> str:
-        # TODO: To be implemented
-        pass
-
     def to_strings(self) -> list[str]:
         # TODO: To be implemented
         pass
 
-    # ---------------------------------------------
+    # --------------------------------------------------
+    # Overwritten Dictionary's Built-in Regular Methods
+    # --------------------------------------------------
+
+    # copy(): Returns a shallow copy.
+    # fromkeys(seq[, value]): Creates dict from keys sequence.
+    # get(key[, default]): Returns value for key.
+    # items(): Returns view of key-value pairs.
+    # keys(): Returns view of keys.
+    # pop(key[, default]): Removes specified key and returns its value.
+    # popitem(): Removes and returns last key-value pair.
+    # setdefault(key[, default]): Returns value for key; inserts if not present.
+    # update([other]): Updates dict from other dict or iterable.
+    # values(): Returns view of values.
+
+    # --------------------------------------------------
     # MultiLangString's Dunder Methods
-    # ---------------------------------------------
+    # --------------------------------------------------
+
+    # __getitem__(self, key): Allows access to an item using dict[key].
+    # __setitem__(self, key, value): Enables item assignment via dict[key] = value.
+    # __delitem__(self, key): Allows deletion of an item using del dict[key].
+    # __iter__(self): Returns an iterator for the dictionary, typically over its keys.
+    # __len__(self): Returns the number of items in the dictionary when len(dict) is called.
+    # __contains__(self, key): Implements membership testing with key in dict.
+    # __eq__(self, other): Defines behavior for the equality operator, ==.
+    # __ne__(self, other): Defines behavior for the inequality operator, !=.
+    # __repr__(self): Returns the "official" string representation of the dictionary, which ideally should be a valid Python expression that could be used to recreate the object.
+    # __str__(self): Returns the "informal" or nicely printable string representation of the dictionary.
 
     def __eq__(self, other: object) -> bool:
         """Check equality of this MultiLangString with another MultiLangString.

@@ -15,14 +15,6 @@
    retrieving entries in specific languages or across all languages. The class also allows setting a preferred language,
    which can be used as a default for operations that involve retrieving text entries.
 
-   Key Features:
-   - Store and manage text entries in multiple languages using language tags.
-   - Add and remove text entries for specific languages.
-   - Retrieve text entries for a specific language or all languages.
-   - Set and get a preferred language for default text retrieval.
-   - Support for equality comparison and hashing based on the content of the multilingual text entries.
-   - Validation and control strategies for handling duplicate language tags and ensuring the integrity of text entries.
-
    This module is designed to be used in applications that require handling of text in multiple languages, providing a
    convenient and standardized way to store and manipulate multilingual text data.
 
@@ -77,7 +69,12 @@ Classes
       :return: The preferred language as a string.
 
 
-   .. py:method:: add(input)
+   .. py:method:: add(arg)
+
+
+   .. py:method:: add_text_in_pref_lang(text)
+
+      Add a text entry to the preferred language.
 
 
    .. py:method:: add_entry(text, lang = '')
@@ -110,7 +107,15 @@ Classes
       :type setlangstring: SetLangString
 
 
-   .. py:method:: remove_entry(text, lang, clear_empty = False)
+   .. py:method:: remove(arg)
+
+
+   .. py:method:: remove_text_in_pref_lang(text)
+
+      Remove a text entry from the preferred language.
+
+
+   .. py:method:: remove_entry(text, lang)
 
       Remove a single entry from the set of a given language key in the dictionary.
 
@@ -126,6 +131,9 @@ Classes
    .. py:method:: remove_langstring(langstring)
 
 
+   .. py:method:: remove_setlangstring(setlangstring)
+
+
    .. py:method:: remove_lang(lang)
 
       Remove all entries of a given language from the dictionary.
@@ -136,96 +144,142 @@ Classes
       :type lang: str
 
 
-   .. py:method:: clear_empty()
+   .. py:method:: discard(arg)
 
 
-   .. py:method:: get_strings_lang(lang)
+   .. py:method:: discard_text_in_pref_lang(text)
 
-      Retrieve all text entries for a specific language.
-
-      :param lang: The language key to retrieve entries for.
-      :type lang: str
-      :return: A list of text entries for the specified language.
-      :rtype: list[str]
+      Discard a text entry from the preferred language.
 
 
-   .. py:method:: get_strings_pref_lang()
-
-      Retrieve all text entries for the preferred language.
-
-      :return: A list of text entries for the specified language.
-      :rtype: list[str]
+   .. py:method:: discard_entry(text, lang)
 
 
-   .. py:method:: get_strings_all()
-
-      Retrieve all text entries across all languages.
-
-      :return: A list of all text entries.
-      :rtype: list[str]
+   .. py:method:: discard_langstring(langstring)
 
 
-   .. py:method:: get_strings_langstring_lang(lang)
-
-      Retrieve all text entries for a specific language, formatted as '"text"@lang'.
-
-      :param lang: The language key to retrieve entries for.
-      :type lang: str
-      :return: A list of formatted text entries for the specified language.
-      :rtype: list[str]
+   .. py:method:: discard_setlangstring(setlangstring)
 
 
-   .. py:method:: get_strings_langstring_pref_lang()
-
-      Retrieve all text entries for the preferred language, formatted as '"text"@lang'.
-
-      :return: A list of formatted text entries for the specified language.
-      :rtype: list[str]
+   .. py:method:: discard_lang(lang)
 
 
-   .. py:method:: get_strings_langstring_all()
-
-      Retrieve all text entries across all languages, formatted as '"text"@lang'.
-
-      :return: A list of formatted text entries for all languages.
-      :rtype: list[str]
+   .. py:method:: to_langstrings(languages = None)
 
 
-   .. py:method:: len_entries_all()
-
-      Calculate the total number of elements across all sets in the dictionary.
-
-      Iterates through each set in the dictionary values and sums their lengths to get the total number of elements.
-
-      :return: The total number of elements across all sets.
-      :rtype: int
+   .. py:method:: to_setlangstrings(languages = None)
 
 
-   .. py:method:: len_entries_lang(lang)
-
-      Calculate the number of entries of a given language in the dictionary.
-
-      :return: The number of entries for a given language in a MultiLangString.
-      :rtype: int
+   .. py:method:: to_strings(languages = None, print_quotes = True, separator = '@', print_lang = True)
 
 
-   .. py:method:: len_langs()
+   .. py:method:: count_lang_entries()
 
-      Calculate the number of keys (languages) in the dictionary.
+      Returns the number of text entries for each language.
 
-      This method returns the count of distinct keys in the dictionary, which represents the number of languages.
-
-      :return: The number of keys in the dictionary.
-      :rtype: int
+      :return: A dictionary with language codes as keys and counts of text entries as values.
 
 
-   .. py:method:: is_entry(text, lang)
+   .. py:method:: count_langs()
 
 
-   .. py:method:: to_langstrings()
+   .. py:method:: count_total_entries()
+
+      Return the total number of text entries across all languages.
 
 
-   .. py:method:: to_setlangstrings()
+   .. py:method:: contains(arg)
+
+
+   .. py:method:: contains_text_in_pref_lang(text)
+
+      Check if a specific text exists in the preferred language.
+
+
+   .. py:method:: contains_entry(text, lang)
+
+
+   .. py:method:: contains_langstring(langstring)
+
+      Check if the given LangString's text and lang are part of this MultiLangString.
+
+      :param langstring: A LangString object to check.
+      :return: True if the LangString's text is found within the specified language's set; otherwise, False.
+
+
+   .. py:method:: contains_setlangstring(setlangstring)
+
+      Check if all texts and the language of a SetLangString are part of this MultiLangString.
+
+      :param setlangstring: A SetLangString object to check.
+      :return: True if the SetLangString's language exists and all its texts are found within the specified
+      language's set; otherwise, False.
+
+
+   .. py:method:: clear_empty_langs()
+
+
+   .. py:method:: copy()
+
+      Create a shallow copy of the MultiLangString instance.
+
+      Returns a new MultiLangString instance with a shallow copy of the internal dictionary.
+
+
+   .. py:method:: fromkeys(seq, value=None)
+      :classmethod:
+
+      Create a new MultiLangString instance with keys from seq and values set to value.
+
+
+   .. py:method:: get(key, default=None)
+
+      Return the value for key if key is in the dictionary, else default.
+
+
+   .. py:method:: items()
+
+      Return items (language, texts set) in the MultiLangString.
+
+
+   .. py:method:: keys()
+
+      Return the languages in the MultiLangString.
+
+
+   .. py:method:: pop(key, default=None)
+
+      Remove specified key and returns its value. If key is not found, default is returned if given.
+
+
+   .. py:method:: popitem()
+
+      Remove and returns a (key, value) pair as a 2-tuple.
+
+
+   .. py:method:: setdefault(key, default=None)
+
+      If key is in the dict, return its value. If not, insert key with a value of default and return default.
+
+
+   .. py:method:: update(other)
+
+      Update the dictionary with the key/value pairs from other, overwriting existing keys.
+
+
+   .. py:method:: values()
+
+      Return the sets of texts in the MultiLangString.
+
+
+   .. py:method:: __contains__(key)
+
+      Check if a language is in the MultiLangString.
+
+
+   .. py:method:: __delitem__(key)
+
+      Allow deletion of language entries.
 
 
    .. py:method:: __eq__(other)
@@ -241,6 +295,11 @@ Classes
       :rtype: bool
 
 
+   .. py:method:: __getitem__(key)
+
+      Allow retrieval of entries by language.
+
+
    .. py:method:: __hash__()
 
       Generate a hash new_text for a MultiLangString object.
@@ -252,6 +311,31 @@ Classes
       :rtype: int
 
 
+   .. py:method:: __ior__(other)
+
+      Implement in-place update operation (equivalent to self.update(other)).
+
+
+   .. py:method:: __iter__()
+
+      Allow iteration over the dictionary keys (language codes).
+
+
+   .. py:method:: __len__()
+
+      Return the number of languages in the dictionary.
+
+
+   .. py:method:: __ne__(other)
+
+      Define behavior for the inequality operator, !=.
+
+
+   .. py:method:: __or__(other)
+
+      Implement merge operation, returning a new MultiLangString with merged content.
+
+
    .. py:method:: __repr__()
 
       Return a detailed string representation of the MultiLangString object.
@@ -261,6 +345,21 @@ Classes
 
       :return: A detailed string representation of the MultiLangString.
       :rtype: str
+
+
+   .. py:method:: __reversed__()
+
+      Return a reverse iterator over the dictionary keys.
+
+
+   .. py:method:: __ror__(other)
+
+      Implement right-side merge, used if the left operand does not support merge.
+
+
+   .. py:method:: __setitem__(key, value)
+
+      Allow setting entries by language.
 
 
    .. py:method:: __str__()

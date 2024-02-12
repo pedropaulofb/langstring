@@ -431,7 +431,7 @@ class MultiLangString:
     # Overwritten Dictionary's Built-in Regular Methods
     # --------------------------------------------------
 
-    def copy(self):
+    def copy(self)-> 'MultiLangString':
         """Create a shallow copy of the MultiLangString instance.
 
         Returns a new MultiLangString instance with a shallow copy of the internal dictionary.
@@ -440,7 +440,7 @@ class MultiLangString:
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=self.pref_lang)
 
     @classmethod
-    def fromkeys(cls, seq, value=None):
+    def fromkeys(cls, seq, value=None)-> 'MultiLangString':
         """Create a new MultiLangString instance with keys from seq and values set to value."""
         return cls({k: set(value) if value is not None else set() for k in seq})
 

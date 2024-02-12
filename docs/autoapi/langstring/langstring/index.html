@@ -1040,19 +1040,15 @@ Otherwise, return a copy of the original LangString.</p>
 <dt class="sig sig-object py" id="langstring.langstring.LangString.__radd__">
 <span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.__radd__" title="Link to this definition"></a></dt>
 <dd><p>Handle concatenation when LangString is on the right side of the ‘+’ operator.</p>
-<p>This method allows a string to be added to the beginning of the LangString’s text.</p>
+<p>Only defined to ‘other’ of type string because the __add__ method is used when ‘other’ is a LangString.</p>
+<p>As it concatenates other’s text to the LangString’s text (in this order), it returns a string and, consequently,
+the result looses its language tag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>str</em>) – The string to be concatenated to the beginning of this LangString’s text.</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>str</em>) – </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A new LangString with the concatenated text.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#langstring.langstring.LangString" title="langstring.langstring.LangString">LangString</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If ‘other’ is not a string.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 </dd></dl>

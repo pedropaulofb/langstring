@@ -347,13 +347,10 @@ Classes
 
       Handle concatenation when LangString is on the right side of the '+' operator.
 
-      This method allows a string to be added to the beginning of the LangString's text.
+      Only defined to 'other' of type string because the __add__ method is used when 'other' is a LangString.
 
-      :param other: The string to be concatenated to the beginning of this LangString's text.
-      :type other: str
-      :return: A new LangString with the concatenated text.
-      :rtype: LangString
-      :raises TypeError: If 'other' is not a string.
+      As it concatenates other's text to the LangString's text (in this order), it returns a string and, consequently,
+      the result looses its language tag.
 
 
    .. py:method:: __repr__()

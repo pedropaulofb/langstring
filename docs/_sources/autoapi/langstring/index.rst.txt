@@ -43,13 +43,11 @@ Classes
 .. autoapisummary::
 
    langstring.Controller
-   langstring.Converter
    langstring.GlobalFlag
    langstring.LangStringFlag
    langstring.MultiLangStringFlag
    langstring.SetLangStringFlag
    langstring.LangString
-   langstring.MultiLangString
    langstring.SetLangString
 
 
@@ -172,193 +170,6 @@ Classes
 
 
 
-.. py:class:: Converter
-
-
-   A utility class for converting between different string types used in language processing.
-
-   This class provides methods to convert between `LangString`, `SetLangString`, and `MultiLangString` types.
-   It is designed to be non-instantiable as it serves as a utility class with class methods only.
-
-   .. py:method:: to_string(input)
-      :classmethod:
-
-
-   .. py:method:: to_strings(input)
-      :classmethod:
-
-
-   .. py:method:: to_langstring(input)
-      :classmethod:
-
-      Convert a SetLangString or MultiLangString to a list of LangStrings.
-
-      :param input: The SetLangString or MultiLangString to be converted.
-      :type input: Union[SetLangString, MultiLangString]
-      :return: A list of LangStrings.
-      :rtype: list[LangString]
-      :raises TypeError: If the input is not of type SetLangString or MultiLangString.
-
-
-   .. py:method:: to_setlangstring(input)
-      :classmethod:
-
-      Convert a LangString or MultiLangString to a SetLangString or a list of SetLangStrings.
-
-      :param input: The LangString or MultiLangString to be converted.
-      :type input: Union[LangString, MultiLangString]
-      :return: A SetLangString or a list of SetLangStrings.
-      :rtype: Union[SetLangString, list[SetLangString]]
-      :raises TypeError: If the input is not of type LangString or MultiLangString.
-
-
-   .. py:method:: to_multilangstring(input)
-      :classmethod:
-
-      Convert a LangString or SetLangString to a MultiLangString.
-
-      :param input: The LangString or SetLangString to be converted.
-      :type input: Union[LangString, SetLangString]
-      :return: A MultiLangString.
-      :rtype: MultiLangString
-      :raises TypeError: If the input is not of type LangString or SetLangString.
-
-
-   .. py:method:: from_string_to_langstring(input_string, ignore_at_sign = False)
-      :staticmethod:
-
-      Convert a string into a LangString.
-
-      If the string contains '@', it splits the string into text (left part) and lang (right part).
-      If there is no '@', the entire string is set as text and lang is set to an empty string.
-
-      :param input_string: The input string to be converted.
-      :return: A LangString
-
-
-   .. py:method:: from_strings_to_langstrings(input, lang)
-      :staticmethod:
-
-
-   .. py:method:: from_strings_to_setlangstring(input, lang)
-      :staticmethod:
-
-
-   .. py:method:: from_strings_to_multilangstring(input)
-      :classmethod:
-
-
-   .. py:method:: from_langstring_to_string(input)
-      :staticmethod:
-
-
-   .. py:method:: from_langstring_to_setlangstring(input)
-      :staticmethod:
-
-      Convert a LangString to a SetLangString.
-
-      This method creates a SetLangString from a LangString. The resulting SetLangString contains the text of the
-      LangString in a set and retains its language.
-
-      :param input: The LangString to be converted.
-      :type input: LangString
-      :return: A SetLangString containing the text from the input LangString.
-      :rtype: SetLangString
-      :raises TypeError: If the input is not of type LangString.
-
-
-   .. py:method:: from_langstrings_to_setlangstring(input)
-      :staticmethod:
-
-
-   .. py:method:: from_langstring_to_multilangstring(input)
-      :staticmethod:
-
-      Convert a LangString to a MultiLangString.
-
-      This method takes a single LangString and converts it into a MultiLangString. The resulting MultiLangString
-      contains the text and language of the input LangString.
-
-      :param input: The LangString to be converted.
-      :type input: LangString
-      :return: A MultiLangString containing the text and language from the input LangString.
-      :rtype: MultiLangString
-      :raises TypeError: If the input is not of type LangString.
-
-
-   .. py:method:: from_langstrings_to_multilangstring(input)
-      :staticmethod:
-
-
-   .. py:method:: from_setlangstring_to_string(input)
-      :staticmethod:
-
-
-   .. py:method:: from_setlangstring_to_strings(input)
-      :staticmethod:
-
-
-   .. py:method:: from_setlangstring_to_langstrings(input)
-      :staticmethod:
-
-      Convert a SetLangString to a list of LangStrings.
-
-      This method takes a SetLangString and converts it into a list of LangStrings, each containing one of the texts
-      from the SetLangString and its associated language.
-
-      :param input: The SetLangString to be converted.
-      :type input: SetLangString
-      :return: A list of LangStrings, each corresponding to a text in the input SetLangString.
-      :rtype: list[LangString]
-      :raises TypeError: If the input is not of type SetLangString.
-
-
-   .. py:method:: from_setlangstring_to_multilangstring(input)
-      :staticmethod:
-
-      Convert a SetLangString to a MultiLangString.
-
-      This method creates a MultiLangString from a SetLangString. The resulting MultiLangString contains all texts
-      from the SetLangString, associated with its language.
-
-      :param input: The SetLangString to be converted.
-      :type input: SetLangString
-      :return: A MultiLangString containing all texts from the input SetLangString.
-      :rtype: MultiLangString
-      :raises TypeError: If the input is not of type SetLangString.
-
-
-   .. py:method:: from_multilangstring_to_langstrings(input)
-      :staticmethod:
-
-      Convert a MultiLangString to a list of LangStrings.
-
-      This method takes a MultiLangString and converts it into a list of LangStrings, each representing one of the
-      texts in the MultiLangString along with its associated language.
-
-      :param input: The MultiLangString to be converted.
-      :type input: MultiLangString
-      :return: A list of LangStrings, each corresponding to a text in the input MultiLangString.
-      :rtype: list[LangString]
-      :raises TypeError: If the input is not of type MultiLangString.
-
-
-   .. py:method:: from_multilangstring_to_setlangstrings(input)
-      :staticmethod:
-
-      Convert a MultiLangString to a list of SetLangStrings.
-
-      This method creates a list of SetLangStrings from a MultiLangString. Each SetLangString in the list contains
-      texts of a single language from the MultiLangString.
-
-      :param input: The MultiLangString to be converted.
-      :type input: MultiLangString
-      :return: A list of SetLangStrings, each containing texts of a single language from the input MultiLangString.
-      :rtype: list[SetLangString]
-      :raises TypeError: If the input is not of type MultiLangString.
-
-
-
 .. py:class:: GlobalFlag(*args, **kwds)
 
 
@@ -374,6 +185,10 @@ Classes
    :vartype ENSURE_ANY_LANG: Enum
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
    :vartype VALID_LANG: Enum
+
+   .. py:attribute:: CLEAR_EMPTY_LANG
+
+      
 
    .. py:attribute:: DEFINED_LANG
 
@@ -485,6 +300,10 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
+   .. py:attribute:: CLEAR_EMPTY_LANG
+
+      
+
    .. py:attribute:: DEFINED_LANG
 
       
@@ -494,6 +313,14 @@ Classes
       
 
    .. py:attribute:: LOWERCASE_LANG
+
+      
+
+   .. py:attribute:: PRINT_WITH_LANG
+
+      
+
+   .. py:attribute:: PRINT_WITH_QUOTES
 
       
 
@@ -872,13 +699,10 @@ Classes
 
       Handle concatenation when LangString is on the right side of the '+' operator.
 
-      This method allows a string to be added to the beginning of the LangString's text.
+      Only defined to 'other' of type string because the __add__ method is used when 'other' is a LangString.
 
-      :param other: The string to be concatenated to the beginning of this LangString's text.
-      :type other: str
-      :return: A new LangString with the concatenated text.
-      :rtype: LangString
-      :raises TypeError: If 'other' is not a string.
+      As it concatenates other's text to the LangString's text (in this order), it returns a string and, consequently,
+      the result looses its language tag.
 
 
    .. py:method:: __repr__()
@@ -912,231 +736,6 @@ Classes
 
 
    .. py:method:: _validate_match_langs(other)
-
-
-
-.. py:class:: MultiLangString(mls_dict = None, pref_lang = 'en')
-
-
-   A class for managing multilingual text strings with various language tags.
-
-   Utilizes a global control strategy set in Controller to handle duplicate language tags. Supports
-   operations like adding, removing, and retrieving language strings in multiple languages.
-
-   :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
-   :vartype mls_dict: Optional[dict[str, set[str]]]
-   :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
-   :vartype pref_lang: str
-
-   .. py:property:: mls_dict
-      :type: dict[str, set[str]]
-
-      Getter for texts.
-
-
-   .. py:property:: pref_lang
-      :type: str
-
-      Get the preferred language for this MultiLangString.
-
-      :return: The preferred language as a string.
-
-
-   .. py:method:: add(input)
-
-
-   .. py:method:: add_entry(text, lang = '')
-
-      Add a text entry to the MultiLangString under a specified language.
-
-      Validates the provided text and language against the current flag settings before adding. If the specified
-      language does not exist in the mls_dict, a new set for that language is created. The text is then added to
-      this set. If the language already exists, the text is added to the existing set for that language.
-
-      :param text: The text to be added to the MultiLangString.
-      :type text: str
-      :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
-      :type lang: str
-
-
-   .. py:method:: add_langstring(langstring)
-
-      Add a LangString to the MultiLangString.
-
-      :param langstring: The LangString object to be added, representing a text in a specific language.
-      :type langstring: LangString
-
-
-   .. py:method:: add_setlangstring(setlangstring)
-
-      Add a SetLangString to the MultiLangString.
-
-      :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
-      :type setlangstring: SetLangString
-
-
-   .. py:method:: remove_entry(text, lang, clear_empty = False)
-
-      Remove a single entry from the set of a given language key in the dictionary.
-
-      If the specified language key exists and the text is in its set, the text is removed. If this results in an
-      empty set for the language, the language key is also removed from the dictionary.
-
-      :param text: The text to be removed.
-      :type text: str
-      :param lang: The language key from which the text should be removed.
-      :type lang: str
-
-
-   .. py:method:: remove_langstring(langstring)
-
-
-   .. py:method:: remove_lang(lang)
-
-      Remove all entries of a given language from the dictionary.
-
-      If the specified language key exists, it and all its associated texts are removed from the dictionary.
-
-      :param lang: The language key to be removed along with all its texts.
-      :type lang: str
-
-
-   .. py:method:: clear_empty()
-
-
-   .. py:method:: get_strings_lang(lang)
-
-      Retrieve all text entries for a specific language.
-
-      :param lang: The language key to retrieve entries for.
-      :type lang: str
-      :return: A list of text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_pref_lang()
-
-      Retrieve all text entries for the preferred language.
-
-      :return: A list of text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_all()
-
-      Retrieve all text entries across all languages.
-
-      :return: A list of all text entries.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_langstring_lang(lang)
-
-      Retrieve all text entries for a specific language, formatted as '"text"@lang'.
-
-      :param lang: The language key to retrieve entries for.
-      :type lang: str
-      :return: A list of formatted text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_langstring_pref_lang()
-
-      Retrieve all text entries for the preferred language, formatted as '"text"@lang'.
-
-      :return: A list of formatted text entries for the specified language.
-      :rtype: list[str]
-
-
-   .. py:method:: get_strings_langstring_all()
-
-      Retrieve all text entries across all languages, formatted as '"text"@lang'.
-
-      :return: A list of formatted text entries for all languages.
-      :rtype: list[str]
-
-
-   .. py:method:: len_entries_all()
-
-      Calculate the total number of elements across all sets in the dictionary.
-
-      Iterates through each set in the dictionary values and sums their lengths to get the total number of elements.
-
-      :return: The total number of elements across all sets.
-      :rtype: int
-
-
-   .. py:method:: len_entries_lang(lang)
-
-      Calculate the number of entries of a given language in the dictionary.
-
-      :return: The number of entries for a given language in a MultiLangString.
-      :rtype: int
-
-
-   .. py:method:: len_langs()
-
-      Calculate the number of keys (languages) in the dictionary.
-
-      This method returns the count of distinct keys in the dictionary, which represents the number of languages.
-
-      :return: The number of keys in the dictionary.
-      :rtype: int
-
-
-   .. py:method:: is_entry(text, lang)
-
-
-   .. py:method:: to_langstrings()
-
-
-   .. py:method:: to_setlangstrings()
-
-
-   .. py:method:: __eq__(other)
-
-      Check equality of this MultiLangString with another MultiLangString.
-
-      Equality is determined based on the mls_dict attribute. The pref_lang attribute is not considered in the
-      equality check.
-
-      :param other: Another object to compare with.
-      :type other: object
-      :return: True if both MultiLangString objects have the same mls_dict, False otherwise.
-      :rtype: bool
-
-
-   .. py:method:: __hash__()
-
-      Generate a hash new_text for a MultiLangString object.
-
-      The hash is computed based on the 'mls_dict' attribute of the MultiLangString. This approach ensures that
-      MultiLangString objects with the same content will have the same hash new_text.
-
-      :return: The hash new_text of the MultiLangString object.
-      :rtype: int
-
-
-   .. py:method:: __repr__()
-
-      Return a detailed string representation of the MultiLangString object.
-
-      This method provides a more verbose string representation of the MultiLangString, which includes the full
-      dictionary of language strings and the preferred language, making it useful for debugging.
-
-      :return: A detailed string representation of the MultiLangString.
-      :rtype: str
-
-
-   .. py:method:: __str__()
-
-      Return a string representation of the MultiLangString, including language tags.
-
-      This method provides a concise string representation of the MultiLangString, listing each text entry with its
-      associated language tag.
-
-      :return: A string representation of the MultiLangString with language tags.
-      :rtype: str
 
 
 

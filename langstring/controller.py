@@ -60,6 +60,8 @@ class Controller(metaclass=NonInstantiable):
         MultiLangStringFlag.DEFINED_LANG: False,
         MultiLangStringFlag.DEFINED_TEXT: False,
         MultiLangStringFlag.LOWERCASE_LANG: False,
+        MultiLangStringFlag.PRINT_WITH_LANG: True,
+        MultiLangStringFlag.PRINT_WITH_QUOTES: True,
         MultiLangStringFlag.STRIP_LANG: False,
         MultiLangStringFlag.STRIP_TEXT: False,
         MultiLangStringFlag.VALID_LANG: False,

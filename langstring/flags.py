@@ -93,6 +93,8 @@ class MultiLangStringFlag(Enum):
     DEFINED_LANG = auto()
     DEFINED_TEXT = auto()
     LOWERCASE_LANG = auto()
+    PRINT_WITH_LANG = auto()
+    PRINT_WITH_QUOTES = auto()
     STRIP_LANG = auto()
     STRIP_TEXT = auto()
     VALID_LANG = auto()

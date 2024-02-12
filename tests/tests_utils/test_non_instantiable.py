@@ -1,5 +1,7 @@
 import pytest
+
 from langstring.utils.non_instantiable import NonInstantiable
+
 
 def test_noninstantiable_prevents_instantiation():
     """Test that NonInstantiable metaclass prevents instantiation of a class."""

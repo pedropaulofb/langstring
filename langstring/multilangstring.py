@@ -111,7 +111,12 @@ class MultiLangString:
 
     # ----- ADD METHODS -----
 
+    @Validator.validate_simple_type
     def add(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, str):
+            self.add_text_in_pref_lang(arg)
+            return
+
         if isinstance(arg, LangString):
             self.add_langstring(arg)
             return
@@ -125,9 +130,14 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"Argument '{arg}' must be of type 'str', 'tuple[str,str]', 'LangString', or 'SetLangString', "
             f"but got '{type(arg).__name__}'."
         )
+
+    @Validator.validate_simple_type
+    def add_text_in_pref_lang(self, text: str) -> None:
+        """Add a text entry to the preferred language."""
+        self.add_entry(text, self.pref_lang)
 
     @Validator.validate_simple_type
     def add_entry(self, text: str, lang: str = "") -> None:
@@ -175,7 +185,12 @@ class MultiLangString:
 
     # ----- REMOVE METHODS -----
 
-    def remove(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+    @Validator.validate_simple_type
+    def remove(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, str):
+            self.remove_text_in_pref_lang(arg)
+            return
+
         if isinstance(arg, LangString):
             self.remove_langstring(arg)
             return
@@ -189,12 +204,17 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"Argument '{arg}' must be of type 'str', 'tuple[str,str]', 'LangString', or 'SetLangString', "
             f"but got '{type(arg).__name__}'."
         )
 
     @Validator.validate_simple_type
-    def remove_entry(self, text: str, lang: str, clear_empty_lang: bool = False) -> None:
+    def remove_text_in_pref_lang(self, text: str) -> None:
+        """Remove a text entry from the preferred language."""
+        self.remove_entry(text, self.pref_lang)
+
+    @Validator.validate_simple_type
+    def remove_entry(self, text: str, lang: str) -> None:
         """Remove a single entry from the set of a given language key in the dictionary.
 
         If the specified language key exists and the text is in its set, the text is removed. If this results in an
@@ -206,7 +226,7 @@ class MultiLangString:
         :type lang: str
         """
         if self.contains_entry(text, lang):
-            self.discard_entry(text, lang, clear_empty_lang)
+            self.discard_entry(text, lang)
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
 
@@ -235,7 +255,12 @@ class MultiLangString:
 
     # ----- DISCARD METHODS -----
 
-    def discard(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+    @Validator.validate_simple_type
+    def discard(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, str):
+            self.discard_text_in_pref_lang(arg)
+            return
+
         if isinstance(arg, LangString):
             self.discard_langstring(arg)
             return
@@ -252,6 +277,11 @@ class MultiLangString:
             f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
             f"but got '{type(arg).__name__}'."
         )
+
+    @Validator.validate_simple_type
+    def discard_text_in_pref_lang(self, text: str) -> None:
+        """Discard a text entry from the preferred language."""
+        self.discard_entry(text, self.pref_lang)
 
     @Validator.validate_simple_type
     def discard_entry(self, text: str, lang: str) -> None:
@@ -338,7 +368,11 @@ class MultiLangString:
 
     # ----- CONTAIN METHODS -----
 
-    def contains(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+    def contains(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, str):
+            self.contains_text_in_pref_lang(arg)
+            return
+
         if isinstance(arg, LangString):
             self.contains_langstring(arg)
             return
@@ -352,16 +386,19 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"Argument '{arg}' must be of type 'str', 'tuple[str,str]', 'LangString', or 'SetLangString', "
             f"but got '{type(arg).__name__}'."
         )
+
+    def contains_text_in_pref_lang(self, text: str) -> bool:
+        """Check if a specific text exists in the preferred language."""
+        return self.contains_entry(text, self.pref_lang)
 
     def contains_entry(self, text: str, lang: str) -> bool:
         return lang in self.mls_dict and text in self.mls_dict[lang]
 
     def contains_langstring(self, langstring: LangString) -> bool:
-        """
-        Checks if the given LangString's text and lang are part of this MultiLangString.
+        """Check if the given LangString's text and lang are part of this MultiLangString.
 
         :param langstring: A LangString object to check.
         :return: True if the LangString's text is found within the specified language's set; otherwise, False.
@@ -370,8 +407,7 @@ class MultiLangString:
         return langstring.lang in self.mls_dict and langstring.text in self.mls_dict[langstring.lang]
 
     def contains_setlangstring(self, setlangstring: SetLangString) -> bool:
-        """
-        Checks if all texts and the language of a SetLangString are part of this MultiLangString.
+        """Check if all texts and the language of a SetLangString are part of this MultiLangString.
 
         :param setlangstring: A SetLangString object to check.
         :return: True if the SetLangString's language exists and all its texts are found within the specified
@@ -429,7 +465,7 @@ class MultiLangString:
         return self.mls_dict.popitem()
 
     def setdefault(self, key, default=None):
-        """If key is in the dictionary, return its value. If not, insert key with a value of default and return default."""
+        """If key is in the dict, return its value. If not, insert key with a value of default and return default."""
         return self.mls_dict.setdefault(key, default if default is not None else set())
 
     def update(self, other):
@@ -557,11 +593,13 @@ class MultiLangString:
         :return: A string representation of the MultiLangString with language tags.
         :rtype: str
         """
-        entries = []
+        parts = []
         for lang, texts in self.mls_dict.items():
-            for text in texts:
-                if lang:  # If there is a language tag
-                    entries.append(f'"{text}"@{lang}')
-                else:  # If there is no language tag
-                    entries.append(text)
-        return ", ".join(entries)
+            texts_repr = ", ".join(
+                [f'"{text}"' if Controller.get_flag(MultiLangStringFlag.PRINT_WITH_QUOTES) else text for text in texts]
+            )
+            lang_representation = f"@{lang}" if Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG) else ""
+            parts.append(f"{{{texts_repr}}}{lang_representation}")
+
+        # Join all language representations with a comma and space
+        return ", ".join(parts)

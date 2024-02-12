@@ -526,7 +526,10 @@ class MultiLangString:
         :return: A detailed string representation of the MultiLangString.
         :rtype: str
         """
-        return f"MultiLangString({self.mls_dict}, pref_lang='{self.pref_lang}')"
+        class_name = self.__class__.__name__
+        mls_dict_repr = repr(self.mls_dict)  # Provides a string representation of the dictionary
+        pref_lang_repr = repr(self.pref_lang)  # Wraps the pref_lang in quotes
+        return f"{class_name}(mls_dict={mls_dict_repr}, pref_lang={pref_lang_repr})"
 
     def __reversed__(self):
         """Return a reverse iterator over the dictionary keys."""

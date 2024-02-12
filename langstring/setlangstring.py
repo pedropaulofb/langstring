@@ -223,7 +223,7 @@ class SetLangString:
 
     def __hash__(self) -> int:
         """Generate a hash for a SetLangString object."""
-        # Convert the set to a frozenset for hashing, as sets mutable and, hence, unhashable.
+        # Convert the set to a frozenset for hashing, as sets are mutable and, hence, unhashable.
         return hash((frozenset(self.texts), self.lang.casefold()))
 
     def __iand__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":

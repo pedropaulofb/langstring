@@ -21,6 +21,7 @@ This module is part of a larger package dealing with language processing and RDF
 foundational tools for handling multilingual text data in various formats.
 """
 
+from typing import Optional
 from typing import Union
 
 from .langstring import LangString
@@ -335,7 +336,9 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_simple_type
     @staticmethod
-    def from_multilangstring_to_langstrings(input: MultiLangString) -> list[LangString]:
+    def from_multilangstring_to_langstrings(
+        input: MultiLangString, languages: Optional[list[str]] = None
+    ) -> list[LangString]:
         """Convert a MultiLangString to a list of LangStrings.
 
         This method takes a MultiLangString and converts it into a list of LangStrings, each representing one of the
@@ -347,11 +350,13 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[LangString]
         :raises TypeError: If the input is not of type MultiLangString.
         """
-        return [LangString(text, lang) for lang, texts in input.mls_dict.items() for text in texts]
+        return input.to_langstrings(languages=languages)
 
     @Validator.validate_simple_type
     @staticmethod
-    def from_multilangstring_to_setlangstrings(input: MultiLangString) -> list[SetLangString]:
+    def from_multilangstring_to_setlangstrings(
+        input: MultiLangString, languages: Optional[list[str]] = None
+    ) -> list[SetLangString]:
         """Convert a MultiLangString to a list of SetLangStrings.
 
         This method creates a list of SetLangStrings from a MultiLangString. Each SetLangString in the list contains
@@ -363,17 +368,22 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[SetLangString]
         :raises TypeError: If the input is not of type MultiLangString.
         """
-        return_list = []
+        return input.to_setlangstrings(languages=languages)
 
-        for lang in input.mls_dict.keys():
-            return_list.append(SetLangString(texts=input.mls_dict[lang], lang=lang))
+    @Validator.validate_simple_type
+    @staticmethod
+    def from_multilangstring_to_string(input: MultiLangString) -> str:
+        return input.__str__()
 
-        return return_list
-
-    def from_multilangstring_to_string(self) -> str:
-        # TODO: To be implemented
-        pass
-
-    def from_multilangstring_to_strings(self) -> list[str]:
-        # TODO: To be implemented
-        pass
+    @Validator.validate_simple_type
+    @staticmethod
+    def from_multilangstring_to_strings(
+        input: MultiLangString,
+        languages: Optional[list[str]] = None,
+        print_quotes: bool = True,
+        separator: str = "@",
+        print_lang: bool = True,
+    ) -> list[str]:
+        return input.to_strings(
+            languages=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang
+        )

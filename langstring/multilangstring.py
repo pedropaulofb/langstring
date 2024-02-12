@@ -8,14 +8,6 @@ representation and handling of text in various languages. It supports adding new
 retrieving entries in specific languages or across all languages. The class also allows setting a preferred language,
 which can be used as a default for operations that involve retrieving text entries.
 
-Key Features:
-- Store and manage text entries in multiple languages using language tags.
-- Add and remove text entries for specific languages.
-- Retrieve text entries for a specific language or all languages.
-- Set and get a preferred language for default text retrieval.
-- Support for equality comparison and hashing based on the content of the multilingual text entries.
-- Validation and control strategies for handling duplicate language tags and ensuring the integrity of text entries.
-
 This module is designed to be used in applications that require handling of text in multiple languages, providing a
 convenient and standardized way to store and manipulate multilingual text data.
 
@@ -36,6 +28,7 @@ from .flags import MultiLangStringFlag
 from .langstring import LangString
 from .setlangstring import SetLangString
 from .utils.validator import Validator
+from langstring import Controller
 
 
 class MultiLangString:
@@ -116,6 +109,8 @@ class MultiLangString:
     # MultiLangString's Regular Methods
     # --------------------------------------------------
 
+    # ----- ADD METHODS -----
+
     def add(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
         if isinstance(arg, LangString):
             self.add_langstring(arg)
@@ -178,6 +173,8 @@ class MultiLangString:
 
         # TODO: To be implemented.
 
+    # ----- REMOVE METHODS -----
+
     def remove(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
         if isinstance(arg, LangString):
             self.remove_langstring(arg)
@@ -208,10 +205,7 @@ class MultiLangString:
         :param lang: The language key from which the text should be removed.
         :type lang: str
         """
-        # TODO: Verify if it is better to use clear_empty_lang as a flag instead of a parameter.
-        #  It is applied to all remove and discard methods.
-
-        if self.is_entry(text, lang):
+        if self.contains_entry(text, lang):
             self.discard_entry(text, lang, clear_empty_lang)
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
@@ -239,6 +233,8 @@ class MultiLangString:
         else:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
 
+    # ----- DISCARD METHODS -----
+
     def discard(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
         if isinstance(arg, LangString):
             self.discard_langstring(arg)
@@ -258,10 +254,10 @@ class MultiLangString:
         )
 
     @Validator.validate_simple_type
-    def discard_entry(self, text: str, lang: str, clear_empty_lang: bool = False) -> None:
+    def discard_entry(self, text: str, lang: str) -> None:
         if lang in self.mls_dict and text in self.mls_dict[lang]:
             self.mls_dict[lang].remove(text)
-            if len(self.mls_dict[lang]) == 0 and clear_empty_lang:
+            if len(self.mls_dict[lang]) == 0 and Controller.get_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG):
                 del self.mls_dict[lang]
 
     @Validator.validate_simple_type
@@ -278,137 +274,189 @@ class MultiLangString:
         if lang in self.mls_dict:
             del self.mls_dict[lang]
 
-    def clear_empty(self) -> None:
+    # ----- CONVERSION METHODS -----
+
+    @Validator.validate_simple_type
+    def to_langstrings(self, languages: Optional[list[str]] = None) -> list[LangString]:
+        langstrings = []
+        selected_langs = self.mls_dict.keys() if languages is None else languages
+
+        for lang in selected_langs:
+            if lang in self.mls_dict:
+                for text in self.mls_dict[lang]:
+                    langstrings.append(LangString(text, lang))
+
+        return langstrings
+
+    @Validator.validate_simple_type
+    def to_setlangstrings(self, languages: Optional[list[str]] = None) -> list[SetLangString]:
+        setlangstrings = []
+        selected_langs = self.mls_dict.keys() if languages is None else languages
+
+        for lang in selected_langs:
+            if lang in self.mls_dict:
+                setlangstrings.append(SetLangString(self.mls_dict[lang], lang))
+
+        return setlangstrings
+
+    @Validator.validate_simple_type
+    def to_strings(
+        self,
+        languages: Optional[list[str]] = None,
+        print_quotes: bool = True,
+        separator: str = "@",
+        print_lang: bool = True,
+    ) -> list[str]:
+        strings = []
+        selected_langs = self.mls_dict.keys() if languages is None else languages
+
+        for lang in selected_langs:
+            if lang in self.mls_dict:
+                for text in self.mls_dict[lang]:
+                    new_text = f'"{text}"' if print_quotes else text
+                    new_lang = f"{separator}{lang}" if print_lang else ""
+                    strings.append(f"{new_text}{new_lang}")
+
+        return strings
+
+    # ----- COUNT METHODS -----
+
+    def count_lang_entries(self) -> dict[str, int]:
+        """
+        Returns the number of text entries for each language.
+
+        :return: A dictionary with language codes as keys and counts of text entries as values.
+        """
+        return {lang: len(texts) for lang, texts in self.mls_dict.items()}
+
+    def count_langs(self) -> int:
+        return len(self.mls_dict)
+
+    def count_total_entries(self) -> int:
+        """Return the total number of text entries across all languages."""
+        return sum(len(texts) for texts in self.mls_dict.values())
+
+    # ----- CONTAIN METHODS -----
+
+    def contains(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+        if isinstance(arg, LangString):
+            self.contains_langstring(arg)
+            return
+
+        if isinstance(arg, SetLangString):
+            self.contains_setlangstring(arg)
+            return
+
+        if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
+            self.contains_entry(arg[0], arg[1])
+            return
+
+        raise TypeError(
+            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"but got '{type(arg).__name__}'."
+        )
+
+    def contains_entry(self, text: str, lang: str) -> bool:
+        return lang in self.mls_dict and text in self.mls_dict[lang]
+
+    def contains_langstring(self, langstring: LangString) -> bool:
+        """
+        Checks if the given LangString's text and lang are part of this MultiLangString.
+
+        :param langstring: A LangString object to check.
+        :return: True if the LangString's text is found within the specified language's set; otherwise, False.
+        """
+        # Check if the lang exists in the mls_dict and if the text exists within that language's set.
+        return langstring.lang in self.mls_dict and langstring.text in self.mls_dict[langstring.lang]
+
+    def contains_setlangstring(self, setlangstring: SetLangString) -> bool:
+        """
+        Checks if all texts and the language of a SetLangString are part of this MultiLangString.
+
+        :param setlangstring: A SetLangString object to check.
+        :return: True if the SetLangString's language exists and all its texts are found within the specified
+        language's set; otherwise, False.
+        """
+        # First, check if the language exists in the MultiLangString
+        if setlangstring.lang not in self.mls_dict:
+            return False
+
+        # Then, check if every text in the SetLangString is in the MultiLangString's set for that language
+        return setlangstring.texts.issubset(self.mls_dict[setlangstring.lang])
+
+    # ----- GENERAL METHODS -----
+
+    def clear_empty_langs(self) -> None:
         empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
         for lang in empty_langs:
             del self.mls_dict[lang]
-
-    def get_strings_lang(self, lang: str) -> list[str]:
-        """Retrieve all text entries for a specific language.
-
-        :param lang: The language key to retrieve entries for.
-        :type lang: str
-        :return: A list of text entries for the specified language.
-        :rtype: list[str]
-        """
-        return list(self.mls_dict.get(lang, []))
-
-    def get_strings_pref_lang(self) -> list[str]:
-        """Retrieve all text entries for the preferred language.
-
-        :return: A list of text entries for the specified language.
-        :rtype: list[str]
-        """
-        return self.get_strings_lang(self._pref_lang)
-
-    def get_strings_all(self) -> list[str]:
-        """Retrieve all text entries across all languages.
-
-        :return: A list of all text entries.
-        :rtype: list[str]
-        """
-        return [text for texts in self.mls_dict.values() for text in texts]
-
-    def get_strings_langstring_lang(self, lang: str) -> list[str]:
-        """Retrieve all text entries for a specific language, formatted as '"text"@lang'.
-
-        :param lang: The language key to retrieve entries for.
-        :type lang: str
-        :return: A list of formatted text entries for the specified language.
-        :rtype: list[str]
-        """
-        return [f'"{text}"@{lang}' for text in self.mls_dict.get(lang, [])]
-
-    def get_strings_langstring_pref_lang(self) -> list[str]:
-        """Retrieve all text entries for the preferred language, formatted as '"text"@lang'.
-
-        :return: A list of formatted text entries for the specified language.
-        :rtype: list[str]
-        """
-        return self.get_strings_langstring_lang(self._pref_lang)
-
-    def get_strings_langstring_all(self) -> list[str]:
-        """Retrieve all text entries across all languages, formatted as '"text"@lang'.
-
-        :return: A list of formatted text entries for all languages.
-        :rtype: list[str]
-        """
-        return [f'"{text}"@{lang}' for lang, texts in self.mls_dict.items() for text in texts]
-
-    def len_entries_all(self) -> int:
-        """Calculate the total number of elements across all sets in the dictionary.
-
-        Iterates through each set in the dictionary values and sums their lengths to get the total number of elements.
-
-        :return: The total number of elements across all sets.
-        :rtype: int
-        """
-        return sum(len(elements) for elements in self.mls_dict.values())
-
-    def len_entries_lang(self, lang: str) -> int:
-        """Calculate the number of entries of a given language in the dictionary.
-
-        :return: The number of entries for a given language in a MultiLangString.
-        :rtype: int
-        """
-        if lang in self.mls_dict.keys():
-            return len(self.mls_dict[lang])
-        return 0
-
-    def len_langs(self) -> int:
-        """Calculate the number of keys (languages) in the dictionary.
-
-        This method returns the count of distinct keys in the dictionary, which represents the number of languages.
-
-        :return: The number of keys in the dictionary.
-        :rtype: int
-        """
-        return len(self.mls_dict)
-
-    def is_entry(self, text: str, lang: str) -> bool:
-        return lang in self.mls_dict and text in self.mls_dict[lang]
-
-    def to_langstrings(self) -> list[LangString]:
-        # TODO: To be implemented
-        pass
-
-    def to_setlangstrings(self) -> list[SetLangString]:
-        # TODO: To be implemented
-        pass
-
-    def to_strings(self) -> list[str]:
-        # TODO: To be implemented
-        pass
 
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods
     # --------------------------------------------------
 
-    # copy(): Returns a shallow copy.
-    # fromkeys(seq[, value]): Creates dict from keys sequence.
-    # get(key[, default]): Returns value for key.
-    # items(): Returns view of key-value pairs.
-    # keys(): Returns view of keys.
-    # pop(key[, default]): Removes specified key and returns its value.
-    # popitem(): Removes and returns last key-value pair.
-    # setdefault(key[, default]): Returns value for key; inserts if not present.
-    # update([other]): Updates dict from other dict or iterable.
-    # values(): Returns view of values.
+    def copy(self):
+        """Create a shallow copy of the MultiLangString instance.
+
+        Returns a new MultiLangString instance with a shallow copy of the internal dictionary.
+        """
+        new_mls_dict = self.mls_dict.copy()  # Shallow copy of the dictionary
+        return MultiLangString(mls_dict=new_mls_dict, pref_lang=self.pref_lang)
+
+    @classmethod
+    def fromkeys(cls, seq, value=None):
+        """Create a new MultiLangString instance with keys from seq and values set to value."""
+        return cls({k: set(value) if value is not None else set() for k in seq})
+
+    def get(self, key, default=None):
+        """Return the value for key if key is in the dictionary, else default."""
+        return self.mls_dict.get(key, default)
+
+    def items(self):
+        """Return items (language, texts set) in the MultiLangString."""
+        return self.mls_dict.items()
+
+    def keys(self):
+        """Return the languages in the MultiLangString."""
+        return self.mls_dict.keys()
+
+    def pop(self, key, default=None):
+        """Remove specified key and returns its value. If key is not found, default is returned if given."""
+        return self.mls_dict.pop(key, default)
+
+    def popitem(self):
+        """Remove and returns a (key, value) pair as a 2-tuple."""
+        return self.mls_dict.popitem()
+
+    def setdefault(self, key, default=None):
+        """If key is in the dictionary, return its value. If not, insert key with a value of default and return default."""
+        return self.mls_dict.setdefault(key, default if default is not None else set())
+
+    def update(self, other):
+        """Update the dictionary with the key/value pairs from other, overwriting existing keys."""
+        if isinstance(other, MultiLangString):
+            self.mls_dict.update(other.mls_dict)
+        elif isinstance(other, dict):
+            self.mls_dict.update(other)
+        else:
+            for key, value in other:
+                self.mls_dict[key] = value
+
+    def values(self):
+        """Return the sets of texts in the MultiLangString."""
+        return self.mls_dict.values()
 
     # --------------------------------------------------
     # MultiLangString's Dunder Methods
     # --------------------------------------------------
 
-    # __getitem__(self, key): Allows access to an item using dict[key].
-    # __setitem__(self, key, value): Enables item assignment via dict[key] = value.
-    # __delitem__(self, key): Allows deletion of an item using del dict[key].
-    # __iter__(self): Returns an iterator for the dictionary, typically over its keys.
-    # __len__(self): Returns the number of items in the dictionary when len(dict) is called.
-    # __contains__(self, key): Implements membership testing with key in dict.
-    # __eq__(self, other): Defines behavior for the equality operator, ==.
-    # __ne__(self, other): Defines behavior for the inequality operator, !=.
-    # __repr__(self): Returns the "official" string representation of the dictionary, which ideally should be a valid Python expression that could be used to recreate the object.
-    # __str__(self): Returns the "informal" or nicely printable string representation of the dictionary.
+    def __contains__(self, key: str) -> bool:
+        """Check if a language is in the MultiLangString."""
+        return key in self.mls_dict
+
+    def __delitem__(self, key: str) -> None:
+        """Allow deletion of language entries."""
+        del self.mls_dict[key]
 
     def __eq__(self, other: object) -> bool:
         """Check equality of this MultiLangString with another MultiLangString.
@@ -425,6 +473,10 @@ class MultiLangString:
             return False
         return self.mls_dict == other.mls_dict
 
+    def __getitem__(self, key: str) -> set[str]:
+        """Allow retrieval of entries by language."""
+        return self.mls_dict[key]
+
     def __hash__(self) -> int:
         """Generate a hash new_text for a MultiLangString object.
 
@@ -438,6 +490,33 @@ class MultiLangString:
         hashable_mls_dict = tuple((lang, frozenset(texts)) for lang, texts in self.mls_dict.items())
         return hash(hashable_mls_dict)
 
+    def __ior__(self, other):
+        """Implement in-place update operation (equivalent to self.update(other))."""
+        self.update(other)
+        return self
+
+    def __iter__(self):
+        """Allow iteration over the dictionary keys (language codes)."""
+        return iter(self.mls_dict)
+
+    def __len__(self) -> int:
+        """Return the number of languages in the dictionary."""
+        return len(self.mls_dict)
+
+    def __ne__(self, other):
+        """Define behavior for the inequality operator, !=."""
+        if isinstance(other, MultiLangString):
+            return self.mls_dict != other.mls_dict
+        return self.mls_dict != other
+
+    def __or__(self, other):
+        """Implement merge operation, returning a new MultiLangString with merged content."""
+        if not isinstance(other, (MultiLangString, dict)):
+            return NotImplemented
+        new_dict = self.mls_dict.copy()
+        new_dict.update(other.mls_dict if isinstance(other, MultiLangString) else other)
+        return MultiLangString(new_dict, self.pref_lang)
+
     def __repr__(self) -> str:
         """Return a detailed string representation of the MultiLangString object.
 
@@ -448,6 +527,23 @@ class MultiLangString:
         :rtype: str
         """
         return f"MultiLangString({self.mls_dict}, pref_lang='{self.pref_lang}')"
+
+    def __reversed__(self):
+        """Return a reverse iterator over the dictionary keys."""
+        return reversed(self.mls_dict.keys())
+
+    def __ror__(self, other):
+        """Implement right-side merge, used if the left operand does not support merge."""
+        if not isinstance(other, dict):
+            return NotImplemented
+        # Create a new MultiLangString instance with 'other' as the base, then update with self
+        new_instance = MultiLangString(other)
+        new_instance.update(self.mls_dict)
+        return new_instance
+
+    def __setitem__(self, key: str, value: set[str]) -> None:
+        """Allow setting entries by language."""
+        self.mls_dict[key] = value
 
     def __str__(self) -> str:
         """Return a string representation of the MultiLangString, including language tags.

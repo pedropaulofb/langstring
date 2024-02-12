@@ -24,6 +24,7 @@ class Controller(metaclass=NonInstantiable):
     # Define the default values as a class-level constant
     DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = {
         # Default values for GlobalFlags
+        GlobalFlag.CLEAR_EMPTY_LANG: False,
         GlobalFlag.DEFINED_LANG: False,
         GlobalFlag.DEFINED_TEXT: False,
         GlobalFlag.ENFORCE_EXTRA_DEPEND: False,
@@ -55,6 +56,7 @@ class Controller(metaclass=NonInstantiable):
         SetLangStringFlag.STRIP_TEXT: False,
         SetLangStringFlag.VALID_LANG: False,
         # Default values for MultiLangStringFlags
+        MultiLangStringFlag.CLEAR_EMPTY_LANG: False,
         MultiLangStringFlag.DEFINED_LANG: False,
         MultiLangStringFlag.DEFINED_TEXT: False,
         MultiLangStringFlag.LOWERCASE_LANG: False,

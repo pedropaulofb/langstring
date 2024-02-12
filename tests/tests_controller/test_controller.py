@@ -39,9 +39,9 @@ def test_instantiation_of_langstringcontrol():
 def test_flag_state_persistence(initial_state: bool, new_state: bool):
     for flag in all_flags:
         Controller.set_flag(flag, initial_state)
-        assert Controller.get_flag(flag) == initial_state
+        assert Controller.get_flag(flag) == initial_state, f"Error for {flag} with initial state."
         Controller.set_flag(flag, new_state)
-        assert Controller.get_flag(flag) == new_state
+        assert Controller.get_flag(flag) == new_state, f"Error for {flag} with new state."
 
 
 def test_multiple_flag_modifications_integrity():

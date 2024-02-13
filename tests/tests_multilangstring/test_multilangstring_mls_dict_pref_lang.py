@@ -1,6 +1,6 @@
 import pytest
 
-from langstring import MultiLangString
+from langstring import MultiLangString, Controller, MultiLangStringFlag
 
 
 # Test cases for mls_dict getter and setter
@@ -76,3 +76,38 @@ def test_mls_dict_setter_invalid_value_types(input_dict: dict, expected_error):
     mls = MultiLangString()
     with pytest.raises(expected_error, match="Invalid 'texts' type in mls_dict init. Expected"):
         mls.mls_dict = input_dict
+
+
+@pytest.mark.parametrize(
+    "flags, input_dict, input_pref_lang, expected_dict, expected_pref_lang",
+    [
+        # Test LOWERCASE_LANG impact
+        ({MultiLangStringFlag.LOWERCASE_LANG: True}, {"EN": {"Hello"}}, "EN", {"en": {"Hello"}}, "en"),
+        # Test STRIP_TEXT impact on pref_lang (assuming implementation allows)
+        ({MultiLangStringFlag.STRIP_TEXT: True}, {"en": {"  Hello  "}}, "en", {"en": {"Hello"}}, "en"),
+        # Combination of flags, assuming possible cumulative effects
+        (
+            {MultiLangStringFlag.LOWERCASE_LANG: True, MultiLangStringFlag.STRIP_TEXT: True},
+            {"EN": {"  Hello  "}},
+            "EN",
+            {"en": {"Hello"}},
+            "en",
+        ),
+    ],
+)
+def test_flags_impact_on_getter_setter(flags, input_dict, input_pref_lang, expected_dict, expected_pref_lang):
+    """Tests the impact of flags on mls_dict and pref_lang getters and setters.
+
+    :param flags: Dictionary of flags to set.
+    :param input_dict: The input dictionary for mls_dict.
+    :param input_pref_lang: The input preferred language.
+    :param expected_dict: The expected mls_dict state considering the flag effects.
+    :param expected_pref_lang: The expected pref_lang considering the flag effects.
+    """
+    for flag, value in flags.items():
+        Controller.set_flag(flag, value)
+    mls = MultiLangString()
+    mls.mls_dict = input_dict
+    mls.pref_lang = input_pref_lang
+    assert mls.mls_dict == expected_dict, "mls_dict not affected as expected by the flags."
+    assert mls.pref_lang == expected_pref_lang, "pref_lang not affected as expected by the flags."

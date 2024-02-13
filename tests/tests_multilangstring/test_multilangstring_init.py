@@ -152,8 +152,6 @@ def test_multilangstring_init_with_lowercase_lang_flag():
     # Expecting languages to be converted to lowercase if LOWERCASE_LANG flag is set
     for lang in mls.mls_dict.keys():
         assert lang.islower(), "Language codes should be lowercase when LOWERCASE_LANG flag is True"
-    # Reset the flag to its default value
-    Controller.reset_flag(MultiLangStringFlag.LOWERCASE_LANG)
 
 
 def test_multilangstring_init_with_strip_text_flag():
@@ -168,5 +166,3 @@ def test_multilangstring_init_with_strip_text_flag():
             assert (
                 text == text.strip()
             ), "Text should be stripped of leading and trailing spaces when STRIP_TEXT flag is True"
-    # Reset the flag to its default value after test to avoid side effects
-    Controller.reset_flag(MultiLangStringFlag.STRIP_TEXT)

@@ -24,11 +24,11 @@ the development of multilingual applications and facilitate the handling of text
 from typing import Optional
 from typing import Union
 
+from .controller import Controller
 from .flags import MultiLangStringFlag
 from .langstring import LangString
 from .setlangstring import SetLangString
 from .utils.validator import Validator
-from langstring import Controller
 
 
 class MultiLangString:
@@ -74,14 +74,26 @@ class MultiLangString:
     @mls_dict.setter
     def mls_dict(self, new_mls_dict: dict[str, set[str]]) -> None:
         """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
-        msg = f"Invalid type of 'mls_dict' received ('{new_mls_dict}')."
+        msg = f"Invalid type of 'mls_dict' received."
         if not isinstance(new_mls_dict, dict):
             raise TypeError(f"{msg}'). Expected 'dict', got '{type(new_mls_dict).__name__}'.")
 
         temp_dict: dict[str, set[str]] = {}
+        # Validating langs that are the dict's keys
         for lang, texts in new_mls_dict.items():
+
+            if not isinstance(lang, str):
+                raise TypeError(
+                    f"Invalid 'lang' type in mls_dict init. " f"Expected 'str', got '{type(new_mls_dict).__name__}'."
+                )
+            if not isinstance(texts, set):
+                raise TypeError(
+                    f"Invalid 'texts' type in mls_dict init. " f"Expected 'set', got '{type(new_mls_dict).__name__}'."
+                )
+
             validated_key = Validator.validate_lang(MultiLangStringFlag, lang)
             temp_dict[validated_key] = set()
+            # Validating texts inside the dict's values
             for text in texts:
                 validated_value = Validator.validate_text(MultiLangStringFlag, text)
                 temp_dict[validated_key].add(validated_value)
@@ -431,7 +443,7 @@ class MultiLangString:
     # Overwritten Dictionary's Built-in Regular Methods
     # --------------------------------------------------
 
-    def copy(self)-> 'MultiLangString':
+    def copy(self) -> "MultiLangString":
         """Create a shallow copy of the MultiLangString instance.
 
         Returns a new MultiLangString instance with a shallow copy of the internal dictionary.
@@ -440,7 +452,7 @@ class MultiLangString:
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=self.pref_lang)
 
     @classmethod
-    def fromkeys(cls, seq, value=None)-> 'MultiLangString':
+    def fromkeys(cls, seq, value=None) -> "MultiLangString":
         """Create a new MultiLangString instance with keys from seq and values set to value."""
         return cls({k: set(value) if value is not None else set() for k in seq})
 

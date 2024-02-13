@@ -119,7 +119,7 @@ def test_multilangstring_init_invalid_pref_lang(input_dict: dict, pref_lang: str
     :param input_dict: Dictionary containing invalid values.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match="Invalid 'text' value received .+. Expected 'str'"):
+    with pytest.raises(TypeError, match="Invalid 'lang' value received"):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 

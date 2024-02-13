@@ -114,7 +114,7 @@ class MultiLangString:
         :param new_pref_lang: The preferred language as a string.
         :type new_pref_lang: str
         """
-        self._pref_lang = Validator.validate_text(MultiLangStringFlag, new_pref_lang)
+        self._pref_lang = Validator.validate_lang(MultiLangStringFlag, new_pref_lang)
 
     # --------------------------------------------------
     # MultiLangString's Regular Methods

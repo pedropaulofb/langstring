@@ -42,7 +42,7 @@ def test_pref_lang_getter_setter(input_lang: str, expected_output):
     """
     mls = MultiLangString()
     if expected_output is TypeError:
-        with pytest.raises(TypeError, match="Invalid 'text' value received"):
+        with pytest.raises(TypeError, match="Invalid 'lang' value received"):
             mls.pref_lang = input_lang
     else:
         mls.pref_lang = input_lang

@@ -81,7 +81,6 @@ class MultiLangString:
         temp_dict: dict[str, set[str]] = {}
         # Validating langs that are the dict's keys
         for lang, texts in new_mls_dict.items():
-
             if not isinstance(lang, str):
                 raise TypeError(
                     f"Invalid 'lang' type in mls_dict init. " f"Expected 'str', got '{type(new_mls_dict).__name__}'."
@@ -164,9 +163,17 @@ class MultiLangString:
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
         """
-        if lang not in self.mls_dict:
-            self.mls_dict[lang] = set()
-        self.mls_dict[lang].add(text)
+        lang_key = next(
+            (existing_key for existing_key in self.mls_dict.keys() if existing_key.casefold() == lang.casefold()), None
+        )
+
+        if lang_key is None:
+            new_lang = Validator.validate_lang(MultiLangStringFlag, lang)
+            self.mls_dict[new_lang] = set()
+            lang_key = new_lang
+
+        validated_text = Validator.validate_text(MultiLangStringFlag, text)
+        self.mls_dict[lang_key].add(validated_text)
 
     @Validator.validate_simple_type
     def add_langstring(self, langstring: LangString) -> None:

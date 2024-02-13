@@ -78,6 +78,8 @@ def test_print_flag_default_state(flag):
             LangStringFlag.PRINT_WITH_LANG,
             SetLangStringFlag.PRINT_WITH_QUOTES,
             SetLangStringFlag.PRINT_WITH_LANG,
+            MultiLangStringFlag.PRINT_WITH_QUOTES,
+            MultiLangStringFlag.PRINT_WITH_LANG,
         ]
         else "False"
     )

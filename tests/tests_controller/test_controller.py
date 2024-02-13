@@ -25,6 +25,8 @@ def test_default_flag_state(flag, expected_state: bool):
         LangStringFlag.PRINT_WITH_LANG,
         SetLangStringFlag.PRINT_WITH_QUOTES,
         SetLangStringFlag.PRINT_WITH_LANG,
+        MultiLangStringFlag.PRINT_WITH_QUOTES,
+        MultiLangStringFlag.PRINT_WITH_LANG,
     ]:
         expected_state = True
     assert Controller.get_flag(flag) == expected_state

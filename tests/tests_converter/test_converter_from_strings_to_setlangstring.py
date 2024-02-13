@@ -37,7 +37,7 @@ def test_from_strings_to_setlangstring_valid(input: Union[Set[str], List[str]], 
     [
         (123, "en", "must be of types 'set\\[str\\]' or 'list\\[str\\]' but got 'int'"),
         ("not a set or list", "en", "must be of types 'set\\[str\\]' or 'list\\[str\\]' but got 'str'"),
-        ({"Hello", 123}, "en", "Invalid element type inside input argument. Expected 'str', got 'int'."),
+        ({"Hello", 123}, "en", "Invalid element type inside arg argument. Expected 'str', got 'int'."),
     ],
 )
 def test_from_strings_to_setlangstring_invalid_types(input, lang: str, match_text: str):
@@ -67,7 +67,7 @@ def test_from_strings_to_setlangstring_empty_or_none(input, lang: str):
     :param input: The input that is empty or None.
     :param lang: A dummy language code.
     """
-    with pytest.raises(ValueError, match="Cannot convert the empty input to a SetLangString."):
+    with pytest.raises(ValueError, match="Cannot convert the empty arg to a SetLangString."):
         Converter.from_strings_to_setlangstring(input, lang)
 
 
@@ -104,5 +104,5 @@ def test_from_strings_to_setlangstring_mixed_input_types(input, lang):
     :param input: The input collection containing mixed types.
     :param lang: A dummy language code.
     """
-    with pytest.raises(TypeError, match="Invalid element type inside input argument."):
+    with pytest.raises(TypeError, match="Invalid element type inside arg argument."):
         Converter.from_strings_to_setlangstring(input, lang)

@@ -74,20 +74,21 @@ class MultiLangString:
     @mls_dict.setter
     def mls_dict(self, new_mls_dict: dict[str, set[str]]) -> None:
         """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
-        msg = f"Invalid type of 'mls_dict' received."
         if not isinstance(new_mls_dict, dict):
-            raise TypeError(f"{msg}'). Expected 'dict', got '{type(new_mls_dict).__name__}'.")
+            raise TypeError(
+                f"Invalid type of 'mls_dict' received. " f"Expected 'dict', got '{type(new_mls_dict).__name__}'."
+            )
 
         temp_dict: dict[str, set[str]] = {}
         # Validating langs that are the dict's keys
         for lang, texts in new_mls_dict.items():
             if not isinstance(lang, str):
                 raise TypeError(
-                    f"Invalid 'lang' type in mls_dict init. " f"Expected 'str', got '{type(new_mls_dict).__name__}'."
+                    f"Invalid 'lang' type in mls_dict init. Expected 'str', got '{type(new_mls_dict).__name__}'."
                 )
             if not isinstance(texts, set):
                 raise TypeError(
-                    f"Invalid 'texts' type in mls_dict init. " f"Expected 'set', got '{type(new_mls_dict).__name__}'."
+                    f"Invalid 'texts' type in mls_dict init. Expected 'set', got '{type(new_mls_dict).__name__}'."
                 )
 
             validated_key = Validator.validate_lang(MultiLangStringFlag, lang)
@@ -182,10 +183,6 @@ class MultiLangString:
         :param langstring: The LangString object to be added, representing a text in a specific language.
         :type langstring: LangString
         """
-        if not isinstance(langstring, LangString):
-            raise TypeError(f"Invalid argument type. Expected type 'LangString', got '{type(langstring).__name__}'")
-
-        langstring.lang = "" if langstring.lang is None else langstring.lang
         self.add_entry(text=langstring.text, lang=langstring.lang)
 
     @Validator.validate_simple_type
@@ -195,12 +192,8 @@ class MultiLangString:
         :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
         :type setlangstring: SetLangString
         """
-        if not isinstance(setlangstring, SetLangString):
-            raise TypeError(
-                f"Invalid argument type. Expected type 'SetLangString', got '{type(setlangstring).__name__}'"
-            )
-
-        # TODO: To be implemented.
+        for text in setlangstring.texts:
+            self.add_entry(text=text, lang=setlangstring.lang)
 
     # ----- REMOVE METHODS -----
 

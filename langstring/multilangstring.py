@@ -124,7 +124,7 @@ class MultiLangString:
     # ----- ADD METHODS -----
 
     @Validator.validate_simple_type
-    def add(self, arg: Union[tuple[str, str], LangString, SetLangString]) -> None:
+    def add(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
         if isinstance(arg, str):
             self.add_text_in_pref_lang(arg)
             return
@@ -164,17 +164,17 @@ class MultiLangString:
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
         """
-        lang_key = next(
-            (existing_key for existing_key in self.mls_dict.keys() if existing_key.casefold() == lang.casefold()), None
-        )
-
-        if lang_key is None:
-            new_lang = Validator.validate_lang(MultiLangStringFlag, lang)
-            self.mls_dict[new_lang] = set()
-            lang_key = new_lang
 
         validated_text = Validator.validate_text(MultiLangStringFlag, text)
-        self.mls_dict[lang_key].add(validated_text)
+        validated_lang = Validator.validate_lang(MultiLangStringFlag, lang)
+
+        registered_lang = self._get_registered_lang(validated_lang)
+
+        if not registered_lang:
+            self.mls_dict[validated_lang] = set()
+            self.mls_dict[validated_lang].add(validated_text)
+        else:
+            self.mls_dict[registered_lang].add(validated_text)
 
     @Validator.validate_simple_type
     def add_langstring(self, langstring: LangString) -> None:
@@ -192,6 +192,7 @@ class MultiLangString:
         :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
         :type setlangstring: SetLangString
         """
+        # Iterate through the texts in SetLangString and add them to the mls_dict
         for text in setlangstring.texts:
             self.add_entry(text=text, lang=setlangstring.lang)
 
@@ -439,6 +440,10 @@ class MultiLangString:
         for lang in empty_langs:
             del self.mls_dict[lang]
 
+    @Validator.validate_simple_type
+    def has_lang(self, lang:str)->bool:
+        return self._get_registered_lang(lang)
+
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods
     # --------------------------------------------------
@@ -615,3 +620,14 @@ class MultiLangString:
 
         # Join all language representations with a comma and space
         return ", ".join(parts)
+
+    # --------------------------------------------------
+    # Private Methods
+    # --------------------------------------------------
+
+    @Validator.validate_simple_type
+    def _get_registered_lang(self, lang: str) -> Union[str, None]:
+        lang_register = {s.casefold(): s for s in self.mls_dict.keys()}
+        if lang.casefold() in lang_register:
+            return lang_register[lang.casefold()]
+        return None

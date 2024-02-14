@@ -1,5 +1,9 @@
 import pytest
-from langstring import LangString, MultiLangString, Controller, MultiLangStringFlag
+
+from langstring import Controller
+from langstring import LangString
+from langstring import MultiLangString
+from langstring import MultiLangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -61,10 +65,10 @@ def test_add_langstring_with_none():
     [
         ("a" * 10000, "en", {"en": {"a" * 10000}}),  # Extremely long text
         ("Hello", "xx", {"xx": {"Hello"}}),  # Unusual but valid language code
-    # Adding a LangString with special characters
-    ("Special@#&*Chars", "en", {"en": {"Special@#&*Chars"}}),
-    # Adding a LangString with numeric content
-    ("123456", "en", {"en": {"123456"}}),
+        # Adding a LangString with special characters
+        ("Special@#&*Chars", "en", {"en": {"Special@#&*Chars"}}),
+        # Adding a LangString with numeric content
+        ("123456", "en", {"en": {"123456"}}),
     ],
 )
 def test_add_langstring_edge_cases(text, lang, expected_result):
@@ -92,8 +96,8 @@ def test_add_langstring_with_lowercase_flag():
     [
         "",  # Empty string
         "  ",  # Whitespace string
-        "@#&*", # special characters
-        "123", # numeric string
+        "@#&*",  # special characters
+        "123",  # numeric string
     ],
 )
 def test_add_langstring_unusual_valid_usage(text):

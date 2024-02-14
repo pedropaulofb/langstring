@@ -1,7 +1,9 @@
 import pytest
-from icecream import ic
 
-from langstring import MultiLangString, SetLangString, Controller, MultiLangStringFlag
+from langstring import Controller
+from langstring import MultiLangString
+from langstring import MultiLangStringFlag
+from langstring import SetLangString
 
 
 @pytest.mark.parametrize(
@@ -60,7 +62,7 @@ def test_add_setlangstring_invalid_type(invalid_setlangstring):
         ("en", "es", {}),
     ],
 )
-def test_add_setlangstring_empty_texts(lang1,lang2, expected_dict):
+def test_add_setlangstring_empty_texts(lang1, lang2, expected_dict):
     mls = MultiLangString()
     mls.add_setlangstring(SetLangString(texts=set(), lang=lang1))
     assert mls.mls_dict == expected_dict, "Empty SetLangString was not handled correctly."

@@ -44,6 +44,55 @@ class SetLangString:
         self._lang = Validator.validate_lang(SetLangStringFlag, new_lang)
 
     # -------------------------------------------
+    # SetLangString's Regular Methods
+    # -------------------------------------------
+
+    @Validator.validate_simple_type
+    def add_langstring(self, langstring: LangString) -> None:
+        self._validate_match_types_and_langs(langstring, True)
+        self.texts.add(Validator.validate_text(SetLangStringFlag, langstring.text))
+
+    @Validator.validate_simple_type
+    def add_text(self, text: str) -> None:
+        self.texts.add(Validator.validate_text(SetLangStringFlag, text))
+
+    @Validator.validate_simple_type
+    def discard_text(self, text: str) -> None:
+        self.texts.discard(text)
+
+    @Validator.validate_simple_type
+    def discard_langstring(self, langstring: LangString) -> None:
+        self._validate_match_types_and_langs(langstring, True)
+        self.texts.discard(langstring.text)
+
+    # TODO: Analyze creation of setlangstring add/discard/remove setlangstring
+
+    @Validator.validate_simple_type
+    def remove_langstring(self, langstring: LangString) -> None:
+        self._validate_match_types_and_langs(langstring, True)
+        self.texts.remove(langstring.text)
+
+    @Validator.validate_simple_type
+    def remove_text(self, text: str) -> None:
+        self.texts.remove(text)
+
+    @Validator.validate_simple_type
+    def to_langstrings(self) -> list[LangString]:
+        langstrings = []
+        for text in self.texts:
+            langstrings.append(LangString(text=text, lang=self.lang))
+        return langstrings
+
+    @Validator.validate_simple_type
+    def to_strings(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> list[str]:
+        strings = []
+        for text in self.texts:
+            new_text = f'"{text}"' if print_quotes else text
+            new_lang = f"{separator}{self.lang}" if print_lang else ""
+            strings.append(f"{new_text}{new_lang}")
+        return strings
+
+    # -------------------------------------------
     # Overwritten Set's Built-in Regular Methods
     # -------------------------------------------
 
@@ -144,55 +193,6 @@ class SetLangString:
         for other in others:
             self._validate_match_types_and_langs(other)
         self.texts.update(*others_texts)
-
-    # -------------------------------------------
-    # SetLangString's Regular Methods
-    # -------------------------------------------
-
-    @Validator.validate_simple_type
-    def add_langstring(self, langstring: LangString) -> None:
-        self._validate_match_types_and_langs(langstring, True)
-        self.texts.add(Validator.validate_text(SetLangStringFlag, langstring.text))
-
-    @Validator.validate_simple_type
-    def add_text(self, text: str) -> None:
-        self.texts.add(Validator.validate_text(SetLangStringFlag, text))
-
-    @Validator.validate_simple_type
-    def discard_text(self, text: str) -> None:
-        self.texts.discard(text)
-
-    @Validator.validate_simple_type
-    def discard_langstring(self, langstring: LangString) -> None:
-        self._validate_match_types_and_langs(langstring, True)
-        self.texts.discard(langstring.text)
-
-    # TODO: Analyze creation of discard/remove_setlangstring
-
-    @Validator.validate_simple_type
-    def remove_langstring(self, langstring: LangString) -> None:
-        self._validate_match_types_and_langs(langstring, True)
-        self.texts.remove(langstring.text)
-
-    @Validator.validate_simple_type
-    def remove_text(self, text: str) -> None:
-        self.texts.remove(text)
-
-    @Validator.validate_simple_type
-    def to_langstrings(self) -> list[LangString]:
-        langstrings = []
-        for text in self.texts:
-            langstrings.append(LangString(text=text, lang=self.lang))
-        return langstrings
-
-    @Validator.validate_simple_type
-    def to_strings(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> list[str]:
-        strings = []
-        for text in self.texts:
-            new_text = f'"{text}"' if print_quotes else text
-            new_lang = f"{separator}{self.lang}" if print_lang else ""
-            strings.append(f"{new_text}{new_lang}")
-        return strings
 
     # -------------------------------------------
     # SetLangString's Dunder Methods

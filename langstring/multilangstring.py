@@ -123,7 +123,7 @@ class MultiLangString:
 
     # ----- ADD METHODS -----
 
-    def add(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
+    def add(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, str):
             self.add_text_in_pref_lang(arg)
             return
@@ -134,6 +134,10 @@ class MultiLangString:
 
         if isinstance(arg, SetLangString):
             self.add_setlangstring(arg)
+            return
+
+        if isinstance(arg, MultiLangString):
+            self.add_multilangstring(arg)
             return
 
         if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
@@ -194,9 +198,16 @@ class MultiLangString:
         for text in setlangstring.texts:
             self.add_entry(text=text, lang=setlangstring.lang)
 
+    @Validator.validate_simple_type
+    def add_multilangstring(self, multilangstring: "MultiLangString") -> None:
+        # If there is a language with empty set in the mls to be added, this will not be inserted into the target mls.
+        for lang in multilangstring.mls_dict:
+            for text in multilangstring.mls_dict[lang]:
+                self.add_entry(text=text, lang=lang)
+
     # ----- DISCARD METHODS -----
 
-    def discard(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
+    def discard(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, str):
             self.discard_text_in_pref_lang(arg)
             return
@@ -207,6 +218,10 @@ class MultiLangString:
 
         if isinstance(arg, SetLangString):
             self.discard_setlangstring(arg)
+            return
+
+        if isinstance(arg, MultiLangString):
+            self.discard_multilangstring(arg)
             return
 
         if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
@@ -242,18 +257,23 @@ class MultiLangString:
             self.discard_entry(text=text, lang=setlangstring.lang)
 
     @Validator.validate_simple_type
+    def discard_multilangstring(self, multilangstring: "MultiLangString") -> None:
+        for lang in multilangstring.mls_dict:
+            for text in multilangstring.mls_dict[lang]:
+                self.discard_entry(text=text, lang=lang)
+
+    @Validator.validate_simple_type
     def discard_lang(self, lang: str) -> None:
         registered_lang = self._get_registered_lang(lang)
         if registered_lang:
             del self.mls_dict[registered_lang]
 
-    # TODO: Check if it is necessary/possible to have a discard/remove_multilangstring method.
     # TODO: Check if it is necessary/possible to have a 'difference' or '-' method.
     # TODO: Check if it is necessary/possible to have a '+' or 'update' method.
 
     # ----- REMOVE METHODS -----
 
-    def remove(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
+    def remove(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, str):
             self.remove_text_in_pref_lang(arg)
             return
@@ -264,6 +284,10 @@ class MultiLangString:
 
         if isinstance(arg, SetLangString):
             self.remove_setlangstring(arg)
+            return
+
+        if isinstance(arg, MultiLangString):
+            self.remove_multilangstring(arg)
             return
 
         if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
@@ -305,6 +329,12 @@ class MultiLangString:
     def remove_setlangstring(self, setlangstring: SetLangString) -> None:
         for text in setlangstring.texts:
             self.remove_entry(text, setlangstring.lang)
+
+    @Validator.validate_simple_type
+    def remove_multilangstring(self, multilangstring: "MultiLangString") -> None:
+        for lang in multilangstring.mls_dict:
+            for text in multilangstring.mls_dict[lang]:
+                self.remove_entry(text=text, lang=lang)
 
     @Validator.validate_simple_type
     def remove_lang(self, lang: str) -> None:
@@ -508,7 +538,7 @@ class MultiLangString:
         return self.mls_dict.values()
 
     # --------------------------------------------------
-    # MultiLangString's Dunder Methods
+    # Overwritten Dictionary's Dunder Methods
     # --------------------------------------------------
 
     # TODO: Check if there is no __add__ method and if it is necessary to implement one.

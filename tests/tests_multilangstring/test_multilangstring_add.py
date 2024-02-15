@@ -162,4 +162,20 @@ def test_add_invalid_data_structure(invalid_arg):
         mls.add(invalid_arg)
 
 
-# Note: Testing with null values directly might not be applicable based on your method signatures and expected inputs.
+# Testing addition of MultiLangString object
+@pytest.mark.parametrize(
+    "initial_contents, adding_mls_contents, expected_dict",
+    [
+        # Test adding MultiLangString with the same language
+        ({"en": {"Hello"}}, {"en": {"World"}}, {"en": {"Hello", "World"}}),
+        # Test adding MultiLangString with different languages
+        ({"en": {"Hello"}}, {"fr": {"Bonjour"}}, {"en": {"Hello"}, "fr": {"Bonjour"}}),
+        # Test adding MultiLangString with overlapping contents
+        ({"en": {"Hello", "World"}}, {"en": {"World", "Everyone"}}, {"en": {"Hello", "World", "Everyone"}}),
+    ],
+)
+def test_add_multilangstring(initial_contents, adding_mls_contents, expected_dict):
+    mls_initial = MultiLangString(initial_contents)
+    mls_adding = MultiLangString(adding_mls_contents)
+    mls_initial.add(mls_adding)
+    assert mls_initial.mls_dict == expected_dict, "Failed to add MultiLangString object correctly."

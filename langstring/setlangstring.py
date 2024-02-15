@@ -167,7 +167,7 @@ class SetLangString:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.discard(langstring.text)
 
-    # TODO: Analyze creation of discard_setlangstring
+    # TODO: Analyze creation of discard/remove_setlangstring
 
     @Validator.validate_simple_type
     def remove_langstring(self, langstring: LangString) -> None:
@@ -195,10 +195,16 @@ class SetLangString:
         return strings
 
     # -------------------------------------------
-    # Overwritten Set's Built-in Dunder Methods
+    # SetLangString's Dunder Methods
     # -------------------------------------------
 
-    # TODO: Isn't there an __add__ method to sets? Check and implement to SetLangStrings.
+    def __add__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        # Not available to regular sets.
+        return self.union(other)
+
+    # -------------------------------------------
+    # Overwritten Set's Built-in Dunder Methods
+    # -------------------------------------------
 
     def __and__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
         return self.intersection(other)

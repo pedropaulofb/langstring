@@ -248,6 +248,8 @@ class MultiLangString:
             del self.mls_dict[registered_lang]
 
     # TODO: Check if it is necessary/possible to have a discard/remove_multilangstring method.
+    # TODO: Check if it is necessary/possible to have a 'difference' or '-' method.
+    # TODO: Check if it is necessary/possible to have a '+' or 'update' method.
 
     # ----- REMOVE METHODS -----
 

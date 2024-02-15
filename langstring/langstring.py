@@ -489,6 +489,7 @@ class LangString:
     # Private Methods
     # ---------------------------------------------
 
+    @Validator.validate_simple_type
     def _validate_match_types(self, other: Union[object, str, "LangString"], overwrite_strict: bool = False) -> None:
         strict = Controller.get_flag(LangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
 
@@ -498,6 +499,7 @@ class LangString:
                 f"Strict mode is enabled. Operand must be of type LangString, but got {type(other).__name__}."
             )
 
+    @Validator.validate_simple_type
     def _validate_match_langs(self, other: object) -> None:
         # Check language compatibility for LangString type
         if isinstance(other, LangString) and self.lang.casefold() != other.lang.casefold():

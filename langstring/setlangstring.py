@@ -149,33 +149,43 @@ class SetLangString:
     # SetLangString's Regular Methods
     # -------------------------------------------
 
+    @Validator.validate_simple_type
     def add_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.add(Validator.validate_text(SetLangStringFlag, langstring.text))
 
+    @Validator.validate_simple_type
     def add_text(self, text: str) -> None:
         self.texts.add(Validator.validate_text(SetLangStringFlag, text))
 
+    @Validator.validate_simple_type
+    def discard_text(self, text: str) -> None:
+        self.texts.discard(text)
+
+    @Validator.validate_simple_type
     def discard_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.discard(langstring.text)
 
-    def discard_text(self, text: str) -> None:
-        self.texts.discard(text)
+    # TODO: Analyze creation of discard_setlangstring
 
+    @Validator.validate_simple_type
     def remove_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.remove(langstring.text)
 
+    @Validator.validate_simple_type
     def remove_text(self, text: str) -> None:
         self.texts.remove(text)
 
+    @Validator.validate_simple_type
     def to_langstrings(self) -> list[LangString]:
         langstrings = []
         for text in self.texts:
             langstrings.append(LangString(text=text, lang=self.lang))
         return langstrings
 
+    @Validator.validate_simple_type
     def to_strings(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> list[str]:
         strings = []
         for text in self.texts:
@@ -187,6 +197,8 @@ class SetLangString:
     # -------------------------------------------
     # Overwritten Set's Built-in Dunder Methods
     # -------------------------------------------
+
+    # TODO: Isn't there an __add__ method to sets? Check and implement to SetLangStrings.
 
     def __and__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
         return self.intersection(other)

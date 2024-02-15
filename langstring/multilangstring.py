@@ -158,7 +158,6 @@ class MultiLangString:
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
         """
-
         validated_text = Validator.validate_text(MultiLangStringFlag, text)
         validated_lang = Validator.validate_lang(MultiLangStringFlag, lang)
 
@@ -247,6 +246,8 @@ class MultiLangString:
         registered_lang = self._get_registered_lang(lang)
         if registered_lang:
             del self.mls_dict[registered_lang]
+
+    # TODO: Check if it is necessary/possible to have a discard/remove_multilangstring method.
 
     # ----- REMOVE METHODS -----
 
@@ -507,6 +508,8 @@ class MultiLangString:
     # --------------------------------------------------
     # MultiLangString's Dunder Methods
     # --------------------------------------------------
+
+    # TODO: Check if there is no __add__ method and if it is necessary to implement one.
 
     def __contains__(self, key: str) -> bool:
         """Check if a language is in the MultiLangString."""

@@ -259,7 +259,7 @@ class MultiLangString:
     @Validator.validate_simple_type
     def discard_multilangstring(self, multilangstring: "MultiLangString") -> None:
         for lang in multilangstring.mls_dict:
-            for text in multilangstring.mls_dict[lang]:
+            for text in list(multilangstring.mls_dict[lang]):
                 self.discard_entry(text=text, lang=lang)
 
     @Validator.validate_simple_type
@@ -471,6 +471,8 @@ class MultiLangString:
         # Then, check if every text in the SetLangString is in the MultiLangString's set for that language
         return setlangstring.texts.issubset(self.mls_dict[setlangstring.lang])
 
+    # TODO: Create contains_multilangstring ?
+
     # ----- GENERAL METHODS -----
 
     def clear_empty_langs(self) -> None:
@@ -481,6 +483,11 @@ class MultiLangString:
     @Validator.validate_simple_type
     def has_lang(self, lang: str) -> bool:
         return self._get_registered_lang(lang)
+
+    @Validator.validate_simple_type
+    def has_entry(self, text:str, lang: str) -> bool:
+        registered_lang = self._get_registered_lang(lang)
+        return (registered_lang and (text in self.mls_dict[registered_lang]))
 
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods

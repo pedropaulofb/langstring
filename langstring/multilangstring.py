@@ -24,6 +24,8 @@ the development of multilingual applications and facilitate the handling of text
 from typing import Optional
 from typing import Union
 
+from icecream import ic
+
 from .controller import Controller
 from .flags import MultiLangStringFlag
 from .langstring import LangString
@@ -439,12 +441,25 @@ class MultiLangString:
 
     @Validator.validate_simple_type
     def contains_entry(self, text: str, lang: str) -> bool:
-        return lang in self.mls_dict and text in self.mls_dict[lang]
+        registered_lang = self._get_registered_lang(lang)
+        return False if (registered_lang is None) else (text in self.mls_dict[registered_lang])
+
+    @Validator.validate_simple_type
+    def contains_lang(self, lang: str) -> bool:
+        return self._get_registered_lang(lang) is not None
 
     @Validator.validate_simple_type
     def contains_text_in_pref_lang(self, text: str) -> bool:
         """Check if a specific text exists in the preferred language."""
         return self.contains_entry(text, self.pref_lang)
+
+    @Validator.validate_simple_type
+    def contains_text_in_any_lang(self, text: str) -> bool:
+        """Check if a specific text exists in the preferred language."""
+        for lang in self.mls_dict:
+            if text in self.mls_dict[lang]:
+                return True
+        return False
 
     @Validator.validate_simple_type
     def contains_langstring(self, langstring: LangString) -> bool:
@@ -453,6 +468,7 @@ class MultiLangString:
         :param langstring: A LangString object to check.
         :return: True if the LangString's text is found within the specified language's set; otherwise, False.
         """
+        # TODO: To be validated
         # Check if the lang exists in the mls_dict and if the text exists within that language's set.
         return langstring.lang in self.mls_dict and langstring.text in self.mls_dict[langstring.lang]
 
@@ -464,6 +480,7 @@ class MultiLangString:
         :return: True if the SetLangString's language exists and all its texts are found within the specified
         language's set; otherwise, False.
         """
+        # TODO: To be validated
         # First, check if the language exists in the MultiLangString
         if setlangstring.lang not in self.mls_dict:
             return False
@@ -471,7 +488,20 @@ class MultiLangString:
         # Then, check if every text in the SetLangString is in the MultiLangString's set for that language
         return setlangstring.texts.issubset(self.mls_dict[setlangstring.lang])
 
-    # TODO: Create contains_multilangstring ?
+    def contains_multilangstring(self, multilangstring: "MultiLangString") -> bool:
+        """
+        Check if the current MultiLangString instance contains all languages and texts of another MultiLangString instance.
+
+        :param multilangstring: The MultiLangString instance to check against.
+        :return: True if all languages and their respective texts in `multilangstring` are contained in this instance, False otherwise.
+        """
+        # TODO: To be validated
+        for lang, texts in multilangstring.mls_dict.items():
+            if lang not in self.mls_dict:
+                return False  # Language not found in self
+            if not all(text in self.mls_dict[lang] for text in texts):
+                return False  # At least one text in this language is not found in self
+        return True
 
     # ----- GENERAL METHODS -----
 
@@ -479,15 +509,6 @@ class MultiLangString:
         empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
         for lang in empty_langs:
             del self.mls_dict[lang]
-
-    @Validator.validate_simple_type
-    def has_lang(self, lang: str) -> bool:
-        return self._get_registered_lang(lang)
-
-    @Validator.validate_simple_type
-    def has_entry(self, text:str, lang: str) -> bool:
-        registered_lang = self._get_registered_lang(lang)
-        return (registered_lang and (text in self.mls_dict[registered_lang]))
 
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods
@@ -610,6 +631,9 @@ class MultiLangString:
         return self.mls_dict != other
 
     def __or__(self, other):
+        # TODO: check if/how to apply the constraint flag.
+        #  I can defined that, for all structures, only when doing and operation (+ or -) the flag is valid.
+        #  For directly calling the method it is not taken into consideration.
         """Implement merge operation, returning a new MultiLangString with merged content."""
         if not isinstance(other, (MultiLangString, dict)):
             return NotImplemented

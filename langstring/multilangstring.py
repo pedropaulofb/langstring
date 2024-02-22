@@ -124,6 +124,7 @@ class MultiLangString:
     # ----- ADD METHODS -----
 
     def add(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
+        # TODO: remove the option of str here and in similar cases
         if isinstance(arg, str):
             self.add_text_in_pref_lang(arg)
             return
@@ -505,66 +506,43 @@ class MultiLangString:
         for lang in empty_langs:
             del self.mls_dict[lang]
 
+    def get(self, key, default=None):
+        """Return the value for key if key is in the dictionary, else default."""
+        # TODO: Fix implementation. It must be named get_langstring(text,lang), get_setlangstring(lang)
+        return self.mls_dict.get(key, default)
+
+    def pop(self, key, default=None):
+        """Remove specified key and returns its value. If key is not found, default is returned if given."""
+        # TODO: Fix implementation. It must be named pop_langstring(text,lang), pop_setlangstring(lang)
+        return self.mls_dict.pop(key, default)
+
+    def langs(self):
+        """Return the languages in the MultiLangString."""
+        # Corresponds to dicts' keys method
+        return self.mls_dict.keys()
+
+    def texts(self):
+        """Return the sets of texts in the MultiLangString."""
+        # TODO: Fix the implementation to, instead of returning sets, return a LIST with all texts inside the MLS.
+        return self.mls_dict.values()
+
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods
     # --------------------------------------------------
-
-    def copy(self) -> "MultiLangString":
-        """Create a shallow copy of the MultiLangString instance.
-
-        Returns a new MultiLangString instance with a shallow copy of the internal dictionary.
-        """
-        new_mls_dict = self.mls_dict.copy()  # Shallow copy of the dictionary
-        return MultiLangString(mls_dict=new_mls_dict, pref_lang=self.pref_lang)
-
-    @classmethod
-    def fromkeys(cls, seq, value=None) -> "MultiLangString":
-        """Create a new MultiLangString instance with keys from seq and values set to value."""
-        return cls({k: set(value) if value is not None else set() for k in seq})
-
-    def get(self, key, default=None):
-        """Return the value for key if key is in the dictionary, else default."""
-        return self.mls_dict.get(key, default)
 
     def items(self):
         """Return items (language, texts set) in the MultiLangString."""
         return self.mls_dict.items()
 
-    def keys(self):
-        """Return the languages in the MultiLangString."""
-        return self.mls_dict.keys()
+    # --------------------------------------------------
+    # MultiLangString's Dunder Methods
+    # --------------------------------------------------
 
-    def pop(self, key, default=None):
-        """Remove specified key and returns its value. If key is not found, default is returned if given."""
-        return self.mls_dict.pop(key, default)
-
-    def popitem(self):
-        """Remove and returns a (key, value) pair as a 2-tuple."""
-        return self.mls_dict.popitem()
-
-    def setdefault(self, key, default=None):
-        """If key is in the dict, return its value. If not, insert key with a value of default and return default."""
-        return self.mls_dict.setdefault(key, default if default is not None else set())
-
-    def update(self, other):
-        """Update the dictionary with the key/value pairs from other, overwriting existing keys."""
-        if isinstance(other, MultiLangString):
-            self.mls_dict.update(other.mls_dict)
-        elif isinstance(other, dict):
-            self.mls_dict.update(other)
-        else:
-            for key, value in other:
-                self.mls_dict[key] = value
-
-    def values(self):
-        """Return the sets of texts in the MultiLangString."""
-        return self.mls_dict.values()
+    # TODO: Create a __add__ method. MLS + LS/SLS/MLS
 
     # --------------------------------------------------
     # Overwritten Dictionary's Dunder Methods
     # --------------------------------------------------
-
-    # TODO: Check if there is no __add__ method and if it is necessary to implement one.
 
     def __contains__(self, key: str) -> bool:
         """Check if a language is in the MultiLangString."""

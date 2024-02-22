@@ -1,6 +1,8 @@
 import pytest
 
-from langstring import MultiLangString, Controller, MultiLangStringFlag
+from langstring import Controller
+from langstring import MultiLangString
+from langstring import MultiLangStringFlag
 
 
 @pytest.mark.parametrize(

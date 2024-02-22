@@ -24,8 +24,6 @@ the development of multilingual applications and facilitate the handling of text
 from typing import Optional
 from typing import Union
 
-from icecream import ic
-
 from .controller import Controller
 from .flags import MultiLangStringFlag
 from .langstring import LangString
@@ -401,8 +399,7 @@ class MultiLangString:
     # ----- COUNT METHODS -----
 
     def count_lang_entries(self) -> dict[str, int]:
-        """
-        Returns the number of text entries for each language.
+        """Return the number of text entries for each language.
 
         :return: A dictionary with language codes as keys and counts of text entries as values.
         """
@@ -417,7 +414,7 @@ class MultiLangString:
 
     # ----- CONTAIN METHODS -----
 
-    def contains(self, arg: Union[str, tuple[str, str], LangString, SetLangString]) -> None:
+    def contains(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, str):
             self.contains_text_in_pref_lang(arg)
             return
@@ -428,6 +425,10 @@ class MultiLangString:
 
         if isinstance(arg, SetLangString):
             self.contains_setlangstring(arg)
+            return
+
+        if isinstance(arg, MultiLangString):
+            self.contains_multilangstring(arg)
             return
 
         if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
@@ -468,9 +469,7 @@ class MultiLangString:
         :param langstring: A LangString object to check.
         :return: True if the LangString's text is found within the specified language's set; otherwise, False.
         """
-        # TODO: To be validated
-        # Check if the lang exists in the mls_dict and if the text exists within that language's set.
-        return langstring.lang in self.mls_dict and langstring.text in self.mls_dict[langstring.lang]
+        return self.contains_entry(langstring.text, langstring.lang)
 
     @Validator.validate_simple_type
     def contains_setlangstring(self, setlangstring: SetLangString) -> bool:
@@ -480,14 +479,12 @@ class MultiLangString:
         :return: True if the SetLangString's language exists and all its texts are found within the specified
         language's set; otherwise, False.
         """
-        # TODO: To be validated
-        # First, check if the language exists in the MultiLangString
-        if setlangstring.lang not in self.mls_dict:
-            return False
+        for text in setlangstring.texts:
+            if not self.contains_entry(text, setlangstring.lang):
+                return False
+        return True
 
-        # Then, check if every text in the SetLangString is in the MultiLangString's set for that language
-        return setlangstring.texts.issubset(self.mls_dict[setlangstring.lang])
-
+    @Validator.validate_simple_type
     def contains_multilangstring(self, multilangstring: "MultiLangString") -> bool:
         """
         Check if the current MultiLangString instance contains all languages and texts of another MultiLangString instance.
@@ -495,12 +492,10 @@ class MultiLangString:
         :param multilangstring: The MultiLangString instance to check against.
         :return: True if all languages and their respective texts in `multilangstring` are contained in this instance, False otherwise.
         """
-        # TODO: To be validated
         for lang, texts in multilangstring.mls_dict.items():
-            if lang not in self.mls_dict:
-                return False  # Language not found in self
-            if not all(text in self.mls_dict[lang] for text in texts):
-                return False  # At least one text in this language is not found in self
+            for text in texts:
+                if not self.contains_entry(text, lang):
+                    return False
         return True
 
     # ----- GENERAL METHODS -----

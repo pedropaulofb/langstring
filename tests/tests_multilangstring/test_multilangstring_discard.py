@@ -10,7 +10,6 @@ from langstring import SetLangString
 @pytest.mark.parametrize(
     "arg, expected_result",
     [
-        ("Hello", {"en": {"World"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}}),  # Discard text in default language
         (
             LangString("Bonjour", "fr"),
             {"en": {"Hello", "World"}, "fr": set(), "es": {"Hola", "Adios"}},
@@ -41,7 +40,6 @@ def test_discard_various_args_off(arg, expected_result):
 @pytest.mark.parametrize(
     "arg, expected_result",
     [
-        ("Hello", {"en": {"World"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}}),  # Discard text in default language
         (
             LangString("Bonjour", "fr"),
             {"en": {"Hello", "World"}, "es": {"Hola", "Adios"}},
@@ -82,11 +80,6 @@ def test_discard_with_invalid_type():
 @pytest.mark.parametrize(
     "arg, expected_result, test_case_description",
     [
-        (
-            "",
-            {"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}},
-            "Discarding empty string does nothing",
-        ),
         (
             SetLangString(set(), "en"),
             {"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}},

@@ -16,8 +16,8 @@ from langstring import SetLangString
 )
 def test_add_simple_text(text: str, expected_dict: dict):
     mls = MultiLangString()
-    mls.add(text)
-    assert mls.mls_dict == expected_dict, "Failed to add simple text correctly."
+    with pytest.raises(TypeError, match="Argument .+ must be of type"):
+        mls.add(text)
 
 
 # Testing addition of LangString object
@@ -72,7 +72,7 @@ def test_add_invalid_type(invalid_arg):
     mls = MultiLangString()
     with pytest.raises(
         TypeError,
-        match="Argument .+ must be of type 'str', 'tuple\[str,str\]', 'LangString', or 'SetLangString', but got",
+        match="Argument .+ must be of type .+, but got",
     ):
         mls.add(invalid_arg)
 
@@ -86,8 +86,8 @@ def test_add_invalid_type(invalid_arg):
 )
 def test_add_empty_string(text: str, expected_dict: dict):
     mls = MultiLangString()
-    mls.add(text)
-    assert mls.mls_dict == expected_dict, "Failed to add an empty string correctly."
+    with pytest.raises(TypeError, match="Argument .+ must be of type"):
+        mls.add(text)
 
 
 # Testing addition of a very long string
@@ -99,8 +99,8 @@ def test_add_empty_string(text: str, expected_dict: dict):
 )
 def test_add_very_long_string(text: str, expected_dict: dict):
     mls = MultiLangString()
-    mls.add(text)
-    assert mls.mls_dict == expected_dict, "Failed to add a very long string correctly."
+    with pytest.raises(TypeError, match="Argument .+ must be of type"):
+        mls.add(text)
 
 
 # Testing addition with unusual language codes
@@ -142,9 +142,8 @@ def test_add_with_flag_effect(text: str, lang: str, flag, expected_dict: dict):
 def test_add_with_strip_text_flag_effect(text: str, expected_dict: dict, flag):
     Controller.set_flag(flag, True)
     mls = MultiLangString()
-    mls.add(text)
-    assert mls.mls_dict == expected_dict, "Failed to apply STRIP_TEXT flag effect."
-    Controller.reset_flag(flag)
+    with pytest.raises(TypeError, match="Argument .+ must be of type"):
+        mls.add(text)
 
 
 # Expanding test cases for invalid argument types

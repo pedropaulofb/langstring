@@ -66,6 +66,7 @@ class SetLangString:
         self.texts.discard(langstring.text)
 
     # TODO: Analyze creation of setlangstring add/discard/remove setlangstring
+    # TODO: Analyze creation of contains methods (similar to MLSs)
 
     @Validator.validate_simple_type
     def remove_langstring(self, langstring: LangString) -> None:

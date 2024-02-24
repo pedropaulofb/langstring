@@ -21,6 +21,7 @@ By providing a comprehensive set of methods for managing multilingual text, the 
 the development of multilingual applications and facilitate the handling of text in multiple languages.
 """
 
+from typing import Any
 from typing import Optional
 from typing import Union
 
@@ -63,7 +64,7 @@ class MultiLangString:
         self.pref_lang: str = pref_lang
 
     # --------------------------------------------------
-    # Getters and Setters
+    # Properties' Getters and Setters
     # --------------------------------------------------
 
     @property
@@ -117,18 +118,25 @@ class MultiLangString:
         """
         self._pref_lang = Validator.validate_lang(MultiLangStringFlag, new_pref_lang)
 
+    @property
+    def langs(self) -> list[str]:
+        """Return the languages in the MultiLangString, converted to lowercase."""
+        return [lang.lower() for lang in self.mls_dict.keys()]
+
+    @property
+    def texts(self) -> list[str]:
+        """Return all texts in the MultiLangString."""
+        # TODO: To be implemented.
+        # Fix the implementation to, instead of returning sets, return a LIST with all texts inside the MLS.
+        return self.mls_dict.values()
+
     # --------------------------------------------------
     # MultiLangString's Regular Methods
     # --------------------------------------------------
 
     # ----- ADD METHODS -----
 
-    def add(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
-        # TODO: remove the option of str here and in similar cases
-        if isinstance(arg, str):
-            self.add_text_in_pref_lang(arg)
-            return
-
+    def add(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, LangString):
             self.add_langstring(arg)
             return
@@ -146,7 +154,7 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument '{arg}' must be of type 'str', 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
             f"but got '{type(arg).__name__}'."
         )
 
@@ -208,11 +216,7 @@ class MultiLangString:
 
     # ----- DISCARD METHODS -----
 
-    def discard(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
-        if isinstance(arg, str):
-            self.discard_text_in_pref_lang(arg)
-            return
-
+    def discard(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, LangString):
             self.discard_langstring(arg)
             return
@@ -274,11 +278,7 @@ class MultiLangString:
 
     # ----- REMOVE METHODS -----
 
-    def remove(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
-        if isinstance(arg, str):
-            self.remove_text_in_pref_lang(arg)
-            return
-
+    def remove(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, LangString):
             self.remove_langstring(arg)
             return
@@ -296,7 +296,7 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument '{arg}' must be of type 'str', 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
             f"but got '{type(arg).__name__}'."
         )
 
@@ -415,29 +415,21 @@ class MultiLangString:
 
     # ----- CONTAIN METHODS -----
 
-    def contains(self, arg: Union[str, tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
-        if isinstance(arg, str):
-            self.contains_text_in_pref_lang(arg)
-            return
-
+    def contains(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
         if isinstance(arg, LangString):
-            self.contains_langstring(arg)
-            return
+            return self.contains_langstring(arg)
 
         if isinstance(arg, SetLangString):
-            self.contains_setlangstring(arg)
-            return
+            return self.contains_setlangstring(arg)
 
         if isinstance(arg, MultiLangString):
-            self.contains_multilangstring(arg)
-            return
+            return self.contains_multilangstring(arg)
 
         if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
-            self.contains_entry(arg[0], arg[1])
-            return
+            return self.contains_entry(arg[0], arg[1])
 
         raise TypeError(
-            f"Argument '{arg}' must be of type 'str', 'tuple[str,str]', 'LangString', or 'SetLangString', "
+            f"Argument '{arg}' must be of type 'tuple[str,str]', 'LangString', or 'SetLangString', "
             f"but got '{type(arg).__name__}'."
         )
 
@@ -480,6 +472,7 @@ class MultiLangString:
         :return: True if the SetLangString's language exists and all its texts are found within the specified
         language's set; otherwise, False.
         """
+        # If the setlangstring.texts is empty, it will return true
         for text in setlangstring.texts:
             if not self.contains_entry(text, setlangstring.lang):
                 return False
@@ -499,32 +492,40 @@ class MultiLangString:
                     return False
         return True
 
+    # ----- GET METHODS -----
+
+    def get_langstring(self, text: str, lang: str, default: Optional[Any] = None):
+        # TODO: To be implemented.
+        # If is part remove, create and return value
+        # Else return default
+        pass
+
+    def get_setlangstring(self, lang: str, default: Optional[Any] = None):
+        # TODO: To be implemented.
+        # If is part remove, create and return value
+        # Else return default
+        pass
+
+    # ----- POP METHODS -----
+
+    def pop_langstring(self, text: str, lang: str, default: Optional[Any] = None):
+        # TODO: To be implemented.
+        # If is part remove, create and return value
+        # Else return default
+        pass
+
+    def pop_setlangstring(self, lang: str, default: Optional[Any] = None):
+        # TODO: To be implemented.
+        # If is part remove, create and return value
+        # Else return default
+        pass
+
     # ----- GENERAL METHODS -----
 
     def clear_empty_langs(self) -> None:
         empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
         for lang in empty_langs:
             del self.mls_dict[lang]
-
-    def get(self, key, default=None):
-        """Return the value for key if key is in the dictionary, else default."""
-        # TODO: Fix implementation. It must be named get_langstring(text,lang), get_setlangstring(lang)
-        return self.mls_dict.get(key, default)
-
-    def pop(self, key, default=None):
-        """Remove specified key and returns its value. If key is not found, default is returned if given."""
-        # TODO: Fix implementation. It must be named pop_langstring(text,lang), pop_setlangstring(lang)
-        return self.mls_dict.pop(key, default)
-
-    def langs(self):
-        """Return the languages in the MultiLangString."""
-        # Corresponds to dicts' keys method
-        return self.mls_dict.keys()
-
-    def texts(self):
-        """Return the sets of texts in the MultiLangString."""
-        # TODO: Fix the implementation to, instead of returning sets, return a LIST with all texts inside the MLS.
-        return self.mls_dict.values()
 
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods

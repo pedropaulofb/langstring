@@ -495,30 +495,30 @@ class MultiLangString:
     # ----- GET METHODS -----
 
     def get_langstring(self, text: str, lang: str, default: Optional[Any] = None):
-        # TODO: To be implemented.
-        # If is part remove, create and return value
-        # Else return default
-        pass
+        if self.contains_entry(text=text, lang=lang):
+            return LangString(text=text, lang=lang)
+        return default
 
     def get_setlangstring(self, lang: str, default: Optional[Any] = None):
-        # TODO: To be implemented.
-        # If is part remove, create and return value
-        # Else return default
-        pass
+        if self.contains_lang(lang=lang):
+            return SetLangString(texts=self.mls_dict[lang], lang=lang)
+        return default
 
     # ----- POP METHODS -----
 
     def pop_langstring(self, text: str, lang: str, default: Optional[Any] = None):
-        # TODO: To be implemented.
-        # If is part remove, create and return value
-        # Else return default
-        pass
+        if self.contains_entry(text=text, lang=lang):
+            new_ls = self.get_langstring(text=text, lang=lang)
+            self.remove_entry(text=text, lang=lang)
+            return new_ls
+        return default
 
     def pop_setlangstring(self, lang: str, default: Optional[Any] = None):
-        # TODO: To be implemented.
-        # If is part remove, create and return value
-        # Else return default
-        pass
+        if self.contains_lang(lang=lang):
+            new_sls = self.get_setlangstring(lang=lang)
+            self.remove_lang(lang=lang)
+            return new_sls
+        return default
 
     # ----- GENERAL METHODS -----
 

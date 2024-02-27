@@ -77,7 +77,7 @@ class MultiLangString:
         """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
         if not isinstance(new_mls_dict, dict):
             raise TypeError(
-                f"Invalid type of 'mls_dict' received. " f"Expected 'dict', got '{type(new_mls_dict).__name__}'."
+                f"Invalid type of 'mls_dict' received. Expected 'dict', got '{type(new_mls_dict).__name__}'."
             )
 
         temp_dict: dict[str, set[str]] = {}
@@ -117,18 +117,6 @@ class MultiLangString:
         :type new_pref_lang: str
         """
         self._pref_lang = Validator.validate_lang(MultiLangStringFlag, new_pref_lang)
-
-    @property
-    def langs(self) -> list[str]:
-        """Return the languages in the MultiLangString, converted to lowercase."""
-        return [lang.lower() for lang in self.mls_dict.keys()]
-
-    @property
-    def texts(self) -> list[str]:
-        """Return all texts in the MultiLangString."""
-        # TODO: To be implemented.
-        # Fix the implementation to, instead of returning sets, return a LIST with all texts inside the MLS.
-        return self.mls_dict.values()
 
     # --------------------------------------------------
     # MultiLangString's Regular Methods
@@ -494,18 +482,31 @@ class MultiLangString:
 
     # ----- GET METHODS -----
 
-    def get_langstring(self, text: str, lang: str, default: Optional[Any] = None):
-        if self.contains_entry(text=text, lang=lang):
-            return LangString(text=text, lang=lang)
-        return default
+    def get_langs(self, casefold: bool = False) -> list[str]:
+        """Return a list with all languages in the MultiLangString."""
+        return [lang.lower() for lang in self.mls_dict.keys()] if casefold else list(self.mls_dict.keys())
 
-    def get_setlangstring(self, lang: str, default: Optional[Any] = None):
-        if self.contains_lang(lang=lang):
-            return SetLangString(texts=self.mls_dict[lang], lang=lang)
-        return default
+    def get_texts(self) -> list[str]:
+        """Return a sorted list with all texts in the MultiLangString."""
+        result = [item for subset in self.mls_dict.values() for item in subset]
+        result.sort()
+        return result
+
+    def get_langstring(self, text: str, lang: str, default: Optional[Any] = None) -> Union[LangString, Any]:
+        if not isinstance(text, str):
+            raise TypeError(f"Invalid argument 'text' received. Expected 'str', got '{type(text).__name__}'.")
+        if not isinstance(lang, str):
+            raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
+        return LangString(text=text, lang=lang) if self.contains_entry(text=text, lang=lang) else default
+
+    def get_setlangstring(self, lang: str, default: Optional[Any] = None) -> Union[LangString, Any]:
+        if not isinstance(lang, str):
+            raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
+        return SetLangString(texts=self.mls_dict[lang], lang=lang) if self.contains_lang(lang=lang) else default
 
     # ----- POP METHODS -----
 
+    @Validator.validate_simple_type
     def pop_langstring(self, text: str, lang: str, default: Optional[Any] = None):
         if self.contains_entry(text=text, lang=lang):
             new_ls = self.get_langstring(text=text, lang=lang)
@@ -513,6 +514,7 @@ class MultiLangString:
             return new_ls
         return default
 
+    @Validator.validate_simple_type
     def pop_setlangstring(self, lang: str, default: Optional[Any] = None):
         if self.contains_lang(lang=lang):
             new_sls = self.get_setlangstring(lang=lang)

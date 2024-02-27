@@ -72,11 +72,6 @@ Classes
    .. py:method:: add(arg)
 
 
-   .. py:method:: add_text_in_pref_lang(text)
-
-      Add a text entry to the preferred language.
-
-
    .. py:method:: add_entry(text, lang = '')
 
       Add a text entry to the MultiLangString under a specified language.
@@ -89,6 +84,11 @@ Classes
       :type text: str
       :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
       :type lang: str
+
+
+   .. py:method:: add_text_in_pref_lang(text)
+
+      Add a text entry to the preferred language.
 
 
    .. py:method:: add_langstring(langstring)
@@ -107,12 +107,33 @@ Classes
       :type setlangstring: SetLangString
 
 
+   .. py:method:: add_multilangstring(multilangstring)
+
+
+   .. py:method:: discard(arg)
+
+
+   .. py:method:: discard_entry(text, lang)
+
+
+   .. py:method:: discard_text_in_pref_lang(text)
+
+      Discard a text entry from the preferred language.
+
+
+   .. py:method:: discard_langstring(langstring)
+
+
+   .. py:method:: discard_setlangstring(setlangstring)
+
+
+   .. py:method:: discard_multilangstring(multilangstring)
+
+
+   .. py:method:: discard_lang(lang)
+
+
    .. py:method:: remove(arg)
-
-
-   .. py:method:: remove_text_in_pref_lang(text)
-
-      Remove a text entry from the preferred language.
 
 
    .. py:method:: remove_entry(text, lang)
@@ -128,10 +149,18 @@ Classes
       :type lang: str
 
 
+   .. py:method:: remove_text_in_pref_lang(text)
+
+      Remove a text entry from the preferred language.
+
+
    .. py:method:: remove_langstring(langstring)
 
 
    .. py:method:: remove_setlangstring(setlangstring)
+
+
+   .. py:method:: remove_multilangstring(multilangstring)
 
 
    .. py:method:: remove_lang(lang)
@@ -142,26 +171,6 @@ Classes
 
       :param lang: The language key to be removed along with all its texts.
       :type lang: str
-
-
-   .. py:method:: discard(arg)
-
-
-   .. py:method:: discard_text_in_pref_lang(text)
-
-      Discard a text entry from the preferred language.
-
-
-   .. py:method:: discard_entry(text, lang)
-
-
-   .. py:method:: discard_langstring(langstring)
-
-
-   .. py:method:: discard_setlangstring(setlangstring)
-
-
-   .. py:method:: discard_lang(lang)
 
 
    .. py:method:: to_langstrings(languages = None)
@@ -175,7 +184,7 @@ Classes
 
    .. py:method:: count_lang_entries()
 
-      Returns the number of text entries for each language.
+      Return the number of text entries for each language.
 
       :return: A dictionary with language codes as keys and counts of text entries as values.
 
@@ -191,12 +200,20 @@ Classes
    .. py:method:: contains(arg)
 
 
+   .. py:method:: contains_entry(text, lang)
+
+
+   .. py:method:: contains_lang(lang)
+
+
    .. py:method:: contains_text_in_pref_lang(text)
 
       Check if a specific text exists in the preferred language.
 
 
-   .. py:method:: contains_entry(text, lang)
+   .. py:method:: contains_text_in_any_lang(text)
+
+      Check if a specific text exists in the preferred language.
 
 
    .. py:method:: contains_langstring(langstring)
@@ -216,60 +233,42 @@ Classes
       language's set; otherwise, False.
 
 
+   .. py:method:: contains_multilangstring(multilangstring)
+
+      Check if the current MultiLangString instance contains all languages and texts of another MultiLangString instance.
+
+      :param multilangstring: The MultiLangString instance to check against.
+      :return: True if all languages and their respective texts in `multilangstring` are contained in this instance, False otherwise.
+
+
+   .. py:method:: get_langs(casefold = False)
+
+      Return a list with all languages in the MultiLangString.
+
+
+   .. py:method:: get_texts()
+
+      Return a sorted list with all texts in the MultiLangString.
+
+
+   .. py:method:: get_langstring(text, lang, default = None)
+
+
+   .. py:method:: get_setlangstring(lang, default = None)
+
+
+   .. py:method:: pop_langstring(text, lang, default = None)
+
+
+   .. py:method:: pop_setlangstring(lang, default = None)
+
+
    .. py:method:: clear_empty_langs()
-
-
-   .. py:method:: copy()
-
-      Create a shallow copy of the MultiLangString instance.
-
-      Returns a new MultiLangString instance with a shallow copy of the internal dictionary.
-
-
-   .. py:method:: fromkeys(seq, value=None)
-      :classmethod:
-
-      Create a new MultiLangString instance with keys from seq and values set to value.
-
-
-   .. py:method:: get(key, default=None)
-
-      Return the value for key if key is in the dictionary, else default.
 
 
    .. py:method:: items()
 
       Return items (language, texts set) in the MultiLangString.
-
-
-   .. py:method:: keys()
-
-      Return the languages in the MultiLangString.
-
-
-   .. py:method:: pop(key, default=None)
-
-      Remove specified key and returns its value. If key is not found, default is returned if given.
-
-
-   .. py:method:: popitem()
-
-      Remove and returns a (key, value) pair as a 2-tuple.
-
-
-   .. py:method:: setdefault(key, default=None)
-
-      If key is in the dict, return its value. If not, insert key with a value of default and return default.
-
-
-   .. py:method:: update(other)
-
-      Update the dictionary with the key/value pairs from other, overwriting existing keys.
-
-
-   .. py:method:: values()
-
-      Return the sets of texts in the MultiLangString.
 
 
    .. py:method:: __contains__(key)
@@ -371,6 +370,9 @@ Classes
 
       :return: A string representation of the MultiLangString with language tags.
       :rtype: str
+
+
+   .. py:method:: _get_registered_lang(lang)
 
 
 

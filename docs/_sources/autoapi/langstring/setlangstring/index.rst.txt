@@ -32,6 +32,30 @@ Classes
       Getter for lang.
 
 
+   .. py:method:: add_langstring(langstring)
+
+
+   .. py:method:: add_text(text)
+
+
+   .. py:method:: discard_text(text)
+
+
+   .. py:method:: discard_langstring(langstring)
+
+
+   .. py:method:: remove_langstring(langstring)
+
+
+   .. py:method:: remove_text(text)
+
+
+   .. py:method:: to_langstrings()
+
+
+   .. py:method:: to_strings(print_quotes = True, separator = '@', print_lang = True)
+
+
    .. py:method:: add(new_element)
 
 
@@ -83,28 +107,7 @@ Classes
    .. py:method:: update(*others)
 
 
-   .. py:method:: add_langstring(langstring)
-
-
-   .. py:method:: add_text(text)
-
-
-   .. py:method:: discard_langstring(langstring)
-
-
-   .. py:method:: discard_text(text)
-
-
-   .. py:method:: remove_langstring(langstring)
-
-
-   .. py:method:: remove_text(text)
-
-
-   .. py:method:: to_langstrings()
-
-
-   .. py:method:: to_strings(print_quotes = True, separator = '@', print_lang = True)
+   .. py:method:: __add__(other)
 
 
    .. py:method:: __and__(other)

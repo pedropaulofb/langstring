@@ -1,4 +1,3 @@
-from typing import Any
 from typing import Optional
 
 import pytest
@@ -12,8 +11,8 @@ from langstring import MultiLangString
     [
         ({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, "Hello", "en", LangString(text="Hello", lang="en")),
         ({"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}}, "Monde", "fr", LangString(text="Monde", lang="fr")),
-        ({"en": {"Hello"}, "fr": {"Bonjour"}}, "Hola", "es", None),
-        ({"en": {"Hello"}, "fr": {"Bonjour"}}, "Hello", "fr", None),
+        ({"en": {"Hello"}, "fr": {"Bonjour"}}, "Hola", "es", LangString(lang="es")),
+        ({"en": {"Hello"}, "fr": {"Bonjour"}}, "Hello", "fr", LangString(lang="fr")),
         ({"ru": {"Привет"}}, "Привет", "ru", LangString(text="Привет", lang="ru")),
         ({"emoji": {"😊", "😂"}}, "😊", "emoji", LangString(text="😊", lang="emoji")),
         ({"en": {" "}}, " ", "en", LangString(text=" ", lang="en")),  # Testing with whitespace
@@ -41,34 +40,6 @@ def test_get_langstring_valid_cases(
     mls = MultiLangString(input_dict)
     result = mls.get_langstring(text=text, lang=lang)
     assert result == expected_output, f"Expected {expected_output} for text '{text}' in lang '{lang}', got {result}"
-
-
-@pytest.mark.parametrize(
-    "text, lang, default, expected_output",
-    [
-        ("NonExistent", "en", LangString(text="Default", lang="en"), LangString(text="Default", lang="en")),
-        ("NonExistent", "en", "DefaultText", "DefaultText"),
-        ("NonExistent", "en", None, None),
-        ("NonExistent", "en", [], []),  # Testing with an empty list as default
-        ("NonExistent", "en", {}, {}),  # Testing with an empty dict as default
-        ("NonExistent", "en", True, True),  # Testing with a boolean True as default
-        ("NonExistent", "en", False, False),  # Testing with a boolean False as default
-    ],
-)
-def test_get_langstring_with_default(text: str, lang: str, default: Any, expected_output: Optional[LangString]) -> None:
-    """Test get_langstring method with a default value for non-existing text.
-
-    :param text: The text to search for within a specific language.
-    :param lang: The language code to search the text in.
-    :param default: The default value to return if the text is not found.
-    :param expected_output: The expected output, either a LangString or the default value.
-    :return: None
-    """
-    mls = MultiLangString({"en": {"Hello"}})
-    result = mls.get_langstring(text=text, lang=lang, default=default)
-    assert (
-        result == expected_output
-    ), f"Expected {expected_output} as default for text '{text}' in lang '{lang}', got {result}"
 
 
 @pytest.mark.parametrize(

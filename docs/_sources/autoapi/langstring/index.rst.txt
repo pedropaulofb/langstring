@@ -1149,16 +1149,22 @@ Classes
       Return a sorted list with all texts in the MultiLangString.
 
 
-   .. py:method:: get_langstring(text, lang, default = None)
+   .. py:method:: get_langstring(text, lang)
 
 
-   .. py:method:: get_setlangstring(lang, default = None)
+   .. py:method:: get_setlangstring(lang)
+
+
+   .. py:method:: get_multilangstring(langs)
 
 
    .. py:method:: pop_langstring(text, lang, default = None)
 
 
    .. py:method:: pop_setlangstring(lang, default = None)
+
+
+   .. py:method:: pop_multilangstring(langs, default = None)
 
 
    .. py:method:: clear_empty_langs()

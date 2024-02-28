@@ -403,7 +403,7 @@ class MultiLangString:
 
     # ----- CONTAIN METHODS -----
 
-    def contains(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
+    def contains(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> bool:
         if isinstance(arg, LangString):
             return self.contains_langstring(arg)
 
@@ -468,11 +468,11 @@ class MultiLangString:
 
     @Validator.validate_simple_type
     def contains_multilangstring(self, multilangstring: "MultiLangString") -> bool:
-        """
-        Check if the current MultiLangString instance contains all languages and texts of another MultiLangString instance.
+        """Check if the current instance contains all languages and texts of another MultiLangString instance.
 
         :param multilangstring: The MultiLangString instance to check against.
-        :return: True if all languages and their respective texts in `multilangstring` are contained in this instance, False otherwise.
+        :return: True if all languages and their respective texts in `multilangstring` are contained in this instance,
+        False otherwise.
         """
         for lang, texts in multilangstring.mls_dict.items():
             for text in texts:
@@ -493,31 +493,36 @@ class MultiLangString:
         result.sort()
         return result
 
-    def get_langstring(self, text: str, lang: str, default: Optional[Any] = None) -> Union[LangString, Any]:
+    def get_langstring(self, text: str, lang: str) -> LangString:
         if not isinstance(text, str):
             raise TypeError(f"Invalid argument 'text' received. Expected 'str', got '{type(text).__name__}'.")
         if not isinstance(lang, str):
             raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
 
-        return LangString(text=text, lang=lang) if self.contains_entry(text=text, lang=lang) else default
+        return LangString(text=text, lang=lang) if self.contains_entry(text=text, lang=lang) else LangString(lang=lang)
 
-    def get_setlangstring(self, lang: str, default: Optional[Any] = None) -> Union[SetLangString, Any]:
+    def get_setlangstring(self, lang: str) -> SetLangString:
         if not isinstance(lang, str):
             raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
 
-        return SetLangString(texts=self.mls_dict[lang], lang=lang) if self.contains_lang(lang=lang) else default
+        registered_lang = self._get_registered_lang(lang)
+        if registered_lang:
+            return SetLangString(texts=self.mls_dict[registered_lang], lang=lang)
+        return SetLangString(lang=lang)
 
-    def get_multilangstring(self, langs: list[str], default: Optional[Any] = None) -> Union["MultiLangString", Any]:
+    def get_multilangstring(self, langs: list[str]) -> "MultiLangString":
         if not isinstance(langs, list):
             raise TypeError(f"Invalid argument 'langs' received. Expected 'list', got '{type(langs).__name__}'.")
         if not all(isinstance(item, str) for item in langs):
             raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
 
-        if all(lang in self.mls_dict for lang in langs):
-            return MultiLangString(mls_dict={lang: self.mls_dict[lang] for lang in langs if lang in self.mls_dict},
-                                   pref_lang=self.pref_lang)
-        else:
-            return default
+        new_mls = MultiLangString()
+        for lang in langs:
+            if self.contains_lang(lang):
+                new_sls = self.get_setlangstring(lang)
+                new_mls.add_setlangstring(new_sls)
+
+        return new_mls
 
     # ----- POP METHODS -----
 
@@ -549,7 +554,7 @@ class MultiLangString:
         if not all(isinstance(item, str) for item in langs):
             raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
 
-        new_mls = self.get_multilangstring(langs, None)
+        new_mls = self.get_multilangstring(langs)
         if new_mls:
             for lang in langs:
                 self.remove_lang(lang)

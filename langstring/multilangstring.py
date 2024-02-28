@@ -499,28 +499,40 @@ class MultiLangString:
             raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
         return LangString(text=text, lang=lang) if self.contains_entry(text=text, lang=lang) else default
 
-    def get_setlangstring(self, lang: str, default: Optional[Any] = None) -> Union[LangString, Any]:
+    def get_setlangstring(self, lang: str, default: Optional[Any] = None) -> Union[SetLangString, Any]:
         if not isinstance(lang, str):
             raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
         return SetLangString(texts=self.mls_dict[lang], lang=lang) if self.contains_lang(lang=lang) else default
 
+    def get_multilangstring(self, langs: list[str], default: Optional[Any] = None) -> Union["MultiLangString", Any]:
+        # TODO: Add type validation
+        if all(lang in self.mls_dict for lang in langs):
+            return MultiLangString(mls_dict={lang: self.mls_dict[lang] for lang in langs if lang in self.mls_dict},
+                                   pref_lang=self.pref_lang)
+        else:
+            return default
+
     # ----- POP METHODS -----
 
-    @Validator.validate_simple_type
-    def pop_langstring(self, text: str, lang: str, default: Optional[Any] = None):
+    def pop_langstring(self, text: str, lang: str, default: Optional[Any] = None) -> Union[LangString, Any]:
+        # TODO: Add type validation
         if self.contains_entry(text=text, lang=lang):
             new_ls = self.get_langstring(text=text, lang=lang)
             self.remove_entry(text=text, lang=lang)
             return new_ls
         return default
 
-    @Validator.validate_simple_type
-    def pop_setlangstring(self, lang: str, default: Optional[Any] = None):
+    def pop_setlangstring(self, lang: str, default: Optional[Any] = None) -> Union[SetLangString, Any]:
+        # TODO: Add type validation
         if self.contains_lang(lang=lang):
             new_sls = self.get_setlangstring(lang=lang)
             self.remove_lang(lang=lang)
             return new_sls
         return default
+
+    def pop_multilangstring(self, langs: list[str], default: Optional[Any] = None) -> Union["MultiLangString", Any]:
+        # TODO: TO BE IMPLEMENTED
+        pass
 
     # ----- GENERAL METHODS -----
 

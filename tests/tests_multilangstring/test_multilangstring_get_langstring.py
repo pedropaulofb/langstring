@@ -58,7 +58,7 @@ def test_get_langstring_invalid_inputs(lang, text) -> None:
     :param text: The text to search for, which might be invalid.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Invalid argument .+ received. Expected 'str', got"):
+    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
         mls.get_langstring(text=text, lang=lang)
 
 

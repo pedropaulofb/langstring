@@ -33,22 +33,21 @@ def test_get_setlangstring_valid_inputs(lang: str, expected_texts: set, expected
 
 
 @pytest.mark.parametrize(
-    "lang, match_error",
+    "lang",
     [
-        (123, "Expected 'str', got 'int'."),  # Non-string input
-        ([], "Expected 'str', got 'list'."),  # Non-string input
-        (None, "Expected 'str', got 'NoneType'."),  # Non-string input
+        123,  # Non-string input
+        [],  # Non-string input
+        None,  # Non-string input
     ],
 )
-def test_get_setlangstring_invalid_inputs(lang: str, match_error: str):
+def test_get_setlangstring_invalid_inputs(lang: str):
     """
     Test `get_setlangstring` with invalid language inputs.
 
     :param lang: The invalid language code input.
-    :param match_error: The expected error message part.
     """
     mls = MultiLangString()
-    with pytest.raises(TypeError, match=match_error):
+    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got."):
         mls.get_setlangstring(lang)
 
 

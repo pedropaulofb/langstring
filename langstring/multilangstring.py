@@ -21,7 +21,6 @@ By providing a comprehensive set of methods for managing multilingual text, the 
 the development of multilingual applications and facilitate the handling of text in multiple languages.
 """
 
-from typing import Any
 from typing import Optional
 from typing import Union
 
@@ -493,18 +492,12 @@ class MultiLangString:
         result.sort()
         return result
 
+    @Validator.validate_simple_type
     def get_langstring(self, text: str, lang: str) -> LangString:
-        if not isinstance(text, str):
-            raise TypeError(f"Invalid argument 'text' received. Expected 'str', got '{type(text).__name__}'.")
-        if not isinstance(lang, str):
-            raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
-
         return LangString(text=text, lang=lang) if self.contains_entry(text=text, lang=lang) else LangString(lang=lang)
 
+    @Validator.validate_simple_type
     def get_setlangstring(self, lang: str) -> SetLangString:
-        if not isinstance(lang, str):
-            raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
-
         registered_lang = self._get_registered_lang(lang)
         if registered_lang:
             return SetLangString(texts=self.mls_dict[registered_lang], lang=lang)
@@ -526,40 +519,30 @@ class MultiLangString:
 
     # ----- POP METHODS -----
 
-    def pop_langstring(self, text: str, lang: str, default: Optional[Any] = None) -> Union[LangString, Any]:
-        if not isinstance(text, str):
-            raise TypeError(f"Invalid argument 'text' received. Expected 'str', got '{type(text).__name__}'.")
-        if not isinstance(lang, str):
-            raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
-
+    @Validator.validate_simple_type
+    def pop_langstring(self, text: str, lang: str) -> Union[None, LangString]:
         if self.contains_entry(text=text, lang=lang):
             new_ls = self.get_langstring(text=text, lang=lang)
             self.remove_entry(text=text, lang=lang)
             return new_ls
-        return default
 
-    def pop_setlangstring(self, lang: str, default: Optional[Any] = None) -> Union[SetLangString, Any]:
-        if not isinstance(lang, str):
-            raise TypeError(f"Invalid argument 'lang' received. Expected 'str', got '{type(lang).__name__}'.")
-
+    @Validator.validate_simple_type
+    def pop_setlangstring(self, lang: str) -> Union[None, SetLangString]:
         if self.contains_lang(lang=lang):
             new_sls = self.get_setlangstring(lang=lang)
             self.remove_lang(lang=lang)
             return new_sls
-        return default
 
-    def pop_multilangstring(self, langs: list[str], default: Optional[Any] = None) -> Union["MultiLangString", Any]:
+    def pop_multilangstring(self, langs: list[str]) -> "MultiLangString":
         if not isinstance(langs, list):
             raise TypeError(f"Invalid argument 'langs' received. Expected 'list', got '{type(langs).__name__}'.")
         if not all(isinstance(item, str) for item in langs):
             raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
 
         new_mls = self.get_multilangstring(langs)
-        if new_mls:
-            for lang in langs:
-                self.remove_lang(lang)
-            return new_mls
-        return default
+        for lang in langs:
+            self.discard_lang(lang)
+        return new_mls
 
     # ----- GENERAL METHODS -----
 

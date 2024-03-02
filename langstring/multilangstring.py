@@ -59,6 +59,9 @@ class MultiLangString:
         :type pref_lang: str
         :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
+        # TODO: Fix.
+        #  Init is currently accepting MultiLangString(mls_dict={"EN":{"test"}, "en":{"test"}}),
+        #  generating MultiLangString(mls_dict={'EN': {'test'}, 'en': {'test'}}, pref_lang='en')
         self.mls_dict: dict[str, set[str]] = mls_dict if (mls_dict is not None) else {}
         self.pref_lang: str = pref_lang
 
@@ -520,14 +523,14 @@ class MultiLangString:
     # ----- POP METHODS -----
 
     @Validator.validate_simple_type
-    def pop_langstring(self, text: str, lang: str) -> Union[None, LangString]:
+    def pop_langstring(self, text: str, lang: str) -> Optional[LangString]:
         if self.contains_entry(text=text, lang=lang):
             new_ls = self.get_langstring(text=text, lang=lang)
             self.remove_entry(text=text, lang=lang)
             return new_ls
 
     @Validator.validate_simple_type
-    def pop_setlangstring(self, lang: str) -> Union[None, SetLangString]:
+    def pop_setlangstring(self, lang: str) -> Optional[SetLangString]:
         if self.contains_lang(lang=lang):
             new_sls = self.get_setlangstring(lang=lang)
             self.remove_lang(lang=lang)

@@ -149,7 +149,7 @@ class MultiLangString:
         )
 
     @Validator.validate_simple_type
-    def add_entry(self, text: str, lang: str = "") -> None:
+    def add_entry(self, text: str, lang: str) -> None:
         """Add a text entry to the MultiLangString under a specified language.
 
         Validates the provided text and language against the current flag settings before adding. If the specified
@@ -389,17 +389,23 @@ class MultiLangString:
 
     # ----- COUNT METHODS -----
 
-    def count_lang_entries(self) -> dict[str, int]:
+    def count_entries_per_lang(self) -> dict[str, int]:
         """Return the number of text entries for each language.
 
         :return: A dictionary with language codes as keys and counts of text entries as values.
         """
         return {lang: len(texts) for lang, texts in self.mls_dict.items()}
 
-    def count_langs(self) -> int:
+    def count_langs_total(self) -> int:
+        # Count the total number of langs the MultiLangString has.
         return len(self.mls_dict)
 
-    def count_total_entries(self) -> int:
+    def count_entries_by_lang(self, lang: str) -> int:
+        # Count the number of texts a given lang has.
+        registered_lang = self._get_registered_lang()
+        return len(self.mls_dict[registered_lang])
+
+    def count_entries_total(self) -> int:
         """Return the total number of text entries across all languages."""
         return sum(len(texts) for texts in self.mls_dict.values())
 
@@ -553,6 +559,10 @@ class MultiLangString:
         empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
         for lang in empty_langs:
             del self.mls_dict[lang]
+
+    def has_pref_lang_entries(self) -> bool:
+        registered_lang = self._get_registered_lang(self.pref_lang)
+        return len(self.mls_dict[registered_lang]) > 0
 
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods

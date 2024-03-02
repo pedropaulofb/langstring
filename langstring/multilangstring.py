@@ -389,6 +389,12 @@ class MultiLangString:
 
     # ----- COUNT METHODS -----
 
+    @Validator.validate_simple_type
+    def count_entries_by_lang(self, lang: str) -> int:
+        # Count the number of texts a given lang has.
+        registered_lang = self._get_registered_lang(lang)
+        return 0 if registered_lang is None else len(self.mls_dict[registered_lang])
+
     def count_entries_per_lang(self) -> dict[str, int]:
         """Return the number of text entries for each language.
 
@@ -396,18 +402,13 @@ class MultiLangString:
         """
         return {lang: len(texts) for lang, texts in self.mls_dict.items()}
 
-    def count_langs_total(self) -> int:
-        # Count the total number of langs the MultiLangString has.
-        return len(self.mls_dict)
-
-    def count_entries_by_lang(self, lang: str) -> int:
-        # Count the number of texts a given lang has.
-        registered_lang = self._get_registered_lang()
-        return len(self.mls_dict[registered_lang])
-
     def count_entries_total(self) -> int:
         """Return the total number of text entries across all languages."""
         return sum(len(texts) for texts in self.mls_dict.values())
+
+    def count_langs_total(self) -> int:
+        # Count the total number of langs the MultiLangString has.
+        return len(self.mls_dict)
 
     # ----- CONTAIN METHODS -----
 

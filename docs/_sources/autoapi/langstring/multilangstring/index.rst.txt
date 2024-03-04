@@ -72,7 +72,7 @@ Classes
    .. py:method:: add(arg)
 
 
-   .. py:method:: add_entry(text, lang = '')
+   .. py:method:: add_entry(text, lang)
 
       Add a text entry to the MultiLangString under a specified language.
 
@@ -182,19 +182,22 @@ Classes
    .. py:method:: to_strings(languages = None, print_quotes = True, separator = '@', print_lang = True)
 
 
-   .. py:method:: count_lang_entries()
+   .. py:method:: count_entries_by_lang(lang)
+
+
+   .. py:method:: count_entries_per_lang()
 
       Return the number of text entries for each language.
 
       :return: A dictionary with language codes as keys and counts of text entries as values.
 
 
-   .. py:method:: count_langs()
-
-
-   .. py:method:: count_total_entries()
+   .. py:method:: count_entries_total()
 
       Return the total number of text entries across all languages.
+
+
+   .. py:method:: count_langs_total()
 
 
    .. py:method:: contains(arg)
@@ -235,10 +238,11 @@ Classes
 
    .. py:method:: contains_multilangstring(multilangstring)
 
-      Check if the current MultiLangString instance contains all languages and texts of another MultiLangString instance.
+      Check if the current instance contains all languages and texts of another MultiLangString instance.
 
       :param multilangstring: The MultiLangString instance to check against.
-      :return: True if all languages and their respective texts in `multilangstring` are contained in this instance, False otherwise.
+      :return: True if all languages and their respective texts in `multilangstring` are contained in this instance,
+      False otherwise.
 
 
    .. py:method:: get_langs(casefold = False)
@@ -260,16 +264,19 @@ Classes
    .. py:method:: get_multilangstring(langs)
 
 
-   .. py:method:: pop_langstring(text, lang, default = None)
+   .. py:method:: pop_langstring(text, lang)
 
 
-   .. py:method:: pop_setlangstring(lang, default = None)
+   .. py:method:: pop_setlangstring(lang)
 
 
-   .. py:method:: pop_multilangstring(langs, default = None)
+   .. py:method:: pop_multilangstring(langs)
 
 
    .. py:method:: clear_empty_langs()
+
+
+   .. py:method:: has_pref_lang_entries()
 
 
    .. py:method:: items()

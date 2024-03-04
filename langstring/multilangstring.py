@@ -563,7 +563,7 @@ class MultiLangString:
 
     def has_pref_lang_entries(self) -> bool:
         registered_lang = self._get_registered_lang(self.pref_lang)
-        return len(self.mls_dict[registered_lang]) > 0
+        return len(self.mls_dict[registered_lang]) > 0 if registered_lang else False
 
     # --------------------------------------------------
     # Overwritten Dictionary's Built-in Regular Methods

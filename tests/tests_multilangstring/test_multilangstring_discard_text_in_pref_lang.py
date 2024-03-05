@@ -63,7 +63,7 @@ def test_discard_text_in_pref_lang_various_scenarios_off(
             {"en": {"Hello", "World"}, "es": {"Hola", "Mundo"}},
         ),
         ({"en": {"Hello"}}, "", {"en": {"Hello"}}),  # Discarding an empty string, with flag on
-        ({"en": set()}, "Hello", {"en": set()}),  # Discarding from an empty language set, with CLEAN_EMPTY_LANG flag
+        ({"en": set()}, "Hello", {"en": set()}),  # Discarding from an empty language set, with clean_empty arg
     ],
 )
 def test_discard_text_in_pref_lang_various_scenarios_on(
@@ -111,3 +111,29 @@ def test_discard_text_in_pref_lang_with_invalid_values(text_to_discard):
     mls = MultiLangString({"en": {"Hello"}}, "en")
     with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
         mls.discard_text_in_pref_lang(text_to_discard)
+
+
+@pytest.mark.parametrize(
+    "initial_contents, pref_lang, text_to_discard, clean_empty, expected_contents",
+    [
+        ({"en": {"Hello"}}, "en", "Hello", True, {}),  # Preferred language becomes empty and should be removed
+        ({"en": {"Hello"}}, "en", "Hello", False, {"en": set()}),  # Preferred language becomes empty but remains
+        ({"fr": {"Bonjour"}}, "en", "Hello", True, {"fr": {"Bonjour"}}),  # Non-existent preferred language
+        ({"fr": {"Bonjour"}, "en": {"Hello"}}, "en", "Hello", True, {"fr": {"Bonjour"}}),  # Mixed languages
+    ],
+)
+def test_discard_text_in_pref_lang_with_clean_empty(
+    initial_contents, pref_lang, text_to_discard, clean_empty, expected_contents
+):
+    """
+    Test the `discard_text_in_pref_lang` method with the `clean_empty` parameter, verifying its behavior in various scenarios.
+
+    :param initial_contents: The initial contents of the MultiLangString.
+    :param pref_lang: The preferred language set for the MultiLangString instance.
+    :param text_to_discard: The text to discard from the preferred language.
+    :param clean_empty: Determines if empty languages should be removed from `mls_dict`.
+    :param expected_contents: The expected contents of the `mls_dict` after discarding the text.
+    """
+    mls = MultiLangString(initial_contents, pref_lang)
+    mls.discard_text_in_pref_lang(text_to_discard, clean_empty)
+    assert mls.mls_dict == expected_contents, "The `mls_dict` did not match the expected contents after operation."

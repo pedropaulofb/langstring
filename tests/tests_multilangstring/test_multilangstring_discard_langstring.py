@@ -124,7 +124,7 @@ def test_discard_langstring_unusual_but_valid_usage():
 
 def test_discard_langstring_clean_empty_lang_flag_effect():
     """
-    Test the effect of the CLEAN_EMPTY_LANG flag on discard_langstring method, ensuring that languages with no remaining
+    Test the effect of the clean_empty arg on discard_langstring method, ensuring that languages with no remaining
     strings are removed from the MultiLangString instance.
     """
 
@@ -133,14 +133,45 @@ def test_discard_langstring_clean_empty_lang_flag_effect():
     mls.discard_langstring(langstring, True)
     assert (
         "fr" not in mls.mls_dict
-    ), "Expected 'fr' language to be removed after discarding its only string with CLEAN_EMPTY_LANG flag enabled."
+    ), "Expected 'fr' language to be removed after discarding its only string with clean_empty arg enabled."
 
 
 def test_discard_langstring_without_clean_empty_lang_flag_effect():
     """
-    Verify that without the CLEAN_EMPTY_LANG flag enabled, languages with no remaining strings are not removed.
+    Verify that without the clean_empty arg enabled, languages with no remaining strings are not removed.
     """
     langstring = LangString("Goodbye", "en")
     mls = MultiLangString({"en": {"Goodbye"}})
     mls.discard_langstring(langstring, True)
     assert "en" not in mls.mls_dict, "Expected 'en' language not to remain."
+
+
+@pytest.mark.parametrize(
+    "initial_contents, langstring, clean_empty, expected_contents",
+    [
+        # Case where language should be removed after discarding LangString, with clean_empty=True
+        ({"en": {"Hello"}}, LangString("Hello", "en"), True, {}),
+        # Case where language remains but is empty, with clean_empty=False
+        ({"en": {"Hello"}}, LangString("Hello", "en"), False, {"en": set()}),
+    ],
+)
+def test_discard_langstring_with_clean_empty(
+    initial_contents: dict[str, Set[str]],
+    langstring: LangString,
+    clean_empty: bool,
+    expected_contents: dict[str, Set[str]],
+):
+    """Test discarding a LangString with the clean_empty parameter affecting the final state of mls_dict.
+
+    :param initial_contents: Initial contents of the MultiLangString instance.
+    :param langstring: The LangString to be discarded.
+    :param clean_empty: Determines whether empty language sets are removed after discarding.
+    :param expected_contents: Expected state of mls_dict after discarding the LangString.
+    :type initial_contents: dict
+    :type langstring: LangString
+    :type clean_empty: bool
+    :type expected_contents: dict
+    """
+    mls = MultiLangString(initial_contents)
+    mls.discard_langstring(langstring, clean_empty=clean_empty)
+    assert mls.mls_dict == expected_contents, "mls_dict did not match expected contents after discarding LangString."

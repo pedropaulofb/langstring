@@ -114,10 +114,6 @@ def test_discard_very_long_string(setup_mls):
     assert long_text not in setup_mls.mls_dict.get("en", {}), "Failed to discard very long string."
 
 
-import pytest
-from langstring import MultiLangString, MultiLangStringFlag, Controller
-
-
 @pytest.mark.parametrize(
     "text, lang, setup_texts, expected_result",
     [
@@ -161,7 +157,7 @@ def test_discard_special_cases_on(text, lang, setup_texts, expected_result):
 @pytest.mark.parametrize(
     "initial_dict, text, lang, expected_dict",
     [
-        # Test clearing empty language set after discarding with CLEAN_EMPTY_LANG flag
+        # Test clearing empty language set after discarding with clean_empty arg
         ({"en": {"Hello"}, "fr": set()}, "Hello", "en", {"fr": set()}),
     ],
 )
@@ -286,3 +282,45 @@ def test_discard_from_all_empty_languages(setup_mls, setup_texts, expected_dict)
     mls = MultiLangString(mls_dict=setup_texts)
     mls.discard_entry("Hello", "en")
     assert mls.mls_dict == expected_dict
+
+
+@pytest.mark.parametrize("clean_empty", [True, False])
+def test_discard_last_entry_with_clean_empty_option(setup_mls, clean_empty):
+    """Test discarding the last entry in a language with clean_empty option.
+
+    :param setup_mls: Fixture for setting up a MultiLangString instance.
+    :param clean_empty: Boolean flag to test both behaviors of clean_empty.
+    """
+    setup_mls.discard_entry("Bonjour", "fr", clean_empty=clean_empty)
+    expected = {"en": {"Hello", "World"}} if clean_empty else {"en": {"Hello", "World"}, "fr": set()}
+    assert setup_mls.mls_dict == expected, "Discard last entry with clean_empty={} did not behave as expected.".format(
+        clean_empty
+    )
+
+
+@pytest.mark.parametrize("text,lang,clean_empty", [("NonExistent", "en", True), ("Hello", "nonexistent", True)])
+def test_discard_nonexistent_with_clean_empty(setup_mls, text, lang, clean_empty):
+    """Test discarding a non-existent entry or language with clean_empty=True does not alter the dictionary.
+
+    :param setup_mls: Fixture for setting up a MultiLangString instance.
+    :param text: Text to discard.
+    :param lang: Language code of the text to discard.
+    :param clean_empty: Boolean flag indicating whether to clean empty languages.
+    """
+    initial_dict = setup_mls.mls_dict.copy()
+    setup_mls.discard_entry(text, lang, clean_empty=clean_empty)
+    assert (
+        setup_mls.mls_dict == initial_dict
+    ), "Discarding non-existent entry or language with clean_empty=True should not alter the mls_dict."
+
+
+@pytest.mark.parametrize("text,lang", [(123, "en"), ("Hello", 123)])
+def test_discard_invalid_types_with_clean_empty(setup_mls, text, lang):
+    """Test discarding entry with invalid types for text and lang parameters, ensuring TypeError is raised.
+
+    :param setup_mls: Fixture for setting up a MultiLangString instance.
+    :param text: Text to discard, intentionally of incorrect type.
+    :param lang: Language code of the text, intentionally of incorrect type.
+    """
+    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+        setup_mls.discard_entry(text, lang, clean_empty=True)

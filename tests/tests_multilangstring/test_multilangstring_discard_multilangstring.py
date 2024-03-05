@@ -131,3 +131,97 @@ def test_discard_multilangstring_additional_languages_not_in_original(
     assert (
         mls_initial.mls_dict == expected_result
     ), "Discarding did not work as expected when discarding object has additional languages."
+
+
+import pytest
+from langstring import MultiLangString
+
+
+@pytest.mark.parametrize(
+    "initial_contents, discarding_contents, clean_empty, expected_result",
+    [
+        # Verify clean_empty=True behavior when the preferred language becomes empty
+        ({"en": {"Hello"}}, {"en": {"Hello"}}, True, {}),
+        # Ensure language remains when clean_empty=False, even if empty
+        ({"en": {"Hello"}}, {"en": {"Hello"}}, False, {"en": set()}),
+        # Check non-existent preferred language
+        ({"fr": {"Bonjour"}}, {"en": {"Hello"}}, True, {"fr": {"Bonjour"}}),
+        # Test with mixed language contents
+        ({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, {"en": {"World"}}, True, {"en": {"Hello"}, "fr": {"Bonjour"}}),
+    ],
+)
+def test_discard_multilangstring_with_clean_empty(initial_contents, discarding_contents, clean_empty, expected_result):
+    """
+    Test `discard_multilangstring` method with the `clean_empty` parameter, verifying its effect in various scenarios.
+
+    :param initial_contents: Initial contents of the MultiLangString.
+    :param discarding_contents: Contents to be discarded, represented as a MultiLangString.
+    :param clean_empty: Determines if empty languages should be removed from `mls_dict`.
+    :param expected_result: Expected contents of `mls_dict` after discarding.
+    """
+    mls_initial = MultiLangString(initial_contents)
+    mls_discarding = MultiLangString(discarding_contents)
+    mls_initial.discard_multilangstring(mls_discarding, clean_empty=clean_empty)
+    assert mls_initial.mls_dict == expected_result, "MultiLangString contents did not match expected after discarding."
+
+
+@pytest.mark.parametrize(
+    "discarding_contents, clean_empty, match_error",
+    [
+        (123, False, "must be of type 'MultiLangString'"),
+        ("not a MultiLangString", True, "must be of type 'MultiLangString'"),
+    ],
+)
+def test_discard_multilangstring_invalid_type(discarding_contents, clean_empty, match_error):
+    """
+    Test discarding with invalid types for `discard_multilangstring` method raises appropriate errors.
+
+    :param discarding_contents: Invalid content to attempt to discard.
+    :param clean_empty: Boolean indicating if empty languages should be cleared.
+    :param match_error: Expected error message pattern.
+    """
+    mls = MultiLangString({"en": {"Hello"}})
+    with pytest.raises(TypeError, match=match_error):
+        mls.discard_multilangstring(discarding_contents, clean_empty=clean_empty)
+
+
+# Additional pytest tests based on your current test set
+import pytest
+from langstring import MultiLangString
+
+
+@pytest.mark.parametrize(
+    "initial_contents, discarding_contents, clean_empty, expected_result",
+    [
+        # Test with clean_empty=True, removing the only text in the preferred language
+        ({"en": {"Hello"}}, {"en": {"Hello"}}, True, {}),
+        # Test with clean_empty=False, keeping the language even if it becomes empty
+        ({"en": {"Hello"}}, {"en": {"Hello"}}, False, {"en": set()}),
+        # Test discarding from a language not present, with clean_empty=True
+        ({"fr": {"Bonjour"}}, {"en": {"Hello"}}, True, {"fr": {"Bonjour"}}),
+        # Test discarding non-existent text, with clean_empty=True
+        (
+            {"en": {"Hello", "World"}, "fr": {"Bonjour"}},
+            {"en": {"Universe"}},
+            True,
+            {"en": {"Hello", "World"}, "fr": {"Bonjour"}},
+        ),
+        # Test discarding with an invalid type for the discarding_contents parameter
+        ({"en": {"Hello"}}, 123, False, TypeError("Argument '123' must be of type 'MultiLangString', but got")),
+    ],
+)
+def test_discard_multilangstring_with_clean_empty_and_edge_cases(
+    initial_contents, discarding_contents, clean_empty, expected_result
+):
+    mls_initial = MultiLangString(initial_contents)
+    if isinstance(expected_result, Exception):
+        with pytest.raises(type(expected_result), match=str(expected_result)):
+            mls_initial.discard_multilangstring(discarding_contents, clean_empty=clean_empty)
+    else:
+        mls_discarding = (
+            MultiLangString(discarding_contents) if not isinstance(discarding_contents, Exception) else None
+        )
+        mls_initial.discard_multilangstring(mls_discarding, clean_empty=clean_empty)
+        assert (
+            mls_initial.mls_dict == expected_result
+        ), "MultiLangString contents did not match expected after discarding."

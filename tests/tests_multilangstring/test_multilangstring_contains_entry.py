@@ -74,17 +74,17 @@ def test_contains_entry_with_unusual_language_codes(text, lang, expected_result)
 @pytest.mark.parametrize(
     "flag_state, text, lang, expected_result",
     [
-        # Test with CLEAN_EMPTY_LANG flag set to False
+        # Test with clean_empty arg set to False
         (False, "Hello", "en", True),
-        # Test with CLEAN_EMPTY_LANG flag set to True
+        # Test with clean_empty arg set to True
         (True, "Hello", "en", True),
     ],
 )
 def test_contains_entry_with_clean_empty_lang_flag(flag_state, text, lang, expected_result):
     """
-    Test the `contains_entry` method with the CLEAN_EMPTY_LANG flag set to various states to ensure it does not affect the outcome.
+    Test the `contains_entry` method with the clean_empty arg set to various states to ensure it does not affect the outcome.
 
-    :param flag_state: The state to set for the CLEAN_EMPTY_LANG flag.
+    :param flag_state: The state to set for the clean_empty arg.
     :param text: The text to check for in the MultiLangString.
     :param lang: The language under which to check for the text.
     :param expected_result: The expected result of the contains_entry check.

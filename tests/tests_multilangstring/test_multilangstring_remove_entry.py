@@ -145,3 +145,45 @@ def test_remove_entry_various_inputs(initial_contents, text_to_remove, lang_to_r
     assert (
         mls.mls_dict == expected_contents
     ), f"Expected contents after removal: {expected_contents}, got: {mls.mls_dict}"
+
+
+@pytest.mark.parametrize(
+    "initial_contents, text, lang, clean_empty, expected_contents",
+    [
+        ({"en": {"hello", "world"}, "fr": {"bonjour"}}, "world", "en", True, {"en": {"hello"}, "fr": {"bonjour"}}),
+        (
+            {"en": {"world"}, "fr": {"bonjour"}},
+            "world",
+            "en",
+            True,
+            {"fr": {"bonjour"}},
+        ),  # en becomes empty and should be removed
+        (
+            {"en": {"world"}, "fr": {"bonjour"}},
+            "world",
+            "en",
+            False,
+            {"en": set(), "fr": {"bonjour"}},
+        ),  # en remains but is empty
+        (
+            {"en": {"hello"}, "fr": {"bonjour", "salut"}},
+            "bonjour",
+            "fr",
+            True,
+            {"en": {"hello"}, "fr": {"salut"}},
+        ),  # fr remains
+    ],
+)
+def test_remove_entry_with_clean_empty(initial_contents, text, lang, clean_empty, expected_contents):
+    """
+    Test the `remove_entry` method with the `clean_empty` parameter affecting the final state of `mls_dict`.
+
+    :param initial_contents: Initial contents of the MultiLangString.
+    :param text: The text of the entry to be removed.
+    :param lang: The language of the entry to be removed.
+    :param clean_empty: Whether to remove empty language sets after removal.
+    :param expected_contents: Expected state of `mls_dict` after the operation.
+    """
+    mls = MultiLangString(initial_contents)
+    mls.remove_entry(text, lang, clean_empty=clean_empty)
+    assert mls.mls_dict == expected_contents, "The `mls_dict` did not match expected contents after the operation."

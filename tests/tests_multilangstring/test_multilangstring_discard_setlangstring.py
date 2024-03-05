@@ -92,3 +92,69 @@ def test_discard_setlangstring_with_flags_effect(initial_contents, setlangstring
     assert (
         mls.mls_dict == expected_contents
     ), "Contents after discarding SetLangString with flag effect did not match expectations."
+
+
+@pytest.mark.parametrize(
+    "initial_contents, setlangstring, clean_empty, expected_contents",
+    [
+        # Test discarding when multiple texts in different languages are discarded, leaving one language empty
+        (
+            {"en": {"Hello", "Goodbye"}, "fr": {"Bonjour", "Au revoir"}, "es": {"Hola"}},
+            SetLangString({"Bonjour", "Au revoir"}, "fr"),
+            True,
+            {"en": {"Hello", "Goodbye"}, "es": {"Hola"}},
+        ),
+        # Test partial existence of texts in the target language set with clean_empty=True
+        (
+            {"en": {"Hello", "World"}, "fr": {"Bonjour"}},
+            SetLangString({"Hello", "Universe"}, "en"),
+            True,
+            {"en": {"World"}, "fr": {"Bonjour"}},
+        ),
+        # Test with an empty SetLangString and clean_empty=True
+        (
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+            SetLangString(set(), "en"),
+            True,
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+        ),
+        # Test with an empty SetLangString and clean_empty=False
+        (
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+            SetLangString(set(), "en"),
+            False,
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+        ),
+    ],
+)
+def test_discard_setlangstring_additional_scenarios(initial_contents, setlangstring, clean_empty, expected_contents):
+    """
+    Test additional scenarios for `discard_setlangstring` including cases with clean_empty parameter.
+
+    :param initial_contents: Initial contents of the MultiLangString instance.
+    :param setlangstring: The SetLangString to discard.
+    :param clean_empty: Boolean indicating if empty languages should be removed.
+    :param expected_contents: Expected contents of the MultiLangString post-operation.
+    """
+    mls = MultiLangString(initial_contents)
+    mls.discard_setlangstring(setlangstring, clean_empty=clean_empty)
+    assert mls.mls_dict == expected_contents, "Contents after operation did not match expectations."
+
+
+@pytest.mark.parametrize(
+    "setlangstring, clean_empty",
+    [
+        ("not a SetLangString", False),  # Invalid type
+        (123, True),  # Invalid type
+    ],
+)
+def test_discard_setlangstring_with_invalid_types_raises_error(setlangstring, clean_empty):
+    """
+    Test passing invalid types for `setlangstring` with `discard_setlangstring` raises a TypeError.
+
+    :param setlangstring: Invalid SetLangString to discard.
+    :param clean_empty: Boolean indicating if empty languages should be removed.
+    """
+    mls = MultiLangString({"en": {"Hello"}})
+    with pytest.raises(TypeError, match="Argument .+ must be of type 'SetLangString', but got"):
+        mls.discard_setlangstring(setlangstring, clean_empty=clean_empty)

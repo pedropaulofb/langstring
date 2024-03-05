@@ -355,6 +355,7 @@ class MultiLangString:
 
     @Validator.validate_simple_type
     def to_langstrings(self, languages: Optional[list[str]] = None) -> list[LangString]:
+        # TODO: FIX IMPLEMENTATION. Use get_langstring method.
         langstrings = []
         selected_langs = self.mls_dict.keys() if languages is None else languages
 
@@ -367,6 +368,7 @@ class MultiLangString:
 
     @Validator.validate_simple_type
     def to_setlangstrings(self, languages: Optional[list[str]] = None) -> list[SetLangString]:
+        # TODO: FIX IMPLEMENTATION. Use get_setlangstring method.
         setlangstrings = []
         selected_langs = self.mls_dict.keys() if languages is None else languages
 
@@ -384,6 +386,7 @@ class MultiLangString:
         separator: str = "@",
         print_lang: bool = True,
     ) -> list[str]:
+        # TODO: CHECK IMPLEMENTATION.
         strings = []
         selected_langs = self.mls_dict.keys() if languages is None else languages
 
@@ -568,14 +571,6 @@ class MultiLangString:
     def has_pref_lang_entries(self) -> bool:
         registered_lang = self._get_registered_lang(self.pref_lang)
         return len(self.mls_dict[registered_lang]) > 0 if registered_lang else False
-
-    # --------------------------------------------------
-    # Overwritten Dictionary's Built-in Regular Methods
-    # --------------------------------------------------
-
-    def items(self):
-        """Return items (language, texts set) in the MultiLangString."""
-        return self.mls_dict.items()
 
     # --------------------------------------------------
     # MultiLangString's Dunder Methods

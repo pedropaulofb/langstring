@@ -79,7 +79,7 @@ def test_add_multilangstring_with_overlapping_content():
 
 def test_add_multilangstring_with_clean_empty_lang_flag_effect():
     """
-    Test the behavior of add_multilangstring method when CLEAN_EMPTY_LANG flag is set.
+    Test the behavior of add_multilangstring method when clean_empty arg is set.
     This test assumes that when CLEAN_EMPTY_LANG is True, adding a MultiLangString that results in empty language entries
     should remove those entries.
     """

@@ -206,21 +206,23 @@ class MultiLangString:
 
     # ----- DISCARD METHODS -----
 
-    def discard(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
+    def discard(
+        self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
+    ) -> None:
         if isinstance(arg, LangString):
-            self.discard_langstring(arg)
+            self.discard_langstring(arg, clean_empty)
             return
 
         if isinstance(arg, SetLangString):
-            self.discard_setlangstring(arg)
+            self.discard_setlangstring(arg, clean_empty)
             return
 
         if isinstance(arg, MultiLangString):
-            self.discard_multilangstring(arg)
+            self.discard_multilangstring(arg, clean_empty)
             return
 
         if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
-            self.discard_entry(arg[0], arg[1])
+            self.discard_entry(arg[0], arg[1], clean_empty)
             return
 
         raise TypeError(
@@ -229,33 +231,33 @@ class MultiLangString:
         )
 
     @Validator.validate_simple_type
-    def discard_entry(self, text: str, lang: str) -> None:
+    def discard_entry(self, text: str, lang: str, clean_empty: bool = False) -> None:
         registered_lang = self._get_registered_lang(lang)
 
         if registered_lang in self.mls_dict and text in self.mls_dict[registered_lang]:
             self.mls_dict[registered_lang].remove(text)
-            if len(self.mls_dict[registered_lang]) == 0 and Controller.get_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG):
+            if len(self.mls_dict[registered_lang]) == 0 and clean_empty:
                 del self.mls_dict[registered_lang]
 
     @Validator.validate_simple_type
-    def discard_text_in_pref_lang(self, text: str) -> None:
+    def discard_text_in_pref_lang(self, text: str, clean_empty: bool = False) -> None:
         """Discard a text entry from the preferred language."""
-        self.discard_entry(text, self.pref_lang)
+        self.discard_entry(text, self.pref_lang, clean_empty)
 
     @Validator.validate_simple_type
-    def discard_langstring(self, langstring: LangString) -> None:
-        self.discard_entry(text=langstring.text, lang=langstring.lang)
+    def discard_langstring(self, langstring: LangString, clean_empty: bool = False) -> None:
+        self.discard_entry(text=langstring.text, lang=langstring.lang, clean_empty=clean_empty)
 
     @Validator.validate_simple_type
-    def discard_setlangstring(self, setlangstring: SetLangString) -> None:
+    def discard_setlangstring(self, setlangstring: SetLangString, clean_empty: bool = False) -> None:
         for text in setlangstring.texts:
-            self.discard_entry(text=text, lang=setlangstring.lang)
+            self.discard_entry(text=text, lang=setlangstring.lang, clean_empty=clean_empty)
 
     @Validator.validate_simple_type
-    def discard_multilangstring(self, multilangstring: "MultiLangString") -> None:
+    def discard_multilangstring(self, multilangstring: "MultiLangString", clean_empty: bool = False) -> None:
         for lang in multilangstring.mls_dict:
             for text in list(multilangstring.mls_dict[lang]):
-                self.discard_entry(text=text, lang=lang)
+                self.discard_entry(text=text, lang=lang, clean_empty=clean_empty)
 
     @Validator.validate_simple_type
     def discard_lang(self, lang: str) -> None:
@@ -268,21 +270,23 @@ class MultiLangString:
 
     # ----- REMOVE METHODS -----
 
-    def remove(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
+    def remove(
+        self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
+    ) -> None:
         if isinstance(arg, LangString):
-            self.remove_langstring(arg)
+            self.remove_langstring(arg, clean_empty)
             return
 
         if isinstance(arg, SetLangString):
-            self.remove_setlangstring(arg)
+            self.remove_setlangstring(arg, clean_empty)
             return
 
         if isinstance(arg, MultiLangString):
-            self.remove_multilangstring(arg)
+            self.remove_multilangstring(arg, clean_empty)
             return
 
         if isinstance(arg, tuple) and len(arg) == 2 and all(isinstance(a, str) for a in arg):
-            self.remove_entry(arg[0], arg[1])
+            self.remove_entry(arg[0], arg[1], clean_empty)
             return
 
         raise TypeError(
@@ -291,7 +295,7 @@ class MultiLangString:
         )
 
     @Validator.validate_simple_type
-    def remove_entry(self, text: str, lang: str) -> None:
+    def remove_entry(self, text: str, lang: str, clean_empty: bool = False) -> None:
         """Remove a single entry from the set of a given language key in the dictionary.
 
         If the specified language key exists and the text is in its set, the text is removed. If this results in an
@@ -303,29 +307,29 @@ class MultiLangString:
         :type lang: str
         """
         if self.contains_entry(text, lang):
-            self.discard_entry(text, lang)
+            self.discard_entry(text, lang, clean_empty)
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
 
     @Validator.validate_simple_type
-    def remove_text_in_pref_lang(self, text: str) -> None:
+    def remove_text_in_pref_lang(self, text: str, clean_empty: bool = False) -> None:
         """Remove a text entry from the preferred language."""
-        self.remove_entry(text, self.pref_lang)
+        self.remove_entry(text, self.pref_lang, clean_empty)
 
     @Validator.validate_simple_type
-    def remove_langstring(self, langstring: LangString) -> None:
-        self.remove_entry(langstring.text, langstring.lang)
+    def remove_langstring(self, langstring: LangString, clean_empty: bool = False) -> None:
+        self.remove_entry(langstring.text, langstring.lang, clean_empty)
 
     @Validator.validate_simple_type
-    def remove_setlangstring(self, setlangstring: SetLangString) -> None:
+    def remove_setlangstring(self, setlangstring: SetLangString, clean_empty: bool = False) -> None:
         for text in setlangstring.texts:
-            self.remove_entry(text, setlangstring.lang)
+            self.remove_entry(text, setlangstring.lang, clean_empty)
 
     @Validator.validate_simple_type
-    def remove_multilangstring(self, multilangstring: "MultiLangString") -> None:
+    def remove_multilangstring(self, multilangstring: "MultiLangString", clean_empty: bool = False) -> None:
         for lang in multilangstring.mls_dict:
             for text in multilangstring.mls_dict[lang]:
-                self.remove_entry(text=text, lang=lang)
+                self.remove_entry(text=text, lang=lang, clean_empty=clean_empty)
 
     @Validator.validate_simple_type
     def remove_lang(self, lang: str) -> None:
@@ -341,6 +345,11 @@ class MultiLangString:
             del self.mls_dict[registered_lang]
         else:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
+
+    def remove_empty_langs(self) -> None:
+        empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
+        for lang in empty_langs:
+            del self.mls_dict[lang]
 
     # ----- CONVERSION METHODS -----
 
@@ -555,11 +564,6 @@ class MultiLangString:
         return new_mls
 
     # ----- GENERAL METHODS -----
-
-    def clear_empty_langs(self) -> None:
-        empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
-        for lang in empty_langs:
-            del self.mls_dict[lang]
 
     def has_pref_lang_entries(self) -> bool:
         registered_lang = self._get_registered_lang(self.pref_lang)

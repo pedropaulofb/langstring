@@ -1,9 +1,7 @@
 import pytest
 
-from langstring import Controller
 from langstring import LangString
 from langstring import MultiLangString
-from langstring import MultiLangStringFlag
 from langstring import SetLangString
 
 
@@ -62,9 +60,8 @@ def test_discard_various_args_on(arg, expected_result):
     :param arg: Argument to discard, which could be a string, LangString, SetLangString, or tuple.
     :param expected_result: Expected state of the MultiLangString instance after the discard operation.
     """
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, True)
     mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}})
-    mls.discard(arg)
+    mls.discard(arg, clean_empty=True)
     assert mls.mls_dict == expected_result, f"Expected dictionary did not match after discarding {arg}."
 
 
@@ -109,25 +106,25 @@ def test_discard_with_none():
         mls.discard(None)  # Passing None should raise TypeError
 
 
-# Test case for discarding a non-empty string in a non-default language when the CLEAR_EMPTY_LANG flag is off.
+# Test case for discarding a non-empty string in a non-default language when the CLEAN_EMPTY_LANG flag is off.
 (
     LangString("World", "en"),
     {"en": {"Hello"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}},
-    "Discarding 'World' from 'en' with CLEAR_EMPTY_LANG off",
+    "Discarding 'World' from 'en' with CLEAN_EMPTY_LANG off",
 ),
 
-# Test case for discarding a non-empty SetLangString in a non-default language when the CLEAR_EMPTY_LANG flag is off.
+# Test case for discarding a non-empty SetLangString in a non-default language when the CLEAN_EMPTY_LANG flag is off.
 (
     SetLangString({"Adios"}, "es"),
     {"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}},
-    "Discarding 'Adios' from 'es' with CLEAR_EMPTY_LANG off",
+    "Discarding 'Adios' from 'es' with CLEAN_EMPTY_LANG off",
 ),
 
-# Test case for discarding an existing tuple in a non-default language when the CLEAR_EMPTY_LANG flag is off.
+# Test case for discarding an existing tuple in a non-default language when the CLEAN_EMPTY_LANG flag is off.
 (
     ("Hola", "es"),
     {"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Adios"}},
-    "Discarding tuple ('Hola', 'es') with CLEAR_EMPTY_LANG off",
+    "Discarding tuple ('Hola', 'es') with CLEAN_EMPTY_LANG off",
 ),
 
 
@@ -218,10 +215,9 @@ def test_discard_multilangstring_various_scenarios_on(
     :param expected_result: Expected contents of the MultiLangString after the discard operation.
     :param description: Description of the test case.
     """
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, True)
     mls_initial = MultiLangString(initial_contents)
     mls_discarding = MultiLangString(discarding_mls_contents)
-    mls_initial.discard(mls_discarding)
+    mls_initial.discard(mls_discarding, True)
     assert (
         mls_initial.mls_dict == expected_result
     ), f"After discarding {description}, expected dictionary did not match."

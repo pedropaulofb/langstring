@@ -1,8 +1,6 @@
 import pytest
 
-from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -79,19 +77,16 @@ def test_add_multilangstring_with_overlapping_content():
     assert mls1.mls_dict == {"en": {"Hello", "World"}}, "Overlapping content should be merged correctly."
 
 
-def test_add_multilangstring_with_clear_empty_lang_flag_effect():
+def test_add_multilangstring_with_clean_empty_lang_flag_effect():
     """
-    Test the behavior of add_multilangstring method when CLEAR_EMPTY_LANG flag is set.
-    This test assumes that when CLEAR_EMPTY_LANG is True, adding a MultiLangString that results in empty language entries
+    Test the behavior of add_multilangstring method when CLEAN_EMPTY_LANG flag is set.
+    This test assumes that when CLEAN_EMPTY_LANG is True, adding a MultiLangString that results in empty language entries
     should remove those entries.
     """
     # Setup initial MultiLangString with some languages
     mls1a = MultiLangString({"en": {"Hello"}, "fr": set()})
     mls1b = MultiLangString({"en": {"Hello"}, "fr": set()})
     mls2 = MultiLangString({"en": {"World"}})
-
-    # Set the CLEAR_EMPTY_LANG flag to True to test its effect
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, True)
 
     # Perform the add operation
     mls1a.add_multilangstring(mls2)
@@ -101,9 +96,5 @@ def test_add_multilangstring_with_clear_empty_lang_flag_effect():
     expected_result1 = {"en": {"Hello", "World"}, "fr": set()}
     expected_result2 = {"en": {"Hello", "World"}}
 
-    assert (
-        mls1a.mls_dict == expected_result1
-    ), "The CLEAR_EMPTY_LANG flag did not remove empty language entries as expected."
-    assert (
-        mls2.mls_dict == expected_result2
-    ), "The CLEAR_EMPTY_LANG flag did not remove empty language entries as expected."
+    assert mls1a.mls_dict == expected_result1, "Did not remove empty language entries as expected."
+    assert mls2.mls_dict == expected_result2, "Did not remove empty language entries as expected."

@@ -15,7 +15,6 @@ class GlobalFlag(Enum):
     :vartype VALID_LANG: Enum
     """
 
-    CLEAR_EMPTY_LANG = auto()
     DEFINED_LANG = auto()
     DEFINED_TEXT = auto()
     ENFORCE_EXTRA_DEPEND = auto()
@@ -89,7 +88,6 @@ class MultiLangStringFlag(Enum):
     :vartype VALID_LANG: Enum
     """
 
-    CLEAR_EMPTY_LANG = auto()
     DEFINED_LANG = auto()
     DEFINED_TEXT = auto()
     LOWERCASE_LANG = auto()

@@ -39,9 +39,8 @@ def test_discard_non_existing_entry(setup_mls):
     assert setup_mls.mls_dict == expected_result
 
 
-def test_clear_empty_language_set(setup_mls):
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, True)
-    setup_mls.discard_entry("Bonjour", "fr")  # Removing last entry in 'fr'
+def test_clean_empty_language_set(setup_mls):
+    setup_mls.discard_entry("Bonjour", "fr", True)  # Removing last entry in 'fr'
     expected_result = {"en": {"Hello", "World"}}  # 'fr' should be removed
     assert setup_mls.mls_dict == expected_result
 
@@ -154,24 +153,22 @@ def test_discard_special_cases_off(text, lang, setup_texts, expected_result):
     ],
 )
 def test_discard_special_cases_on(text, lang, setup_texts, expected_result):
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, True)
     mls = MultiLangString(mls_dict=setup_texts)
-    mls.discard_entry(text, lang)
+    mls.discard_entry(text, lang, True)
     assert mls.mls_dict == expected_result, "Special case discarding failed."
 
 
 @pytest.mark.parametrize(
-    "flag, initial_dict, text, lang, expected_dict",
+    "initial_dict, text, lang, expected_dict",
     [
-        # Test clearing empty language set after discarding with CLEAR_EMPTY_LANG flag
-        (MultiLangStringFlag.CLEAR_EMPTY_LANG, {"en": {"Hello"}, "fr": set()}, "Hello", "en", {"fr": set()}),
+        # Test clearing empty language set after discarding with CLEAN_EMPTY_LANG flag
+        ({"en": {"Hello"}, "fr": set()}, "Hello", "en", {"fr": set()}),
     ],
 )
-def test_discard_with_flag_effect(flag, initial_dict, text, lang, expected_dict):
-    Controller.set_flag(flag, True)
+def test_discard_with_clean_empty_effect(initial_dict, text, lang, expected_dict):
     mls = MultiLangString(mls_dict=initial_dict)
-    mls.discard_entry(text, lang)
-    assert mls.mls_dict == expected_dict, f"Discard with flag {flag.name} effect failed."
+    mls.discard_entry(text, lang, True)
+    assert mls.mls_dict == expected_dict, f"Discard with clean_empty effect failed."
 
 
 @pytest.mark.parametrize(

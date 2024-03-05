@@ -2,10 +2,8 @@ from typing import Set
 
 import pytest
 
-from langstring import Controller
 from langstring import LangString
 from langstring import MultiLangString
-from langstring import MultiLangStringFlag
 
 
 def test_discard_langstring_removes_existing_langstring():
@@ -124,28 +122,25 @@ def test_discard_langstring_unusual_but_valid_usage():
     assert "Hello" not in mls.mls_dict.get("fr", set()), "Expected 'Hello' to be removed from the 'fr' set."
 
 
-def test_discard_langstring_clear_empty_lang_flag_effect():
+def test_discard_langstring_clean_empty_lang_flag_effect():
     """
-    Test the effect of the CLEAR_EMPTY_LANG flag on discard_langstring method, ensuring that languages with no remaining
+    Test the effect of the CLEAN_EMPTY_LANG flag on discard_langstring method, ensuring that languages with no remaining
     strings are removed from the MultiLangString instance.
     """
 
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, True)
     langstring = LangString("Adieu", "fr")
     mls = MultiLangString({"fr": {"Adieu"}, "en": {"Goodbye"}})
-    mls.discard_langstring(langstring)
+    mls.discard_langstring(langstring, True)
     assert (
         "fr" not in mls.mls_dict
-    ), "Expected 'fr' language to be removed after discarding its only string with CLEAR_EMPTY_LANG flag enabled."
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, False)  # Reset flag to default after test
+    ), "Expected 'fr' language to be removed after discarding its only string with CLEAN_EMPTY_LANG flag enabled."
 
 
-def test_discard_langstring_without_clear_empty_lang_flag_effect():
+def test_discard_langstring_without_clean_empty_lang_flag_effect():
     """
-    Verify that without the CLEAR_EMPTY_LANG flag enabled, languages with no remaining strings are not removed.
+    Verify that without the CLEAN_EMPTY_LANG flag enabled, languages with no remaining strings are not removed.
     """
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, False)
     langstring = LangString("Goodbye", "en")
     mls = MultiLangString({"en": {"Goodbye"}})
-    mls.discard_langstring(langstring)
-    assert "en" in mls.mls_dict and len(mls.mls_dict["en"]) == 0, "Expected 'en' language to remain with an empty set."
+    mls.discard_langstring(langstring, True)
+    assert "en" not in mls.mls_dict, "Expected 'en' language not to remain."

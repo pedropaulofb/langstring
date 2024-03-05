@@ -1,8 +1,6 @@
 import pytest
 
-from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -76,23 +74,22 @@ def test_contains_entry_with_unusual_language_codes(text, lang, expected_result)
 @pytest.mark.parametrize(
     "flag_state, text, lang, expected_result",
     [
-        # Test with CLEAR_EMPTY_LANG flag set to False
+        # Test with CLEAN_EMPTY_LANG flag set to False
         (False, "Hello", "en", True),
-        # Test with CLEAR_EMPTY_LANG flag set to True
+        # Test with CLEAN_EMPTY_LANG flag set to True
         (True, "Hello", "en", True),
     ],
 )
-def test_contains_entry_with_clear_empty_lang_flag(flag_state, text, lang, expected_result):
+def test_contains_entry_with_clean_empty_lang_flag(flag_state, text, lang, expected_result):
     """
-    Test the `contains_entry` method with the CLEAR_EMPTY_LANG flag set to various states to ensure it does not affect the outcome.
+    Test the `contains_entry` method with the CLEAN_EMPTY_LANG flag set to various states to ensure it does not affect the outcome.
 
-    :param flag_state: The state to set for the CLEAR_EMPTY_LANG flag.
+    :param flag_state: The state to set for the CLEAN_EMPTY_LANG flag.
     :param text: The text to check for in the MultiLangString.
     :param lang: The language under which to check for the text.
     :param expected_result: The expected result of the contains_entry check.
     """
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, flag_state)
     mls = MultiLangString({"en": {"Hello", "World"}})
     assert (
         mls.contains_entry(text, lang) == expected_result
-    ), f"contains_entry did not return expected result with CLEAR_EMPTY_LANG flag set to {flag_state}."
+    ), f"contains_entry did not return expected result with clean_empty set to {flag_state}."

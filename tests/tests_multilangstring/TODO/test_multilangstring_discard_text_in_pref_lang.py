@@ -1,8 +1,6 @@
 import pytest
 
-from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringFlag
 
 
 def test_discard_text_in_pref_lang_removes_existing_text():
@@ -65,7 +63,7 @@ def test_discard_text_in_pref_lang_various_scenarios_off(
             {"en": {"Hello", "World"}, "es": {"Hola", "Mundo"}},
         ),
         ({"en": {"Hello"}}, "", {"en": {"Hello"}}),  # Discarding an empty string, with flag on
-        ({"en": set()}, "Hello", {"en": set()}),  # Discarding from an empty language set, with CLEAR_EMPTY_LANG flag
+        ({"en": set()}, "Hello", {"en": set()}),  # Discarding from an empty language set, with CLEAN_EMPTY_LANG flag
     ],
 )
 def test_discard_text_in_pref_lang_various_scenarios_on(
@@ -74,9 +72,8 @@ def test_discard_text_in_pref_lang_various_scenarios_on(
     """
     Test `discard_text_in_pref_lang` across various scenarios including non-default languages and absence of text.
     """
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, True)
     mls = MultiLangString(initial_contents, "en")
-    mls.discard_text_in_pref_lang(text_to_discard)
+    mls.discard_text_in_pref_lang(text_to_discard, True)
     assert (
         mls.mls_dict == expected_result
     ), f"After discarding '{text_to_discard}', expected {expected_result} but got {mls.mls_dict}"

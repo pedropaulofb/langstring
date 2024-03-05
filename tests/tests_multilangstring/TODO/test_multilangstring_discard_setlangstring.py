@@ -1,8 +1,6 @@
 import pytest
 
-from langstring import Controller
 from langstring import MultiLangString
-from langstring import MultiLangStringFlag
 from langstring import SetLangString
 
 
@@ -62,7 +60,7 @@ def test_discard_setlangstring_with_invalid_type():
 
 
 @pytest.mark.parametrize(
-    "initial_contents, setlangstring, flag_effect, expected_contents",
+    "initial_contents, setlangstring, clean_empty, expected_contents",
     [
         (
             {"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}},
@@ -78,26 +76,19 @@ def test_discard_setlangstring_with_invalid_type():
         ),
     ],
 )
-def test_discard_setlangstring_with_flags_effect(initial_contents, setlangstring, flag_effect, expected_contents):
+def test_discard_setlangstring_with_flags_effect(initial_contents, setlangstring, clean_empty, expected_contents):
     """
     Test the `discard_setlangstring` method considering the effect of flags that may influence its behavior,
     specifically testing the scenario where empty languages might be cleared based on flag settings.
 
     :param initial_contents: Initial contents of the MultiLangString instance.
     :param setlangstring: The SetLangString to discard.
-    :param flag_effect: Boolean indicating if the flag to clear empty languages is active.
+    :param clean_empty: Boolean indicating if the flag to clear empty languages is active.
     :param expected_contents: Expected contents of the MultiLangString post-operation.
     """
-
-    # Setting flag based on test case
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, flag_effect)
-
     mls = MultiLangString(initial_contents)
-    mls.discard_setlangstring(setlangstring)
+    mls.discard_setlangstring(setlangstring, clean_empty)
 
     assert (
         mls.mls_dict == expected_contents
     ), "Contents after discarding SetLangString with flag effect did not match expectations."
-
-    # Reset flag to default state after test
-    Controller.set_flag(MultiLangStringFlag.CLEAR_EMPTY_LANG, False)

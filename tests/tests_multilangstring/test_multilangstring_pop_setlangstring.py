@@ -34,8 +34,8 @@ from langstring import SetLangString
         (
             {"EN": {"HELLO", "WORLD"}, "en": {"hello", "world"}},
             "EN",
-            ("EN", {"world", "hello"}),
-            {"EN": {"HELLO", "WORLD"}},
+            ("EN", {"world", "hello", "HELLO", "WORLD"}),
+            {},
         ),
         # Test with Greek and Cyrillic characters, and emojis
         (

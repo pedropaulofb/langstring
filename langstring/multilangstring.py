@@ -59,10 +59,7 @@ class MultiLangString:
         :type pref_lang: str
         :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
-        # TODO: Fix.
-        #  Init is currently accepting MultiLangString(mls_dict={"EN":{"test"}, "en":{"test"}}),
-        #  generating MultiLangString(mls_dict={'EN': {'test'}, 'en': {'test'}}, pref_lang='en')
-        self.mls_dict: dict[str, set[str]] = mls_dict if (mls_dict is not None) else {}
+        self.mls_dict = {} if mls_dict is None else mls_dict
         self.pref_lang: str = pref_lang
 
     # --------------------------------------------------
@@ -75,25 +72,17 @@ class MultiLangString:
         return self._mls_dict
 
     @mls_dict.setter
-    def mls_dict(self, new_mls_dict: dict[str, set[str]]) -> None:
+    def mls_dict(self, in_mls_dict: dict[str, set[str]]) -> None:
         """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
-        if not isinstance(new_mls_dict, dict):
-            raise TypeError(
-                f"Invalid type of 'mls_dict' received. Expected 'dict', got '{type(new_mls_dict).__name__}'."
-            )
+        # Validate input before merging
+        self._validate_input_mls_dict(in_mls_dict)
 
+        # Merge entries with case-insensitive language keys
+        new_mls_dict = self._merge_language_entries(in_mls_dict)
+
+        # Validate and transform texts in the merged dictionary
         temp_dict: dict[str, set[str]] = {}
-        # Validating langs that are the dict's keys
         for lang, texts in new_mls_dict.items():
-            if not isinstance(lang, str):
-                raise TypeError(
-                    f"Invalid 'lang' type in mls_dict init. Expected 'str', got '{type(new_mls_dict).__name__}'."
-                )
-            if not isinstance(texts, set):
-                raise TypeError(
-                    f"Invalid 'texts' type in mls_dict init. Expected 'set', got '{type(new_mls_dict).__name__}'."
-                )
-
             validated_key = Validator.validate_lang(MultiLangStringFlag, lang)
             temp_dict[validated_key] = set()
             # Validating texts inside the dict's values
@@ -265,9 +254,6 @@ class MultiLangString:
         if registered_lang:
             del self.mls_dict[registered_lang]
 
-    # TODO: Check if it is necessary/possible to have a 'difference' or '-' method.
-    # TODO: Check if it is necessary/possible to have a '+' or 'update' method.
-
     # ----- REMOVE METHODS -----
 
     def remove(
@@ -354,36 +340,6 @@ class MultiLangString:
     # ----- CONVERSION METHODS -----
 
     @Validator.validate_simple_type
-    def to_strings(self, languages: Optional[list[str]] = None) -> list[LangString]:
-        # TODO: TO BE IMPLEMENTATED.
-        pass
-
-    @Validator.validate_simple_type
-    def to_langstrings(self, languages: Optional[list[str]] = None) -> list[LangString]:
-        # TODO: FIX IMPLEMENTATION. Use get_langstring method.
-        langstrings = []
-        selected_langs = self.mls_dict.keys() if languages is None else languages
-
-        for lang in selected_langs:
-            if lang in self.mls_dict:
-                for text in self.mls_dict[lang]:
-                    langstrings.append(LangString(text, lang))
-
-        return langstrings
-
-    @Validator.validate_simple_type
-    def to_setlangstrings(self, languages: Optional[list[str]] = None) -> list[SetLangString]:
-        # TODO: FIX IMPLEMENTATION. Use get_setlangstring method.
-        setlangstrings = []
-        selected_langs = self.mls_dict.keys() if languages is None else languages
-
-        for lang in selected_langs:
-            if lang in self.mls_dict:
-                setlangstrings.append(SetLangString(self.mls_dict[lang], lang))
-
-        return setlangstrings
-
-    @Validator.validate_simple_type
     def to_strings(
         self,
         languages: Optional[list[str]] = None,
@@ -391,7 +347,7 @@ class MultiLangString:
         separator: str = "@",
         print_lang: bool = True,
     ) -> list[str]:
-        # TODO: CHECK IMPLEMENTATION.
+        # TODO: CHECK IMPLEMENTATION. Is it the same as doing str?
         strings = []
         selected_langs = self.mls_dict.keys() if languages is None else languages
 
@@ -403,6 +359,49 @@ class MultiLangString:
                     strings.append(f"{new_text}{new_lang}")
 
         return strings
+
+    def to_langstrings(self, langs: Optional[list[str]] = None) -> list[LangString]:
+        if not isinstance(langs, list):
+            raise TypeError(f"Invalid argument 'langs' received. Expected 'list', got '{type(langs).__name__}'.")
+        if not all(isinstance(item, str) for item in langs):
+            raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
+
+        langstrings = []
+        self_reg_langs = []
+
+        selected_langs = self.mls_dict.keys() if (langs is None) else langs
+
+        for selected_lang in selected_langs:
+            reg_lang = self._get_registered_lang(selected_lang)
+            if reg_lang:
+                self_reg_langs.append(reg_lang)
+
+        for lang in self_reg_langs:
+            for text in self.mls_dict[lang]:
+                langstrings.append(self.get_langstring(text, lang))
+
+        return langstrings
+
+    def to_setlangstrings(self, langs: Optional[list[str]] = None) -> list[SetLangString]:
+        if not isinstance(langs, list):
+            raise TypeError(f"Invalid argument 'langs' received. Expected 'list', got '{type(langs).__name__}'.")
+        if not all(isinstance(item, str) for item in langs):
+            raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
+
+        setlangstrings = []
+        self_reg_langs = []
+
+        selected_langs = self.mls_dict.keys() if (langs is None) else langs
+
+        for selected_lang in selected_langs:
+            reg_lang = self._get_registered_lang(selected_lang)
+            if reg_lang:
+                self_reg_langs.append(reg_lang)
+
+        for lang in self_reg_langs:
+            setlangstrings.append(self.get_setlangstring(lang))
+
+        return setlangstrings
 
     # ----- COUNT METHODS -----
 
@@ -578,12 +577,6 @@ class MultiLangString:
         return len(self.mls_dict[registered_lang]) > 0 if registered_lang else False
 
     # --------------------------------------------------
-    # MultiLangString's Dunder Methods
-    # --------------------------------------------------
-
-    # TODO: Create a __add__ method. MLS + LS/SLS/MLS
-
-    # --------------------------------------------------
     # Overwritten Dictionary's Dunder Methods
     # --------------------------------------------------
 
@@ -627,11 +620,6 @@ class MultiLangString:
         hashable_mls_dict = tuple((lang, frozenset(texts)) for lang, texts in self.mls_dict.items())
         return hash(hashable_mls_dict)
 
-    def __ior__(self, other):
-        """Implement in-place update operation (equivalent to self.update(other))."""
-        self.update(other)
-        return self
-
     def __iter__(self):
         """Allow iteration over the dictionary keys (language codes)."""
         return iter(self.mls_dict)
@@ -645,17 +633,6 @@ class MultiLangString:
         if isinstance(other, MultiLangString):
             return self.mls_dict != other.mls_dict
         return self.mls_dict != other
-
-    def __or__(self, other):
-        # TODO: check if/how to apply the constraint flag.
-        #  I can defined that, for all structures, only when doing and operation (+ or -) the flag is valid.
-        #  For directly calling the method it is not taken into consideration.
-        """Implement merge operation, returning a new MultiLangString with merged content."""
-        if not isinstance(other, (MultiLangString, dict)):
-            return NotImplemented
-        new_dict = self.mls_dict.copy()
-        new_dict.update(other.mls_dict if isinstance(other, MultiLangString) else other)
-        return MultiLangString(new_dict, self.pref_lang)
 
     def __repr__(self) -> str:
         """Return a detailed string representation of the MultiLangString object.
@@ -674,15 +651,6 @@ class MultiLangString:
     def __reversed__(self):
         """Return a reverse iterator over the dictionary keys."""
         return reversed(self.mls_dict.keys())
-
-    def __ror__(self, other):
-        """Implement right-side merge, used if the left operand does not support merge."""
-        if not isinstance(other, dict):
-            return NotImplemented
-        # Create a new MultiLangString instance with 'other' as the base, then update with self
-        new_instance = MultiLangString(other)
-        new_instance.update(self.mls_dict)
-        return new_instance
 
     def __setitem__(self, key: str, value: set[str]) -> None:
         """Allow setting entries by language."""
@@ -718,3 +686,51 @@ class MultiLangString:
         if lang.casefold() in lang_register:
             return lang_register[lang.casefold()]
         return None
+
+    def _merge_language_entries(self, mls_dict:dict[str, set[str]])->dict[str, set[str]]:
+        """
+        Merges entries in the provided dictionary where the language codes match case-insensitively, only if
+        duplicates exist. Preserves original language codes if no case-insensitive duplicates are found.
+
+        :param mls_dict: Dictionary with language codes as keys and sets of strings as values.
+        :return: A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.
+        """
+        # Step 1: Detect if there are any case-insensitive duplicates
+        casefolded_keys = set(lang.casefold() for lang in mls_dict.keys())
+        has_duplicates = len(casefolded_keys) < len(mls_dict)
+
+        if not has_duplicates:
+            # No case-insensitive duplicates, return the original dictionary
+            return mls_dict
+
+        # Step 2: Merge entries with case-insensitive duplication
+        merged_dict = {}
+        original_case_map = {}  # Maps casefolded language codes to their first occurrence's original casing
+
+        for lang, texts in mls_dict.items():
+            lang_cf = lang.casefold()
+
+            if lang_cf not in original_case_map:
+                original_case_map[lang_cf] = lang  # Preserve the first occurrence's casing
+                merged_dict[lang] = texts.copy()
+            else:
+                # Use the preserved original casing for merging
+                original_lang = original_case_map[lang_cf]
+                merged_dict[original_lang].update(texts)
+
+        return merged_dict
+
+    def _validate_input_mls_dict(self, mls_dict:dict[str, set[str]])->None:
+        if not isinstance(mls_dict, dict):
+            raise TypeError(f"Invalid type of 'mls_dict' received. Expected 'dict', got '{type(mls_dict).__name__}'.")
+
+        # Validating langs that are the dict's keys
+        for lang, texts in mls_dict.items():
+            if not isinstance(lang, str):
+                raise TypeError(
+                    f"Invalid 'lang' type in mls_dict init. Expected 'str', got '{type(mls_dict).__name__}'."
+                )
+            if not isinstance(texts, set):
+                raise TypeError(
+                    f"Invalid 'texts' type in mls_dict init. Expected 'set', got '{type(mls_dict).__name__}'."
+                )

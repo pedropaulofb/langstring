@@ -9,6 +9,18 @@ from langstring import MultiLangStringFlag
     "input_dict, pref_lang, expected_dict, expected_pref_lang",
     [
         ({"en": {"Hello"}, "fr": {"Bonjour"}}, "en", {"en": {"Hello"}, "fr": {"Bonjour"}}, "en"),
+        (
+            {"en": {"Hello"}, "En": {"World"}, "fr": {"Bonjour"}},
+            "en",
+            {"en": {"Hello", "World"}, "fr": {"Bonjour"}},
+            "en",
+        ),
+        (
+            {"EN": {"Hello"}, "En": {"World"}, "fr": {"Bonjour"}},
+            "en",
+            {"EN": {"Hello", "World"}, "fr": {"Bonjour"}},
+            "en",
+        ),
         ({}, "en", {}, "en"),
         (None, "en", {}, "en"),
         ({"en": {"Hello"}, "es": {"Hola"}}, "en", {"en": {"Hello"}, "es": {"Hola"}}, "en"),
@@ -166,3 +178,46 @@ def test_multilangstring_init_with_strip_text_flag():
             assert (
                 text == text.strip()
             ), "Text should be stripped of leading and trailing spaces when STRIP_TEXT flag is True"
+
+
+@pytest.mark.parametrize(
+    "input_dict, expected_dict",
+    [
+        ({"en": {"Hello"}, "EN": {"World"}}, {"en": {"Hello", "World"}}),
+        ({"FR": {"Salut"}, "fr": {"Bonjour"}, "Fr": {"Au revoir"}}, {"FR": {"Salut", "Bonjour", "Au revoir"}}),
+        ({"es": {"Hola"}, "ES": {"Adiós"}, "Es": {"Buenos días"}}, {"es": {"Hola", "Adiós", "Buenos días"}}),
+        ({"en": {""}, "EN": {"World", ""}}, {"en": {"", "World"}}),
+        ({"": {"Empty key"}, "  ": {"Whitespace key"}}, {"": {"Empty key"}, "  ": {"Whitespace key"}}),
+        ({"GR": {"Γειά σου"}, "gr": {"Καλημέρα"}, "Gr": {"Καλησπέρα"}}, {"GR": {"Γειά σου", "Καλημέρα", "Καλησπέρα"}}),
+        ({"RU": {"Привет"}, "ru": {"Здравствуйте"}}, {"RU": {"Привет", "Здравствуйте"}}),
+        ({"emoji": {"😀", "😃"}, "EMOJI": {"😄", "😁"}}, {"emoji": {"😀", "😃", "😄", "😁"}}),
+        (
+            {"special": {"!@#$%", "^&*()"}, "SPECIAL": {"_+{}:", "<>?~"}},
+            {"special": {"!@#$%", "^&*()", "_+{}:", "<>?~"}},
+        ),
+        (
+            {"mixedCASE": {"Case Insensitive"}, "MixedCase": {"Merging Test"}},
+            {"mixedCASE": {"Case Insensitive", "Merging Test"}},
+        ),
+        (
+            {" leading ": {"Leading spaces"}, "leading ": {"Trimming"}},
+            {" leading ": {"Leading spaces"}, "leading ": {"Trimming"}},
+        ),
+        ({"trailing": {"Trailing spaces "}, "Trailing": {"Merging"}}, {"trailing": {"Trailing spaces ", "Merging"}}),
+        (
+            {"inner  spaces": {"Inner spaces"}, "Inner  Spaces": {"Are preserved"}},
+            {"inner  spaces": {"Inner spaces", "Are preserved"}},
+        ),
+        (
+            {"ja": {"こんにちは"}, "JA": {"こんばんは"}, "Ja": {"おはようございます"}},
+            {"ja": {"こんにちは", "こんばんは", "おはようございます"}},
+        ),
+        (
+            {"de": {"Guten Tag"}, "DE": {"Guten Morgen", "Guten Abend"}},
+            {"de": {"Guten Tag", "Guten Morgen", "Guten Abend"}},
+        ),
+    ],
+)
+def test_multilangstring_language_merging(input_dict: dict, expected_dict: dict):
+    mls = MultiLangString(mls_dict=input_dict)
+    assert mls.mls_dict == expected_dict, "Languages with different cases should be merged correctly"

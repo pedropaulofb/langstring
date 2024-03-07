@@ -359,7 +359,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[LangString]
         :raises TypeError: If the arg is not of type MultiLangString.
         """
-        return arg.to_langstrings(languages=languages)
+        return arg.to_langstrings(langs=languages)
 
     @Validator.validate_simple_type
     @staticmethod
@@ -377,7 +377,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[SetLangString]
         :raises TypeError: If the arg is not of type MultiLangString.
         """
-        return arg.to_setlangstrings(languages=languages)
+        return arg.to_setlangstrings(langs=languages)
 
     @Validator.validate_simple_type
     @staticmethod

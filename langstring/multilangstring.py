@@ -354,6 +354,11 @@ class MultiLangString:
     # ----- CONVERSION METHODS -----
 
     @Validator.validate_simple_type
+    def to_strings(self, languages: Optional[list[str]] = None) -> list[LangString]:
+        # TODO: TO BE IMPLEMENTATED.
+        pass
+
+    @Validator.validate_simple_type
     def to_langstrings(self, languages: Optional[list[str]] = None) -> list[LangString]:
         # TODO: FIX IMPLEMENTATION. Use get_langstring method.
         langstrings = []

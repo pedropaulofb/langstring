@@ -387,10 +387,6 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
    :vartype VALID_LANG: Enum
 
-   .. py:attribute:: CLEAR_EMPTY_LANG
-
-      
-
    .. py:attribute:: DEFINED_LANG
 
       
@@ -500,10 +496,6 @@ Classes
    :vartype ENSURE_ANY_LANG: Enum
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
    :vartype VALID_LANG: Enum
-
-   .. py:attribute:: CLEAR_EMPTY_LANG
-
-      
 
    .. py:attribute:: DEFINED_LANG
 
@@ -1008,33 +1000,33 @@ Classes
    .. py:method:: add_multilangstring(multilangstring)
 
 
-   .. py:method:: discard(arg)
+   .. py:method:: discard(arg, clean_empty = False)
 
 
-   .. py:method:: discard_entry(text, lang)
+   .. py:method:: discard_entry(text, lang, clean_empty = False)
 
 
-   .. py:method:: discard_text_in_pref_lang(text)
+   .. py:method:: discard_text_in_pref_lang(text, clean_empty = False)
 
       Discard a text entry from the preferred language.
 
 
-   .. py:method:: discard_langstring(langstring)
+   .. py:method:: discard_langstring(langstring, clean_empty = False)
 
 
-   .. py:method:: discard_setlangstring(setlangstring)
+   .. py:method:: discard_setlangstring(setlangstring, clean_empty = False)
 
 
-   .. py:method:: discard_multilangstring(multilangstring)
+   .. py:method:: discard_multilangstring(multilangstring, clean_empty = False)
 
 
    .. py:method:: discard_lang(lang)
 
 
-   .. py:method:: remove(arg)
+   .. py:method:: remove(arg, clean_empty = False)
 
 
-   .. py:method:: remove_entry(text, lang)
+   .. py:method:: remove_entry(text, lang, clean_empty = False)
 
       Remove a single entry from the set of a given language key in the dictionary.
 
@@ -1047,18 +1039,18 @@ Classes
       :type lang: str
 
 
-   .. py:method:: remove_text_in_pref_lang(text)
+   .. py:method:: remove_text_in_pref_lang(text, clean_empty = False)
 
       Remove a text entry from the preferred language.
 
 
-   .. py:method:: remove_langstring(langstring)
+   .. py:method:: remove_langstring(langstring, clean_empty = False)
 
 
-   .. py:method:: remove_setlangstring(setlangstring)
+   .. py:method:: remove_setlangstring(setlangstring, clean_empty = False)
 
 
-   .. py:method:: remove_multilangstring(multilangstring)
+   .. py:method:: remove_multilangstring(multilangstring, clean_empty = False)
 
 
    .. py:method:: remove_lang(lang)
@@ -1069,6 +1061,12 @@ Classes
 
       :param lang: The language key to be removed along with all its texts.
       :type lang: str
+
+
+   .. py:method:: remove_empty_langs()
+
+
+   .. py:method:: to_strings(languages = None)
 
 
    .. py:method:: to_langstrings(languages = None)
@@ -1171,15 +1169,7 @@ Classes
    .. py:method:: pop_multilangstring(langs)
 
 
-   .. py:method:: clear_empty_langs()
-
-
    .. py:method:: has_pref_lang_entries()
-
-
-   .. py:method:: items()
-
-      Return items (language, texts set) in the MultiLangString.
 
 
    .. py:method:: __contains__(key)

@@ -1,5 +1,7 @@
 import pytest
-from langstring import MultiLangString, LangString
+
+from langstring import LangString
+from langstring import MultiLangString
 
 
 @pytest.mark.parametrize(
@@ -9,12 +11,15 @@ from langstring import MultiLangString, LangString
         ({"en": {"test1"}, "de": {"test2"}}, "test2", "de", True, False),
         ({"en": {"test1", "test2"}}, "test1", "en", True, True),
         ({"en": {""}}, "", "en", True, False),
-        ({"en": {"Test1"}, "de": {"Test2"}}, "test1", "en", False, True),
+        ({"en": {"Test1"}, "de": {"Test2"}}, "Test1", "en", False, True),
+        ({"en": {"Test1"}, "de": {"Test2"}}, "Test1", "en", True, False),
         ({"en": {" test1 "}, "de": {"test2"}}, " test1 ", "en", True, False),
         ({"el": {"δοκιμή"}}, "δοκιμή", "el", False, True),
         ({"ru": {"тест"}}, "тест", "ru", True, False),
         ({"en": {"😊"}}, "😊", "en", True, False),
         ({"en": {"test@#"}}, "test@#", "en", True, False),
+        ({"En": {"test@#"}}, "test@#", "en", True, False),
+        ({"en": {"test@#"}}, "test@#", "En", True, False),
         ({"none": {"test1"}}, "test1", "none", False, True),
         ({"int": {"42"}}, "42", "int", True, False),
     ],
@@ -45,12 +50,6 @@ def test_remove_langstring_valid_cases(init_data, langstring_text, langstring_la
         ),
         ({"en": set()}, LangString("test1", "en"), ValueError, "Entry 'test1@en' not found in the MultiLangString."),
         ({"en": {"test1"}}, LangString("", "en"), ValueError, "Entry '@en' not found in the MultiLangString."),
-        (
-            {"EN": {"test1"}},
-            LangString("test1", "en"),
-            ValueError,
-            "Entry 'test1@en' not found in the MultiLangString.",
-        ),
         ({"en": {"test1"}}, LangString("😊", "en"), ValueError, "Entry '😊@en' not found in the MultiLangString."),
         (
             {"en": {"test1"}},
@@ -58,10 +57,10 @@ def test_remove_langstring_valid_cases(init_data, langstring_text, langstring_la
             ValueError,
             "Entry 'test@#@en' not found in the MultiLangString.",
         ),
-        ({"en": {"test1"}}, LangString(None, "en"), TypeError, "LangString text cannot be None."),
-        ({"en": {"test1"}}, LangString("test1", None), TypeError, "LangString lang cannot be None."),
-        ({None: {"test1"}}, LangString("test1", "en"), ValueError, "Init data key cannot be None."),
-        ({"en": ["test1"]}, LangString("test1", "en"), TypeError, "Init data value for 'en' must be a set."),
+        ({"en": {"test1"}}, None, TypeError, "Argument .+ must be of type 'LangString', but got"),
+        ({"en": {"test1"}}, "LangString", TypeError, "Argument .+ must be of type 'LangString', but got"),
+        ({"en": {"test1"}}, True, TypeError, "Argument .+ must be of type 'LangString', but got"),
+        ({"en": {"test1"}}, {}, TypeError, "Argument .+ must be of type 'LangString', but got"),
     ],
 )
 def test_remove_langstring_invalid_cases(init_data, langstring_to_remove, expected_exception, match_message):

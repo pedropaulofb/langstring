@@ -754,11 +754,6 @@ texts of a single language from the MultiLangString.</p>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.GlobalFlag.CLEAR_EMPTY_LANG">
-<span class="sig-name descname"><span class="pre">CLEAR_EMPTY_LANG</span></span><a class="headerlink" href="#langstring.GlobalFlag.CLEAR_EMPTY_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="langstring.GlobalFlag.DEFINED_LANG">
 <span class="sig-name descname"><span class="pre">DEFINED_LANG</span></span><a class="headerlink" href="#langstring.GlobalFlag.DEFINED_LANG" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -887,11 +882,6 @@ texts of a single language from the MultiLangString.</p>
 </ul>
 </dd>
 </dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.MultiLangStringFlag.CLEAR_EMPTY_LANG">
-<span class="sig-name descname"><span class="pre">CLEAR_EMPTY_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.CLEAR_EMPTY_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="langstring.MultiLangStringFlag.DEFINED_LANG">
 <span class="sig-name descname"><span class="pre">DEFINED_LANG</span></span><a class="headerlink" href="#langstring.MultiLangStringFlag.DEFINED_LANG" title="Link to this definition"></a></dt>
@@ -2136,10 +2126,13 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.discard">
-<span class="sig-name descname"><span class="pre">discard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">discard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>, </em><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>, </em><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2149,12 +2142,13 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.discard_entry">
-<span class="sig-name descname"><span class="pre">discard_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_entry" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">discard_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_entry" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<em>str</em>) – </p></li>
 <li><p><strong>lang</strong> (<em>str</em>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -2165,11 +2159,14 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.discard_text_in_pref_lang">
-<span class="sig-name descname"><span class="pre">discard_text_in_pref_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_text_in_pref_lang" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">discard_text_in_pref_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_text_in_pref_lang" title="Link to this definition"></a></dt>
 <dd><p>Discard a text entry from the preferred language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2179,10 +2176,13 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.discard_langstring">
-<span class="sig-name descname"><span class="pre">discard_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_langstring" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">discard_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_langstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>langstring</strong> (<a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>langstring</strong> (<a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2192,10 +2192,13 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.discard_setlangstring">
-<span class="sig-name descname"><span class="pre">discard_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_setlangstring" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">discard_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_setlangstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>setlangstring</strong> (<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setlangstring</strong> (<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2205,10 +2208,13 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.discard_multilangstring">
-<span class="sig-name descname"><span class="pre">discard_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multilangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_multilangstring" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">discard_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multilangstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.discard_multilangstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>multilangstring</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>multilangstring</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2231,10 +2237,13 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>, </em><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>, </em><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2244,7 +2253,7 @@ this set. If the language already exists, the text is added to the existing set 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.remove_entry">
-<span class="sig-name descname"><span class="pre">remove_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_entry" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_entry" title="Link to this definition"></a></dt>
 <dd><p>Remove a single entry from the set of a given language key in the dictionary.</p>
 <p>If the specified language key exists and the text is in its set, the text is removed. If this results in an
 empty set for the language, the language key is also removed from the dictionary.</p>
@@ -2253,6 +2262,7 @@ empty set for the language, the language key is also removed from the dictionary
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<em>str</em>) – The text to be removed.</p></li>
 <li><p><strong>lang</strong> (<em>str</em>) – The language key from which the text should be removed.</p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -2263,11 +2273,14 @@ empty set for the language, the language key is also removed from the dictionary
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.remove_text_in_pref_lang">
-<span class="sig-name descname"><span class="pre">remove_text_in_pref_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_text_in_pref_lang" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_text_in_pref_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_text_in_pref_lang" title="Link to this definition"></a></dt>
 <dd><p>Remove a text entry from the preferred language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2277,10 +2290,13 @@ empty set for the language, the language key is also removed from the dictionary
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.remove_langstring">
-<span class="sig-name descname"><span class="pre">remove_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_langstring" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_langstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>langstring</strong> (<a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>langstring</strong> (<a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2290,10 +2306,13 @@ empty set for the language, the language key is also removed from the dictionary
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.remove_setlangstring">
-<span class="sig-name descname"><span class="pre">remove_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_setlangstring" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_setlangstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>setlangstring</strong> (<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setlangstring</strong> (<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2303,10 +2322,13 @@ empty set for the language, the language key is also removed from the dictionary
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.remove_multilangstring">
-<span class="sig-name descname"><span class="pre">remove_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multilangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_multilangstring" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multilangstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_multilangstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>multilangstring</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>multilangstring</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – </p></li>
+<li><p><strong>clean_empty</strong> (<em>bool</em>) – </p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -2325,6 +2347,34 @@ empty set for the language, the language key is also removed from the dictionary
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.MultiLangString.remove_empty_langs">
+<span class="sig-name descname"><span class="pre">remove_empty_langs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.remove_empty_langs" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.MultiLangString.to_strings">
+<span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.to_strings" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>print_quotes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – </p></li>
+<li><p><strong>print_lang</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2356,8 +2406,8 @@ empty set for the language, the language key is also removed from the dictionary
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.to_strings">
-<span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.to_strings" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2654,16 +2704,6 @@ empty set for the language, the language key is also removed from the dictionary
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.clear_empty_langs">
-<span class="sig-name descname"><span class="pre">clear_empty_langs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.clear_empty_langs" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="langstring.MultiLangString.has_pref_lang_entries">
 <span class="sig-name descname"><span class="pre">has_pref_lang_entries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.has_pref_lang_entries" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
@@ -2671,12 +2711,6 @@ empty set for the language, the language key is also removed from the dictionary
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.MultiLangString.items">
-<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.items" title="Link to this definition"></a></dt>
-<dd><p>Return items (language, texts set) in the MultiLangString.</p>
 </dd></dl>
 
 <dl class="py method">

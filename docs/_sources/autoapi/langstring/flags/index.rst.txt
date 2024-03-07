@@ -36,10 +36,6 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
    :vartype VALID_LANG: Enum
 
-   .. py:attribute:: CLEAR_EMPTY_LANG
-
-      
-
    .. py:attribute:: DEFINED_LANG
 
       
@@ -202,10 +198,6 @@ Classes
    :vartype ENSURE_ANY_LANG: Enum
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
    :vartype VALID_LANG: Enum
-
-   .. py:attribute:: CLEAR_EMPTY_LANG
-
-      
 
    .. py:attribute:: DEFINED_LANG
 

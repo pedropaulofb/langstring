@@ -1,7 +1,6 @@
 from copy import deepcopy
 
 import pytest
-from icecream import ic
 
 from langstring import MultiLangString
 

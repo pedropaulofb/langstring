@@ -361,9 +361,9 @@ class MultiLangString:
         return strings
 
     def to_langstrings(self, langs: Optional[list[str]] = None) -> list[LangString]:
-        if not isinstance(langs, list):
+        if langs and not isinstance(langs, list):
             raise TypeError(f"Invalid argument 'langs' received. Expected 'list', got '{type(langs).__name__}'.")
-        if not all(isinstance(item, str) for item in langs):
+        if langs and not all(isinstance(item, str) for item in langs):
             raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
 
         langstrings = []
@@ -383,9 +383,9 @@ class MultiLangString:
         return langstrings
 
     def to_setlangstrings(self, langs: Optional[list[str]] = None) -> list[SetLangString]:
-        if not isinstance(langs, list):
+        if langs and not isinstance(langs, list):
             raise TypeError(f"Invalid argument 'langs' received. Expected 'list', got '{type(langs).__name__}'.")
-        if not all(isinstance(item, str) for item in langs):
+        if langs and not all(isinstance(item, str) for item in langs):
             raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
 
         setlangstrings = []
@@ -687,7 +687,7 @@ class MultiLangString:
             return lang_register[lang.casefold()]
         return None
 
-    def _merge_language_entries(self, mls_dict:dict[str, set[str]])->dict[str, set[str]]:
+    def _merge_language_entries(self, mls_dict: dict[str, set[str]]) -> dict[str, set[str]]:
         """
         Merges entries in the provided dictionary where the language codes match case-insensitively, only if
         duplicates exist. Preserves original language codes if no case-insensitive duplicates are found.
@@ -720,7 +720,7 @@ class MultiLangString:
 
         return merged_dict
 
-    def _validate_input_mls_dict(self, mls_dict:dict[str, set[str]])->None:
+    def _validate_input_mls_dict(self, mls_dict: dict[str, set[str]]) -> None:
         if not isinstance(mls_dict, dict):
             raise TypeError(f"Invalid type of 'mls_dict' received. Expected 'dict', got '{type(mls_dict).__name__}'.")
 

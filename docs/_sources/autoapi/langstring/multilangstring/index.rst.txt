@@ -176,16 +176,13 @@ Classes
    .. py:method:: remove_empty_langs()
 
 
-   .. py:method:: to_strings(languages = None)
-
-
-   .. py:method:: to_langstrings(languages = None)
-
-
-   .. py:method:: to_setlangstrings(languages = None)
-
-
    .. py:method:: to_strings(languages = None, print_quotes = True, separator = '@', print_lang = True)
+
+
+   .. py:method:: to_langstrings(langs = None)
+
+
+   .. py:method:: to_setlangstrings(langs = None)
 
 
    .. py:method:: count_entries_by_lang(lang)
@@ -282,12 +279,12 @@ Classes
    .. py:method:: has_pref_lang_entries()
 
 
-   .. py:method:: __contains__(key)
+   .. py:method:: __contains__(lang)
 
       Check if a language is in the MultiLangString.
 
 
-   .. py:method:: __delitem__(key)
+   .. py:method:: __delitem__(lang)
 
       Allow deletion of language entries.
 
@@ -305,7 +302,7 @@ Classes
       :rtype: bool
 
 
-   .. py:method:: __getitem__(key)
+   .. py:method:: __getitem__(lang)
 
       Allow retrieval of entries by language.
 
@@ -321,11 +318,6 @@ Classes
       :rtype: int
 
 
-   .. py:method:: __ior__(other)
-
-      Implement in-place update operation (equivalent to self.update(other)).
-
-
    .. py:method:: __iter__()
 
       Allow iteration over the dictionary keys (language codes).
@@ -339,11 +331,6 @@ Classes
    .. py:method:: __ne__(other)
 
       Define behavior for the inequality operator, !=.
-
-
-   .. py:method:: __or__(other)
-
-      Implement merge operation, returning a new MultiLangString with merged content.
 
 
    .. py:method:: __repr__()
@@ -362,12 +349,7 @@ Classes
       Return a reverse iterator over the dictionary keys.
 
 
-   .. py:method:: __ror__(other)
-
-      Implement right-side merge, used if the left operand does not support merge.
-
-
-   .. py:method:: __setitem__(key, value)
+   .. py:method:: __setitem__(lang, value)
 
       Allow setting entries by language.
 
@@ -384,6 +366,18 @@ Classes
 
 
    .. py:method:: _get_registered_lang(lang)
+
+
+   .. py:method:: _merge_language_entries(mls_dict)
+
+      Merge entries in the provided dictionary where the language codes match case-insensitively, only if
+      duplicates exist. Preserves original language codes if no case-insensitive duplicates are found.
+
+      :param mls_dict: Dictionary with language codes as keys and sets of strings as values.
+      :return: A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.
+
+
+   .. py:method:: _validate_input_mls_dict(mls_dict)
 
 
 

@@ -580,14 +580,21 @@ class MultiLangString:
     # Overwritten Dictionary's Dunder Methods
     # --------------------------------------------------
 
-    def __contains__(self, key: str) -> bool:
+    @Validator.validate_simple_type
+    def __contains__(self, lang: str) -> bool:
         """Check if a language is in the MultiLangString."""
-        return key in self.mls_dict
+        return self.contains_lang(lang)
 
-    def __delitem__(self, key: str) -> None:
+    @Validator.validate_simple_type
+    def __delitem__(self, lang: str) -> None:
         """Allow deletion of language entries."""
-        del self.mls_dict[key]
+        reg_lang = self._get_registered_lang(lang)
 
+        # Del valid using registered lang or raise KeyError when invalid (not registered in any case)
+        del_lang = reg_lang if reg_lang else lang
+        del self.mls_dict[del_lang]
+
+    @Validator.validate_simple_type
     def __eq__(self, other: object) -> bool:
         """Check equality of this MultiLangString with another MultiLangString.
 
@@ -603,9 +610,15 @@ class MultiLangString:
             return False
         return self.mls_dict == other.mls_dict
 
-    def __getitem__(self, key: str) -> set[str]:
+    @Validator.validate_simple_type
+    def __getitem__(self, lang: str) -> set[str]:
         """Allow retrieval of entries by language."""
-        return self.mls_dict[key]
+
+        reg_lang = self._get_registered_lang(lang)
+
+        # Get valid using registered lang or raise KeyError when invalid (not registered in any case)
+        get_lang = reg_lang if reg_lang else lang
+        return self.mls_dict[get_lang]
 
     def __hash__(self) -> int:
         """Generate a hash new_text for a MultiLangString object.
@@ -628,7 +641,8 @@ class MultiLangString:
         """Return the number of languages in the dictionary."""
         return len(self.mls_dict)
 
-    def __ne__(self, other):
+    @Validator.validate_simple_type
+    def __ne__(self, other: object):
         """Define behavior for the inequality operator, !=."""
         if isinstance(other, MultiLangString):
             return self.mls_dict != other.mls_dict
@@ -652,9 +666,10 @@ class MultiLangString:
         """Return a reverse iterator over the dictionary keys."""
         return reversed(self.mls_dict.keys())
 
-    def __setitem__(self, key: str, value: set[str]) -> None:
+    @Validator.validate_simple_type
+    def __setitem__(self, lang: str, value: set[str]) -> None:
         """Allow setting entries by language."""
-        self.mls_dict[key] = value
+        self.mls_dict[lang] = value
 
     def __str__(self) -> str:
         """Return a string representation of the MultiLangString, including language tags.
@@ -688,8 +703,7 @@ class MultiLangString:
         return None
 
     def _merge_language_entries(self, mls_dict: dict[str, set[str]]) -> dict[str, set[str]]:
-        """
-        Merges entries in the provided dictionary where the language codes match case-insensitively, only if
+        """Merge entries in the provided dictionary where the language codes match case-insensitively, only if
         duplicates exist. Preserves original language codes if no case-insensitive duplicates are found.
 
         :param mls_dict: Dictionary with language codes as keys and sets of strings as values.

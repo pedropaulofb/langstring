@@ -643,9 +643,14 @@ class MultiLangString:
         :return: The hash new_text of the MultiLangString object.
         :rtype: int
         """
-        # Convert dictionary to a hashable form (tuple of tuples) for consistent hashing
-        hashable_mls_dict = tuple((lang, frozenset(texts)) for lang, texts in self.mls_dict.items())
-        return hash(hashable_mls_dict)
+        # Create a casefolded version of mls_dict with sorted values
+        hashable_data = tuple(
+            (lang.casefold(), tuple(sorted(self.mls_dict[lang])))
+            for lang in sorted(self.mls_dict.keys(), key=str.casefold)
+        )
+
+        # Hash the hashable_data
+        return hash(hashable_data)
 
     def __iter__(self):
         """Allow iteration over the dictionary keys (language codes)."""

@@ -312,6 +312,7 @@ class LangString:
         """
         self._validate_match_types(other)
 
+        # TODO: Check if it is better to use NotImplemented or to return False. Must be in accordance with SLS and MLS.
         if not isinstance(other, (str, LangString)):
             return NotImplemented
         if isinstance(other, str):
@@ -428,17 +429,6 @@ class LangString:
         :rtype: LangString
         """
         return LangString(self.text * other, self.lang)
-
-    def __ne__(self, other: object) -> bool:
-        """Check inequality of this LangString with another object."""
-        self._validate_match_types(other)
-
-        if not isinstance(other, (str, LangString)):
-            return NotImplemented
-        if isinstance(other, str):
-            return self.text != other
-        if isinstance(other, LangString):
-            return (self.text != other.text) or (self.lang.casefold() != other.lang.casefold())
 
     @Validator.validate_simple_type
     def __radd__(self, other: str) -> str:

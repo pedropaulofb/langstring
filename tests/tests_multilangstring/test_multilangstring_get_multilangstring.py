@@ -68,7 +68,6 @@ def test_get_multilangstring_edge_cases(langs, expected_keys, description):
     """Test get_multilangstring handles edge cases appropriately."""
     mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}, "ελ": {"Γειά"}, "рус": {"Привет"}}, pref_lang="en")
     result = mls.get_multilangstring(langs)
-    print(result)
     assert set(result.get_langs()) == expected_keys, f"{description}: Expected languages {expected_keys} not found"
 
 

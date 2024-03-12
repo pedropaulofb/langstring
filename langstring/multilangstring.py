@@ -608,7 +608,21 @@ class MultiLangString:
         """
         if not isinstance(other, MultiLangString):
             return False
-        return self.mls_dict == other.mls_dict
+
+        # Convert langs to casefolded version for both instances for comparison
+        casefolded_self = {k.casefold(): v for k, v in self.mls_dict.items()}
+        casefolded_other = {k.casefold(): v for k, v in other.mls_dict.items()}
+
+        # Check if the sets of casefolded langs are the same
+        if set(casefolded_self.keys()) != set(casefolded_other.keys()):
+            return False
+
+        # Check if the values of corresponding casefolded langs are the same
+        for lang in casefolded_self:
+            if casefolded_self[lang] != casefolded_other[lang]:
+                return False
+
+        return True
 
     @Validator.validate_simple_type
     def __getitem__(self, lang: str) -> set[str]:
@@ -640,13 +654,6 @@ class MultiLangString:
     def __len__(self) -> int:
         """Return the number of languages in the dictionary."""
         return len(self.mls_dict)
-
-    @Validator.validate_simple_type
-    def __ne__(self, other: object):
-        """Define behavior for the inequality operator, !=."""
-        if isinstance(other, MultiLangString):
-            return self.mls_dict != other.mls_dict
-        return self.mls_dict != other
 
     def __repr__(self) -> str:
         """Return a detailed string representation of the MultiLangString object.

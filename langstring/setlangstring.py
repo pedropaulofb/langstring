@@ -279,11 +279,6 @@ class SetLangString:
         other_texts = self._extract_texts(other)
         return self.texts < other_texts
 
-    def __ne__(self, other: object) -> bool:
-        if not isinstance(other, SetLangString):
-            return NotImplemented
-        return self.texts != other.texts or self.lang.casefold() != other.lang.casefold()
-
     def __or__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
         return self.union(other)
 

@@ -470,7 +470,7 @@ class LangString:
         print_with_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
         print_with_lang = Controller.get_flag(LangStringFlag.PRINT_WITH_LANG)
 
-        text_representation = f'"{self.text}"' if print_with_quotes else self.text
+        text_representation = f'"{self.text}"' if (print_with_quotes and print_with_lang) else self.text
         lang_representation = f"@{self.lang}" if print_with_lang else ""
 
         return text_representation + lang_representation

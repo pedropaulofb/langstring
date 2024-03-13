@@ -713,16 +713,20 @@ class MultiLangString:
         :return: A string representation of the MultiLangString with language tags.
         :rtype: str
         """
-        parts = []
-        for lang, texts in self.mls_dict.items():
-            texts_repr = ", ".join(
-                [f'"{text}"' if Controller.get_flag(MultiLangStringFlag.PRINT_WITH_QUOTES) else text for text in texts]
-            )
-            lang_representation = f"@{lang}" if Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG) else ""
-            parts.append(f"{{{texts_repr}}}{lang_representation}")
+        if not self.mls_dict:
+            return "{}"
 
-        # Join all language representations with a comma and space
-        return ", ".join(parts)
+        formatted_items = []
+        print_lang = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG)
+        for lang, texts in self.mls_dict.items():
+            if texts:
+                formatted_item = f"{texts}@{lang}" if print_lang else str(texts)
+            else:
+                formatted_item = f"{{}}@{lang}" if print_lang else "{}"
+            formatted_items.append(formatted_item)
+
+        result_string = ", ".join(formatted_items)
+        return result_string
 
     # --------------------------------------------------
     # Private Methods

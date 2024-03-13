@@ -676,7 +676,7 @@ class MultiLangString:
 
     def __reversed__(self):
         """Return a reverse iterator over the dictionary keys."""
-        return reversed(self.mls_dict.keys())
+        return reversed(self.mls_dict)
 
     @Validator.validate_simple_type
     def __setitem__(self, lang: str, value: set[str]) -> None:

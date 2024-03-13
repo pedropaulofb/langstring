@@ -130,14 +130,20 @@ def test_eq_operation_on_itself():
     mls = MultiLangString(content)
     assert mls == mls, "A MultiLangString instance should be equal to itself"
 
-@pytest.mark.parametrize("pref_lang1,pref_lang2,expected", [
-    ("en", "fr", True),
-    ("es", "de", True),
-    ("ru", "gr", True),
-    ("en", "en", True),
-])
+
+@pytest.mark.parametrize(
+    "pref_lang1,pref_lang2,expected",
+    [
+        ("en", "fr", True),
+        ("es", "de", True),
+        ("ru", "gr", True),
+        ("en", "en", True),
+    ],
+)
 def test_eq_different_pref_lang_same_content(pref_lang1, pref_lang2, expected):
     content = {"en": {"Hello"}, "fr": {"Bonjour"}, "es": {"Hola"}, "de": {"Hallo"}, "ru": {"Привет"}, "gr": {"Γειά"}}
     mls1 = MultiLangString(content, pref_lang=pref_lang1)
     mls2 = MultiLangString(content, pref_lang=pref_lang2)
-    assert (mls1 == mls2) is expected, "MultiLangString instances with different pref_lang but identical content should be equal"
+    assert (
+        mls1 == mls2
+    ) is expected, "MultiLangString instances with different pref_lang but identical content should be equal"

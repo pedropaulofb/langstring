@@ -57,17 +57,17 @@ def test_add_setlangstring_invalid_type(invalid_setlangstring):
 
 
 @pytest.mark.parametrize(
-    "lang1, lang2, expected_dict",
+    "lang1, lang2, expected_dict1, expected_dict2",
     [
-        ("en", "es", {}),
+        ("en", "es", {"en": set()}, {"en": set(), "es": set()}),
     ],
 )
-def test_add_setlangstring_empty_texts(lang1, lang2, expected_dict):
+def test_add_setlangstring_empty_texts(lang1, lang2, expected_dict1, expected_dict2):
     mls = MultiLangString()
     mls.add_setlangstring(SetLangString(texts=set(), lang=lang1))
-    assert mls.mls_dict == expected_dict, "Empty SetLangString was not handled correctly."
+    assert mls.mls_dict == expected_dict1, "Empty SetLangString was not handled correctly."
     mls.add_setlangstring(SetLangString(texts=set(), lang=lang2))
-    assert mls.mls_dict == expected_dict, "Empty SetLangString was not handled correctly."
+    assert mls.mls_dict == expected_dict2, "Empty SetLangString was not handled correctly."
 
 
 def test_add_setlangstring_with_flag_effect():

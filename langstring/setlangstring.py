@@ -284,8 +284,7 @@ class SetLangString:
 
     def __repr__(self) -> str:
         """Return the official string representation of the SetLangString object."""
-        texts_repr = repr(self.texts)
-        return f"SetLangString(texts={texts_repr}, lang='{self.lang}')"
+        return f"{self.__class__.__name__}(texts={repr(self.texts)}, lang={repr(self.lang)})"
 
     def __str__(self) -> str:
         """Define the string representation of the LangString object.

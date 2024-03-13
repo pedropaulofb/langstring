@@ -9,7 +9,11 @@ from langstring import MultiLangString
         # Test adding MultiLangString with the same language
         ({"en": {"Hello"}}, {"en": {"World"}}, {"en": {"Hello", "World"}}),
         # Test adding MultiLangString with empty langs:
-        ({"en": {"Hello"}}, {"es": set(), "fr": set(), "pt": set()}, {"en": {"Hello"}}),
+        (
+            {"en": {"Hello"}},
+            {"es": set(), "fr": set(), "pt": set()},
+            {"en": {"Hello"}, "es": set(), "fr": set(), "pt": set()},
+        ),
         # Test adding MultiLangString with different languages
         ({"en": {"Hello"}}, {"fr": {"Bonjour"}}, {"en": {"Hello"}, "fr": {"Bonjour"}}),
         # Test adding MultiLangString with overlapping text in the same language
@@ -92,9 +96,7 @@ def test_add_multilangstring_with_clean_empty_lang_flag_effect():
     mls1a.add_multilangstring(mls2)
     mls2.add_multilangstring(mls1b)
 
-    # Expected result should not include the "fr" language since it's empty and the flag is set
-    expected_result1 = {"en": {"Hello", "World"}, "fr": set()}
-    expected_result2 = {"en": {"Hello", "World"}}
+    expected_result = {"en": {"Hello", "World"}, "fr": set()}
 
-    assert mls1a.mls_dict == expected_result1, "Did not remove empty language entries as expected."
-    assert mls2.mls_dict == expected_result2, "Did not remove empty language entries as expected."
+    assert mls1a.mls_dict == expected_result, "Did not remove empty language entries as expected."
+    assert mls2.mls_dict == expected_result, "Did not remove empty language entries as expected."

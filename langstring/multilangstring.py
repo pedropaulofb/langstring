@@ -182,16 +182,24 @@ class MultiLangString:
         :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
         :type setlangstring: SetLangString
         """
+        self.add_empty_lang(setlangstring.lang)
         # Iterate through the texts in SetLangString and add them to the mls_dict
         for text in setlangstring.texts:
             self.add_entry(text=text, lang=setlangstring.lang)
 
     @Validator.validate_simple_type
     def add_multilangstring(self, multilangstring: "MultiLangString") -> None:
-        # If there is a language with empty set in the mls to be added, this will not be inserted into the target mls.
         for lang in multilangstring.mls_dict:
+            self.add_empty_lang(lang)
             for text in multilangstring.mls_dict[lang]:
                 self.add_entry(text=text, lang=lang)
+
+    @Validator.validate_simple_type
+    def add_empty_lang(self, lang: str) -> None:
+        validated_lang = Validator.validate_lang(MultiLangStringFlag, lang)
+        registered_lang = self._get_registered_lang(validated_lang)
+        if not registered_lang:
+            self.mls_dict[validated_lang] = set()
 
     # ----- DISCARD METHODS -----
 
@@ -669,19 +677,32 @@ class MultiLangString:
         :return: A detailed string representation of the MultiLangString.
         :rtype: str
         """
-        class_name = self.__class__.__name__
-        mls_dict_repr = repr(self.mls_dict)  # Provides a string representation of the dictionary
-        pref_lang_repr = repr(self.pref_lang)  # Wraps the pref_lang in quotes
-        return f"{class_name}(mls_dict={mls_dict_repr}, pref_lang={pref_lang_repr})"
+        return f"{self.__class__.__name__}(mls_dict={repr(self.mls_dict)}, pref_lang={repr(self.pref_lang)})"
 
     def __reversed__(self):
         """Return a reverse iterator over the dictionary keys."""
         return reversed(self.mls_dict)
 
-    @Validator.validate_simple_type
-    def __setitem__(self, lang: str, value: set[str]) -> None:
+    def __setitem__(self, lang: str, texts: set[str]) -> None:
         """Allow setting entries by language."""
-        self.mls_dict[lang] = value
+        if not isinstance(lang, str):
+            raise TypeError(f"Invalid 'lang' type argument. Expected 'str', got '{type(lang).__name__}'.")
+        if not isinstance(texts, set):
+            raise TypeError(f"Invalid 'texts' type argument. Expected 'set', got '{type(texts).__name__}'.")
+        for text in texts:
+            if not isinstance(text, str):
+                raise TypeError(
+                    f"Invalid 'text' type in 'texts' argument. Expected 'str', got '{type(text).__name__}'."
+                )
+
+        registered_lang = self._get_registered_lang(lang)
+        add_lang = registered_lang if registered_lang else lang
+
+        if texts:
+            for text in texts:
+                self.add_entry(text, add_lang)
+        else:
+            self.mls_dict[add_lang] = set()
 
     def __str__(self) -> str:
         """Return a string representation of the MultiLangString, including language tags.

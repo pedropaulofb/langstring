@@ -35,5 +35,5 @@ def test_repr_method(text: str, lang: str) -> None:
     :param lang: The language tag of the LangString.
     """
     lang_string = LangString(text, lang)
-    expected_repr = f"LangString({repr(text)}, {repr(lang)})"
+    expected_repr = f"LangString(text={repr(text)}, lang={repr(lang)})"
     assert repr(lang_string) == expected_repr, f"__repr__ failed for LangString with text '{text}' and lang '{lang}'"

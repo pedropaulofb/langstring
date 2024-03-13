@@ -443,7 +443,7 @@ class LangString:
 
     def __repr__(self) -> str:
         """Return an unambiguous string representation of the LangString."""
-        return f"LangString({repr(self.text)}, {repr(self.lang)})"
+        return f"{self.__class__.__name__}(text={repr(self.text)}, lang={repr(self.lang)})"
 
     @Validator.validate_simple_type
     def __rmul__(self, other: int) -> "LangString":

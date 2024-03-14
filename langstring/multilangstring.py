@@ -720,9 +720,11 @@ class MultiLangString:
         print_lang = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG)
         for lang, texts in self.mls_dict.items():
             if texts:
-                formatted_item = f"{texts}@{lang}" if print_lang else str(texts)
+                formatted_texts = "{" + ", ".join(f"'{text}'" for text in texts) + "}"
+                formatted_lang = f'"{lang}"' if lang == "" else lang
+                formatted_item = f"{formatted_texts}@{formatted_lang}" if print_lang else formatted_texts
             else:
-                formatted_item = f"{{}}@{lang}" if print_lang else "{}"
+                formatted_item = '{}@""' if print_lang and lang == "" else "{}"
             formatted_items.append(formatted_item)
 
         result_string = ", ".join(formatted_items)

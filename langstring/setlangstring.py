@@ -236,6 +236,7 @@ class SetLangString:
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, SetLangString):
             return NotImplemented
+
         return self.texts == other.texts and self.lang.casefold() == other.lang.casefold()
 
     def __ge__(self, other: Union[set[str], "SetLangString"]) -> bool:

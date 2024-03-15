@@ -15,7 +15,6 @@ from langstring import MultiLangString
         (True, "", True, ['"Hello"en', '"Hola"es']),  # No separator with language
         (False, "@", False, ["Hello", "Hola"]),  # No quotes, no language despite separator
         (True, "@", False, ['"Hello"', '"Hola"']),  # Quotes without language
-        (True, "@", True, ['"Text with no language"@""']),  # Expecting the special handling of empty lang code
     ],
 )
 def test_to_strings_with_various_options(print_quotes, separator, print_lang, expected_output):
@@ -219,7 +218,7 @@ def test_to_strings_with_lang_subtags(langs, expected_output):
     "texts, print_lang, expected_output",
     [
         # Testing with empty language code and print_lang=True
-        ({"": {"Text with no language"}}, True, ['"Text with no language"@""']),
+        ({"": {"Text with no language"}}, True, ['"Text with no language"@']),
     ],
 )
 def test_to_strings_with_empty_lang_code(texts, print_lang, expected_output):

@@ -377,11 +377,12 @@ class MultiLangString:
             print_lang = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG)
 
         strings = []
-        selected_langs = self.mls_dict.keys() if langs is None else langs
+        selected_langs = langs if (langs is not None) else list(self.mls_dict.keys())
 
         for lang in selected_langs:
             registered_lang = self._get_registered_lang(lang)
-            if registered_lang:
+
+            if registered_lang is not None:
                 for text in self.mls_dict[registered_lang]:
                     new_text = f'"{text}"' if print_quotes else text
                     new_lang = f"{separator}{lang}" if print_lang else ""
@@ -636,7 +637,7 @@ class MultiLangString:
         :rtype: bool
         """
         if not isinstance(other, MultiLangString):
-            return False
+            return NotImplemented
 
         # Convert langs to casefolded version for both instances for comparison
         casefolded_self = {k.casefold(): v for k, v in self.mls_dict.items()}

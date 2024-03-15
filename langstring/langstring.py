@@ -320,9 +320,9 @@ class LangString:
         """
         self._validate_match_types(other)
 
-        # TODO: Check if it is better to use NotImplemented or to return False. Must be in accordance with SLS and MLS.
         if not isinstance(other, (str, LangString)):
             return NotImplemented
+
         if isinstance(other, str):
             return self.text == other
         if isinstance(other, LangString):

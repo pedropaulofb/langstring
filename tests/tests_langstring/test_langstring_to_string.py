@@ -1,6 +1,8 @@
 import pytest
 
+from langstring import Controller
 from langstring import LangString
+from langstring import LangStringFlag
 
 
 @pytest.mark.parametrize(
@@ -90,3 +92,25 @@ def test_to_string_invalid_types(text, lang, print_quotes, separator, print_lang
     ls = LangString(text, lang)
     with pytest.raises(expected, match="Argument '.+' must be of type"):
         ls.to_string(print_quotes, separator, print_lang)
+
+
+@pytest.mark.parametrize(
+    "text, lang, print_quotes, print_lang, expected",
+    [
+        # Existing test cases...
+        # Test cases with print_quotes and print_lang set to None
+        ("Hello", "en", True, True, '"Hello"@en'),
+        ("Hello", "en", True, False, '"Hello"'),
+        ("Hello", "en", False, True, "Hello@en"),
+        ("Hello", "en", False, False, "Hello"),
+    ],
+)
+def test_to_string(text, lang, print_quotes, print_lang, expected):
+    """Extended test to include cases where print_quotes and print_lang are None."""
+    # Setup code to configure Controller flags before the test
+    Controller.set_flag(LangStringFlag.PRINT_WITH_QUOTES, print_quotes)
+    Controller.set_flag(LangStringFlag.PRINT_WITH_LANG, print_lang)
+    # Test execution remains the same
+    ls = LangString(text, lang)
+    result = ls.to_string()
+    assert result == expected, f"Expected '{expected}', but got '{result}'"

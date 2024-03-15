@@ -258,14 +258,16 @@ class LangString:
     # ---------------------------------------------
 
     @Validator.validate_simple_type
-    def to_string(self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None) -> str:
+    def to_string(
+        self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
+    ) -> str:
 
-        if not print_quotes:
+        if print_quotes is None:
             print_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
-        if not print_lang:
+        if print_lang is None:
             print_lang = Controller.get_flag(LangStringFlag.PRINT_WITH_LANG)
 
-        text_value: str = f'"{self.text}"' if (print_quotes and print_lang) else f"{self.text}"
+        text_value: str = f'"{self.text}"' if print_quotes else f"{self.text}"
         lang_value: str = f"{separator}{self.lang}" if print_lang else ""
 
         return text_value + lang_value
@@ -476,7 +478,7 @@ class LangString:
         print_with_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
         print_with_lang = Controller.get_flag(LangStringFlag.PRINT_WITH_LANG)
 
-        text_representation = f'"{self.text}"' if (print_with_quotes and print_with_lang) else self.text
+        text_representation = f'"{self.text}"' if print_with_quotes else self.text
         lang_representation = f"@{self.lang}" if print_with_lang else ""
 
         return text_representation + lang_representation

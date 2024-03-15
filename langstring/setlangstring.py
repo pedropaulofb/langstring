@@ -3,7 +3,7 @@ from typing import Optional
 from typing import Union
 
 from .controller import Controller
-from .flags import SetLangStringFlag, MultiLangStringFlag
+from .flags import SetLangStringFlag
 from .langstring import LangString
 from .utils.validator import Validator
 
@@ -89,18 +89,19 @@ class SetLangString:
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> list[str]:
 
-        if not print_quotes:
+        if print_quotes is None:
             print_quotes = Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES)
-        if not print_lang:
+        if print_lang is None:
             print_lang = Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG)
 
         strings = []
 
         for text in self.texts:
-            new_text = f'"{text}"' if (print_quotes and print_lang) else text
+            new_text = f'"{text}"' if print_quotes else text
             new_lang = f"{separator}{self.lang}" if print_lang else ""
             strings.append(f"{new_text}{new_lang}")
-        return strings
+
+        return sorted(strings)
 
     # -------------------------------------------
     # Overwritten Set's Built-in Regular Methods

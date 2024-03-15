@@ -25,8 +25,8 @@ str_test_cases = [
     StrTestCase("hello", "en", True, True, '"hello"@en'),
     StrTestCase("", "en", True, True, '""@en'),
     # Quotes only
-    StrTestCase("hello", "en", True, False, 'hello'),
-    StrTestCase("こんにちは", "ja", True, False, 'こんにちは'),
+    StrTestCase("hello", "en", True, False, "hello"),
+    StrTestCase("こんにちは", "ja", True, False, "こんにちは"),
     # Language tag only
     StrTestCase("hello", "en", False, True, "hello@en"),
     StrTestCase("😊", "en", False, True, "😊@en"),
@@ -46,7 +46,7 @@ str_test_cases = [
     StrTestCase("hello", a1000, True, True, f'"hello"@{a1000}'),  # Extremely long language tag
     StrTestCase("hello", "en-US", True, True, '"hello"@en-US'),  # Language tag with special characters
     StrTestCase("hello", "en", False, False, "hello"),  # Both flags False
-    StrTestCase("hello", "en", True, False, 'hello'),  # Only PRINT_WITH_QUOTES True
+    StrTestCase("hello", "en", True, False, "hello"),  # Only PRINT_WITH_QUOTES True
     StrTestCase("hello", "en", False, True, "hello@en"),  # Only PRINT_WITH_LANG True
 ]
 

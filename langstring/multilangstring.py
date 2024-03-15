@@ -355,19 +355,25 @@ class MultiLangString:
         print_lang: Optional[bool] = None,
     ) -> list[str]:
         if print_quotes and not isinstance(print_quotes, bool):
-            raise TypeError(f"Invalid argument 'print_quotes' received. Expected 'print_quotes', got '{type(print_quotes).__name__}'.")
+            raise TypeError(
+                f"Invalid argument 'print_quotes' received. Expected 'print_quotes', got '{type(print_quotes).__name__}'."
+            )
         if separator and not isinstance(separator, str):
-            raise TypeError(f"Invalid argument 'separator' received. Expected 'separator', got '{type(separator).__name__}'.")
+            raise TypeError(
+                f"Invalid argument 'separator' received. Expected 'separator', got '{type(separator).__name__}'."
+            )
         if print_lang and not isinstance(print_lang, bool):
-            raise TypeError(f"Invalid argument 'print_lang' received. Expected 'print_lang', got '{type(print_lang).__name__}'.")
+            raise TypeError(
+                f"Invalid argument 'print_lang' received. Expected 'print_lang', got '{type(print_lang).__name__}'."
+            )
         if langs and not isinstance(langs, list):
             raise TypeError(f"Invalid argument 'langs' received. Expected 'list', got '{type(langs).__name__}'.")
         if langs and not all(isinstance(lang, str) for lang in langs):
             raise TypeError("Invalid argument 'langs' received. Not all elements in the list are strings.")
 
-        if not print_quotes:
+        if print_quotes is None:
             print_quotes = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_QUOTES)
-        if not print_lang:
+        if print_lang is None:
             print_lang = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG)
 
         strings = []
@@ -377,11 +383,11 @@ class MultiLangString:
             registered_lang = self._get_registered_lang(lang)
             if registered_lang:
                 for text in self.mls_dict[registered_lang]:
-                    new_text = f'"{text}"' if (print_quotes and print_lang) else text
+                    new_text = f'"{text}"' if print_quotes else text
                     new_lang = f"{separator}{lang}" if print_lang else ""
                     strings.append(f"{new_text}{new_lang}")
 
-        return strings
+        return sorted(strings)
 
     def to_langstrings(self, langs: Optional[list[str]] = None) -> list[LangString]:
         if langs and not isinstance(langs, list):
@@ -736,10 +742,15 @@ class MultiLangString:
         for lang, texts in self.mls_dict.items():
             if texts:
                 formatted_texts = "{" + ", ".join(f"'{text}'" for text in texts) + "}"
-                formatted_lang = f'"{lang}"' if lang == "" else lang
-                formatted_item = f"{formatted_texts}@{formatted_lang}" if print_lang else formatted_texts
             else:
-                formatted_item = '{}@""' if print_lang and lang == "" else "{}"
+                formatted_texts = "{}"
+
+            if print_lang:
+                formatted_lang = f"@{lang}" if lang else "@"  # Adjust here for empty language
+                formatted_item = f"{formatted_texts}{formatted_lang}"
+            else:
+                formatted_item = formatted_texts
+
             formatted_items.append(formatted_item)
 
         result_string = ", ".join(formatted_items)

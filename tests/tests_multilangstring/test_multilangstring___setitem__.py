@@ -15,6 +15,7 @@ from langstring import MultiLangStringFlag
         ("Ру", {"Привет", "Мир"}, {"Ру": {"Привет", "Мир"}}),  # Cyrillic characters
         ("👋", {"😃", "🌍"}, {"👋": {"😃", "🌍"}}),  # Emojis
         ("en@", {"Hello&", "<World>"}, {"en@": {"Hello&", "<World>"}}),  # Special characters
+        ("", set(), {"": set()}),  # Adding a new language with an empty set of texts
     ],
 )
 def test_setitem_new_language(lang: str, texts: set, expected: dict):

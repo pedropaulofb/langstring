@@ -1,5 +1,8 @@
 import pytest
-from langstring import MultiLangString, Controller, MultiLangStringFlag
+
+from langstring import Controller
+from langstring import MultiLangString
+from langstring import MultiLangStringFlag
 
 
 @pytest.mark.parametrize("print_with_lang, expected_output", [(True, "{}"), (False, "{}")])
@@ -17,20 +20,62 @@ def test_multi_lang_string_str_empty(print_with_lang: bool, expected_output: str
     )
 
 
+def normalize_string(s: str) -> str:
+    """Normalizes a string by sorting elements enclosed in braces `{}` if detected, and returns a comparable string."""
+    import re
+
+    def sort_braced_content(match):
+        content = match.group(0).strip("{}")
+        sorted_content = sorted(content.split(", "))
+        return "{" + ", ".join(sorted_content) + "}"
+
+    # This regex matches content within braces, including cases with nested braces.
+    normalized = re.sub(r"\{[^{}]*\}", sort_braced_content, s)
+    return normalized
+
+
 @pytest.mark.parametrize(
     "texts, expected_with_lang, expected_without_lang",
     [
-        ([("", "")], "{''}@\"\"", "{''}"),
+        ([("", "")], "{''}@", "{''}"),
         ([("Hello", "en")], "{'Hello'}@en", "{'Hello'}"),
         ([("Hola", "es"), ("Hello", "en")], "{'Hola'}@es, {'Hello'}@en", "{'Hola'}, {'Hello'}"),
-        ([(" Привет", "ru"), (" Γειά", "gr")], "{' Привет'}@ru, {' Γειά'}@gr", "{' Привет'}, {' Γειά'}"),  # Leading spaces in text, Cyrillic and Greek.
-        ([("Hello ", "en"), ("Hola", "es ")], "{'Hello '}@en, {'Hola'}@es ", "{'Hello '}, {'Hola'}"),  # Trailing spaces in text and language.
-        ([("Καλημέρα", "GR"), ("Hello", "EN")], "{'Καλημέρα'}@GR, {'Hello'}@EN", "{'Καλημέρα'}, {'Hello'}"),  # Mixed case languages.
-        ([("Hello😊", "en"), ("😢", "emoji")], "{'Hello😊'}@en, {'😢'}@emoji", "{'Hello😊'}, {'😢'}"),  # Emojis in text and as a language.
-        ([("Hello\nWorld", "en"), ("Line\nBreak", "mult")], "{'Hello\nWorld'}@en, {'Line\nBreak'}@mult", "{'Hello\nWorld'}, {'Line\nBreak'}"),  # Newline characters in text.
-        ([("Speci@l Ch@racters", "en"), ("<XML>", "markup")], "{'Speci@l Ch@racters'}@en, {'<XML>'}@markup", "{'Speci@l Ch@racters'}, {'<XML>'}"),  # Special characters.
+        (
+            [(" Привет", "ru"), (" Γειά", "gr")],
+            "{' Привет'}@ru, {' Γειά'}@gr",
+            "{' Привет'}, {' Γειά'}",
+        ),  # Leading spaces in text, Cyrillic and Greek.
+        (
+            [("Hello ", "en"), ("Hola", "es ")],
+            "{'Hello '}@en, {'Hola'}@es ",
+            "{'Hello '}, {'Hola'}",
+        ),  # Trailing spaces in text and language.
+        (
+            [("Καλημέρα", "GR"), ("Hello", "EN")],
+            "{'Καλημέρα'}@GR, {'Hello'}@EN",
+            "{'Καλημέρα'}, {'Hello'}",
+        ),  # Mixed case languages.
+        (
+            [("Hello😊", "en"), ("😢", "emoji")],
+            "{'Hello😊'}@en, {'😢'}@emoji",
+            "{'Hello😊'}, {'😢'}",
+        ),  # Emojis in text and as a language.
+        (
+            [("Hello\nWorld", "en"), ("Line\nBreak", "mult")],
+            "{'Hello\nWorld'}@en, {'Line\nBreak'}@mult",
+            "{'Hello\nWorld'}, {'Line\nBreak'}",
+        ),  # Newline characters in text.
+        (
+            [("Speci@l Ch@racters", "en"), ("<XML>", "markup")],
+            "{'Speci@l Ch@racters'}@en, {'<XML>'}@markup",
+            "{'Speci@l Ch@racters'}, {'<XML>'}",
+        ),  # Special characters.
         ([("Hello", "en"), ("hello", "en")], "{'Hello', 'hello'}@en", "{'Hello', 'hello'}"),
-        ([("你好", "zh-Hant"), ("こんにちは", "ja")], "{'你好'}@zh-Hant, {'こんにちは'}@ja", "{'你好'}, {'こんにちは'}"),
+        (
+            [("你好", "zh-Hant"), ("こんにちは", "ja")],
+            "{'你好'}@zh-Hant, {'こんにちは'}@ja",
+            "{'你好'}, {'こんにちは'}",
+        ),
         ([("", "en")], "{''}@en", "{''}"),
         ([(" ", "en")], "{' '}@en", "{' '}"),
         ([("مرحبا", "ar"), ("שלום", "he")], "{'مرحبا'}@ar, {'שלום'}@he", "{'مرحبا'}, {'שלום'}"),
@@ -38,23 +83,23 @@ def test_multi_lang_string_str_empty(print_with_lang: bool, expected_output: str
     ],
 )
 def test_multi_lang_string_str_various_texts(
-    texts: list[tuple[str, str]], expected_with_lang: str, expected_without_lang: str):
-    """Test __str__ method with various texts and languages.
-
-    :param texts: List of text and language pairs to add to the MultiLangString.
-    :param expected_with_lang: Expected string representation with language tags included.
-    :param expected_without_lang: Expected string representation without language tags.
-    :param reset_controller_flags: Pytest fixture to reset Controller flags before each test.
-    """
+    texts: list[tuple[str, str]], expected_with_lang: str, expected_without_lang: str
+):
     mls = MultiLangString()
     for text, lang in texts:
         mls.add_entry(text, lang)
 
+    # Test with language tags
     Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, True)
-    assert str(mls) == expected_with_lang, "String representation with languages included does not match expected."
+    assert normalize_string(str(mls)) == normalize_string(expected_with_lang), "Mismatch with language tags"
 
+    # Test without language tags
     Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, False)
-    assert str(mls) == expected_without_lang, "String representation without languages does not match expected."
+    assert normalize_string(str(mls)) == normalize_string(expected_without_lang), "Mismatch without language tags"
+
+    # Reset flags if needed
+    Controller.reset_flags()
+
 
 @pytest.mark.parametrize(
     "texts, expected_output",
@@ -75,3 +120,39 @@ def test_multi_lang_string_str_edge_and_unusual_cases(texts: list[tuple[str, str
     for text, lang in texts:
         mls.add_entry(text, lang)
     assert str(mls) == expected_output, "String representation does not match expected for edge or unusual cases."
+
+
+def test_multi_lang_string_str_empty_set():
+    """Test __str__ method for an empty set in MultiLangString with variations of the print_lang flag."""
+    mls_empty_set = MultiLangString({"": set()})
+
+    # Test with print_lang True
+    Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, True)
+    assert str(mls_empty_set) == "{}@", "Empty set with print_lang True should return '{}@'."
+
+    # Test with print_lang False
+    Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, False)
+    assert str(mls_empty_set) == "{}", "Empty set with print_lang False should return '{}'."
+
+    # Reset flags if needed
+    Controller.reset_flags()
+
+
+def test_multi_lang_string_str_empty_string():
+    """Test __str__ method for a set containing an empty string in MultiLangString with variations of the print_lang flag."""
+    mls_empty_string = MultiLangString({"": {""}})
+
+    # Test with print_lang True
+    Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, True)
+    assert (
+        str(mls_empty_string) == "{''}@"
+    ), "Set containing an empty string with print_lang True should return \"{''}@\"."
+
+    # Test with print_lang False
+    Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, False)
+    assert (
+        str(mls_empty_string) == "{''}"
+    ), "Set containing an empty string with print_lang False should return \"{''}\"."
+
+    # Reset flags if needed
+    Controller.reset_flags()

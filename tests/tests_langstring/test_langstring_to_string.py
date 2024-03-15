@@ -53,9 +53,7 @@ def test_to_string(text, lang, print_quotes, separator, print_lang, expected):
 @pytest.mark.parametrize(
     "text, lang, print_quotes, separator, print_lang, expected",
     [
-        ("Hello", "en", None, "@", True, TypeError),
         ("Hello", "en", True, None, True, TypeError),
-        ("Hello", "en", True, "@", None, TypeError),
         # Invalid types for print_quotes
         ("Hello", "en", "True", "@", True, TypeError),
         ("Hello", "en", 1, "@", True, TypeError),

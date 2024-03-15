@@ -3,7 +3,7 @@ from typing import Optional
 from typing import Union
 
 from .controller import Controller
-from .flags import SetLangStringFlag
+from .flags import SetLangStringFlag, MultiLangStringFlag
 from .langstring import LangString
 from .utils.validator import Validator
 
@@ -85,10 +85,19 @@ class SetLangString:
         return langstrings
 
     @Validator.validate_simple_type
-    def to_strings(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> list[str]:
+    def to_strings(
+        self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
+    ) -> list[str]:
+
+        if not print_quotes:
+            print_quotes = Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES)
+        if not print_lang:
+            print_lang = Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG)
+
         strings = []
+
         for text in self.texts:
-            new_text = f'"{text}"' if print_quotes else text
+            new_text = f'"{text}"' if (print_quotes and print_lang) else text
             new_lang = f"{separator}{self.lang}" if print_lang else ""
             strings.append(f"{new_text}{new_lang}")
         return strings

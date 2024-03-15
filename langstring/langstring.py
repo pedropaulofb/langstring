@@ -258,8 +258,14 @@ class LangString:
     # ---------------------------------------------
 
     @Validator.validate_simple_type
-    def to_string(self, print_quotes: bool = True, separator: str = "@", print_lang: bool = True) -> str:
-        text_value: str = f'"{self.text}"' if print_quotes else f"{self.text}"
+    def to_string(self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None) -> str:
+
+        if not print_quotes:
+            print_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
+        if not print_lang:
+            print_lang = Controller.get_flag(LangStringFlag.PRINT_WITH_LANG)
+
+        text_value: str = f'"{self.text}"' if (print_quotes and print_lang) else f"{self.text}"
         lang_value: str = f"{separator}{self.lang}" if print_lang else ""
 
         return text_value + lang_value

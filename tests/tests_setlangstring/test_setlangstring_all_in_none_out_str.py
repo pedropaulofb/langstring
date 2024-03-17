@@ -1,6 +1,10 @@
+import re
+
 import pytest
 
+from langstring import Controller
 from langstring import SetLangString
+from langstring import SetLangStringFlag
 
 
 class SetLangStringOperationTestCase:
@@ -83,3 +87,167 @@ def test_setlangstring_operation_methods(test_case, method_name):
             assert result == "KeyError", "Expected KeyError for popping from an empty set"
     else:
         assert isinstance(result, str), f"Failed {method_name} for texts={test_case.texts}"
+
+
+str_test_cases = [
+    {"texts": set(), "lang": "en", "expected_without_lang": "{}", "expected_with_lang": "{}@en"},
+    {
+        "texts": {"a", "b", "c"},
+        "lang": "en",
+        "expected_without_lang": "{'a', 'b', 'c'}",
+        "expected_with_lang": "{'a', 'b', 'c'}@en",
+    },
+    {"texts": {" "}, "lang": "en", "expected_without_lang": "{' '}", "expected_with_lang": "{' '}@en"},
+    # Cyrillic
+    {
+        "texts": {"привет", "мир"},
+        "lang": "ru",
+        "expected_without_lang": "{'привет', 'мир'}",
+        "expected_with_lang": "{'привет', 'мир'}@ru",
+    },
+    # Greek
+    {
+        "texts": {"γειά", "σου"},
+        "lang": "el",
+        "expected_without_lang": "{'γειά', 'σου'}",
+        "expected_with_lang": "{'γειά', 'σου'}@el",
+    },
+    # Emojis
+    {
+        "texts": {"😊", "😂", "👍"},
+        "lang": "en",
+        "expected_without_lang": "{'😊', '😂', '👍'}",
+        "expected_with_lang": "{'😊', '😂', '👍'}@en",
+    },
+    # Upper case
+    {
+        "texts": {"HELLO", "WORLD"},
+        "lang": "en",
+        "expected_without_lang": "{'HELLO', 'WORLD'}",
+        "expected_with_lang": "{'HELLO', 'WORLD'}@en",
+    },
+    # Mixed case
+    {
+        "texts": {"Python", "pYTHON"},
+        "lang": "en",
+        "expected_without_lang": "{'Python', 'pYTHON'}",
+        "expected_with_lang": "{'Python', 'pYTHON'}@en",
+    },
+    # Spaces before and after
+    {
+        "texts": {" hello ", " world "},
+        "lang": "en",
+        "expected_without_lang": "{' hello ', ' world '}",
+        "expected_with_lang": "{' hello ', ' world '}@en",
+    },
+    # Mixed content
+    {
+        "texts": {"123", "abc", "😜", "Привет"},
+        "lang": "en",
+        "expected_without_lang": "{'123', 'abc', '😜', 'Привет'}",
+        "expected_with_lang": "{'123', 'abc', '😜', 'Привет'}@en",
+    },
+    # Single character
+    {
+        "texts": {"a"},
+        "lang": "en",
+        "expected_without_lang": "{'a'}",
+        "expected_with_lang": "{'a'}@en",
+    },
+    # Numerics and symbols
+    {
+        "texts": {"1", "2", "$", "%"},
+        "lang": "en",
+        "expected_without_lang": "{'1', '2', '$', '%'}",
+        "expected_with_lang": "{'1', '2', '$', '%'}@en",
+    },
+    # Empty string in a set
+    {
+        "texts": {""},
+        "lang": "en",
+        "expected_without_lang": "{''}",  # Adjust based on actual handling of empty strings
+        "expected_with_lang": "{''}@en",  # Adjust based on actual handling of empty strings
+    },
+    # Mixed empty and non-empty strings
+    {
+        "texts": {"", "non-empty"},
+        "lang": "en",
+        "expected_without_lang": "{'', 'non-empty'}",
+        "expected_with_lang": "{'', 'non-empty'}@en",
+    },
+    # Empty set
+    {
+        "texts": set(),
+        "lang": "en",
+        "expected_without_lang": "{}",
+        "expected_with_lang": "{}@en",
+    },
+    # Set with only spaces (considering valid as it's not auto-trimmed)
+    {
+        "texts": {" ", "  "},
+        "lang": "en",
+        "expected_without_lang": "{' ', '  '}",
+        "expected_with_lang": "{' ', '  '}@en",
+    },
+    # Set with mixed empty strings and spaces
+    {
+        "texts": {"", " ", "  "},
+        "lang": "en",
+        "expected_without_lang": "{'', ' ', '  '}",
+        "expected_with_lang": "{'', ' ', '  '}@en",
+    },
+    # Set with newline characters
+    {
+        "texts": {"\n", "\n\n"},
+        "lang": "en",
+        "expected_without_lang": "{'\\n', '\\n\\n'}",
+        "expected_with_lang": "{'\\n', '\\n\\n'}@en",
+    },
+    # Set with tab characters
+    {
+        "texts": {"\t", "\t\t"},
+        "lang": "en",
+        "expected_without_lang": "{'\\t', '\\t\\t'}",
+        "expected_with_lang": "{'\\t', '\\t\\t'}@en",
+    },
+    # Multiple empty strings (effectively a single empty string due to set behavior)
+    {
+        "texts": {"", "", ""},
+        "lang": "en",
+        "expected_without_lang": "{''}",  # As sets deduplicate, only one empty string is valid
+        "expected_with_lang": "{''}@en",  # Adjust based on actual handling
+    },
+]
+
+
+@pytest.mark.parametrize("case", str_test_cases)
+def test_setlangstring_str_method(case):
+    set_lang_string = SetLangString(texts=case["texts"], lang=case["lang"])
+
+    # Disable PRINT_WITH_LANG for the first part of the test
+    Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, False)
+    result_without_lang = str(set_lang_string)
+    # Directly compare sets to ensure elements match, regardless of order
+    expected_set = set(case["expected_without_lang"].strip("{}").split(", "))
+    assert (
+        set(result_without_lang.strip("{}").split(", ")) == expected_set
+    ), "Mismatch in set elements without language tag"
+
+    # Enable PRINT_WITH_LANG for the second part of the test
+    Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, True)
+    result_with_lang = str(set_lang_string)
+    # Extract set and language tag portions from the result
+    match = re.match(r"^(.*)@(\w+)$", result_with_lang)
+    if not match:
+        assert False, f"Result does not match expected format: {result_with_lang}"
+    result_set_str, result_lang = match.groups()
+    # Convert set portion back to a set and compare
+    result_set = set(result_set_str.strip("{}").split(", "))
+    expected_set_with_lang = set(case["expected_with_lang"].split("@")[0].strip("{}").split(", "))
+    assert result_set == expected_set_with_lang, "Mismatch in set elements with language tag"
+    # Compare language tags
+    expected_lang = case["expected_with_lang"].split("@")[1]
+    assert result_lang == expected_lang, "Mismatch in language tag"
+
+    # Reset flag to default after test
+    Controller.reset_flag(SetLangStringFlag.PRINT_WITH_LANG)

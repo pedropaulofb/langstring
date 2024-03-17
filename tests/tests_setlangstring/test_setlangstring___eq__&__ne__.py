@@ -69,3 +69,35 @@ def test_setlangstring_eq_ne(test_case):
     assert (
         test_case.set1 != test_case.set2
     ) == test_case.expected_ne, f"Inequality test failed for {test_case.set1} and {test_case.set2}"
+
+
+# Define a dummy class to test comparison with a user-defined object type
+class DummyClass:
+    pass
+
+
+# Define the parameterized test cases
+@pytest.mark.parametrize(
+    "different_type_object",
+    [
+        "a string",
+        42,
+        3.14,
+        True,
+        None,
+        [1, 2, 3],
+        {"key": "value"},
+        DummyClass(),
+        (1, 2, 3),
+    ],
+)
+def test_setlangstring_eq_returns_not_implemented(different_type_object):
+    """
+    Test that SetLangString.__eq__ method returns NotImplemented when compared with objects of different types.
+    """
+    set_lang_string = SetLangString(texts={"hello", "world"}, lang="en")
+    # Directly call the __eq__ method
+    result = set_lang_string.__eq__(different_type_object)
+    assert (
+        result is NotImplemented
+    ), f"__eq__ did not return NotImplemented when comparing with {type(different_type_object).__name__}."

@@ -206,14 +206,6 @@ class SetLangString:
         self.texts.update(*others_texts)
 
     # -------------------------------------------
-    # SetLangString's Dunder Methods
-    # -------------------------------------------
-
-    def __add__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
-        # Not available to regular sets.
-        return self.union(other)
-
-    # -------------------------------------------
     # Overwritten Set's Built-in Dunder Methods
     # -------------------------------------------
 

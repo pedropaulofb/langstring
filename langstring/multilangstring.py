@@ -769,8 +769,8 @@ class MultiLangString:
         return None
 
     def _merge_language_entries(self, mls_dict: dict[str, set[str]]) -> dict[str, set[str]]:
-        """Merge entries in the provided dictionary where the language codes match case-insensitively, only if
-        duplicates exist. Preserves original language codes if no case-insensitive duplicates are found.
+        """Merge entries in the provided dict where the lang codes match case-insensitively, only if duplicates exist.
+        Preserves original language codes if no case-insensitive duplicates are found.
 
         :param mls_dict: Dictionary with language codes as keys and sets of strings as values.
         :return: A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.

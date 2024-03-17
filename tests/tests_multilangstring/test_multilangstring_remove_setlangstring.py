@@ -18,7 +18,6 @@ from langstring import SetLangString
         ("en", {"edge_case_text"}, True, False),
         # Unusual, but valid usage
         ("en", {"unusual_text1", "unusual_text2"}, False, True),
-        # Operation on itself - Assuming a self-reference removal if applicable
     ],
 )
 def test_remove_setlangstring(lang, texts, clean_empty, expected_result):

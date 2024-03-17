@@ -25,19 +25,19 @@ from langstring import SetLangString
         # Invalid types for tuple
         ((123, "en"), pytest.raises(TypeError)),  # Non-string text
         (("Hello", 123), pytest.raises(TypeError)),  # Non-string language
-        # Operation on itself (if applicable)
+        # Operation on itself
         ((MultiLangString({"en": {"Hello", "Hi"}}), True)),  # MultiLangString containing itself
         # Unusual but valid usage
         ((("LongText" * 1000, "en"), False)),  # Extremely long text
         # Invalid argument type
         (("Just a string",), pytest.raises(TypeError, match="Argument .* must be of type 'tuple\\[str,str\\]'")),
         # Case sensitivity checks
-        (("hello", "en"), False),  # Case sensitivity check if applicable
+        (("hello", "en"), False),  # Case sensitivity check
         # Exact match vs. partial match
         (("Hello world", "en"), False),  # Assuming exact match is required
         # Special characters and punctuation
         (("Hello!", "en"), False),  # Text with punctuation not present
-        # Numeric texts if applicable
+        # Numeric texts
         (("123", "en"), False),  # Numeric string
         # Testing with multiple languages in a single MultiLangString instance
         ((MultiLangString({"en": {"Hello"}, "es": {"Hola"}}), False)),  # MultiLangString with multiple languages

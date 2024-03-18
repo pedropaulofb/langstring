@@ -39,105 +39,6 @@ class Converter(metaclass=NonInstantiable):
     """
 
     # ---------------------------------------------
-    # General Conversion Methods
-    # ---------------------------------------------
-
-    @classmethod
-    def to_string(cls, arg: Union[LangString, SetLangString, MultiLangString]) -> str:
-        if isinstance(arg, LangString):
-            return cls.from_langstring_to_string(arg)
-
-        if isinstance(arg, SetLangString):
-            return cls.from_setlangstring_to_string(arg)
-
-        if isinstance(arg, MultiLangString):
-            return cls.from_multilangstring_to_string(arg)
-
-        raise TypeError(
-            f"Invalid arg argument type. Expected LangString, SetLangString or MultiLangString, "
-            f"got '{type(arg).__name__}'."
-        )
-
-    @classmethod
-    def to_strings(cls, arg: Union[SetLangString, MultiLangString]) -> list[str]:
-        if isinstance(arg, SetLangString):
-            return cls.from_setlangstring_to_strings(arg)
-
-        if isinstance(arg, MultiLangString):
-            return cls.from_multilangstring_to_strings(arg)
-
-        raise TypeError(
-            f"Invalid arg argument type. Expected SetLangString or MultiLangString, got '{type(arg).__name__}'."
-        )
-
-    @classmethod
-    def to_langstring(cls, arg: Union[str, SetLangString, MultiLangString]) -> Union[LangString, list[LangString]]:
-        """Convert a SetLangString or MultiLangString to a list of LangStrings.
-
-        :param arg: The SetLangString or MultiLangString to be converted.
-        :type arg: Union[SetLangString, MultiLangString]
-        :return: A list of LangStrings.
-        :rtype: list[LangString]
-        :raises TypeError: If the arg is not of type SetLangString or MultiLangString.
-        """
-        if isinstance(arg, str):
-            return cls.from_string_to_langstring(arg)
-
-        if isinstance(arg, SetLangString):
-            return cls.from_setlangstring_to_langstrings(arg)
-
-        if isinstance(arg, MultiLangString):
-            return cls.from_multilangstring_to_langstrings(arg)
-
-        raise TypeError(
-            f"Invalid arg argument type. Expected str, SetLangString or MultiLangString, "
-            f"got '{type(arg).__name__}'."
-        )
-
-    @classmethod
-    def to_setlangstring(cls, arg: Union[LangString, MultiLangString]) -> Union[SetLangString, list[SetLangString]]:
-        """Convert a LangString or MultiLangString to a SetLangString or a list of SetLangStrings.
-
-        :param arg: The LangString or MultiLangString to be converted.
-        :type arg: Union[LangString, MultiLangString]
-        :return: A SetLangString or a list of SetLangStrings.
-        :rtype: Union[SetLangString, list[SetLangString]]
-        :raises TypeError: If the arg is not of type LangString or MultiLangString.
-        """
-        if isinstance(arg, LangString):
-            return cls.from_langstring_to_setlangstring(arg)
-
-        if isinstance(arg, MultiLangString):
-            return cls.from_multilangstring_to_setlangstrings(arg)
-
-        raise TypeError(
-            f"Invalid arg argument type. Expected LangString or MultiLangString, got '{type(arg).__name__}'."
-        )
-
-    @classmethod
-    def to_multilangstring(cls, arg: Union[set[str], list[str], LangString, SetLangString]) -> MultiLangString:
-        """Convert a LangString or SetLangString to a MultiLangString.
-
-        :param arg: The LangString or SetLangString to be converted.
-        :type arg: Union[LangString, SetLangString]
-        :return: A MultiLangString.
-        :rtype: MultiLangString
-        :raises TypeError: If the arg is not of type LangString or SetLangString.
-        """
-        if isinstance(arg, set) or isinstance(arg, list):
-            return cls.from_strings_to_multilangstring(arg)
-
-        if isinstance(arg, LangString):
-            return cls.from_langstring_to_multilangstring(arg)
-
-        if isinstance(arg, SetLangString):
-            return cls.from_setlangstring_to_multilangstring(arg)
-
-        raise TypeError(
-            f"Invalid arg argument type. Expected str, LangString or SetLangString, got '{type(arg).__name__}'."
-        )
-
-    # ---------------------------------------------
     # Strings' Conversion Methods
     # ---------------------------------------------
 
@@ -388,3 +289,68 @@ class Converter(metaclass=NonInstantiable):
         return arg.to_strings(
             languages=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang
         )
+
+    @staticmethod
+    def from_langstrings_to_setlangstrings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_langstrings_to_string(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_langstrings_to_strings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_multilangstring_to_string(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_multilangstrings_to_langstrings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_multilangstrings_to_setlangstrings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_multilangstrings_to_strings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_setlangstring_to_string(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_setlangstrings_to_langstrings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_setlangstrings_to_strings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_string_to_multilangstring(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_string_to_setlangstring(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_strings_to_setlangstrings(arg):
+        # TODO: To be implemented.
+        pass

@@ -164,7 +164,7 @@ class Converter(metaclass=NonInstantiable):
     def from_strings_to_langstrings(arg: Union[set[str], list[str]], lang: str) -> list[LangString]:
         if not (isinstance(arg, set) or isinstance(arg, list)):
             raise TypeError(
-                f"Argument '{arg}' must be of types 'set[str]' or 'list[str]', " f"but got '{type(arg).__name__}'."
+                f"Argument '{arg}' must be of types 'set[str]' or 'list[str]', but got '{type(arg).__name__}'."
             )
 
         output = []
@@ -185,7 +185,7 @@ class Converter(metaclass=NonInstantiable):
         for text in arg:
             if not isinstance(text, str):
                 raise TypeError(
-                    f"Invalid element type inside arg argument. " f"Expected 'str', got '{type(text).__name__}'."
+                    f"Invalid element type inside arg argument. Expected 'str', got '{type(text).__name__}'."
                 )
             texts.add(text)
 
@@ -233,7 +233,7 @@ class Converter(metaclass=NonInstantiable):
     @staticmethod
     def from_langstrings_to_setlangstring(arg: list[LangString]) -> SetLangString:
         if not isinstance(arg, list):
-            raise TypeError(f"Invalid arg argument type. Expected 'list', got '{type(arg).__name__}'.")
+            raise TypeError(f"Invalid 'arg' argument type. Expected 'list', got '{type(arg).__name__}'.")
         if not arg:
             raise ValueError("Cannot convert an empty list to a SetLangString.")
 
@@ -271,9 +271,11 @@ class Converter(metaclass=NonInstantiable):
         new_mls_dict: dict[str, set[str]] = {arg.lang: {arg.text}}
         return MultiLangString(mls_dict=new_mls_dict, pref_lang=arg.lang)
 
-    @Validator.validate_simple_type
     @staticmethod
     def from_langstrings_to_multilangstring(arg: list[LangString]) -> MultiLangString:
+        if arg and not isinstance(arg, list):
+            raise TypeError(f"Invalid 'arg' argument type. Expected 'list', got '{type(arg).__name__}'.")
+
         new_mls = MultiLangString()
 
         for langstring in arg:
@@ -284,11 +286,6 @@ class Converter(metaclass=NonInstantiable):
     # ---------------------------------------------
     # SetLangStrings' Conversion Methods
     # ---------------------------------------------
-
-    @Validator.validate_simple_type
-    @staticmethod
-    def from_setlangstring_to_string(arg: SetLangString) -> str:
-        return arg.__str__()
 
     @Validator.validate_simple_type
     @staticmethod
@@ -378,11 +375,6 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type MultiLangString.
         """
         return arg.to_setlangstrings(langs=languages)
-
-    @Validator.validate_simple_type
-    @staticmethod
-    def from_multilangstring_to_string(arg: MultiLangString) -> str:
-        return arg.__str__()
 
     @Validator.validate_simple_type
     @staticmethod

@@ -53,7 +53,7 @@ def test_contains_langstring_invalid_input_types(text: str, lang: str):
     :param text: The text to be checked, intentionally the wrong type.
     :param lang: The language of the text, intentionally the wrong type.
     """
-    with pytest.raises(TypeError, match="Invalid .+ value received .+ Expected 'str', got"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         langstring = LangString(text, lang)
         mls = MultiLangString()
         mls.contains_langstring(langstring)

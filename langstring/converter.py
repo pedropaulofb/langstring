@@ -320,8 +320,9 @@ class Converter(metaclass=NonInstantiable):
         return arg.to_langstrings(langs=languages)
 
     @staticmethod
-    def from_multilangstrings_to_langstrings(arg: list[MultiLangString], languages: Optional[list[str]] = None
-        ) -> list[LangString]:
+    def from_multilangstrings_to_langstrings(
+        arg: list[MultiLangString], languages: Optional[list[str]] = None
+    ) -> list[LangString]:
         # TODO: Add type validation.
         langstrings = []
 

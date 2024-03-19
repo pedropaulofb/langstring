@@ -50,50 +50,6 @@ Classes
    This class provides methods to convert between `LangString`, `SetLangString`, and `MultiLangString` types.
    It is designed to be non-instantiable as it serves as a utility class with class methods only.
 
-   .. py:method:: to_string(arg)
-      :classmethod:
-
-
-   .. py:method:: to_strings(arg)
-      :classmethod:
-
-
-   .. py:method:: to_langstring(arg)
-      :classmethod:
-
-      Convert a SetLangString or MultiLangString to a list of LangStrings.
-
-      :param arg: The SetLangString or MultiLangString to be converted.
-      :type arg: Union[SetLangString, MultiLangString]
-      :return: A list of LangStrings.
-      :rtype: list[LangString]
-      :raises TypeError: If the arg is not of type SetLangString or MultiLangString.
-
-
-   .. py:method:: to_setlangstring(arg)
-      :classmethod:
-
-      Convert a LangString or MultiLangString to a SetLangString or a list of SetLangStrings.
-
-      :param arg: The LangString or MultiLangString to be converted.
-      :type arg: Union[LangString, MultiLangString]
-      :return: A SetLangString or a list of SetLangStrings.
-      :rtype: Union[SetLangString, list[SetLangString]]
-      :raises TypeError: If the arg is not of type LangString or MultiLangString.
-
-
-   .. py:method:: to_multilangstring(arg)
-      :classmethod:
-
-      Convert a LangString or SetLangString to a MultiLangString.
-
-      :param arg: The LangString or SetLangString to be converted.
-      :type arg: Union[LangString, SetLangString]
-      :return: A MultiLangString.
-      :rtype: MultiLangString
-      :raises TypeError: If the arg is not of type LangString or SetLangString.
-
-
    .. py:method:: from_string_to_langstring(arg_string, ignore_at_sign = False)
       :staticmethod:
 
@@ -110,7 +66,19 @@ Classes
       :staticmethod:
 
 
+   .. py:method:: from_string_to_setlangstring(arg)
+      :staticmethod:
+
+
+   .. py:method:: from_strings_to_setlangstrings(arg)
+      :staticmethod:
+
+
    .. py:method:: from_strings_to_setlangstring(arg, lang)
+      :staticmethod:
+
+
+   .. py:method:: from_string_to_multilangstring(arg)
       :staticmethod:
 
 
@@ -119,6 +87,10 @@ Classes
 
 
    .. py:method:: from_langstring_to_string(arg)
+      :staticmethod:
+
+
+   .. py:method:: from_langstrings_to_strings(arg)
       :staticmethod:
 
 
@@ -138,6 +110,10 @@ Classes
 
 
    .. py:method:: from_langstrings_to_setlangstring(arg)
+      :staticmethod:
+
+
+   .. py:method:: from_langstrings_to_setlangstrings(arg)
       :staticmethod:
 
 
@@ -168,6 +144,10 @@ Classes
       :staticmethod:
 
 
+   .. py:method:: from_setlangstrings_to_strings(arg)
+      :staticmethod:
+
+
    .. py:method:: from_setlangstring_to_langstrings(arg)
       :staticmethod:
 
@@ -181,6 +161,10 @@ Classes
       :return: A list of LangStrings, each corresponding to a text in the arg SetLangString.
       :rtype: list[LangString]
       :raises TypeError: If the arg is not of type SetLangString.
+
+
+   .. py:method:: from_setlangstrings_to_langstrings(arg)
+      :staticmethod:
 
 
    .. py:method:: from_setlangstring_to_multilangstring(arg)
@@ -202,6 +186,18 @@ Classes
       :staticmethod:
 
 
+   .. py:method:: from_multilangstring_to_string(arg)
+      :staticmethod:
+
+
+   .. py:method:: from_multilangstring_to_strings(arg, languages = None, print_quotes = True, separator = '@', print_lang = True)
+      :staticmethod:
+
+
+   .. py:method:: from_multilangstrings_to_strings(arg)
+      :staticmethod:
+
+
    .. py:method:: from_multilangstring_to_langstrings(arg, languages = None)
       :staticmethod:
 
@@ -215,6 +211,10 @@ Classes
       :return: A list of LangStrings, each corresponding to a text in the arg MultiLangString.
       :rtype: list[LangString]
       :raises TypeError: If the arg is not of type MultiLangString.
+
+
+   .. py:method:: from_multilangstrings_to_langstrings(arg, languages = None)
+      :staticmethod:
 
 
    .. py:method:: from_multilangstring_to_setlangstrings(arg, languages = None)
@@ -232,11 +232,7 @@ Classes
       :raises TypeError: If the arg is not of type MultiLangString.
 
 
-   .. py:method:: from_multilangstring_to_string(arg)
-      :staticmethod:
-
-
-   .. py:method:: from_multilangstring_to_strings(arg, languages = None, print_quotes = True, separator = '@', print_lang = True)
+   .. py:method:: from_multilangstrings_to_setlangstrings(arg, languages = None)
       :staticmethod:
 
 

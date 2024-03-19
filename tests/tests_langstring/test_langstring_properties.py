@@ -46,7 +46,7 @@ def test_text_setter_invalid_type(invalid_text) -> None:
 
     :param invalid_text: The invalid text input to be set.
     """
-    with pytest.raises(TypeError, match="Invalid 'text' value received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         LangString(text=invalid_text)
 
 
@@ -56,7 +56,7 @@ def test_lang_setter_invalid_type(invalid_lang) -> None:
 
     :param invalid_lang: The invalid language tag input to be set.
     """
-    with pytest.raises(TypeError, match="Invalid 'lang' value received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         LangString(lang=invalid_lang)
 
 
@@ -69,6 +69,7 @@ def test_text_setter_empty_with_flag() -> None:
 
 def test_lang_setter_empty_with_flag() -> None:
     """Test the text setter with an empty string when the DEFINED_LANG flag is enabled."""
+    Controller.reset_flags()
     Controller.set_flag(LangStringFlag.DEFINED_LANG, True)
     with pytest.raises(ValueError, match="Invalid 'lang' value received"):
         LangString(lang="")
@@ -76,6 +77,7 @@ def test_lang_setter_empty_with_flag() -> None:
 
 def test_lang_setter_invalid_with_flag() -> None:
     """Test the lang setter with an invalid language tag when the VALID_LANG flag is enabled."""
+    Controller.reset_flags()
     Controller.set_flag(LangStringFlag.VALID_LANG, True)
     with pytest.raises(ValueError, match="Invalid 'lang' value received"):
         LangString(lang="invalid-lang")

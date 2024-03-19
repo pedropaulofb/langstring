@@ -233,13 +233,13 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.to_strings">
-<span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.to_strings" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.to_strings" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>print_quotes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
 <li><p><strong>separator</strong> (<em>str</em>) – </p></li>
-<li><p><strong>print_lang</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -461,19 +461,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.__add__">
-<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.__add__" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – </p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString">SetLangString</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.__and__">
 <span class="sig-name descname"><span class="pre">__and__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.__and__" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
@@ -645,20 +632,6 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – </p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.__ne__">
-<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.__ne__" title="Link to this definition"></a></dt>
-<dd><p>Return self!=value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>

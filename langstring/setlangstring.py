@@ -25,13 +25,11 @@ class SetLangString:
     @texts.setter
     def texts(self, new_texts: set[str]) -> None:
         """Setter for texts."""
-        msg = f"Invalid 'texts' value received ('{new_texts}')."
-        if not isinstance(new_texts, set):
-            raise TypeError(f"{msg}'). Expected 'set', got '{type(new_texts).__name__}'.")
+        Validator.validate_iterable_type(new_texts, set, str)
 
         self._texts = set()
         for text_value in new_texts:
-            self._texts.add(Validator.validate_text(SetLangStringFlag, text_value))
+            self._texts.add(Validator.validate_flags_text(SetLangStringFlag, text_value))
 
     @property
     def lang(self) -> str:
@@ -41,7 +39,8 @@ class SetLangString:
     @lang.setter
     def lang(self, new_lang: str) -> None:
         """Setter for lang."""
-        self._lang = Validator.validate_lang(SetLangStringFlag, new_lang)
+        Validator.validate_single_type(new_lang, str)
+        self._lang = Validator.validate_flags_lang(SetLangStringFlag, new_lang)
 
     # -------------------------------------------
     # SetLangString's Regular Methods
@@ -50,11 +49,11 @@ class SetLangString:
     @Validator.validate_type_decorator
     def add_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
-        self.texts.add(Validator.validate_text(SetLangStringFlag, langstring.text))
+        self.texts.add(Validator.validate_flags_text(SetLangStringFlag, langstring.text))
 
     @Validator.validate_type_decorator
     def add_text(self, text: str) -> None:
-        self.texts.add(Validator.validate_text(SetLangStringFlag, text))
+        self.texts.add(Validator.validate_flags_text(SetLangStringFlag, text))
 
     @Validator.validate_type_decorator
     def discard_text(self, text: str) -> None:
@@ -88,7 +87,6 @@ class SetLangString:
     def to_strings(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> list[str]:
-
         if print_quotes is None:
             print_quotes = Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES)
         if print_lang is None:

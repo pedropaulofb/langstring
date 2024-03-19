@@ -75,9 +75,7 @@ def test_get_multilangstring_edge_cases(langs, expected_keys, description):
     "langs, expected_exception",
     [
         (123, TypeError),
-        (
-            [False],
-            TypeError),
+        ([False], TypeError),
     ],
 )
 def test_get_multilangstring_invalid_langs(langs, expected_exception):

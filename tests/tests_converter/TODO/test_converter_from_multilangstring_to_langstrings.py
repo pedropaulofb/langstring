@@ -1,7 +1,8 @@
 import pytest
-from langstring import MultiLangString, Converter
-from langstring import LangString
 
+from langstring import Converter
+from langstring import LangString
+from langstring import MultiLangString
 
 
 @pytest.mark.parametrize(
@@ -17,7 +18,7 @@ from langstring import LangString
         ({"en": {"<script>alert('xss')</script>"}}, [LangString("<script>alert('xss')</script>", "en")], None),
         ({"": {"Empty key test"}}, [LangString("Empty key test", "")], None),
         ({"en": {""}}, [LangString("", "en")], None),
-    ]
+    ],
 )
 def test_from_multilangstring_to_langstrings(input_data, expected_output, langs):
     mls = MultiLangString(mls_dict=input_data)
@@ -31,8 +32,6 @@ def test_from_multilangstring_to_langstrings(input_data, expected_output, langs)
         assert (langstring.text, langstring.lang) in expected_texts, "Unexpected LangString in result."
 
 
-
-
 @pytest.mark.parametrize(
     "invalid_input",
     [
@@ -43,7 +42,7 @@ def test_from_multilangstring_to_langstrings(input_data, expected_output, langs)
 )
 def test_from_multilangstring_to_langstrings_type_error(invalid_input):
     """Test the from_multilangstring_to_langstrings method raises TypeError for invalid input types."""
-    with pytest.raises(TypeError, match="Argument .+ must be of type \'MultiLangString\', but got"):
+    with pytest.raises(TypeError, match="Argument .+ must be of type 'MultiLangString', but got"):
         Converter.from_multilangstring_to_langstrings(invalid_input)
 
 

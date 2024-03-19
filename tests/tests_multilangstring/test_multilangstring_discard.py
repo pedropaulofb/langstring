@@ -70,7 +70,7 @@ def test_discard_with_invalid_type():
     Test the `discard` method raises a TypeError when an invalid argument type is passed.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type"):
+    with pytest.raises(TypeError, match="Argument with value '.+' must be of type"):
         mls.discard(123)  # Invalid type argument
 
 
@@ -102,7 +102,7 @@ def test_discard_with_none():
     Test that passing None as an argument to `discard` raises a TypeError.
     """
     mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}})
-    with pytest.raises(TypeError, match="Argument 'None' must be of type"):
+    with pytest.raises(TypeError, match="Argument with value 'None' must be of type"):
         mls.discard(None)  # Passing None should raise TypeError
 
 
@@ -134,7 +134,7 @@ def test_discard_with_none_raises_error():
     Test that passing None as an argument to `discard` method raises a TypeError, ensuring robust input validation.
     """
     mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola", "Adios"}})
-    with pytest.raises(TypeError, match="Argument 'None' must be of type"):
+    with pytest.raises(TypeError, match="Argument with value 'None' must be of type"):
         mls.discard(None)  # Passing None should raise TypeError
 
 

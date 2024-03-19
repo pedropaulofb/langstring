@@ -27,16 +27,16 @@ from enum import Enum
 from functools import wraps
 from typing import Any
 from typing import Callable
-from typing import Optional
-from typing import TypeVar
-from typing import Union
 from typing import get_args
 from typing import get_origin
 from typing import get_type_hints
+from typing import Optional
+from typing import TypeVar
+from typing import Union
 
-from .non_instantiable import NonInstantiable
 from ..controller import Controller
 from ..flags import GlobalFlag
+from .non_instantiable import NonInstantiable
 
 T = TypeVar("T")
 
@@ -49,10 +49,8 @@ class Validator(metaclass=NonInstantiable):
     """
 
     @staticmethod
-    def validate_text(flag_type: type[Enum], text: Optional[str]) -> str:
+    def validate_flags_text(flag_type: type[Enum], text: Optional[str]) -> str:
         msg = f"Invalid 'text' value received ('{text}')."
-        if not isinstance(text, str):
-            raise TypeError(f"{msg} Expected 'str', got '{type(text).__name__}'.")
 
         if Controller.get_flag(flag_type.DEFINED_TEXT) and not text:
             print(Controller.get_flag(flag_type.DEFINED_TEXT))
@@ -61,11 +59,8 @@ class Validator(metaclass=NonInstantiable):
         return text if not Controller.get_flag(flag_type.STRIP_TEXT) else text.strip()
 
     @staticmethod
-    def validate_lang(flag_type: type[Enum], lang: Optional[str]) -> str:
+    def validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> str:
         msg = f"Invalid 'lang' value received ('{lang}')."
-
-        if not isinstance(lang, str):
-            raise TypeError(f"{msg} Expected 'str', got '{type(lang).__name__}'.")
 
         if Controller.get_flag(flag_type.DEFINED_LANG) and not lang:
             raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_LANG' is enabled. Expected non-empty 'str'.")

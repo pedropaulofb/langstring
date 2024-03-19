@@ -233,7 +233,7 @@ Classes
    .. py:method:: zfill(width)
 
 
-   .. py:method:: to_string(print_quotes = True, separator = '@', print_lang = True)
+   .. py:method:: to_string(print_quotes = None, separator = '@', print_lang = None)
 
 
    .. py:method:: equals_str(other)
@@ -336,11 +336,6 @@ Classes
       :type other: int
       :return: A new LangString with the text repeated.
       :rtype: LangString
-
-
-   .. py:method:: __ne__(other)
-
-      Check inequality of this LangString with another object.
 
 
    .. py:method:: __radd__(other)

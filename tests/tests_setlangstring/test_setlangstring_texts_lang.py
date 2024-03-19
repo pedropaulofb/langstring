@@ -64,19 +64,19 @@ def test_setlangstring_invalid_texts_initialization(invalid_texts: Optional[Set[
     :param match: The regex pattern that the exception message is expected to match.
     :return: None. Asserts if the correct exception is raised with the expected message.
     """
-    with pytest.raises(exception, match="Invalid 'texts' value received"):
+    with pytest.raises(exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         SetLangString(texts=invalid_texts)
 
 
 @pytest.mark.parametrize(
-    "invalid_lang, exception, match",
+    "invalid_lang, exception",
     [
-        (123, TypeError, "Expected 'str', got 'int'"),
-        ([], TypeError, "Expected 'str', got 'list'"),
-        (None, TypeError, "Expected 'str', got 'NoneType'"),
+        (123, TypeError),
+        ([], TypeError),
+        (None, TypeError),
     ],
 )
-def test_setlangstring_invalid_lang_initialization(invalid_lang: str, exception: Exception, match: str) -> None:
+def test_setlangstring_invalid_lang_initialization(invalid_lang: str, exception: Exception) -> None:
     """
     Test the initialization of SetLangString with invalid types for lang.
 
@@ -85,7 +85,7 @@ def test_setlangstring_invalid_lang_initialization(invalid_lang: str, exception:
     :param match: The regex pattern that the exception message is expected to match.
     :return: None. Asserts if the correct exception is raised with the expected message.
     """
-    with pytest.raises(exception, match=match):
+    with pytest.raises(exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         SetLangString(texts={"valid", "set"}, lang=invalid_lang)
 
 
@@ -97,9 +97,9 @@ def test_setlangstring_invalid_lang_initialization(invalid_lang: str, exception:
 )
 def test_setlangstring_invalid_initialization(invalid_texts, invalid_lang):
     """Test SetLangString initialization with invalid texts and language types or null values."""
-    with pytest.raises(TypeError, match="Invalid 'texts' value received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         SetLangString(texts=invalid_texts)
-    with pytest.raises(TypeError, match="Invalid 'lang' value received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         SetLangString(lang=invalid_lang)
 
 

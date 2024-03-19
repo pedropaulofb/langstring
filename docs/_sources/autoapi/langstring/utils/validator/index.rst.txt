@@ -41,6 +41,14 @@ Classes
 
 
 
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   langstring.utils.validator.validate_multiple_type
+
+
 
 Attributes
 ~~~~~~~~~~
@@ -62,15 +70,15 @@ Attributes
    It ensures that the text and language arguments meet specific criteria, such as type correctness, non-emptiness,
    and language tag validity. The validation rules are determined by control flags from a control class.
 
-   .. py:method:: validate_text(flag_type, text)
+   .. py:method:: validate_flags_text(flag_type, text)
       :staticmethod:
 
 
-   .. py:method:: validate_lang(flag_type, lang)
+   .. py:method:: validate_flags_lang(flag_type, lang)
       :staticmethod:
 
 
-   .. py:method:: validate_simple_type(func)
+   .. py:method:: validate_type_decorator(func)
       :classmethod:
 
       Validate the types of arguments passed to a function or method based on their type hints. Used as decorator.
@@ -105,5 +113,16 @@ Attributes
    .. py:method:: _get_args(tp)
       :staticmethod:
 
+
+   .. py:method:: validate_single_type(arg, arg_exp_type, optional = False)
+      :staticmethod:
+
+
+   .. py:method:: validate_iterable_type(arg, arg_exp_type, arg_content_exp_type, optional = False)
+      :classmethod:
+
+
+
+.. py:function:: validate_multiple_type(arg, arg_exp_type, optional = False)
 
 

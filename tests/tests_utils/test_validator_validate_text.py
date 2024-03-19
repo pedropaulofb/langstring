@@ -11,7 +11,7 @@ def test_validate_text_valid(text, expected):
     """Test validate_text with valid inputs."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
-    assert Validator.validate_text(LangStringFlag, text) == expected, "Valid text should be validated correctly."
+    assert Validator.validate_flags_text(LangStringFlag, text) == expected, "Valid text should be validated correctly."
 
 
 # Test cases for invalid text input
@@ -19,7 +19,7 @@ def test_validate_text_valid(text, expected):
 def test_validate_text_invalid_type(invalid_text):
     """Test validate_text with invalid input types."""
     with pytest.raises(TypeError, match="Expected 'str', got"):
-        Validator.validate_text(LangStringFlag, invalid_text)
+        Validator.validate_flags_text(LangStringFlag, invalid_text)
 
 
 # Test cases for empty text with DEFINED_TEXT flag enabled
@@ -27,14 +27,16 @@ def test_validate_text_empty_with_defined_text_flag():
     """Test validate_text with empty string and DEFINED_TEXT flag enabled."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     with pytest.raises(ValueError, match="Expected non-empty 'str'"):
-        Validator.validate_text(LangStringFlag, "")
+        Validator.validate_flags_text(LangStringFlag, "")
 
 
 # Test cases for non-empty text with DEFINED_TEXT flag enabled
 def test_validate_text_non_empty_with_defined_text_flag():
     """Test validate_text with non-empty string and DEFINED_TEXT flag enabled."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
-    assert Validator.validate_text(LangStringFlag, "Hello") == "Hello", "Non-empty text should be validated correctly."
+    assert (
+        Validator.validate_flags_text(LangStringFlag, "Hello") == "Hello"
+    ), "Non-empty text should be validated correctly."
 
 
 # Test cases for stripping text
@@ -42,7 +44,7 @@ def test_validate_text_non_empty_with_defined_text_flag():
 def test_validate_text_strip_text(text, expected):
     """Test validate_text with STRIP_TEXT flag enabled."""
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
-    assert Validator.validate_text(LangStringFlag, text) == expected, "Text should be stripped correctly."
+    assert Validator.validate_flags_text(LangStringFlag, text) == expected, "Text should be stripped correctly."
 
 
 # Test cases for not stripping text
@@ -50,7 +52,7 @@ def test_validate_text_strip_text(text, expected):
 def test_validate_text_no_strip_text(text, expected):
     """Test validate_text with STRIP_TEXT flag disabled."""
     Controller.set_flag(LangStringFlag.STRIP_TEXT, False)
-    assert Validator.validate_text(LangStringFlag, text) == expected, "Text should not be stripped."
+    assert Validator.validate_flags_text(LangStringFlag, text) == expected, "Text should not be stripped."
 
 
 # Test cases for strings with only whitespace
@@ -60,7 +62,7 @@ def test_validate_text_whitespace_only(whitespace_text):
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
     assert (
-        Validator.validate_text(LangStringFlag, whitespace_text) == ""
+        Validator.validate_flags_text(LangStringFlag, whitespace_text) == ""
     ), "Whitespace-only text should be handled correctly."
 
 
@@ -71,5 +73,5 @@ def test_validate_text_unusual_valid_strings(unusual_text):
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     Controller.set_flag(LangStringFlag.STRIP_TEXT, False)
     assert (
-        Validator.validate_text(LangStringFlag, unusual_text) == unusual_text
+        Validator.validate_flags_text(LangStringFlag, unusual_text) == unusual_text
     ), "Unusual but valid text should be validated correctly."

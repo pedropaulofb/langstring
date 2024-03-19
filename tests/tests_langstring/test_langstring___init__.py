@@ -21,15 +21,15 @@ def test_langstring_init_valid_inputs(text, lang, expected_text, expected_lang):
 
 
 @pytest.mark.parametrize(
-    "text, lang, error, match",
+    "text, lang, error",
     [
-        (123, "en", TypeError, "Expected 'str', got 'int'"),
-        ("Hello", 123, TypeError, "Expected 'str', got 'int'"),
+        (123, "en", TypeError),
+        ("Hello", 123, TypeError),
     ],
 )
-def test_langstring_init_invalid_inputs(text, lang, error, match):
+def test_langstring_init_invalid_inputs(text, lang, error):
     """Test the __init__ method with invalid input types."""
-    with pytest.raises(error, match=match):
+    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         LangString(text, lang)
 
 
@@ -56,28 +56,28 @@ def test_langstring_init_with_default_values():
 
 
 @pytest.mark.parametrize(
-    "text, lang, error, match",
+    "text, lang, error",
     [
-        (None, "en", TypeError, "Expected 'str', got 'NoneType'"),
-        ("Hello", None, TypeError, "Expected 'str', got 'NoneType'"),
+        (None, "en", TypeError),
+        ("Hello", None, TypeError),
     ],
 )
-def test_langstring_init_with_none(text, lang, error, match):
+def test_langstring_init_with_none(text, lang, error):
     """Test initialization with None."""
-    with pytest.raises(error, match=match):
+    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         LangString(text, lang)
 
 
 @pytest.mark.parametrize(
-    "text, lang, error, match",
+    "text, lang, error",
     [
-        ([], "en", TypeError, "Expected 'str', got 'list'"),
-        ("Hello", (), TypeError, "Expected 'str', got 'tuple'"),
+        ([], "en", TypeError),
+        ("Hello", (), TypeError),
     ],
 )
-def test_langstring_init_with_list_or_tuple(text, lang, error, match):
+def test_langstring_init_with_list_or_tuple(text, lang, error):
     """Test initialization with list or tuple."""
-    with pytest.raises(error, match=match):
+    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         LangString(text, lang)
 
 
@@ -146,6 +146,7 @@ def test_langstring_init_with_global_defined_flags(text, lang, error, match):
 )
 def test_langstring_init_with_combined_flags(text, lang, expected_text, expected_lang):
     """Test the __init__ method with a combination of STRIP_TEXT, STRIP_LANG, and LOWERCASE_LANG flags."""
+    Controller.reset_flags()
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
     Controller.set_flag(LangStringFlag.STRIP_LANG, True)
     Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
@@ -167,6 +168,7 @@ def test_langstring_init_with_combined_flags(text, lang, expected_text, expected
 )
 def test_langstring_init_edge_cases(text, lang):
     """Test the __init__ method with various edge cases."""
+    Controller.reset_flags()
     lang_string = LangString(text, lang)
     assert lang_string.text == text, "LangString text should match input text"
     assert lang_string.lang == lang, "LangString language should match input language"
@@ -272,16 +274,16 @@ def test_langstring_init_valid_inputs_extended(text, lang, expected_text, expect
 
 
 @pytest.mark.parametrize(
-    "text, lang, error, match",
+    "text, lang, error",
     [
-        (3.14, "en", TypeError, "Expected 'str', got 'float'"),
-        (True, "en", TypeError, "Expected 'str', got 'bool'"),
-        ({"greeting": "hello"}, "en", TypeError, "Expected 'str', got 'dict'"),
-        (None, "en", TypeError, "Expected 'str', got 'NoneType'"),
+        (3.14, "en", TypeError),
+        (True, "en", TypeError),
+        ({"greeting": "hello"}, "en", TypeError),
+        (None, "en", TypeError),
     ],
 )
-def test_langstring_init_with_various_types(text, lang, error, match):
-    with pytest.raises(error, match=match):
+def test_langstring_init_with_various_types(text, lang, error):
+    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         LangString(text, lang)
 
 
@@ -309,6 +311,7 @@ def test_langstring_init_with_more_varied_language_codes(text, lang):
     ],
 )
 def test_langstring_init_with_mixed_characters(text, lang):
+    Controller.reset_flags()
     lang_string = LangString(text, lang)
     assert lang_string.text == text
 
@@ -322,6 +325,7 @@ def test_langstring_init_with_mixed_characters(text, lang):
     ],
 )
 def test_langstring_init_with_additional_boundary_values(text, lang):
+    Controller.reset_flags()
     lang_string = LangString(text, lang)
     assert lang_string.text == text
 

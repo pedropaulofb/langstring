@@ -110,6 +110,9 @@ Classes
    .. py:method:: add_multilangstring(multilangstring)
 
 
+   .. py:method:: add_empty_lang(lang)
+
+
    .. py:method:: discard(arg, clean_empty = False)
 
 
@@ -176,7 +179,7 @@ Classes
    .. py:method:: remove_empty_langs()
 
 
-   .. py:method:: to_strings(languages = None, print_quotes = True, separator = '@', print_lang = True)
+   .. py:method:: to_strings(langs = None, print_quotes = None, separator = '@', print_lang = None)
 
 
    .. py:method:: to_langstrings(langs = None)
@@ -328,11 +331,6 @@ Classes
       Return the number of languages in the dictionary.
 
 
-   .. py:method:: __ne__(other)
-
-      Define behavior for the inequality operator, !=.
-
-
    .. py:method:: __repr__()
 
       Return a detailed string representation of the MultiLangString object.
@@ -349,7 +347,7 @@ Classes
       Return a reverse iterator over the dictionary keys.
 
 
-   .. py:method:: __setitem__(lang, value)
+   .. py:method:: __setitem__(lang, texts)
 
       Allow setting entries by language.
 
@@ -369,15 +367,14 @@ Classes
 
 
    .. py:method:: _merge_language_entries(mls_dict)
+      :staticmethod:
 
-      Merge entries in the provided dictionary where the language codes match case-insensitively, only if
-      duplicates exist. Preserves original language codes if no case-insensitive duplicates are found.
+      Merge entries in the provided dict where the lang codes match case-insensitively. For duplicates,
+      the entries are merged under their casefolded version. Original language codes are preserved
+      if no case-insensitive duplicates are found.
 
       :param mls_dict: Dictionary with language codes as keys and sets of strings as values.
       :return: A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.
-
-
-   .. py:method:: _validate_input_mls_dict(mls_dict)
 
 
 

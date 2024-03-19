@@ -1,5 +1,4 @@
 import pytest
-from icecream import ic
 
 from langstring import Controller
 from langstring import MultiLangString
@@ -19,7 +18,7 @@ from langstring import MultiLangStringFlag
         (
             {"EN": {"Hello"}, "En": {"World"}, "fr": {"Bonjour"}},
             "en",
-            {"EN": {"Hello", "World"}, "fr": {"Bonjour"}},
+            {"en": {"Hello", "World"}, "fr": {"Bonjour"}},
             "en",
         ),
         ({}, "en", {}, "en"),
@@ -54,7 +53,7 @@ def test_multilangstring_init_invalid_none(input_dict, pref_lang, expected_error
     :param pref_lang: Preferred language code, or None.
     :param expected_error: The type of error expected to be raised.
     """
-    with pytest.raises(expected_error, match="Invalid .+ value received .+"):
+    with pytest.raises(expected_error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -132,7 +131,7 @@ def test_multilangstring_init_invalid_pref_lang(input_dict: dict, pref_lang: str
     :param input_dict: Dictionary containing invalid values.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match="Invalid 'lang' value received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -185,12 +184,12 @@ def test_multilangstring_init_with_strip_text_flag():
     "input_dict, expected_dict",
     [
         ({"en": {"Hello"}, "EN": {"World"}}, {"en": {"Hello", "World"}}),
-        ({"FR": {"Salut"}, "fr": {"Bonjour"}, "Fr": {"Au revoir"}}, {"FR": {"Salut", "Bonjour", "Au revoir"}}),
+        ({"FR": {"Salut"}, "fr": {"Bonjour"}, "Fr": {"Au revoir"}}, {"fr": {"Salut", "Bonjour", "Au revoir"}}),
         ({"es": {"Hola"}, "ES": {"Adiós"}, "Es": {"Buenos días"}}, {"es": {"Hola", "Adiós", "Buenos días"}}),
         ({"en": {""}, "EN": {"World", ""}}, {"en": {"", "World"}}),
         ({"": {"Empty key"}, "  ": {"Whitespace key"}}, {"": {"Empty key"}, "  ": {"Whitespace key"}}),
-        ({"GR": {"Γειά σου"}, "gr": {"Καλημέρα"}, "Gr": {"Καλησπέρα"}}, {"GR": {"Γειά σου", "Καλημέρα", "Καλησπέρα"}}),
-        ({"RU": {"Привет"}, "ru": {"Здравствуйте"}}, {"RU": {"Привет", "Здравствуйте"}}),
+        ({"GR": {"Γειά σου"}, "gr": {"Καλημέρα"}, "Gr": {"Καλησπέρα"}}, {"gr": {"Γειά σου", "Καλημέρα", "Καλησπέρα"}}),
+        ({"RU": {"Привет"}, "ru": {"Здравствуйте"}}, {"ru": {"Привет", "Здравствуйте"}}),
         ({"emoji": {"😀", "😃"}, "EMOJI": {"😄", "😁"}}, {"emoji": {"😀", "😃", "😄", "😁"}}),
         (
             {"special": {"!@#$%", "^&*()"}, "SPECIAL": {"_+{}:", "<>?~"}},
@@ -198,7 +197,7 @@ def test_multilangstring_init_with_strip_text_flag():
         ),
         (
             {"mixedCASE": {"Case Insensitive"}, "MixedCase": {"Merging Test"}},
-            {"mixedCASE": {"Case Insensitive", "Merging Test"}},
+            {"mixedcase": {"Case Insensitive", "Merging Test"}},
         ),
         (
             {" leading ": {"Leading spaces"}, "leading ": {"Trimming"}},
@@ -221,5 +220,4 @@ def test_multilangstring_init_with_strip_text_flag():
 )
 def test_multilangstring_language_merging(input_dict: dict, expected_dict: dict):
     mls = MultiLangString(mls_dict=input_dict)
-    ic(mls.mls_dict)
     assert mls.mls_dict == expected_dict, "Languages with different cases should be merged correctly"

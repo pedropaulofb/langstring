@@ -36,56 +36,27 @@ def test_to_langstrings_valid_cases(input_langs, expected_length, specific_lang_
 
 
 @pytest.mark.parametrize(
-    "input_langs, expected_exception, match_message",
+    "input_langs, expected_exception",
     [
-        ("en", TypeError, "Invalid argument 'langs' received. Expected 'list', got 'str'."),  # Non-list, non-None input
-        (
-            [123, "en"],
-            TypeError,
-            "Invalid argument 'langs' received. Not all elements in the list are strings.",
-        ),  # List with non-string element
-        (
-            {"en", "fr"},
-            TypeError,
-            "Invalid argument 'langs' received. Expected 'list', got 'set'.",
-        ),  # Set input, expecting list
-        (
-            [123, "fr"],
-            TypeError,
-            "Invalid argument 'langs' received. Not all elements in the list are strings.",
-        ),  # Numeric element in langs
-        (
-            ["en", None],
-            TypeError,
-            "Invalid argument 'langs' received. Not all elements in the list are strings.",
-        ),  # None in langs
-        (
-            ["en", 5.5],
-            TypeError,
-            "Invalid argument 'langs' received. Not all elements in the list are strings.",
-        ),  # Float in langs
-        (
-            ["en", []],
-            TypeError,
-            "Invalid argument 'langs' received. Not all elements in the list are strings.",
-        ),  # Empty list in langs
-        (
-            ["en", {}],
-            TypeError,
-            "Invalid argument 'langs' received. Not all elements in the list are strings.",
-        ),  # Empty dict in langs
+        ("en", TypeError),  # Non-list, non-None input
+        ([123, "en"], TypeError),  # List with non-string element
+        ({"en", "fr"}, TypeError),  # Set input, expecting list
+        ([123, "fr"], TypeError),  # Numeric element in langs
+        (["en", None], TypeError),  # None in langs
+        (["en", 5.5], TypeError),  # Float in langs
+        (["en", []], TypeError),  # Empty list in langs
+        (["en", {}], TypeError),  # Empty dict in langs
     ],
 )
-def test_to_langstrings_invalid_cases(input_langs, expected_exception, match_message):
+def test_to_langstrings_invalid_cases(input_langs, expected_exception):
     """
     Test the to_langstrings method with invalid inputs to ensure it raises the correct exceptions.
 
     :param input_langs: The input 'langs' parameter to the method that is expected to trigger an exception.
     :param expected_exception: The exception type that is expected to be raised.
-    :param match_message: The regex pattern to match the exception message against.
     """
     mls = MultiLangString(mls_dict={"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}})
-    with pytest.raises(expected_exception, match=match_message):
+    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         mls.to_langstrings(langs=input_langs)
 
 

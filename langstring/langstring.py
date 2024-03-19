@@ -67,7 +67,8 @@ class LangString:
     @text.setter
     def text(self, new_text: str) -> None:
         """Setter for text."""
-        self._text = Validator.validate_text(LangStringFlag, new_text)
+        Validator.validate_single_type(new_text, str)
+        self._text = Validator.validate_flags_text(LangStringFlag, new_text)
 
     @property
     def lang(self) -> str:
@@ -77,7 +78,8 @@ class LangString:
     @lang.setter
     def lang(self, new_lang: str) -> None:
         """Setter for lang."""
-        self._lang = Validator.validate_lang(LangStringFlag, new_lang)
+        Validator.validate_single_type(new_lang, str)
+        self._lang = Validator.validate_flags_lang(LangStringFlag, new_lang)
 
     # ---------------------------------------------
     # Overwritten String's Built-in Regular Methods
@@ -261,7 +263,6 @@ class LangString:
     def to_string(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> str:
-
         if print_quotes is None:
             print_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
         if print_lang is None:

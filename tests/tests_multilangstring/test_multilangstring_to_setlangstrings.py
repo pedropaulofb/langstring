@@ -83,7 +83,7 @@ def test_to_setlangstrings_with_invalid_langs_type(langs, expected_exception):
     :return: Asserts that TypeError is raised with an appropriate message.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(expected_exception, match="Invalid argument 'langs' received."):
+    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         mls.to_setlangstrings(langs=langs)
 
 

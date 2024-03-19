@@ -85,11 +85,11 @@ class MultiLangString:
         # Validate and transform texts in the merged dictionary
         temp_dict: dict[str, set[str]] = {}
         for lang, texts in new_mls_dict.items():
-            validated_key = Validator.validate_lang(MultiLangStringFlag, lang)
+            validated_key = Validator.validate_flags_lang(MultiLangStringFlag, lang)
             temp_dict[validated_key] = set()
             # Validating texts inside the dict's values
             for text in texts:
-                validated_value = Validator.validate_text(MultiLangStringFlag, text)
+                validated_value = Validator.validate_flags_text(MultiLangStringFlag, text)
                 temp_dict[validated_key].add(validated_value)
 
         self._mls_dict = temp_dict
@@ -109,7 +109,8 @@ class MultiLangString:
         :param new_pref_lang: The preferred language as a string.
         :type new_pref_lang: str
         """
-        self._pref_lang = Validator.validate_lang(MultiLangStringFlag, new_pref_lang)
+        Validator.validate_single_type(new_pref_lang, str)
+        self._pref_lang = Validator.validate_flags_lang(MultiLangStringFlag, new_pref_lang)
 
     # --------------------------------------------------
     # MultiLangString's Regular Methods
@@ -135,8 +136,8 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument with value '{arg}' must be of type 'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', "
-            f"but got '{type(arg).__name__}'."
+            f"Argument with value '{arg}' must be of type "
+            f"'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
     @Validator.validate_type_decorator
@@ -152,8 +153,8 @@ class MultiLangString:
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
         """
-        validated_text = Validator.validate_text(MultiLangStringFlag, text)
-        validated_lang = Validator.validate_lang(MultiLangStringFlag, lang)
+        validated_text = Validator.validate_flags_text(MultiLangStringFlag, text)
+        validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
 
         registered_lang = self._get_registered_lang(validated_lang)
 
@@ -198,7 +199,7 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def add_empty_lang(self, lang: str) -> None:
-        validated_lang = Validator.validate_lang(MultiLangStringFlag, lang)
+        validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
         registered_lang = self._get_registered_lang(validated_lang)
         if not registered_lang:
             self.mls_dict[validated_lang] = set()
@@ -225,8 +226,8 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument with value '{arg}' must be of type 'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', "
-            f"but got '{type(arg).__name__}'."
+            f"Argument with value '{arg}' must be of type "
+            f"'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
     @Validator.validate_type_decorator
@@ -456,8 +457,8 @@ class MultiLangString:
             return self.contains_entry(arg[0], arg[1])
 
         raise TypeError(
-            f"Argument with value '{arg}' must be of type 'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', "
-            f"but got '{type(arg).__name__}'."
+            f"Argument with value '{arg}' must be of type "
+            f"'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
     @Validator.validate_type_decorator

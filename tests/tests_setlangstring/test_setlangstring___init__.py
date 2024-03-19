@@ -47,7 +47,7 @@ def test_setlangstring_init_invalid_texts(invalid_texts) -> None:
     :param invalid_texts: Invalid 'texts' input.
     :return: None. Asserts if TypeError is raised for invalid 'texts' input.
     """
-    with pytest.raises(TypeError, match="Invalid 'texts*' value received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         SetLangString(invalid_texts, "en")
 
 
@@ -63,7 +63,7 @@ def test_setlangstring_init_invalid_lang(invalid_lang) -> None:
     :param invalid_lang: Invalid 'lang' input.
     :return: None. Asserts if TypeError is raised for invalid 'lang' input.
     """
-    with pytest.raises(TypeError, match="Invalid 'lang' value received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         SetLangString({"hello", "world"}, invalid_lang)
 
 

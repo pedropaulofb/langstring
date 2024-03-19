@@ -9,7 +9,7 @@ from langstring import MultiLangString
         (MultiLangString(), []),
         (MultiLangString({"en": {"Hello"}}), ["en"]),
         (MultiLangString({"en": {"Hello"}, "es": {"Hola"}}), ["en", "es"]),
-        (MultiLangString({"EN": {"Hello"}, "es": {"Hola"}, "en": {"World"}}), ["EN", "es"]),
+        (MultiLangString({"EN": {"Hello"}, "es": {"Hola"}, "en": {"World"}}), ["en", "es"]),
         (MultiLangString({"en": {"Hello"}, "EN": {"Hi"}}), ["en"]),
         (MultiLangString({"": {"Empty key"}}), [""]),
         (MultiLangString({"GR": {"Γειά σου"}, "RU": {"Привет"}}), ["GR", "RU"]),

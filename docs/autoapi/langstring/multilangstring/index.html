@@ -261,6 +261,19 @@ this set. If the language already exists, the text is added to the existing set 
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.add_empty_lang">
+<span class="sig-name descname"><span class="pre">add_empty_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.add_empty_lang" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.discard">
 <span class="sig-name descname"><span class="pre">discard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.discard" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
@@ -499,14 +512,14 @@ empty set for the language, the language key is also removed from the dictionary
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.to_strings">
-<span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.to_strings" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.to_strings" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>print_quotes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>langs</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
 <li><p><strong>separator</strong> (<em>str</em>) – </p></li>
-<li><p><strong>print_lang</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -926,17 +939,6 @@ MultiLangString objects with the same content will have the same hash new_text.<
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__ne__">
-<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__ne__" title="Link to this definition"></a></dt>
-<dd><p>Define behavior for the inequality operator, !=.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__repr__">
 <span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__repr__" title="Link to this definition"></a></dt>
 <dd><p>Return a detailed string representation of the MultiLangString object.</p>
@@ -960,13 +962,13 @@ dictionary of language strings and the preferred language, making it useful for 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__setitem__">
-<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__setitem__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__setitem__" title="Link to this definition"></a></dt>
 <dd><p>Allow setting entries by language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lang</strong> (<em>str</em>) – </p></li>
-<li><p><strong>value</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>texts</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1006,9 +1008,10 @@ associated language tag.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._merge_language_entries">
-<span class="sig-name descname"><span class="pre">_merge_language_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._merge_language_entries" title="Link to this definition"></a></dt>
-<dd><p>Merge entries in the provided dictionary where the language codes match case-insensitively, only if
-duplicates exist. Preserves original language codes if no case-insensitive duplicates are found.</p>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_merge_language_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._merge_language_entries" title="Link to this definition"></a></dt>
+<dd><p>Merge entries in the provided dict where the lang codes match case-insensitively. For duplicates,
+the entries are merged under their casefolded version. Original language codes are preserved
+if no case-insensitive duplicates are found.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>mls_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Dictionary with language codes as keys and sets of strings as values.</p>
@@ -1018,19 +1021,6 @@ duplicates exist. Preserves original language codes if no case-insensitive dupli
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict[str, set[str]]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._validate_input_mls_dict">
-<span class="sig-name descname"><span class="pre">_validate_input_mls_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._validate_input_mls_dict" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mls_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>

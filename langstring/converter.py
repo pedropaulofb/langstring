@@ -74,6 +74,16 @@ class Converter(metaclass=NonInstantiable):
         return output
 
     @staticmethod
+    def from_string_to_setlangstring(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
+    def from_strings_to_setlangstrings(arg):
+        # TODO: To be implemented.
+        pass
+
+    @staticmethod
     def from_strings_to_setlangstring(arg: Union[set[str], list[str]], lang: str) -> SetLangString:
         if not arg:
             raise ValueError("Cannot convert the empty arg to a SetLangString.")
@@ -91,6 +101,11 @@ class Converter(metaclass=NonInstantiable):
             texts.add(text)
 
         return SetLangString(texts=texts, lang=lang)
+
+    @staticmethod
+    def from_string_to_multilangstring(arg):
+        # TODO: To be implemented.
+        pass
 
     @classmethod
     def from_strings_to_multilangstring(cls, arg: Union[set[str], list[str]]) -> MultiLangString:
@@ -113,6 +128,11 @@ class Converter(metaclass=NonInstantiable):
     @staticmethod
     def from_langstring_to_string(arg: LangString) -> str:
         return arg.__str__()
+
+    @staticmethod
+    def from_langstrings_to_strings(arg):
+        # TODO: To be implemented.
+        pass
 
     @Validator.validate_simple_type
     @staticmethod
@@ -155,6 +175,11 @@ class Converter(metaclass=NonInstantiable):
 
         return SetLangString(texts=new_texts, lang=new_lang.pop())
 
+    @staticmethod
+    def from_langstrings_to_setlangstrings(arg):
+        # TODO: To be implemented.
+        pass
+
     @Validator.validate_simple_type
     @staticmethod
     def from_langstring_to_multilangstring(arg: LangString) -> MultiLangString:
@@ -188,12 +213,23 @@ class Converter(metaclass=NonInstantiable):
     # SetLangStrings' Conversion Methods
     # ---------------------------------------------
 
+    @staticmethod
+    def from_setlangstring_to_string(arg):
+        # TODO: To be implemented.
+        pass
+
     @Validator.validate_simple_type
     @staticmethod
     def from_setlangstring_to_strings(
         arg: SetLangString, print_quotes: bool = True, separator: str = "@", print_lang: bool = True
     ) -> list[str]:
         return arg.to_strings(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
+
+
+    @staticmethod
+    def from_setlangstrings_to_strings(arg):
+        # TODO: To be implemented.
+        pass
 
     @Validator.validate_simple_type
     @staticmethod
@@ -210,6 +246,11 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type SetLangString.
         """
         return arg.to_langstrings()
+
+    @staticmethod
+    def from_setlangstrings_to_langstrings(arg):
+        # TODO: To be implemented.
+        pass
 
     @Validator.validate_simple_type
     @staticmethod
@@ -237,9 +278,37 @@ class Converter(metaclass=NonInstantiable):
 
         return new_mls
 
+
+
     # ---------------------------------------------
     # MultiLangStrings' Conversion Methods
     # ---------------------------------------------
+
+
+    @staticmethod
+    def from_multilangstring_to_string(arg):
+        # TODO: To be implemented.
+        pass
+
+
+    @Validator.validate_simple_type
+    @staticmethod
+    def from_multilangstring_to_strings(
+        arg: MultiLangString,
+        languages: Optional[list[str]] = None,
+        print_quotes: bool = True,
+        separator: str = "@",
+        print_lang: bool = True,
+    ) -> list[str]:
+        return arg.to_strings(
+            languages=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang
+        )
+
+    @staticmethod
+    def from_multilangstrings_to_strings(arg):
+        # TODO: To be implemented.
+        pass
+
 
     @Validator.validate_simple_type
     @staticmethod
@@ -259,6 +328,11 @@ class Converter(metaclass=NonInstantiable):
         """
         return arg.to_langstrings(langs=languages)
 
+    @staticmethod
+    def from_multilangstrings_to_langstrings(arg):
+        # TODO: To be implemented.
+        pass
+
     @Validator.validate_simple_type
     @staticmethod
     def from_multilangstring_to_setlangstrings(
@@ -277,80 +351,7 @@ class Converter(metaclass=NonInstantiable):
         """
         return arg.to_setlangstrings(langs=languages)
 
-    @Validator.validate_simple_type
-    @staticmethod
-    def from_multilangstring_to_strings(
-        arg: MultiLangString,
-        languages: Optional[list[str]] = None,
-        print_quotes: bool = True,
-        separator: str = "@",
-        print_lang: bool = True,
-    ) -> list[str]:
-        return arg.to_strings(
-            languages=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang
-        )
-
-    @staticmethod
-    def from_langstrings_to_setlangstrings(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_langstrings_to_string(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_langstrings_to_strings(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_multilangstring_to_string(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_multilangstrings_to_langstrings(arg):
-        # TODO: To be implemented.
-        pass
-
     @staticmethod
     def from_multilangstrings_to_setlangstrings(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_multilangstrings_to_strings(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_setlangstring_to_string(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_setlangstrings_to_langstrings(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_setlangstrings_to_strings(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_string_to_multilangstring(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_string_to_setlangstring(arg):
-        # TODO: To be implemented.
-        pass
-
-    @staticmethod
-    def from_strings_to_setlangstrings(arg):
         # TODO: To be implemented.
         pass

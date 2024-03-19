@@ -214,9 +214,8 @@ class Converter(metaclass=NonInstantiable):
     # ---------------------------------------------
 
     @staticmethod
-    def from_setlangstring_to_string(arg):
-        # TODO: To be implemented.
-        pass
+    def from_setlangstring_to_string(arg:SetLangString)->str:
+        return arg.__str__()
 
     @Validator.validate_simple_type
     @staticmethod
@@ -286,9 +285,8 @@ class Converter(metaclass=NonInstantiable):
 
 
     @staticmethod
-    def from_multilangstring_to_string(arg):
-        # TODO: To be implemented.
-        pass
+    def from_multilangstring_to_string(arg:MultiLangString)->str:
+        return arg.__str__()
 
 
     @Validator.validate_simple_type

@@ -60,23 +60,22 @@ def test_pop_multilangstring_parametrized(initial_data, langs_to_pop, expected_r
 
 
 @pytest.mark.parametrize(
-    "langs_to_pop, expected_exception, expected_message",
+    "langs_to_pop, expected_exception",
     [
-        (None, TypeError, "Invalid argument 'langs' received. Expected 'list', got 'NoneType'."),
-        ("en", TypeError, "Invalid argument 'langs' received. Expected 'list', got 'str'."),
-        (123, TypeError, "Invalid argument 'langs' received. Expected 'list', got 'int'."),
-        (True, TypeError, "Invalid argument 'langs' received. Expected 'list', got 'bool'."),
-        (["en", 1], TypeError, "Invalid argument 'langs' received. Not all elements in the list are strings."),
-        ([1, "en"], TypeError, "Invalid argument 'langs' received. Not all elements in the list are strings."),
+        (None, TypeError),
+        ("en", TypeError),
+        (123, TypeError),
+        (True, TypeError),
+        (["en", 1], TypeError),
+        ([1, "en"], TypeError),
     ],
 )
-def test_pop_multilangstring_invalid_input(langs_to_pop, expected_exception, expected_message):
+def test_pop_multilangstring_invalid_input(langs_to_pop, expected_exception):
     """
     Test the pop_multilangstring method with invalid input types for langs parameter.
     :param langs_to_pop: Invalid type for langs parameter.
     :param expected_exception: Expected exception type.
-    :param expected_message: Expected error message.
     """
     mls = MultiLangString({"en": {"Hello", "World"}})
-    with pytest.raises(expected_exception, match=expected_message):
+    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         mls.pop_multilangstring(langs_to_pop)

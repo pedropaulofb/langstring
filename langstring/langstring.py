@@ -257,7 +257,7 @@ class LangString:
     # LangString's Regular Methods
     # ---------------------------------------------
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def to_string(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> str:
@@ -272,11 +272,11 @@ class LangString:
 
         return text_value + lang_value
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def equals_str(self, other: str) -> bool:
         return self.text == other
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def equals_langstring(self, other: "LangString") -> bool:
         return self.text == other.text and self.lang.casefold() == other.lang.casefold()
 
@@ -284,7 +284,7 @@ class LangString:
     # Overwritten String's Built-in Dunder Methods
     # ---------------------------------------------
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __add__(self, other: Union["LangString", str]) -> "LangString":
         """Add another LangString or a string to this LangString.
 
@@ -305,7 +305,7 @@ class LangString:
         if isinstance(other, str):
             return LangString(self.text + other, self.lang)
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __contains__(self, item: str) -> bool:
         """Check if a substring exists within the LangString's text."""
         return item in self.text
@@ -370,7 +370,7 @@ class LangString:
         """
         return hash((self.text, self.lang.casefold()))
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __iadd__(self, other: Union["LangString", str]) -> "LangString":
         """Implement in-place addition."""
         self._validate_match_types(other)
@@ -383,7 +383,7 @@ class LangString:
 
         return self
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __imul__(self, other: int) -> "LangString":
         """In-place multiplication of the LangString's text.
 
@@ -427,7 +427,7 @@ class LangString:
         if isinstance(other, LangString):
             return self.text < other.text
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __mul__(self, other: int) -> "LangString":
         """Multiply the LangString's text a specified number of times.
 
@@ -438,7 +438,7 @@ class LangString:
         """
         return LangString(self.text * other, self.lang)
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __radd__(self, other: str) -> str:
         """Handle concatenation when LangString is on the right side of the '+' operator.
 
@@ -453,7 +453,7 @@ class LangString:
         """Return an unambiguous string representation of the LangString."""
         return f"{self.__class__.__name__}(text={repr(self.text)}, lang={repr(self.lang)})"
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __rmul__(self, other: int) -> "LangString":
         """
         Implement right multiplication.
@@ -487,7 +487,7 @@ class LangString:
     # Private Methods
     # ---------------------------------------------
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def _validate_match_types(self, other: Union[object, str, "LangString"], overwrite_strict: bool = False) -> None:
         strict = Controller.get_flag(LangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
 
@@ -497,7 +497,7 @@ class LangString:
                 f"Strict mode is enabled. Operand must be of type LangString, but got {type(other).__name__}."
             )
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def _validate_match_langs(self, other: object) -> None:
         # Check language compatibility for LangString type
         if isinstance(other, LangString) and self.lang.casefold() != other.lang.casefold():

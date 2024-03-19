@@ -66,18 +66,18 @@ def test_setitem_update_existing_language(initial_dict, lang, new_texts, expecte
 @pytest.mark.parametrize(
     "lang, texts, expected_exception, match_message",
     [
-        (123, {"Hello"}, TypeError, "Invalid 'lang' type argument. Expected 'str', got 'int'"),
-        ("en", None, TypeError, "Invalid 'texts' type argument. Expected 'set', got 'NoneType'."),
-        ("en", {None}, TypeError, "Invalid 'text' type in 'texts' argument. Expected 'str', got 'NoneType'"),
-        (None, {"Hello"}, TypeError, "Invalid 'lang' type argument. Expected 'str', got 'NoneType'"),
-        ("en", ["Hello"], TypeError, "Invalid 'texts' type argument. Expected 'set', got 'list'"),
-        ("en", {"Hello", 123}, TypeError, "Invalid 'text' type in 'texts' argument. Expected 'str', got 'int'."),
-        ("en", {"Hello", None}, TypeError, "Invalid 'text' type in 'texts' argument. Expected 'str', got 'NoneType'."),
-        (True, {"World"}, TypeError, "Invalid 'lang' type argument. Expected 'str', got 'bool'"),
-        ("fr", "Bonjour", TypeError, "Invalid 'texts' type argument. Expected 'set', got 'str'"),
-        ([], {"Hello"}, TypeError, "Invalid 'lang' type argument. Expected 'str', got 'list'"),
-        ("de", 123, TypeError, "Invalid 'texts' type argument. Expected 'set', got 'int'"),
-        ("en", {}, TypeError, "Invalid 'texts' type argument. Expected 'set', got"),  # Empty set
+        (123, {"Hello"}, TypeError, "Invalid argument with value \'.+\'. Expected \'str\', but got \'int\'."),
+        ("en", None, TypeError, "Invalid argument with value \'None\'. Expected \'set\', but got \'NoneType\'."),
+        ("en", {None}, TypeError, "Invalid argument with value \'None\'. Expected \'str\', but got \'NoneType\'."),
+        (None, {"Hello"}, TypeError, "Invalid argument with value \'.+\'. Expected \'str\', but got \'NoneType\'."),
+        ("en", ["Hello"], TypeError, "Invalid argument with value \'\['Hello'\]\'. Expected \'set\', but got \'list\'."),
+        ("en", {"Hello", 123}, TypeError, "Invalid argument with value '123'. Expected 'str', but got 'int'."),
+        ("en", {"Hello", None}, TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
+        (True, {"World"}, TypeError, "Invalid argument with value \'.+\'. Expected \'str\', but got \'bool\'."),
+        ("fr", "Bonjour", TypeError, "Invalid argument with value 'Bonjour'. Expected 'set', but got 'str'."),
+        ([], {"Hello"}, TypeError, "Invalid argument with value \'.+\'. Expected \'str\', but got \'list\'."),
+        ("de", 123, TypeError, "Invalid argument with value '123'. Expected 'set', but got 'int'."),
+        ("en", {}, TypeError, "Invalid argument with value '{}'. Expected 'set', but got 'dict'."),  # Empty set
     ],
 )
 def test_setitem_invalid_inputs(lang, texts, expected_exception, match_message):

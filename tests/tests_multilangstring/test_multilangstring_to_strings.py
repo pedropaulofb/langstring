@@ -77,7 +77,7 @@ def test_to_strings_with_invalid_parameters(invalid_param, value):
     :param value: Invalid value to test for the parameter.
     """
     mls = MultiLangString({"en": {"Hello"}, "es": {"Hola"}})
-    with pytest.raises(TypeError, match=f"Invalid argument '{invalid_param}' received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         kwargs = {invalid_param: value}
         mls.to_strings(**kwargs)
 

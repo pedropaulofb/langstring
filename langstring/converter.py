@@ -42,7 +42,7 @@ class Converter(metaclass=NonInstantiable):
     # Strings' Conversion Methods
     # ---------------------------------------------
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_string_to_langstring(arg_string: str, ignore_at_sign: bool = False) -> LangString:
         """Convert a string into a LangString.
@@ -124,7 +124,7 @@ class Converter(metaclass=NonInstantiable):
     # LangStrings' Conversion Methods
     # ---------------------------------------------
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_langstring_to_string(arg: LangString) -> str:
         return arg.__str__()
@@ -134,7 +134,7 @@ class Converter(metaclass=NonInstantiable):
         # TODO: To be implemented.
         pass
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_langstring_to_setlangstring(arg: LangString) -> SetLangString:
         """
@@ -180,7 +180,7 @@ class Converter(metaclass=NonInstantiable):
         # TODO: To be implemented.
         pass
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_langstring_to_multilangstring(arg: LangString) -> MultiLangString:
         """Convert a LangString to a MultiLangString.
@@ -217,7 +217,7 @@ class Converter(metaclass=NonInstantiable):
     def from_setlangstring_to_string(arg: SetLangString) -> str:
         return arg.__str__()
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_strings(
         arg: SetLangString, print_quotes: bool = True, separator: str = "@", print_lang: bool = True
@@ -229,7 +229,7 @@ class Converter(metaclass=NonInstantiable):
         # TODO: To be implemented.
         pass
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_langstrings(arg: SetLangString) -> list[LangString]:
         """Convert a SetLangString to a list of LangStrings.
@@ -250,7 +250,7 @@ class Converter(metaclass=NonInstantiable):
         # TODO: To be implemented.
         pass
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_multilangstring(arg: SetLangString) -> MultiLangString:
         """Convert a SetLangString to a MultiLangString.
@@ -284,7 +284,7 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstring_to_string(arg: MultiLangString) -> str:
         return arg.__str__()
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_multilangstring_to_strings(
         arg: MultiLangString,
@@ -302,7 +302,6 @@ class Converter(metaclass=NonInstantiable):
         # TODO: To be implemented.
         pass
 
-    @Validator.validate_simple_type
     @staticmethod
     def from_multilangstring_to_langstrings(
         arg: MultiLangString, languages: Optional[list[str]] = None
@@ -331,7 +330,7 @@ class Converter(metaclass=NonInstantiable):
 
         return langstrings
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     @staticmethod
     def from_multilangstring_to_setlangstrings(
         arg: MultiLangString, languages: Optional[list[str]] = None

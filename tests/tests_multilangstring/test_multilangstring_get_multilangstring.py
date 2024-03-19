@@ -21,19 +21,19 @@ def test_get_multilangstring_success(langs, expected_keys):
 
 
 @pytest.mark.parametrize(
-    "langs, match_error",
+    "langs",
     [
-        ({"en": "Hello"}, "Invalid argument 'langs' received. Expected 'list', got 'dict'."),
-        ("en", "Invalid argument 'langs' received. Expected 'list', got 'str'."),
-        ([1, "en"], "Invalid argument 'langs' received. Not all elements in the list are strings."),
-        (None, "Invalid argument 'langs' received. Expected 'list', got 'NoneType'."),
-        (["en", 1], "Invalid argument 'langs' received. Not all elements in the list are strings."),
+        ({"en": "Hello"}),
+        ("en"),
+        ([1, "en"]),
+        (None),
+        (["en", 1]),
     ],
 )
-def test_get_multilangstring_type_errors(langs, match_error):
+def test_get_multilangstring_type_errors(langs):
     """Test get_multilangstring raises TypeError with invalid langs argument."""
     mls = MultiLangString({"en": {"Hello"}}, pref_lang="en")
-    with pytest.raises(TypeError, match=match_error):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         mls.get_multilangstring(langs)
 
 
@@ -72,20 +72,18 @@ def test_get_multilangstring_edge_cases(langs, expected_keys, description):
 
 
 @pytest.mark.parametrize(
-    "langs, expected_exception, match_error",
+    "langs, expected_exception",
     [
-        (123, TypeError, "Invalid argument 'langs' received. Expected 'list', got 'int'."),
+        (123, TypeError),
         (
             [False],
-            TypeError,
-            "Invalid argument 'langs' received. Not all elements in the list are strings.",
-        ),  # Boolean in list
+            TypeError),
     ],
 )
-def test_get_multilangstring_invalid_langs(langs, expected_exception, match_error):
+def test_get_multilangstring_invalid_langs(langs, expected_exception):
     """Test get_multilangstring raises appropriate exceptions for invalid or nonexistent languages."""
     mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}}, pref_lang="en")
-    with pytest.raises(expected_exception, match=match_error):
+    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         mls.get_multilangstring(langs)
 
 

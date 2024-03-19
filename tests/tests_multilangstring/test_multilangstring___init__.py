@@ -1,4 +1,5 @@
 import pytest
+from icecream import ic
 
 from langstring import Controller
 from langstring import MultiLangString
@@ -71,7 +72,7 @@ def test_multilangstring_init_invalid_type(input_dict: dict, pref_lang: str):
     :param input_dict: Invalid type for the dictionary parameter.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match="Invalid type of 'mls_dict' received"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -94,7 +95,7 @@ def test_multilangstring_init_invalid_dict_values(input_dict: dict, pref_lang: s
     :param input_dict: Dictionary containing invalid values.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match="(Invalid 'texts' type in mls_dict init)|(Invalid 'text' value received)"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -112,7 +113,7 @@ def test_multilangstring_init_invalid_dict_keys(input_dict: dict, pref_lang: str
     :param input_dict: Dictionary containing invalid values.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match="Invalid 'lang' type in mls_dict init"):
+    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -220,4 +221,5 @@ def test_multilangstring_init_with_strip_text_flag():
 )
 def test_multilangstring_language_merging(input_dict: dict, expected_dict: dict):
     mls = MultiLangString(mls_dict=input_dict)
+    ic(mls.mls_dict)
     assert mls.mls_dict == expected_dict, "Languages with different cases should be merged correctly"

@@ -47,20 +47,20 @@ class SetLangString:
     # SetLangString's Regular Methods
     # -------------------------------------------
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def add_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.add(Validator.validate_text(SetLangStringFlag, langstring.text))
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def add_text(self, text: str) -> None:
         self.texts.add(Validator.validate_text(SetLangStringFlag, text))
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def discard_text(self, text: str) -> None:
         self.texts.discard(text)
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def discard_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.discard(langstring.text)
@@ -68,23 +68,23 @@ class SetLangString:
     # TODO: Analyze creation of setlangstring add/discard/remove setlangstring
     # TODO: Analyze creation of contains methods (similar to MLSs)
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def remove_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.remove(langstring.text)
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def remove_text(self, text: str) -> None:
         self.texts.remove(text)
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def to_langstrings(self) -> list[LangString]:
         langstrings = []
         for text in self.texts:
             langstrings.append(LangString(text=text, lang=self.lang))
         return langstrings
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def to_strings(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> list[str]:
@@ -212,7 +212,7 @@ class SetLangString:
     def __and__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
         return self.intersection(other)
 
-    @Validator.validate_simple_type
+    @Validator.validate_type_decorator
     def __contains__(self, element: Union[str, LangString]) -> bool:
         # Check language compatibility
         self._validate_match_types_and_langs(element)

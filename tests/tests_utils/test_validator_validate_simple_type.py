@@ -14,7 +14,7 @@ def decorated_func():
         return f"{arg1}, {arg2}, {arg3}"
 
     # Return the decorated function
-    return Validator.validate_simple_type(test_func)
+    return Validator.validate_type_decorator(test_func)
 
 
 def test_validate_simple_type_with_correct_types(decorated_func):

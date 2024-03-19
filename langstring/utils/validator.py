@@ -27,16 +27,16 @@ from enum import Enum
 from functools import wraps
 from typing import Any
 from typing import Callable
-from typing import get_args
-from typing import get_origin
-from typing import get_type_hints
 from typing import Optional
 from typing import TypeVar
 from typing import Union
+from typing import get_args
+from typing import get_origin
+from typing import get_type_hints
 
+from .non_instantiable import NonInstantiable
 from ..controller import Controller
 from ..flags import GlobalFlag
-from .non_instantiable import NonInstantiable
 
 T = TypeVar("T")
 
@@ -97,7 +97,7 @@ class Validator(metaclass=NonInstantiable):
         return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.casefold()
 
     @classmethod
-    def validate_simple_type(cls, func: Callable[..., T]) -> Callable[..., T]:
+    def validate_type_decorator(cls, func: Callable[..., T]) -> Callable[..., T]:
         """Validate the types of arguments passed to a function or method based on their type hints. Used as decorator.
 
         This method checks if each argument's type matches its corresponding type hint. It is intended for use with
@@ -179,3 +179,42 @@ class Validator(metaclass=NonInstantiable):
     @staticmethod
     def _get_args(tp: Any) -> tuple[Any, ...]:
         return getattr(tp, "__args__", ())
+
+    @staticmethod
+    def validate_single_type(arg: Any, arg_exp_type: type, optional: bool = False) -> None:
+        if optional and arg is None:
+            return
+
+        if not isinstance(arg, arg_exp_type):
+            raise TypeError(
+                f"Invalid argument with value '{arg}'. "
+                f"Expected '{arg_exp_type.__name__}', but got '{type(arg).__name__}'."
+            )
+
+    @classmethod
+    def validate_iterable_type(
+        cls, arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False
+    ) -> None:
+        if optional and arg is None:
+            return
+        cls.validate_single_type(arg, arg_exp_type)
+        for elem in arg:
+            cls.validate_single_type(elem, arg_content_exp_type)
+
+
+def validate_multiple_type(arg: Any, arg_exp_type: Union[type, Union[type, ...]], optional: bool = False) -> None:
+    if optional and arg is None:
+        return
+
+    # This works with Unions of any number of types, not just two
+    if get_origin(arg_exp_type) is Union:
+        expected_types = get_args(arg_exp_type)  # Retrieves all types within the Union
+    else:
+        expected_types = (arg_exp_type,)
+
+    if not isinstance(arg, expected_types):
+        expected_types_str = ", ".join([t.__name__ for t in expected_types])
+        raise TypeError(
+            f"Invalid argument with value '{arg}'. "
+            f"Expected one of {expected_types_str}, but got '{type(arg).__name__}'."
+        )

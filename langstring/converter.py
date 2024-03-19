@@ -214,7 +214,7 @@ class Converter(metaclass=NonInstantiable):
     # ---------------------------------------------
 
     @staticmethod
-    def from_setlangstring_to_string(arg:SetLangString)->str:
+    def from_setlangstring_to_string(arg: SetLangString) -> str:
         return arg.__str__()
 
     @Validator.validate_simple_type
@@ -223,7 +223,6 @@ class Converter(metaclass=NonInstantiable):
         arg: SetLangString, print_quotes: bool = True, separator: str = "@", print_lang: bool = True
     ) -> list[str]:
         return arg.to_strings(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
-
 
     @staticmethod
     def from_setlangstrings_to_strings(arg):
@@ -277,17 +276,13 @@ class Converter(metaclass=NonInstantiable):
 
         return new_mls
 
-
-
     # ---------------------------------------------
     # MultiLangStrings' Conversion Methods
     # ---------------------------------------------
 
-
     @staticmethod
-    def from_multilangstring_to_string(arg:MultiLangString)->str:
+    def from_multilangstring_to_string(arg: MultiLangString) -> str:
         return arg.__str__()
-
 
     @Validator.validate_simple_type
     @staticmethod
@@ -306,7 +301,6 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstrings_to_strings(arg):
         # TODO: To be implemented.
         pass
-
 
     @Validator.validate_simple_type
     @staticmethod
@@ -327,9 +321,15 @@ class Converter(metaclass=NonInstantiable):
         return arg.to_langstrings(langs=languages)
 
     @staticmethod
-    def from_multilangstrings_to_langstrings(arg):
-        # TODO: To be implemented.
-        pass
+    def from_multilangstrings_to_langstrings(arg: list[MultiLangString], languages: Optional[list[str]] = None
+        ) -> list[LangString]:
+        # TODO: Add type validation.
+        langstrings = []
+
+        for multilangstring in arg:
+            langstrings.extend(multilangstring.to_langstrings(languages))
+
+        return langstrings
 
     @Validator.validate_simple_type
     @staticmethod
@@ -350,6 +350,13 @@ class Converter(metaclass=NonInstantiable):
         return arg.to_setlangstrings(langs=languages)
 
     @staticmethod
-    def from_multilangstrings_to_setlangstrings(arg):
-        # TODO: To be implemented.
-        pass
+    def from_multilangstrings_to_setlangstrings(
+        arg: list[MultiLangString], languages: Optional[list[str]] = None
+    ) -> list[SetLangString]:
+        # TODO: Add type validation.
+        setlangstrings = []
+
+        for multilangstring in arg:
+            setlangstrings.extend(multilangstring.to_setlangstrings(languages))
+
+        return setlangstrings

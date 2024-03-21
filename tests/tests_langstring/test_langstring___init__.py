@@ -4,6 +4,7 @@ from langstring import Controller
 from langstring import GlobalFlag
 from langstring import LangString
 from langstring import LangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -29,7 +30,7 @@ def test_langstring_init_valid_inputs(text, lang, expected_text, expected_lang):
 )
 def test_langstring_init_invalid_inputs(text, lang, error):
     """Test the __init__ method with invalid input types."""
-    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(error, match=TYPEERROR_MSG_SINGULAR):
         LangString(text, lang)
 
 
@@ -64,7 +65,7 @@ def test_langstring_init_with_default_values():
 )
 def test_langstring_init_with_none(text, lang, error):
     """Test initialization with None."""
-    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(error, match=TYPEERROR_MSG_SINGULAR):
         LangString(text, lang)
 
 
@@ -77,7 +78,7 @@ def test_langstring_init_with_none(text, lang, error):
 )
 def test_langstring_init_with_list_or_tuple(text, lang, error):
     """Test initialization with list or tuple."""
-    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(error, match=TYPEERROR_MSG_SINGULAR):
         LangString(text, lang)
 
 
@@ -283,7 +284,7 @@ def test_langstring_init_valid_inputs_extended(text, lang, expected_text, expect
     ],
 )
 def test_langstring_init_with_various_types(text, lang, error):
-    with pytest.raises(error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(error, match=TYPEERROR_MSG_SINGULAR):
         LangString(text, lang)
 
 

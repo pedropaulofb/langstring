@@ -3,6 +3,8 @@ import pytest
 from langstring import Controller
 from langstring import LangString
 from langstring import LangStringFlag
+from tests.conftest import TYPEERROR_MSG_PLURAL
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 # Test cases for adding two LangString objects
@@ -100,7 +102,7 @@ def test_add_string_and_langstring(other_text, lang_str_text, lang_str_lang, exp
 def test_add_incompatible_types(lang_str, other, strict):
     """Test adding incompatible types to a LangString."""
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
-    with pytest.raises(TypeError, match="Argument '.+' must be of types 'LangString' or 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_PLURAL):
         _ = lang_str + other
 
 
@@ -147,7 +149,7 @@ def test_radd_incompatible_type_to_langstring(other, lang_str_text, lang_str_lan
     """Test adding an incompatible type to a LangString object using the __radd__ method."""
     Controller.set_flag(LangStringFlag.METHODS_MATCH_TYPES, strict)
     lang_str = LangString(lang_str_text, lang_str_lang)
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         _ = other + lang_str
 
 

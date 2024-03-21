@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -56,7 +57,7 @@ def test_contains_entry_various_scenarios(initial_contents, text, lang, expected
 )
 def test_contains_entry_with_none(text, lang):
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.contains_entry(text, lang)
 
 

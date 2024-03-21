@@ -2,6 +2,7 @@ import pytest
 
 from langstring import MultiLangString
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -41,6 +42,24 @@ from langstring import SetLangString
             {"en": {"Hello-world"}, "es": {"Hola_mundo"}},
             ["en", "es"],
             [SetLangString({"Hello-world"}, "en"), SetLangString({"Hola_mundo"}, "es")],
+        ),
+        ({"": {"NoLangText"}, "en": {"Hello"}, "es": {"Hola"}}, [""], [SetLangString({"NoLangText"}, "")]),
+        (
+            {"": {"NoLangText1", "NoLangText2"}, "en": {"Hello"}},
+            [""],
+            [SetLangString({"NoLangText1", "NoLangText2"}, "")],
+        ),
+        (
+            {"": {"NoLangText"}, "en": {"Hello"}, "es": {"Hola"}},
+            ["", "en"],
+            [SetLangString({"NoLangText"}, ""), SetLangString({"Hello"}, "en")],
+        ),
+        ({"": {"OnlyNoLangText"}}, None, [SetLangString({"OnlyNoLangText"}, "")]),
+        # Testing with an empty string alongside non-existent and valid language codes.
+        (
+            {"": {"NoLang"}, "en": {"Hello"}, "es": {"Hola"}},
+            ["", "xx", "en"],
+            [SetLangString({"NoLang"}, ""), SetLangString({"Hello"}, "en")],
         ),
     ],
 )
@@ -83,7 +102,7 @@ def test_to_setlangstrings_with_invalid_langs_type(langs, expected_exception):
     :return: Asserts that TypeError is raised with an appropriate message.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.to_setlangstrings(langs=langs)
 
 

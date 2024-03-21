@@ -1,21 +1,22 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
-    "text, lang, expected_exception, expected_message",
+    "text, lang, expected_exception ",
     [
-        (123, "en", TypeError, "Argument '123' must be of type 'str', but got"),
-        ("123", "en", ValueError, "Entry '123@en' not found in the MultiLangString"),
-        ("hello", 123, TypeError, "Argument '123' must be of type 'str', but got"),
-        (" hello", "en", ValueError, "Entry ' hello@en' not found in the MultiLangString"),
-        ("Hello", "en", ValueError, "Entry 'Hello@en' not found in the MultiLangString"),
-        ("hello", " en", ValueError, "Entry 'hello@ en' not found in the MultiLangString"),
-        ("hello", "", ValueError, "Entry 'hello@' not found in the MultiLangString"),
+        (123, "en", TypeError),
+        ("123", "en", ValueError),
+        ("hello", 123, TypeError),
+        (" hello", "en", ValueError),
+        ("Hello", "en", ValueError),
+        ("hello", " en", ValueError),
+        ("hello", "", ValueError),
     ],
 )
-def test_remove_entry_exceptions(text, lang, expected_exception, expected_message):
+def test_remove_entry_exceptions(text, lang, expected_exception):
     """
     Test remove_entry method raises expected exceptions with corresponding messages for invalid inputs or when an entry does not exist.
 
@@ -25,7 +26,7 @@ def test_remove_entry_exceptions(text, lang, expected_exception, expected_messag
     :param expected_message: Expected error message.
     """
     mls = MultiLangString({"en": {"hello", "world"}})
-    with pytest.raises(expected_exception, match=expected_message):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.remove_entry(text, lang)
 
 
@@ -79,13 +80,13 @@ def test_remove_entry_content(initial_contents, text_to_remove, lang_to_remove, 
 
 
 @pytest.mark.parametrize(
-    "initial_contents, lang_to_remove, expected_exception, expected_message",
+    "initial_contents, lang_to_remove, expected_exception",
     [
-        ({"en": {"hello", "world"}}, None, TypeError, "Argument 'None' must be of type 'str', but got 'NoneType'."),
-        ({"en": {"hello", "world"}}, "", ValueError, "Entry 'hello@' not found in the MultiLangString."),
+        ({"en": {"hello", "world"}}, None, TypeError),
+        ({"en": {"hello", "world"}}, "", ValueError),
     ],
 )
-def test_remove_entry_edge_cases_lang(initial_contents, lang_to_remove, expected_exception, expected_message):
+def test_remove_entry_edge_cases_lang(initial_contents, lang_to_remove, expected_exception):
     """
     Test remove_entry method with edge cases for 'lang' parameter, such as null and empty string values.
 
@@ -95,18 +96,18 @@ def test_remove_entry_edge_cases_lang(initial_contents, lang_to_remove, expected
     :param expected_message: Expected error message for edge cases.
     """
     mls = MultiLangString(initial_contents)
-    with pytest.raises(expected_exception, match=expected_message):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.remove_entry("hello", lang_to_remove)
 
 
 @pytest.mark.parametrize(
-    "text, lang, expected_exception, expected_message",
+    "text, lang, expected_exception",
     [
-        (None, "en", TypeError, "Argument 'None' must be of type 'str', but got 'NoneType'"),
-        ("", "en", ValueError, "Entry '@en' not found in the MultiLangString."),
+        (None, "en", TypeError),
+        ("", "en", ValueError),
     ],
 )
-def test_remove_entry_invalid_types_and_values(text, lang, expected_exception, expected_message):
+def test_remove_entry_invalid_types_and_values(text, lang, expected_exception):
     """
     Test remove_entry method handles null, empty, and invalid type parameters correctly.
 
@@ -116,7 +117,7 @@ def test_remove_entry_invalid_types_and_values(text, lang, expected_exception, e
     :param expected_message: Expected error message for invalid inputs.
     """
     mls = MultiLangString({"en": {"hello", "world"}})
-    with pytest.raises(expected_exception, match=expected_message):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.remove_entry(text, lang)
 
 

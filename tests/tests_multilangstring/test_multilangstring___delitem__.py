@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -53,20 +54,20 @@ def test_multilangstring_delitem_key_error(lang: str, match_msg: str):
 
 
 @pytest.mark.parametrize(
-    "lang, match_msg",
+    "lang",
     [
-        (123, "Argument .+ must be of type 'str', but got"),  # Non-string input: integer
-        ([], "Argument .+ must be of type 'str', but got"),  # Non-string input: list
-        ({}, "Argument .+ must be of type 'str', but got"),  # Non-string input: dictionary
+        123,  # Non-string input: integer
+        [],  # Non-string input: list
+        {},  # Non-string input: dictionary
     ],
 )
-def test_multilangstring_delitem_type_error(lang: str, match_msg: str):
+def test_multilangstring_delitem_type_error(lang: str):
     """Test the delitem method for type validation, expecting TypeError for invalid input types.
     :param lang: The invalid language code input, not of type str, to be tested for deletion.
     :raises TypeError: If the input is not of type str.
     """
     mls = MultiLangString(mls_dict={"en": {"Hello World"}, "es": {"Hola Mundo"}})
-    with pytest.raises(TypeError, match=match_msg):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         del mls[lang]
 
 
@@ -77,7 +78,7 @@ def test_multilangstring_delitem_none_value():
     :raises TypeError: If the input is null or an empty string.
     """
     mls = MultiLangString(mls_dict={"en": {"Hello World"}})
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         del mls[None]
 
 
@@ -98,3 +99,59 @@ def test_multilangstring_delitem_edge_cases(lang: str, expected_exception: type,
     mls = MultiLangString(mls_dict={"en": {"Hello World"}, "es": {"Hola Mundo"}})
     with pytest.raises(expected_exception, match=match_msg):
         del mls[lang]
+
+
+@pytest.mark.parametrize(
+    "initial_contents, key_to_delete, expected_contents, expected_exception",
+    [
+        # Case 1: Empty string as key exists, and it is deleted.
+        ({"": {"No language entry"}, "en": {"Hello"}}, "", {"en": {"Hello"}}, None),
+        # Case 2: Attempt to delete using empty string when it does not exist, other languages present.
+        ({"en": {"Hello"}, "fr": {"Bonjour"}}, "", {"en": {"Hello"}, "fr": {"Bonjour"}}, KeyError),
+        # Case 3: MultiLangString contains only an empty string entry, which is then deleted.
+        ({"": {"Only no language entry"}}, "", {}, None),
+        # Case 4: MultiLangString is empty, attempt to delete using empty string.
+        ({}, "", {}, KeyError),
+        # Case 5: MultiLangString contains multiple languages, including empty string, all are deleted except one.
+        (
+            {"": {"No language entry"}, "en": {"Hello"}, "fr": {"Bonjour"}},
+            "fr",
+            {"": {"No language entry"}, "en": {"Hello"}},
+            None,
+        ),
+        # Case 6: Delete a non-empty key when an empty string entry exists.
+        ({"": {"No language entry"}, "en": {"Hello"}}, "en", {"": {"No language entry"}}, None),
+    ],
+)
+def test_multilangstring_delitem_with_empty_string(
+    initial_contents, key_to_delete, expected_contents, expected_exception
+):
+    """
+    Test the `__delitem__` method of the MultiLangString class for handling the empty string as a key, across various scenarios.
+
+    :param initial_contents: The initial contents to populate the MultiLangString instance.
+    :param key_to_delete: The key (language code) to attempt to delete.
+    :param expected_contents: The expected contents of the MultiLangString instance after deletion.
+    :param expected_exception: The expected exception, if any; otherwise, None.
+    """
+    mls = MultiLangString(initial_contents)
+
+    if expected_exception:
+        with pytest.raises(expected_exception):
+            del mls[key_to_delete]
+    else:
+        del mls[key_to_delete]
+        assert mls.mls_dict == expected_contents, "MultiLangString contents after deletion did not match expected."
+
+
+# Additional checks to ensure method's behavior aligns with expectations.
+def test_multilangstring_delitem_side_effects():
+    """
+    Test to ensure that deleting an item does not have unintended side effects on MultiLangString's internal state.
+    """
+    initial_contents = {"": {"No language entry"}, "en": {"Hello"}}
+    mls = MultiLangString(initial_contents)
+    del mls["en"]  # Deleting an existing key
+
+    assert "" in mls.mls_dict, "Deleting a specified language key unexpectedly affected other keys."
+    assert "en" not in mls.mls_dict, "Specified language key was not successfully deleted."

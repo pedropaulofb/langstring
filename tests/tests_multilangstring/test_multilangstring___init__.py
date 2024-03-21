@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -53,7 +54,7 @@ def test_multilangstring_init_invalid_none(input_dict, pref_lang, expected_error
     :param pref_lang: Preferred language code, or None.
     :param expected_error: The type of error expected to be raised.
     """
-    with pytest.raises(expected_error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(expected_error, match=TYPEERROR_MSG_SINGULAR):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -71,7 +72,7 @@ def test_multilangstring_init_invalid_type(input_dict: dict, pref_lang: str):
     :param input_dict: Invalid type for the dictionary parameter.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -94,7 +95,7 @@ def test_multilangstring_init_invalid_dict_values(input_dict: dict, pref_lang: s
     :param input_dict: Dictionary containing invalid values.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -112,7 +113,7 @@ def test_multilangstring_init_invalid_dict_keys(input_dict: dict, pref_lang: str
     :param input_dict: Dictionary containing invalid values.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
@@ -131,7 +132,7 @@ def test_multilangstring_init_invalid_pref_lang(input_dict: dict, pref_lang: str
     :param input_dict: Dictionary containing invalid values.
     :param pref_lang: Preferred language code.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 

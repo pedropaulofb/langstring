@@ -2,6 +2,7 @@ import pytest
 
 from langstring import Converter
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -30,8 +31,7 @@ def test_from_setlangstring_to_string_invalid_type():
     """
     Test conversion of SetLangString to a string with invalid input type, expecting a TypeError.
     """
-    expected_message = "Argument 'not a SetLangString' must be of type 'SetLangString', but got 'str'."
-    with pytest.raises(TypeError, match=expected_message):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_setlangstring_to_string("not a SetLangString")
 
 

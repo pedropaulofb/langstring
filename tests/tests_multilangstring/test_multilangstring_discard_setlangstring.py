@@ -2,6 +2,7 @@ import pytest
 
 from langstring import MultiLangString
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -55,7 +56,7 @@ def test_discard_setlangstring_with_invalid_type():
     Test that passing an invalid type to `discard_setlangstring` raises a TypeError.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'SetLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_setlangstring("not a SetLangString")  # Invalid type passed
 
 
@@ -156,5 +157,5 @@ def test_discard_setlangstring_with_invalid_types_raises_error(setlangstring, cl
     :param clean_empty: Boolean indicating if empty languages should be removed.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'SetLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_setlangstring(setlangstring, clean_empty=clean_empty)

@@ -67,7 +67,7 @@ class LangString:
     @text.setter
     def text(self, new_text: str) -> None:
         """Setter for text."""
-        Validator.validate_single_type(new_text, str)
+        Validator.validate_type_single(new_text, str)
         self._text = Validator.validate_flags_text(LangStringFlag, new_text)
 
     @property
@@ -78,7 +78,7 @@ class LangString:
     @lang.setter
     def lang(self, new_lang: str) -> None:
         """Setter for lang."""
-        Validator.validate_single_type(new_lang, str)
+        Validator.validate_type_single(new_lang, str)
         self._lang = Validator.validate_flags_lang(LangStringFlag, new_lang)
 
     # ---------------------------------------------

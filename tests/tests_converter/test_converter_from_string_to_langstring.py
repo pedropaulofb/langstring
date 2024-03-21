@@ -2,6 +2,7 @@ import pytest
 
 from langstring.converter import Converter
 from langstring.langstring import LangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -48,7 +49,7 @@ def test_from_string_to_langstring_type_errors(input_string, expected_error):
     :param match_text: Regex pattern to match the error message.
     :return: Asserts if TypeError is raised with the expected message.
     """
-    with pytest.raises(expected_error, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(expected_error, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_string_to_langstring(input_string)
 
 

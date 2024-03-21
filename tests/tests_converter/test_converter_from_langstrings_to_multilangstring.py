@@ -3,6 +3,7 @@ import pytest
 from langstring import Converter
 from langstring import LangString
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -48,31 +49,27 @@ def test_from_langstrings_to_multilangstring_valid_cases(
 
 
 @pytest.mark.parametrize(
-    "input_arg, match_error",
+    "input_arg",
     [
-        (123, "Invalid 'arg' argument type. Expected 'list', got"),
-        ("string", "Invalid 'arg' argument type. Expected 'list', got"),
-        (True, "Invalid 'arg' argument type. Expected 'list', got"),
-        (None, "'NoneType' object is not iterable"),
-        ([123, "test"], "Argument '123' must be of type 'LangString', but got"),
-        ([LangString("Hello", "en"), 123], "Argument '123' must be of type 'LangString', but got"),
-        ([None], "Argument 'None' must be of type 'LangString', but got"),
-        ([LangString("valid", "en"), None], "Argument 'None' must be of type 'LangString', but got"),
-        (["Invalid Type"], "Argument 'Invalid Type' must be of type 'LangString', but got"),
-        (
-            [LangString("😊", "emoji"), "Not a LangString"],
-            "Argument 'Not a LangString' must be of type 'LangString', but got",
-        ),
+        123,
+        "string",
+        True,
+        [None, "test"],
+        [LangString("Hello", "en"), 123],
+        [None],
+        [LangString("valid", "en"), None],
+        ["Invalid Type"],
+        [LangString("😊", "emoji"), "Not a LangString"],
     ],
 )
-def test_from_langstrings_to_multilangstring_invalid_type(input_arg, match_error):
+def test_from_langstrings_to_multilangstring_invalid_type(input_arg):
     """
     Test `from_langstrings_to_multilangstring` with invalid types of input.
 
     :param input_arg: The input argument of invalid type.
     :param match_error: The error message expected to match when the exception is raised.
     """
-    with pytest.raises(TypeError, match=match_error):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_langstrings_to_multilangstring(input_arg)
 
 

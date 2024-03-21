@@ -3,6 +3,7 @@ import pytest
 from langstring import Converter
 from langstring import LangString
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -59,7 +60,7 @@ def test_from_multilangstring_to_langstrings_type_error(invalid_input):
 def test_from_multilangstring_to_langstrings_invalid_languages_type(languages_input, expected_exception):
     """Test the from_multilangstring_to_langstrings method raises exceptions for invalid 'languages' parameter types."""
     mls = MultiLangString(mls_dict={"en": {"Hello"}})
-    with pytest.raises(expected_exception, match="if specified, 'languages' must be a list of strings"):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_multilangstring_to_langstrings(mls, languages=languages_input)
 
 

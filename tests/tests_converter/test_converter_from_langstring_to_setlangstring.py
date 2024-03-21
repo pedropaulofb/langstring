@@ -6,6 +6,7 @@ from langstring import LangString
 from langstring import LangStringFlag
 from langstring import SetLangString
 from langstring import SetLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -37,7 +38,7 @@ def test_langstring_to_setlangstring_invalid_type(invalid_input):
     :return: None
     :raises TypeError: If input is not of type LangString.
     """
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'LangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_langstring_to_setlangstring(invalid_input)
 
 
@@ -162,7 +163,7 @@ def test_langstring_to_setlangstring_none_values(text, lang):
     :return: None
     :raises TypeError: If text or lang is None, violating type expectations.
     """
-    with pytest.raises(TypeError, match="Expected 'str', got 'NoneType'"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_langstring_to_setlangstring(LangString(text=text, lang=lang))
 
 

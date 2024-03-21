@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -60,7 +61,7 @@ def test_add_text_in_pref_lang_invalid_type(text_to_add, expected_error):
     :param expected_error: Expected error type.
     """
     mls = MultiLangString(pref_lang="en")
-    with pytest.raises(expected_error, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(expected_error, match=TYPEERROR_MSG_SINGULAR):
         mls.add_text_in_pref_lang(text_to_add)
 
 
@@ -74,7 +75,7 @@ def test_add_text_in_pref_lang_invalid_type(text_to_add, expected_error):
 def test_add_text_in_pref_lang_with_null(text_to_add, expected_error):
     """Tests adding a None value as text, expecting TypeError."""
     mls = MultiLangString(pref_lang="en")
-    with pytest.raises(expected_error, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(expected_error, match=TYPEERROR_MSG_SINGULAR):
         mls.add_text_in_pref_lang(text_to_add)
 
 

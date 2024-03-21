@@ -1,6 +1,7 @@
 import pytest
 
 from langstring.langstring import LangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -27,7 +28,7 @@ def test_contains_with_valid_substrings(main_text, search_text, expected_result)
 def test_contains_with_invalid_substrings(main_text, search_text):
     """Test __contains__ with invalid substring types."""
     lang_str = LangString(main_text, "en")
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         _ = search_text in lang_str
 
 

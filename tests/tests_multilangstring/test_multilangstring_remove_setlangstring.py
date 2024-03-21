@@ -2,6 +2,7 @@ import pytest
 
 from langstring import MultiLangString
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -70,15 +71,13 @@ def test_remove_setlangstring_valid_cases(initial_contents, lang_to_remove, clea
 
 
 @pytest.mark.parametrize(
-    "initial_contents, invalid_input, clean_empty, expected_exception, expected_message",
+    "initial_contents, invalid_input, clean_empty, expected_exception",
     [
         # Attempting to remove with an invalid type for SetLangString
-        ({"en": {"hello"}}, 123, False, TypeError, "Argument '123' must be of type"),
+        ({"en": {"hello"}}, 123, False, TypeError),
     ],
 )
-def test_remove_setlangstring_invalid_cases(
-    initial_contents, invalid_input, clean_empty, expected_exception, expected_message
-):
+def test_remove_setlangstring_invalid_cases(initial_contents, invalid_input, clean_empty, expected_exception):
     """Test the remove_setlangstring method for various invalid scenarios to ensure proper error handling.
 
     :param initial_contents: Initial contents of the MultiLangString instance.
@@ -88,7 +87,7 @@ def test_remove_setlangstring_invalid_cases(
     :param expected_message: Expected message in the exception if an error is expected.
     """
     mls = MultiLangString(initial_contents)
-    with pytest.raises(expected_exception, match=expected_message):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.remove_setlangstring(invalid_input, clean_empty=clean_empty)
 
 

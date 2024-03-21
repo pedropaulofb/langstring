@@ -4,6 +4,7 @@ import pytest
 
 from langstring import MultiLangString
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -108,7 +109,7 @@ def test_pop_setlangstring_invalid_language_type(lang):
     :raises TypeError: If the language type is not str.
     """
     mls = MultiLangString({"en": {"Hello", "World"}})
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.pop_setlangstring(lang)
 
 
@@ -141,12 +142,12 @@ def test_pop_setlangstring_after_adding_text():
 
 
 @pytest.mark.parametrize(
-    "lang, expected_exception, expected_message",
+    "lang, expected_exception",
     [
-        (None, TypeError, "Argument 'None' must be of type 'str', but got 'NoneType'."),
+        (None, TypeError),
     ],
 )
-def test_pop_setlangstring_invalid_or_empty_language_code(lang, expected_exception, expected_message):
+def test_pop_setlangstring_invalid_or_empty_language_code(lang, expected_exception):
     """
     Test that pop_setlangstring raises the correct exception for invalid or empty language codes.
     :param lang: The language code to test with, which could be invalid or empty.
@@ -155,7 +156,7 @@ def test_pop_setlangstring_invalid_or_empty_language_code(lang, expected_excepti
     :return: None
     """
     mls = MultiLangString({"en": {"Hello", "World"}})
-    with pytest.raises(expected_exception, match=expected_message):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.pop_setlangstring(lang)
 
 

@@ -48,10 +48,12 @@ class Validator(metaclass=NonInstantiable):
     and language tag validity. The validation rules are determined by control flags from a control class.
     """
 
-    @staticmethod
-    def validate_flags_text(flag_type: type[Enum], text: Optional[str]) -> str:
-        msg = f"Invalid 'text' value received ('{text}')."
+    @classmethod
+    def validate_flags_text(cls, flag_type: type[Enum], text: Optional[str]) -> str:
+        cls.validate_type_single(flag_type, type)
+        cls.validate_type_single(text, str, optional=True)
 
+        msg = f"Invalid 'text' value received ('{text}')."
         if Controller.get_flag(flag_type.DEFINED_TEXT) and not text:
             print(Controller.get_flag(flag_type.DEFINED_TEXT))
             raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_TEXT' is enabled. Expected non-empty 'str'.")
@@ -60,6 +62,9 @@ class Validator(metaclass=NonInstantiable):
 
     @staticmethod
     def validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> str:
+        Validator.validate_type_single(flag_type, type)
+        Validator.validate_type_single(lang, str, optional=True)
+
         msg = f"Invalid 'lang' value received ('{lang}')."
 
         if Controller.get_flag(flag_type.DEFINED_LANG) and not lang:
@@ -142,13 +147,15 @@ class Validator(metaclass=NonInstantiable):
                     if not any(isinstance(arg, t) for t in get_args(hint)):
                         allowed_types = " or ".join(f"'{t.__name__}'" for t in get_args(hint))
                         raise TypeError(
-                            f"Argument '{arg}' must be of types {allowed_types}, but got '{type(arg).__name__}'."
+                            f"Invalid argument with value '{arg}'. "
+                            f"Expected one of {allowed_types}, but got '{type(arg).__name__}'."
                         )
                     return True
 
                 if not isinstance(arg, hint):
                     raise TypeError(
-                        f"Argument '{arg}' must be of type '{hint.__name__}', but got '{type(arg).__name__}'."
+                        f"Invalid argument with value '{arg}'. "
+                        f"Expected '{hint.__name__}', but got '{type(arg).__name__}'."
                     )
 
                 return True
@@ -156,12 +163,18 @@ class Validator(metaclass=NonInstantiable):
             # Validate positional arguments
             for arg, (name, hint) in zip(args_to_check, zip(param_names, type_hints.values())):
                 if not check_arg(arg, hint):
-                    raise TypeError(f"Argument '{arg}' must be of type '{hint}', but got '{type(arg)}'.")
+                    raise TypeError(
+                        f"Invalid argument with value '{arg}'. "
+                        f"Expected '{hint.__name__}', but got '{type(arg).__name__}'."
+                    )
 
             # Validate keyword arguments
             for kwarg, hint in type_hints.items():
                 if kwarg in kwargs and not check_arg(kwargs[kwarg], hint):
-                    raise TypeError(f"Argument '{kwarg}' must be of type '{hint}', but got '{type(kwargs[kwarg])}'.")
+                    raise TypeError(
+                        f"Invalid argument with value '{kwarg}'. "
+                        f"Expected '{hint.__name__}', but got '{type(kwargs[kwarg]).__name__}'."
+                    )
 
             return func(*args, **kwargs)
 
@@ -176,7 +189,7 @@ class Validator(metaclass=NonInstantiable):
         return getattr(tp, "__args__", ())
 
     @staticmethod
-    def validate_single_type(arg: Any, arg_exp_type: type, optional: bool = False) -> None:
+    def validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -> None:
         if optional and arg is None:
             return
 
@@ -187,14 +200,14 @@ class Validator(metaclass=NonInstantiable):
             )
 
     @classmethod
-    def validate_iterable_type(
+    def validate_type_iterable(
         cls, arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False
     ) -> None:
         if optional and arg is None:
             return
-        cls.validate_single_type(arg, arg_exp_type)
+        cls.validate_type_single(arg, arg_exp_type)
         for elem in arg:
-            cls.validate_single_type(elem, arg_content_exp_type)
+            cls.validate_type_single(elem, arg_content_exp_type)
 
 
 def validate_multiple_type(arg: Any, arg_exp_type: Union[type, Union[type, ...]], optional: bool = False) -> None:

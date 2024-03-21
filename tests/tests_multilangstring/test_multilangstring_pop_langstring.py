@@ -3,6 +3,7 @@ from pytest import raises
 
 from langstring import LangString
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -100,7 +101,7 @@ def test_pop_langstring_invalid_text_type():
     :raises TypeError: If the text parameter is not a string.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.pop_langstring(123, "en")  # 123 is not a valid text
 
 
@@ -116,7 +117,7 @@ def test_pop_langstring_invalid_arg_types(text, lang):
     :raises TypeError: If text or language is not a string.
     """
     mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-    with pytest.raises((ValueError, TypeError), match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises((ValueError, TypeError), match=TYPEERROR_MSG_SINGULAR):
         mls.pop_langstring(text, lang)
 
 

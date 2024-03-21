@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -45,7 +46,7 @@ def test_add_entry_invalid_type(text, lang, error_type):
     :param error_type: The expected error type.
     """
     mls = MultiLangString()
-    with pytest.raises(error_type, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(error_type, match=TYPEERROR_MSG_SINGULAR):
         mls.add_entry(text, lang)
 
 

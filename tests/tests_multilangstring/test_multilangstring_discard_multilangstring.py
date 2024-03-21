@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -52,14 +53,14 @@ def test_discard_multilangstring_self():
 
 def test_discard_multilangstring_with_none():
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'MultiLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_multilangstring(None)
 
 
 @pytest.mark.parametrize("invalid_input", [123, "string", [1, 2, 3], {"a": 1}])
 def test_discard_multilangstring_with_invalid_type(invalid_input):
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'MultiLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_multilangstring(invalid_input)
 
 
@@ -166,13 +167,13 @@ def test_discard_multilangstring_with_clean_empty(initial_contents, discarding_c
 
 
 @pytest.mark.parametrize(
-    "discarding_contents, clean_empty, match_error",
+    "discarding_contents, clean_empty",
     [
-        (123, False, "must be of type 'MultiLangString'"),
-        ("not a MultiLangString", True, "must be of type 'MultiLangString'"),
+        (123, False),
+        ("not a MultiLangString", True),
     ],
 )
-def test_discard_multilangstring_invalid_type(discarding_contents, clean_empty, match_error):
+def test_discard_multilangstring_invalid_type(discarding_contents, clean_empty):
     """
     Test discarding with invalid types for `discard_multilangstring` method raises appropriate errors.
 
@@ -181,7 +182,7 @@ def test_discard_multilangstring_invalid_type(discarding_contents, clean_empty, 
     :param match_error: Expected error message pattern.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match=match_error):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_multilangstring(discarding_contents, clean_empty=clean_empty)
 
 
@@ -215,7 +216,7 @@ def test_discard_multilangstring_with_clean_empty_and_edge_cases(
 ):
     mls_initial = MultiLangString(initial_contents)
     if isinstance(expected_result, Exception):
-        with pytest.raises(type(expected_result), match=str(expected_result)):
+        with pytest.raises(type(expected_result), match=TYPEERROR_MSG_SINGULAR):
             mls_initial.discard_multilangstring(discarding_contents, clean_empty=clean_empty)
     else:
         mls_discarding = (

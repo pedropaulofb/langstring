@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import LangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -50,5 +51,5 @@ def test_equals_langstring_invalid_type(invalid_type) -> None:
     :param invalid_type: An invalid input type to test against the LangString's equals_langstring method.
     """
     lang_string = LangString(text="test", lang="en")
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'LangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         lang_string.equals_langstring(invalid_type)

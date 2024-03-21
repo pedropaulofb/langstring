@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import LangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -28,7 +29,7 @@ def test_mul_with_invalid_multiplier(invalid_multiplier) -> None:
     :param invalid_multiplier: An invalid multiplier type.
     """
     lang_string = LangString("Hello", "en")
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'int', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         _ = lang_string * invalid_multiplier
 
 

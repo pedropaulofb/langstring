@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -20,6 +21,18 @@ from langstring import MultiLangString
             "en",
             {"fr": {"Bonjour"}},
         ),  # Discard a language with an empty set of texts
+        (
+            {"": {"AnonLangText"}, "en": {"Hello"}, "fr": {"Bonjour"}},
+            "",
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+        ),  # Discard texts without a specified language
+        ({"": {"NoLang"}, "en": {"Hello"}}, "", {"en": {"Hello"}}),  # Only discard entries without a language
+        ({"": {"OnlyNoLangText"}}, "", {}),  # Discard the only language which is an empty string
+        (
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+            "",
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+        ),  # Attempt to discard an empty string in a dict without it
     ],
 )
 def test_discard_lang_various_scenarios(initial_contents, lang_to_discard, expected_contents):
@@ -42,7 +55,7 @@ def test_discard_lang_with_invalid_type():
     Test that passing an invalid type to `discard_lang` raises a TypeError.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_lang(123)  # Invalid type passed
 
 
@@ -51,5 +64,5 @@ def test_discard_lang_with_null_value():
     Test that attempting to discard a null (None) language raises an appropriate error.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_lang(None)  # Passing None as a language code

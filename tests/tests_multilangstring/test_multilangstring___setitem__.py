@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 # Test setting new language entries
@@ -173,3 +174,70 @@ def test_pref_lang_unchanged_after_setitem():
     assert (
         mls.pref_lang == initial_pref_lang
     ), f"Expected pref_lang to remain '{initial_pref_lang}', but it was modified to '{mls.pref_lang}'."
+
+
+@pytest.mark.parametrize(
+    "initial_contents, key_to_set, value_to_set, expected_contents",
+    [
+        # Case 1: Setting an entry with the empty string as key on an empty MultiLangString.
+        ({}, "", {"An entry without language"}, {"": {"An entry without language"}}),
+        # Case 2: Updating an existing entry where the key is an empty string.
+        (
+            {"": {"Old entry without language"}},
+            "",
+            {"Updated entry without language"},
+            {"": {"Updated entry without language"}},
+        ),
+        # Case 3: Adding a new entry with the empty string as key alongside existing specified languages.
+        ({"en": {"Hello"}}, "", {"No language entry"}, {"": {"No language entry"}, "en": {"Hello"}}),
+        # Case 4: Updating an existing entry with the empty string as key alongside other languages.
+        (
+            {"": {"Old no language entry"}, "fr": {"Bonjour"}},
+            "",
+            {"New no language entry"},
+            {"": {"New no language entry"}, "fr": {"Bonjour"}},
+        ),
+        # Case 5: Introducing the empty string entry in a MultiLangString containing multiple languages.
+        (
+            {"en": {"Hello"}, "fr": {"Bonjour"}},
+            "",
+            {"No language entry"},
+            {"": {"No language entry"}, "en": {"Hello"}, "fr": {"Bonjour"}},
+        ),
+        # Case 6: Replacing an existing empty string entry with a new set of texts.
+        ({"": {"Some old text"}, "es": {"Hola"}}, "", {"Some new text"}, {"": {"Some new text"}, "es": {"Hola"}}),
+    ],
+)
+def test_multilangstring_setitem_with_empty_string(initial_contents, key_to_set, value_to_set, expected_contents):
+    """
+    Test the `__setitem__` method of the MultiLangString class for handling the empty string as a key across various scenarios.
+
+    :param initial_contents: The initial contents to populate the MultiLangString instance.
+    :param key_to_set: The key (language code) where the value is to be set, focusing on the empty string.
+    :param value_to_set: The value (set of texts) to set for the given key.
+    :param expected_contents: The expected contents of the MultiLangString after setting the item.
+    """
+    mls = MultiLangString(initial_contents)
+    mls[key_to_set] = value_to_set
+    assert mls.mls_dict == expected_contents, "MultiLangString contents after setting item did not match expected."
+
+
+@pytest.mark.parametrize(
+    "invalid_value",
+    [
+        "Not a set",  # String instead of a set
+        ["Not", "a", "set"],  # List instead of a set
+        None,  # None value
+        123,  # Integer instead of a set
+        {},  # Empty dictionary instead of a set
+    ],
+)
+def test_multilangstring_setitem_with_invalid_values(invalid_value):
+    """
+    Test the `__setitem__` method of the MultiLangString class with invalid value types for the empty string key.
+
+    :param invalid_value: An invalid value to attempt setting for a given language code.
+    """
+    mls = MultiLangString()
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
+        mls[""] = invalid_value

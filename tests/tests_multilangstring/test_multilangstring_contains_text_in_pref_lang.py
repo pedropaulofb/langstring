@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -53,7 +54,7 @@ def test_contains_text_in_pref_lang_invalid_input_type(text):
     :raises TypeError: Expected when input type is not a string.
     """
     mls = MultiLangString()
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.contains_text_in_pref_lang(text)
 
 

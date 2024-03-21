@@ -5,6 +5,7 @@ from langstring import Converter
 from langstring import LangString
 from langstring import SetLangString
 from langstring import SetLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 def test_setlangstring_to_langstrings_with_multiple_texts():
@@ -38,7 +39,7 @@ def test_setlangstring_to_langstrings_invalid_type(invalid_input):
     :return: None
     :raises TypeError: If input is not of type SetLangString.
     """
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'SetLangString', but"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_setlangstring_to_langstrings(invalid_input)
 
 

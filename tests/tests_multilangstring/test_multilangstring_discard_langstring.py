@@ -4,6 +4,7 @@ import pytest
 
 from langstring import LangString
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 def test_discard_langstring_removes_existing_langstring():
@@ -82,7 +83,7 @@ def test_discard_langstring_with_invalid_type_raises_error():
     :raises TypeError: If the argument is not a LangString.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'LangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_langstring("not a LangString")  # Invalid type passed
 
 
@@ -98,7 +99,7 @@ def test_discard_langstring_with_null_and_invalid_types_raises_error(langstring)
     Test that attempting to discard a null or an invalid type instead of a LangString raises appropriate errors.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'LangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_langstring(langstring)
 
 

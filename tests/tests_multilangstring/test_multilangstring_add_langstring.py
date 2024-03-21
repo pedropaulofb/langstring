@@ -4,6 +4,7 @@ from langstring import Controller
 from langstring import LangString
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -47,7 +48,7 @@ def test_add_langstring_invalid_type(invalid_langstring):
     :param match_message: Expected error message or pattern.
     """
     mls = MultiLangString()
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'LangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.add_langstring(invalid_langstring)
 
 
@@ -55,7 +56,7 @@ def test_add_langstring_invalid_type(invalid_langstring):
 def test_add_langstring_with_none():
     """Tests adding None as a LangString, expecting TypeError."""
     mls = MultiLangString()
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'LangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.add_langstring(None)
 
 

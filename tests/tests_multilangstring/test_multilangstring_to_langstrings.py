@@ -1,5 +1,8 @@
 import pytest
 
+from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
+
 
 @pytest.mark.parametrize(
     "input_langs, expected_length, specific_lang_check",
@@ -15,6 +18,8 @@ import pytest
         (["En"], 2, "En"),  # Mixed case language code
         (["🙂"], 0, None),  # Emoji as a language code, expecting no LangStrings
         ([""], 0, None),  # Empty string as a language code, expecting no LangStrings
+        ([""], 0, []),
+        (["en", "xx", ""], 2, "en"),
     ],
 )
 def test_to_langstrings_valid_cases(input_langs, expected_length, specific_lang_check):
@@ -56,7 +61,7 @@ def test_to_langstrings_invalid_cases(input_langs, expected_exception):
     :param expected_exception: The exception type that is expected to be raised.
     """
     mls = MultiLangString(mls_dict={"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}})
-    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.to_langstrings(langs=input_langs)
 
 
@@ -98,7 +103,6 @@ def test_to_langstrings_valid_edge_cases(input_langs, expected_length, expected_
 
 
 import pytest
-from langstring import MultiLangString
 
 
 # Tests for valid cases including handling of non-existing languages
@@ -149,3 +153,26 @@ def test_to_langstrings_invalid_types(input_langs, expected_exception):
     mls = MultiLangString(mls_dict={"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}})
     with pytest.raises(expected_exception):
         mls.to_langstrings(langs=input_langs)
+
+
+@pytest.mark.parametrize(
+    "input_langs, expected_length, expected_languages",
+    [
+        # New test case: Case with an empty string language code existing in the mls_dict
+        ([""], 2, ["", ""]),  # Expecting LangStrings with empty lang
+        # New test case: Mixed case with valid, invalid, and empty string language codes
+        (["en", "xx", ""], 4, ["en", "en", "", ""]),  # Including empty string lang code
+    ],
+)
+def test_to_langstrings_valid_cases_with_empty_lang(input_langs, expected_length, expected_languages):
+    # Enhanced MultiLangString dictionary to include empty string language code
+    mls = MultiLangString(mls_dict={"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}, "": {"Empty1", "Empty2"}})
+    output = mls.to_langstrings(langs=input_langs)
+    assert (
+        len(output) == expected_length
+    ), f"Incorrect number of LangStrings returned. Expected {expected_length}, got {len(output)}."
+    if expected_length > 0:
+        output_languages = [ls.lang for ls in output]
+        assert (
+            output_languages == expected_languages
+        ), f"Incorrect languages returned. Expected {expected_languages}, got {output_languages}."

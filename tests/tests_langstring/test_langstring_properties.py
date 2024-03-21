@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import LangString
 from langstring import LangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -46,7 +47,7 @@ def test_text_setter_invalid_type(invalid_text) -> None:
 
     :param invalid_text: The invalid text input to be set.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         LangString(text=invalid_text)
 
 
@@ -56,7 +57,7 @@ def test_lang_setter_invalid_type(invalid_lang) -> None:
 
     :param invalid_lang: The invalid language tag input to be set.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         LangString(lang=invalid_lang)
 
 

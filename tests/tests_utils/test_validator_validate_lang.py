@@ -3,6 +3,7 @@ import pytest
 from langstring import LangStringFlag
 from langstring.controller import Controller
 from langstring.utils.validator import Validator
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 # Test valid language codes
@@ -28,7 +29,7 @@ def test_validate_lang_invalid_codes(invalid_lang):
 @pytest.mark.parametrize("non_string", [123, 5.5, True, None, [], {}])
 def test_validate_lang_non_string_input(non_string):
     """Test validate_lang with non-string inputs."""
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Validator.validate_flags_lang(LangStringFlag, non_string)
 
 

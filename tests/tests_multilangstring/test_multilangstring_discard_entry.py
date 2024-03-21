@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.fixture
@@ -322,5 +323,5 @@ def test_discard_invalid_types_with_clean_empty(setup_mls, text, lang):
     :param text: Text to discard, intentionally of incorrect type.
     :param lang: Language code of the text, intentionally of incorrect type.
     """
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         setup_mls.discard_entry(text, lang, clean_empty=True)

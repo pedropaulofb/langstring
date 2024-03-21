@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import LangString
 from langstring import LangStringFlag
+from tests.conftest import TYPEERROR_MSG_GENERAL
 
 
 @pytest.mark.parametrize(
@@ -90,7 +91,7 @@ def test_to_string_invalid_types(text, lang, print_quotes, separator, print_lang
     :type expected: str
     """
     ls = LangString(text, lang)
-    with pytest.raises(expected, match="Argument '.+' must be of type"):
+    with pytest.raises(expected, match=TYPEERROR_MSG_GENERAL):
         ls.to_string(print_quotes, separator, print_lang)
 
 

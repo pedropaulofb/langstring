@@ -3,6 +3,7 @@ from typing import Any
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -81,7 +82,7 @@ def test_merge_with_invalid_input_types(input_mls_dict: Any) -> None:
     :raises: TypeError if input types are not dictionaries.
     """
     mls = MultiLangString()
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls._merge_language_entries(input_mls_dict)
 
 

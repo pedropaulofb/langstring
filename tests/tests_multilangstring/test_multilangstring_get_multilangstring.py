@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -33,7 +34,7 @@ def test_get_multilangstring_success(langs, expected_keys):
 def test_get_multilangstring_type_errors(langs):
     """Test get_multilangstring raises TypeError with invalid langs argument."""
     mls = MultiLangString({"en": {"Hello"}}, pref_lang="en")
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.get_multilangstring(langs)
 
 
@@ -81,7 +82,7 @@ def test_get_multilangstring_edge_cases(langs, expected_keys, description):
 def test_get_multilangstring_invalid_langs(langs, expected_exception):
     """Test get_multilangstring raises appropriate exceptions for invalid or nonexistent languages."""
     mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}}, pref_lang="en")
-    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.get_multilangstring(langs)
 
 

@@ -3,6 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 # Test cases for mls_dict getter and setter
@@ -44,7 +45,7 @@ def test_pref_lang_getter_setter(input_lang: str, expected_output):
     """
     mls = MultiLangString()
     if expected_output is TypeError:
-        with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+        with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
             mls.pref_lang = input_lang
     else:
         mls.pref_lang = input_lang
@@ -61,7 +62,7 @@ def test_pref_lang_getter_setter(input_lang: str, expected_output):
 def test_mls_dict_setter_none(input_dict, expected_output):
     """Tests setting mls_dict to None to ensure appropriate error is raised."""
     mls = MultiLangString()
-    with pytest.raises(expected_output, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(expected_output, match=TYPEERROR_MSG_SINGULAR):
         mls.mls_dict = input_dict
 
 
@@ -76,7 +77,7 @@ def test_mls_dict_setter_none(input_dict, expected_output):
 def test_mls_dict_setter_invalid_value_types(input_dict: dict, expected_error):
     """Tests setting mls_dict with invalid value types."""
     mls = MultiLangString()
-    with pytest.raises(expected_error, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(expected_error, match=TYPEERROR_MSG_SINGULAR):
         mls.mls_dict = input_dict
 
 

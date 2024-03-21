@@ -3,6 +3,7 @@ import pytest
 from langstring.controller import Controller
 from langstring.langstring import LangStringFlag
 from langstring.utils.validator import Validator
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 # Test cases for valid text input
@@ -18,7 +19,7 @@ def test_validate_text_valid(text, expected):
 @pytest.mark.parametrize("invalid_text", [123, None, 5.5, [], {}])
 def test_validate_text_invalid_type(invalid_text):
     """Test validate_text with invalid input types."""
-    with pytest.raises(TypeError, match="Expected 'str', got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Validator.validate_flags_text(LangStringFlag, invalid_text)
 
 
@@ -26,7 +27,7 @@ def test_validate_text_invalid_type(invalid_text):
 def test_validate_text_empty_with_defined_text_flag():
     """Test validate_text with empty string and DEFINED_TEXT flag enabled."""
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
-    with pytest.raises(ValueError, match="Expected non-empty 'str'"):
+    with pytest.raises(ValueError, match="Invalid 'text' value received"):
         Validator.validate_flags_text(LangStringFlag, "")
 
 

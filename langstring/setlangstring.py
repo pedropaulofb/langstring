@@ -25,7 +25,7 @@ class SetLangString:
     @texts.setter
     def texts(self, new_texts: set[str]) -> None:
         """Setter for texts."""
-        Validator.validate_iterable_type(new_texts, set, str)
+        Validator.validate_type_iterable(new_texts, set, str)
 
         self._texts = set()
         for text_value in new_texts:
@@ -39,7 +39,7 @@ class SetLangString:
     @lang.setter
     def lang(self, new_lang: str) -> None:
         """Setter for lang."""
-        Validator.validate_single_type(new_lang, str)
+        Validator.validate_type_single(new_lang, str)
         self._lang = Validator.validate_flags_lang(SetLangStringFlag, new_lang)
 
     # -------------------------------------------

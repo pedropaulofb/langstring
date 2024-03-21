@@ -61,7 +61,14 @@ def test_remove_text_in_pref_lang_valid_cases(
             "Entry 'bonjour@en' not found in the MultiLangString.",
         ),
         # Invalid type for text_to_remove
-        ({"en": {"hello"}}, "en", 123, False, TypeError, "Argument '123' must be of type 'str', but got 'int'."),
+        (
+            {"en": {"hello"}},
+            "en",
+            123,
+            False,
+            TypeError,
+            r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\.",
+        ),
         # Removing text from a non-existent language
         ({"en": {"hello"}}, "fr", "bonjour", False, ValueError, "Entry 'bonjour@fr' not found in the MultiLangString."),
         # Text to remove is empty string

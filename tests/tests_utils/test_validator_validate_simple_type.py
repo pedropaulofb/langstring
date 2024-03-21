@@ -4,6 +4,7 @@ from typing import Union
 import pytest
 
 from langstring.utils.validator import Validator
+from tests.conftest import TYPEERROR_MSG_PLURAL
 
 
 # Fixture for the decorated function
@@ -70,7 +71,7 @@ def test_validate_simple_type_with_unusual_valid_usage(decorated_func):
 
 def test_validate_simple_type_with_incorrect_type(decorated_func):
     """Test validate_simple_type with incorrect argument type."""
-    with pytest.raises(TypeError, match="Argument '1.5' must be of type"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_PLURAL):
         decorated_func(1.5, "test")
 
 
@@ -82,5 +83,5 @@ def test_validate_simple_type_with_empty_string(decorated_func):
 
 def test_validate_simple_type_with_none(decorated_func):
     """Test validate_simple_type with None as an argument."""
-    with pytest.raises(TypeError, match="Argument 'None' must be of types .+, but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_PLURAL):
         decorated_func(None, "test")

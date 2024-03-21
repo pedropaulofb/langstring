@@ -75,9 +75,9 @@ class MultiLangString:
     def mls_dict(self, in_mls_dict: dict[str, set[str]]) -> None:
         """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
         # Validate input before merging
-        Validator.validate_iterable_type(in_mls_dict, dict, str)
+        Validator.validate_type_iterable(in_mls_dict, dict, str)
         for key in in_mls_dict:
-            Validator.validate_iterable_type(in_mls_dict[key], set, str)
+            Validator.validate_type_iterable(in_mls_dict[key], set, str)
 
         # Merge entries with case-insensitive language keys
         new_mls_dict = self._merge_language_entries(in_mls_dict)
@@ -109,7 +109,7 @@ class MultiLangString:
         :param new_pref_lang: The preferred language as a string.
         :type new_pref_lang: str
         """
-        Validator.validate_single_type(new_pref_lang, str)
+        Validator.validate_type_single(new_pref_lang, str)
         self._pref_lang = Validator.validate_flags_lang(MultiLangStringFlag, new_pref_lang)
 
     # --------------------------------------------------
@@ -262,7 +262,7 @@ class MultiLangString:
     @Validator.validate_type_decorator
     def discard_lang(self, lang: str) -> None:
         registered_lang = self._get_registered_lang(lang)
-        if registered_lang:
+        if registered_lang is not None:
             del self.mls_dict[registered_lang]
 
     # ----- REMOVE METHODS -----
@@ -338,7 +338,7 @@ class MultiLangString:
         :type lang: str
         """
         registered_lang = self._get_registered_lang(lang)
-        if registered_lang:
+        if registered_lang is not None:
             del self.mls_dict[registered_lang]
         else:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
@@ -357,10 +357,10 @@ class MultiLangString:
         separator: str = "@",
         print_lang: Optional[bool] = None,
     ) -> list[str]:
-        Validator.validate_iterable_type(langs, list, str, optional=True)
-        Validator.validate_single_type(print_quotes, bool, optional=True)
-        Validator.validate_single_type(separator, str)
-        Validator.validate_single_type(print_lang, bool, optional=True)
+        Validator.validate_type_iterable(langs, list, str, optional=True)
+        Validator.validate_type_single(print_quotes, bool, optional=True)
+        Validator.validate_type_single(separator, str)
+        Validator.validate_type_single(print_lang, bool, optional=True)
 
         if print_quotes is None:
             print_quotes = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_QUOTES)
@@ -382,7 +382,7 @@ class MultiLangString:
         return sorted(strings)
 
     def to_langstrings(self, langs: Optional[list[str]] = None) -> list[LangString]:
-        Validator.validate_iterable_type(langs, list, str, optional=True)
+        Validator.validate_type_iterable(langs, list, str, optional=True)
 
         langstrings = []
         self_reg_langs = []
@@ -391,7 +391,7 @@ class MultiLangString:
 
         for selected_lang in selected_langs:
             reg_lang = self._get_registered_lang(selected_lang)
-            if reg_lang:
+            if reg_lang is not None:
                 self_reg_langs.append(reg_lang)
 
         for lang in self_reg_langs:
@@ -401,7 +401,7 @@ class MultiLangString:
         return langstrings
 
     def to_setlangstrings(self, langs: Optional[list[str]] = None) -> list[SetLangString]:
-        Validator.validate_iterable_type(langs, list, str, optional=True)
+        Validator.validate_type_iterable(langs, list, str, optional=True)
 
         setlangstrings = []
         self_reg_langs = []
@@ -410,11 +410,11 @@ class MultiLangString:
 
         for selected_lang in selected_langs:
             reg_lang = self._get_registered_lang(selected_lang)
-            if reg_lang:
+            if reg_lang is not None:
                 self_reg_langs.append(reg_lang)
 
-        for lang in self_reg_langs:
-            setlangstrings.append(self.get_setlangstring(lang))
+        for reg_lang in self_reg_langs:
+            setlangstrings.append(self.get_setlangstring(reg_lang))
 
         return setlangstrings
 
@@ -540,12 +540,12 @@ class MultiLangString:
     @Validator.validate_type_decorator
     def get_setlangstring(self, lang: str) -> SetLangString:
         registered_lang = self._get_registered_lang(lang)
-        if registered_lang:
+        if registered_lang is not None:
             return SetLangString(texts=self.mls_dict[registered_lang], lang=lang)
         return SetLangString(lang=lang)
 
     def get_multilangstring(self, langs: list[str]) -> "MultiLangString":
-        Validator.validate_iterable_type(langs, list, str)
+        Validator.validate_type_iterable(langs, list, str)
 
         new_mls = MultiLangString()
         for lang in langs:
@@ -572,7 +572,7 @@ class MultiLangString:
             return new_sls
 
     def pop_multilangstring(self, langs: list[str]) -> "MultiLangString":
-        Validator.validate_iterable_type(langs, list, str)
+        Validator.validate_type_iterable(langs, list, str)
 
         new_mls = self.get_multilangstring(langs)
         for lang in langs:
@@ -583,7 +583,7 @@ class MultiLangString:
 
     def has_pref_lang_entries(self) -> bool:
         registered_lang = self._get_registered_lang(self.pref_lang)
-        return len(self.mls_dict[registered_lang]) > 0 if registered_lang else False
+        return len(self.mls_dict[registered_lang]) > 0 if (registered_lang is not None) else False
 
     # --------------------------------------------------
     # Overwritten Dictionary's Dunder Methods
@@ -600,7 +600,7 @@ class MultiLangString:
         reg_lang = self._get_registered_lang(lang)
 
         # Del valid using registered lang or raise KeyError when invalid (not registered in any case)
-        del_lang = reg_lang if reg_lang else lang
+        del_lang = reg_lang if (reg_lang is not None) else lang
         del self.mls_dict[del_lang]
 
     @Validator.validate_type_decorator
@@ -640,7 +640,7 @@ class MultiLangString:
         reg_lang = self._get_registered_lang(lang)
 
         # Get valid using registered lang or raise KeyError when invalid (not registered in any case)
-        get_lang = reg_lang if reg_lang else lang
+        get_lang = reg_lang if (reg_lang is not None) else lang
         return self.mls_dict[get_lang]
 
     def __hash__(self) -> int:
@@ -686,11 +686,11 @@ class MultiLangString:
 
     def __setitem__(self, lang: str, texts: set[str]) -> None:
         """Allow setting entries by language."""
-        Validator.validate_single_type(lang, str)
-        Validator.validate_iterable_type(texts, set, str)
+        Validator.validate_type_single(lang, str)
+        Validator.validate_type_iterable(texts, set, str)
 
         registered_lang = self._get_registered_lang(lang)
-        add_lang = registered_lang if registered_lang else lang
+        add_lang = registered_lang if (registered_lang is not None) else lang
 
         if texts:
             for text in texts:
@@ -751,9 +751,9 @@ class MultiLangString:
         :return: A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.
         """
 
-        Validator.validate_iterable_type(mls_dict, dict, str)
+        Validator.validate_type_iterable(mls_dict, dict, str)
         for key in mls_dict:
-            Validator.validate_iterable_type(mls_dict[key], set, str)
+            Validator.validate_type_iterable(mls_dict[key], set, str)
 
         # Step 1: Identify case-insensitive duplicates and prepare for merging
         duplicates = {}

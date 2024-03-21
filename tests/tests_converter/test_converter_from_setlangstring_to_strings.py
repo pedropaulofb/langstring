@@ -3,6 +3,7 @@ import pytest
 from langstring import Converter
 from langstring import LangString
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -52,5 +53,5 @@ def test_from_setlangstring_to_strings_invalid_input(invalid_input):
     :param invalid_input: The invalid input to test.
     :param expected_error: The expected error message.
     """
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'SetLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_setlangstring_to_strings(invalid_input)

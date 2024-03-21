@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -38,15 +39,15 @@ def test_multilangstring_contains_positive(input_lang, expected_result):
 
 
 @pytest.mark.parametrize(
-    "input_lang, expected_exception, match_msg",
+    "input_lang, expected_exception",
     [
-        (None, TypeError, "Argument .+ must be of type 'str', but got"),  # Non-string input
-        (123, TypeError, "Argument .+ must be of type 'str', but got"),  # Non-string input
-        ([], TypeError, "Argument .+ must be of type 'str', but got"),  # List as input
-        ({}, TypeError, "Argument .+ must be of type 'str', but got"),  # Dict as input
+        (None, TypeError),  # Non-string input
+        (123, TypeError),  # Non-string input
+        ([], TypeError),  # List as input
+        ({}, TypeError),  # Dict as input
     ],
 )
-def test_multilangstring_contains_negative(input_lang, expected_exception, match_msg):
+def test_multilangstring_contains_negative(input_lang, expected_exception):
     """Test the __contains__ method in MultiLangString for negative scenarios, expecting exceptions.
 
     :param input_lang: The language code (or invalid input) to check in the MultiLangString instance.
@@ -54,7 +55,7 @@ def test_multilangstring_contains_negative(input_lang, expected_exception, match
     :param match_msg: The expected message in the exception.
     """
     mls = MultiLangString(mls_dict={"en": {"Hello World"}})
-    with pytest.raises(expected_exception, match=match_msg):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         assert input_lang in mls
 
 
@@ -76,5 +77,5 @@ def test_multilangstring_contains_edge_cases(input_lang, expected_result):
 def test_multilangstring_operation_on_itself():
     """Test operations on itself to ensure stability and expected behavior."""
     mls_instance = MultiLangString(mls_dict={"en": {"Hello World"}})
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls_instance in mls_instance

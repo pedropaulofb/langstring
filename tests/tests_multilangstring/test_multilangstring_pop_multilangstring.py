@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -77,5 +78,5 @@ def test_pop_multilangstring_invalid_input(langs_to_pop, expected_exception):
     :param expected_exception: Expected exception type.
     """
     mls = MultiLangString({"en": {"Hello", "World"}})
-    with pytest.raises(expected_exception, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.pop_multilangstring(langs_to_pop)

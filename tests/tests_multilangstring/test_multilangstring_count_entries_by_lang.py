@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -42,5 +43,5 @@ def test_count_entries_by_lang_invalid_lang_type(invalid_lang):
     Test the `count_entries_by_lang` method with various invalid language types to ensure type validation.
     """
     mls = MultiLangString()
-    with pytest.raises(TypeError, match=".*must be of type 'str'.*"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.count_entries_by_lang(invalid_lang)

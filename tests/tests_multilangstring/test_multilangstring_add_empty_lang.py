@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -53,15 +54,15 @@ def test_add_empty_lang_does_not_overwrite_existing_languages(lang: str):
 
 
 @pytest.mark.parametrize(
-    "lang, expected_exception, match_message",
+    "lang, expected_exception",
     [
-        (123, TypeError, "Argument '123' must be of type 'str', but got 'int'."),
-        (None, TypeError, "Argument 'None' must be of type 'str', but got 'NoneType'."),
-        ([], TypeError, "Argument .+ must be of type 'str', but got 'list'."),
-        (True, TypeError, "Argument 'True' must be of type 'str', but got 'bool'."),
+        (123, TypeError),
+        (None, TypeError),
+        ([], TypeError),
+        (True, TypeError),
     ],
 )
-def test_add_empty_lang_with_invalid_language_type(lang, expected_exception, match_message):
+def test_add_empty_lang_with_invalid_language_type(lang, expected_exception):
     """Test `add_empty_lang` raises TypeError for invalid language types.
 
     :param lang: The invalid language code to add.
@@ -69,7 +70,7 @@ def test_add_empty_lang_with_invalid_language_type(lang, expected_exception, mat
     :param match_message: A substring of the expected error message to match against the raised exception.
     """
     mls = MultiLangString()
-    with pytest.raises(expected_exception, match=match_message):
+    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
         mls.add_empty_lang(lang)
 
 

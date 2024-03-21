@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 def test_discard_text_in_pref_lang_removes_existing_text():
@@ -93,7 +94,7 @@ def test_discard_text_in_pref_lang_with_invalid_text_type():
     Test that `discard_text_in_pref_lang` raises a TypeError when provided with an invalid text type.
     """
     mls = MultiLangString({"en": {"Hello"}}, "en")
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_text_in_pref_lang(123)  # Invalid text type
 
 
@@ -109,7 +110,7 @@ def test_discard_text_in_pref_lang_with_invalid_values(text_to_discard):
     Test that `discard_text_in_pref_lang` raises a TypeError with a descriptive message for null and invalid value types.
     """
     mls = MultiLangString({"en": {"Hello"}}, "en")
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.discard_text_in_pref_lang(text_to_discard)
 
 

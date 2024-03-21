@@ -32,3 +32,34 @@ def test_has_pref_lang_entries_parametrized(mls_data, pref_lang, expected_result
     assert (
         mls.has_pref_lang_entries() == expected_result
     ), f"Expected {expected_result} for preferred language '{pref_lang}' with data {mls_data}"
+
+
+@pytest.mark.parametrize(
+    "initial_contents, pref_lang, expected_result",
+    [
+        # Case 1: Preferred language is empty string, and entries exist for it.
+        ({"": {"An entry without language"}}, "", True),
+        # Case 2: Entries for both specified languages and empty string exist, preferred language is empty string.
+        ({"": {"An entry without language"}, "en": {"Hello"}, "fr": {"Bonjour"}}, "", True),
+        # Case 3: No entries for the empty string, but other languages exist; preferred language is empty string.
+        ({"en": {"Hello"}, "fr": {"Bonjour"}}, "", False),
+        # Case 4: MultiLangString is entirely empty, preferred language is empty string.
+        ({}, "", False),
+        # Case 5: Only specified languages exist in MultiLangString, no empty string entries; preferred language is empty string.
+        ({"en": {"Hello"}, "fr": {"Bonjour"}, "es": {"Hola"}}, "", False),
+    ],
+)
+def test_has_pref_lang_entries_with_empty_string(initial_contents, pref_lang, expected_result):
+    """
+    Test the `has_pref_lang_entries` method for handling the empty string as a preferred language across various scenarios.
+
+    :param initial_contents: Initial contents of the MultiLangString instance.
+    :param pref_lang: The preferred language set for the test, specifically focusing on the empty string.
+    :param expected_result: The expected boolean result indicating whether entries for the preferred language exist.
+    """
+    mls = MultiLangString(initial_contents)
+    mls.pref_lang = pref_lang  # Setting the preferred language to the test case's preference
+    result = mls.has_pref_lang_entries()
+    assert (
+        result is expected_result
+    ), f"Expected {expected_result} for preferred language '{pref_lang}', but got {result}."

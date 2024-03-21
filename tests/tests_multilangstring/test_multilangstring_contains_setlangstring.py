@@ -2,6 +2,7 @@ import pytest
 
 from langstring import MultiLangString
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -51,7 +52,7 @@ def test_contains_setlangstring_with_invalid_type(invalid_type):
     :param invalid_type: An invalid type to pass to contains_setlangstring, expecting a TypeError.
     """
     mls = MultiLangString()
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'SetLangString'"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.contains_setlangstring(invalid_type)
 
 

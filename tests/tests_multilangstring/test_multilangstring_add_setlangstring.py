@@ -4,6 +4,7 @@ from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -52,7 +53,7 @@ def test_add_setlangstring_invalid_type(invalid_setlangstring):
     :param match_message: Expected error message or pattern.
     """
     mls = MultiLangString()
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'SetLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.add_setlangstring(invalid_setlangstring)
 
 

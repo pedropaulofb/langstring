@@ -4,6 +4,7 @@ import pytest
 
 from langstring import LangString
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -58,7 +59,7 @@ def test_get_langstring_invalid_inputs(lang, text) -> None:
     :param text: The text to search for, which might be invalid.
     """
     mls = MultiLangString({"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'str', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.get_langstring(text=text, lang=lang)
 
 

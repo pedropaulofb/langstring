@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -56,7 +57,7 @@ def test_add_multilangstring_to_itself():
 
 def test_add_multilangstring_with_none():
     mls = MultiLangString()
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'MultiLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.add_multilangstring(None)
 
 
@@ -70,7 +71,7 @@ def test_add_empty_multilangstring_to_empty():
 @pytest.mark.parametrize("invalid_arg", ["string", ["list"], 123])
 def test_add_multilangstring_with_invalid_type(invalid_arg):
     mls = MultiLangString()
-    with pytest.raises(TypeError, match="Argument '.+' must be of type 'MultiLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.add_multilangstring(invalid_arg)
 
 

@@ -1,6 +1,7 @@
 import pytest
 
 from langstring import SetLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 # Test cases for valid initialization
@@ -47,7 +48,7 @@ def test_setlangstring_init_invalid_texts(invalid_texts) -> None:
     :param invalid_texts: Invalid 'texts' input.
     :return: None. Asserts if TypeError is raised for invalid 'texts' input.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         SetLangString(invalid_texts, "en")
 
 
@@ -63,7 +64,7 @@ def test_setlangstring_init_invalid_lang(invalid_lang) -> None:
     :param invalid_lang: Invalid 'lang' input.
     :return: None. Asserts if TypeError is raised for invalid 'lang' input.
     """
-    with pytest.raises(TypeError, match=r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         SetLangString({"hello", "world"}, invalid_lang)
 
 

@@ -2,6 +2,7 @@ import pytest
 
 from langstring import Converter
 from langstring import LangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -45,7 +46,7 @@ def test_from_langstring_to_string_none_values(text: str, lang: str):
     :return: None
     :raises TypeError: When text or lang is None.
     """
-    with pytest.raises(TypeError, match="Invalid '.+' value received"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_langstring_to_string(LangString(text=text, lang=lang))
 
 

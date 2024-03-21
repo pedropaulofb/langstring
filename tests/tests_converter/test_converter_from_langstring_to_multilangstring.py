@@ -3,6 +3,7 @@ import pytest
 from langstring import Converter
 from langstring import LangString
 from langstring import MultiLangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.mark.parametrize(
@@ -51,7 +52,7 @@ def test_from_langstring_to_multilangstring_invalid_type(input_arg):
 
     :param input_arg: The input argument of invalid type.
     """
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'LangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_langstring_to_multilangstring(input_arg)
 
 
@@ -82,7 +83,7 @@ def test_from_langstring_to_multilangstring_none_values(input_text, input_lang):
     """
     Test `from_langstring_to_multilangstring` handling None values for text and lang.
     """
-    with raises(TypeError, match="Invalid .+ value received"):
+    with raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         lang_string = LangString(input_text, input_lang)  # LangString initialization might fail
         Converter.from_langstring_to_multilangstring(lang_string)
 

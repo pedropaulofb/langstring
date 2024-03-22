@@ -4,9 +4,6 @@ from langstring import MultiLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
-import pytest
-
-
 # TypeError test for remove_entry
 @pytest.mark.parametrize(
     "text, lang",
@@ -142,6 +139,7 @@ def test_remove_entry_value_error(text, lang):
     mls = MultiLangString({"en": {"hello", "world"}})
     with pytest.raises(ValueError, match="Entry .+ not found in the MultiLangString."):
         mls.remove_entry(text, lang)
+
 
 @pytest.mark.parametrize(
     "initial_contents, lang_to_remove",

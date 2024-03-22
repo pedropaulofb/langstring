@@ -24,8 +24,6 @@ foundational tools for handling multilingual text data in various formats.
 from typing import Optional
 from typing import Union
 
-from icecream import ic
-
 from .langstring import LangString
 from .multilangstring import MultiLangString
 from .setlangstring import SetLangString
@@ -281,17 +279,47 @@ class Converter(metaclass=NonInstantiable):
         :rtype: MultiLangString
         :raises TypeError: If the arg is not of type SetLangString.
         """
-        new_mls_dict: dict[str, set[str]] = {arg.lang: arg.texts}
-        return MultiLangString(mls_dict=new_mls_dict, pref_lang=arg.lang)
+        new_mls = MultiLangString()
+        new_mls.add_setlangstring(arg)
+        return new_mls
 
     @staticmethod
     def from_setlangstrings_to_multilangstring(arg: list[SetLangString]) -> MultiLangString:
-        new_mls = MultiLangString()
+        """
+        Convert a list of SetLangString objects to a MultiLangString object. If there are different casings for the
+        same lang tag among the SetLangString objects in the input list, the casefolded version of the lang tag is used.
+        If only a single case is used, that case is adopted.
 
-        for setlangstring in arg:
-            new_mls.add_setlangstring(setlangstring)
+        :param setlangstrings: List of SetLangString instances to be converted.
+        :return: A MultiLangString instance with aggregated texts under normalized language tags.
+        """
+        Validator.validate_type_iterable(arg, list, SetLangString)
+        lang_tags = {}
+        for sls in arg:
+            lang = sls.lang
+            # Collect all variants of language tags
+            if lang.lower() not in lang_tags:
+                lang_tags[lang.lower()] = set()
+            lang_tags[lang.lower()].add(lang)
 
-        return new_mls
+        # Determine final lang tag casing
+        final_lang_tags = {}
+        for lang_lower, variants in lang_tags.items():
+            if len(variants) > 1:
+                # Multiple casings found, use casefolded version
+                final_lang_tags[lang_lower] = lang_lower
+            else:
+                # Single casing, use as is
+                final_lang_tags[lang_lower] = variants.pop()
+
+        # Aggregate texts under the determined language tags
+        aggregated_texts = {final_lang: set() for final_lang in final_lang_tags.values()}
+        for sls in arg:
+            normalized_lang = final_lang_tags[sls.lang.lower()]
+            aggregated_texts[normalized_lang].update(sls.texts)
+
+        # Create and return the MultiLangString object
+        return MultiLangString(mls_dict=aggregated_texts)
 
     # ---------------------------------------------
     # MultiLangStrings' Conversion Methods
@@ -373,7 +401,8 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstrings_to_setlangstrings(
         arg: list[MultiLangString], languages: Optional[list[str]] = None
     ) -> list[SetLangString]:
-        # TODO: Add type validation.
+        Validator.validate_type_iterable(arg, list, MultiLangString)
+        Validator.validate_type_iterable(languages, list, str, optional=True)
         setlangstrings = []
 
         for multilangstring in arg:

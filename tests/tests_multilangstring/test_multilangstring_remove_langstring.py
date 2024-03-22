@@ -61,6 +61,7 @@ def test_remove_langstring_value_error(init_data, langstring_to_remove):
     with pytest.raises(ValueError, match="Entry .+ not found in the MultiLangString."):
         mls.remove_langstring(langstring_to_remove), "Expected exception was not raised."
 
+
 # TypeError test for remove_langstring with invalid types
 @pytest.mark.parametrize(
     "init_data, langstring_to_remove",

@@ -1,6 +1,8 @@
 import pytest
 
-from langstring import LangString, Converter, SetLangString
+from langstring import Converter
+from langstring import LangString
+from langstring import SetLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 

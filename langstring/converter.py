@@ -24,6 +24,8 @@ foundational tools for handling multilingual text data in various formats.
 from typing import Optional
 from typing import Union
 
+from icecream import ic
+
 from .langstring import LangString
 from .multilangstring import MultiLangString
 from .setlangstring import SetLangString
@@ -166,7 +168,9 @@ class Converter(metaclass=NonInstantiable):
         if len(new_lang) > 1:
             raise ValueError("The conversion can only be performed from LangStrings with the same language.")
 
-        return SetLangString(texts=new_texts, lang=new_lang.pop())
+        final_lang = "" if not len(new_lang) else new_lang.pop()
+
+        return SetLangString(texts=new_texts, lang=final_lang)
 
     @staticmethod
     def from_langstrings_to_setlangstrings(arg):

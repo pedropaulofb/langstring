@@ -4,29 +4,49 @@ from langstring import MultiLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
+import pytest
+
+
+# TypeError test for remove_entry
 @pytest.mark.parametrize(
-    "text, lang, expected_exception ",
+    "text, lang",
     [
-        (123, "en", TypeError),
-        ("123", "en", ValueError),
-        ("hello", 123, TypeError),
-        (" hello", "en", ValueError),
-        ("Hello", "en", ValueError),
-        ("hello", " en", ValueError),
-        ("hello", "", ValueError),
+        (123, "en"),  # text is not a string
+        ("hello", 123),  # lang is not a string
     ],
 )
-def test_remove_entry_exceptions(text, lang, expected_exception):
+def test_remove_entry_type_error(text, lang):
     """
-    Test remove_entry method raises expected exceptions with corresponding messages for invalid inputs or when an entry does not exist.
+    Test remove_entry method raises TypeError for invalid input types.
 
     :param text: Text of the entry to be removed.
     :param lang: Language of the entry to be removed.
-    :param expected_exception: Expected exception type.
-    :param expected_message: Expected error message.
     """
     mls = MultiLangString({"en": {"hello", "world"}})
-    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
+        mls.remove_entry(text, lang)
+
+
+# ValueError test for remove_entry
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        ("123", "en"),  # Assuming this value combination is invalid for the operation
+        (" hello", "en"),  # Leading space in text might be considered invalid
+        ("Hello", "en"),  # Case sensitivity issue, assuming 'Hello' is not present
+        ("hello", " en"),  # Leading space in lang might be considered invalid
+        ("hello", ""),  # Empty lang string is invalid
+    ],
+)
+def test_remove_entry_value_error(text, lang):
+    """
+    Test remove_entry method raises ValueError for invalid input values.
+
+    :param text: Text of the entry to be removed.
+    :param lang: Language of the entry to be removed.
+    """
+    mls = MultiLangString({"en": {"hello", "world"}})
+    with pytest.raises(ValueError, match="Entry .+ not found in the MultiLangString."):
         mls.remove_entry(text, lang)
 
 
@@ -79,45 +99,122 @@ def test_remove_entry_content(initial_contents, text_to_remove, lang_to_remove, 
     ), f"Expected contents after removal: {expected_contents}, got: {mls.mls_dict}"
 
 
+import pytest
+
+
 @pytest.mark.parametrize(
-    "initial_contents, lang_to_remove, expected_exception",
+    "text, lang",
     [
-        ({"en": {"hello", "world"}}, None, TypeError),
-        ({"en": {"hello", "world"}}, "", ValueError),
+        (123, "en"),  # text is not a string
+        ("hello", 123),  # lang is not a string
     ],
 )
-def test_remove_entry_edge_cases_lang(initial_contents, lang_to_remove, expected_exception):
+def test_remove_entry_type_error(text, lang):
     """
-    Test remove_entry method with edge cases for 'lang' parameter, such as null and empty string values.
+    Test remove_entry method raises TypeError for invalid input types.
+
+    :param text: Text of the entry to be removed.
+    :param lang: Language of the entry to be removed.
+    """
+    mls = MultiLangString({"en": {"hello", "world"}})
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
+        mls.remove_entry(text, lang)
+
+
+# ValueError test for remove_entry
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        ("123", "en"),  # Assuming this value combination is invalid for the operation
+        (" hello", "en"),  # Leading space in text might be considered invalid
+        ("Hello", "en"),  # Case sensitivity issue, assuming 'Hello' is not present
+        ("hello", " en"),  # Leading space in lang might be considered invalid
+        ("hello", ""),  # Empty lang string is invalid
+    ],
+)
+def test_remove_entry_value_error(text, lang):
+    """
+    Test remove_entry method raises ValueError for invalid input values.
+
+    :param text: Text of the entry to be removed.
+    :param lang: Language of the entry to be removed.
+    """
+    mls = MultiLangString({"en": {"hello", "world"}})
+    with pytest.raises(ValueError, match="Entry .+ not found in the MultiLangString."):
+        mls.remove_entry(text, lang)
+
+@pytest.mark.parametrize(
+    "initial_contents, lang_to_remove",
+    [
+        ({"en": {"hello", "world"}}, None),  # lang_to_remove is None
+    ],
+)
+def test_remove_entry_edge_cases_lang_type_error(initial_contents, lang_to_remove):
+    """
+    Test remove_entry method with edge cases for 'lang' parameter, such as null value.
 
     :param initial_contents: Initial contents of the MultiLangString.
-    :param lang_to_remove: Language code to remove entry from, testing null and empty values.
-    :param expected_exception: Expected exception type for edge cases.
-    :param expected_message: Expected error message for edge cases.
+    :param lang_to_remove: Language code to remove entry from, testing null value.
     """
     mls = MultiLangString(initial_contents)
-    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.remove_entry("hello", lang_to_remove)
 
 
+# ValueError test for remove_entry with edge cases for 'lang' parameter
 @pytest.mark.parametrize(
-    "text, lang, expected_exception",
+    "initial_contents, lang_to_remove",
     [
-        (None, "en", TypeError),
-        ("", "en", ValueError),
+        ({"en": {"hello", "world"}}, ""),  # lang_to_remove is an empty string
     ],
 )
-def test_remove_entry_invalid_types_and_values(text, lang, expected_exception):
+def test_remove_entry_edge_cases_lang_value_error(initial_contents, lang_to_remove):
     """
-    Test remove_entry method handles null, empty, and invalid type parameters correctly.
+    Test remove_entry method with edge cases for 'lang' parameter, such as empty string value.
 
-    :param text: Text of the entry to be removed, testing null and empty values.
+    :param initial_contents: Initial contents of the MultiLangString.
+    :param lang_to_remove: Language code to remove entry from, testing empty string value.
+    """
+    mls = MultiLangString(initial_contents)
+    with pytest.raises(ValueError, match="Entry .+ not found in the MultiLangString."):
+        mls.remove_entry("hello", lang_to_remove)
+
+
+# TypeError test for remove_entry with invalid text type
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        (None, "en"),  # text is None
+    ],
+)
+def test_remove_entry_invalid_types_type_error(text, lang):
+    """
+    Test remove_entry method handles null type parameters correctly.
+
+    :param text: Text of the entry to be removed, testing null value.
     :param lang: Language of the entry to be removed.
-    :param expected_exception: Expected exception type for invalid inputs.
-    :param expected_message: Expected error message for invalid inputs.
     """
     mls = MultiLangString({"en": {"hello", "world"}})
-    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
+        mls.remove_entry(text, lang)
+
+
+# ValueError test for remove_entry with empty text value
+@pytest.mark.parametrize(
+    "text, lang",
+    [
+        ("", "en"),  # text is an empty string
+    ],
+)
+def test_remove_entry_invalid_values_value_error(text, lang):
+    """
+    Test remove_entry method handles empty value parameters correctly.
+
+    :param text: Text of the entry to be removed, testing empty value.
+    :param lang: Language of the entry to be removed.
+    """
+    mls = MultiLangString({"en": {"hello", "world"}})
+    with pytest.raises(ValueError, match="Entry .+ not found in the MultiLangString."):
         mls.remove_entry(text, lang)
 
 

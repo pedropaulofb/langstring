@@ -41,26 +41,43 @@ def test_remove_langstring_valid_cases(init_data, langstring_text, langstring_la
 
 
 @pytest.mark.parametrize(
-    "init_data, langstring_to_remove, expected_exception",
+    "init_data, langstring_to_remove",
     [
-        ({"en": {"test1"}}, LangString("nonexistent", "en"), ValueError),
-        ({"en": set()}, LangString("test1", "en"), ValueError),
-        ({"en": {"test1"}}, LangString("", "en"), ValueError),
-        ({"en": {"test1"}}, LangString("😊", "en"), ValueError),
-        ({"en": {"test1"}}, LangString("test@#", "en"), ValueError),
-        ({"en": {"test1"}}, None, TypeError),
-        ({"en": {"test1"}}, "LangString", TypeError),
-        ({"en": {"test1"}}, True, TypeError),
-        ({"en": {"test1"}}, {}, TypeError),
+        ({"en": {"test1"}}, LangString("nonexistent", "en")),
+        ({"en": set()}, LangString("test1", "en")),
+        ({"en": {"test1"}}, LangString("", "en")),
+        ({"en": {"test1"}}, LangString("😊", "en")),
+        ({"en": {"test1"}}, LangString("test@#", "en")),
     ],
 )
-def test_remove_langstring_invalid_cases(init_data, langstring_to_remove, expected_exception):
-    """Test removing LangStrings from MultiLangString for scenarios expected to fail.
+def test_remove_langstring_value_error(init_data, langstring_to_remove):
+    """
+    Test removing LangStrings from MultiLangString for scenarios expected to fail with ValueError.
 
     :param init_data: Initial data for MultiLangString instance.
     :param langstring_to_remove: LangString instance to be removed.
-    :param expected_exception: Exception class expected to be raised.
     """
     mls = MultiLangString(init_data)
-    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
+    with pytest.raises(ValueError, match="Entry .+ not found in the MultiLangString."):
+        mls.remove_langstring(langstring_to_remove), "Expected exception was not raised."
+
+# TypeError test for remove_langstring with invalid types
+@pytest.mark.parametrize(
+    "init_data, langstring_to_remove",
+    [
+        ({"en": {"test1"}}, None),
+        ({"en": {"test1"}}, "LangString"),
+        ({"en": {"test1"}}, True),
+        ({"en": {"test1"}}, {}),
+    ],
+)
+def test_remove_langstring_type_error(init_data, langstring_to_remove):
+    """
+    Test removing LangStrings from MultiLangString for scenarios expected to fail with TypeError.
+
+    :param init_data: Initial data for MultiLangString instance.
+    :param langstring_to_remove: LangString instance to be removed.
+    """
+    mls = MultiLangString(init_data)
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         mls.remove_langstring(langstring_to_remove), "Expected exception was not raised."

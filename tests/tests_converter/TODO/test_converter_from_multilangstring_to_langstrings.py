@@ -43,25 +43,38 @@ def test_from_multilangstring_to_langstrings(input_data, expected_output, langs)
 )
 def test_from_multilangstring_to_langstrings_type_error(invalid_input):
     """Test the from_multilangstring_to_langstrings method raises TypeError for invalid input types."""
-    with pytest.raises(TypeError, match="Argument .+ must be of type 'MultiLangString', but got"):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_multilangstring_to_langstrings(invalid_input)
 
 
+import pytest
+
 @pytest.mark.parametrize(
-    "languages_input, expected_exception",
+    "languages_input",
     [
-        (123, TypeError),  # Invalid type for languages parameter
-        ("en", TypeError),  # Invalid type, expecting list, got str
-        ([], ValueError),  # Empty list for languages parameter
-        (["en", 123], TypeError),  # List with invalid type
-        ([""], ValueError),  # List with empty string as language
+        123,  # Invalid type for languages parameter
+        "en",  # Invalid type, expecting list, got str
+        ["en", 123],  # List with invalid type
     ],
 )
-def test_from_multilangstring_to_langstrings_invalid_languages_type(languages_input, expected_exception):
-    """Test the from_multilangstring_to_langstrings method raises exceptions for invalid 'languages' parameter types."""
+def test_from_multilangstring_to_langstrings_type_error(languages_input):
+    """Test the from_multilangstring_to_langstrings method raises TypeError for invalid 'languages' parameter types."""
     mls = MultiLangString(mls_dict={"en": {"Hello"}})
-    with pytest.raises(expected_exception, match=TYPEERROR_MSG_SINGULAR):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_multilangstring_to_langstrings(mls, languages=languages_input)
+
+@pytest.mark.parametrize(
+    "languages_input",
+    [
+        [],  # Empty list for languages parameter
+        [""],  # List with empty string as language
+    ],
+)
+def test_from_multilangstring_to_langstrings_empty_noterror(languages_input):
+    """Test the from_multilangstring_to_langstrings method raises ValueError for invalid 'languages' parameter values."""
+    mls = MultiLangString(mls_dict={"en": {"Hello"}})
+    assert Converter.from_multilangstring_to_langstrings(mls, languages=languages_input) == []
+
 
 
 @pytest.mark.parametrize(

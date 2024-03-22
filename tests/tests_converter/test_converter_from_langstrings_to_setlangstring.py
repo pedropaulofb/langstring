@@ -1,6 +1,6 @@
 import pytest
 
-from langstring import LangString
+from langstring import LangString, SetLangString
 from langstring.converter import Converter
 
 
@@ -22,8 +22,8 @@ def test_from_langstrings_to_setlangstring_valid(langstrings, expected_texts, ex
 
 
 def test_from_langstrings_to_setlangstring_empty_list():
-    with pytest.raises(ValueError):
-        Converter.from_langstrings_to_setlangstring([])
+    z = Converter.from_langstrings_to_setlangstring([])
+    assert z == SetLangString()
 
 
 @pytest.mark.parametrize(

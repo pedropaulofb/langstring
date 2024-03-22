@@ -157,11 +157,6 @@ class Converter(metaclass=NonInstantiable):
         new_lang = set()
 
         for langstring in arg:
-            if not isinstance(langstring, LangString):
-                raise TypeError(
-                    f"Invalid element type inside arg argument. "
-                    f"Expected 'LangString', got '{type(langstring).__name__}'."
-                )
             new_texts.add(langstring.text)
             new_lang.add(langstring.lang)
 
@@ -173,9 +168,34 @@ class Converter(metaclass=NonInstantiable):
         return SetLangString(texts=new_texts, lang=final_lang)
 
     @staticmethod
-    def from_langstrings_to_setlangstrings(arg):
-        # TODO: To be implemented.
-        pass
+    def from_langstrings_to_setlangstrings(arg: list[LangString]) -> list[SetLangString]:
+        Validator.validate_type_iterable(arg, list, LangString)
+
+        # Step 1: Detect case variants
+        original_langs = {langstring.lang for langstring in arg}
+        casefolded_langs = {langstring.lang.casefold() for langstring in arg}
+        normalize_langs = len(original_langs) != len(casefolded_langs)
+
+        lang_groups = {}
+
+        for langstring in arg:
+            lang_key = langstring.lang.casefold() if normalize_langs else langstring.lang
+
+            if lang_key not in lang_groups:
+                lang_groups[lang_key] = set()
+            lang_groups[lang_key].add(langstring.text)
+
+        set_langstrings = []
+        for lang, texts in lang_groups.items():
+            # Decide on the language code to use in the output based on normalization
+            final_lang = (
+                lang
+                if not normalize_langs
+                else [original_lang for original_lang in original_langs if original_lang.casefold() == lang][0]
+            )
+            set_langstrings.append(SetLangString(texts=texts, lang=final_lang))
+
+        return set_langstrings
 
     @Validator.validate_type_decorator
     @staticmethod

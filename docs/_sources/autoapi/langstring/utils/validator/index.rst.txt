@@ -71,7 +71,7 @@ Attributes
    and language tag validity. The validation rules are determined by control flags from a control class.
 
    .. py:method:: validate_flags_text(flag_type, text)
-      :staticmethod:
+      :classmethod:
 
 
    .. py:method:: validate_flags_lang(flag_type, lang)
@@ -114,11 +114,11 @@ Attributes
       :staticmethod:
 
 
-   .. py:method:: validate_single_type(arg, arg_exp_type, optional = False)
+   .. py:method:: validate_type_single(arg, arg_exp_type, optional = False)
       :staticmethod:
 
 
-   .. py:method:: validate_iterable_type(arg, arg_exp_type, arg_content_exp_type, optional = False)
+   .. py:method:: validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional = False)
       :classmethod:
 
 

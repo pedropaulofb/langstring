@@ -261,9 +261,12 @@ class Converter(metaclass=NonInstantiable):
         return arg.to_langstrings()
 
     @staticmethod
-    def from_setlangstrings_to_langstrings(arg):
-        # TODO: To be implemented.
-        pass
+    def from_setlangstrings_to_langstrings(arg: list[SetLangString]) -> list[LangString]:
+        Validator.validate_type_iterable(arg, list, SetLangString)
+        langstrings = []
+        for setlangstring in arg:
+            langstrings.extend(setlangstring.to_langstrings())
+        return langstrings
 
     @Validator.validate_type_decorator
     @staticmethod
@@ -285,10 +288,10 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_setlangstrings_to_multilangstring(arg: list[SetLangString]) -> MultiLangString:
-        """
-        Convert a list of SetLangString objects to a MultiLangString object. If there are different casings for the
-        same lang tag among the SetLangString objects in the input list, the casefolded version of the lang tag is used.
-        If only a single case is used, that case is adopted.
+        """Convert a list of SetLangString objects to a MultiLangString object.
+
+        If there are different casings for the same lang tag among the SetLangString objects in the input list,
+        the casefolded version of the lang tag is used. If only a single case is used, that case is adopted.
 
         :param setlangstrings: List of SetLangString instances to be converted.
         :return: A MultiLangString instance with aggregated texts under normalized language tags.

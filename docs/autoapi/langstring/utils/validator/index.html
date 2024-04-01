@@ -160,7 +160,7 @@ determine the validation behavior.</p>
 and language tag validity. The validation rules are determined by control flags from a control class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validator.Validator.validate_flags_text">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_flags_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator.validate_flags_text" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_flags_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator.validate_flags_text" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -252,8 +252,8 @@ decorator to methods where the parameters or return types involve generic collec
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validator.Validator.validate_single_type">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_single_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_exp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator.validate_single_type" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validator.Validator.validate_type_single">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_type_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_exp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator.validate_type_single" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -269,8 +269,8 @@ decorator to methods where the parameters or return types involve generic collec
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validator.Validator.validate_iterable_type">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_iterable_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_exp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_content_exp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator.validate_iterable_type" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="langstring.utils.validator.Validator.validate_type_iterable">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_type_iterable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_exp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_content_exp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator.validate_type_iterable" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

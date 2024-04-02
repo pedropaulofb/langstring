@@ -407,9 +407,13 @@ class Converter(metaclass=NonInstantiable):
     ) -> list[SetLangString]:
         Validator.validate_type_iterable(arg, list, MultiLangString)
         Validator.validate_type_iterable(languages, list, str, optional=True)
-        setlangstrings = []
 
-        for multilangstring in arg:
-            setlangstrings.extend(multilangstring.to_setlangstrings(languages))
+        if len(arg):
+            unified_mls = arg[0]  # Initialize with the first element
+            for mls in arg[1:]:  # Loop through elements from the second to the last
+                unified_mls.add_multilangstring(mls)
+        else:
+            unified_mls = MultiLangString()
 
-        return setlangstrings
+
+        return unified_mls.to_setlangstrings(langs=languages)

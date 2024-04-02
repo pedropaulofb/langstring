@@ -1,161 +1,145 @@
 import pytest
 
-from langstring import Converter
-from langstring import LangString
-from langstring import MultiLangString
+from langstring import Converter, LangString, MultiLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
-@pytest.mark.parametrize(
-    "mls_dict, expected_output",
-    [
-        (
-            {"en": {"Hello"}, "fr": {"Bonjour"}, "es": {"Hola"}},
-            [
-                LangString(text="Hello", lang="en"),
-                LangString(text="Bonjour", lang="fr"),
-                LangString(text="Hola", lang="es"),
-            ],
-        ),
-        ({"de": {"Hallo"}, "it": {"Ciao"}}, [LangString(text="Hallo", lang="de"), LangString(text="Ciao", lang="it")]),
-        (
-            {"gr": {"Γειά"}, "ru": {"Привет"}},
-            [LangString(text="Γειά", lang="gr"), LangString(text="Привет", lang="ru")],
-        ),
-        (
-            {"emoji": {"😊"}, "special": {"@#&*"}},
-            [LangString(text="😊", lang="emoji"), LangString(text="@#&*", lang="special")],
-        ),
-    ],
-)
-def test_convert_multilangstring_to_langstrings_basic(mls_dict, expected_output):
-    """
-    Test conversion of MultiLangString with multiple languages to a list of LangString objects using parametrization.
-    """
-    mls = MultiLangString(mls_dict=mls_dict)
-    result = Converter.from_multilangstring_to_langstrings(mls)
-    assert all(isinstance(item, LangString) for item in result), "All items in result should be LangString instances."
-    assert len(result) == len(
-        expected_output
-    ), "Result should contain the same number of LangString instances as expected."
-    for langstring in expected_output:
-        assert langstring in result, f"Expected LangString {langstring} not found in result."
+@pytest.fixture
+def mls_with_multiple_languages():
+    return MultiLangString(mls_dict={"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}, "es": {"Hola", "Mundo"}})
 
-
-@pytest.mark.parametrize(
-    "languages, expected_texts",
-    [
-        (["en"], ["Hello"]),
-        (["fr"], ["Bonjour"]),
-        (["es", "fr"], ["Hola", "Bonjour"]),
-        (None, ["Hello", "Bonjour", "Hola"]),  # None to signify no language filtering
-    ],
-)
-def test_convert_multilangstring_with_language_filtering(languages, expected_texts):
-    """
-    Test conversion of a MultiLangString with filtering by languages.
-    """
-    mls = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}, "es": {"Hola"}})
-    result = Converter.from_multilangstring_to_langstrings(mls, languages=languages)
-    result_texts = [ls.text for ls in result]
-    assert sorted(result_texts) == sorted(
-        expected_texts
-    ), "Filtered conversion should only include specified languages."
-
-
-def test_convert_empty_multilangstring():
-    """
-    Test conversion of an empty MultiLangString to an empty list of LangString objects.
-    """
-    mls = MultiLangString()
-    result = Converter.from_multilangstring_to_langstrings(mls)
-    assert result == [], "Converting an empty MultiLangString should result in an empty list."
-
-
-@pytest.mark.parametrize(
-    "invalid_input",
-    ["Not a MultiLangString", 123, [], ({"not": "a dictionary"},), (True,), (None,), True],
-)
-def test_convert_multilangstring_to_langstrings_type_error(invalid_input):
-    """
-    Test that passing a non-MultiLangString object raises a TypeError, using parametrization for various types.
-    """
+@pytest.mark.parametrize("invalid_input", [None, 123, "string", [], {}, LangString(), True])
+def test_from_multilangstring_to_setlangstrings_invalid_type(invalid_input):
     with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
-        Converter.from_multilangstring_to_langstrings(invalid_input)
+        Converter.from_multilangstring_to_setlangstrings(invalid_input)
 
 
-def test_convert_multilangstring_to_langstrings_with_invalid_languages_param():
-    """
-    Test that passing an invalid type for the languages parameter raises a TypeError.
-    """
-    mls = MultiLangString(mls_dict={"en": {"Hello"}})
-    with pytest.raises(TypeError, match="Invalid argument with value 'en'. Expected 'list', but got 'str'."):
-        Converter.from_multilangstring_to_langstrings(mls, languages="en")  # Incorrect type for languages parameter
+def test_from_multilangstring_to_setlangstrings_empty_multilangstring():
+    mls = MultiLangString()
+    result = Converter.from_multilangstring_to_setlangstrings(mls)
+    assert isinstance(result, list), "Result should be a list"
+    assert not result, "Result list should be empty for an empty MultiLangString"
 
 
 @pytest.mark.parametrize(
-    "mls_dict, languages, expected_count",
+    "mls_dict, expected_langs_texts",
     [
-        ({"en": ["Hello", "Goodbye"], "fr": ["Bonjour", "Au revoir"]}, None, 4),
-        ({}, ["en"], 0),
-        ({"en": []}, ["en"], 0),
+        ({"en": {"Hello", "World"}}, [("en", {"Hello", "World"})]),
         (
-            {"en": ["Hello"], "en": ["Hello again"]},
-            ["en"],
-            1,
-        ),  # Duplicate keys in dict not possible, but for illustration
-        ({"spaces": {" Hello ", "World "}, "empty": {""}, "mixedCase": {"Hello", "WORLD"}}, None, 5),
-        ({"en": {" Hello"}, "fr": {"Bonjour "}}, None, 2),
-        ({"en": {"Hello"}, "cyrl": {"Привет"}, "gr": {"Γειά σου"}}, ["cyrl", "gr"], 2),
-        ({"with spaces": {"Hello"}}, None, 1),
+            {"fr": {"Bonjour", "Monde"}, "es": {"Hola", "Mundo"}},
+            [("fr", {"Bonjour", "Monde"}), ("es", {"Hola", "Mundo"})],
+        ),
+        ({"de": set(), "it": {"Ciao"}}, [("de", set()), ("it", {"Ciao"})]),  # Testing empty language set
+        ({}, []),  # Testing completely empty MultiLangString
+        # Testing with multiple texts in the same language
+        (
+            {"en": {"Hello", "Good morning"}, "fr": {"Bonjour", "Bonsoir"}},
+            [("en", {"Hello", "Good morning"}), ("fr", {"Bonjour", "Bonsoir"})],
+        ),
+(
+    {"en": {" ", "  "}},  # Spaces as valid texts
+    [("en", {" ", "  "})]
+),
+(
+    {"ru": {"Привет", "Мир"}, "el": {"Γειά", "Κόσμος"}},  # Cyrillic and Greek characters
+    [("ru", {"Привет", "Мир"}), ("el", {"Γειά", "Κόσμος"})]
+),
+(
+    {"emoji": {"😊", "😂"}},  # Emojis as valid texts
+    [("emoji", {"😊", "😂"})]
+),
+(
+    {"mixed": {"Hello", "HELLO", "hello"}},  # Different cases considered distinct
+    [("mixed", {"Hello", "HELLO", "hello"})]
+),
+(
+    {"special": {"Hello@world", "Hi#there"}},  # Special characters in texts
+    [("special", {"Hello@world", "Hi#there"})]
+),
     ],
 )
-def test_convert_multilangstring_to_langstrings_edge_cases(mls_dict, languages, expected_count):
-    """
-    Test conversion of MultiLangString considering unusual or edge cases.
-    """
-    mls = MultiLangString(mls_dict={lang: set(texts) for lang, texts in mls_dict.items()})
-    result = Converter.from_multilangstring_to_langstrings(mls, languages=languages)
-    assert len(result) == expected_count, f"Expected {expected_count} LangStrings, got {len(result)}."
+def test_from_multilangstring_to_setlangstrings_basic_conversion(mls_dict, expected_langs_texts):
+    mls = MultiLangString(mls_dict=mls_dict)
+    result = Converter.from_multilangstring_to_setlangstrings(mls)
+    assert len(result) == len(expected_langs_texts), "Number of SetLangString objects does not match expected count"
+    for lang, texts in expected_langs_texts:
+        found_sls = next((sls for sls in result if sls.lang == lang and sls.texts == texts), None)
+        assert found_sls is not None, f"SetLangString for language {lang} with texts {texts} not found"
+
+
+@pytest.mark.parametrize("languages, expected_len", [(["en"], 1), (["en", "fr"], 2), (["de"], 0), ([], 0),
+(["ru", "el"], 0),  # Cyrillic and Greek languages not present
+(["emoji"], 0),  # Emoji language not present
+(["mixed"], 0),  # Mixed case language not present
+(["special"], 0),  # Special characters in language not present
+                         ])
+def test_from_multilangstring_to_setlangstrings_with_languages_param(
+    mls_with_multiple_languages, languages, expected_len
+):
+    result = Converter.from_multilangstring_to_setlangstrings(mls_with_multiple_languages, languages=languages)
+    assert len(result) == expected_len, f"Expected {expected_len} SetLangString objects for languages {languages}"
+
+
+@pytest.mark.parametrize("lang, texts", [("en", {"Hello", "World"}), ("fr", {"Bonjour", "Monde"}), # Adding cases with spaces, special characters, different charset, and emojis
+("spaced", {" Hello ", "World "}),  # Spaces before and after
+("special", {"Hello@world", "<Hi#there>"}),  # Special characters
+("greek", {"Γειά", "Κόσμος"}),  # Greek characters
+("emoji", {"😊", "😂"}),  # Emojis
+])
+def test_from_multilangstring_to_setlangstrings_content_conversion(lang, texts):
+    mls = MultiLangString(mls_dict={lang: texts})
+    result = Converter.from_multilangstring_to_setlangstrings(mls)
+    assert len(result) == 1, "Should return a single SetLangString object for one language"
+    sls = result[0]
+    assert sls.lang == lang and sls.texts == texts, "SetLangString content should match input MultiLangString"
 
 
 @pytest.mark.parametrize(
-    "mls_input, modification",
+    "mls_dict, expected_result",
     [
-        (MultiLangString(mls_dict={"en": {"Hello"}}), lambda x: x.add_langstring(LangString("Goodbye", "en"))),
-        (MultiLangString(), lambda x: None),
+        # Single language with different casings should be merged into one.
+        ({"en": {"Hello"}, "EN": {"Hi"}}, [("en", {"Hello", "Hi"})]),
+        # Multiple casings for multiple languages, all should be merged by language.
+        (
+            {"En": {"Hello"}, "en": {"World"}, "EN": {"Hi"}, "fr": {"Bonjour"}, "FR": {"Salut"}},
+            [("en", {"Hello", "World", "Hi"}), ("fr", {"Bonjour", "Salut"})],
+        ),
+        # No merging needed, single case per language.
+        ({"de": {"Hallo"}, "it": {"Ciao"}}, [("de", {"Hallo"}), ("it", {"Ciao"})]),
+(
+    {" en ": {"Hello"}, " EN ": {"Hi"}, " eN ": {"Hey"}},  # Spaces around language codes
+    [(" en ", {"Hello", "Hi", "Hey"})]
+),
+(
+    {"special@": {"One", "Two"}, "SPECIAL@": {"Three"}},  # Special characters in language codes
+    [("special@", {"One", "Two", "Three"})]
+),
+(
+    {"😊": {"Smile", "Joy"}, "😂": {"Laugh"}},  # Emojis as language codes
+    [("😊", {"Smile", "Joy"}), ("😂", {"Laugh"})]
+),
     ],
 )
-def test_convert_modified_multilangstring_to_langstrings(mls_input, modification):
-    """
-    Test conversion after modifying the MultiLangString object.
-    """
-    modification(mls_input)  # Apply modification
-    result = Converter.from_multilangstring_to_langstrings(mls_input)
-    assert isinstance(result, list) and all(
-        isinstance(ls, LangString) for ls in result
-    ), "Result should be a list of LangString instances."
+def test_from_multilangstring_to_setlangstrings_case_sensitivity(mls_dict, expected_result):
+    mls = MultiLangString(mls_dict=mls_dict)
+    result = Converter.from_multilangstring_to_setlangstrings(mls)
+
+    # Ensure the number of SetLangStrings matches the expected number of unique languages, considering case insensitivity.
+    assert len(result) == len(
+        expected_result
+    ), f"Expected {len(expected_result)} SetLangString objects, got {len(result)}"
+
+    # Verify that each expected language and its texts are correctly represented in the result.
+    for expected_lang, expected_texts in expected_result:
+        sls = next((r for r in result if r.lang.lower() == expected_lang.lower()), None)
+        assert sls is not None, f"Expected language '{expected_lang}' not found in result"
+        assert sls.texts == set(
+            expected_texts
+        ), f"Mismatch in texts for language '{expected_lang}': expected {set(expected_texts)}, got {sls.texts}"
+
+@pytest.mark.parametrize("invalid_languages", [123, "string", {}, LangString("Hello")])
+def test_from_multilangstring_to_setlangstrings_invalid_languages_type(mls_with_multiple_languages, invalid_languages):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
+        Converter.from_multilangstring_to_setlangstrings(mls_with_multiple_languages, languages=invalid_languages)
 
 
-@pytest.mark.parametrize(
-    "mls_dict_modification, expected_result_texts",
-    [
-        # Assuming None values are not intended based on your class definitions.
-        (lambda mls: mls.add_langstring(LangString(text="Goodbye", lang="en")), ["Hello", "Goodbye"]),
-        (lambda mls: mls.add_langstring(LangString(text="Hola", lang="es")), ["Hello", "Hola"]),
-        (lambda mls: mls.add_langstring(LangString(text="   trimmed  ", lang="en")), ["Hello", "   trimmed  "]),
-        (lambda mls: mls.add_langstring(LangString(text="Привет", lang="ru")), ["Hello", "Привет"]),
-        (lambda mls: mls.add_langstring(LangString(text="😊", lang="emoji")), ["Hello", "😊"]),
-    ],
-)
-def test_convert_multilangstring_modification_during_iteration(mls_dict_modification, expected_result_texts):
-    """
-    Test the method with a MultiLangString object that is modified before conversion.
-    """
-    mls = MultiLangString({"en": {"Hello"}})
-    mls_dict_modification(mls)  # Apply modification function to mls
-    result = Converter.from_multilangstring_to_langstrings(mls)
-    result_texts = [ls.text for ls in result]
-    assert sorted(result_texts) == sorted(
-        expected_result_texts
-    ), "The conversion result does not match the expected texts after modification."

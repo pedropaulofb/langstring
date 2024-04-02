@@ -382,7 +382,6 @@ class Converter(metaclass=NonInstantiable):
 
         return langstrings
 
-    @Validator.validate_type_decorator
     @staticmethod
     def from_multilangstring_to_setlangstrings(
         arg: MultiLangString, languages: Optional[list[str]] = None
@@ -398,6 +397,8 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[SetLangString]
         :raises TypeError: If the arg is not of type MultiLangString.
         """
+        Validator.validate_type_single(arg, MultiLangString)
+        Validator.validate_type_iterable(languages, list, str, optional=True)
         return arg.to_setlangstrings(langs=languages)
 
     @staticmethod

@@ -129,6 +129,7 @@ class Converter(metaclass=NonInstantiable):
     @staticmethod
     def from_langstrings_to_strings(arg):
         # TODO: To be implemented.
+        # TODO: Check using a strategy similar to the one I used for "from_multilangstrings_to_*"
         pass
 
     @Validator.validate_type_decorator
@@ -242,6 +243,7 @@ class Converter(metaclass=NonInstantiable):
     @staticmethod
     def from_setlangstrings_to_strings(arg):
         # TODO: To be implemented.
+        # TODO: Check using a strategy similar to the one I used for "from_multilangstrings_to_*"
         pass
 
     @Validator.validate_type_decorator
@@ -262,6 +264,7 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_setlangstrings_to_langstrings(arg: list[SetLangString]) -> list[LangString]:
+        # TODO: Check using a strategy similar to the one I used for "from_multilangstrings_to_*"
         Validator.validate_type_iterable(arg, list, SetLangString)
         langstrings = []
         for setlangstring in arg:
@@ -296,6 +299,7 @@ class Converter(metaclass=NonInstantiable):
         :param setlangstrings: List of SetLangString instances to be converted.
         :return: A MultiLangString instance with aggregated texts under normalized language tags.
         """
+        # TODO: Check using the same strategy I used for "from_multilangstrings_to_*"
         Validator.validate_type_iterable(arg, list, SetLangString)
         lang_tags = {}
         for sls in arg:
@@ -374,13 +378,17 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstrings_to_langstrings(
         arg: list[MultiLangString], languages: Optional[list[str]] = None
     ) -> list[LangString]:
-        # TODO: Add type validation.
-        langstrings = []
+        Validator.validate_type_iterable(arg, list, MultiLangString)
+        Validator.validate_type_iterable(languages, list, str, optional=True)
 
-        for multilangstring in arg:
-            langstrings.extend(multilangstring.to_langstrings(languages))
+        if len(arg):
+            unified_mls = arg[0]  # Initialize with the first element
+            for mls in arg[1:]:  # Loop through elements from the second to the last
+                unified_mls.add_multilangstring(mls)
+        else:
+            unified_mls = MultiLangString()
 
-        return langstrings
+        return unified_mls.to_langstrings(langs=languages)
 
     @staticmethod
     def from_multilangstring_to_setlangstrings(
@@ -414,6 +422,5 @@ class Converter(metaclass=NonInstantiable):
                 unified_mls.add_multilangstring(mls)
         else:
             unified_mls = MultiLangString()
-
 
         return unified_mls.to_setlangstrings(langs=languages)

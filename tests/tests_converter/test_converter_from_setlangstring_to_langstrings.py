@@ -8,26 +8,63 @@ from langstring import SetLangStringFlag
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
-def test_setlangstring_to_langstrings_with_multiple_texts():
+@pytest.mark.parametrize(
+    "texts, lang, expected_output",
+    [
+        # Combine multiple texts and single text scenarios
+        ({"Hello", "Hi"}, "en", [LangString("Hello", "en"), LangString("Hi", "en")]),
+        ({"Hello"}, "en", [LangString("Hello", "en")]),
+        # New cases
+        (set(), "en", []),  # Empty SetLangString
+        ({"   ", "\n"}, "en", [LangString("   ", "en"), LangString("\n", "en")]),  # Whitespace and newline
+        ({"", " "}, "en", [LangString("", "en"), LangString(" ", "en")]),  # Empty string and a single space
+        (
+            {"Hello", "hello", "HELLO"},
+            "en",
+            [LangString("Hello", "en"), LangString("hello", "en"), LangString("HELLO", "en")],
+        ),  # Case-sensitive texts
+        # Language variations and special characters
+        ({"Γειά", "Привет"}, "gr", [LangString("Γειά", "gr"), LangString("Привет", "gr")]),  # Greek and Cyrillic
+        ({"Hello😊"}, "en", [LangString("Hello😊", "en")]),  # Emoji
+        ({"@#$%"}, "special", [LangString("@#$%", "special")]),  # Special characters
+        # With spaces in different positions
+        (
+            {" leading", "trailing ", " inside "},
+            "en",
+            [LangString(" leading", "en"), LangString("trailing ", "en"), LangString(" inside ", "en")],
+        ),
+        # Flags effect
+        ({"Text"}, " en ", [LangString("Text", "en")]),  # Test STRIP_LANG flag effect
+        ({"UPPERCASE"}, "en", [LangString("UPPERCASE", "en")]),
+        ({"lowercase"}, "EN", [LangString("lowercase", "EN")]),
+        ({"MixedCase"}, "En", [LangString("MixedCase", "En")]),
+        ({"    spaces before"}, "en", [LangString("    spaces before", "en")]),
+        ({"spaces after    "}, "en", [LangString("spaces after    ", "en")]),
+        ({"  spaces  inside  "}, "en", [LangString("  spaces  inside  ", "en")]),
+        ({"Χαίρετε"}, "gr", [LangString("Χαίρετε", "gr")]),  # Greek
+        ({"Привет"}, "ru", [LangString("Привет", "ru")]),  # Cyrillic
+        ({"😀😃😄😁"}, "emoji", [LangString("😀😃😄😁", "emoji")]),  # Emojis
+        ({"@#$%^&*()_+"}, "special", [LangString("@#$%^&*()_+", "special")]),  # Special characters
+    ],
+)
+def test_setlangstring_to_langstrings_variations(texts: set[str], lang: str, expected_output: list[LangString]):
     """
-    Test converting a SetLangString with multiple texts to a list of LangStrings.
-    """
-    set_lang_string = SetLangString(texts={"Hello", "Hi"}, lang="en")
-    result = Converter.from_setlangstring_to_langstrings(set_lang_string)
-    expected = [LangString("Hello", "en"), LangString("Hi", "en")]
-    assert all(
-        langstring in result for langstring in expected
-    ), "setlangstring_to_langstrings should return LangStrings for all texts"
+    Unified test for converting a SetLangString to a list of LangStrings, covering multiple scenarios including
+    different texts, languages, special characters, and effects of flags.
 
-
-def test_setlangstring_to_langstrings_with_single_text():
+    :param texts: The set of texts to include in the SetLangString.
+    :param lang: The language code for the SetLangString.
+    :param expected_output: The expected list of LangStrings after conversion.
     """
-    Test converting a SetLangString with a single text to a list of LangStrings.
-    """
-    set_lang_string = SetLangString(texts={"Hello"}, lang="en")
+    set_lang_string = SetLangString(texts=texts, lang=lang.strip())
     result = Converter.from_setlangstring_to_langstrings(set_lang_string)
-    expected = [LangString("Hello", "en")]
-    assert result == expected, "setlangstring_to_langstrings should handle single text correctly"
+
+    assert len(result) == len(expected_output), "Expected number of LangStrings does not match"
+
+    for expected_langstring in expected_output:
+        assert any(
+            expected_langstring.text == actual.text and expected_langstring.lang == actual.lang for actual in result
+        ), f"Expected LangString {expected_langstring.text}@{expected_langstring.lang} not found in the result"
 
 
 @pytest.mark.parametrize("invalid_input", [123, 5.5, True, None, [], {}, "string", LangString("Hello", "en")])
@@ -48,6 +85,10 @@ def test_setlangstring_to_langstrings_invalid_type(invalid_input):
     [
         ("EN", "EN"),  # Test with uppercase language code
         ("en-gb", "en-gb"),  # Test with language subtag
+        (" EN ", " EN "),  # Space around uppercase
+        (" en-gb ", " en-gb "),  # Space around language subtag
+        ("fr ", "fr "),  # Space after language code
+        (" de", " de"),  # Space before language code
     ],
 )
 def test_setlangstring_to_langstrings_language_preservation(lang: str, expected_lang: str):
@@ -69,6 +110,8 @@ def test_setlangstring_to_langstrings_language_preservation(lang: str, expected_
     [
         ({"   ", "\n"}),  # Test texts that are only whitespace or newline
         ({"", " "}),  # Test empty string and a single space
+        ({"multiple", "words"}),
+        ({"tabs\tand\nnewlines"}),
     ],
 )
 def test_setlangstring_to_langstrings_whitespace_texts(texts: set[str]):
@@ -116,7 +159,7 @@ def test_setlangstring_to_langstrings_empty_set():
 @pytest.mark.parametrize(
     "lang, flag",
     [
-        (" en ", SetLangStringFlag.STRIP_LANG),  # Assuming STRIP_LANG trims whitespace from language codes
+        (" en ", SetLangStringFlag.STRIP_LANG),
     ],
 )
 def test_setlangstring_to_langstrings_flag_effects(lang: str, flag: SetLangStringFlag):

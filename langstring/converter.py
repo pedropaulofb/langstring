@@ -264,7 +264,6 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_setlangstrings_to_langstrings(arg: list[SetLangString]) -> list[LangString]:
-        # TODO: Check using a strategy similar to the one I used for "from_multilangstrings_to_*"
         Validator.validate_type_iterable(arg, list, SetLangString)
         langstrings = []
         for setlangstring in arg:

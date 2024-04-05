@@ -1,5 +1,7 @@
 import pytest
-from langstring import Converter, MultiLangString
+
+from langstring import Converter
+from langstring import MultiLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
@@ -12,11 +14,10 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
             [MultiLangString({"es": {"Hola"}, "fr": {"Bonjour"}, "en": {"Hello"}})],
             ['"Bonjour"@fr', '"Hello"@en', '"Hola"@es'],
         ),
-([MultiLangString({"en": {" "}, "fr": {" "}})], ['" "@en', '" "@fr']),
-([MultiLangString({"gr": {"Γειά"}, "ru": {"Привет"}})], ['"Γειά"@gr', '"Привет"@ru']),
-([MultiLangString({"en": {"Hello😊"}})], ['"Hello😊"@en']),
-([MultiLangString({"en": {"Hello"}, "empty": set()})], ['"Hello"@en']),
-
+        ([MultiLangString({"en": {" "}, "fr": {" "}})], ['" "@en', '" "@fr']),
+        ([MultiLangString({"gr": {"Γειά"}, "ru": {"Привет"}})], ['"Γειά"@gr', '"Привет"@ru']),
+        ([MultiLangString({"en": {"Hello😊"}})], ['"Hello😊"@en']),
+        ([MultiLangString({"en": {"Hello"}, "empty": set()})], ['"Hello"@en']),
     ],
 )
 def test_from_multilangstrings_to_strings_success(input_data: list[MultiLangString], expected_output: list[str]):
@@ -59,10 +60,12 @@ def test_from_multilangstrings_to_strings_empty_input():
         ([MultiLangString({"en": set()})], []),
         ([MultiLangString({"en": {" "}})], ['" "@en']),
         ([MultiLangString({"en": {""}})], ['""@en']),
-        ([MultiLangString({"en": {" leading space"}, "fr": {"trailing space "}})], ['" leading space"@en', '"trailing space "@fr']),
+        (
+            [MultiLangString({"en": {" leading space"}, "fr": {"trailing space "}})],
+            ['" leading space"@en', '"trailing space "@fr'],
+        ),
         ([MultiLangString({"mixed": {"UPPER lower"}})], ['"UPPER lower"@mixed']),
         ([MultiLangString({"special": {"@#$%"}})], ['"@#$%"@special']),
-
     ],
 )
 def test_from_multilangstrings_to_strings_edge_cases(input_data: list[MultiLangString], expected_output: list[str]):
@@ -128,7 +131,6 @@ def test_from_multilangstrings_to_strings_optional_params(
         ([MultiLangString({"cy": {"Helo"}, "en": {"Hello"}})], True, False, " & ", ['"Hello"', '"Helo"']),
         ([MultiLangString({"special": {"*&^%$#@!"}})], True, True, " - ", ['"*&^%$#@!" - special']),
         ([MultiLangString({"emoji": {"😊👍"}, "text": {"hello"}})], False, True, "/", ["hello/text", "😊👍/emoji"]),
-
     ],
 )
 def test_from_multilangstrings_to_strings_flags_effect_corrected(

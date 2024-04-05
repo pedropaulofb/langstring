@@ -1,12 +1,15 @@
 import pytest
 
-from langstring import Converter, LangString, MultiLangString
+from langstring import Converter
+from langstring import LangString
+from langstring import MultiLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 @pytest.fixture
 def mls_with_multiple_languages():
     return MultiLangString(mls_dict={"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}, "es": {"Hola", "Mundo"}})
+
 
 @pytest.mark.parametrize("invalid_input", [None, 123, "string", [], {}, LangString(), True])
 def test_from_multilangstring_to_setlangstrings_invalid_type(invalid_input):
@@ -36,26 +39,20 @@ def test_from_multilangstring_to_setlangstrings_empty_multilangstring():
             {"en": {"Hello", "Good morning"}, "fr": {"Bonjour", "Bonsoir"}},
             [("en", {"Hello", "Good morning"}), ("fr", {"Bonjour", "Bonsoir"})],
         ),
-(
-    {"en": {" ", "  "}},  # Spaces as valid texts
-    [("en", {" ", "  "})]
-),
-(
-    {"ru": {"Привет", "Мир"}, "el": {"Γειά", "Κόσμος"}},  # Cyrillic and Greek characters
-    [("ru", {"Привет", "Мир"}), ("el", {"Γειά", "Κόσμος"})]
-),
-(
-    {"emoji": {"😊", "😂"}},  # Emojis as valid texts
-    [("emoji", {"😊", "😂"})]
-),
-(
-    {"mixed": {"Hello", "HELLO", "hello"}},  # Different cases considered distinct
-    [("mixed", {"Hello", "HELLO", "hello"})]
-),
-(
-    {"special": {"Hello@world", "Hi#there"}},  # Special characters in texts
-    [("special", {"Hello@world", "Hi#there"})]
-),
+        ({"en": {" ", "  "}}, [("en", {" ", "  "})]),  # Spaces as valid texts
+        (
+            {"ru": {"Привет", "Мир"}, "el": {"Γειά", "Κόσμος"}},  # Cyrillic and Greek characters
+            [("ru", {"Привет", "Мир"}), ("el", {"Γειά", "Κόσμος"})],
+        ),
+        ({"emoji": {"😊", "😂"}}, [("emoji", {"😊", "😂"})]),  # Emojis as valid texts
+        (
+            {"mixed": {"Hello", "HELLO", "hello"}},  # Different cases considered distinct
+            [("mixed", {"Hello", "HELLO", "hello"})],
+        ),
+        (
+            {"special": {"Hello@world", "Hi#there"}},  # Special characters in texts
+            [("special", {"Hello@world", "Hi#there"})],
+        ),
     ],
 )
 def test_from_multilangstring_to_setlangstrings_basic_conversion(mls_dict, expected_langs_texts):
@@ -67,12 +64,19 @@ def test_from_multilangstring_to_setlangstrings_basic_conversion(mls_dict, expec
         assert found_sls is not None, f"SetLangString for language {lang} with texts {texts} not found"
 
 
-@pytest.mark.parametrize("languages, expected_len", [(["en"], 1), (["en", "fr"], 2), (["de"], 0), ([], 0),
-(["ru", "el"], 0),  # Cyrillic and Greek languages not present
-(["emoji"], 0),  # Emoji language not present
-(["mixed"], 0),  # Mixed case language not present
-(["special"], 0),  # Special characters in language not present
-                         ])
+@pytest.mark.parametrize(
+    "languages, expected_len",
+    [
+        (["en"], 1),
+        (["en", "fr"], 2),
+        (["de"], 0),
+        ([], 0),
+        (["ru", "el"], 0),  # Cyrillic and Greek languages not present
+        (["emoji"], 0),  # Emoji language not present
+        (["mixed"], 0),  # Mixed case language not present
+        (["special"], 0),  # Special characters in language not present
+    ],
+)
 def test_from_multilangstring_to_setlangstrings_with_languages_param(
     mls_with_multiple_languages, languages, expected_len
 ):
@@ -80,12 +84,17 @@ def test_from_multilangstring_to_setlangstrings_with_languages_param(
     assert len(result) == expected_len, f"Expected {expected_len} SetLangString objects for languages {languages}"
 
 
-@pytest.mark.parametrize("lang, texts", [("en", {"Hello", "World"}), ("fr", {"Bonjour", "Monde"}), # Adding cases with spaces, special characters, different charset, and emojis
-("spaced", {" Hello ", "World "}),  # Spaces before and after
-("special", {"Hello@world", "<Hi#there>"}),  # Special characters
-("greek", {"Γειά", "Κόσμος"}),  # Greek characters
-("emoji", {"😊", "😂"}),  # Emojis
-])
+@pytest.mark.parametrize(
+    "lang, texts",
+    [
+        ("en", {"Hello", "World"}),
+        ("fr", {"Bonjour", "Monde"}),  # Adding cases with spaces, special characters, different charset, and emojis
+        ("spaced", {" Hello ", "World "}),  # Spaces before and after
+        ("special", {"Hello@world", "<Hi#there>"}),  # Special characters
+        ("greek", {"Γειά", "Κόσμος"}),  # Greek characters
+        ("emoji", {"😊", "😂"}),  # Emojis
+    ],
+)
 def test_from_multilangstring_to_setlangstrings_content_conversion(lang, texts):
     mls = MultiLangString(mls_dict={lang: texts})
     result = Converter.from_multilangstring_to_setlangstrings(mls)
@@ -106,18 +115,18 @@ def test_from_multilangstring_to_setlangstrings_content_conversion(lang, texts):
         ),
         # No merging needed, single case per language.
         ({"de": {"Hallo"}, "it": {"Ciao"}}, [("de", {"Hallo"}), ("it", {"Ciao"})]),
-(
-    {" en ": {"Hello"}, " EN ": {"Hi"}, " eN ": {"Hey"}},  # Spaces around language codes
-    [(" en ", {"Hello", "Hi", "Hey"})]
-),
-(
-    {"special@": {"One", "Two"}, "SPECIAL@": {"Three"}},  # Special characters in language codes
-    [("special@", {"One", "Two", "Three"})]
-),
-(
-    {"😊": {"Smile", "Joy"}, "😂": {"Laugh"}},  # Emojis as language codes
-    [("😊", {"Smile", "Joy"}), ("😂", {"Laugh"})]
-),
+        (
+            {" en ": {"Hello"}, " EN ": {"Hi"}, " eN ": {"Hey"}},  # Spaces around language codes
+            [(" en ", {"Hello", "Hi", "Hey"})],
+        ),
+        (
+            {"special@": {"One", "Two"}, "SPECIAL@": {"Three"}},  # Special characters in language codes
+            [("special@", {"One", "Two", "Three"})],
+        ),
+        (
+            {"😊": {"Smile", "Joy"}, "😂": {"Laugh"}},  # Emojis as language codes
+            [("😊", {"Smile", "Joy"}), ("😂", {"Laugh"})],
+        ),
     ],
 )
 def test_from_multilangstring_to_setlangstrings_case_sensitivity(mls_dict, expected_result):
@@ -137,9 +146,8 @@ def test_from_multilangstring_to_setlangstrings_case_sensitivity(mls_dict, expec
             expected_texts
         ), f"Mismatch in texts for language '{expected_lang}': expected {set(expected_texts)}, got {sls.texts}"
 
+
 @pytest.mark.parametrize("invalid_languages", [123, "string", {}, LangString("Hello")])
 def test_from_multilangstring_to_setlangstrings_invalid_languages_type(mls_with_multiple_languages, invalid_languages):
     with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
         Converter.from_multilangstring_to_setlangstrings(mls_with_multiple_languages, languages=invalid_languages)
-
-

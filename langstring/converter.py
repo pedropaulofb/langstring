@@ -346,14 +346,32 @@ class Converter(metaclass=NonInstantiable):
         separator: str = "@",
         print_lang: bool = True,
     ) -> list[str]:
-        return arg.to_strings(
-            languages=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang
-        )
+        return arg.to_strings(langs=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
     @staticmethod
-    def from_multilangstrings_to_strings(arg):
-        # TODO: To be implemented.
-        pass
+    def from_multilangstrings_to_strings(
+        arg: list[MultiLangString],
+        languages: Optional[list[str]] = None,
+        print_quotes: bool = True,
+        separator: str = "@",
+        print_lang: bool = True,
+    ) -> list[str]:
+        Validator.validate_type_iterable(arg, list, MultiLangString)
+        Validator.validate_type_iterable(languages, list, str, optional=True)
+        Validator.validate_type_single(print_quotes, bool)
+        Validator.validate_type_single(separator, str)
+        Validator.validate_type_single(print_lang, bool)
+
+        if len(arg):
+            unified_mls = arg[0]  # Initialize with the first element
+            for mls in arg[1:]:  # Loop through elements from the second to the last
+                unified_mls.add_multilangstring(mls)
+        else:
+            unified_mls = MultiLangString()
+
+        return unified_mls.to_strings(
+            langs=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang
+        )
 
     @staticmethod
     def from_multilangstring_to_langstrings(

@@ -1,6 +1,8 @@
 import pytest
 
-from langstring import Converter, SetLangString, MultiLangString
+from langstring import Converter
+from langstring import MultiLangString
+from langstring import SetLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
@@ -108,19 +110,21 @@ def test_from_multilangstrings_to_setlangstrings_empty_strings_and_special_chars
     assert special_sls is not None and "@#&*()" in special_sls.texts, "Special characters should be correctly handled."
 
 
-@pytest.mark.parametrize("input_mls, expected_lang_tag", [
-    ([MultiLangString(mls_dict={"xx-long-lang-code": {"Unique"}})], "xx-long-lang-code"),
-    ([MultiLangString(mls_dict={"MixedCASE": {"Text"}})], "MixedCASE"),
-    ([MultiLangString(mls_dict={" spacedLang ": {"Text with spaces"}})], " spacedLang "),
-    ([MultiLangString(mls_dict={"ru": {"Привет, как дела?"}})], "ru"),
-    ([MultiLangString(mls_dict={"emoji-text": {"😀😃😄"}})], "emoji-text"),
-])
+@pytest.mark.parametrize(
+    "input_mls, expected_lang_tag",
+    [
+        ([MultiLangString(mls_dict={"xx-long-lang-code": {"Unique"}})], "xx-long-lang-code"),
+        ([MultiLangString(mls_dict={"MixedCASE": {"Text"}})], "MixedCASE"),
+        ([MultiLangString(mls_dict={" spacedLang ": {"Text with spaces"}})], " spacedLang "),
+        ([MultiLangString(mls_dict={"ru": {"Привет, как дела?"}})], "ru"),
+        ([MultiLangString(mls_dict={"emoji-text": {"😀😃😄"}})], "emoji-text"),
+    ],
+)
 def test_from_multilangstrings_to_setlangstrings_unusual_valid_usage(input_mls, expected_lang_tag):
     """Test handling of unusual but valid language codes."""
     result = Converter.from_multilangstrings_to_setlangstrings(input_mls)
     assert len(result) == 1, "Should handle unusual but valid language codes correctly."
     assert result[0].lang == expected_lang_tag, f"Expected language tag '{expected_lang_tag}' was not preserved."
-
 
 
 @pytest.mark.parametrize(

@@ -315,9 +315,10 @@ Classes
    .. py:method:: from_setlangstrings_to_multilangstring(arg)
       :staticmethod:
 
-      Convert a list of SetLangString objects to a MultiLangString object. If there are different casings for the
-      same lang tag among the SetLangString objects in the input list, the casefolded version of the lang tag is used.
-      If only a single case is used, that case is adopted.
+      Convert a list of SetLangString objects to a MultiLangString object.
+
+      If there are different casings for the same lang tag among the SetLangString objects in the input list,
+      the casefolded version of the lang tag is used. If only a single case is used, that case is adopted.
 
       :param setlangstrings: List of SetLangString instances to be converted.
       :return: A MultiLangString instance with aggregated texts under normalized language tags.
@@ -331,7 +332,7 @@ Classes
       :staticmethod:
 
 
-   .. py:method:: from_multilangstrings_to_strings(arg)
+   .. py:method:: from_multilangstrings_to_strings(arg, languages = None, print_quotes = True, separator = '@', print_lang = True)
       :staticmethod:
 
 
@@ -923,6 +924,21 @@ Classes
       :rtype: str
 
 
+   .. py:method:: merge_langstrings(langstrings)
+      :staticmethod:
+
+      Merges duplicated LangStrings in a list based on content and language tags.
+
+      If there's a single casing used for LangStrings with the same content, that casing is used.
+      If there are LangStrings with the same content but different casings, the resulting LangString uses
+      a casefolded version of the language tag.
+
+      :param langstrings: List of LangString instances to be merged.
+      :type langstrings: List[LangString]
+      :return: A list of merged LangString instances without duplicates.
+      :rtype: list
+
+
    .. py:method:: _validate_match_types(other, overwrite_strict = False)
 
 
@@ -1430,6 +1446,18 @@ Classes
 
 
    .. py:method:: __xor__(other)
+
+
+   .. py:method:: merge_setlangstrings(setlangstrings)
+      :staticmethod:
+
+      Merges duplicated setlangstrings based on their language tags using the union method.
+
+      Args:
+      - setlangstrings (List[SetLangString]): The list of SetLangString instances.
+
+      Returns:
+      - List[SetLangString]: A list of merged SetLangString instances without duplicates.
 
 
    .. py:method:: _validate_match_types_and_langs(other, overwrite_strict = False)

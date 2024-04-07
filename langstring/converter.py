@@ -264,6 +264,7 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_setlangstrings_to_langstrings(arg: list[SetLangString]) -> list[LangString]:
+        # TODO: Check using the same strategy I used for "from_multilangstrings_to_*"
         Validator.validate_type_iterable(arg, list, SetLangString)
         langstrings = []
         for setlangstring in arg:
@@ -298,7 +299,6 @@ class Converter(metaclass=NonInstantiable):
         :param setlangstrings: List of SetLangString instances to be converted.
         :return: A MultiLangString instance with aggregated texts under normalized language tags.
         """
-        # TODO: Check using the same strategy I used for "from_multilangstrings_to_*"
         Validator.validate_type_iterable(arg, list, SetLangString)
         lang_tags = {}
         for sls in arg:
@@ -361,12 +361,7 @@ class Converter(metaclass=NonInstantiable):
         Validator.validate_type_single(separator, str)
         Validator.validate_type_single(print_lang, bool)
 
-        if len(arg):
-            unified_mls = arg[0]  # Initialize with the first element
-            for mls in arg[1:]:  # Loop through elements from the second to the last
-                unified_mls.add_multilangstring(mls)
-        else:
-            unified_mls = MultiLangString()
+        unified_mls = MultiLangString.merge_multilangstrings(arg)
 
         return unified_mls.to_strings(
             langs=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang
@@ -398,12 +393,7 @@ class Converter(metaclass=NonInstantiable):
         Validator.validate_type_iterable(arg, list, MultiLangString)
         Validator.validate_type_iterable(languages, list, str, optional=True)
 
-        if len(arg):
-            unified_mls = arg[0]  # Initialize with the first element
-            for mls in arg[1:]:  # Loop through elements from the second to the last
-                unified_mls.add_multilangstring(mls)
-        else:
-            unified_mls = MultiLangString()
+        unified_mls = MultiLangString.merge_multilangstrings(arg)
 
         return unified_mls.to_langstrings(langs=languages)
 
@@ -433,11 +423,6 @@ class Converter(metaclass=NonInstantiable):
         Validator.validate_type_iterable(arg, list, MultiLangString)
         Validator.validate_type_iterable(languages, list, str, optional=True)
 
-        if len(arg):
-            unified_mls = arg[0]  # Initialize with the first element
-            for mls in arg[1:]:  # Loop through elements from the second to the last
-                unified_mls.add_multilangstring(mls)
-        else:
-            unified_mls = MultiLangString()
+        unified_mls = MultiLangString.merge_multilangstrings(arg)
 
         return unified_mls.to_setlangstrings(langs=languages)

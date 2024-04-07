@@ -185,9 +185,10 @@ Classes
    .. py:method:: from_setlangstrings_to_multilangstring(arg)
       :staticmethod:
 
-      Convert a list of SetLangString objects to a MultiLangString object. If there are different casings for the
-      same lang tag among the SetLangString objects in the input list, the casefolded version of the lang tag is used.
-      If only a single case is used, that case is adopted.
+      Convert a list of SetLangString objects to a MultiLangString object.
+
+      If there are different casings for the same lang tag among the SetLangString objects in the input list,
+      the casefolded version of the lang tag is used. If only a single case is used, that case is adopted.
 
       :param setlangstrings: List of SetLangString instances to be converted.
       :return: A MultiLangString instance with aggregated texts under normalized language tags.
@@ -201,7 +202,7 @@ Classes
       :staticmethod:
 
 
-   .. py:method:: from_multilangstrings_to_strings(arg)
+   .. py:method:: from_multilangstrings_to_strings(arg, languages = None, print_quotes = True, separator = '@', print_lang = True)
       :staticmethod:
 
 

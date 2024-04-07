@@ -485,6 +485,36 @@ class LangString:
         return text_representation + lang_representation
 
     # ---------------------------------------------
+    # Static Methods
+    # ---------------------------------------------
+
+    @staticmethod
+    def merge_langstrings(langstrings: list["LangString"]) -> list["LangString"]:
+        """
+        Merges duplicated LangStrings in a list based on content and language tags.
+
+        If there's a single casing used for LangStrings with the same content, that casing is used.
+        If there are LangStrings with the same content but different casings, the resulting LangString uses
+        a casefolded version of the language tag.
+
+        :param langstrings: List of LangString instances to be merged.
+        :type langstrings: List[LangString]
+        :return: A list of merged LangString instances without duplicates.
+        :rtype: list
+        """
+        Validator.validate_type_iterable(langstrings, list, LangString)
+        merged = {}
+        for ls in langstrings:
+            key = (ls.text, ls.lang.casefold())
+            if key in merged:
+                # If existing and new instance have the same lang casing, keep it. Otherwise, casefold.
+                if merged[key].lang != ls.lang:
+                    merged[key].lang = ls.lang.casefold()
+            else:
+                merged[key] = ls
+        return list(merged.values())
+
+    # ---------------------------------------------
     # Private Methods
     # ---------------------------------------------
 

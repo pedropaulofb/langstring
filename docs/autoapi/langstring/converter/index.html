@@ -414,9 +414,9 @@ from the SetLangString, associated with its language.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.converter.Converter.from_setlangstrings_to_multilangstring">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstrings_to_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_setlangstrings_to_multilangstring" title="Link to this definition"></a></dt>
-<dd><p>Convert a list of SetLangString objects to a MultiLangString object. If there are different casings for the
-same lang tag among the SetLangString objects in the input list, the casefolded version of the lang tag is used.
-If only a single case is used, that case is adopted.</p>
+<dd><p>Convert a list of SetLangString objects to a MultiLangString object.</p>
+<p>If there are different casings for the same lang tag among the SetLangString objects in the input list,
+the casefolded version of the lang tag is used. If only a single case is used, that case is adopted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -467,8 +467,22 @@ If only a single case is used, that case is adopted.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.converter.Converter.from_multilangstrings_to_strings">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstrings_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_multilangstrings_to_strings" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstrings_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_multilangstrings_to_strings" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>) – </p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>print_quotes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – </p></li>
+<li><p><strong>print_lang</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.converter.Converter.from_multilangstring_to_langstrings">

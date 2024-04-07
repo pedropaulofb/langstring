@@ -1087,6 +1087,26 @@ It is typically used for repeating the LangString’s text a specified number of
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="langstring.langstring.LangString.merge_langstrings">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_langstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstrings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.merge_langstrings" title="Link to this definition"></a></dt>
+<dd><p>Merges duplicated LangStrings in a list based on content and language tags.</p>
+<p>If there’s a single casing used for LangStrings with the same content, that casing is used.
+If there are LangStrings with the same content but different casings, the resulting LangString uses
+a casefolded version of the language tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>langstrings</strong> (<em>List</em><em>[</em><a class="reference internal" href="#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>LangString</em></a><em>]</em>) – List of LangString instances to be merged.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of merged LangString instances without duplicates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString._validate_match_types">
 <span class="sig-name descname"><span class="pre">_validate_match_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString._validate_match_types" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">

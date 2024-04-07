@@ -308,6 +308,34 @@ class SetLangString:
         return self.symmetric_difference(other)
 
     # -------------------------------------------
+    # Static Methods
+    # -------------------------------------------
+
+    @staticmethod
+    def merge_setlangstrings(setlangstrings: list["SetLangString"]) -> list["SetLangString"]:
+        """
+        Merges duplicated setlangstrings based on their language tags using the union method.
+
+        Args:
+        - setlangstrings (List[SetLangString]): The list of SetLangString instances.
+
+        Returns:
+        - List[SetLangString]: A list of merged SetLangString instances without duplicates.
+        """
+        Validator.validate_type_iterable(setlangstrings, list, SetLangString)
+        merged = {}
+        for sls in setlangstrings:
+            key = sls.lang.casefold()
+            if key in merged:
+                # Utilize the union method to merge SetLangString instances, updating the instance in the dictionary.
+                merged[key] = merged[key].union(sls)
+            else:
+                # When a new language tag is encountered, standardize its case for consistency in merging.
+                sls.lang = key
+                merged[key] = sls
+        return list(merged.values())
+
+    # -------------------------------------------
     # Private Methods
     # -------------------------------------------
 

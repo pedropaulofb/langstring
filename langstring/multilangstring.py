@@ -729,6 +729,24 @@ class MultiLangString:
         result_string = ", ".join(formatted_items)
         return result_string
 
+
+    # --------------------------------------------------
+    # Static Methods
+    # --------------------------------------------------
+
+    @staticmethod
+    def merge_multilangstrings(multilangstrings:list["MultiLangString"])->"MultiLangString":
+        Validator.validate_type_iterable(multilangstrings, list, MultiLangString)
+
+        if len(multilangstrings):
+            unified_mls = multilangstrings[0]  # Initialize with the first element
+            for mls in multilangstrings[1:]:  # Loop through elements from the second to the last
+                unified_mls.add_multilangstring(mls)
+        else:
+            unified_mls = MultiLangString()
+
+        return unified_mls
+
     # --------------------------------------------------
     # Private Methods
     # --------------------------------------------------
@@ -742,8 +760,7 @@ class MultiLangString:
 
     @staticmethod
     def _merge_language_entries(mls_dict: dict[str, set[str]]) -> dict[str, set[str]]:
-        """
-        Merge entries in the provided dict where the lang codes match case-insensitively. For duplicates,
+        """Merge entries in the provided dict where the lang codes match case-insensitively. For duplicates,
         the entries are merged under their casefolded version. Original language codes are preserved
         if no case-insensitive duplicates are found.
 

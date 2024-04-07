@@ -183,6 +183,18 @@ Classes
    .. py:method:: __xor__(other)
 
 
+   .. py:method:: merge_setlangstrings(setlangstrings)
+      :staticmethod:
+
+      Merges duplicated setlangstrings based on their language tags using the union method.
+
+      Args:
+      - setlangstrings (List[SetLangString]): The list of SetLangString instances.
+
+      Returns:
+      - List[SetLangString]: A list of merged SetLangString instances without duplicates.
+
+
    .. py:method:: _validate_match_types_and_langs(other, overwrite_strict = False)
 
 

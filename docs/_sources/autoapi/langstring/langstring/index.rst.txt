@@ -375,6 +375,21 @@ Classes
       :rtype: str
 
 
+   .. py:method:: merge_langstrings(langstrings)
+      :staticmethod:
+
+      Merges duplicated LangStrings in a list based on content and language tags.
+
+      If there's a single casing used for LangStrings with the same content, that casing is used.
+      If there are LangStrings with the same content but different casings, the resulting LangString uses
+      a casefolded version of the language tag.
+
+      :param langstrings: List of LangString instances to be merged.
+      :type langstrings: List[LangString]
+      :return: A list of merged LangString instances without duplicates.
+      :rtype: list
+
+
    .. py:method:: _validate_match_types(other, overwrite_strict = False)
 
 

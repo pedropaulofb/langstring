@@ -314,25 +314,32 @@ class SetLangString:
     @staticmethod
     def merge_setlangstrings(setlangstrings: list["SetLangString"]) -> list["SetLangString"]:
         """
-        Merges duplicated setlangstrings based on their language tags using the union method.
+        Merges duplicated SetLangStrings based on their language tags using the union method.
 
-        Args:
-        - setlangstrings (List[SetLangString]): The list of SetLangString instances.
+        If there's no case variation in the language tags among duplicates, the original casing is preserved.
+        If case variations are found, the casefolded version of the language tag is used in the merged SetLangString.
 
-        Returns:
-        - List[SetLangString]: A list of merged SetLangString instances without duplicates.
+        :param setlangstrings: The list of SetLangString instances.
+        :return: A list of merged SetLangString instances without duplicates.
         """
         Validator.validate_type_iterable(setlangstrings, list, SetLangString)
         merged = {}
-        for sls in setlangstrings:
-            key = sls.lang.casefold()
+        lang_case_map = {}
+        for setlangstring in setlangstrings:
+            key = setlangstring.lang.casefold()
             if key in merged:
-                # Utilize the union method to merge SetLangString instances, updating the instance in the dictionary.
-                merged[key] = merged[key].union(sls)
+                merged[key] = merged[key].union(setlangstring)
+                # If encountering a different casing, standardize to casefold.
+                if setlangstring.lang != lang_case_map[key]:
+                    lang_case_map[key] = key
             else:
-                # When a new language tag is encountered, standardize its case for consistency in merging.
-                sls.lang = key
-                merged[key] = sls
+                merged[key] = setlangstring
+                lang_case_map[key] = setlangstring.lang  # Keep track of the original casing
+
+        # Adjust the language tags based on detected case variations
+        for key, setlangstring in merged.items():
+            setlangstring.lang = lang_case_map[key]
+
         return list(merged.values())
 
     # -------------------------------------------

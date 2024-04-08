@@ -1,4 +1,5 @@
 import pytest
+
 from langstring import MultiLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
@@ -30,19 +31,18 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
             [{"emoji": {"👋"}, "special": {"#hello"}}, {"emoji": {"😊"}, "special": {"$greeting"}}],
             {"emoji": {"👋", "😊"}, "special": {"#hello", "$greeting"}},
         ),
-(
-    [{"EN": {"HELLO"}}, {"en": {"world"}}],
-    {"EN": {"HELLO", "world"}},
-),
-(
-    [{"fr": {"bonjour"}}, {"FR": {"BONSOIR"}, "Fr": {"salut"}}],
-    {"fr": {"bonjour", "BONSOIR", "salut"}},
-),
-(
-    [{"mixCase": {"This"}}, {"mixCase": {"is"}, "MIXCASE": {"Mixed"}}],
-    {"mixCase": {"This", "is", "Mixed"}},
-),
-
+        (
+            [{"EN": {"HELLO"}}, {"en": {"world"}}],
+            {"EN": {"HELLO", "world"}},
+        ),
+        (
+            [{"fr": {"bonjour"}}, {"FR": {"BONSOIR"}, "Fr": {"salut"}}],
+            {"fr": {"bonjour", "BONSOIR", "salut"}},
+        ),
+        (
+            [{"mixCase": {"This"}}, {"mixCase": {"is"}, "MIXCASE": {"Mixed"}}],
+            {"mixCase": {"This", "is", "Mixed"}},
+        ),
     ],
 )
 def test_merge_multilangstrings_with_valid_inputs(inputs, expected):

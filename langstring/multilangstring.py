@@ -729,13 +729,12 @@ class MultiLangString:
         result_string = ", ".join(formatted_items)
         return result_string
 
-
     # --------------------------------------------------
     # Static Methods
     # --------------------------------------------------
 
     @staticmethod
-    def merge_multilangstrings(multilangstrings:list["MultiLangString"])->"MultiLangString":
+    def merge_multilangstrings(multilangstrings: list["MultiLangString"]) -> "MultiLangString":
         Validator.validate_type_iterable(multilangstrings, list, MultiLangString)
 
         if len(multilangstrings):

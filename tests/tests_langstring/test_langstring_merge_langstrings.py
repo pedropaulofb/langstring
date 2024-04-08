@@ -15,6 +15,18 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
             [LangString("hello", "EN"), LangString("world", "EN")],
             [LangString("hello", "EN"), LangString("world", "EN")],
         ),
+        (
+            [LangString("hello", "EN"), LangString("world", "En")],
+            [LangString("hello", "EN"), LangString("world", "En")],
+        ),
+        (
+            [LangString("hello", "EN"), LangString("hello", "EN")],
+            [LangString("hello", "EN")],
+        ),
+        (
+            [LangString("hello", "EN"), LangString("hello", "eN")],
+            [LangString("hello", "en")],
+        ),
         ([LangString(" Καλημέρα", "en")], [LangString(" Καλημέρα", "en")]),  # Spaces before, Greek characters
         (
             [LangString("🚀", "emoji"), LangString("🌟", "emoji")],
@@ -22,11 +34,11 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
         ),  # Emojis
         (
             [LangString("data", " DE "), LangString("science", " de ")],
-            [LangString("data", " de "), LangString("science", " de ")],
+            [LangString("data", " DE "), LangString("science", " de ")],
         ),  # Spaces in lang
         (
             [LangString("Привет", "ru"), LangString("Мир", "RU")],
-            [LangString("Привет", "ru"), LangString("Мир", "ru")],
+            [LangString("Привет", "ru"), LangString("Мир", "RU")],
         ),  # Cyrillic
         (
             [LangString("!@#$%^&*()", "spec"), LangString("{}[]:;\"'<>?,./", "spec")],
@@ -41,15 +53,61 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
             [LangString("A", "en"), LangString("a", "en")],
         ),  # Case sensitivity in content
         (
+            [LangString("A", "En"), LangString("a", "en")],
+            [LangString("A", "En"), LangString("a", "en")],
+        ),  # Case sensitivity in content
+        (
+            [LangString("A", "EN"), LangString("a", "EN")],
+            [LangString("A", "EN"), LangString("a", "EN")],
+        ),  # Case sensitivity in content
+        (
             [LangString("hello", "en"), LangString("HELLO", "en")],
             [LangString("hello", "en"), LangString("HELLO", "en")],
         ),  # Different content, same lang
+        # Preserve original casing if texts differ
+        (
+            [LangString("text", "DE"), LangString("more text", "DE")],
+            [LangString("text", "DE"), LangString("more text", "DE")],
+        ),
+        (
+            [LangString("text", "DE"), LangString("more text", "de")],
+            [LangString("text", "DE"), LangString("more text", "de")],
+        ),
+        # Merge with original casing if texts and casings are identical
+        ([LangString("text", "DE"), LangString("text", "DE")], [LangString("text", "DE")]),
+        # Merge with original casing if texts and casings are identical
+        ([LangString(" text", "DE"), LangString("text", "dE")], [LangString(" text", "DE"), LangString("text", "dE")]),
+        # Casefold language tag if there are case variations among duplicates
+        ([LangString("text", "De"), LangString("text", "DE")], [LangString("text", "de")]),
+        # Testing leading/trailing spaces in texts
+        (
+            [LangString("    ", "en"), LangString("Empty spaces", "EN")],
+            [LangString("    ", "en"), LangString("Empty spaces", "EN")],
+        ),
+        # Greek characters, mixed case, preserving individual instances
+        (
+            [LangString("Γειά σου κόσμε", "el"), LangString("Καλημέρα", "EL")],
+            [LangString("Γειά σου κόσμε", "el"), LangString("Καλημέρα", "EL")],
+        ),
+        # Cyrillic characters, mixed case, preserving individual instances
+        ([LangString("Привет", "ru"), LangString("Мир", "RU")], [LangString("Привет", "ru"), LangString("Мир", "RU")]),
+        # Emojis in texts, mixed case, preserving individual instances
+        (
+            [LangString("👋", "emoji"), LangString("😊", "EMOJI")],
+            [LangString("👋", "emoji"), LangString("😊", "EMOJI")],
+        ),
     ],
 )
 def test_merge_langstrings_success(input_data, expected_output):
-    """Adapted test to verify merge_langstrings successfully merges LangStrings with different or same case language tags."""
+    """Adapted test to verify merge_langstrings successfully merges LangStrings following specific rules about text content and language tag casing."""
     result = LangString.merge_langstrings(input_data)
-    assert result == expected_output, "Expected merged LangString instances did not match actual result."
+    assert len(result) == len(
+        expected_output
+    ), f"Expected {len(expected_output)} LangString instances, got {len(result)}."
+    for res, exp in zip(result, expected_output):
+        assert (
+            res.text == exp.text and res.lang == exp.lang
+        ), f"Expected LangString with text '{exp.text}' and lang '{exp.lang}', got text '{res.text}' and lang '{res.lang}'."
 
 
 @pytest.mark.parametrize(

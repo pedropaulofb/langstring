@@ -503,15 +503,24 @@ class LangString:
         :rtype: list
         """
         Validator.validate_type_iterable(langstrings, list, LangString)
+
         merged = {}
+        lang_case_map = {}
         for ls in langstrings:
             key = (ls.text, ls.lang.casefold())
             if key in merged:
-                # If existing and new instance have the same lang casing, keep it. Otherwise, casefold.
+                # Here, implement the actual logic for merging LangString instances, if needed.
+                # For example, you might want to merge other attributes or metadata.
                 if merged[key].lang != ls.lang:
-                    merged[key].lang = ls.lang.casefold()
+                    lang_case_map[key] = ls.lang.casefold()
             else:
                 merged[key] = ls
+                lang_case_map[key] = ls.lang  # Keep track of the original casing
+
+        # Adjust the language tags based on detected case variations
+        for key, ls in merged.items():
+            ls.lang = lang_case_map.get(key, ls.lang)  # Use get() to safely handle missing entries
+
         return list(merged.values())
 
     # ---------------------------------------------

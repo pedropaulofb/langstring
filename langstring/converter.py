@@ -152,10 +152,12 @@ class Converter(metaclass=NonInstantiable):
     @staticmethod
     def from_langstrings_to_setlangstring(arg: list[LangString]) -> SetLangString:
         Validator.validate_type_iterable(arg, list, LangString)
+        merged_langstrings = LangString.merge_langstrings(arg)
+
         new_texts = set()
         new_lang = set()
 
-        for langstring in arg:
+        for langstring in merged_langstrings:
             new_texts.add(langstring.text)
             new_lang.add(langstring.lang)
 
@@ -170,31 +172,15 @@ class Converter(metaclass=NonInstantiable):
     def from_langstrings_to_setlangstrings(arg: list[LangString]) -> list[SetLangString]:
         Validator.validate_type_iterable(arg, list, LangString)
 
-        # Step 1: Detect case variants
-        original_langs = {langstring.lang for langstring in arg}
-        casefolded_langs = {langstring.lang.casefold() for langstring in arg}
-        normalize_langs = len(original_langs) != len(casefolded_langs)
+        merged_lagnstrings = LangString.merge_langstrings(arg)
 
-        lang_groups = {}
+        setlangstrings = []
+        for langstring in merged_lagnstrings:
+            setlangstrings.append(Converter.from_langstrings_to_setlangstring([langstring]))
 
-        for langstring in arg:
-            lang_key = langstring.lang.casefold() if normalize_langs else langstring.lang
+        final_setlangstrings = SetLangString.merge_setlangstrings(setlangstrings)
 
-            if lang_key not in lang_groups:
-                lang_groups[lang_key] = set()
-            lang_groups[lang_key].add(langstring.text)
-
-        set_langstrings = []
-        for lang, texts in lang_groups.items():
-            # Decide on the language code to use in the output based on normalization
-            final_lang = (
-                lang
-                if not normalize_langs
-                else [original_lang for original_lang in original_langs if original_lang.casefold() == lang][0]
-            )
-            set_langstrings.append(SetLangString(texts=texts, lang=final_lang))
-
-        return set_langstrings
+        return final_setlangstrings
 
     @Validator.validate_type_decorator
     @staticmethod
@@ -217,8 +203,9 @@ class Converter(metaclass=NonInstantiable):
     def from_langstrings_to_multilangstring(arg: list[LangString]) -> MultiLangString:
         Validator.validate_type_iterable(arg, list, LangString)
         new_mls = MultiLangString()
+        merged_langstrings = LangString.merge_langstrings(arg)
 
-        for langstring in arg:
+        for langstring in merged_langstrings:
             new_mls.add_langstring(langstring)
 
         return new_mls
@@ -266,8 +253,10 @@ class Converter(metaclass=NonInstantiable):
     def from_setlangstrings_to_langstrings(arg: list[SetLangString]) -> list[LangString]:
         # TODO: Check using the same strategy I used for "from_multilangstrings_to_*"
         Validator.validate_type_iterable(arg, list, SetLangString)
+        merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
+
         langstrings = []
-        for setlangstring in arg:
+        for setlangstring in merged_setlangstrings:
             langstrings.extend(setlangstring.to_langstrings())
         return langstrings
 
@@ -300,32 +289,12 @@ class Converter(metaclass=NonInstantiable):
         :return: A MultiLangString instance with aggregated texts under normalized language tags.
         """
         Validator.validate_type_iterable(arg, list, SetLangString)
-        lang_tags = {}
-        for sls in arg:
-            lang = sls.lang
-            # Collect all variants of language tags
-            if lang.lower() not in lang_tags:
-                lang_tags[lang.lower()] = set()
-            lang_tags[lang.lower()].add(lang)
+        merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
 
-        # Determine final lang tag casing
-        final_lang_tags = {}
-        for lang_lower, variants in lang_tags.items():
-            if len(variants) > 1:
-                # Multiple casings found, use casefolded version
-                final_lang_tags[lang_lower] = lang_lower
-            else:
-                # Single casing, use as is
-                final_lang_tags[lang_lower] = variants.pop()
-
-        # Aggregate texts under the determined language tags
-        aggregated_texts = {final_lang: set() for final_lang in final_lang_tags.values()}
-        for sls in arg:
-            normalized_lang = final_lang_tags[sls.lang.lower()]
-            aggregated_texts[normalized_lang].update(sls.texts)
-
-        # Create and return the MultiLangString object
-        return MultiLangString(mls_dict=aggregated_texts)
+        multilangstring = MultiLangString()
+        for setlangstring in merged_setlangstrings:
+            multilangstring.add_setlangstring(setlangstring)
+        return multilangstring
 
     # ---------------------------------------------
     # MultiLangStrings' Conversion Methods

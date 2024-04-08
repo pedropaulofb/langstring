@@ -274,3 +274,61 @@ def test_from_setlangstrings_to_multilangstring_case_insensitivity_multiple_lang
         assert all(
             text in result.mls_dict[lang.lower()] for text in expected_texts
         ), f"Not all expected texts for {lang} found under the aggregated language tag."
+
+
+@pytest.mark.parametrize(
+    "setlangstrings, expected_output",
+    [
+        # Test to ensure language tags are preserved in uppercase if all are uppercase
+        (
+            [SetLangString(texts={"UPPERCASE", "ONLY"}, lang="DE")],
+            [SetLangString(texts={"UPPERCASE", "ONLY"}, lang="DE")],
+        ),
+        # Test to ensure language tags are converted to lowercase if there's a variation in case
+        (
+            [
+                SetLangString(texts={"MixedCase", "Test"}, lang="De"),
+                SetLangString(texts={"ANOTHER", "TEST"}, lang="DE"),
+            ],
+            [SetLangString(texts={"MixedCase", "Test", "ANOTHER", "TEST"}, lang="de")],
+        ),
+        (
+            [
+                SetLangString(texts={"MixedCase", "Test"}, lang="De"),
+                SetLangString(texts={"ANOTHER", "TEST"}, lang="De"),
+            ],
+            [SetLangString(texts={"MixedCase", "Test", "ANOTHER", "TEST"}, lang="De")],
+        ),
+        # Test to ensure language tags are preserved in lowercase if all are lowercase
+        (
+            [SetLangString(texts={"lowercase", "test"}, lang="de")],
+            [SetLangString(texts={"lowercase", "test"}, lang="de")],
+        ),
+        # Test to ensure original casing is used when no duplicates exist
+        (
+            [SetLangString(texts={"unique"}, lang="EN"), SetLangString(texts={"distinct"}, lang="FR")],
+            [SetLangString(texts={"unique"}, lang="EN"), SetLangString(texts={"distinct"}, lang="FR")],
+        ),
+        # Test to ensure casefolding occurs when there are multiple instances with varying cases
+        (
+            [SetLangString(texts={"first"}, lang="es"), SetLangString(texts={"second"}, lang="ES")],
+            [SetLangString(texts={"first", "second"}, lang="es")],
+        ),
+    ],
+)
+def test_merge_setlangstrings_language_tag_casing(setlangstrings, expected_output):
+    """
+    Test `merge_setlangstrings` to verify it correctly handles language tag casing according to specified rules.
+
+    :param setlangstrings: List of SetLangString instances to be merged.
+    :param expected_output: Expected list of merged SetLangString instances, with appropriate language tag casing.
+    """
+    result = SetLangString.merge_setlangstrings(setlangstrings)
+    assert len(result) == len(
+        expected_output
+    ), "The number of merged SetLangStrings does not match the expected output."
+    for merged, expected in zip(result, expected_output):
+        assert (
+            merged.texts == expected.texts
+        ), f"Expected texts {expected.texts} but got {merged.texts} for lang {expected.lang}."
+        assert merged.lang == expected.lang, f"Expected language tag '{expected.lang}' but got '{merged.lang}'."

@@ -123,6 +123,7 @@ class Validator(metaclass=NonInstantiable):
         :raises TypeError: If an argument's type does not match its type hint.
         """
 
+        # TODO: Add an error when the function calls this validation and does not provide the necessary types to be checked.
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             # Get type hints of the function (excluding 'return')

@@ -226,12 +226,23 @@ class Converter(metaclass=NonInstantiable):
     ) -> list[str]:
         return arg.to_strings(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
-    @Validator.validate_type_decorator
     @staticmethod
-    def from_setlangstrings_to_strings(arg):
-        # TODO: To be implemented.
-        # TODO: Check using a strategy similar to the one I used for "from_multilangstrings_to_*"
-        pass
+    def from_setlangstrings_to_strings(
+        arg: list[SetLangString], print_quotes: bool = True, separator: str = "@", print_lang: bool = True
+    ) -> list[str]:
+        Validator.validate_type_iterable(arg, list, SetLangString)
+        Validator.validate_type_single(print_quotes, bool)
+        Validator.validate_type_single(separator, str)
+        Validator.validate_type_single(print_lang, bool)
+
+        merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
+
+        strings = []
+        for setlangstring in merged_setlangstrings:
+            strings.extend(
+                setlangstring.to_strings(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
+            )
+        return strings
 
     @Validator.validate_type_decorator
     @staticmethod

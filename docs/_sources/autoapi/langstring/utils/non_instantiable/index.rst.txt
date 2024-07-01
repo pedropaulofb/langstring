@@ -1,26 +1,24 @@
-:py:mod:`langstring.utils.non_instantiable`
-===========================================
+langstring.utils.non_instantiable
+=================================
 
 .. py:module:: langstring.utils.non_instantiable
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    langstring.utils.non_instantiable.NonInstantiable
 
 
-
+Module Contents
+---------------
 
 .. py:class:: NonInstantiable
 
-
    Bases: :py:obj:`type`
+
 
    A metaclass that prevents the instantiation of any class that uses it.
 
@@ -30,6 +28,7 @@ Classes
 
    Methods:
        __call__: Overrides the default call behavior to prevent instantiation.
+
 
    .. py:method:: __call__()
 

@@ -1,14 +1,11 @@
-:py:mod:`langstring.flags`
-==========================
+langstring.flags
+================
 
 .. py:module:: langstring.flags
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
@@ -18,12 +15,13 @@ Classes
    langstring.flags.MultiLangStringFlag
 
 
-
+Module Contents
+---------------
 
 .. py:class:: GlobalFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for global control flags.
 
@@ -36,51 +34,41 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: ENFORCE_EXTRA_DEPEND
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: METHODS_MATCH_TYPES
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
-
-      
 
 
 .. py:class:: LangStringFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for LangString control flags.
 
@@ -93,47 +81,38 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: METHODS_MATCH_TYPES
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
-
-      
 
 
 .. py:class:: SetLangStringFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for SetLangString control flags.
 
@@ -146,47 +125,38 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the SetLangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: METHODS_MATCH_TYPES
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
-
-      
 
 
 .. py:class:: MultiLangStringFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for MultiLangString control flags.
 
@@ -199,36 +169,28 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
-
-      
 
 

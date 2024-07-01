@@ -1,5 +1,5 @@
-:py:mod:`langstring.multilangstring`
-====================================
+langstring.multilangstring
+==========================
 
 .. py:module:: langstring.multilangstring
 
@@ -29,21 +29,18 @@
 
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    langstring.multilangstring.MultiLangString
 
 
-
+Module Contents
+---------------
 
 .. py:class:: MultiLangString(mls_dict = None, pref_lang = 'en')
-
 
    A class for managing multilingual text strings with various language tags.
 
@@ -55,10 +52,12 @@ Classes
    :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
    :vartype pref_lang: str
 
+
    .. py:property:: mls_dict
       :type: dict[str, set[str]]
 
       Getter for texts.
+
 
 
    .. py:property:: pref_lang
@@ -67,6 +66,7 @@ Classes
       Get the preferred language for this MultiLangString.
 
       :return: The preferred language as a string.
+
 
 
    .. py:method:: add(arg)
@@ -86,9 +86,11 @@ Classes
       :type lang: str
 
 
+
    .. py:method:: add_text_in_pref_lang(text)
 
       Add a text entry to the preferred language.
+
 
 
    .. py:method:: add_langstring(langstring)
@@ -99,12 +101,14 @@ Classes
       :type langstring: LangString
 
 
+
    .. py:method:: add_setlangstring(setlangstring)
 
       Add a SetLangString to the MultiLangString.
 
       :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
       :type setlangstring: SetLangString
+
 
 
    .. py:method:: add_multilangstring(multilangstring)
@@ -122,6 +126,7 @@ Classes
    .. py:method:: discard_text_in_pref_lang(text, clean_empty = False)
 
       Discard a text entry from the preferred language.
+
 
 
    .. py:method:: discard_langstring(langstring, clean_empty = False)
@@ -152,9 +157,11 @@ Classes
       :type lang: str
 
 
+
    .. py:method:: remove_text_in_pref_lang(text, clean_empty = False)
 
       Remove a text entry from the preferred language.
+
 
 
    .. py:method:: remove_langstring(langstring, clean_empty = False)
@@ -174,6 +181,7 @@ Classes
 
       :param lang: The language key to be removed along with all its texts.
       :type lang: str
+
 
 
    .. py:method:: remove_empty_langs()
@@ -198,9 +206,11 @@ Classes
       :return: A dictionary with language codes as keys and counts of text entries as values.
 
 
+
    .. py:method:: count_entries_total()
 
       Return the total number of text entries across all languages.
+
 
 
    .. py:method:: count_langs_total()
@@ -220,9 +230,11 @@ Classes
       Check if a specific text exists in the preferred language.
 
 
+
    .. py:method:: contains_text_in_any_lang(text)
 
       Check if a specific text exists in the preferred language.
+
 
 
    .. py:method:: contains_langstring(langstring)
@@ -231,6 +243,7 @@ Classes
 
       :param langstring: A LangString object to check.
       :return: True if the LangString's text is found within the specified language's set; otherwise, False.
+
 
 
    .. py:method:: contains_setlangstring(setlangstring)
@@ -242,6 +255,7 @@ Classes
       language's set; otherwise, False.
 
 
+
    .. py:method:: contains_multilangstring(multilangstring)
 
       Check if the current instance contains all languages and texts of another MultiLangString instance.
@@ -251,14 +265,17 @@ Classes
       False otherwise.
 
 
+
    .. py:method:: get_langs(casefold = False)
 
       Return a list with all languages in the MultiLangString.
 
 
+
    .. py:method:: get_texts()
 
       Return a sorted list with all texts in the MultiLangString.
+
 
 
    .. py:method:: get_langstring(text, lang)
@@ -287,9 +304,11 @@ Classes
       Check if a language is in the MultiLangString.
 
 
+
    .. py:method:: __delitem__(lang)
 
       Allow deletion of language entries.
+
 
 
    .. py:method:: __eq__(other)
@@ -305,9 +324,11 @@ Classes
       :rtype: bool
 
 
+
    .. py:method:: __getitem__(lang)
 
       Allow retrieval of entries by language.
+
 
 
    .. py:method:: __hash__()
@@ -321,14 +342,17 @@ Classes
       :rtype: int
 
 
+
    .. py:method:: __iter__()
 
       Allow iteration over the dictionary keys (language codes).
 
 
+
    .. py:method:: __len__()
 
       Return the number of languages in the dictionary.
+
 
 
    .. py:method:: __repr__()
@@ -342,14 +366,17 @@ Classes
       :rtype: str
 
 
+
    .. py:method:: __reversed__()
 
       Return a reverse iterator over the dictionary keys.
 
 
+
    .. py:method:: __setitem__(lang, texts)
 
       Allow setting entries by language.
+
 
 
    .. py:method:: __str__()
@@ -363,11 +390,18 @@ Classes
       :rtype: str
 
 
+
+   .. py:method:: merge_multilangstrings(multilangstrings)
+      :staticmethod:
+
+
+
    .. py:method:: _get_registered_lang(lang)
 
 
    .. py:method:: _merge_language_entries(mls_dict)
       :staticmethod:
+
 
       Merge entries in the provided dict where the lang codes match case-insensitively. For duplicates,
       the entries are merged under their casefolded version. Original language codes are preserved

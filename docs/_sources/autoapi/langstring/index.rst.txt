@@ -1,5 +1,5 @@
-:py:mod:`langstring`
-====================
+langstring
+==========
 
 .. py:module:: langstring
 
@@ -13,32 +13,29 @@
 
 Subpackages
 -----------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 3
 
-   utils/index.rst
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/langstring/utils/index
 
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   controller/index.rst
-   converter/index.rst
-   flags/index.rst
-   langstring/index.rst
-   multilangstring/index.rst
-   setlangstring/index.rst
+   /autoapi/langstring/controller/index
+   /autoapi/langstring/converter/index
+   /autoapi/langstring/flags/index
+   /autoapi/langstring/langstring/index
+   /autoapi/langstring/multilangstring/index
+   /autoapi/langstring/setlangstring/index
 
-
-Package Contents
-----------------
 
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
@@ -53,10 +50,10 @@ Classes
    langstring.SetLangString
 
 
-
+Package Contents
+----------------
 
 .. py:class:: Controller
-
 
    Control class for managing configuration flags, designed to be non-instantiable.
 
@@ -69,18 +66,18 @@ Classes
    :cvar flags: Stores the current state of each flag.
    :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
 
-   .. py:attribute:: DEFAULT_FLAGS
-      :type: dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
 
-      
+   .. py:attribute:: DEFAULT_FLAGS
+      :type:  dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
+
 
    .. py:attribute:: flags
-      :type: dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
+      :type:  dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
 
-      
 
    .. py:method:: set_flag(flag, state)
       :classmethod:
+
 
       Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.
 
@@ -94,8 +91,10 @@ Classes
       :raises TypeError: If 'flag' is not an instance of one of the flag enums, or if 'state' is not a Boolean.
 
 
+
    .. py:method:: get_flag(flag)
       :classmethod:
+
 
       Retrieve the current state of a specified configuration flag.
 
@@ -112,8 +111,10 @@ Classes
       :raises TypeError: If 'flag' is not a member of LangStringFlag or MultiLangStringFlag.
 
 
+
    .. py:method:: get_flags()
       :classmethod:
+
 
       Retrieve the current state of all configuration flags.
 
@@ -127,8 +128,10 @@ Classes
       :rtype: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
 
 
+
    .. py:method:: print_flag(flag)
       :classmethod:
+
 
       Print the current state of a specific configuration flag.
 
@@ -142,8 +145,10 @@ Classes
           This method is typically used for debugging or quick monitoring, to display the state of a specific flag.
 
 
+
    .. py:method:: print_flags(flag_type = None)
       :classmethod:
+
 
       Print the current state of configuration flags in alphabetical order.
 
@@ -155,8 +160,10 @@ Classes
       :type flag_type: Optional[Type]
 
 
+
    .. py:method:: reset_flag(flag)
       :classmethod:
+
 
       Reset a specific flag to its default value.
 
@@ -165,8 +172,10 @@ Classes
       LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.
 
 
+
    .. py:method:: reset_flags(flag_type = GlobalFlag)
       :classmethod:
+
 
       Reset all flags of a specific type to their default values.
 
@@ -174,14 +183,15 @@ Classes
 
 .. py:class:: Converter
 
-
    A utility class for converting between different string types used in language processing.
 
    This class provides methods to convert between `LangString`, `SetLangString`, and `MultiLangString` types.
    It is designed to be non-instantiable as it serves as a utility class with class methods only.
 
+
    .. py:method:: from_string_to_langstring(arg_string, ignore_at_sign = False)
       :staticmethod:
+
 
       Convert a string into a LangString.
 
@@ -192,40 +202,50 @@ Classes
       :return: A LangString
 
 
+
    .. py:method:: from_strings_to_langstrings(arg, lang)
       :staticmethod:
+
 
 
    .. py:method:: from_string_to_setlangstring(arg)
       :staticmethod:
 
 
+
    .. py:method:: from_strings_to_setlangstrings(arg)
       :staticmethod:
+
 
 
    .. py:method:: from_strings_to_setlangstring(arg, lang)
       :staticmethod:
 
 
+
    .. py:method:: from_string_to_multilangstring(arg)
       :staticmethod:
+
 
 
    .. py:method:: from_strings_to_multilangstring(arg)
       :classmethod:
 
 
+
    .. py:method:: from_langstring_to_string(arg)
       :staticmethod:
+
 
 
    .. py:method:: from_langstrings_to_strings(arg)
       :staticmethod:
 
 
+
    .. py:method:: from_langstring_to_setlangstring(arg)
       :staticmethod:
+
 
       Convert a LangString to a SetLangString.
 
@@ -239,16 +259,20 @@ Classes
       :raises TypeError: If the arg is not of type LangString.
 
 
+
    .. py:method:: from_langstrings_to_setlangstring(arg)
       :staticmethod:
+
 
 
    .. py:method:: from_langstrings_to_setlangstrings(arg)
       :staticmethod:
 
 
+
    .. py:method:: from_langstring_to_multilangstring(arg)
       :staticmethod:
+
 
       Convert a LangString to a MultiLangString.
 
@@ -262,24 +286,30 @@ Classes
       :raises TypeError: If the arg is not of type LangString.
 
 
+
    .. py:method:: from_langstrings_to_multilangstring(arg)
       :staticmethod:
+
 
 
    .. py:method:: from_setlangstring_to_string(arg)
       :staticmethod:
 
 
+
    .. py:method:: from_setlangstring_to_strings(arg, print_quotes = True, separator = '@', print_lang = True)
       :staticmethod:
 
 
-   .. py:method:: from_setlangstrings_to_strings(arg)
+
+   .. py:method:: from_setlangstrings_to_strings(arg, print_quotes = True, separator = '@', print_lang = True)
       :staticmethod:
+
 
 
    .. py:method:: from_setlangstring_to_langstrings(arg)
       :staticmethod:
+
 
       Convert a SetLangString to a list of LangStrings.
 
@@ -293,12 +323,15 @@ Classes
       :raises TypeError: If the arg is not of type SetLangString.
 
 
+
    .. py:method:: from_setlangstrings_to_langstrings(arg)
       :staticmethod:
 
 
+
    .. py:method:: from_setlangstring_to_multilangstring(arg)
       :staticmethod:
+
 
       Convert a SetLangString to a MultiLangString.
 
@@ -312,8 +345,10 @@ Classes
       :raises TypeError: If the arg is not of type SetLangString.
 
 
+
    .. py:method:: from_setlangstrings_to_multilangstring(arg)
       :staticmethod:
+
 
       Convert a list of SetLangString objects to a MultiLangString object.
 
@@ -324,20 +359,25 @@ Classes
       :return: A MultiLangString instance with aggregated texts under normalized language tags.
 
 
+
    .. py:method:: from_multilangstring_to_string(arg)
       :staticmethod:
+
 
 
    .. py:method:: from_multilangstring_to_strings(arg, languages = None, print_quotes = True, separator = '@', print_lang = True)
       :staticmethod:
 
 
+
    .. py:method:: from_multilangstrings_to_strings(arg, languages = None, print_quotes = True, separator = '@', print_lang = True)
       :staticmethod:
 
 
+
    .. py:method:: from_multilangstring_to_langstrings(arg, languages = None)
       :staticmethod:
+
 
       Convert a MultiLangString to a list of LangStrings.
 
@@ -351,12 +391,15 @@ Classes
       :raises TypeError: If the arg is not of type MultiLangString.
 
 
+
    .. py:method:: from_multilangstrings_to_langstrings(arg, languages = None)
       :staticmethod:
 
 
+
    .. py:method:: from_multilangstring_to_setlangstrings(arg, languages = None)
       :staticmethod:
+
 
       Convert a MultiLangString to a list of SetLangStrings.
 
@@ -370,6 +413,7 @@ Classes
       :raises TypeError: If the arg is not of type MultiLangString.
 
 
+
    .. py:method:: from_multilangstrings_to_setlangstrings(arg, languages = None)
       :staticmethod:
 
@@ -377,8 +421,8 @@ Classes
 
 .. py:class:: GlobalFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for global control flags.
 
@@ -391,51 +435,41 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: ENFORCE_EXTRA_DEPEND
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: METHODS_MATCH_TYPES
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
-
-      
 
 
 .. py:class:: LangStringFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for LangString control flags.
 
@@ -448,47 +482,38 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: METHODS_MATCH_TYPES
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
-
-      
 
 
 .. py:class:: MultiLangStringFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for MultiLangString control flags.
 
@@ -501,43 +526,35 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
-
-      
 
 
 .. py:class:: SetLangStringFlag(*args, **kwds)
 
-
    Bases: :py:obj:`enum.Enum`
+
 
    Enumeration for SetLangString control flags.
 
@@ -550,45 +567,35 @@ Classes
    :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the SetLangString's field 'lang'.
    :vartype VALID_LANG: Enum
 
+
    .. py:attribute:: DEFINED_LANG
 
-      
 
    .. py:attribute:: DEFINED_TEXT
 
-      
 
    .. py:attribute:: LOWERCASE_LANG
 
-      
 
    .. py:attribute:: METHODS_MATCH_TYPES
 
-      
 
    .. py:attribute:: PRINT_WITH_LANG
 
-      
 
    .. py:attribute:: PRINT_WITH_QUOTES
 
-      
 
    .. py:attribute:: STRIP_LANG
 
-      
 
    .. py:attribute:: STRIP_TEXT
 
-      
 
    .. py:attribute:: VALID_LANG
 
-      
-
 
 .. py:class:: LangString(text = '', lang = '')
-
 
    A class to encapsulate a string with its language information.
 
@@ -601,16 +608,19 @@ Classes
    :ivar lang: The language tag of the text.
    :vartype lang: str
 
+
    .. py:property:: text
       :type: str
 
       Getter for text.
 
 
+
    .. py:property:: lang
       :type: str
 
       Getter for lang.
+
 
 
    .. py:method:: capitalize()
@@ -684,9 +694,11 @@ Classes
       Join an iterable with the text of the LangString.
 
 
+
    .. py:method:: ljust(width, fillchar = ' ')
 
       Left justify the text.
+
 
 
    .. py:method:: lower()
@@ -698,6 +710,7 @@ Classes
    .. py:method:: partition(sep)
 
       Partition the text.
+
 
 
    .. py:method:: replace(old, new, count = -1)
@@ -714,6 +727,7 @@ Classes
       :return: A new LangString with the prefix removed.
 
 
+
    .. py:method:: removesuffix(suffix)
 
       Remove the specified suffix from the LangString's text.
@@ -723,6 +737,7 @@ Classes
 
       :param suffix: The suffix to remove from the text.
       :return: A new LangString with the suffix removed.
+
 
 
    .. py:method:: rfind(sub, start = 0, end = None)
@@ -736,14 +751,17 @@ Classes
       Right justify the text.
 
 
+
    .. py:method:: rpartition(sep)
 
       Partition the text from the right.
 
 
+
    .. py:method:: rsplit(sep = None, maxsplit = -1)
 
       Split the text from the right.
+
 
 
    .. py:method:: rstrip(chars = None)
@@ -754,9 +772,11 @@ Classes
       Split the text.
 
 
+
    .. py:method:: splitlines(keepends = False)
 
       Split the text into lines.
+
 
 
    .. py:method:: startswith(prefix, start = 0, end = None)
@@ -774,6 +794,7 @@ Classes
    .. py:method:: translate(table)
 
       Translate the text using a translation table.
+
 
 
    .. py:method:: upper()
@@ -804,9 +825,11 @@ Classes
       :raises TypeError: If the objects are not compatible for addition.
 
 
+
    .. py:method:: __contains__(item)
 
       Check if a substring exists within the LangString's text.
+
 
 
    .. py:method:: __eq__(other)
@@ -819,9 +842,11 @@ Classes
       :rtype: bool
 
 
+
    .. py:method:: __ge__(other)
 
       Check if this LangString is greater than or equal to another str or LangString object.
+
 
 
    .. py:method:: __getitem__(key)
@@ -829,9 +854,11 @@ Classes
       Retrieve a substring or a reversed string from the LangString's text.
 
 
+
    .. py:method:: __gt__(other)
 
       Check if this LangString is greater than another LangString object.
+
 
 
    .. py:method:: __hash__()
@@ -842,9 +869,11 @@ Classes
       :rtype: int
 
 
+
    .. py:method:: __iadd__(other)
 
       Implement in-place addition.
+
 
 
    .. py:method:: __imul__(other)
@@ -857,9 +886,11 @@ Classes
       :rtype: LangString
 
 
+
    .. py:method:: __iter__()
 
       Enable iteration over the text part of the LangString.
+
 
 
    .. py:method:: __le__(other)
@@ -867,14 +898,17 @@ Classes
       Check if this LangString is less than or equal to another LangString object.
 
 
+
    .. py:method:: __len__()
 
       Return the length of the LangString's text.
 
 
+
    .. py:method:: __lt__(other)
 
       Check if this LangString is less than another LangString object.
+
 
 
    .. py:method:: __mul__(other)
@@ -887,6 +921,7 @@ Classes
       :rtype: LangString
 
 
+
    .. py:method:: __radd__(other)
 
       Handle concatenation when LangString is on the right side of the '+' operator.
@@ -897,9 +932,11 @@ Classes
       the result looses its language tag.
 
 
+
    .. py:method:: __repr__()
 
       Return an unambiguous string representation of the LangString.
+
 
 
    .. py:method:: __rmul__(other)
@@ -916,6 +953,7 @@ Classes
       :raises TypeError: If 'other' is not an integer.
 
 
+
    .. py:method:: __str__()
 
       Define the string representation of the LangString object.
@@ -924,8 +962,10 @@ Classes
       :rtype: str
 
 
+
    .. py:method:: merge_langstrings(langstrings)
       :staticmethod:
+
 
       Merges duplicated LangStrings in a list based on content and language tags.
 
@@ -939,15 +979,14 @@ Classes
       :rtype: list
 
 
+
    .. py:method:: _validate_match_types(other, overwrite_strict = False)
 
 
    .. py:method:: _validate_match_langs(other)
 
 
-
 .. py:class:: MultiLangString(mls_dict = None, pref_lang = 'en')
-
 
    A class for managing multilingual text strings with various language tags.
 
@@ -959,10 +998,12 @@ Classes
    :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
    :vartype pref_lang: str
 
+
    .. py:property:: mls_dict
       :type: dict[str, set[str]]
 
       Getter for texts.
+
 
 
    .. py:property:: pref_lang
@@ -971,6 +1012,7 @@ Classes
       Get the preferred language for this MultiLangString.
 
       :return: The preferred language as a string.
+
 
 
    .. py:method:: add(arg)
@@ -990,9 +1032,11 @@ Classes
       :type lang: str
 
 
+
    .. py:method:: add_text_in_pref_lang(text)
 
       Add a text entry to the preferred language.
+
 
 
    .. py:method:: add_langstring(langstring)
@@ -1003,12 +1047,14 @@ Classes
       :type langstring: LangString
 
 
+
    .. py:method:: add_setlangstring(setlangstring)
 
       Add a SetLangString to the MultiLangString.
 
       :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
       :type setlangstring: SetLangString
+
 
 
    .. py:method:: add_multilangstring(multilangstring)
@@ -1026,6 +1072,7 @@ Classes
    .. py:method:: discard_text_in_pref_lang(text, clean_empty = False)
 
       Discard a text entry from the preferred language.
+
 
 
    .. py:method:: discard_langstring(langstring, clean_empty = False)
@@ -1056,9 +1103,11 @@ Classes
       :type lang: str
 
 
+
    .. py:method:: remove_text_in_pref_lang(text, clean_empty = False)
 
       Remove a text entry from the preferred language.
+
 
 
    .. py:method:: remove_langstring(langstring, clean_empty = False)
@@ -1078,6 +1127,7 @@ Classes
 
       :param lang: The language key to be removed along with all its texts.
       :type lang: str
+
 
 
    .. py:method:: remove_empty_langs()
@@ -1102,9 +1152,11 @@ Classes
       :return: A dictionary with language codes as keys and counts of text entries as values.
 
 
+
    .. py:method:: count_entries_total()
 
       Return the total number of text entries across all languages.
+
 
 
    .. py:method:: count_langs_total()
@@ -1124,9 +1176,11 @@ Classes
       Check if a specific text exists in the preferred language.
 
 
+
    .. py:method:: contains_text_in_any_lang(text)
 
       Check if a specific text exists in the preferred language.
+
 
 
    .. py:method:: contains_langstring(langstring)
@@ -1135,6 +1189,7 @@ Classes
 
       :param langstring: A LangString object to check.
       :return: True if the LangString's text is found within the specified language's set; otherwise, False.
+
 
 
    .. py:method:: contains_setlangstring(setlangstring)
@@ -1146,6 +1201,7 @@ Classes
       language's set; otherwise, False.
 
 
+
    .. py:method:: contains_multilangstring(multilangstring)
 
       Check if the current instance contains all languages and texts of another MultiLangString instance.
@@ -1155,14 +1211,17 @@ Classes
       False otherwise.
 
 
+
    .. py:method:: get_langs(casefold = False)
 
       Return a list with all languages in the MultiLangString.
 
 
+
    .. py:method:: get_texts()
 
       Return a sorted list with all texts in the MultiLangString.
+
 
 
    .. py:method:: get_langstring(text, lang)
@@ -1191,9 +1250,11 @@ Classes
       Check if a language is in the MultiLangString.
 
 
+
    .. py:method:: __delitem__(lang)
 
       Allow deletion of language entries.
+
 
 
    .. py:method:: __eq__(other)
@@ -1209,9 +1270,11 @@ Classes
       :rtype: bool
 
 
+
    .. py:method:: __getitem__(lang)
 
       Allow retrieval of entries by language.
+
 
 
    .. py:method:: __hash__()
@@ -1225,14 +1288,17 @@ Classes
       :rtype: int
 
 
+
    .. py:method:: __iter__()
 
       Allow iteration over the dictionary keys (language codes).
 
 
+
    .. py:method:: __len__()
 
       Return the number of languages in the dictionary.
+
 
 
    .. py:method:: __repr__()
@@ -1246,14 +1312,17 @@ Classes
       :rtype: str
 
 
+
    .. py:method:: __reversed__()
 
       Return a reverse iterator over the dictionary keys.
 
 
+
    .. py:method:: __setitem__(lang, texts)
 
       Allow setting entries by language.
+
 
 
    .. py:method:: __str__()
@@ -1267,11 +1336,18 @@ Classes
       :rtype: str
 
 
+
+   .. py:method:: merge_multilangstrings(multilangstrings)
+      :staticmethod:
+
+
+
    .. py:method:: _get_registered_lang(lang)
 
 
    .. py:method:: _merge_language_entries(mls_dict)
       :staticmethod:
+
 
       Merge entries in the provided dict where the lang codes match case-insensitively. For duplicates,
       the entries are merged under their casefolded version. Original language codes are preserved
@@ -1284,17 +1360,18 @@ Classes
 
 .. py:class:: SetLangString(texts = None, lang = '')
 
-
    .. py:property:: texts
       :type: set[str]
 
       Getter for texts.
 
 
+
    .. py:property:: lang
       :type: str
 
       Getter for lang.
+
 
 
    .. py:method:: add_langstring(langstring)
@@ -1383,9 +1460,11 @@ Classes
       Return self==value.
 
 
+
    .. py:method:: __ge__(other)
 
       Check if self is a superset of another.
+
 
 
    .. py:method:: __gt__(other)
@@ -1393,9 +1472,11 @@ Classes
       Check if self is a proper superset of other.
 
 
+
    .. py:method:: __hash__()
 
       Generate a hash for a SetLangString object.
+
 
 
    .. py:method:: __iand__(other)
@@ -1418,12 +1499,14 @@ Classes
       Check if self is a subset of other.
 
 
+
    .. py:method:: __len__()
 
 
    .. py:method:: __lt__(other)
 
       Check if self is a proper subset of other.
+
 
 
    .. py:method:: __or__(other)
@@ -1434,12 +1517,14 @@ Classes
       Return the official string representation of the SetLangString object.
 
 
+
    .. py:method:: __str__()
 
       Define the string representation of the LangString object.
 
       :return: The string representation of the LangString object.
       :rtype: str
+
 
 
    .. py:method:: __sub__(other)
@@ -1451,19 +1536,20 @@ Classes
    .. py:method:: merge_setlangstrings(setlangstrings)
       :staticmethod:
 
-      Merges duplicated setlangstrings based on their language tags using the union method.
 
-      Args:
-      - setlangstrings (List[SetLangString]): The list of SetLangString instances.
+      Merges duplicated SetLangStrings based on their language tags using the union method.
 
-      Returns:
-      - List[SetLangString]: A list of merged SetLangString instances without duplicates.
+      If there's no case variation in the language tags among duplicates, the original casing is preserved.
+      If case variations are found, the casefolded version of the language tag is used in the merged SetLangString.
+
+      :param setlangstrings: The list of SetLangString instances.
+      :return: A list of merged SetLangString instances without duplicates.
+
 
 
    .. py:method:: _validate_match_types_and_langs(other, overwrite_strict = False)
 
 
    .. py:method:: _extract_texts(other)
-
 
 

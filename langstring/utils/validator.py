@@ -1,24 +1,4 @@
 """This module defines the Validator class.
-
-The Validator provides validation functionalities for LangString and MultiLangString classes.
-It includes methods to validate argument types, ensure text and language requirements, and check the validity of
-language tags based on configurable control flags.
-
-The mixin is designed to be used with classes that handle language strings and need to enforce specific validation
-rules. It leverages control flags from a control class (like Controller or Controller) to
-determine the validation behavior.
-
-Classes:
-    Validator: A mixin class providing validation methods for LangString and MultiLangString classes.
-
-Example Usage:
-    class LangString(Validator):
-        # LangString implementation
-        ...
-
-    class MultiLangString(Validator):
-        # MultiLangString implementation
-        ...
 """
 
 import inspect

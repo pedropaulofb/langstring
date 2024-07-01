@@ -1,24 +1,21 @@
-:py:mod:`langstring.controller`
-===============================
+langstring.controller
+=====================
 
 .. py:module:: langstring.controller
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    langstring.controller.Controller
 
 
-
+Module Contents
+---------------
 
 .. py:class:: Controller
-
 
    Control class for managing configuration flags, designed to be non-instantiable.
 
@@ -31,18 +28,18 @@ Classes
    :cvar flags: Stores the current state of each flag.
    :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
 
-   .. py:attribute:: DEFAULT_FLAGS
-      :type: dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
 
-      
+   .. py:attribute:: DEFAULT_FLAGS
+      :type:  dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
+
 
    .. py:attribute:: flags
-      :type: dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
+      :type:  dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
 
-      
 
    .. py:method:: set_flag(flag, state)
       :classmethod:
+
 
       Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.
 
@@ -56,8 +53,10 @@ Classes
       :raises TypeError: If 'flag' is not an instance of one of the flag enums, or if 'state' is not a Boolean.
 
 
+
    .. py:method:: get_flag(flag)
       :classmethod:
+
 
       Retrieve the current state of a specified configuration flag.
 
@@ -74,8 +73,10 @@ Classes
       :raises TypeError: If 'flag' is not a member of LangStringFlag or MultiLangStringFlag.
 
 
+
    .. py:method:: get_flags()
       :classmethod:
+
 
       Retrieve the current state of all configuration flags.
 
@@ -89,8 +90,10 @@ Classes
       :rtype: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
 
 
+
    .. py:method:: print_flag(flag)
       :classmethod:
+
 
       Print the current state of a specific configuration flag.
 
@@ -104,8 +107,10 @@ Classes
           This method is typically used for debugging or quick monitoring, to display the state of a specific flag.
 
 
+
    .. py:method:: print_flags(flag_type = None)
       :classmethod:
+
 
       Print the current state of configuration flags in alphabetical order.
 
@@ -117,8 +122,10 @@ Classes
       :type flag_type: Optional[Type]
 
 
+
    .. py:method:: reset_flag(flag)
       :classmethod:
+
 
       Reset a specific flag to its default value.
 
@@ -127,8 +134,10 @@ Classes
       LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.
 
 
+
    .. py:method:: reset_flags(flag_type = GlobalFlag)
       :classmethod:
+
 
       Reset all flags of a specific type to their default values.
 

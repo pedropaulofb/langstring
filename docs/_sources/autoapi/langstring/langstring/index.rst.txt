@@ -1,5 +1,5 @@
-:py:mod:`langstring.langstring`
-===============================
+langstring.langstring
+=====================
 
 .. py:module:: langstring.langstring
 
@@ -25,21 +25,18 @@
 
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    langstring.langstring.LangString
 
 
-
+Module Contents
+---------------
 
 .. py:class:: LangString(text = '', lang = '')
-
 
    A class to encapsulate a string with its language information.
 
@@ -52,16 +49,19 @@ Classes
    :ivar lang: The language tag of the text.
    :vartype lang: str
 
+
    .. py:property:: text
       :type: str
 
       Getter for text.
 
 
+
    .. py:property:: lang
       :type: str
 
       Getter for lang.
+
 
 
    .. py:method:: capitalize()
@@ -135,9 +135,11 @@ Classes
       Join an iterable with the text of the LangString.
 
 
+
    .. py:method:: ljust(width, fillchar = ' ')
 
       Left justify the text.
+
 
 
    .. py:method:: lower()
@@ -149,6 +151,7 @@ Classes
    .. py:method:: partition(sep)
 
       Partition the text.
+
 
 
    .. py:method:: replace(old, new, count = -1)
@@ -165,6 +168,7 @@ Classes
       :return: A new LangString with the prefix removed.
 
 
+
    .. py:method:: removesuffix(suffix)
 
       Remove the specified suffix from the LangString's text.
@@ -174,6 +178,7 @@ Classes
 
       :param suffix: The suffix to remove from the text.
       :return: A new LangString with the suffix removed.
+
 
 
    .. py:method:: rfind(sub, start = 0, end = None)
@@ -187,14 +192,17 @@ Classes
       Right justify the text.
 
 
+
    .. py:method:: rpartition(sep)
 
       Partition the text from the right.
 
 
+
    .. py:method:: rsplit(sep = None, maxsplit = -1)
 
       Split the text from the right.
+
 
 
    .. py:method:: rstrip(chars = None)
@@ -205,9 +213,11 @@ Classes
       Split the text.
 
 
+
    .. py:method:: splitlines(keepends = False)
 
       Split the text into lines.
+
 
 
    .. py:method:: startswith(prefix, start = 0, end = None)
@@ -225,6 +235,7 @@ Classes
    .. py:method:: translate(table)
 
       Translate the text using a translation table.
+
 
 
    .. py:method:: upper()
@@ -255,9 +266,11 @@ Classes
       :raises TypeError: If the objects are not compatible for addition.
 
 
+
    .. py:method:: __contains__(item)
 
       Check if a substring exists within the LangString's text.
+
 
 
    .. py:method:: __eq__(other)
@@ -270,9 +283,11 @@ Classes
       :rtype: bool
 
 
+
    .. py:method:: __ge__(other)
 
       Check if this LangString is greater than or equal to another str or LangString object.
+
 
 
    .. py:method:: __getitem__(key)
@@ -280,9 +295,11 @@ Classes
       Retrieve a substring or a reversed string from the LangString's text.
 
 
+
    .. py:method:: __gt__(other)
 
       Check if this LangString is greater than another LangString object.
+
 
 
    .. py:method:: __hash__()
@@ -293,9 +310,11 @@ Classes
       :rtype: int
 
 
+
    .. py:method:: __iadd__(other)
 
       Implement in-place addition.
+
 
 
    .. py:method:: __imul__(other)
@@ -308,9 +327,11 @@ Classes
       :rtype: LangString
 
 
+
    .. py:method:: __iter__()
 
       Enable iteration over the text part of the LangString.
+
 
 
    .. py:method:: __le__(other)
@@ -318,14 +339,17 @@ Classes
       Check if this LangString is less than or equal to another LangString object.
 
 
+
    .. py:method:: __len__()
 
       Return the length of the LangString's text.
 
 
+
    .. py:method:: __lt__(other)
 
       Check if this LangString is less than another LangString object.
+
 
 
    .. py:method:: __mul__(other)
@@ -338,6 +362,7 @@ Classes
       :rtype: LangString
 
 
+
    .. py:method:: __radd__(other)
 
       Handle concatenation when LangString is on the right side of the '+' operator.
@@ -348,9 +373,11 @@ Classes
       the result looses its language tag.
 
 
+
    .. py:method:: __repr__()
 
       Return an unambiguous string representation of the LangString.
+
 
 
    .. py:method:: __rmul__(other)
@@ -367,6 +394,7 @@ Classes
       :raises TypeError: If 'other' is not an integer.
 
 
+
    .. py:method:: __str__()
 
       Define the string representation of the LangString object.
@@ -375,8 +403,10 @@ Classes
       :rtype: str
 
 
+
    .. py:method:: merge_langstrings(langstrings)
       :staticmethod:
+
 
       Merges duplicated LangStrings in a list based on content and language tags.
 
@@ -390,10 +420,10 @@ Classes
       :rtype: list
 
 
+
    .. py:method:: _validate_match_types(other, overwrite_strict = False)
 
 
    .. py:method:: _validate_match_langs(other)
-
 
 

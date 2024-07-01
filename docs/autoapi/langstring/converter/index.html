@@ -7,7 +7,7 @@
   <title>langstring.converter &mdash; langstring  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx_rtd_size.css?v=f26ae176" />
       <link rel="stylesheet" type="text/css" href="../../../_static/logo_resize.css?v=11130da6" />
 
@@ -19,7 +19,7 @@
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -54,17 +54,18 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring</span></code></a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">langstring</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../index.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../controller/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.controller</span></code></a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.converter</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../flags/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.flags</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../langstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.langstring</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../multilangstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.multilangstring</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../setlangstring/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.setlangstring</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/index.html">langstring.controller</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">langstring.converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../flags/index.html">langstring.flags</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../langstring/index.html">langstring.langstring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../multilangstring/index.html">langstring.multilangstring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../setlangstring/index.html">langstring.setlangstring</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#classes">Classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
 </ul>
 </li>
@@ -87,8 +88,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
-          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring</span></code></a></li>
-      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.converter</span></code></li>
+          <li class="breadcrumb-item"><a href="../index.html">langstring</a></li>
+      <li class="breadcrumb-item active">langstring.converter</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/autoapi/langstring/converter/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -99,7 +100,7 @@
            <div itemprop="articleBody">
              
   <section id="module-langstring.converter">
-<span id="langstring-converter"></span><h1><a class="reference internal" href="#module-langstring.converter" title="langstring.converter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">langstring.converter</span></code></a><a class="headerlink" href="#module-langstring.converter" title="Link to this heading"></a></h1>
+<span id="langstring-converter"></span><h1>langstring.converter<a class="headerlink" href="#module-langstring.converter" title="Link to this heading"></a></h1>
 <p>This module provides a Converter class for converting between different string types used in language processing.</p>
 <p>The Converter class is designed as a utility class to facilitate the conversion between <cite>LangString</cite>, <cite>SetLangString</cite>,
 and <cite>MultiLangString</cite> objects. These objects represent different ways of handling language-tagged strings, which are
@@ -118,10 +119,8 @@ classes. Error handling is provided for type mismatches, but not for malformed o
 </dl>
 <p>This module is part of a larger package dealing with language processing and RDF data manipulation, providing
 foundational tools for handling multilingual text data in various formats.</p>
-<section id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#langstring.converter.Converter" title="langstring.converter.Converter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Converter</span></code></a></p></td>
@@ -129,6 +128,9 @@ foundational tools for handling multilingual text data in various formats.</p>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="langstring.converter.Converter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.converter.</span></span><span class="sig-name descname"><span class="pre">Converter</span></span><a class="headerlink" href="#langstring.converter.Converter" title="Link to this definition"></a></dt>
@@ -145,7 +147,7 @@ If there is no ‘&#64;’, the entire string is set as text and lang is set to 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arg_string</strong> (<em>str</em>) – The arg string to be converted.</p></li>
-<li><p><strong>ignore_at_sign</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>ignore_at_sign</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -163,8 +165,8 @@ If there is no ‘&#64;’, the entire string is set as text and lang is set to 
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>lang</strong> (<em>str</em>) – </p></li>
+<li><p><strong>arg</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>lang</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -189,8 +191,8 @@ If there is no ‘&#64;’, the entire string is set as text and lang is set to 
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>lang</strong> (<em>str</em>) – </p></li>
+<li><p><strong>arg</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>lang</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -209,7 +211,7 @@ If there is no ‘&#64;’, the entire string is set as text and lang is set to 
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_strings_to_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_strings_to_multilangstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">langstring.multilangstring.MultiLangString</a></p>
@@ -222,7 +224,7 @@ If there is no ‘&#64;’, the entire string is set as text and lang is set to 
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstring_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_langstring_to_string" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
@@ -262,7 +264,7 @@ LangString in a set and retains its language.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstrings_to_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_langstrings_to_setlangstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString">langstring.setlangstring.SetLangString</a></p>
@@ -275,7 +277,7 @@ LangString in a set and retains its language.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstrings_to_setlangstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_langstrings_to_setlangstrings" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString">langstring.setlangstring.SetLangString</a>]</p>
@@ -310,7 +312,7 @@ contains the text and language of the arg LangString.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstrings_to_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_langstrings_to_multilangstring" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">langstring.multilangstring.MultiLangString</a></p>
@@ -323,7 +325,7 @@ contains the text and language of the arg LangString.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstring_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_setlangstring_to_string" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
@@ -337,10 +339,10 @@ contains the text and language of the arg LangString.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>) – </p></li>
-<li><p><strong>print_quotes</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>separator</strong> (<em>str</em>) – </p></li>
-<li><p><strong>print_lang</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>arg</strong> (<a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>)</p></li>
+<li><p><strong>print_quotes</strong> (<em>bool</em>)</p></li>
+<li><p><strong>separator</strong> (<em>str</em>)</p></li>
+<li><p><strong>print_lang</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -351,8 +353,21 @@ contains the text and language of the arg LangString.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.converter.Converter.from_setlangstrings_to_strings">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstrings_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_setlangstrings_to_strings" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstrings_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_setlangstrings_to_strings" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>)</p></li>
+<li><p><strong>print_quotes</strong> (<em>bool</em>)</p></li>
+<li><p><strong>separator</strong> (<em>str</em>)</p></li>
+<li><p><strong>print_lang</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.converter.Converter.from_setlangstring_to_langstrings">
@@ -381,7 +396,7 @@ from the SetLangString and its associated language.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstrings_to_langstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_setlangstrings_to_langstrings" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="../langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString">langstring.langstring.LangString</a>]</p>
@@ -421,7 +436,7 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>setlangstrings</strong> – List of SetLangString instances to be converted.</p></li>
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>) – </p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -438,7 +453,7 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstring_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.converter.Converter.from_multilangstring_to_string" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a>) – </p>
+<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
@@ -452,11 +467,11 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a>) – </p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>print_quotes</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>separator</strong> (<em>str</em>) – </p></li>
-<li><p><strong>print_lang</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>arg</strong> (<a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a>)</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>print_quotes</strong> (<em>bool</em>)</p></li>
+<li><p><strong>separator</strong> (<em>str</em>)</p></li>
+<li><p><strong>print_lang</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -471,11 +486,11 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>) – </p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>print_quotes</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>separator</strong> (<em>str</em>) – </p></li>
-<li><p><strong>print_lang</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>)</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>print_quotes</strong> (<em>bool</em>)</p></li>
+<li><p><strong>separator</strong> (<em>str</em>)</p></li>
+<li><p><strong>print_lang</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -494,7 +509,7 @@ texts in the MultiLangString along with its associated language.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arg</strong> (<a class="reference internal" href="../index.html#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString to be converted.</p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -515,8 +530,8 @@ texts in the MultiLangString along with its associated language.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>) – </p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>)</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -535,7 +550,7 @@ texts of a single language from the MultiLangString.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arg</strong> (<a class="reference internal" href="../index.html#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString to be converted.</p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -556,8 +571,8 @@ texts of a single language from the MultiLangString.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>) – </p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="../multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>)</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -568,7 +583,6 @@ texts of a single language from the MultiLangString.</p>
 
 </dd></dl>
 
-</section>
 </section>
 </section>
 

@@ -1,24 +1,21 @@
-:py:mod:`langstring.setlangstring`
-==================================
+langstring.setlangstring
+========================
 
 .. py:module:: langstring.setlangstring
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    langstring.setlangstring.SetLangString
 
 
-
+Module Contents
+---------------
 
 .. py:class:: SetLangString(texts = None, lang = '')
-
 
    .. py:property:: texts
       :type: set[str]
@@ -26,10 +23,12 @@ Classes
       Getter for texts.
 
 
+
    .. py:property:: lang
       :type: str
 
       Getter for lang.
+
 
 
    .. py:method:: add_langstring(langstring)
@@ -118,9 +117,11 @@ Classes
       Return self==value.
 
 
+
    .. py:method:: __ge__(other)
 
       Check if self is a superset of another.
+
 
 
    .. py:method:: __gt__(other)
@@ -128,9 +129,11 @@ Classes
       Check if self is a proper superset of other.
 
 
+
    .. py:method:: __hash__()
 
       Generate a hash for a SetLangString object.
+
 
 
    .. py:method:: __iand__(other)
@@ -153,12 +156,14 @@ Classes
       Check if self is a subset of other.
 
 
+
    .. py:method:: __len__()
 
 
    .. py:method:: __lt__(other)
 
       Check if self is a proper subset of other.
+
 
 
    .. py:method:: __or__(other)
@@ -169,12 +174,14 @@ Classes
       Return the official string representation of the SetLangString object.
 
 
+
    .. py:method:: __str__()
 
       Define the string representation of the LangString object.
 
       :return: The string representation of the LangString object.
       :rtype: str
+
 
 
    .. py:method:: __sub__(other)
@@ -186,19 +193,20 @@ Classes
    .. py:method:: merge_setlangstrings(setlangstrings)
       :staticmethod:
 
-      Merges duplicated setlangstrings based on their language tags using the union method.
 
-      Args:
-      - setlangstrings (List[SetLangString]): The list of SetLangString instances.
+      Merges duplicated SetLangStrings based on their language tags using the union method.
 
-      Returns:
-      - List[SetLangString]: A list of merged SetLangString instances without duplicates.
+      If there's no case variation in the language tags among duplicates, the original casing is preserved.
+      If case variations are found, the casefolded version of the language tag is used in the merged SetLangString.
+
+      :param setlangstrings: The list of SetLangString instances.
+      :return: A list of merged SetLangString instances without duplicates.
+
 
 
    .. py:method:: _validate_match_types_and_langs(other, overwrite_strict = False)
 
 
    .. py:method:: _extract_texts(other)
-
 
 

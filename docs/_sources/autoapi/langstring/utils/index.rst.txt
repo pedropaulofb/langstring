@@ -1,5 +1,5 @@
-:py:mod:`langstring.utils`
-==========================
+langstring.utils
+================
 
 .. py:module:: langstring.utils
 
@@ -13,11 +13,11 @@
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   non_instantiable/index.rst
-   validator/index.rst
+   /autoapi/langstring/utils/non_instantiable/index
+   /autoapi/langstring/utils/validator/index
 
 

@@ -123,14 +123,27 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_type_decorator
     @staticmethod
-    def from_langstring_to_string(arg: LangString) -> str:
-        return arg.__str__()
+    def from_langstring_to_string(
+        arg: LangString, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
+    ) -> str:
+        return arg.to_string(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
     @staticmethod
-    def from_langstrings_to_strings(arg):
-        # TODO: To be implemented.
-        # TODO: Check using a strategy similar to the one I used for "from_multilangstrings_to_*"
-        pass
+    def from_langstrings_to_strings(
+        arg: list[LangString],
+        print_quotes: Optional[bool] = None,
+        separator: str = "@",
+        print_lang: Optional[bool] = None,
+    ) -> list[str]:
+        Validator.validate_type_iterable(arg, list, LangString)
+        Validator.validate_type_single(print_quotes, bool, optional=True)
+        Validator.validate_type_single(separator, str)
+        Validator.validate_type_single(print_lang, bool, optional=True)
+
+        strings = []
+        for langstring in arg:
+            strings.append(langstring.to_string(print_quotes=print_quotes, separator=separator, print_lang=print_lang))
+        return strings
 
     @Validator.validate_type_decorator
     @staticmethod
@@ -222,18 +235,21 @@ class Converter(metaclass=NonInstantiable):
     @Validator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_strings(
-        arg: SetLangString, print_quotes: bool = True, separator: str = "@", print_lang: bool = True
+        arg: SetLangString, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> list[str]:
         return arg.to_strings(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
     @staticmethod
     def from_setlangstrings_to_strings(
-        arg: list[SetLangString], print_quotes: bool = True, separator: str = "@", print_lang: bool = True
+        arg: list[SetLangString],
+        print_quotes: Optional[bool] = None,
+        separator: str = "@",
+        print_lang: Optional[bool] = None,
     ) -> list[str]:
         Validator.validate_type_iterable(arg, list, SetLangString)
-        Validator.validate_type_single(print_quotes, bool)
+        Validator.validate_type_single(print_quotes, bool, optional=True)
         Validator.validate_type_single(separator, str)
-        Validator.validate_type_single(print_lang, bool)
+        Validator.validate_type_single(print_lang, bool, optional=True)
 
         merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
 

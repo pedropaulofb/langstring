@@ -71,7 +71,7 @@ def test_setitem_update_existing_language(initial_dict, lang, new_texts, expecte
         ("en", None, TypeError, "Invalid argument with value 'None'. Expected 'set', but got 'NoneType'."),
         ("en", {None}, TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
         (None, {"Hello"}, TypeError, "Invalid argument with value '.+'. Expected 'str', but got 'NoneType'."),
-        ("en", ["Hello"], TypeError, "Invalid argument with value '\['Hello'\]'. Expected 'set', but got 'list'."),
+        ("en", ["Hello"], TypeError, r"Invalid argument with value '\['Hello'\]'. Expected 'set', but got 'list'."),
         ("en", {"Hello", 123}, TypeError, "Invalid argument with value '123'. Expected 'str', but got 'int'."),
         ("en", {"Hello", None}, TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
         (True, {"World"}, TypeError, "Invalid argument with value '.+'. Expected 'str', but got 'bool'."),

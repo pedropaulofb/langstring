@@ -731,6 +731,7 @@ class MultiLangString:
 
             formatted_items.append(formatted_item)
 
+        # TODO: JUSTIFY IN DOCSTRINGS THAT IT IS SORTED TO BE DETERMINISTIC
         sorted_formatted_items = sorted(formatted_items)  # Sort the formatted items
         result_string = ", ".join(sorted_formatted_items)
         return result_string

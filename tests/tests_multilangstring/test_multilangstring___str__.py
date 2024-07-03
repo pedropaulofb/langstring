@@ -39,11 +39,11 @@ def normalize_string(s: str) -> str:
     [
         ([("", "")], "{''}@", "{''}"),
         ([("Hello", "en")], "{'Hello'}@en", "{'Hello'}"),
-        ([("Hola", "es"), ("Hello", "en")], "{'Hola'}@es, {'Hello'}@en", "{'Hola'}, {'Hello'}"),
+        ([("Hola", "es"), ("Hello", "en")], "{'Hello'}@en, {'Hola'}@es", "{'Hello'}, {'Hola'}"),
         (
             [(" Привет", "ru"), (" Γειά", "gr")],
-            "{' Привет'}@ru, {' Γειά'}@gr",
-            "{' Привет'}, {' Γειά'}",
+            "{' Γειά'}@gr, {' Привет'}@ru",
+            "{' Γειά'}, {' Привет'}",
         ),  # Leading spaces in text, Cyrillic and Greek.
         (
             [("Hello ", "en"), ("Hola", "es ")],
@@ -52,8 +52,8 @@ def normalize_string(s: str) -> str:
         ),  # Trailing spaces in text and language.
         (
             [("Καλημέρα", "GR"), ("Hello", "EN")],
-            "{'Καλημέρα'}@GR, {'Hello'}@EN",
-            "{'Καλημέρα'}, {'Hello'}",
+            "{'Hello'}@EN, {'Καλημέρα'}@GR",
+            "{'Hello'}, {'Καλημέρα'}",
         ),  # Mixed case languages.
         (
             [("Hello😊", "en"), ("😢", "emoji")],
@@ -67,18 +67,18 @@ def normalize_string(s: str) -> str:
         ),  # Newline characters in text.
         (
             [("Speci@l Ch@racters", "en"), ("<XML>", "markup")],
-            "{'Speci@l Ch@racters'}@en, {'<XML>'}@markup",
-            "{'Speci@l Ch@racters'}, {'<XML>'}",
+            "{'<XML>'}@markup, {'Speci@l Ch@racters'}@en",
+            "{'<XML>'}, {'Speci@l Ch@racters'}",
         ),  # Special characters.
         ([("Hello", "en"), ("hello", "en")], "{'Hello', 'hello'}@en", "{'Hello', 'hello'}"),
         (
             [("你好", "zh-Hant"), ("こんにちは", "ja")],
-            "{'你好'}@zh-Hant, {'こんにちは'}@ja",
-            "{'你好'}, {'こんにちは'}",
+            "{'こんにちは'}@ja, {'你好'}@zh-Hant",
+            "{'こんにちは'}, {'你好'}",
         ),
         ([("", "en")], "{''}@en", "{''}"),
         ([(" ", "en")], "{' '}@en", "{' '}"),
-        ([("مرحبا", "ar"), ("שלום", "he")], "{'مرحبا'}@ar, {'שלום'}@he", "{'مرحبا'}, {'שלום'}"),
+        ([("مرحبا", "ar"), ("שלום", "he")], "{'שלום'}@he, {'مرحبا'}@ar", "{'שלום'}, {'مرحبا'}"),
         ([("Line1\\nLine2", "en")], "{'Line1\\nLine2'}@en", "{'Line1\\nLine2'}"),
     ],
 )

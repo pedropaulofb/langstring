@@ -293,6 +293,9 @@ class SetLangString:
         :return: The string representation of the LangString object.
         :rtype: str
         """
+
+        # TODO: Verify use of PRINT_WITH_QUOTES, just like it is done in the MultiLangString class.
+
         texts_str = "{}" if not self.texts else str(self.texts)
 
         if Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG):

@@ -30,6 +30,8 @@ from .setlangstring import SetLangString
 from .utils.non_instantiable import NonInstantiable
 from .utils.validator import Validator
 
+# TODO (@pedropaulofb): Check for redundant type validations.
+
 
 class Converter(metaclass=NonInstantiable):
     """A utility class for converting between different string types used in language processing.
@@ -335,12 +337,12 @@ class Converter(metaclass=NonInstantiable):
     @staticmethod
     def from_multilangstring_to_strings(
         arg: MultiLangString,
-        languages: Optional[list[str]] = None,
-        print_quotes: bool = True,
+        langs: Optional[list[str]] = None,
+        print_quotes: Optional[bool] = None,
         separator: str = "@",
-        print_lang: bool = True,
+        print_lang: Optional[bool] = None,
     ) -> list[str]:
-        return arg.to_strings(langs=languages, print_quotes=print_quotes, separator=separator, print_lang=print_lang)
+        return arg.to_strings(langs=langs, print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
     @staticmethod
     def from_multilangstrings_to_strings(
@@ -351,10 +353,7 @@ class Converter(metaclass=NonInstantiable):
         print_lang: bool = True,
     ) -> list[str]:
         Validator.validate_type_iterable(arg, list, MultiLangString)
-        Validator.validate_type_iterable(languages, list, str, optional=True)
-        Validator.validate_type_single(print_quotes, bool)
-        Validator.validate_type_single(separator, str)
-        Validator.validate_type_single(print_lang, bool)
+        # Other argument types are already validated in the 'to_strings' method.
 
         unified_mls = MultiLangString.merge_multilangstrings(arg)
 

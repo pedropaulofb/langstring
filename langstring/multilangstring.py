@@ -712,9 +712,14 @@ class MultiLangString:
 
         formatted_items = []
         print_lang = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG)
-        for lang, texts in self.mls_dict.items():
+        print_quotes = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_QUOTES)
+        for lang, texts in sorted(self.mls_dict.items()):  # Sort languages
             if texts:
-                formatted_texts = "{" + ", ".join(f"'{text}'" for text in texts) + "}"
+                sorted_texts = sorted(texts)  # Sort texts within the language
+                if print_quotes:
+                    formatted_texts = "{" + ", ".join(f"'{text}'" for text in sorted_texts) + "}"
+                else:
+                    formatted_texts = "{" + ", ".join(f"{text}" for text in sorted_texts) + "}"
             else:
                 formatted_texts = "{}"
 
@@ -726,7 +731,8 @@ class MultiLangString:
 
             formatted_items.append(formatted_item)
 
-        result_string = ", ".join(formatted_items)
+        sorted_formatted_items = sorted(formatted_items)  # Sort the formatted items
+        result_string = ", ".join(sorted_formatted_items)
         return result_string
 
     # --------------------------------------------------

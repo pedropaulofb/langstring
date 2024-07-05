@@ -724,7 +724,7 @@ class MultiLangString:
                 formatted_texts = "{}"
 
             if print_lang:
-                formatted_lang = f"@{lang}" if lang else "@"  # Adjust here for empty language
+                formatted_lang = f"@{lang}" if print_lang else ""
                 formatted_item = f"{formatted_texts}{formatted_lang}"
             else:
                 formatted_item = formatted_texts

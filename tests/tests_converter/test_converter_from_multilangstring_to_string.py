@@ -1,5 +1,4 @@
 import pytest
-from icecream import ic
 
 from langstring import Controller
 from langstring import Converter
@@ -138,10 +137,8 @@ def test_from_multilangstring_to_string_various_cases(mls_dict, expected) -> Non
     :param expected: The expected string representation.
     :raises AssertionError: If the conversion does not return the expected string value.
     """
-    Controller.reset_flag(MultiLangStringFlag.PRINT_WITH_QUOTES)
-    Controller.reset_flag(MultiLangStringFlag.PRINT_WITH_LANG)
+    Controller.reset_flags()
     multilangstring = MultiLangString(mls_dict)
-    ic(multilangstring)
     result = Converter.from_multilangstring_to_string(multilangstring)
     assert result == expected, f"Expected '{expected}', got {result}"
 

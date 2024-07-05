@@ -290,16 +290,24 @@ class SetLangString:
     def __str__(self) -> str:
         """Define the string representation of the LangString object.
 
+        This method provides a concise string representation of the LangString, listing each text entry with its
+        associated language tag if the corresponding flags are set.
+
         :return: The string representation of the LangString object.
         :rtype: str
         """
-
-        # TODO: Verify use of PRINT_WITH_QUOTES, just like it is done in the MultiLangString class.
-
-        texts_str = "{}" if not self.texts else str(self.texts)
+        if not self.texts:
+            texts_str = "{}"
+        else:
+            # The texts are sorted to ensure deterministic output.
+            sorted_texts = sorted(self.texts)
+            if Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES):
+                texts_str = "{" + ", ".join(f"'{text}'" for text in sorted_texts) + "}"
+            else:
+                texts_str = "{" + ", ".join(f"{text}" for text in sorted_texts) + "}"
 
         if Controller.get_flag(SetLangStringFlag.PRINT_WITH_LANG):
-            lang_representation = f"@{self.lang}" if self.lang else "@"
+            lang_representation = f"@{self.lang}" if self.lang else ""
             return f"{texts_str}{lang_representation}"
 
         return texts_str

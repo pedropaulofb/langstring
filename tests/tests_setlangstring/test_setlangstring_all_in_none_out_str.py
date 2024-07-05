@@ -220,6 +220,10 @@ str_test_cases = [
 ]
 
 
+
+def escape_special_characters(text: str) -> str:
+    return text.replace('\n', '\\n').replace('\t', '\\t')
+
 @pytest.mark.parametrize("case", str_test_cases)
 def test_setlangstring_str_method(case):
     set_lang_string = SetLangString(texts=case["texts"], lang=case["lang"])
@@ -227,27 +231,33 @@ def test_setlangstring_str_method(case):
     # Disable PRINT_WITH_LANG for the first part of the test
     Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, False)
     result_without_lang = str(set_lang_string)
+
+    # Escaping special characters in the expected result for comparison
+    escaped_expected_without_lang = escape_special_characters(case["expected_without_lang"])
+
     # Directly compare sets to ensure elements match, regardless of order
-    expected_set = set(case["expected_without_lang"].strip("{}").split(", "))
-    assert (
-        set(result_without_lang.strip("{}").split(", ")) == expected_set
-    ), "Mismatch in set elements without language tag"
+    expected_set = set(escaped_expected_without_lang.strip("{}").split(", "))
+    result_set = set(escape_special_characters(result_without_lang).strip("{}").split(", "))
+
+    assert result_set == expected_set, f"Mismatch in set elements without language tag: {result_set} != {expected_set}"
 
     # Enable PRINT_WITH_LANG for the second part of the test
     Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, True)
     result_with_lang = str(set_lang_string)
+
+    # Escaping special characters in the expected result for comparison
+    escaped_expected_with_lang = escape_special_characters(case["expected_with_lang"])
+
     # Extract set and language tag portions from the result
-    match = re.match(r"^(.*)@(\w+)$", result_with_lang)
+    match = re.match(r"^(.*)@(\w+)$", result_with_lang, re.DOTALL)
     if not match:
         assert False, f"Result does not match expected format: {result_with_lang}"
-    result_set_str, result_lang = match.groups()
-    # Convert set portion back to a set and compare
-    result_set = set(result_set_str.strip("{}").split(", "))
-    expected_set_with_lang = set(case["expected_with_lang"].split("@")[0].strip("{}").split(", "))
-    assert result_set == expected_set_with_lang, "Mismatch in set elements with language tag"
-    # Compare language tags
-    expected_lang = case["expected_with_lang"].split("@")[1]
-    assert result_lang == expected_lang, "Mismatch in language tag"
 
-    # Reset flag to default after test
-    Controller.reset_flag(SetLangStringFlag.PRINT_WITH_LANG)
+    result_texts, result_lang = match.groups()
+    expected_texts, expected_lang = re.match(r"^(.*)@(\w+)$", escaped_expected_with_lang).groups()
+
+    result_set_with_lang = set(escape_special_characters(result_texts).strip("{}").split(", "))
+    expected_set_with_lang = set(expected_texts.strip("{}").split(", "))
+
+    assert result_set_with_lang == expected_set_with_lang, f"Mismatch in set elements with language tag: {result_set_with_lang} != {expected_set_with_lang}"
+    assert result_lang == expected_lang, f"Mismatch in language tag: {result_lang} != {expected_lang}"

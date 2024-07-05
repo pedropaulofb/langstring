@@ -85,6 +85,8 @@ def normalize_string(s: str) -> str:
 def test_multi_lang_string_str_various_texts(
     texts: list[tuple[str, str]], expected_with_lang: str, expected_without_lang: str
 ):
+    Controller.reset_flags()
+
     mls = MultiLangString()
     for text, lang in texts:
         mls.add_entry(text, lang)

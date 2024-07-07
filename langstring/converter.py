@@ -46,44 +46,95 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_type_decorator
     @staticmethod
-    def from_string_to_langstring(arg_string: str, ignore_at_sign: bool = False) -> LangString:
-        """Convert a string into a LangString.
+    def from_string_to_langstring(
+        input_string: str, method: str, lang: Optional[str] = None, separator: str = '@'
+    ) -> LangString:
+        """Convert a string to a LangString using the specified method.
 
-        If the string contains '@', it splits the string into text (left part) and lang (right part).
-        If there is no '@', the entire string is set as text and lang is set to an empty string.
-
-        :param arg_string: The arg string to be converted.
-        :return: A LangString
+        :param input_string: The text to be converted.
+        :type input_string: str
+        :param method: The method to use for conversion ('manual' or 'parse').
+        :type method: str
+        :param lang: The language code (used only with 'manual' method).
+        :type lang: Optional[str]
+        :param separator: The separator used to split the text and language (used only with 'parse' method).
+        :type separator: str
+        :return: A LangString object with the converted text and language.
+        :rtype: LangString
+        :raises ValueError: If the method is unknown.
         """
-        if "@" in arg_string and not ignore_at_sign:
-            parts = arg_string.rsplit("@", 1)
-            text, lang = parts[0], parts[1]
+        if method == "manual":
+            return Converter.from_string_to_langstring_manual(input_string, lang)
+        elif method == "parse":
+            return Converter.from_string_to_langstring_parse(input_string, separator)
         else:
-            text, lang = arg_string, ""
+            raise ValueError(f"Unknown method: {method}. Valid methods are 'manual' and 'parse'.")
 
-        return LangString(text, lang)
-
+    @Validator.validate_type_decorator
     @staticmethod
-    def from_strings_to_langstrings(arg: Union[set[str], list[str]], lang: str) -> list[LangString]:
-        if not (isinstance(arg, set) or isinstance(arg, list)):
-            raise TypeError(
-                f"Argument '{arg}' must be of types 'set[str]' or 'list[str]', but got '{type(arg).__name__}'."
-            )
+    def from_string_to_langstring_manual(string: str, lang: Optional[str]) -> LangString:
+        """Convert a string to a LangString with the specified language.
 
-        output = []
-        for text in arg:
-            output.append(LangString(text=text, lang=lang))
-        return output
+        :param string: The text to be converted.
+        :type string: str
+        :param lang: The language code.
+        :type lang: Optional[str]
+        :return: A LangString object with the provided text and language.
+        :rtype: LangString
+        """
+        return LangString(text=string, lang=lang)
 
+    @Validator.validate_type_decorator
     @staticmethod
-    def from_string_to_setlangstring(arg):
-        # TODO: To be implemented.
-        pass
+    def from_string_to_langstring_parse(string: str, separator: str = '@') -> LangString:
+        """Convert a string to a LangString by parsing it with the given separator.
 
+        This function splits the input string into text and language components based on the last occurrence of the
+        specified separator. If the separator is not found, the entire string is considered as text and lang is set to None.
+
+        :param string: The text to be converted.
+        :type string: str
+        :param separator: The separator used to split the text and language.
+        :type separator: str
+        :return: A LangString object with the parsed text and language.
+        :rtype: LangString
+        """
+        if separator not in string:
+            text, lang = string, None
+        else:
+            text, lang = string.rsplit(separator, 1)
+
+        return LangString(text=text, lang=lang)
+
+    @Validator.validate_type_decorator
     @staticmethod
-    def from_strings_to_setlangstrings(arg):
-        # TODO: To be implemented.
-        pass
+    def from_strings_to_langstrings(
+            strings: list[str], method: str, lang: Optional[str] = None, separator: str = '@'
+    ) -> list[LangString]:
+        """
+        Convert a list of strings to a list of LangStrings using the specified method.
+
+        :param strings: List of strings to be converted.
+        :type strings: list[str]
+        :param method: The method to use for conversion ('manual' or 'parse').
+        :type method: str
+        :param lang: The language code for 'manual' method.
+        :type lang: Optional[str]
+        :param separator: The separator used in 'parse' method.
+        :type separator: str
+        :return: A list of LangString objects.
+        :rtype: list[LangString]
+        :raises ValueError: If an unknown method is specified.
+        :raises TypeError: If the input types are incorrect.
+        """
+        Validator.validate_type_iterable(strings, list, str)
+
+        langstrings = []
+        for string in strings:
+            langstring = Converter.from_string_to_langstring(string, method, lang, separator)
+            langstrings.append(langstring)
+
+        return langstrings
 
     @staticmethod
     def from_strings_to_setlangstring(arg: Union[set[str], list[str]], lang: str) -> SetLangString:
@@ -103,11 +154,6 @@ class Converter(metaclass=NonInstantiable):
             texts.add(text)
 
         return SetLangString(texts=texts, lang=lang)
-
-    @staticmethod
-    def from_string_to_multilangstring(arg):
-        # TODO: To be implemented.
-        pass
 
     @classmethod
     def from_strings_to_multilangstring(cls, arg: list[str]) -> MultiLangString:

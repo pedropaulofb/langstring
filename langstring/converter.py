@@ -22,13 +22,13 @@ foundational tools for handling multilingual text data in various formats.
 """
 
 from typing import Optional
-from typing import Union
 
 from .langstring import LangString
 from .multilangstring import MultiLangString
 from .setlangstring import SetLangString
 from .utils.non_instantiable import NonInstantiable
 from .utils.validator import Validator
+
 
 # TODO (@pedropaulofb): Check for redundant type validations.
 
@@ -45,8 +45,8 @@ class Converter(metaclass=NonInstantiable):
     # ---------------------------------------------
 
     @classmethod
-    def from_string_to_langstring(cls,
-        input_string: str, method: str, lang: Optional[str] = None, separator: str = '@'
+    def from_string_to_langstring(
+        cls, input_string: str, method: str, lang: Optional[str] = None, separator: str = "@"
     ) -> LangString:
         """Convert a string to a LangString using the specified method.
 
@@ -90,7 +90,7 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_type_decorator
     @staticmethod
-    def from_string_to_langstring_parse(string: str, separator: str = '@') -> LangString:
+    def from_string_to_langstring_parse(string: str, separator: str = "@") -> LangString:
         """Convert a string to a LangString by parsing it with the given separator.
 
         This function splits the input string into text and language components based on the last occurrence of the
@@ -111,8 +111,8 @@ class Converter(metaclass=NonInstantiable):
         return LangString(text=text, lang=lang)
 
     @classmethod
-    def from_strings_to_langstrings(cls,
-            strings: list[str], method: str, lang: Optional[str] = None, separator: str = '@'
+    def from_strings_to_langstrings(
+        cls, strings: list[str], method: str, lang: Optional[str] = None, separator: str = "@"
     ) -> list[LangString]:
         """
         Convert a list of strings to a list of LangStrings using the specified method.
@@ -160,12 +160,10 @@ class Converter(metaclass=NonInstantiable):
             setlangstring.add_langstring(langstring)
 
         return setlangstring
+
     @classmethod
-    def from_strings_to_multilangstring(cls,
-        strings: list[str],
-        method: str,
-        lang: Optional[str] = None,
-        separator: str = '@'
+    def from_strings_to_multilangstring(
+        cls, strings: list[str], method: str, lang: Optional[str] = None, separator: str = "@"
     ) -> MultiLangString:
         """Convert a list of strings to a MultiLangString using the specified method.
 

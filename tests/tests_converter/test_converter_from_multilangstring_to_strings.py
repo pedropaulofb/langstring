@@ -1,43 +1,71 @@
 import pytest
 
-from langstring import MultiLangStringFlag, Controller, MultiLangString, Converter
+from langstring import Controller
+from langstring import Converter
+from langstring import MultiLangString
+from langstring import MultiLangStringFlag
 
 
-@pytest.mark.parametrize("mls_dict, flags, expected", [
-    ({"en": {"Hello"}, "es": {"Hola"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ["Hello@en", "Hola@es"]),
-    ({"en": {"hello"}, "es": {"hola"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: False},
-     ["hello", "hola"]),
-    ({"en": {"HELLO"}, "es": {"HOLA"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ['"HELLO"@en', '"HOLA"@es']),
-    ({"en": {"Hello 😊"}, "fr": {"Bonjour"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ["Bonjour@fr", "Hello 😊@en"]),
-    ({"en": {"Hello"}, "es": {"Hola"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: False},
-     ['"Hello"', '"Hola"']),
-    ({"en": {"HELLO"}, "es": {"Hola"}, "fr": {"Bonjour"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ["Bonjour@fr", "HELLO@en", "Hola@es"]),
-    ({"en": {"hello"}, "fr": {"bonjour"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: False},
-     ['"bonjour"', '"hello"']),
-    ({"en": {"Hello World"}, "es": {"Hola Mundo"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ["Hello World@en", "Hola Mundo@es"]),
-    ({"en": {"Hello 😊"}, "es": {"Hola 😃"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ['"Hello 😊"@en', '"Hola 😃"@es']),
-    ({"en": {"你好"}, "zh": {"世界"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ["世界@zh", "你好@en"]),
-    ({"en": {"Hello\nWorld"}, "es": {"Hola\nMundo"}},
-     {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: True},
-     ['"Hello\nWorld"@en', '"Hola\nMundo"@es']),
-])
+@pytest.mark.parametrize(
+    "mls_dict, flags, expected",
+    [
+        (
+            {"en": {"Hello"}, "es": {"Hola"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ["Hello@en", "Hola@es"],
+        ),
+        (
+            {"en": {"hello"}, "es": {"hola"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: False},
+            ["hello", "hola"],
+        ),
+        (
+            {"en": {"HELLO"}, "es": {"HOLA"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ['"HELLO"@en', '"HOLA"@es'],
+        ),
+        (
+            {"en": {"Hello 😊"}, "fr": {"Bonjour"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ["Bonjour@fr", "Hello 😊@en"],
+        ),
+        (
+            {"en": {"Hello"}, "es": {"Hola"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: False},
+            ['"Hello"', '"Hola"'],
+        ),
+        (
+            {"en": {"HELLO"}, "es": {"Hola"}, "fr": {"Bonjour"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ["Bonjour@fr", "HELLO@en", "Hola@es"],
+        ),
+        (
+            {"en": {"hello"}, "fr": {"bonjour"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: False},
+            ['"bonjour"', '"hello"'],
+        ),
+        (
+            {"en": {"Hello World"}, "es": {"Hola Mundo"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ["Hello World@en", "Hola Mundo@es"],
+        ),
+        (
+            {"en": {"Hello 😊"}, "es": {"Hola 😃"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ['"Hello 😊"@en', '"Hola 😃"@es'],
+        ),
+        (
+            {"en": {"你好"}, "zh": {"世界"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ["世界@zh", "你好@en"],
+        ),
+        (
+            {"en": {"Hello\nWorld"}, "es": {"Hola\nMundo"}},
+            {MultiLangStringFlag.PRINT_WITH_QUOTES: True, MultiLangStringFlag.PRINT_WITH_LANG: True},
+            ['"Hello\nWorld"@en', '"Hola\nMundo"@es'],
+        ),
+    ],
+)
 def test_from_multilangstring_to_strings_various_flags_effects(mls_dict: dict, flags: dict, expected: list) -> None:
     """Test the from_multilangstring_to_strings method with various flags effects.
 
@@ -53,24 +81,19 @@ def test_from_multilangstring_to_strings_various_flags_effects(mls_dict: dict, f
     assert result == expected, f"Expected '{expected}', got '{result}'"
 
 
-@pytest.mark.parametrize("mls_dict, expected", [
-    ({"en": {"Hello"}, "es": {"Hola"}},
-     ["Hello@en", "Hola@es"]),
-    ({"en": {"你好"}, "zh": {"世界"}},
-     ["世界@zh", "你好@en"]),
-    ({"en": {"Hello😊"}},
-     ["Hello😊@en"]),
-    ({"en": {"HELLO"}, "es": {"HOLA"}},
-     ["HELLO@en", "HOLA@es"]),
-    ({"en": {"Hello "}, "es": {" Hola"}},
-     [" Hola@es", "Hello @en"]),
-    ({"en": {"HELLO"}, "ru": {"ПРИВЕТ"}},
-     ["HELLO@en", "ПРИВЕТ@ru"]),
-    ({"en": {"Hello"}, "jp": {"こんにちは"}},
-     ["Hello@en", "こんにちは@jp"]),
-    ({"en": {"Hello😊"}},
-     ["Hello😊@en"]),
-])
+@pytest.mark.parametrize(
+    "mls_dict, expected",
+    [
+        ({"en": {"Hello"}, "es": {"Hola"}}, ["Hello@en", "Hola@es"]),
+        ({"en": {"你好"}, "zh": {"世界"}}, ["世界@zh", "你好@en"]),
+        ({"en": {"Hello😊"}}, ["Hello😊@en"]),
+        ({"en": {"HELLO"}, "es": {"HOLA"}}, ["HELLO@en", "HOLA@es"]),
+        ({"en": {"Hello "}, "es": {" Hola"}}, [" Hola@es", "Hello @en"]),
+        ({"en": {"HELLO"}, "ru": {"ПРИВЕТ"}}, ["HELLO@en", "ПРИВЕТ@ru"]),
+        ({"en": {"Hello"}, "jp": {"こんにちは"}}, ["Hello@en", "こんにちは@jp"]),
+        ({"en": {"Hello😊"}}, ["Hello😊@en"]),
+    ],
+)
 def test_from_multilangstring_to_strings_operation_on_itself(mls_dict: dict, expected: list) -> None:
     """Test the from_multilangstring_to_strings method by performing the conversion twice.
 
@@ -83,29 +106,26 @@ def test_from_multilangstring_to_strings_operation_on_itself(mls_dict: dict, exp
     multilangstring = MultiLangString(mls_dict)
 
     first_result = Converter.from_multilangstring_to_strings(multilangstring)
-    second_multilangstring = MultiLangString({s.split('@')[1]: {s.split('@')[0]} for s in first_result})
+    second_multilangstring = MultiLangString({s.split("@")[1]: {s.split("@")[0]} for s in first_result})
     second_result = Converter.from_multilangstring_to_strings(second_multilangstring)
 
     assert first_result == expected, f"First conversion mismatch: {first_result} != {expected}"
     assert second_result == expected, f"Second conversion mismatch: {second_result} != {expected}"
 
 
-@pytest.mark.parametrize("mls_dict, expected", [
-    ({}, []),
-    ({"en": set()}, []),
-    ({"en": {""}, "es": {"Hola"}},
-     ['""@en', '"Hola"@es']),
-    ({"en": {"Hello\nWorld"}, "es": {"Hola\nMundo"}},
-     ['"Hello\nWorld"@en', '"Hola\nMundo"@es']),
-    ({"en": {"\n\n"}, "es": {"\t\t"}},
-     ['"\t\t"@es', '"\n\n"@en']),
-    ({"en": {" "}, "es": {" "}},
-     ['" "@en', '" "@es']),
-    ({"en": {"HELLO"}, "es": {"HOLA"}, "fr": {"BONJOUR"}},
-     ['"BONJOUR"@fr', '"HELLO"@en', '"HOLA"@es']),
-    ({"en": {""}, "fr": {""}},
-     ['""@en', '""@fr']),
-])
+@pytest.mark.parametrize(
+    "mls_dict, expected",
+    [
+        ({}, []),
+        ({"en": set()}, []),
+        ({"en": {""}, "es": {"Hola"}}, ['""@en', '"Hola"@es']),
+        ({"en": {"Hello\nWorld"}, "es": {"Hola\nMundo"}}, ['"Hello\nWorld"@en', '"Hola\nMundo"@es']),
+        ({"en": {"\n\n"}, "es": {"\t\t"}}, ['"\t\t"@es', '"\n\n"@en']),
+        ({"en": {" "}, "es": {" "}}, ['" "@en', '" "@es']),
+        ({"en": {"HELLO"}, "es": {"HOLA"}, "fr": {"BONJOUR"}}, ['"BONJOUR"@fr', '"HELLO"@en', '"HOLA"@es']),
+        ({"en": {""}, "fr": {""}}, ['""@en', '""@fr']),
+    ],
+)
 def test_from_multilangstring_to_strings_edge_cases(mls_dict: dict, expected: list):
     """Test the from_multilangstring_to_strings method with edge cases.
 
@@ -120,15 +140,18 @@ def test_from_multilangstring_to_strings_edge_cases(mls_dict: dict, expected: li
 
 
 # Test invalid types
-@pytest.mark.parametrize("invalid_input", [
-    None,
-    123,
-    "invalid",
-    45.67,
-    [1, 2, 3],
-    (4, 5, 6),
-    {"valid_key": ["invalid_value"]},
-])
+@pytest.mark.parametrize(
+    "invalid_input",
+    [
+        None,
+        123,
+        "invalid",
+        45.67,
+        [1, 2, 3],
+        (4, 5, 6),
+        {"valid_key": ["invalid_value"]},
+    ],
+)
 def test_from_multilangstring_to_strings_invalid_type(invalid_input):
     """Test the from_multilangstring_to_strings method with invalid input types.
 
@@ -152,14 +175,14 @@ def test_from_multilangstring_to_strings_default():
 
 
 # Edge cases with unusual but valid inputs
-@pytest.mark.parametrize("mls_dict, expected", [
-    ({"en": {""}, "es": {"Hola"}},
-     ['""@en', '"Hola"@es']),
-    ({"": {"Hello"}, "es": {"Hola"}},
-     ['"Hello"@', '"Hola"@es']),
-    ({"en": {" "}, "es": {" "}},
-     ['" "@en', '" "@es']),
-])
+@pytest.mark.parametrize(
+    "mls_dict, expected",
+    [
+        ({"en": {""}, "es": {"Hola"}}, ['""@en', '"Hola"@es']),
+        ({"": {"Hello"}, "es": {"Hola"}}, ['"Hello"@', '"Hola"@es']),
+        ({"en": {" "}, "es": {" "}}, ['" "@en', '" "@es']),
+    ],
+)
 def test_from_multilangstring_to_strings_unusual_valid(mls_dict: dict, expected: list):
     """Test the from_multilangstring_to_strings method with unusual but valid inputs.
 
@@ -173,10 +196,13 @@ def test_from_multilangstring_to_strings_unusual_valid(mls_dict: dict, expected:
 
 
 # Test edge cases with empty strings and special characters
-@pytest.mark.parametrize("mls_dict, expected", [
-    ({"en": {"\n", "\n\n"}}, ['"\n\n"@en', '"\n"@en']),
-    ({"en": {"\t", "\t\t"}}, ['"\t\t"@en', '"\t"@en']),
-])
+@pytest.mark.parametrize(
+    "mls_dict, expected",
+    [
+        ({"en": {"\n", "\n\n"}}, ['"\n\n"@en', '"\n"@en']),
+        ({"en": {"\t", "\t\t"}}, ['"\t\t"@en', '"\t"@en']),
+    ],
+)
 def test_from_multilangstring_to_strings_special_characters(mls_dict: dict, expected: list):
     """Test the from_multilangstring_to_strings method with special character inputs.
 
@@ -200,7 +226,7 @@ def test_from_multilangstring_to_strings_operation_on_itself_default():
     multilangstring = MultiLangString()
 
     first_result = Converter.from_multilangstring_to_strings(multilangstring)
-    second_multilangstring = MultiLangString({s.split('@')[1]: {s.split('@')[0]} for s in first_result})
+    second_multilangstring = MultiLangString({s.split("@")[1]: {s.split("@")[0]} for s in first_result})
     second_result = Converter.from_multilangstring_to_strings(second_multilangstring)
 
     expected = []
@@ -208,11 +234,14 @@ def test_from_multilangstring_to_strings_operation_on_itself_default():
     assert second_result == expected, f"Second conversion mismatch: {second_result} != {expected}"
 
     # Test invalid values
-    @pytest.mark.parametrize("mls_dict, expected_error", [
-        ({"en": None}, TypeError),
-        ({"en": 123}, TypeError),
-        ({"en": [1, 2, 3]}, TypeError),
-    ])
+    @pytest.mark.parametrize(
+        "mls_dict, expected_error",
+        [
+            ({"en": None}, TypeError),
+            ({"en": 123}, TypeError),
+            ({"en": [1, 2, 3]}, TypeError),
+        ],
+    )
     def test_from_multilangstring_to_strings_invalid_values(mls_dict: dict, expected_error: type):
         """Test the from_multilangstring_to_strings method with invalid values.
 
@@ -235,7 +264,7 @@ def test_from_multilangstring_to_strings_operation_on_itself_null():
     multilangstring = MultiLangString(None)
 
     first_result = Converter.from_multilangstring_to_strings(multilangstring)
-    second_multilangstring = MultiLangString({s.split('@')[1]: {s.split('@')[0]} for s in first_result})
+    second_multilangstring = MultiLangString({s.split("@")[1]: {s.split("@")[0]} for s in first_result})
     second_result = Converter.from_multilangstring_to_strings(second_multilangstring)
 
     expected = []

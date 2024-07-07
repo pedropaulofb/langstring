@@ -48,56 +48,112 @@ Module Contents
    It is designed to be non-instantiable as it serves as a utility class with class methods only.
 
 
-   .. py:method:: from_string_to_langstring(arg_string, ignore_at_sign = False)
-      :staticmethod:
-
-
-      Convert a string into a LangString.
-
-      If the string contains '@', it splits the string into text (left part) and lang (right part).
-      If there is no '@', the entire string is set as text and lang is set to an empty string.
-
-      :param arg_string: The arg string to be converted.
-      :return: A LangString
-
-
-
-   .. py:method:: from_strings_to_langstrings(arg, lang)
-      :staticmethod:
-
-
-
-   .. py:method:: from_string_to_setlangstring(arg)
-      :staticmethod:
-
-
-
-   .. py:method:: from_strings_to_setlangstrings(arg)
-      :staticmethod:
-
-
-
-   .. py:method:: from_strings_to_setlangstring(arg, lang)
-      :staticmethod:
-
-
-
-   .. py:method:: from_string_to_multilangstring(arg)
-      :staticmethod:
-
-
-
-   .. py:method:: from_strings_to_multilangstring(arg)
+   .. py:method:: from_string_to_langstring(input_string, method, lang = None, separator = '@')
       :classmethod:
 
 
+      Convert a string to a LangString using the specified method.
 
-   .. py:method:: from_langstring_to_string(arg)
+      :param input_string: The text to be converted.
+      :type input_string: str
+      :param method: The method to use for conversion ('manual' or 'parse').
+      :type method: str
+      :param lang: The language code (used only with 'manual' method).
+      :type lang: Optional[str]
+      :param separator: The separator used to split the text and language (used only with 'parse' method).
+      :type separator: str
+      :return: A LangString object with the converted text and language.
+      :rtype: LangString
+      :raises ValueError: If the method is unknown.
+
+
+
+   .. py:method:: from_string_to_langstring_manual(string, lang)
+      :staticmethod:
+
+
+      Convert a string to a LangString with the specified language.
+
+      :param string: The text to be converted.
+      :type string: str
+      :param lang: The language code.
+      :type lang: Optional[str]
+      :return: A LangString object with the provided text and language.
+      :rtype: LangString
+
+
+
+   .. py:method:: from_string_to_langstring_parse(string, separator = '@')
+      :staticmethod:
+
+
+      Convert a string to a LangString by parsing it with the given separator.
+
+      This function splits the input string into text and language components based on the last occurrence of the
+      specified separator. If the separator is not found, the entire string is considered as text and lang is set to None.
+
+      :param string: The text to be converted.
+      :type string: str
+      :param separator: The separator used to split the text and language.
+      :type separator: str
+      :return: A LangString object with the parsed text and language.
+      :rtype: LangString
+
+
+
+   .. py:method:: from_strings_to_langstrings(strings, method, lang = None, separator = '@')
+      :classmethod:
+
+
+      Convert a list of strings to a list of LangStrings using the specified method.
+
+      :param strings: List of strings to be converted.
+      :type strings: list[str]
+      :param method: The method to use for conversion ('manual' or 'parse').
+      :type method: str
+      :param lang: The language code for 'manual' method.
+      :type lang: Optional[str]
+      :param separator: The separator used in 'parse' method.
+      :type separator: str
+      :return: A list of LangString objects.
+      :rtype: list[LangString]
+      :raises ValueError: If an unknown method is specified.
+      :raises TypeError: If the input types are incorrect.
+
+
+
+   .. py:method:: from_strings_to_setlangstring(strings, lang = None)
+      :classmethod:
+
+
+      Convert a list of strings to a SetLangString using the 'manual' method.
+
+      :param strings: List of strings to be converted.
+      :param lang: Language code for the 'manual' method. Optional.
+      :return: A SetLangString object.
+
+
+
+   .. py:method:: from_strings_to_multilangstring(strings, method, lang = None, separator = '@')
+      :classmethod:
+
+
+      Convert a list of strings to a MultiLangString using the specified method.
+
+      :param strings: List of strings to be converted.
+      :param method: Method to use for conversion ("manual", "parse", or "auto").
+      :param lang: Language code for the "manual" method. Optional.
+      :param separator: Separator for the "parse" method. Default is "@".
+      :return: A MultiLangString object.
+
+
+
+   .. py:method:: from_langstring_to_string(arg, print_quotes = None, separator = '@', print_lang = None)
       :staticmethod:
 
 
 
-   .. py:method:: from_langstrings_to_strings(arg)
+   .. py:method:: from_langstrings_to_strings(arg, print_quotes = None, separator = '@', print_lang = None)
       :staticmethod:
 
 
@@ -125,7 +181,7 @@ Module Contents
 
 
    .. py:method:: from_langstrings_to_setlangstrings(arg)
-      :staticmethod:
+      :classmethod:
 
 
 
@@ -156,12 +212,12 @@ Module Contents
 
 
 
-   .. py:method:: from_setlangstring_to_strings(arg, print_quotes = True, separator = '@', print_lang = True)
+   .. py:method:: from_setlangstring_to_strings(arg, print_quotes = None, separator = '@', print_lang = None)
       :staticmethod:
 
 
 
-   .. py:method:: from_setlangstrings_to_strings(arg, print_quotes = True, separator = '@', print_lang = True)
+   .. py:method:: from_setlangstrings_to_strings(arg, print_quotes = None, separator = '@', print_lang = None)
       :staticmethod:
 
 
@@ -224,7 +280,7 @@ Module Contents
 
 
 
-   .. py:method:: from_multilangstring_to_strings(arg, languages = None, print_quotes = True, separator = '@', print_lang = True)
+   .. py:method:: from_multilangstring_to_strings(arg, langs = None, print_quotes = None, separator = '@', print_lang = None)
       :staticmethod:
 
 

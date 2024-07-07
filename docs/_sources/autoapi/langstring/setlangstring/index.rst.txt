@@ -179,6 +179,9 @@ Module Contents
 
       Define the string representation of the LangString object.
 
+      This method provides a concise string representation of the LangString, listing each text entry with its
+      associated language tag if the corresponding flags are set.
+
       :return: The string representation of the LangString object.
       :rtype: str
 

@@ -220,9 +220,9 @@ str_test_cases = [
 ]
 
 
-
 def escape_special_characters(text: str) -> str:
-    return text.replace('\n', '\\n').replace('\t', '\\t')
+    return text.replace("\n", "\\n").replace("\t", "\\t")
+
 
 @pytest.mark.parametrize("case", str_test_cases)
 def test_setlangstring_str_method(case):
@@ -259,5 +259,7 @@ def test_setlangstring_str_method(case):
     result_set_with_lang = set(escape_special_characters(result_texts).strip("{}").split(", "))
     expected_set_with_lang = set(expected_texts.strip("{}").split(", "))
 
-    assert result_set_with_lang == expected_set_with_lang, f"Mismatch in set elements with language tag: {result_set_with_lang} != {expected_set_with_lang}"
+    assert (
+        result_set_with_lang == expected_set_with_lang
+    ), f"Mismatch in set elements with language tag: {result_set_with_lang} != {expected_set_with_lang}"
     assert result_lang == expected_lang, f"Mismatch in language tag: {result_lang} != {expected_lang}"

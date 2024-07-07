@@ -44,9 +44,8 @@ class Converter(metaclass=NonInstantiable):
     # Strings' Conversion Methods
     # ---------------------------------------------
 
-    @Validator.validate_type_decorator
-    @staticmethod
-    def from_string_to_langstring(
+    @classmethod
+    def from_string_to_langstring(cls,
         input_string: str, method: str, lang: Optional[str] = None, separator: str = '@'
     ) -> LangString:
         """Convert a string to a LangString using the specified method.
@@ -63,10 +62,15 @@ class Converter(metaclass=NonInstantiable):
         :rtype: LangString
         :raises ValueError: If the method is unknown.
         """
+        Validator.validate_type_single(input_string, str)
+        Validator.validate_type_single(method, str)
+        Validator.validate_type_single(lang, str, optional=True)
+        Validator.validate_type_single(separator, str)
+
         if method == "manual":
-            return Converter.from_string_to_langstring_manual(input_string, lang)
+            return cls.from_string_to_langstring_manual(input_string, lang)
         elif method == "parse":
-            return Converter.from_string_to_langstring_parse(input_string, separator)
+            return cls.from_string_to_langstring_parse(input_string, separator)
         else:
             raise ValueError(f"Unknown method: {method}. Valid methods are 'manual' and 'parse'.")
 
@@ -106,9 +110,8 @@ class Converter(metaclass=NonInstantiable):
 
         return LangString(text=text, lang=lang)
 
-    @Validator.validate_type_decorator
-    @staticmethod
-    def from_strings_to_langstrings(
+    @classmethod
+    def from_strings_to_langstrings(cls,
             strings: list[str], method: str, lang: Optional[str] = None, separator: str = '@'
     ) -> list[LangString]:
         """
@@ -128,42 +131,62 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input types are incorrect.
         """
         Validator.validate_type_iterable(strings, list, str)
+        Validator.validate_type_single(method, str)
+        Validator.validate_type_single(lang, str, optional=True)
+        Validator.validate_type_single(separator, str)
 
         langstrings = []
         for string in strings:
-            langstring = Converter.from_string_to_langstring(string, method, lang, separator)
+            langstring = cls.from_string_to_langstring(string, method, lang, separator)
             langstrings.append(langstring)
 
         return langstrings
 
-    @staticmethod
-    def from_strings_to_setlangstring(arg: Union[set[str], list[str]], lang: str) -> SetLangString:
-        if not arg:
-            raise ValueError("Cannot convert the empty arg to a SetLangString.")
-        if not (isinstance(arg, set) or isinstance(arg, list)):
-            raise TypeError(
-                f"Argument '{arg}' must be of types 'set[str]' or 'list[str]' but got '{type(arg).__name__}'."
-            )
-        texts = set()
-
-        for text in arg:
-            if not isinstance(text, str):
-                raise TypeError(
-                    f"Invalid element type inside arg argument. Expected 'str', got '{type(text).__name__}'."
-                )
-            texts.add(text)
-
-        return SetLangString(texts=texts, lang=lang)
-
     @classmethod
-    def from_strings_to_multilangstring(cls, arg: list[str]) -> MultiLangString:
-        Validator.validate_type_iterable(arg, list, str)
-        new_mls = MultiLangString()
+    def from_strings_to_setlangstring(cls, strings: list[str], lang: Optional[str] = None) -> SetLangString:
+        """Convert a list of strings to a SetLangString using the 'manual' method.
 
-        for element in arg:
-            new_mls.add_langstring(cls.from_string_to_langstring(element))
+        :param strings: List of strings to be converted.
+        :param lang: Language code for the 'manual' method. Optional.
+        :return: A SetLangString object.
+        """
+        Validator.validate_type_iterable(strings, list, str)
+        Validator.validate_type_single(lang, str, optional=True)
 
-        return new_mls
+        setlangstring = SetLangString(lang=lang)
+
+        for string in strings:
+            langstring = cls.from_string_to_langstring_manual(string, lang)
+            setlangstring.add_langstring(langstring)
+
+        return setlangstring
+    @classmethod
+    def from_strings_to_multilangstring(cls,
+        strings: list[str],
+        method: str,
+        lang: Optional[str] = None,
+        separator: str = '@'
+    ) -> MultiLangString:
+        """Convert a list of strings to a MultiLangString using the specified method.
+
+        :param strings: List of strings to be converted.
+        :param method: Method to use for conversion ("manual", "parse", or "auto").
+        :param lang: Language code for the "manual" method. Optional.
+        :param separator: Separator for the "parse" method. Default is "@".
+        :return: A MultiLangString object.
+        """
+        Validator.validate_type_iterable(strings, list, str)
+        Validator.validate_type_single(method, str)
+        Validator.validate_type_single(lang, str, optional=True)
+        Validator.validate_type_single(separator, str)
+
+        multilangstring = MultiLangString()
+
+        for string in strings:
+            langstring = cls.from_string_to_langstring(string, method, lang, separator)
+            multilangstring.add_langstring(langstring)
+
+        return multilangstring
 
     # ---------------------------------------------
     # LangStrings' Conversion Methods
@@ -229,15 +252,15 @@ class Converter(metaclass=NonInstantiable):
 
         return SetLangString(texts=new_texts, lang=final_lang)
 
-    @staticmethod
-    def from_langstrings_to_setlangstrings(arg: list[LangString]) -> list[SetLangString]:
+    @classmethod
+    def from_langstrings_to_setlangstrings(cls, arg: list[LangString]) -> list[SetLangString]:
         Validator.validate_type_iterable(arg, list, LangString)
 
         merged_lagnstrings = LangString.merge_langstrings(arg)
 
         setlangstrings = []
         for langstring in merged_lagnstrings:
-            setlangstrings.append(Converter.from_langstrings_to_setlangstring([langstring]))
+            setlangstrings.append(cls.from_langstrings_to_setlangstring([langstring]))
 
         final_setlangstrings = SetLangString.merge_setlangstrings(setlangstrings)
 

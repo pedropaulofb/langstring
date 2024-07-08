@@ -94,7 +94,8 @@ class Converter(metaclass=NonInstantiable):
         """Convert a string to a LangString by parsing it with the given separator.
 
         This function splits the input string into text and language components based on the last occurrence of the
-        specified separator. If the separator is not found, the entire string is considered as text and lang is set to None.
+        specified separator. If the separator is not found, the entire string is considered as text and lang is set
+        to "" (empty string).
 
         :param string: The text to be converted.
         :type string: str
@@ -104,7 +105,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: LangString
         """
         if separator not in string:
-            text, lang = string, None
+            text, lang = string, ""
         else:
             text, lang = string.rsplit(separator, 1)
 

@@ -50,10 +50,10 @@ class Converter(metaclass=NonInstantiable):
     ) -> LangString:
         """Convert a string to a LangString using the specified method.
 
-        :param input_string: The text to be converted.
-        :type input_string: str
         :param method: The method to use for conversion ('manual' or 'parse').
         :type method: str
+        :param input_string: The text to be converted.
+        :type input_string: str
         :param lang: The language code (used only with 'manual' method).
         :type lang: Optional[str]
         :param separator: The separator used to split the text and language (used only with 'parse' method).
@@ -76,38 +76,40 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_type_decorator
     @staticmethod
-    def from_string_to_langstring_manual(string: str, lang: Optional[str]) -> LangString:
+    def from_string_to_langstring_manual(input_string: str, lang: Optional[str]) -> LangString:
         """Convert a string to a LangString with the specified language.
 
-        :param string: The text to be converted.
-        :type string: str
+        :param input_string: The text to be converted.
+        :type input_string: str
         :param lang: The language code.
         :type lang: Optional[str]
         :return: A LangString object with the provided text and language.
         :rtype: LangString
         """
-        return LangString(text=string, lang=lang)
+        return LangString(text=input_string, lang=lang)
 
     @Validator.validate_type_decorator
     @staticmethod
-    def from_string_to_langstring_parse(string: str, separator: str = "@") -> LangString:
+    def from_string_to_langstring_parse(input_string: str, separator: str = "@") -> LangString:
         """Convert a string to a LangString by parsing it with the given separator.
 
         This function splits the input string into text and language components based on the last occurrence of the
         specified separator. If the separator is not found, the entire string is considered as text and lang is set
         to "" (empty string).
 
-        :param string: The text to be converted.
-        :type string: str
+        :param input_string: The text to be converted.
+        :type input_string: str
         :param separator: The separator used to split the text and language.
         :type separator: str
         :return: A LangString object with the parsed text and language.
         :rtype: LangString
         """
-        if separator not in string:
-            text, lang = string, ""
+        if separator not in input_string:
+            text, lang = input_string, ""
+        elif separator == "":
+            text, lang = input_string, ""
         else:
-            text, lang = string.rsplit(separator, 1)
+            text, lang = input_string.rsplit(separator, 1)
 
         return LangString(text=text, lang=lang)
 

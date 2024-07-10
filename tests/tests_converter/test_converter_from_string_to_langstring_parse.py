@@ -1,5 +1,5 @@
 import pytest, re
-from langstring import Converter
+from langstring import Converter, LangString
 
 @pytest.mark.parametrize("string, separator, expected_text, expected_lang", [
     ("Hello@World", "@", "Hello", "World"),
@@ -37,7 +37,12 @@ from langstring import Converter
     ("special chars!@#$%^&*()_", "@", "special chars!", "#$%^&*()_"),  # Special characters
     ("MixedCharset@Κόσμε", "@", "MixedCharset", "Κόσμε"),  # Mixed charset
     ("Hello World!@en-US", "@", "Hello World!", "en-US"),  # Language with region code
-
+    # New test cases for additional coverage
+    ("Mixed CASE@text", "@", "Mixed CASE", "text"),  # Mixed case
+    ("Special@#&*Characters", "@", "Special", "#&*Characters"),  # Special characters in separator
+    ("Emoji@😊😊😊", "@", "Emoji", "😊😊😊"),  # Multiple emojis
+    # Explicitly testing empty separator
+    ("Hello World", "", "Hello World", ""),  # Empty separator case
 ])
 def test_from_string_to_langstring_parse(string: str, separator: str, expected_text: str, expected_lang: str):
     """Test the from_string_to_langstring_parse method with various inputs.

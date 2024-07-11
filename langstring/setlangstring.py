@@ -9,8 +9,8 @@ from .utils.validator import Validator
 
 
 class SetLangString:
-    def __init__(self, texts: Optional[set[str]] = None, lang: str = "") -> None:
-        self.texts: set[str] = texts if (texts is not None) else set()
+    def __init__(self, texts: Optional[Union[set[str], list[str]]] = None, lang: str = "") -> None:
+        self.texts: set[str] = set(texts) if (texts is not None) else set()
         self.lang: str = lang
 
     # -------------------------------------------
@@ -23,8 +23,12 @@ class SetLangString:
         return self._texts
 
     @texts.setter
-    def texts(self, new_texts: set[str]) -> None:
+    def texts(self, new_texts: Union[set[str], list[str]]) -> None:
         """Setter for texts."""
+
+        if isinstance(new_texts, list):
+            new_texts = set(new_texts)
+
         Validator.validate_type_iterable(new_texts, set, str)
 
         self._texts = set()

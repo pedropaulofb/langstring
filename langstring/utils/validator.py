@@ -189,21 +189,3 @@ class Validator(metaclass=NonInstantiable):
         cls.validate_type_single(arg, arg_exp_type)
         for elem in arg:
             cls.validate_type_single(elem, arg_content_exp_type)
-
-
-def validate_multiple_type(arg: Any, arg_exp_type: Union[type, Union[type, ...]], optional: bool = False) -> None:
-    if optional and arg is None:
-        return
-
-    # This works with Unions of any number of types, not just two
-    if get_origin(arg_exp_type) is Union:
-        expected_types = get_args(arg_exp_type)  # Retrieves all types within the Union
-    else:
-        expected_types = (arg_exp_type,)
-
-    if not isinstance(arg, expected_types):
-        expected_types_str = ", ".join([t.__name__ for t in expected_types])
-        raise TypeError(
-            f"Invalid argument with value '{arg}'. "
-            f"Expected one of {expected_types_str}, but got '{type(arg).__name__}'."
-        )

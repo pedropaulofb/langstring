@@ -156,13 +156,7 @@ class Converter(metaclass=NonInstantiable):
         Validator.validate_type_iterable(strings, list, str)
         Validator.validate_type_single(lang, str, optional=True)
 
-        setlangstring = SetLangString(lang=lang)
-
-        for string in strings:
-            langstring = cls.from_string_to_langstring_manual(string, lang)
-            setlangstring.add_langstring(langstring)
-
-        return setlangstring
+        return SetLangString(set(strings), lang=lang)
 
     @classmethod
     def from_strings_to_multilangstring(

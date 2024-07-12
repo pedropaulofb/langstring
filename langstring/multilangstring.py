@@ -141,7 +141,7 @@ class MultiLangString:
         )
 
     @Validator.validate_type_decorator
-    def add_entry(self, text: str, lang: str) -> None:
+    def add_entry(self, text: str, lang: Optional[str]) -> None:
         """Add a text entry to the MultiLangString under a specified language.
 
         Validates the provided text and language against the current flag settings before adding. If the specified
@@ -158,7 +158,7 @@ class MultiLangString:
 
         registered_lang = self._get_registered_lang(validated_lang)
 
-        if not registered_lang:
+        if registered_lang is None:
             self.mls_dict[validated_lang] = set()
             self.mls_dict[validated_lang].add(validated_text)
         else:
@@ -201,7 +201,7 @@ class MultiLangString:
     def add_empty_lang(self, lang: str) -> None:
         validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
         registered_lang = self._get_registered_lang(validated_lang)
-        if not registered_lang:
+        if registered_lang is None:
             self.mls_dict[validated_lang] = set()
 
     # ----- DISCARD METHODS -----

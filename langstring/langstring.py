@@ -41,7 +41,7 @@ class LangString:
     :vartype lang: str
     """
 
-    def __init__(self, text: str = "", lang: str = "") -> None:
+    def __init__(self, text: str = "", lang: Optional[str] = "") -> None:
         """Initialize a new LangString object with text and an optional language tag.
 
         The behavior of this method is influenced by control flags set in Controller. For instance, if the
@@ -76,8 +76,10 @@ class LangString:
         return self._lang
 
     @lang.setter
-    def lang(self, new_lang: str) -> None:
+    def lang(self, new_lang: Optional[str] = "") -> None:
         """Setter for lang."""
+        if new_lang is None:
+            new_lang = ""
         Validator.validate_type_single(new_lang, str)
         self._lang = Validator.validate_flags_lang(LangStringFlag, new_lang)
 

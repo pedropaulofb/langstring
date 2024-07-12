@@ -45,7 +45,7 @@ def test_from_string_to_langstring(
     :param expected_lang: The expected language code in the LangString.
     :return: None
     """
-    result = Converter.from_string_to_langstring(input_string, method, lang, separator)
+    result = Converter.from_string_to_langstring(method, input_string,  lang, separator)
     assert result.text == expected_text, f"Expected text '{expected_text}', but got '{result.text}'"
     assert result.lang == expected_lang, f"Expected language '{expected_lang}', but got '{result.lang}'"
 
@@ -115,4 +115,4 @@ def test_from_string_to_langstring_exceptions(input_string, method, lang, separa
     :return: None
     """
     with pytest.raises(expected_exception, match=match):
-        Converter.from_string_to_langstring(input_string, method, lang, separator)
+        Converter.from_string_to_langstring(method, input_string, lang, separator)

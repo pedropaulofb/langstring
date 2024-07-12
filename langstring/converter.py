@@ -46,7 +46,7 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def from_string_to_langstring(
-        cls, input_string: str, method: str, lang: Optional[str] = None, separator: str = "@"
+        cls, method: str, input_string: str, lang: Optional[str] = None, separator: str = "@"
     ) -> LangString:
         """Convert a string to a LangString using the specified method.
 
@@ -115,15 +115,15 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def from_strings_to_langstrings(
-        cls, strings: list[str], method: str, lang: Optional[str] = None, separator: str = "@"
+        cls, method: str, strings: list[str], lang: Optional[str] = None, separator: str = "@"
     ) -> list[LangString]:
         """
         Convert a list of strings to a list of LangStrings using the specified method.
 
-        :param strings: List of strings to be converted.
-        :type strings: list[str]
         :param method: The method to use for conversion ('manual' or 'parse').
         :type method: str
+        :param strings: List of strings to be converted.
+        :type strings: list[str]
         :param lang: The language code for 'manual' method.
         :type lang: Optional[str]
         :param separator: The separator used in 'parse' method.
@@ -140,7 +140,7 @@ class Converter(metaclass=NonInstantiable):
 
         langstrings = []
         for string in strings:
-            langstring = cls.from_string_to_langstring(string, method, lang, separator)
+            langstring = cls.from_string_to_langstring(method,string, lang, separator)
             langstrings.append(langstring)
 
         return langstrings
@@ -160,25 +160,25 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def from_strings_to_multilangstring(
-        cls, strings: list[str], method: str, lang: Optional[str] = None, separator: str = "@"
+        cls, method: str, strings: list[str],  lang: Optional[str] = None, separator: str = "@"
     ) -> MultiLangString:
         """Convert a list of strings to a MultiLangString using the specified method.
 
+        :param method: Method to use for conversion ("manual", or "parse").
         :param strings: List of strings to be converted.
-        :param method: Method to use for conversion ("manual", "parse", or "auto").
         :param lang: Language code for the "manual" method. Optional.
         :param separator: Separator for the "parse" method. Default is "@".
         :return: A MultiLangString object.
         """
-        Validator.validate_type_iterable(strings, list, str)
         Validator.validate_type_single(method, str)
+        Validator.validate_type_iterable(strings, list, str)
         Validator.validate_type_single(lang, str, optional=True)
         Validator.validate_type_single(separator, str)
 
         multilangstring = MultiLangString()
 
         for string in strings:
-            langstring = cls.from_string_to_langstring(string, method, lang, separator)
+            langstring = cls.from_string_to_langstring(method, string, lang, separator)
             multilangstring.add_langstring(langstring)
 
         return multilangstring

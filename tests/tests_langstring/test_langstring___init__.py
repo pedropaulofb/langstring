@@ -59,14 +59,18 @@ def test_langstring_init_with_default_values():
 @pytest.mark.parametrize(
     "text, lang, error",
     [
-        (None, "en", TypeError),
-        ("Hello", None, TypeError),
+        ("Hello", None, None),  # This should not raise an error
+        (None, "en", TypeError),  # This should raise a TypeError
+        (None, None, TypeError),  # This should raise a TypeError
     ],
 )
 def test_langstring_init_with_none(text, lang, error):
     """Test initialization with None."""
-    with pytest.raises(error, match=TYPEERROR_MSG_SINGULAR):
-        LangString(text, lang)
+    if error:
+        with pytest.raises(error, match=TYPEERROR_MSG_SINGULAR):
+            LangString(text, lang)
+    else:
+        LangString(text, lang)  # This should not raise an error
 
 
 @pytest.mark.parametrize(

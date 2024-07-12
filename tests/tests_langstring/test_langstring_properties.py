@@ -28,7 +28,7 @@ def test_text_getter_setter(input_text: str, expected_text: str) -> None:
 
 
 @pytest.mark.parametrize(
-    "input_lang, expected_lang", [("en", "en"), ("", ""), ("fr", "fr"), ("EN", "EN"), ("zh-CN", "zh-CN")]
+    "input_lang, expected_lang", [("en", "en"), ("", ""), ("fr", "fr"), ("EN", "EN"), ("zh-CN", "zh-CN"), (None, "")]
 )
 def test_lang_getter_setter(input_lang: str, expected_lang: str) -> None:
     """Test the lang getter and setter for various inputs.
@@ -51,7 +51,7 @@ def test_text_setter_invalid_type(invalid_text) -> None:
         LangString(text=invalid_text)
 
 
-@pytest.mark.parametrize("invalid_lang", [123, True, None, 3.14, ["list"], {"dict": "value"}])
+@pytest.mark.parametrize("invalid_lang", [123, True, 3.14, ["list"], {"dict": "value"}])
 def test_lang_setter_invalid_type(invalid_lang) -> None:
     """Test the lang setter with invalid types.
 

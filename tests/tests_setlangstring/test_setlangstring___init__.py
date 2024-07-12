@@ -35,10 +35,20 @@ def test_setlangstring_init_valid(texts, lang) -> None:
 @pytest.mark.parametrize(
     "invalid_texts",
     [
-        ["hello", "world"],  # List instead of set
         "hello",  # String instead of set
         123,  # Integer instead of set
         {"hello", 123},  # Set with invalid element type
+        "",  # Empty string
+        ["valid", 123],  # Mixed types in list
+        {"valid", 123},  # Mixed types in set
+        ["valid", ["nested"]],  # Nested list
+        {"valid", ("nested",)},  # Tuple inside set
+        [1.5, "valid"],  # Float in list
+        {1.5, "valid"},  # Float in set
+        "a",  # Single character string
+        True,  # Boolean type
+        False,  # Boolean type
+        object(),  # Object type
     ],
 )
 def test_setlangstring_init_invalid_texts(invalid_texts) -> None:

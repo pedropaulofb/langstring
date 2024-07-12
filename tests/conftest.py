@@ -23,6 +23,6 @@ def reset_configurations() -> None:
 
 # CONSTANTS
 
-TYPEERROR_MSG_SINGULAR = r"Invalid argument with value '.+?'. Expected '.+?', but got '.+?'\."
+TYPEERROR_MSG_SINGULAR = r"Invalid argument with value '.*?'. Expected '.*?', but got '.*?'."
 TYPEERROR_MSG_PLURAL = r"Invalid argument with value '.+?'. Expected one of '.+?'( or '.+?')*, but got '.+?'\."
 TYPEERROR_MSG_GENERAL = r"Invalid argument with value '.+?'. Expected (one of )*'.+?'( or '.+?')*, but got '.+?'\."

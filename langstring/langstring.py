@@ -42,6 +42,7 @@ class LangString:
     """
 
     def __init__(self, text: str = "", lang: Optional[str] = "") -> None:
+        # TODO: Make both text and lang = "" when they are initialized or receive None
         """Initialize a new LangString object with text and an optional language tag.
 
         The behavior of this method is influenced by control flags set in Controller. For instance, if the

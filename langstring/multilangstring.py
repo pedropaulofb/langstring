@@ -44,6 +44,7 @@ class MultiLangString:
     """
 
     def __init__(self, mls_dict: Optional[dict[str, set[str]]] = None, pref_lang: str = "en") -> None:
+        # TODO: Make mls_dict empty when initialized or receive None
         """Initialize a MultiLangString object with an optional dictionary and preferred language.
 
         Validates the provided mls_dict against the current flag settings. If mls_dict is not provided, initializes

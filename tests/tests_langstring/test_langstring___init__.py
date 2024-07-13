@@ -60,8 +60,8 @@ def test_langstring_init_with_default_values():
     "text, lang, error",
     [
         ("Hello", None, None),  # This should not raise an error
-        (None, "en", TypeError),  # This should raise a TypeError
-        (None, None, TypeError),  # This should raise a TypeError
+        (None, "en", None),  # This should not raise a TypeError
+        (None, None, None),  # This should not raise a TypeError
     ],
 )
 def test_langstring_init_with_none(text, lang, error):
@@ -284,7 +284,6 @@ def test_langstring_init_valid_inputs_extended(text, lang, expected_text, expect
         (3.14, "en", TypeError),
         (True, "en", TypeError),
         ({"greeting": "hello"}, "en", TypeError),
-        (None, "en", TypeError),
     ],
 )
 def test_langstring_init_with_various_types(text, lang, error):

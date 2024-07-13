@@ -11,6 +11,7 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
     [
         ("Hello, World!", "Hello, World!"),
         ("", ""),
+        (None, ""),
         ("123", "123"),
         ("Special characters: !@#$%^&*()", "Special characters: !@#$%^&*()"),
         ("Unicode 😊", "Unicode 😊"),
@@ -28,7 +29,7 @@ def test_text_getter_setter(input_text: str, expected_text: str) -> None:
 
 
 @pytest.mark.parametrize(
-    "input_lang, expected_lang", [("en", "en"), ("", ""), ("fr", "fr"), ("EN", "EN"), ("zh-CN", "zh-CN"), (None, "")]
+    "input_lang, expected_lang", [("en", "en"), (None, ""), ("", ""), ("fr", "fr"), ("EN", "EN"), ("zh-CN", "zh-CN"), (None, "")]
 )
 def test_lang_getter_setter(input_lang: str, expected_lang: str) -> None:
     """Test the lang getter and setter for various inputs.
@@ -41,7 +42,7 @@ def test_lang_getter_setter(input_lang: str, expected_lang: str) -> None:
     assert lang_string.lang == expected_lang, f"Lang getter/setter failed for input '{input_lang}'"
 
 
-@pytest.mark.parametrize("invalid_text", [123, True, None, 3.14, ["list"], {"dict": "value"}])
+@pytest.mark.parametrize("invalid_text", [123, True, 3.14, ["list"], {"dict": "value"}])
 def test_text_setter_invalid_type(invalid_text) -> None:
     """Test the text setter with invalid types.
 

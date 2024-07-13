@@ -43,8 +43,7 @@ class MultiLangString:
     :vartype pref_lang: str
     """
 
-    def __init__(self, mls_dict: Optional[dict[str, set[str]]] = None, pref_lang: str = "en") -> None:
-        # TODO: Make mls_dict empty when initialized or receive None
+    def __init__(self, mls_dict: Optional[dict[str, set[str]]] = None, pref_lang: Optional[str] = "en") -> None:
         """Initialize a MultiLangString object with an optional dictionary and preferred language.
 
         Validates the provided mls_dict against the current flag settings. If mls_dict is not provided, initializes
@@ -60,7 +59,7 @@ class MultiLangString:
         :type pref_lang: str
         :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
-        self.mls_dict = {} if mls_dict is None else mls_dict
+        self.mls_dict = mls_dict
         self.pref_lang: str = pref_lang
 
     # --------------------------------------------------
@@ -73,8 +72,11 @@ class MultiLangString:
         return self._mls_dict
 
     @mls_dict.setter
-    def mls_dict(self, in_mls_dict: dict[str, set[str]]) -> None:
+    def mls_dict(self, in_mls_dict: Optional[dict[str, set[str]]]) -> None:
         """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
+
+        in_mls_dict = {} if in_mls_dict is None else in_mls_dict
+
         # Validate input before merging
         Validator.validate_type_iterable(in_mls_dict, dict, str)
         for key in in_mls_dict:
@@ -104,12 +106,13 @@ class MultiLangString:
         return self._pref_lang
 
     @pref_lang.setter
-    def pref_lang(self, new_pref_lang: str) -> None:
+    def pref_lang(self, new_pref_lang: Optional[str]) -> None:
         """Set the preferred language for this MultiLangString.
 
         :param new_pref_lang: The preferred language as a string.
         :type new_pref_lang: str
         """
+        new_pref_lang = "en" if new_pref_lang is None else new_pref_lang
         Validator.validate_type_single(new_pref_lang, str)
         self._pref_lang = Validator.validate_flags_lang(MultiLangStringFlag, new_pref_lang)
 

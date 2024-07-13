@@ -24,6 +24,8 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
         ),
         ({}, "en", {}, "en"),
         (None, "en", {}, "en"),
+        ({}, None, {}, "en"),
+        (None, None, {}, "en"),
         ({"en": {"Hello"}, "es": {"Hola"}}, "en", {"en": {"Hello"}, "es": {"Hola"}}, "en"),
     ],
 )
@@ -38,24 +40,6 @@ def test_multilangstring_init_valid(input_dict: dict, pref_lang: str, expected_d
     mls = MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
     assert mls.mls_dict == expected_dict, "Initialized mls_dict does not match expected dictionary"
     assert mls.pref_lang == expected_pref_lang, "Initialized pref_lang does not match expected preferred language"
-
-
-@pytest.mark.parametrize(
-    "input_dict, pref_lang, expected_error",
-    [
-        ({"en": {"Hello"}, "fr": {"Bonjour"}}, None, TypeError),
-        (None, None, TypeError),
-    ],
-)
-def test_multilangstring_init_invalid_none(input_dict, pref_lang, expected_error):
-    """Tests MultiLangString initialization with None for its arguments to ensure appropriate error is raised.
-
-    :param input_dict: Dictionary containing language code keys and set of strings, or None.
-    :param pref_lang: Preferred language code, or None.
-    :param expected_error: The type of error expected to be raised.
-    """
-    with pytest.raises(expected_error, match=TYPEERROR_MSG_SINGULAR):
-        MultiLangString(mls_dict=input_dict, pref_lang=pref_lang)
 
 
 @pytest.mark.parametrize(
@@ -121,7 +105,6 @@ def test_multilangstring_init_invalid_dict_keys(input_dict: dict, pref_lang: str
     "input_dict, pref_lang",
     [
         ({"en": {"Hello", "World"}, "pt": {"Olá", "Mundo"}}, 123),
-        ({"en": {"Hello", "World"}, "pt": {"Olá", "Mundo"}}, None),
         ({"en": {"Hello", "World"}, "pt": {"Olá", "Mundo"}}, ["a"]),
         ({"en": {"Hello", "World"}, "pt": {"Olá", "Mundo"}}, {"a": "b"}),
     ],

@@ -41,8 +41,6 @@ def test_contains_langstring_valid_input(text: str, lang: str, expected: bool):
     [
         (123, "en"),  # Invalid text type
         ("Hello", 456),  # Invalid lang type
-        (None, "en"),  # Null text
-        ("Hello", None),  # Null language
         ([], "en"),  # List as text
         ("Hello", []),  # List as language
     ],
@@ -108,4 +106,3 @@ def test_contains_langstring_with_flags_effect(flag, flag_state, text, lang, exp
     assert (
         mls.contains_langstring(langstring) == expected
     ), f"Flag {flag} set to {flag_state} should result in {expected} for '{text}' in '{lang}'"
-    Controller.reset_flags()  # Reset flags to default after test

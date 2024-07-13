@@ -85,8 +85,6 @@ def normalize_string(s: str) -> str:
 def test_multi_lang_string_str_various_texts(
     texts: list[tuple[str, str]], expected_with_lang: str, expected_without_lang: str
 ):
-    Controller.reset_flags()
-
     mls = MultiLangString()
     for text, lang in texts:
         mls.add_entry(text, lang)
@@ -98,9 +96,6 @@ def test_multi_lang_string_str_various_texts(
     # Test without language tags
     Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, False)
     assert normalize_string(str(mls)) == normalize_string(expected_without_lang), "Mismatch without language tags"
-
-    # Reset flags if needed
-    Controller.reset_flags()
 
 
 @pytest.mark.parametrize(
@@ -136,9 +131,6 @@ def test_multi_lang_string_str_empty_set():
     Controller.set_flag(MultiLangStringFlag.PRINT_WITH_LANG, False)
     assert str(mls_empty_set) == "{}", "Empty set with print_lang False should return '{}'."
 
-    # Reset flags if needed
-    Controller.reset_flags()
-
 
 def test_multi_lang_string_str_empty_string():
     """Test __str__ method for a set containing an empty string in MultiLangString with variations of the print_lang flag."""
@@ -155,6 +147,3 @@ def test_multi_lang_string_str_empty_string():
     assert (
         str(mls_empty_string) == "{''}"
     ), "Set containing an empty string with print_lang False should return \"{''}\"."
-
-    # Reset flags if needed
-    Controller.reset_flags()

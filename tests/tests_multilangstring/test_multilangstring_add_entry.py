@@ -3,7 +3,7 @@ import pytest
 from langstring import Controller
 from langstring import MultiLangString
 from langstring import MultiLangStringFlag
-from tests.conftest import TYPEERROR_MSG_SINGULAR
+from tests.conftest import TYPEERROR_MSG_GENERAL
 
 
 @pytest.mark.parametrize(
@@ -34,8 +34,10 @@ def test_add_entry_valid_input(text: str, lang: str, expected_result: dict):
     [
         (123, "en", TypeError),
         ("Hello", 123, TypeError),
-        (None, "en", TypeError),
-        ("Hello", None, TypeError),
+        (["en"], "en", TypeError),
+        ("Hello", ["en"], TypeError),
+        ({"en"}, "en", TypeError),
+        ("Hello", {"en"}, TypeError),
     ],
 )
 def test_add_entry_invalid_type(text, lang, error_type):
@@ -46,7 +48,7 @@ def test_add_entry_invalid_type(text, lang, error_type):
     :param error_type: The expected error type.
     """
     mls = MultiLangString()
-    with pytest.raises(error_type, match=TYPEERROR_MSG_SINGULAR):
+    with pytest.raises(error_type, match=TYPEERROR_MSG_GENERAL):
         mls.add_entry(text, lang)
 
 

@@ -84,7 +84,6 @@ def test_contains_text_in_pref_lang_with_flags(flag, text, pref_lang, setup_dict
     Controller.set_flag(flag, True)
     mls = MultiLangString(mls_dict=setup_dict, pref_lang=pref_lang)
     assert mls.contains_text_in_pref_lang(text) == expected, f"Flag '{flag}' affected search unexpectedly."
-    Controller.reset_flags()
 
 
 # Test for unusual but valid usage

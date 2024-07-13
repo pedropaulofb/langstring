@@ -88,7 +88,6 @@ def test_add_langstring_with_lowercase_flag():
     mls = MultiLangString()
     mls.add_langstring(ls)
     assert "en" in mls.mls_dict and "Hello" in mls.mls_dict["en"], "LOWERCASE_LANG flag effect not applied."
-    Controller.reset_flags()
 
 
 # Test for unusual but valid usage: adding empty strings or whitespace

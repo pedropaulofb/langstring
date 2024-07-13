@@ -12,6 +12,7 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
     [
         ({"en": {"Hello"}, "fr": {"Bonjour"}}, {"en": {"Hello"}, "fr": {"Bonjour"}}),
         ({}, {}),
+        (None, {}),
         ({"en": {"Hello"}, "fr": {"Bonjour"}, "es": {"Hola"}}, {"en": {"Hello"}, "fr": {"Bonjour"}, "es": {"Hola"}}),
         ({"en": set()}, {"en": set()}),  # Testing with an empty set for a language
     ],
@@ -33,7 +34,8 @@ def test_mls_dict_getter_setter(input_dict: dict, expected_output: dict):
     [
         ("en", "en"),
         ("fr", "fr"),
-        (None, TypeError),
+        (None, "en"),
+        ("", ""),
         ("es", "es"),
     ],
 )
@@ -50,20 +52,6 @@ def test_pref_lang_getter_setter(input_lang: str, expected_output):
     else:
         mls.pref_lang = input_lang
         assert mls.pref_lang == expected_output, "pref_lang getter or setter does not work as expected"
-
-
-# Testing for handling None as mls_dict
-@pytest.mark.parametrize(
-    "input_dict, expected_output",
-    [
-        (None, TypeError),  # Expect TypeError when setting mls_dict to None
-    ],
-)
-def test_mls_dict_setter_none(input_dict, expected_output):
-    """Tests setting mls_dict to None to ensure appropriate error is raised."""
-    mls = MultiLangString()
-    with pytest.raises(expected_output, match=TYPEERROR_MSG_SINGULAR):
-        mls.mls_dict = input_dict
 
 
 # Testing invalid types within mls_dict values

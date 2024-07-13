@@ -72,4 +72,3 @@ def test_contains_lang_with_flag_effect(flag: MultiLangStringFlag, lang: str, se
     Controller.set_flag(flag, True)
     mls = MultiLangString(mls_dict={setup_lang: {"Hello"}})
     assert mls.contains_lang(lang) == expected, f"With '{flag}' flag, contains_lang('{lang}') should return {expected}"
-    Controller.reset_flags()  # Ensure flags are reset after the test

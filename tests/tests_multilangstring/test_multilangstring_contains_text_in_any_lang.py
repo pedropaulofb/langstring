@@ -74,7 +74,6 @@ def test_contains_text_in_any_lang_with_flag_effect(flag: MultiLangStringFlag, t
     assert (
         mls.contains_text_in_any_lang(text) == expected
     ), f"With '{flag}' flag, contains_text_in_any_lang('{text}') should return {expected}"
-    Controller.reset_flags()  # Ensure flags are reset after the test
 
 
 @pytest.mark.parametrize(

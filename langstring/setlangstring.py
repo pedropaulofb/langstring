@@ -10,8 +10,6 @@ from .utils.validator import Validator
 
 class SetLangString:
     def __init__(self, texts: Optional[Union[set[str], list[str]]] = None, lang: str = "") -> None:
-        # TODO: Make lang = "" when lang is None
-        self._texts = set()
         self.texts = texts if texts is not None else set()
         self.lang: str = lang
 

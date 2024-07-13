@@ -23,6 +23,8 @@ from typing import Iterator
 from typing import Optional
 from typing import Union
 
+from icecream import ic
+
 from .controller import Controller
 from .flags import LangStringFlag
 from .utils.validator import Validator
@@ -41,15 +43,14 @@ class LangString:
     :vartype lang: str
     """
 
-    def __init__(self, text: str = "", lang: Optional[str] = "") -> None:
-        # TODO: Make both text and lang = "" when they are initialized or receive None
+    def __init__(self, text: str = "", lang: str = "") -> None:
         """Initialize a new LangString object with text and an optional language tag.
 
         The behavior of this method is influenced by control flags set in Controller. For instance, if the
         DEFINED_TEXT flag is enabled, an empty 'text' string will raise a ValueError.
 
         :param text: The text string.
-        :type text: Optional[str]
+        :type text: str
         :param lang: The language tag of the text.
         :type lang: str
         """
@@ -68,6 +69,8 @@ class LangString:
     @text.setter
     def text(self, new_text: str) -> None:
         """Setter for text."""
+        if new_text is None:
+            new_text = ""
         Validator.validate_type_single(new_text, str)
         self._text = Validator.validate_flags_text(LangStringFlag, new_text)
 
@@ -77,7 +80,7 @@ class LangString:
         return self._lang
 
     @lang.setter
-    def lang(self, new_lang: Optional[str] = "") -> None:
+    def lang(self, new_lang: str) -> None:
         """Setter for lang."""
         if new_lang is None:
             new_lang = ""

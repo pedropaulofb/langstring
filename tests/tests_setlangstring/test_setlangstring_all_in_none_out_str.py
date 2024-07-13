@@ -263,3 +263,55 @@ def test_setlangstring_str_method(case):
         result_set_with_lang == expected_set_with_lang
     ), f"Mismatch in set elements with language tag: {result_set_with_lang} != {expected_set_with_lang}"
     assert result_lang == expected_lang, f"Mismatch in language tag: {result_lang} != {expected_lang}"
+
+
+def escape_special_characters(text: str) -> str:
+    return text.replace("\n", "\\n").replace("\t", "\\t")
+
+
+def parse_set_string(set_string: str) -> set:
+    """Helper function to parse set string into a Python set."""
+    return set(escape_special_characters(set_string.strip("{}")).split(", "))
+
+
+@pytest.mark.parametrize(
+    "texts, lang, expected_without_quotes, expected_with_lang",
+    [
+        ({"a", "b", "c"}, "en", "{a, b, c}", "{a, b, c}@en"),
+        ({" "}, "en", "{ }", "{ }@en"),
+        ({"😊", "😂", "👍"}, "en", "{😊, 😂, 👍}", "{😊, 😂, 👍}@en"),
+        ({"привет", "мир"}, "ru", "{привет, мир}", "{привет, мир}@ru"),
+        ({"HELLO", "WORLD"}, "en", "{HELLO, WORLD}", "{HELLO, WORLD}@en"),
+        (set(), "en", "{}", "{}@en"),
+        ({"", " "}, "en", "{,  }", "{,  }@en"),
+        ({"\n", "\t"}, "en", "{\\n, \\t}", "{\\n, \\t}@en"),
+        ({"123", "abc", "😜", "Привет"}, "en", "{123, abc, 😜, Привет}", "{123, abc, 😜, Привет}@en"),
+    ],
+)
+def test_setlangstring_str_various_cases(texts, lang, expected_without_quotes, expected_with_lang):
+    # Ensure the PRINT_WITH_QUOTES flag is set to False
+    Controller.set_flag(SetLangStringFlag.PRINT_WITH_QUOTES, False)
+    Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, False)
+
+    set_lang_string = SetLangString(texts=texts, lang=lang)
+    result_without_quotes = str(set_lang_string)
+    assert parse_set_string(result_without_quotes) == parse_set_string(
+        expected_without_quotes
+    ), f"Expected: {expected_without_quotes}, but got: {result_without_quotes}"
+
+    # Enable PRINT_WITH_LANG and check
+    Controller.set_flag(SetLangStringFlag.PRINT_WITH_LANG, True)
+    result_with_lang = str(set_lang_string)
+    result_texts, result_lang = result_with_lang.rsplit("@", 1) if "@" in result_with_lang else (result_with_lang, "")
+    expected_texts, expected_lang = (
+        expected_with_lang.rsplit("@", 1) if "@" in expected_with_lang else (expected_with_lang, "")
+    )
+
+    assert parse_set_string(result_texts) == parse_set_string(
+        expected_texts
+    ), f"Expected: {expected_with_lang}, but got: {result_with_lang}"
+    assert result_lang == expected_lang, f"Expected language: {expected_lang}, but got: {result_lang}"
+
+    # Reset the flags to avoid side effects on other tests
+    Controller.reset_flag(SetLangStringFlag.PRINT_WITH_QUOTES)
+    Controller.reset_flag(SetLangStringFlag.PRINT_WITH_LANG)

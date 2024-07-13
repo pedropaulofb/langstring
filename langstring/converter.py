@@ -140,7 +140,7 @@ class Converter(metaclass=NonInstantiable):
 
         langstrings = []
         for string in strings:
-            langstring = cls.from_string_to_langstring(method,string, lang, separator)
+            langstring = cls.from_string_to_langstring(method, string, lang, separator)
             langstrings.append(langstring)
 
         return langstrings
@@ -160,7 +160,7 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def from_strings_to_multilangstring(
-        cls, method: str, strings: list[str],  lang: Optional[str] = None, separator: str = "@"
+        cls, method: str, strings: list[str], lang: Optional[str] = None, separator: str = "@"
     ) -> MultiLangString:
         """Convert a list of strings to a MultiLangString using the specified method.
 

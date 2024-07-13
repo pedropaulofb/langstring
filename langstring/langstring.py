@@ -23,8 +23,6 @@ from typing import Iterator
 from typing import Optional
 from typing import Union
 
-from icecream import ic
-
 from .controller import Controller
 from .flags import LangStringFlag
 from .utils.validator import Validator

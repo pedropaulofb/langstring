@@ -59,9 +59,9 @@ def test_setitem_update_existing_language(initial_dict, lang, new_texts, expecte
     """
     mls = MultiLangString(initial_dict)
     mls[lang] = new_texts
-    assert mls.mls_dict == expected_dict, (
-        f"Failed to update {lang} correctly. " f"Expected {expected_dict}, got {mls.mls_dict}."
-    )
+    assert (
+        mls.mls_dict == expected_dict
+    ), f"Failed to update {lang} correctly. Expected {expected_dict}, got {mls.mls_dict}."
 
 
 @pytest.mark.parametrize(

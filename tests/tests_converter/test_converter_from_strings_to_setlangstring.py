@@ -1,7 +1,11 @@
-import pytest
-from typing import Optional
-from langstring import Converter, SetLangString
 import re
+from typing import Optional
+
+import pytest
+
+from langstring import Converter
+from langstring import SetLangString
+
 
 @pytest.mark.parametrize(
     "strings, lang, expected_texts, expected_lang",
@@ -18,7 +22,12 @@ import re
         (["Привет", "мир"], "ru", {"Привет", "мир"}, "ru"),  # Russian
         (["Γειά", "σου", "κόσμε"], "el", {"Γειά", "σου", "κόσμε"}, "el"),  # Greek
         (["😊", "🌍"], "", {"😊", "🌍"}, ""),  # Emojis, use empty string instead of None
-        (["Special", "#&*Characters"], "", {"Special", "#&*Characters"}, ""),  # Special characters, use empty string instead of None
+        (
+            ["Special", "#&*Characters"],
+            "",
+            {"Special", "#&*Characters"},
+            "",
+        ),  # Special characters, use empty string instead of None
         # Additional edge cases
         (["MixedCharset", "Κόσμε"], "en", {"MixedCharset", "Κόσμε"}, "en"),  # Mixed charset
         (["With space", "separator"], "en", {"With space", "separator"}, "en"),  # Space in strings
@@ -50,22 +59,53 @@ def test_from_strings_to_setlangstring(
     assert result.texts == expected_texts, f"Expected texts {expected_texts}, but got {result.texts}"
     assert result.lang == expected_lang, f"Expected language '{expected_lang}', but got '{result.lang}'"
 
+
 @pytest.mark.parametrize(
     "strings, lang, expected_exception, match",
     [
         # Existing invalid cases
         (123, "en", TypeError, "Invalid argument with value '123'. Expected 'list', but got 'int'."),
         (["Hello", "World"], 123, TypeError, "Invalid argument with value '123'. Expected 'str', but got 'int'."),
-        (["Hello", "World"], [], TypeError, re.escape("Invalid argument with value '[]'. Expected 'str', but got 'list'.")),
-        (["Hello", "World"], set(), TypeError, re.escape("Invalid argument with value 'set()'. Expected 'str', but got 'set'.")),
+        (
+            ["Hello", "World"],
+            [],
+            TypeError,
+            re.escape("Invalid argument with value '[]'. Expected 'str', but got 'list'."),
+        ),
+        (
+            ["Hello", "World"],
+            set(),
+            TypeError,
+            re.escape("Invalid argument with value 'set()'. Expected 'str', but got 'set'."),
+        ),
         ([123, "World"], "en", TypeError, "Invalid argument with value '123'. Expected 'str', but got 'int'."),
         (["Hello", None], "en", TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
         # Additional invalid cases
-        (["Hello", {}], "en", TypeError, re.escape("Invalid argument with value '{}'. Expected 'str', but got 'dict'.")),
-        (["Hello", ["Nested"]], "en", TypeError, re.escape("Invalid argument with value '['Nested']'. Expected 'str', but got 'list'.")),
-        (["Hello", set()], "en", TypeError, re.escape("Invalid argument with value 'set()'. Expected 'str', but got 'set'.")),
+        (
+            ["Hello", {}],
+            "en",
+            TypeError,
+            re.escape("Invalid argument with value '{}'. Expected 'str', but got 'dict'."),
+        ),
+        (
+            ["Hello", ["Nested"]],
+            "en",
+            TypeError,
+            re.escape("Invalid argument with value '['Nested']'. Expected 'str', but got 'list'."),
+        ),
+        (
+            ["Hello", set()],
+            "en",
+            TypeError,
+            re.escape("Invalid argument with value 'set()'. Expected 'str', but got 'set'."),
+        ),
         ([None], "en", TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
-        (["Valid", "Strings"], None, TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),  # None as lang
+        (
+            ["Valid", "Strings"],
+            None,
+            TypeError,
+            "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'.",
+        ),  # None as lang
     ],
 )
 def test_from_strings_to_setlangstring_exceptions(strings, lang, expected_exception, match) -> None:
@@ -80,4 +120,3 @@ def test_from_strings_to_setlangstring_exceptions(strings, lang, expected_except
     """
     with pytest.raises(expected_exception, match=match):
         Converter.from_strings_to_setlangstring(strings, lang)
-

@@ -1,6 +1,8 @@
-import pytest
 from typing import Optional
-from langstring import Converter, LangString
+
+import pytest
+
+from langstring import Converter
 
 
 @pytest.mark.parametrize(
@@ -18,7 +20,6 @@ from langstring import Converter, LangString
         ("@lang", "parse", None, "@", "", "lang"),
         ("text@", "parse", None, "@", "text", ""),
         ("text@lang@extra", "parse", None, "@", "text@lang", "extra"),
-
         # New cases to add
         ("MixedCASEtext", "manual", "en", "@", "MixedCASEtext", "en"),  # Mixed case
         (" mixed spaces ", "manual", "en", "@", " mixed spaces ", "en"),  # Spaces around
@@ -33,7 +34,7 @@ from langstring import Converter, LangString
     ],
 )
 def test_from_string_to_langstring(
-        input_string: str, method: str, lang: Optional[str], separator: str, expected_text: str, expected_lang: str
+    input_string: str, method: str, lang: Optional[str], separator: str, expected_text: str, expected_lang: str
 ):
     """Test the from_string_to_langstring method with various inputs.
 
@@ -45,7 +46,7 @@ def test_from_string_to_langstring(
     :param expected_lang: The expected language code in the LangString.
     :return: None
     """
-    result = Converter.from_string_to_langstring(method, input_string,  lang, separator)
+    result = Converter.from_string_to_langstring(method, input_string, lang, separator)
     assert result.text == expected_text, f"Expected text '{expected_text}', but got '{result.text}'"
     assert result.lang == expected_lang, f"Expected language '{expected_lang}', but got '{result.lang}'"
 
@@ -55,50 +56,55 @@ def test_from_string_to_langstring(
     [
         # Existing cases
         (
-                "Hello, World!",
-                "unknown_method",
-                None,
-                "@",
-                ValueError,
-                "Unknown method: unknown_method. Valid methods are 'manual' and 'parse'.",
+            "Hello, World!",
+            "unknown_method",
+            None,
+            "@",
+            ValueError,
+            "Unknown method: unknown_method. Valid methods are 'manual' and 'parse'.",
         ),
         (123, "manual", None, "@", TypeError, "Invalid argument with value '123'. Expected 'str', but got 'int'."),
         (
-                "Hello, World!",
-                123,
-                None,
-                "@",
-                TypeError,
-                "Invalid argument with value '123'. Expected 'str', but got 'int'.",
+            "Hello, World!",
+            123,
+            None,
+            "@",
+            TypeError,
+            "Invalid argument with value '123'. Expected 'str', but got 'int'.",
         ),
         (
-                "Hello, World!",
-                "manual",
-                123,
-                "@",
-                TypeError,
-                "Invalid argument with value '123'. Expected 'str', but got 'int'.",
+            "Hello, World!",
+            "manual",
+            123,
+            "@",
+            TypeError,
+            "Invalid argument with value '123'. Expected 'str', but got 'int'.",
         ),
         (
-                "Hello, World!",
-                "parse",
-                None,
-                123,
-                TypeError,
-                "Invalid argument with value '123'. Expected 'str', but got 'int'.",
+            "Hello, World!",
+            "parse",
+            None,
+            123,
+            TypeError,
+            "Invalid argument with value '123'. Expected 'str', but got 'int'.",
         ),
         (
-                "Hello, World!",
-                "manual",
-                None,
-                123,
-                TypeError,
-                "Invalid argument with value '123'. Expected 'str', but got 'int'.",
+            "Hello, World!",
+            "manual",
+            None,
+            123,
+            TypeError,
+            "Invalid argument with value '123'. Expected 'str', but got 'int'.",
         ),
-
         # New cases to add
-        ("Hello, World!", "manual", "en", 123, TypeError,
-         "Invalid argument with value '123'. Expected 'str', but got 'int'."),
+        (
+            "Hello, World!",
+            "manual",
+            "en",
+            123,
+            TypeError,
+            "Invalid argument with value '123'. Expected 'str', but got 'int'.",
+        ),
         ("", "", None, "", ValueError, "Unknown method: . Valid methods are 'manual' and 'parse'."),
     ],
 )

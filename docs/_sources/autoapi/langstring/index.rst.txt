@@ -189,16 +189,16 @@ Package Contents
    It is designed to be non-instantiable as it serves as a utility class with class methods only.
 
 
-   .. py:method:: from_string_to_langstring(input_string, method, lang = None, separator = '@')
+   .. py:method:: from_string_to_langstring(method, input_string, lang = None, separator = '@')
       :classmethod:
 
 
       Convert a string to a LangString using the specified method.
 
-      :param input_string: The text to be converted.
-      :type input_string: str
       :param method: The method to use for conversion ('manual' or 'parse').
       :type method: str
+      :param input_string: The text to be converted.
+      :type input_string: str
       :param lang: The language code (used only with 'manual' method).
       :type lang: Optional[str]
       :param separator: The separator used to split the text and language (used only with 'parse' method).
@@ -209,14 +209,14 @@ Package Contents
 
 
 
-   .. py:method:: from_string_to_langstring_manual(string, lang)
+   .. py:method:: from_string_to_langstring_manual(input_string, lang)
       :staticmethod:
 
 
       Convert a string to a LangString with the specified language.
 
-      :param string: The text to be converted.
-      :type string: str
+      :param input_string: The text to be converted.
+      :type input_string: str
       :param lang: The language code.
       :type lang: Optional[str]
       :return: A LangString object with the provided text and language.
@@ -224,17 +224,18 @@ Package Contents
 
 
 
-   .. py:method:: from_string_to_langstring_parse(string, separator = '@')
+   .. py:method:: from_string_to_langstring_parse(input_string, separator = '@')
       :staticmethod:
 
 
       Convert a string to a LangString by parsing it with the given separator.
 
       This function splits the input string into text and language components based on the last occurrence of the
-      specified separator. If the separator is not found, the entire string is considered as text and lang is set to None.
+      specified separator. If the separator is not found, the entire string is considered as text and lang is set
+      to "" (empty string).
 
-      :param string: The text to be converted.
-      :type string: str
+      :param input_string: The text to be converted.
+      :type input_string: str
       :param separator: The separator used to split the text and language.
       :type separator: str
       :return: A LangString object with the parsed text and language.
@@ -242,16 +243,16 @@ Package Contents
 
 
 
-   .. py:method:: from_strings_to_langstrings(strings, method, lang = None, separator = '@')
+   .. py:method:: from_strings_to_langstrings(method, strings, lang = None, separator = '@')
       :classmethod:
 
 
       Convert a list of strings to a list of LangStrings using the specified method.
 
-      :param strings: List of strings to be converted.
-      :type strings: list[str]
       :param method: The method to use for conversion ('manual' or 'parse').
       :type method: str
+      :param strings: List of strings to be converted.
+      :type strings: list[str]
       :param lang: The language code for 'manual' method.
       :type lang: Optional[str]
       :param separator: The separator used in 'parse' method.
@@ -275,14 +276,14 @@ Package Contents
 
 
 
-   .. py:method:: from_strings_to_multilangstring(strings, method, lang = None, separator = '@')
+   .. py:method:: from_strings_to_multilangstring(method, strings, lang = None, separator = '@')
       :classmethod:
 
 
       Convert a list of strings to a MultiLangString using the specified method.
 
+      :param method: Method to use for conversion ("manual", or "parse").
       :param strings: List of strings to be converted.
-      :param method: Method to use for conversion ("manual", "parse", or "auto").
       :param lang: Language code for the "manual" method. Optional.
       :param separator: Separator for the "parse" method. Default is "@".
       :return: A MultiLangString object.

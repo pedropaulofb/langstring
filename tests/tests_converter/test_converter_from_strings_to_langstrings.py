@@ -1,6 +1,8 @@
-import pytest
 from typing import Optional
-from langstring import Converter, LangString
+
+import pytest
+
+from langstring import Converter
 
 
 @pytest.mark.parametrize(
@@ -71,7 +73,7 @@ def test_from_strings_to_langstrings(
     :param expected_langs: The expected language codes in the list of LangString objects.
     :return: None
     """
-    results = Converter.from_strings_to_langstrings(method, strings,lang, separator)
+    results = Converter.from_strings_to_langstrings(method, strings, lang, separator)
     for result, expected_text, expected_lang in zip(results, expected_texts, expected_langs):
         assert result.text == expected_text, f"Expected text '{expected_text}', but got '{result.text}'"
         assert result.lang == expected_lang, f"Expected language '{expected_lang}', but got '{result.lang}'"

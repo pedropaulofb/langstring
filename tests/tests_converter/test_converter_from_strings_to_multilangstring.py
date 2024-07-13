@@ -1,9 +1,13 @@
+import re
 from collections import Counter
+from typing import List
+from typing import Optional
 
 import pytest
-from typing import Optional, List
-from langstring import Converter, MultiLangString
-import re
+
+from langstring import Converter
+from langstring import MultiLangString
+
 
 @pytest.mark.parametrize(
     "method, strings, lang, separator, expected_texts, expected_langs",
@@ -75,8 +79,9 @@ def test_from_strings_to_multilangstring(
             actual_langs.append(lang_key)
 
     assert Counter(actual_texts) == Counter(expected_texts), f"Expected texts {expected_texts}, but got {actual_texts}"
-    assert Counter(actual_langs) == Counter(expected_langs), f"Expected languages {expected_langs}, but got {actual_langs}"
-
+    assert Counter(actual_langs) == Counter(
+        expected_langs
+    ), f"Expected languages {expected_langs}, but got {actual_langs}"
 
 
 @pytest.mark.parametrize(
@@ -179,11 +184,32 @@ def test_from_strings_to_multilangstring(
         ),
         # Additional
         # Default values
-        ("manual", ["Default"], None, None, TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
+        (
+            "manual",
+            ["Default"],
+            None,
+            None,
+            TypeError,
+            "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'.",
+        ),
         # Null values
-        ("parse", ["Null@Lang"], None, None, TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
+        (
+            "parse",
+            ["Null@Lang"],
+            None,
+            None,
+            TypeError,
+            "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'.",
+        ),
         # Operation on itself with invalid values
-        ("manual", [None], "self", "@", TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
+        (
+            "manual",
+            [None],
+            "self",
+            "@",
+            TypeError,
+            "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'.",
+        ),
     ],
 )
 def test_from_strings_to_multilangstring_exceptions(
@@ -207,4 +233,3 @@ def test_from_strings_to_multilangstring_exceptions(
     """
     with pytest.raises(expected_exception, match=match):
         Converter.from_strings_to_multilangstring(method, strings, lang, separator)
-

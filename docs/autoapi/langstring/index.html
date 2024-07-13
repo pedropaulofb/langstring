@@ -338,13 +338,13 @@ LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag
 It is designed to be non-instantiable as it serves as a utility class with class methods only.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_string_to_langstring">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring" title="Link to this definition"></a></dt>
 <dd><p>Convert a string to a LangString using the specified method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input_string</strong> (<em>str</em>) – The text to be converted.</p></li>
 <li><p><strong>method</strong> (<em>str</em>) – The method to use for conversion (‘manual’ or ‘parse’).</p></li>
+<li><p><strong>input_string</strong> (<em>str</em>) – The text to be converted.</p></li>
 <li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language code (used only with ‘manual’ method).</p></li>
 <li><p><strong>separator</strong> (<em>str</em>) – The separator used to split the text and language (used only with ‘parse’ method).</p></li>
 </ul>
@@ -363,12 +363,12 @@ It is designed to be non-instantiable as it serves as a utility class with class
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_string_to_langstring_manual">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring_manual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring_manual" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring_manual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring_manual" title="Link to this definition"></a></dt>
 <dd><p>Convert a string to a LangString with the specified language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>string</strong> (<em>str</em>) – The text to be converted.</p></li>
+<li><p><strong>input_string</strong> (<em>str</em>) – The text to be converted.</p></li>
 <li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language code.</p></li>
 </ul>
 </dd>
@@ -383,14 +383,15 @@ It is designed to be non-instantiable as it serves as a utility class with class
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_string_to_langstring_parse">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring_parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring_parse" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring_parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring_parse" title="Link to this definition"></a></dt>
 <dd><p>Convert a string to a LangString by parsing it with the given separator.</p>
 <p>This function splits the input string into text and language components based on the last occurrence of the
-specified separator. If the separator is not found, the entire string is considered as text and lang is set to None.</p>
+specified separator. If the separator is not found, the entire string is considered as text and lang is set
+to “” (empty string).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>string</strong> (<em>str</em>) – The text to be converted.</p></li>
+<li><p><strong>input_string</strong> (<em>str</em>) – The text to be converted.</p></li>
 <li><p><strong>separator</strong> (<em>str</em>) – The separator used to split the text and language.</p></li>
 </ul>
 </dd>
@@ -405,13 +406,13 @@ specified separator. If the separator is not found, the entire string is conside
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_strings_to_langstrings">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_strings_to_langstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_strings_to_langstrings" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_strings_to_langstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_strings_to_langstrings" title="Link to this definition"></a></dt>
 <dd><p>Convert a list of strings to a list of LangStrings using the specified method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>strings</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of strings to be converted.</p></li>
 <li><p><strong>method</strong> (<em>str</em>) – The method to use for conversion (‘manual’ or ‘parse’).</p></li>
+<li><p><strong>strings</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of strings to be converted.</p></li>
 <li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language code for ‘manual’ method.</p></li>
 <li><p><strong>separator</strong> (<em>str</em>) – The separator used in ‘parse’ method.</p></li>
 </ul>
@@ -453,13 +454,13 @@ specified separator. If the separator is not found, the entire string is conside
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_strings_to_multilangstring">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_strings_to_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_strings_to_multilangstring" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_strings_to_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_strings_to_multilangstring" title="Link to this definition"></a></dt>
 <dd><p>Convert a list of strings to a MultiLangString using the specified method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>str</em>) – Method to use for conversion (“manual”, or “parse”).</p></li>
 <li><p><strong>strings</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of strings to be converted.</p></li>
-<li><p><strong>method</strong> (<em>str</em>) – Method to use for conversion (“manual”, “parse”, or “auto”).</p></li>
 <li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Language code for the “manual” method. Optional.</p></li>
 <li><p><strong>separator</strong> (<em>str</em>) – Separator for the “parse” method. Default is “&#64;”.</p></li>
 </ul>
@@ -3033,7 +3034,7 @@ if no case-insensitive duplicates are found.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>texts</strong> (<em>Optional</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>texts</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>)</p></li>
 <li><p><strong>lang</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>

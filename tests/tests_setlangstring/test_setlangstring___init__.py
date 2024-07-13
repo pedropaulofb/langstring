@@ -26,9 +26,14 @@ def test_setlangstring_init_valid(texts, lang) -> None:
     """
     set_lang_string = SetLangString(texts, lang)
     expected_texts = texts if texts is not None else set()
+    assert set_lang_string.texts == expected_texts, (
+        f"Expected texts {expected_texts} but got {set_lang_string.texts} "
+        f"when initializing with texts {texts} and language '{lang}'"
+    )
+
     assert (
-        set_lang_string.texts == expected_texts and set_lang_string.lang == lang
-    ), f"Initialization failed for texts={texts} and lang={lang}"
+        set_lang_string.lang == lang
+    ), f"Expected language '{lang}' but got '{set_lang_string.lang}' when initializing with language '{lang}'"
 
 
 # Test cases for invalid 'texts' input
@@ -98,6 +103,37 @@ def test_setlangstring_init_unusual_valid(texts, lang) -> None:
     :return: None. Asserts if SetLangString is initialized correctly with unusual inputs.
     """
     set_lang_string = SetLangString(texts, lang)
+
+    assert set_lang_string.texts == texts, (
+        f"Expected texts {texts} but got {set_lang_string.texts} "
+        f"when initializing with texts {texts} and language '{lang}'"
+    )
+
     assert (
-        set_lang_string.texts == texts and set_lang_string.lang == lang
-    ), f"Initialization failed for unusual but valid inputs: texts={texts}, lang={lang}"
+        set_lang_string.lang == lang
+    ), f"Expected language '{lang}' but got '{set_lang_string.lang}' when initializing with language '{lang}'"
+
+
+# Test for default initialization
+
+
+def test_setlangstring_init_default() -> None:
+    """
+
+    Test default initialization of SetLangString.
+
+
+
+    :return: None. Asserts if SetLangString is initialized correctly with default values.
+
+    """
+
+    set_lang_string = SetLangString()
+
+    assert (
+        set_lang_string.texts == set()
+    ), f"Expected texts to be empty set but got {set_lang_string.texts} when initializing with default values"
+
+    assert (
+        set_lang_string.lang == ""
+    ), f"Expected language to be empty string but got '{set_lang_string.lang}' when initializing with default values"

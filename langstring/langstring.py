@@ -23,6 +23,8 @@ from typing import Iterator
 from typing import Optional
 from typing import Union
 
+from icecream import ic
+
 from .controller import Controller
 from .flags import LangStringFlag
 from .utils.validator import Validator
@@ -67,8 +69,7 @@ class LangString:
     @text.setter
     def text(self, new_text: str) -> None:
         """Setter for text."""
-        if new_text is None:
-            new_text = ""
+        new_text = "" if new_text is None else new_text
         Validator.validate_type_single(new_text, str)
         self._text = Validator.validate_flags_text(LangStringFlag, new_text)
 
@@ -80,8 +81,7 @@ class LangString:
     @lang.setter
     def lang(self, new_lang: str) -> None:
         """Setter for lang."""
-        if new_lang is None:
-            new_lang = ""
+        new_lang = "" if new_lang is None else new_lang
         Validator.validate_type_single(new_lang, str)
         self._lang = Validator.validate_flags_lang(LangStringFlag, new_lang)
 

@@ -2,6 +2,8 @@ from typing import Iterator
 from typing import Optional
 from typing import Union
 
+from icecream import ic
+
 from .controller import Controller
 from .flags import SetLangStringFlag
 from .langstring import LangString
@@ -10,7 +12,7 @@ from .utils.validator import Validator
 
 class SetLangString:
     def __init__(self, texts: Optional[Union[set[str], list[str]]] = None, lang: str = "") -> None:
-        self.texts = texts if texts is not None else set()
+        self.texts: Union[set[str], list[str]] = texts if texts is not None else set()
         self.lang: str = lang
 
     # -------------------------------------------
@@ -23,8 +25,10 @@ class SetLangString:
         return self._texts
 
     @texts.setter
-    def texts(self, new_texts: Union[set[str], list[str]]) -> None:
+    def texts(self, new_texts: Optional[Union[set[str], list[str]]]) -> None:
         """Setter for texts."""
+
+        new_texts = set() if new_texts is None else new_texts
 
         if isinstance(new_texts, list):
             Validator.validate_type_iterable(new_texts, list, str)
@@ -33,6 +37,7 @@ class SetLangString:
         Validator.validate_type_iterable(new_texts, set, str)
 
         self._texts = set()
+
         for text_value in new_texts:
             self._texts.add(Validator.validate_flags_text(SetLangStringFlag, text_value))
 
@@ -44,6 +49,7 @@ class SetLangString:
     @lang.setter
     def lang(self, new_lang: str) -> None:
         """Setter for lang."""
+        new_lang = "" if new_lang is None else new_lang
         Validator.validate_type_single(new_lang, str)
         self._lang = Validator.validate_flags_lang(SetLangStringFlag, new_lang)
 

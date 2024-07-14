@@ -100,12 +100,6 @@ def test_from_strings_to_setlangstring(
             re.escape("Invalid argument with value 'set()'. Expected 'str', but got 'set'."),
         ),
         ([None], "en", TypeError, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
-        (
-            ["Valid", "Strings"],
-            None,
-            TypeError,
-            "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'.",
-        ),  # None as lang
     ],
 )
 def test_from_strings_to_setlangstring_exceptions(strings, lang, expected_exception, match) -> None:

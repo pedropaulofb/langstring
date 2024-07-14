@@ -132,6 +132,9 @@ def test_from_langstring_to_string_self_conversion() -> None:
     "langstring, expected",
     [
         (LangString("Hello", "en"), '"Hello"@en'),
+        (LangString(None, "en"), '""@en'),
+        (LangString("Hello", None), '"Hello"@'),
+        (LangString(None, None), '""@'),
         (LangString("", ""), '""@'),
         (LangString("  Hello  ", "en"), '"  Hello  "@en'),
         (LangString("HELLO", "en"), '"HELLO"@en'),
@@ -162,8 +165,6 @@ def test_from_langstring_to_string_various_cases(langstring: LangString, expecte
     [
         (123, "en", "Invalid argument with value '123'. Expected 'str', but got 'int'."),
         ("Hello", 123, "Invalid argument with value '123'. Expected 'str', but got 'int'."),
-        (None, "en", "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
-        ("Hello", None, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
         ([], "en", r"Invalid argument with value '\[\]'. Expected 'str', but got 'list'."),
         ("Hello", [], r"Invalid argument with value '\[\]'. Expected 'str', but got 'list'."),
         ({}, "en", r"Invalid argument with value '\{\}'. Expected 'str', but got 'dict'."),

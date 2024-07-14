@@ -24,6 +24,8 @@ the development of multilingual applications and facilitate the handling of text
 from typing import Optional
 from typing import Union
 
+from icecream import ic
+
 from .controller import Controller
 from .flags import MultiLangStringFlag
 from .langstring import LangString
@@ -689,6 +691,7 @@ class MultiLangString:
         return reversed(self.mls_dict)
 
     def __setitem__(self, lang: str, texts: set[str]) -> None:
+        # TODO: Maybe update to accept also list? Verify other methods that should also accept list.
         """Allow setting entries by language."""
         Validator.validate_type_single(lang, str)
         Validator.validate_type_iterable(texts, set, str)
@@ -696,11 +699,10 @@ class MultiLangString:
         registered_lang = self._get_registered_lang(lang)
         add_lang = registered_lang if (registered_lang is not None) else lang
 
+        self.mls_dict[add_lang] = set()
         if texts:
             for text in texts:
                 self.add_entry(text, add_lang)
-        else:
-            self.mls_dict[add_lang] = set()
 
     def __str__(self) -> str:
         """Return a string representation of the MultiLangString, including language tags.

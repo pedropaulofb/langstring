@@ -34,19 +34,20 @@ def test_setitem_new_language(lang: str, texts: set, expected: dict):
 @pytest.mark.parametrize(
     "initial_dict, lang, new_texts, expected_dict",
     [
-        ({"en": {"Hello"}}, "en", {"World"}, {"en": {"Hello", "World"}}),
-        ({"fr": {"Bonjour"}}, "fr", {"Salut"}, {"fr": {"Bonjour", "Salut"}}),
-        ({"de": {"Guten Tag"}}, "de", {"Hallo"}, {"de": {"Guten Tag", "Hallo"}}),
-        ({"es": {"Hola"}}, "es", {"Adiós"}, {"es": {"Hola", "Adiós"}}),
-        ({"pt": {"Olá"}}, "pt", {"Tchau"}, {"pt": {"Olá", "Tchau"}}),
+        ({"en": {"Hello"}}, "en", {"World"}, {"en": {"World"}}),
+        ({"en": {"Hello"}}, "en-us", {"World"}, {"en": {"Hello"}, "en-us": {"World"}}),
+        ({"fr": {"Bonjour"}}, "fr", {"Salut"}, {"fr": {"Salut"}}),
+        ({"de": {"Guten Tag"}}, "de", {"Hallo"}, {"de": {"Hallo"}}),
+        ({"es": {"Hola"}}, "es", {"Adiós"}, {"es": {"Adiós"}}),
+        ({"pt": {"Olá"}}, "pt", {"Tchau"}, {"pt": {"Tchau"}}),
         ({"en": set()}, "en", {"Hello"}, {"en": {"Hello"}}),  # Test updating an empty set
         (
             {"en ": {"Hello"}},
             "en ",
             {"World", " Everyone"},
-            {"en ": {"Hello", "World", " Everyone"}},
+            {"en ": {"World", " Everyone"}},
         ),  # Space in language code
-        ({"es": {"Hola"}}, "es", {"", "Adiós"}, {"es": {"Hola", "", "Adiós"}}),  # Empty string as text
+        ({"es": {"Hola"}}, "es", {"", "Adiós"}, {"es": {"", "Adiós"}}),  # Empty string as text
     ],
 )
 def test_setitem_update_existing_language(initial_dict, lang, new_texts, expected_dict):
@@ -97,13 +98,14 @@ def test_setitem_invalid_inputs(lang, texts, expected_exception, match_message):
 @pytest.mark.parametrize(
     "first_lang, first_texts, second_lang, second_texts, expected_dict",
     [
-        ("EN", {"Hello"}, "en", {"World"}, {"EN": {"Hello", "World"}}),
-        ("FR", {"Bonjour"}, "fr", {"Monde"}, {"FR": {"Bonjour", "Monde"}}),
-        ("de", {"Guten Tag"}, "DE", {"Hallo"}, {"de": {"Guten Tag", "Hallo"}}),
-        ("ES", {"Hola"}, "es", {"Adiós"}, {"ES": {"Hola", "Adiós"}}),
-        ("pt", {"Olá"}, "PT", {"Tchau"}, {"pt": {"Olá", "Tchau"}}),
-        ("CASE", {"Test"}, "case", {"Another Test"}, {"CASE": {"Test", "Another Test"}}),  # Upper vs lower case
-        ("Case", {"Mix"}, "cAsE", {"Mixed"}, {"Case": {"Mix", "Mixed"}}),  # Mixed case variations
+        ("EN", {"Hello"}, "en", {"World"}, {"EN": {"World"}}),
+        ("FR", {"Bonjour"}, "fr", {"Monde"}, {"FR": {"Monde"}}),
+        ("de", {"Guten Tag"}, "DE", {"Hallo"}, {"de": {"Hallo"}}),
+        ("ES", {"Hola"}, "es", {"Adiós"}, {"ES": {"Adiós"}}),
+        ("pt", {"Olá"}, "PT", {"Tchau"}, {"pt": {"Tchau"}}),
+        ("CASE", {"Test"}, "case", {"Another Test"}, {"CASE": {"Another Test"}}),  # Upper vs lower case
+        ("Case", {"Mix"}, "cAsE", {"Mixed"}, {"Case": {"Mixed"}}),  # Mixed case variations
+        ("Case", {"Mix"}, "cAsE", {"123", "Mixed"}, {"Case": {"123", "Mixed"}}),  # Mixed case variations
     ],
 )
 def test_setitem_language_case_insensitivity(first_lang, first_texts, second_lang, second_texts, expected_dict):
@@ -179,32 +181,32 @@ def test_pref_lang_unchanged_after_setitem():
 @pytest.mark.parametrize(
     "initial_contents, key_to_set, value_to_set, expected_contents",
     [
-        # Case 1: Setting an entry with the empty string as key on an empty MultiLangString.
+        # Setting an entry with the empty string as key on an empty MultiLangString.
         ({}, "", {"An entry without language"}, {"": {"An entry without language"}}),
-        # Case 2: Updating an existing entry where the key is an empty string.
+        # Updating an existing entry where the key is an empty string.
         (
             {"": {"Old entry without language"}},
             "",
             {"Updated entry without language"},
             {"": {"Updated entry without language"}},
         ),
-        # Case 3: Adding a new entry with the empty string as key alongside existing specified languages.
+        # Adding a new entry with the empty string as key alongside existing specified languages.
         ({"en": {"Hello"}}, "", {"No language entry"}, {"": {"No language entry"}, "en": {"Hello"}}),
-        # Case 4: Updating an existing entry with the empty string as key alongside other languages.
+        # Updating an existing entry with the empty string as key alongside other languages.
         (
             {"": {"Old no language entry"}, "fr": {"Bonjour"}},
             "",
             {"New no language entry"},
             {"": {"New no language entry"}, "fr": {"Bonjour"}},
         ),
-        # Case 5: Introducing the empty string entry in a MultiLangString containing multiple languages.
+        # Introducing the empty string entry in a MultiLangString containing multiple languages.
         (
             {"en": {"Hello"}, "fr": {"Bonjour"}},
             "",
             {"No language entry"},
             {"": {"No language entry"}, "en": {"Hello"}, "fr": {"Bonjour"}},
         ),
-        # Case 6: Replacing an existing empty string entry with a new set of texts.
+        # Replacing an existing empty string entry with a new set of texts.
         ({"": {"Some old text"}, "es": {"Hola"}}, "", {"Some new text"}, {"": {"Some new text"}, "es": {"Hola"}}),
     ],
 )

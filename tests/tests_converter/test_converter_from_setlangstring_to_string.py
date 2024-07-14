@@ -63,7 +63,9 @@ def test_from_setlangstring_to_string_various_cases(texts, lang, expected_output
     "texts, lang, expected_exception",
     [
         ({}, "en", TypeError),  # None texts
-        ({"Hello", "World"}, None, TypeError),  # None lang
+        ({"Hello", None}, "en", TypeError),  # None value in set
+        ("Hello", "en", TypeError),  # Invalid type for texts
+        ({}, "en", TypeError),  # Empty dictionary instead of set
     ],
 )
 def test_from_setlangstring_to_string_none_values(texts, lang, expected_exception):

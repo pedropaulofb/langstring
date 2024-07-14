@@ -15,6 +15,9 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
         ("Hello", "en", SetLangString(texts={"Hello"}, lang="en")),
         ("Hola", "es", SetLangString(texts={"Hola"}, lang="es")),
         ("Bonjour", "fr", SetLangString(texts={"Bonjour"}, lang="fr")),
+        (None, "fr", SetLangString(texts={""}, lang="fr")),
+        ("Bonjour", None, SetLangString(texts={"Bonjour"}, lang="")),
+        (None, None, SetLangString(texts={""}, lang="")),
     ],
 )
 def test_langstring_to_setlangstring_valid(input_text: str, input_lang: str, expected_output: SetLangString):
@@ -147,24 +150,6 @@ def test_langstring_to_setlangstring_flags_effect_on_language(flag: LangStringFl
     expected_output = SetLangString(texts={"Text"}, lang=expected_lang.strip())
     assert result == expected_output, f"Conversion did not respect the '{flag.name}' flag correctly."
 
-
-@pytest.mark.parametrize(
-    "text, lang",
-    [
-        (None, "en"),  # Test handling None as text
-        ("Text", None),  # Test handling None as lang
-    ],
-)
-def test_langstring_to_setlangstring_none_values(text, lang):
-    """Test conversion with None values for text or lang, expecting TypeError due to invalid type.
-
-    :param text: The text of the LangString, possibly None.
-    :param lang: The language code of the LangString, possibly None.
-    :return: None
-    :raises TypeError: If text or lang is None, violating type expectations.
-    """
-    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
-        Converter.from_langstring_to_setlangstring(LangString(text=text, lang=lang))
 
 
 @pytest.mark.parametrize(

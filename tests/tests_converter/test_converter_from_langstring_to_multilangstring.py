@@ -12,6 +12,9 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
         ("Hello", "en", {"en": {"Hello"}}, "en"),
         ("Bonjour", "fr", {"fr": {"Bonjour"}}, "fr"),
         ("", "", {"": {""}}, ""),
+        (None, "x", {"x":{""}}, "x"),
+        ("z", None, {"":{"z"}}, ""),
+        (None, None, {"":{""}}, ""),
         ("Hola", "", {"": {"Hola"}}, ""),
         ("", "en", {"en": {""}}, "en"),
         ("   Spaced   ", "en", {"en": {"   Spaced   "}}, "en"),
@@ -66,26 +69,6 @@ def test_from_langstring_to_multilangstring_empty_langstring():
     assert isinstance(result, MultiLangString), "Result should be an instance of MultiLangString"
     assert result.mls_dict == {"": {""}}, "Expected dict representation with empty text and lang"
     assert result.pref_lang == "", "Expected preferred language to be empty"
-
-
-# Additional imports might not be necessary if already present in your test suite.
-from pytest import raises
-
-
-@pytest.mark.parametrize(
-    "input_text, input_lang",
-    [
-        (None, "en"),  # Testing None as text
-        ("Hello", None),  # Testing None as lang
-    ],
-)
-def test_from_langstring_to_multilangstring_none_values(input_text, input_lang):
-    """
-    Test `from_langstring_to_multilangstring` handling None values for text and lang.
-    """
-    with raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
-        lang_string = LangString(input_text, input_lang)  # LangString initialization might fail
-        Converter.from_langstring_to_multilangstring(lang_string)
 
 
 def test_from_langstring_to_multilangstring_unusual_valid_usage():

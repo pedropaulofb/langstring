@@ -33,37 +33,61 @@ class Validator(metaclass=NonInstantiable):
         cls.validate_type_single(flag_type, type)
         cls.validate_type_single(text, str, optional=True)
 
-        msg = f"Invalid 'text' value received ('{text}')."
-        if Controller.get_flag(flag_type.DEFINED_TEXT) and not text:
-            print(Controller.get_flag(flag_type.DEFINED_TEXT))
-            raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_TEXT' is enabled. Expected non-empty 'str'.")
+        # Initial message for potential errors
+        original_text = text
+        msg = f"Invalid 'text' value received ('{original_text}')."
 
-        return text if not Controller.get_flag(flag_type.STRIP_TEXT) else text.strip()
+        # Transform the text string according to STRIP_TEXT flag
+        if text is not None:
+            text = text.strip() if Controller.get_flag(flag_type.STRIP_TEXT) else text  # Apply STRIP_TEXT if enabled
+            validate_text = text.strip()  # Remove 'whitespace characters' for validation
+        else:
+            validate_text = None
+
+        if Controller.get_flag(flag_type.DEFINED_TEXT) and not validate_text:
+            raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_TEXT' is enabled. "
+                             f"Expected non-empty 'str' or 'str' with non-space characters.")
+
+        return text
 
     @staticmethod
     def validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> str:
         Validator.validate_type_single(flag_type, type)
         Validator.validate_type_single(lang, str, optional=True)
 
-        msg = f"Invalid 'lang' value received ('{lang}')."
+        # Initial message for potential errors
+        original_lang = lang
+        msg = f"Invalid 'lang' value received ('{original_lang}')."
 
-        if Controller.get_flag(flag_type.DEFINED_LANG) and not lang:
-            raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_LANG' is enabled. Expected non-empty 'str'.")
+        # Transform the lang string according to STRIP_LANG and LOWERCASE_LANG flags
+        if lang is not None:
+            lang = lang.strip() if Controller.get_flag(flag_type.STRIP_LANG) else lang  # Apply STRIP_LANG if enabled
+            transformed_lang = lang.casefold() if Controller.get_flag(
+                flag_type.LOWERCASE_LANG) else lang  # Apply LOWERCASE_LANG if enabled
+            validate_lang = transformed_lang.strip()  # Remove 'whitespace characters' for validation
+        else:
+            transformed_lang = None
+            validate_lang = None
 
-        # Validation is performed on lowercase language, according to RDF definition
+        if Controller.get_flag(flag_type.DEFINED_LANG) and not validate_lang:
+            raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_LANG' is enabled. "
+                             f"Expected non-empty 'str' or 'str' with non-space characters.")
+
+        # Validation is performed on the transformed language string
         if Controller.get_flag(flag_type.VALID_LANG):
             try:
                 from langcodes import tag_is_valid
 
-                if not tag_is_valid(lang.casefold()):
+                if not tag_is_valid(transformed_lang):
                     raise ValueError(
-                        f"{msg} '{flag_type.__name__}.VALID_LANG' is enabled. Expected valid language code."
+                        f"Invalid 'lang' value received ('{original_lang}'). '{flag_type.__name__}.VALID_LANG' is enabled. "
+                        f"Expected valid language code."
                     )
             except ImportError as e:
                 if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
                     error_message = (
-                        str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
-                        "Install it with 'pip install langstring[extras]'."
+                            str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
+                                     "Install it with 'pip install langstring[extras]'."
                     )
                     raise ImportError(error_message) from e
 
@@ -73,8 +97,7 @@ class Validator(metaclass=NonInstantiable):
                     UserWarning,
                 )
 
-        lang = lang if not Controller.get_flag(flag_type.STRIP_LANG) else lang.strip()
-        return lang if not Controller.get_flag(flag_type.LOWERCASE_LANG) else lang.casefold()
+        return transformed_lang
 
     @classmethod
     def validate_type_decorator(cls, func: Callable[..., T]) -> Callable[..., T]:
@@ -160,14 +183,6 @@ class Validator(metaclass=NonInstantiable):
             return func(*args, **kwargs)
 
         return wrapper
-
-    @staticmethod
-    def _get_origin(tp: Any) -> Any:
-        return getattr(tp, "__origin__", None)
-
-    @staticmethod
-    def _get_args(tp: Any) -> tuple[Any, ...]:
-        return getattr(tp, "__args__", ())
 
     @staticmethod
     def validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -> None:

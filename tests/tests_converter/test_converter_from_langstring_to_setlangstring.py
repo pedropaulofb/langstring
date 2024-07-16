@@ -151,7 +151,6 @@ def test_langstring_to_setlangstring_flags_effect_on_language(flag: LangStringFl
     assert result == expected_output, f"Conversion did not respect the '{flag.name}' flag correctly."
 
 
-
 @pytest.mark.parametrize(
     "text, expected_output",
     [

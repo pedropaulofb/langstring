@@ -24,8 +24,6 @@ the development of multilingual applications and facilitate the handling of text
 from typing import Optional
 from typing import Union
 
-from icecream import ic
-
 from .controller import Controller
 from .flags import MultiLangStringFlag
 from .langstring import LangString

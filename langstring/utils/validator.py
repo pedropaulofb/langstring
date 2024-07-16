@@ -45,8 +45,10 @@ class Validator(metaclass=NonInstantiable):
             validate_text = None
 
         if Controller.get_flag(flag_type.DEFINED_TEXT) and not validate_text:
-            raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_TEXT' is enabled. "
-                             f"Expected non-empty 'str' or 'str' with non-space characters.")
+            raise ValueError(
+                f"{msg} '{flag_type.__name__}.DEFINED_TEXT' is enabled. "
+                f"Expected non-empty 'str' or 'str' with non-space characters."
+            )
 
         return text
 
@@ -62,16 +64,19 @@ class Validator(metaclass=NonInstantiable):
         # Transform the lang string according to STRIP_LANG and LOWERCASE_LANG flags
         if lang is not None:
             lang = lang.strip() if Controller.get_flag(flag_type.STRIP_LANG) else lang  # Apply STRIP_LANG if enabled
-            transformed_lang = lang.casefold() if Controller.get_flag(
-                flag_type.LOWERCASE_LANG) else lang  # Apply LOWERCASE_LANG if enabled
+            transformed_lang = (
+                lang.casefold() if Controller.get_flag(flag_type.LOWERCASE_LANG) else lang
+            )  # Apply LOWERCASE_LANG if enabled
             validate_lang = transformed_lang.strip()  # Remove 'whitespace characters' for validation
         else:
             transformed_lang = None
             validate_lang = None
 
         if Controller.get_flag(flag_type.DEFINED_LANG) and not validate_lang:
-            raise ValueError(f"{msg} '{flag_type.__name__}.DEFINED_LANG' is enabled. "
-                             f"Expected non-empty 'str' or 'str' with non-space characters.")
+            raise ValueError(
+                f"{msg} '{flag_type.__name__}.DEFINED_LANG' is enabled. "
+                f"Expected non-empty 'str' or 'str' with non-space characters."
+            )
 
         # Validation is performed on the transformed language string
         if Controller.get_flag(flag_type.VALID_LANG):
@@ -86,8 +91,8 @@ class Validator(metaclass=NonInstantiable):
             except ImportError as e:
                 if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
                     error_message = (
-                            str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
-                                     "Install it with 'pip install langstring[extras]'."
+                        str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
+                        "Install it with 'pip install langstring[extras]'."
                     )
                     raise ImportError(error_message) from e
 
@@ -121,9 +126,11 @@ class Validator(metaclass=NonInstantiable):
             if args:
                 if origin in (list, set, tuple):
                     for item in arg:
-                        if not any(isinstance(item, arg_type) or (get_origin(arg_type) is Union and
-                                                                  any(isinstance(item, t) for t in get_args(arg_type)))
-                                   for arg_type in args):
+                        if not any(
+                            isinstance(item, arg_type)
+                            or (get_origin(arg_type) is Union and any(isinstance(item, t) for t in get_args(arg_type)))
+                            for arg_type in args
+                        ):
                             allowed_types = " or ".join(f"'{t.__name__}'" for t in args)
                             raise TypeError(
                                 f"Invalid item with value '{item}' in '{origin.__name__}'. "
@@ -154,37 +161,37 @@ class Validator(metaclass=NonInstantiable):
     @classmethod
     def validate_type_decorator(cls, func: Callable[..., T]) -> Callable[..., T]:
         """
-                Decorator to validate the types of arguments passed to a function or method based on their type hints.
+        Decorator to validate the types of arguments passed to a function or method based on their type hints.
 
-                This method checks if each argument's type matches its corresponding type hint. It is intended for use with
-                functions or instance methods where explicit type hints are provided for all arguments.
+        This method checks if each argument's type matches its corresponding type hint. It is intended for use with
+        functions or instance methods where explicit type hints are provided for all arguments.
 
-                Usage:
-                    - Apply this decorator to functions or instance methods that require type validation based on type hints.
+        Usage:
+            - Apply this decorator to functions or instance methods that require type validation based on type hints.
 
-                When to Use:
-                    - Use this decorator for functions or methods where argument types need to be strictly validated.
-                    - Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.
-                    - Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and
-                      its contents match the specified types.
-                    - Appropriate for instance methods, adjusting for the 'self' parameter automatically.
-                    - Suitable for static methods but requires manual validation for class methods and setters.
+        When to Use:
+            - Use this decorator for functions or methods where argument types need to be strictly validated.
+            - Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.
+            - Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and
+              its contents match the specified types.
+            - Appropriate for instance methods, adjusting for the 'self' parameter automatically.
+            - Suitable for static methods but requires manual validation for class methods and setters.
 
-                When Not to Use:
-                    - Do not use this decorator for class methods with the 'cls' parameter, as it does not handle 'cls' explicitly.
-                    - Avoid using this decorator for property setters.
-                    - This decorator is not suitable for methods with parameters involving generic collections parameterized
-                      with type variables (e.g., List[T] where T is a type variable).
-                    - Complex nested generics (e.g., List[Dict[str, Union[int, List[str]]]]) might not be fully validated.
-                    - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) and nested `Union` within parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly validated by this decorator.
+        When Not to Use:
+            - Do not use this decorator for class methods with the 'cls' parameter, as it does not handle 'cls' explicitly.
+            - Avoid using this decorator for property setters.
+            - This decorator is not suitable for methods with parameters involving generic collections parameterized
+              with type variables (e.g., List[T] where T is a type variable).
+            - Complex nested generics (e.g., List[Dict[str, Union[int, List[str]]]]) might not be fully validated.
+            - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) and nested `Union` within parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly validated by this decorator.
 
 
-                :param func: The function or method to be decorated.
-                :type func: Callable[..., T]
-                :return: The decorated function or method with type validation applied.
-                :rtype: Callable[..., T]
-                :raises TypeError: If an argument's type does not match its type hint.
-                """
+        :param func: The function or method to be decorated.
+        :type func: Callable[..., T]
+        :return: The decorated function or method with type validation applied.
+        :rtype: Callable[..., T]
+        :raises TypeError: If an argument's type does not match its type hint.
+        """
 
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -208,6 +215,7 @@ class Validator(metaclass=NonInstantiable):
                         f"Invalid argument with value '{kwarg}'. Expected '{hint.__name__}', but got '{type(kwargs[kwarg]).__name__}'."
                     )
             return func(*args, **kwargs)
+
         return wrapper
 
     @staticmethod

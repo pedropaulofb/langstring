@@ -3,7 +3,8 @@ from typing import Any
 
 import pytest
 
-from langstring import Controller, LangStringFlag
+from langstring import Controller
+from langstring import LangStringFlag
 from langstring.utils.validator import Validator
 
 
@@ -111,6 +112,7 @@ def test_validate_flags_text_optional_none() -> None:
     text = None
     assert Validator.validate_flags_text(LangStringFlag, text) == text, "Expected None to remain unchanged."
 
+
 def test_validate_flags_text_none_with_defined_text() -> None:
     """Test validate_flags_text raises ValueError when DEFINED_TEXT is enabled and text is None.
 
@@ -118,7 +120,10 @@ def test_validate_flags_text_none_with_defined_text() -> None:
     """
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)  # Enable DEFINED_TEXT
     text = None
-    with pytest.raises(ValueError, match="Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\."):
+    with pytest.raises(
+        ValueError,
+        match="Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\.",
+    ):
         Validator.validate_flags_text(LangStringFlag, text)
 
 
@@ -185,6 +190,7 @@ def test_validate_flags_text_strip_text_various(flag_type: type[Enum], text: str
     Controller.set_flag(flag_type.STRIP_TEXT, True)
     assert Validator.validate_flags_text(flag_type, text) == expected, msg
 
+
 @pytest.mark.parametrize(
     "flag_type,text,msg",
     [
@@ -224,7 +230,6 @@ def test_validate_flags_text_invalid_types(flag_type: type[Enum], text: Any, msg
     Controller.set_flag(flag_type.DEFINED_TEXT, True)
     with pytest.raises(TypeError, match=msg):
         Validator.validate_flags_text(flag_type, text)
-
 
 
 @pytest.mark.parametrize(
@@ -268,8 +273,11 @@ def test_validate_flags_text_none_with_defined_text_enabled() -> None:
     """
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     text = None
-    with pytest.raises(ValueError, match=r"Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. "
-                                         r"Expected non-empty 'str' or 'str' with non-space characters\."):
+    with pytest.raises(
+        ValueError,
+        match=r"Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. "
+        r"Expected non-empty 'str' or 'str' with non-space characters\.",
+    ):
         Validator.validate_flags_text(LangStringFlag, text)
 
 
@@ -291,6 +299,9 @@ def test_validate_flags_text_defined_text_empty_string() -> None:
     """
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     text = ""
-    with pytest.raises(ValueError, match=r"Invalid 'text' value received \(''\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. "
-                                         r"Expected non-empty 'str' or 'str' with non-space characters\."):
+    with pytest.raises(
+        ValueError,
+        match=r"Invalid 'text' value received \(''\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. "
+        r"Expected non-empty 'str' or 'str' with non-space characters\.",
+    ):
         Validator.validate_flags_text(LangStringFlag, text)

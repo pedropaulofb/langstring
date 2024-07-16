@@ -4,24 +4,29 @@ from unittest.mock import patch
 
 import pytest
 
-from langstring import LangStringFlag, Controller, GlobalFlag
+from langstring import Controller
+from langstring import GlobalFlag
+from langstring import LangStringFlag
 from langstring.utils.validator import Validator
 
 
-@pytest.mark.parametrize("flag_type,lang,expected,msg", [
-    (LangStringFlag, None, None, "Expected no error when lang is None"),
-    (LangStringFlag, "", "", "Expected no error when lang is an empty string"),
-    (LangStringFlag, "en", "en", "Expected lang 'en' to be valid"),
-    (LangStringFlag, "EN", "EN", "Expected lang 'EN' to be valid"),
-    (LangStringFlag, "   ", "   ", "Expected lang with spaces only to be valid"),
-    (LangStringFlag, "123", "123", "Expected numeric lang to be valid"),
-    (LangStringFlag, "русский", "русский", "Expected Cyrillic lang to be valid"),
-    (LangStringFlag, "Ελληνικά", "Ελληνικά", "Expected Greek lang to be valid"),
-    (LangStringFlag, "emoji 😊", "emoji 😊", "Expected lang with emoji to be valid"),
-    (LangStringFlag, "!@#$%^&*()", "!@#$%^&*()", "Expected lang with special characters to be valid"),
-    (LangStringFlag, "mixED CaSe", "mixED CaSe", "Expected lang with mixed case to be valid"),
-    (LangStringFlag, "   en   ", "   en   ", "Expected lang with spaces before and after to be valid"),
-])
+@pytest.mark.parametrize(
+    "flag_type,lang,expected,msg",
+    [
+        (LangStringFlag, None, None, "Expected no error when lang is None"),
+        (LangStringFlag, "", "", "Expected no error when lang is an empty string"),
+        (LangStringFlag, "en", "en", "Expected lang 'en' to be valid"),
+        (LangStringFlag, "EN", "EN", "Expected lang 'EN' to be valid"),
+        (LangStringFlag, "   ", "   ", "Expected lang with spaces only to be valid"),
+        (LangStringFlag, "123", "123", "Expected numeric lang to be valid"),
+        (LangStringFlag, "русский", "русский", "Expected Cyrillic lang to be valid"),
+        (LangStringFlag, "Ελληνικά", "Ελληνικά", "Expected Greek lang to be valid"),
+        (LangStringFlag, "emoji 😊", "emoji 😊", "Expected lang with emoji to be valid"),
+        (LangStringFlag, "!@#$%^&*()", "!@#$%^&*()", "Expected lang with special characters to be valid"),
+        (LangStringFlag, "mixED CaSe", "mixED CaSe", "Expected lang with mixed case to be valid"),
+        (LangStringFlag, "   en   ", "   en   ", "Expected lang with spaces before and after to be valid"),
+    ],
+)
 def test_validate_flags_lang_basic(flag_type: type[Enum], lang: Optional[str], expected: str, msg: str) -> None:
     """Test basic functionality of validate_flags_lang without any flags enabled.
 
@@ -37,14 +42,26 @@ def test_validate_flags_lang_basic(flag_type: type[Enum], lang: Optional[str], e
     assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
 
 
-@pytest.mark.parametrize("flag_type,lang,msg", [
-    (LangStringFlag, None,
-     r"Invalid 'lang' value received \('None'\)\. 'LangStringFlag\.DEFINED_LANG' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\."),
-    (LangStringFlag, "",
-     r"Invalid 'lang' value received \(''\)\. 'LangStringFlag\.DEFINED_LANG' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\."),
-    (LangStringFlag, "   ",
-     r"Invalid 'lang' value received \('   '\)\. 'LangStringFlag\.DEFINED_LANG' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\."),
-])
+@pytest.mark.parametrize(
+    "flag_type,lang,msg",
+    [
+        (
+            LangStringFlag,
+            None,
+            r"Invalid 'lang' value received \('None'\)\. 'LangStringFlag\.DEFINED_LANG' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\.",
+        ),
+        (
+            LangStringFlag,
+            "",
+            r"Invalid 'lang' value received \(''\)\. 'LangStringFlag\.DEFINED_LANG' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\.",
+        ),
+        (
+            LangStringFlag,
+            "   ",
+            r"Invalid 'lang' value received \('   '\)\. 'LangStringFlag\.DEFINED_LANG' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\.",
+        ),
+    ],
+)
 def test_validate_flags_lang_defined_lang(flag_type: type[Enum], lang: Optional[str], msg: str) -> None:
     """Test validate_flags_lang with DEFINED_LANG flag enabled.
 
@@ -62,16 +79,37 @@ def test_validate_flags_lang_defined_lang(flag_type: type[Enum], lang: Optional[
     Controller.set_flag(flag_type.DEFINED_LANG, False)
 
 
-
-
-@pytest.mark.parametrize("flag_type,lang,expected,msg", [
-    (LangStringFlag, "  en  ", "en", "Expected 'en' when lang is '  en  ' and STRIP_LANG is enabled"),
-    (LangStringFlag, "EN", "en", "Expected 'en' when lang is 'EN' and LOWERCASE_LANG is enabled"),
-    (LangStringFlag, "  ΕΛΛΗΝΙΚΆ  ", "ελληνικά", "Expected 'ελληνικά' when lang is '  ΕΛΛΗΝΙΚΆ  ' and STRIP_LANG and LOWERCASE_LANG are enabled"),
-    (LangStringFlag, "  РУССКИЙ  ", "русский", "Expected 'русский' when lang is '  РУССКИЙ  ' and STRIP_LANG and LOWERCASE_LANG are enabled"),
-    (LangStringFlag, " Emoji 😊 ", "emoji 😊", "Expected 'emoji 😊' when lang is ' Emoji 😊 ' and STRIP_LANG and LOWERCASE_LANG are enabled"),
-    (LangStringFlag, "  MixED CaSe  ", "mixed case", "Expected 'mixed case' when lang is '  MixED CaSe  ' and STRIP_LANG and LOWERCASE_LANG are enabled"),
-])
+@pytest.mark.parametrize(
+    "flag_type,lang,expected,msg",
+    [
+        (LangStringFlag, "  en  ", "en", "Expected 'en' when lang is '  en  ' and STRIP_LANG is enabled"),
+        (LangStringFlag, "EN", "en", "Expected 'en' when lang is 'EN' and LOWERCASE_LANG is enabled"),
+        (
+            LangStringFlag,
+            "  ΕΛΛΗΝΙΚΆ  ",
+            "ελληνικά",
+            "Expected 'ελληνικά' when lang is '  ΕΛΛΗΝΙΚΆ  ' and STRIP_LANG and LOWERCASE_LANG are enabled",
+        ),
+        (
+            LangStringFlag,
+            "  РУССКИЙ  ",
+            "русский",
+            "Expected 'русский' when lang is '  РУССКИЙ  ' and STRIP_LANG and LOWERCASE_LANG are enabled",
+        ),
+        (
+            LangStringFlag,
+            " Emoji 😊 ",
+            "emoji 😊",
+            "Expected 'emoji 😊' when lang is ' Emoji 😊 ' and STRIP_LANG and LOWERCASE_LANG are enabled",
+        ),
+        (
+            LangStringFlag,
+            "  MixED CaSe  ",
+            "mixed case",
+            "Expected 'mixed case' when lang is '  MixED CaSe  ' and STRIP_LANG and LOWERCASE_LANG are enabled",
+        ),
+    ],
+)
 def test_validate_flags_lang_strip_lowercase(flag_type: type[Enum], lang: str, expected: str, msg: str) -> None:
     """Test validate_flags_lang with STRIP_LANG and LOWERCASE_LANG flags enabled.
 
@@ -100,6 +138,7 @@ def test_validate_flags_lang_import_error() -> None:
     Controller.set_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND, True)
 
     import builtins
+
     original_import = builtins.__import__
 
     def mocked_import(name, *args):
@@ -113,20 +152,43 @@ def test_validate_flags_lang_import_error() -> None:
 
     Controller.set_flag(LangStringFlag.VALID_LANG, False)
     Controller.set_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND, False)
-@pytest.mark.parametrize("flag_type,lang,msg", [
-    (LangStringFlag, "invalid-lang",
-     r"Invalid 'lang' value received \('invalid-lang'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\."),
-    (LangStringFlag, "  invalid-lang  ",
-     r"Invalid 'lang' value received \('  invalid-lang  '\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\."),
-    (LangStringFlag, "русский-invalid",
-     r"Invalid 'lang' value received \('русский-invalid'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\."),
-    (LangStringFlag, "Ελληνικά-invalid",
-     r"Invalid 'lang' value received \('Ελληνικά-invalid'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\."),
-    (LangStringFlag, "emoji-invalid 😊",
-     r"Invalid 'lang' value received \('emoji-invalid 😊'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\."),
-    (LangStringFlag, "!@#$%^&*-invalid",
-     r"Invalid 'lang' value received \('!@#\$%\^&\*-invalid'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\."),
-])
+
+
+@pytest.mark.parametrize(
+    "flag_type,lang,msg",
+    [
+        (
+            LangStringFlag,
+            "invalid-lang",
+            r"Invalid 'lang' value received \('invalid-lang'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\.",
+        ),
+        (
+            LangStringFlag,
+            "  invalid-lang  ",
+            r"Invalid 'lang' value received \('  invalid-lang  '\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\.",
+        ),
+        (
+            LangStringFlag,
+            "русский-invalid",
+            r"Invalid 'lang' value received \('русский-invalid'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\.",
+        ),
+        (
+            LangStringFlag,
+            "Ελληνικά-invalid",
+            r"Invalid 'lang' value received \('Ελληνικά-invalid'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\.",
+        ),
+        (
+            LangStringFlag,
+            "emoji-invalid 😊",
+            r"Invalid 'lang' value received \('emoji-invalid 😊'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\.",
+        ),
+        (
+            LangStringFlag,
+            "!@#$%^&*-invalid",
+            r"Invalid 'lang' value received \('!@#\$%\^&\*-invalid'\)\. 'LangStringFlag\.VALID_LANG' is enabled\. Expected valid language code\.",
+        ),
+    ],
+)
 def test_validate_flags_lang_invalid(flag_type: type[Enum], lang: str, msg: str) -> None:
     """Test validate_flags_lang raises ValueError when VALID_LANG is enabled and lang is invalid.
 
@@ -144,12 +206,14 @@ def test_validate_flags_lang_invalid(flag_type: type[Enum], lang: str, msg: str)
     Controller.set_flag(flag_type.VALID_LANG, False)
 
 
-
-@pytest.mark.parametrize("flag_type,lang,expected,msg", [
-    (LangStringFlag, "a" * 1000, "a" * 1000, "Expected lang to be valid for very long strings"),
-    (LangStringFlag, " !@#$%^&*()_+ ", " !@#$%^&*()_+ ", "Expected lang to be valid for special characters"),
-    (LangStringFlag, "emoji 😊 emoji", "emoji 😊 emoji", "Expected lang to be valid for lang with multiple emojis"),
-])
+@pytest.mark.parametrize(
+    "flag_type,lang,expected,msg",
+    [
+        (LangStringFlag, "a" * 1000, "a" * 1000, "Expected lang to be valid for very long strings"),
+        (LangStringFlag, " !@#$%^&*()_+ ", " !@#$%^&*()_+ ", "Expected lang to be valid for special characters"),
+        (LangStringFlag, "emoji 😊 emoji", "emoji 😊 emoji", "Expected lang to be valid for lang with multiple emojis"),
+    ],
+)
 def test_validate_flags_lang_edge_cases(flag_type: type[Enum], lang: str, expected: str, msg: str) -> None:
     """Test validate_flags_lang with edge cases.
 
@@ -164,20 +228,36 @@ def test_validate_flags_lang_edge_cases(flag_type: type[Enum], lang: str, expect
     """
     assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
 
-@pytest.mark.parametrize("flag_type,flags_combination,lang,expected,msg", [
-    (LangStringFlag, [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG], "  EN  ", "en",
-     "Expected 'en' when STRIP_LANG and LOWERCASE_LANG are enabled"),
-    (LangStringFlag, [LangStringFlag.DEFINED_LANG, LangStringFlag.VALID_LANG], "en", "en",
-     "Expected 'en' when DEFINED_LANG and VALID_LANG are enabled"),
-    # Issue: The `langcodes` library's `tag_is_valid` function may not correctly validate certain known valid language tags.
-    # (LangStringFlag, [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG, LangStringFlag.VALID_LANG], "  ΕΛΛΗΝΙΚΆ  ", "ελληνικά",
-    #  "Expected 'ελληνικά' when STRIP_LANG, LOWERCASE_LANG, and VALID_LANG are enabled"),
-    # (LangStringFlag, [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG, LangStringFlag.VALID_LANG], "  РУССКИЙ  ", "русский",
-    #  "Expected 'русский' when STRIP_LANG, LOWERCASE_LANG, and VALID_LANG are enabled"),
-    # (LangStringFlag, [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG, LangStringFlag.VALID_LANG], " emoji 😊 ", "emoji 😊",
-    #  "Expected 'emoji 😊' when STRIP_LANG, LOWERCASE_LANG, and VALID_LANG are enabled"),
-])
-def test_validate_flags_lang_unusual_usage(flag_type: type[Enum], flags_combination: list, lang: str, expected: str, msg: str) -> None:
+
+@pytest.mark.parametrize(
+    "flag_type,flags_combination,lang,expected,msg",
+    [
+        (
+            LangStringFlag,
+            [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG],
+            "  EN  ",
+            "en",
+            "Expected 'en' when STRIP_LANG and LOWERCASE_LANG are enabled",
+        ),
+        (
+            LangStringFlag,
+            [LangStringFlag.DEFINED_LANG, LangStringFlag.VALID_LANG],
+            "en",
+            "en",
+            "Expected 'en' when DEFINED_LANG and VALID_LANG are enabled",
+        ),
+        # Issue: The `langcodes` library's `tag_is_valid` function may not correctly validate certain known valid language tags.
+        # (LangStringFlag, [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG, LangStringFlag.VALID_LANG], "  ΕΛΛΗΝΙΚΆ  ", "ελληνικά",
+        #  "Expected 'ελληνικά' when STRIP_LANG, LOWERCASE_LANG, and VALID_LANG are enabled"),
+        # (LangStringFlag, [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG, LangStringFlag.VALID_LANG], "  РУССКИЙ  ", "русский",
+        #  "Expected 'русский' when STRIP_LANG, LOWERCASE_LANG, and VALID_LANG are enabled"),
+        # (LangStringFlag, [LangStringFlag.STRIP_LANG, LangStringFlag.LOWERCASE_LANG, LangStringFlag.VALID_LANG], " emoji 😊 ", "emoji 😊",
+        #  "Expected 'emoji 😊' when STRIP_LANG, LOWERCASE_LANG, and VALID_LANG are enabled"),
+    ],
+)
+def test_validate_flags_lang_unusual_usage(
+    flag_type: type[Enum], flags_combination: list, lang: str, expected: str, msg: str
+) -> None:
     """Test validate_flags_lang with unusual but valid flag combinations.
 
     :param flag_type: The type of flag to use for validation.
@@ -233,7 +313,9 @@ def test_validate_flags_lang_unusual_usage(flag_type: type[Enum], flags_combinat
         ),
     ],
 )
-def test_validate_flags_lang_whitespace_characters(flag_type: type[Enum], lang: Optional[str], expected: str, msg: str) -> None:
+def test_validate_flags_lang_whitespace_characters(
+    flag_type: type[Enum], lang: Optional[str], expected: str, msg: str
+) -> None:
     """Test validate_flags_lang with various whitespace characters.
 
     :param flag_type: The type of flag to use for validation.

@@ -1,6 +1,10 @@
 import pytest
 
-from langstring import Converter, LangString, MultiLangString, Controller, MultiLangStringFlag
+from langstring import Controller
+from langstring import Converter
+from langstring import LangString
+from langstring import MultiLangString
+from langstring import MultiLangStringFlag
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
@@ -12,12 +16,12 @@ from tests.conftest import TYPEERROR_MSG_SINGULAR
         # Multiple MultiLangStrings with different languages
         (
             [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"fr": {"Bonjour"}})],
-            [LangString("Hello", "en"), LangString("Bonjour", "fr")]
+            [LangString("Hello", "en"), LangString("Bonjour", "fr")],
         ),
         # Multiple MultiLangStrings with overlapping languages
         (
             [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"en": {"World"}})],
-            [LangString("Hello", "en"), LangString("World", "en")]
+            [LangString("Hello", "en"), LangString("World", "en")],
         ),
         # Multiple MultiLangStrings with empty dictionary
         ([MultiLangString(), MultiLangString()], []),
@@ -38,25 +42,21 @@ def test_from_multilangstrings_to_langstrings(input_list, expected_output):
         (
             [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"fr": {"Bonjour"}})],
             ["en"],
-            [LangString("Hello", "en")]
+            [LangString("Hello", "en")],
         ),
         # Filtering with multiple languages
         (
             [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"fr": {"Bonjour"}})],
             ["en", "fr"],
-            [LangString("Hello", "en"), LangString("Bonjour", "fr")]
+            [LangString("Hello", "en"), LangString("Bonjour", "fr")],
         ),
         # Filtering with no matching languages
-        (
-            [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"fr": {"Bonjour"}})],
-            ["es"],
-            []
-        ),
+        ([MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"fr": {"Bonjour"}})], ["es"], []),
         # Filtering with overlapping languages
         (
             [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"en": {"World"}})],
             ["en"],
-            [LangString("Hello", "en"), LangString("World", "en")]
+            [LangString("Hello", "en"), LangString("World", "en")],
         ),
     ],
 )
@@ -134,7 +134,7 @@ def test_from_multilangstrings_to_langstrings_null_languages(languages):
         ([MultiLangString(mls_dict={"": {""}})], [LangString("", "")]),  # Edge case: empty text and language
         (
             [MultiLangString(mls_dict={"en-GB": {"Colour"}}), MultiLangString(mls_dict={"en-US": {"Color"}})],
-            [LangString("Colour", "en-GB"), LangString("Color", "en-US")]
+            [LangString("Colour", "en-GB"), LangString("Color", "en-US")],
         ),
     ],
 )
@@ -145,21 +145,25 @@ def test_from_multilangstrings_to_langstrings_edge_cases(input_list, expected_ou
     for langstring in expected_output:
         assert langstring in result, f"LangString {langstring} not found in result"
 
+
 @pytest.mark.parametrize(
     "input_list, expected_output",
     [
         ([MultiLangString(mls_dict={"": {""}})], [LangString("", "")]),
         (
             [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"fr": {"Bonjour"}})],
-            [LangString("Hello", "en"), LangString("Bonjour", "fr")]
+            [LangString("Hello", "en"), LangString("Bonjour", "fr")],
         ),
         (
-            [MultiLangString(mls_dict={"en": {"Hello"}}, pref_lang="en"), MultiLangString(mls_dict={"fr": {"Bonjour"}})],
-            [LangString("Hello", "en"), LangString("Bonjour", "fr")]
+            [
+                MultiLangString(mls_dict={"en": {"Hello"}}, pref_lang="en"),
+                MultiLangString(mls_dict={"fr": {"Bonjour"}}),
+            ],
+            [LangString("Hello", "en"), LangString("Bonjour", "fr")],
         ),
         (
             [MultiLangString(mls_dict={"en": {"Hello"}}), MultiLangString(mls_dict={"en": {"World"}})],
-            [LangString("Hello", "en"), LangString("World", "en")]
+            [LangString("Hello", "en"), LangString("World", "en")],
         ),
     ],
 )
@@ -170,6 +174,7 @@ def test_from_multilangstrings_to_langstrings_unusual_usage(input_list, expected
     for langstring in expected_output:
         assert langstring in result, f"LangString {langstring} not found in result"
 
+
 def test_from_multilangstrings_to_langstrings_operation_on_itself():
     """Test operation on itself."""
     mls = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
@@ -179,14 +184,18 @@ def test_from_multilangstrings_to_langstrings_operation_on_itself():
     assert LangString("Hello", "en") in result
     assert LangString("Bonjour", "fr") in result
 
+
 @pytest.mark.parametrize(
     "input_list, expected_output",
     [
         ([MultiLangString(mls_dict={"en": {"Hello"}})], [LangString("Hello", "en")]),
         ([MultiLangString(mls_dict={"en": {"Hello"}}, pref_lang="fr")], [LangString("Hello", "en")]),
         (
-            [MultiLangString(mls_dict={"en": {"Hello"}}, pref_lang="fr"), MultiLangString(mls_dict={"fr": {"Bonjour"}})],
-            [LangString("Hello", "en"), LangString("Bonjour", "fr")]
+            [
+                MultiLangString(mls_dict={"en": {"Hello"}}, pref_lang="fr"),
+                MultiLangString(mls_dict={"fr": {"Bonjour"}}),
+            ],
+            [LangString("Hello", "en"), LangString("Bonjour", "fr")],
         ),
     ],
 )

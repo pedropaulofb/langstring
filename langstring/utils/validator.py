@@ -121,11 +121,26 @@ class Validator(metaclass=NonInstantiable):
             if args:
                 if origin in (list, set, tuple):
                     for item in arg:
-                        if not any(isinstance(item, arg_type) for arg_type in args):
+                        if not any(isinstance(item, arg_type) or (get_origin(arg_type) is Union and
+                                                                  any(isinstance(item, t) for t in get_args(arg_type)))
+                                   for arg_type in args):
                             allowed_types = " or ".join(f"'{t.__name__}'" for t in args)
                             raise TypeError(
                                 f"Invalid item with value '{item}' in '{origin.__name__}'. "
                                 f"Expected one of {allowed_types}, but got '{type(item).__name__}'."
+                            )
+                elif origin is dict:
+                    key_type, value_type = args
+                    for key, value in arg.items():
+                        if not isinstance(key, key_type):
+                            raise TypeError(
+                                f"Invalid key with value '{key}' in 'dict'. "
+                                f"Expected '{key_type.__name__}', but got '{type(key).__name__}'."
+                            )
+                        if not isinstance(value, value_type):
+                            raise TypeError(
+                                f"Invalid value with value '{value}' in 'dict'. "
+                                f"Expected '{value_type.__name__}', but got '{type(value).__name__}'."
                             )
             return True
 
@@ -161,7 +176,8 @@ class Validator(metaclass=NonInstantiable):
                     - This decorator is not suitable for methods with parameters involving generic collections parameterized
                       with type variables (e.g., List[T] where T is a type variable).
                     - Complex nested generics (e.g., List[Dict[str, Union[int, List[str]]]]) might not be fully validated.
-                    - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) are out of scope and will not be correctly validated by this decorator.
+                    - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) and nested `Union` within parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly validated by this decorator.
+
 
                 :param func: The function or method to be decorated.
                 :type func: Callable[..., T]

@@ -1,7 +1,11 @@
+import re
 from functools import wraps
-from typing import Any, Optional, List, Callable
+from typing import Any, Optional, Callable
+
 import pytest
+
 from langstring.utils.validator import Validator
+
 
 @pytest.mark.parametrize("arg, hint, expected", [
     (1, int, True),
@@ -75,6 +79,24 @@ def test_validate_type_decorator_with_valid_types() -> None:
     ((1,), {"b": "test\ttest"}, None),  # String with tab character
     ((1,), {"b": "test\ntest"}, None),  # String with newline character
     ((1,), {"b": {"key": "value"}}, "Expected 'str', but got 'dict'"),  # Invalid type with dictionary
+    ((1,), {"b": "test"}, None),
+    ((1,), {"b": 2}, "Expected 'str', but got 'int'"),
+    ((1.0,), {"b": "test"}, "Expected 'int', but got 'float'"),
+    # Additional cases
+    ((1,), {"b": ""}, None),  # Empty string
+    ((1,), {"b": "   "}, None),  # String with spaces
+    ((1,), {"b": "Test"}, None),  # Capitalized string
+    ((1,), {"b": "TEST"}, None),  # Uppercase string
+    ((1,), {"b": "TeSt"}, None),  # Mixed case string
+    ((1,), {"b": "тест"}, None),  # Cyrillic string
+    ((1,), {"b": "δοκιμή"}, None),  # Greek string
+    ((1,), {"b": "😀"}, None),  # Emoji
+    ((1,), {"b": "test!"}, None),  # String with special character
+    ((1,), {"b": ["test", 1]}, "Expected 'str', but got 'list'"),  # List with mixed types
+    ((1,), {"b": "test\ttest"}, None),  # String with tab character
+    ((1,), {"b": "test\ntest"}, None),  # String with newline character
+    ((1,), {"b": {"key": "value"}}, "Expected 'str', but got 'dict'"),  # Invalid type with dictionary
+
 ])
 def test_validate_type_decorator_with_invalid_types(args: tuple, kwargs: dict, match: Optional[str]) -> None:
     """Test Validator.validate_type_decorator with invalid argument types.
@@ -139,7 +161,7 @@ def test_validate_type_decorator_with_empty_values() -> None:
     :raises: None
     """
     @Validator.validate_type_decorator
-    def func(a: List[int]) -> None:
+    def func(a: list[int]) -> None:
         pass
 
     try:
@@ -231,3 +253,118 @@ def test_validate_type_decorator_with_nested_decorators() -> None:
         func(1, "test")
     except TypeError:
         pytest.fail("validate_type_decorator raised TypeError unexpectedly with nested decorators!")
+
+@pytest.mark.parametrize("arg, hint, expected, error_message", [
+    ([1, "test"], list[int], False, re.escape("Invalid item with value 'test' in 'list'. Expected one of 'int', but got 'str'.")),
+    ([{"key": "value"}, 1], list[dict], False, re.escape("Invalid item with value '1' in 'list'. Expected one of 'dict', but got 'int'.")),])
+def test_check_arg_with_parametrized_generics(arg: Any, hint: type, expected: bool, error_message: Optional[str]) -> None:
+    """Test Validator._check_arg with parameterized generics and invalid items.
+
+    :param arg: The argument to check.
+    :param hint: The type hint to check against.
+    :param expected: The expected result.
+    :param error_message: The expected error message if a TypeError is raised.
+    :return: None
+    :raises: None
+    """
+    if expected:
+        try:
+            result = Validator._check_arg(arg, hint)
+            assert result == expected, f"Expected {expected} but got {result} for arg: {arg} and hint: {hint}"
+        except TypeError:
+            assert not expected, f"Expected {expected} but got a TypeError for arg: {arg} and hint: {hint}"
+    else:
+        with pytest.raises(TypeError, match=error_message):
+            Validator._check_arg(arg, hint)
+
+def test_validate_type_decorator_invalid_positional_arg() -> None:
+    """Test Validator.validate_type_decorator with invalid positional argument types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int, b: str) -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid argument with value 'test'. Expected 'int', but got 'str'."):
+        func("test", "valid")
+
+def test_validate_type_decorator_invalid_keyword_arg() -> None:
+    """Test Validator.validate_type_decorator with invalid keyword argument types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int, b: str) -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid argument with value '2'. Expected 'str', but got 'int'."):
+        func(1, b=2)
+
+def test_validate_type_decorator_invalid_positional_and_keyword_arg() -> None:
+    """Test Validator.validate_type_decorator with both invalid positional and keyword argument types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int, b: str) -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid argument with value 'test'. Expected 'int', but got 'str'."):
+        func("test", b=2)
+
+def test_validate_type_decorator_invalid_default_arg() -> None:
+    """Test Validator.validate_type_decorator with invalid default argument types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int = 1, b: str = "default") -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid argument with value '2'. Expected 'str', but got 'int'."):
+        func(1, 2)
+
+def test_validate_type_decorator_invalid_list_arg() -> None:
+    """Test Validator.validate_type_decorator with invalid list argument types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: list[int]) -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid item with value 'test' in 'list'. Expected one of 'int', but got 'str'."):
+        func([1, 2, "test"])
+
+def test_validate_type_decorator_invalid_dict_arg() -> None:
+    """Test Validator.validate_type_decorator with invalid dictionary argument types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: dict[str, int]) -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid key with value '1' in 'dict'. Expected 'str', but got 'int'."):
+        func({1: 1})
+
+
+def test_validate_type_decorator_invalid_optional_arg() -> None:
+    """Test Validator.validate_type_decorator with invalid optional argument types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: Optional[int] = None) -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid argument with value 'test'. Expected one of 'int' or 'NoneType', but got 'str'."):
+        func("test")

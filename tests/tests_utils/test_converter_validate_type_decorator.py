@@ -1,6 +1,6 @@
 import re
 from functools import wraps
-from typing import Any, Optional, Callable
+from typing import Any, Optional, Callable, Union
 
 import pytest
 
@@ -256,7 +256,9 @@ def test_validate_type_decorator_with_nested_decorators() -> None:
 
 @pytest.mark.parametrize("arg, hint, expected, error_message", [
     ([1, "test"], list[int], False, re.escape("Invalid item with value 'test' in 'list'. Expected one of 'int', but got 'str'.")),
-    ([{"key": "value"}, 1], list[dict], False, re.escape("Invalid item with value '1' in 'list'. Expected one of 'dict', but got 'int'.")),])
+    ([{"key": "value"}, 1], list[dict], False, re.escape("Invalid item with value '1' in 'list'. Expected one of 'dict', but got 'int'.")),
+])
+
 def test_check_arg_with_parametrized_generics(arg: Any, hint: type, expected: bool, error_message: Optional[str]) -> None:
     """Test Validator._check_arg with parameterized generics and invalid items.
 
@@ -368,3 +370,17 @@ def test_validate_type_decorator_invalid_optional_arg() -> None:
 
     with pytest.raises(TypeError, match="Invalid argument with value 'test'. Expected one of 'int' or 'NoneType', but got 'str'."):
         func("test")
+
+
+def test_validate_type_decorator_invalid_dict_value_arg() -> None:
+    """Test Validator.validate_type_decorator with invalid dictionary value types.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: dict[str, int]) -> None:
+        pass
+
+    with pytest.raises(TypeError, match="Invalid value with value 'test' in 'dict'. Expected 'int', but got 'str'."):
+        func({"key": "test"})

@@ -99,6 +99,24 @@ class Validator(metaclass=NonInstantiable):
 
         return transformed_lang
 
+    @staticmethod
+    def _check_arg(arg: Any, hint: type[Any]) -> bool:
+        """Check if the argument matches the type hint."""
+        if get_origin(hint) is Union:
+            if not any(isinstance(arg, t) for t in get_args(hint)):
+                allowed_types = " or ".join(f"'{t.__name__}'" for t in get_args(hint))
+                raise TypeError(
+                    f"Invalid argument with value '{arg}'. Expected one of {allowed_types}, but got '{type(arg).__name__}'."
+                )
+            return True
+
+        if not isinstance(arg, hint):
+            raise TypeError(
+                f"Invalid argument with value '{arg}'. Expected '{hint.__name__}', but got '{type(arg).__name__}'."
+            )
+
+        return True
+
     @classmethod
     def validate_type_decorator(cls, func: Callable[..., T]) -> Callable[..., T]:
         """Validate the types of arguments passed to a function or method based on their type hints. Used as decorator.
@@ -126,62 +144,28 @@ class Validator(metaclass=NonInstantiable):
         :raises TypeError: If an argument's type does not match its type hint.
         """
 
-        # TODO: Add an error when the function calls this validation and does not provide the necessary types to be checked.
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
-            # Get type hints of the function (excluding 'return')
             type_hints = {k: v for k, v in get_type_hints(func).items() if k != "return"}
             param_names = list(inspect.signature(func).parameters)
-
-            # Determine if the function is an instance method
             is_instance_method = "self" in param_names and len(args) > 0 and isinstance(args[0], args[0].__class__)
-
-            # Skip 'self' in type checking if it's an instance method
             if is_instance_method:
                 param_names.remove("self")
                 type_hints.pop("self", None)
-                args_to_check = args[1:]  # Adjust args to exclude 'self'
+                args_to_check = args[1:]
             else:
                 args_to_check = args
-
-            # Function to check if the argument matches the type hint
-            def check_arg(arg: Any, hint: type[Any]) -> bool:
-                """Check if the argument matches the type hint."""
-                if get_origin(hint) is Union:
-                    if not any(isinstance(arg, t) for t in get_args(hint)):
-                        allowed_types = " or ".join(f"'{t.__name__}'" for t in get_args(hint))
-                        raise TypeError(
-                            f"Invalid argument with value '{arg}'. "
-                            f"Expected one of {allowed_types}, but got '{type(arg).__name__}'."
-                        )
-                    return True
-
-                if not isinstance(arg, hint):
-                    raise TypeError(
-                        f"Invalid argument with value '{arg}'. "
-                        f"Expected '{hint.__name__}', but got '{type(arg).__name__}'."
-                    )
-
-                return True
-
-            # Validate positional arguments
             for arg, (name, hint) in zip(args_to_check, zip(param_names, type_hints.values())):
-                if not check_arg(arg, hint):
+                if not Validator._check_arg(arg, hint):
                     raise TypeError(
-                        f"Invalid argument with value '{arg}'. "
-                        f"Expected '{hint.__name__}', but got '{type(arg).__name__}'."
+                        f"Invalid argument with value '{arg}'. Expected '{hint.__name__}', but got '{type(arg).__name__}'."
                     )
-
-            # Validate keyword arguments
             for kwarg, hint in type_hints.items():
-                if kwarg in kwargs and not check_arg(kwargs[kwarg], hint):
+                if kwarg in kwargs and not Validator._check_arg(kwargs[kwarg], hint):
                     raise TypeError(
-                        f"Invalid argument with value '{kwarg}'. "
-                        f"Expected '{hint.__name__}', but got '{type(kwargs[kwarg]).__name__}'."
+                        f"Invalid argument with value '{kwarg}'. Expected '{hint.__name__}', but got '{type(kwargs[kwarg]).__name__}'."
                     )
-
             return func(*args, **kwargs)
-
         return wrapper
 
     @staticmethod

@@ -1,17 +1,31 @@
 from functools import wraps
-from typing import Any, Optional, Callable
-
+from typing import Any, Optional, List, Callable
 import pytest
-
 from langstring.utils.validator import Validator
-
 
 @pytest.mark.parametrize("arg, hint, expected", [
     (1, int, True),
     ("test", str, True),
     (3.14, float, True),
+    (True, bool, True),
     (None, Optional[int], True),
-    (None, int, False)
+    (None, int, False),
+    # Additional cases
+    ("", str, True),  # Empty string
+    ("   ", str, True),  # String with spaces
+    ("Test", str, True),  # Capitalized string
+    ("TEST", str, True),  # Uppercase string
+    ("TeSt", str, True),  # Mixed case string
+    ("тест", str, True),  # Cyrillic string
+    ("δοκιμή", str, True),  # Greek string
+    ("😀", str, True),  # Emoji
+    ("test!", str, True),  # String with special character
+    ([], list, True),  # Empty list
+    ([""], list, True),  # List with empty string
+    (["test"], list, True),  # List with one string
+    (["test", ""], list, True),  # List with string and empty string
+    ("test\ttest", str, True),  # String with tab character
+    ("test\ntest", str, True),  # String with newline character
 ])
 def test_check_arg_valid_cases(arg: Any, hint: type, expected: bool) -> None:
     """Test Validator._check_arg with valid cases.
@@ -46,7 +60,21 @@ def test_validate_type_decorator_with_valid_types() -> None:
 @pytest.mark.parametrize("args, kwargs, match", [
     ((1,), {"b": "test"}, None),
     ((1,), {"b": 2}, "Expected 'str', but got 'int'"),
-    ((1.0,), {"b": "test"}, "Expected 'int', but got 'float'")
+    ((1.0,), {"b": "test"}, "Expected 'int', but got 'float'"),
+    # Additional cases
+    ((1,), {"b": ""}, None),  # Empty string
+    ((1,), {"b": "   "}, None),  # String with spaces
+    ((1,), {"b": "Test"}, None),  # Capitalized string
+    ((1,), {"b": "TEST"}, None),  # Uppercase string
+    ((1,), {"b": "TeSt"}, None),  # Mixed case string
+    ((1,), {"b": "тест"}, None),  # Cyrillic string
+    ((1,), {"b": "δοκιμή"}, None),  # Greek string
+    ((1,), {"b": "😀"}, None),  # Emoji
+    ((1,), {"b": "test!"}, None),  # String with special character
+    ((1,), {"b": ["test", 1]}, "Expected 'str', but got 'list'"),  # List with mixed types
+    ((1,), {"b": "test\ttest"}, None),  # String with tab character
+    ((1,), {"b": "test\ntest"}, None),  # String with newline character
+    ((1,), {"b": {"key": "value"}}, "Expected 'str', but got 'dict'"),  # Invalid type with dictionary
 ])
 def test_validate_type_decorator_with_invalid_types(args: tuple, kwargs: dict, match: Optional[str]) -> None:
     """Test Validator.validate_type_decorator with invalid argument types.
@@ -111,7 +139,7 @@ def test_validate_type_decorator_with_empty_values() -> None:
     :raises: None
     """
     @Validator.validate_type_decorator
-    def func(a: list[int]) -> None:
+    def func(a: List[int]) -> None:
         pass
 
     try:

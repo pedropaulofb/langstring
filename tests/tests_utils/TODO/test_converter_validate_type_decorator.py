@@ -1,4 +1,5 @@
-from typing import Any, Optional
+from functools import wraps
+from typing import Any, Optional, Callable
 
 import pytest
 
@@ -86,3 +87,119 @@ def test_validate_type_decorator_instance_method() -> None:
     except TypeError:
         pytest.fail("validate_type_decorator raised TypeError unexpectedly on instance method!")
 
+def test_validate_type_decorator_with_default_values() -> None:
+    """Test Validator.validate_type_decorator with default argument values.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int = 1, b: str = "default") -> None:
+        pass
+
+    try:
+        func()
+        func(2)
+        func(3, "test")
+    except TypeError:
+        pytest.fail("validate_type_decorator raised TypeError unexpectedly with default values!")
+
+def test_validate_type_decorator_with_empty_values() -> None:
+    """Test Validator.validate_type_decorator with empty values.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: list[int]) -> None:
+        pass
+
+    try:
+        func([])
+    except TypeError:
+        pytest.fail("validate_type_decorator raised TypeError unexpectedly with empty values!")
+
+def test_validate_type_decorator_with_null_values() -> None:
+    """Test Validator.validate_type_decorator with null values.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: Optional[int]) -> None:
+        pass
+
+    try:
+        func(None)
+    except TypeError:
+        pytest.fail("validate_type_decorator raised TypeError unexpectedly with null values!")
+
+def test_validate_type_decorator_with_optional_arguments() -> None:
+    """Test Validator.validate_type_decorator with optional arguments.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int, b: Optional[str] = None) -> None:
+        pass
+
+    try:
+        func(1)
+        func(1, "test")
+        func(1, None)
+    except TypeError:
+        pytest.fail("validate_type_decorator raised TypeError unexpectedly with optional arguments!")
+
+def test_validate_type_decorator_with_keyword_arguments() -> None:
+    """Test Validator.validate_type_decorator with keyword arguments.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int, b: str) -> None:
+        pass
+
+    try:
+        func(a=1, b="test")
+    except TypeError:
+        pytest.fail("validate_type_decorator raised TypeError unexpectedly with keyword arguments!")
+
+def test_validate_type_decorator_with_unusual_but_valid_usage() -> None:
+    """Test Validator.validate_type_decorator with unusual but valid usage.
+
+    :return: None
+    :raises: None
+    """
+    @Validator.validate_type_decorator
+    def func(a: int, b: str = "test") -> None:
+        pass
+
+    try:
+        func(1)
+        func(1, "example")
+    except TypeError:
+        pytest.fail("validate_type_decorator raised TypeError unexpectedly with unusual but valid usage!")
+
+def test_validate_type_decorator_with_nested_decorators() -> None:
+    """Test Validator.validate_type_decorator with nested decorators.
+
+    :return: None
+    :raises: None
+    """
+    def example_decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            return func(*args, **kwargs)
+        return wrapper
+
+    @example_decorator
+    @Validator.validate_type_decorator
+    def func(a: int, b: str) -> None:
+        pass
+
+    try:
+        func(1, "test")
+    except TypeError:
+        pytest.fail("validate_type_decorator raised TypeError unexpectedly with nested decorators!")

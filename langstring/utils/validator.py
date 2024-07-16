@@ -102,12 +102,31 @@ class Validator(metaclass=NonInstantiable):
     @staticmethod
     def _check_arg(arg: Any, hint: type[Any]) -> bool:
         """Check if the argument matches the type hint."""
-        if get_origin(hint) is Union:
-            if not any(isinstance(arg, t) for t in get_args(hint)):
-                allowed_types = " or ".join(f"'{t.__name__}'" for t in get_args(hint))
+        origin = get_origin(hint)
+        args = get_args(hint)
+
+        if origin is Union:
+            if not any(isinstance(arg, t) for t in args):
+                allowed_types = " or ".join(f"'{t.__name__}'" for t in args)
                 raise TypeError(
                     f"Invalid argument with value '{arg}'. Expected one of {allowed_types}, but got '{type(arg).__name__}'."
                 )
+            return True
+
+        if origin is not None:  # This handles parameterized generics like list[int]
+            if not isinstance(arg, origin):
+                raise TypeError(
+                    f"Invalid argument with value '{arg}'. Expected '{origin.__name__}', but got '{type(arg).__name__}'."
+                )
+            if args:
+                if origin in (list, set, tuple):
+                    for item in arg:
+                        if not any(isinstance(item, arg_type) for arg_type in args):
+                            allowed_types = " or ".join(f"'{t.__name__}'" for t in args)
+                            raise TypeError(
+                                f"Invalid item with value '{item}' in '{origin.__name__}'. "
+                                f"Expected one of {allowed_types}, but got '{type(item).__name__}'."
+                            )
             return True
 
         if not isinstance(arg, hint):

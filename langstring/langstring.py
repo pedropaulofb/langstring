@@ -513,8 +513,8 @@ class LangString:
         """
         Validator.validate_type_iterable(langstrings, list, LangString)
 
-        merged = {}
-        lang_case_map = {}
+        merged: dict[tuple[str, str], LangString] = {}
+        lang_case_map: dict[tuple[str, str], str] = {}
         for ls in langstrings:
             key = (ls.text, ls.lang.casefold())
             if key in merged:

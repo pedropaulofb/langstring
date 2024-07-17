@@ -61,7 +61,7 @@ def test_validate_type_decorator_with_valid_types() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: str) -> None:
+    def func(a: int, _: str) -> None:
         pass
 
     try:
@@ -120,7 +120,7 @@ def test_validate_type_decorator_with_invalid_types(args: tuple, kwargs: dict, m
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: str) -> None:
+    def func(a: int, b: str) -> None:  # noqa: Vulture
         pass
 
     if match:
@@ -142,7 +142,7 @@ def test_validate_type_decorator_instance_method() -> None:
 
     class TestClass:
         @Validator.validate_type_decorator
-        def instance_method(self, a: int, b: str) -> None:
+        def instance_method(self, a: int, _: str) -> None:
             pass
 
     instance = TestClass()
@@ -160,7 +160,7 @@ def test_validate_type_decorator_with_default_values() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int = 1, b: str = "default") -> None:
+    def func(a: int = 1, _: str = "default") -> None:
         pass
 
     try:
@@ -213,7 +213,7 @@ def test_validate_type_decorator_with_optional_arguments() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: Optional[str] = None) -> None:
+    def func(a: int, _: Optional[str] = None) -> None:
         pass
 
     try:
@@ -232,7 +232,7 @@ def test_validate_type_decorator_with_keyword_arguments() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: str) -> None:
+    def func(a: int, b: str) -> None:  # noqa: Vulture
         pass
 
     try:
@@ -249,7 +249,7 @@ def test_validate_type_decorator_with_unusual_but_valid_usage() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: str = "test") -> None:
+    def func(a: int, _: str = "test") -> None:
         pass
 
     try:
@@ -275,7 +275,7 @@ def test_validate_type_decorator_with_nested_decorators() -> None:
 
     @example_decorator
     @Validator.validate_type_decorator
-    def func(a: int, b: str) -> None:
+    def func(a: int, _: str) -> None:
         pass
 
     try:
@@ -332,7 +332,7 @@ def test_validate_type_decorator_invalid_positional_arg() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: str) -> None:
+    def func(a: int, _: str) -> None:
         pass
 
     with pytest.raises(TypeError, match="Invalid argument with value 'test'. Expected 'int', but got 'str'."):
@@ -347,7 +347,7 @@ def test_validate_type_decorator_invalid_keyword_arg() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: str) -> None:
+    def func(a: int, b: str) -> None:  # noqa: Vulture
         pass
 
     with pytest.raises(TypeError, match="Invalid argument with value '2'. Expected 'str', but got 'int'."):
@@ -362,7 +362,7 @@ def test_validate_type_decorator_invalid_positional_and_keyword_arg() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int, b: str) -> None:
+    def func(a: int, _: str) -> None:
         pass
 
     with pytest.raises(TypeError, match="Invalid argument with value 'test'. Expected 'int', but got 'str'."):
@@ -377,7 +377,7 @@ def test_validate_type_decorator_invalid_default_arg() -> None:
     """
 
     @Validator.validate_type_decorator
-    def func(a: int = 1, b: str = "default") -> None:
+    def func(a: int = 1, _: str = "default") -> None:
         pass
 
     with pytest.raises(TypeError, match="Invalid argument with value '2'. Expected 'str', but got 'int'."):

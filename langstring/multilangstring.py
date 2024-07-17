@@ -691,7 +691,6 @@ class MultiLangString:
         return reversed(self.mls_dict)
 
     def __setitem__(self, lang: str, texts: set[str]) -> None:
-        # TODO: Maybe update to accept also list? Verify other methods that should also accept list.
         """Allow setting entries by language."""
         Validator.validate_type_single(lang, str)
         Validator.validate_type_iterable(texts, set, str)
@@ -737,7 +736,7 @@ class MultiLangString:
 
             formatted_items.append(formatted_item)
 
-        # TODO: JUSTIFY IN DOCSTRINGS THAT IT IS SORTED TO BE DETERMINISTIC
+        # sorted to be deterministic
         sorted_formatted_items = sorted(formatted_items)  # Sort the formatted items
         return ", ".join(sorted_formatted_items)
 

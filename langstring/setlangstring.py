@@ -73,9 +73,6 @@ class SetLangString:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.discard(langstring.text)
 
-    # TODO: Analyze creation of setlangstring add/discard/remove setlangstring
-    # TODO: Analyze creation of contains methods (similar to MLSs)
-
     @Validator.validate_type_decorator
     def remove_langstring(self, langstring: LangString) -> None:
         self._validate_match_types_and_langs(langstring, True)
@@ -345,8 +342,8 @@ class SetLangString:
         :return: A list of merged SetLangString instances without duplicates.
         """
         Validator.validate_type_iterable(setlangstrings, list, SetLangString)
-        merged = {}
-        lang_case_map = {}
+        merged: dict[str, SetLangString] = {}
+        lang_case_map: dict[str, str] = {}
         for setlangstring in setlangstrings:
             key = setlangstring.lang.casefold()
             if key in merged:

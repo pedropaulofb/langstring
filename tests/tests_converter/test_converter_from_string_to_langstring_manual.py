@@ -9,6 +9,9 @@ from langstring import LangString
 @pytest.mark.parametrize(
     "string, lang, expected_text, expected_lang",
     [
+        (None, "en", "", "en"),
+        ("text", None, "text", ""),
+        (None, None, "", ""),
         ("Hello, World!", "en", "Hello, World!", "en"),
         ("Bonjour le monde!", "fr", "Bonjour le monde!", "fr"),
         ("", "en", "", "en"),  # Empty string
@@ -61,7 +64,9 @@ def test_from_string_to_langstring_manual_invalid_string():
 
     :raises TypeError: If the string type is incorrect.
     """
-    with pytest.raises(TypeError, match="Invalid argument with value '123'. Expected 'str', but got 'int'."):
+    with pytest.raises(
+        TypeError, match="Invalid argument with value '123'. Expected one of 'str' or 'NoneType', but got 'int'."
+    ):
         Converter.from_string_to_langstring_manual(123, "en")
 
 

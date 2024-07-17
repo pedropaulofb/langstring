@@ -29,7 +29,7 @@ class Validator(metaclass=NonInstantiable):
     """
 
     @classmethod
-    def validate_flags_text(cls, flag_type: type[Enum], text: Optional[str]) -> str:
+    def validate_flags_text(cls, flag_type: type[Enum], text: Optional[str]) -> Optional[str]:
         cls.validate_type_single(flag_type, type)
         cls.validate_type_single(text, str, optional=True)
 
@@ -53,7 +53,7 @@ class Validator(metaclass=NonInstantiable):
         return text
 
     @staticmethod
-    def validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> str:
+    def validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> Optional[str]:
         Validator.validate_type_single(flag_type, type)
         Validator.validate_type_single(lang, str, optional=True)
 
@@ -81,7 +81,7 @@ class Validator(metaclass=NonInstantiable):
         # Validation is performed on the transformed language string
         if Controller.get_flag(flag_type.VALID_LANG):
             try:
-                from langcodes import tag_is_valid
+                from langcodes import tag_is_valid  # type: ignore
 
                 if not tag_is_valid(transformed_lang):
                     raise ValueError(

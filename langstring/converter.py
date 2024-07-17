@@ -74,7 +74,7 @@ class Converter(metaclass=NonInstantiable):
 
     @Validator.validate_type_decorator
     @staticmethod
-    def from_string_to_langstring_manual(input_string: str, lang: Optional[str]) -> LangString:
+    def from_string_to_langstring_manual(input_string: Optional[str], lang: Optional[str]) -> LangString:
         """Convert a string to a LangString with the specified language.
 
         :param input_string: The text to be converted.

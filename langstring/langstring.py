@@ -1487,8 +1487,6 @@ class LangString:
         for ls in langstrings:
             key = (ls.text, ls.lang.casefold())
             if key in merged:
-                # Here, implement the actual logic for merging LangString instances, if needed.
-                # For example, you might want to merge other attributes or metadata.
                 if merged[key].lang != ls.lang:
                     lang_case_map[key] = ls.lang.casefold()
             else:
@@ -1497,7 +1495,7 @@ class LangString:
 
         # Adjust the language tags based on detected case variations
         for key, ls in merged.items():
-            ls.lang = lang_case_map.get(key, ls.lang)  # Use get() to safely handle missing entries
+            ls.lang = lang_case_map.get(key, ls.lang)  # Using get() to safely handle missing entries
 
         return list(merged.values())
 

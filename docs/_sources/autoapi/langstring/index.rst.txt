@@ -660,87 +660,476 @@ Package Contents
    representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
    from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.
 
+   Many standard string methods are overridden to return LangString objects, allowing seamless integration and
+   extended functionality. This design ensures that users can work with LangString instances similarly to regular
+   strings.
+
    :ivar text: The text string.
    :vartype text: Optional[str]
    :ivar lang: The language tag of the text.
    :vartype lang: str
+   :raises ValueError: If control flags enforce non-empty text and the text is empty.
+   :raises TypeError: If the types of parameters are incorrect based on validation.
 
 
    .. py:property:: text
       :type: str
 
-      Getter for text.
+      Get the text string.
+
+      :return: The text string.
+      :rtype: str
 
 
 
    .. py:property:: lang
       :type: str
 
-      Getter for lang.
+      Get the language tag.
+
+      :return: The language tag.
+      :rtype: str
 
 
 
    .. py:method:: capitalize()
 
+      Return a copy of the LangString with its first character capitalized and the rest lowercased.
+
+      This method mimics the behavior of the standard string's capitalize method but returns a LangString object.
+
+      :return: A new LangString with the first character capitalized.
+      :rtype: LangString
+
+      :Example:
+
+      >>> lang_str = LangString("hello, world!", "en")
+      >>> capitalized_lang_str = lang_str.capitalize()
+      >>> print(capitalized_lang_str.to_string())  # Output: "Hello, world!"@en
+
+
 
    .. py:method:: casefold()
+
+      Return a casefolded copy of the LangString. Casefolding is a more aggressive version of lowercasing.
+
+      This method mimics the behavior of the standard string's casefold method but returns a LangString object.
+
+      :return: A new LangString that is casefolded.
+      :rtype: LangString
+
+      :Example:
+
+      >>> lang_str = LangString("Hello, WORLD!", "en")
+      >>> casefolded_lang_str = lang_str.casefold()
+      >>> print(casefolded_lang_str.to_string())  # Output: "hello, world!"@en
+
 
 
    .. py:method:: center(width, fillchar = ' ')
 
+      Return a centered LangString of length width.
+
+      Padding is done using the specified fill character (default is a space).
+
+      This method mimics the behavior of the standard string's center method but returns a LangString object.
+
+      :param width: The total width of the resulting LangString.
+      :type width: int
+      :param fillchar: The character to fill the padding with.
+      :type fillchar: str
+      :return: A new LangString centered with padding.
+      :rtype: LangString
+
+      :Example:
+
+      >>> lang_str = LangString("hello", "en")
+      >>> centered_lang_str = lang_str.center(11, "*")
+      >>> print(centered_lang_str.to_string())  # Output: "***hello***"@en
+
+
 
    .. py:method:: count(sub, start = 0, end = None)
+
+      Return the number of non-overlapping occurrences of substring sub in the LangString.
+
+      This method mimics the behavior of the standard string's count method.
+
+      :param sub: The substring to count.
+      :type sub: str
+      :param start: The starting position (default is 0).
+      :type start: int, optional
+      :param end: The ending position (default is the end of the string).
+      :type end: int, optional
+      :return: The number of occurrences of the substring.
+      :rtype: int
+
+      :Example:
+
+      >>> lang_str = LangString("hello, hello, hello!", "en")
+      >>> count_hello = lang_str.count("hello")
+      >>> print(count_hello)  # Output: 3
+
 
 
    .. py:method:: endswith(suffix, start = 0, end = None)
 
+      Return True if the LangString ends with the specified suffix, otherwise return False.
+
+      This method mimics the behavior of the standard string's endswith method.
+
+      :param suffix: The suffix to check.
+      :type suffix: str
+      :param start: The starting position (default is 0).
+      :type start: int, optional
+      :param end: The ending position (default is the end of the string).
+      :type end: int, optional
+      :return: True if the LangString ends with the suffix, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("hello, world!", "en")
+      >>> ends_with_world = lang_str.endswith("world!")
+      >>> print(ends_with_world)  # Output: True
+
+
 
    .. py:method:: expandtabs(tabsize = 8)
+
+      Return a copy of the LangString where all tab characters are expanded using spaces.
+
+      This method mimics the behavior of the standard string's expandtabs method but returns a LangString object.
+
+      :param tabsize: The number of spaces to use for each tab character.
+      :type tabsize: int
+      :return: A new LangString with tabs expanded.
+      :rtype: LangString
+
+      :Example:
+
+      >>> lang_str = LangString("hello        world", "en")
+      >>> expanded_lang_str = lang_str.expandtabs(4)
+      >>> print(expanded_lang_str.to_string())  # Output: "hello   world"@en
+
 
 
    .. py:method:: find(sub, start = 0, end = None)
 
+      Return the lowest index in the LangString where substring sub is found.
+
+      This method mimics the behavior of the standard string's find method.
+
+      :param sub: The substring to find.
+      :type sub: str
+      :param start: The starting position (default is 0).
+      :type start: int, optional
+      :param end: The ending position (default is the end of the string).
+      :type end: int, optional
+      :return: The lowest index where the substring is found, or -1 if not found.
+      :rtype: int
+
+      :Example:
+
+      >>> lang_str = LangString("hello, world", "en")
+      >>> index = lang_str.find("world")
+      >>> print(index)  # Output: 7
+
+
 
    .. py:method:: format(*args, **kwargs)
+
+      Perform a string formatting operation on the LangString.
+
+      This method mimics the behavior of the standard string's format method but returns a LangString object.
+
+      :param args: Positional arguments for formatting.
+      :type args: Any
+      :param kwargs: Keyword arguments for formatting.
+      :type kwargs: Any
+      :return: A new LangString with the formatted text.
+      :rtype: LangString
+
+      :Example:
+
+      >>> lang_str = LangString("Hello, {}!", "en")
+      >>> formatted_lang_str = lang_str.format("world")
+      >>> print(formatted_lang_str.to_string())  # Output: "Hello, world!"@en
+
 
 
    .. py:method:: format_map(mapping)
 
+      Perform a string formatting operation using a dictionary.
+
+      This method mimics the behavior of the standard string's format_map method but returns a LangString object.
+
+      :param mapping: A dictionary for formatting.
+      :type mapping: dict
+      :return: A new LangString with the formatted text.
+      :rtype: LangString
+
+      :Example:
+
+      >>> lang_str = LangString("Hello, {name}!", "en")
+      >>> formatted_lang_str = lang_str.format_map({"name": "world"})
+      >>> print(formatted_lang_str.to_string())  # Output: "Hello, world!"@en
+
+
 
    .. py:method:: index(sub, start = 0, end = None)
+
+      Return the lowest index in the LangString where substring sub is found.
+
+      This method mimics the behavior of the standard string's index method.
+
+      :param sub: The substring to find.
+      :type sub: str
+      :param start: The starting position (default is 0).
+      :type start: int, optional
+      :param end: The ending position (default is the end of the string).
+      :type end: int, optional
+      :return: The lowest index where the substring is found.
+      :rtype: int
+      :raises ValueError: If the substring is not found.
+
+      :Example:
+
+      >>> lang_str = LangString("hello, world", "en")
+      >>> index = lang_str.index("world")
+      >>> print(index)  # Output: 7
+
 
 
    .. py:method:: isalnum()
 
+      Return True if all characters in the LangString are alphanumeric and there is at least one character.
+
+      This method mimics the behavior of the standard string's isalnum method.
+
+      :return: True if the LangString is alphanumeric, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("Hello123", "en")
+      >>> is_alnum = lang_str.isalnum()
+      >>> print(is_alnum)  # Output: True
+
+      >>> lang_str = LangString("Hello 123", "en")
+      >>> is_alnum = lang_str.isalnum()
+      >>> print(is_alnum)  # Output: False
+
+
 
    .. py:method:: isalpha()
+
+      Return True if all characters in the LangString are alphabetic and there is at least one character.
+
+      This method mimics the behavior of the standard string's isalpha method.
+
+      :return: True if the LangString is alphabetic, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("Hello", "en")
+      >>> is_alpha = lang_str.isalpha()
+      >>> print(is_alpha)  # Output: True
+
+      >>> lang_str = LangString("Hello123", "en")
+      >>> is_alpha = lang_str.isalpha()
+      >>> print(is_alpha)  # Output: False
+
 
 
    .. py:method:: isascii()
 
+      Return True if all characters in the LangString are ASCII characters.
+
+      This method mimics the behavior of the standard string's isascii method.
+
+      :return: True if the LangString is ASCII, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("Hello", "en")
+      >>> is_ascii = lang_str.isascii()
+      >>> print(is_ascii)  # Output: True
+
+      >>> lang_str = LangString("Héllo", "en")
+      >>> is_ascii = lang_str.isascii()
+      >>> print(is_ascii)  # Output: False
+
+
 
    .. py:method:: isdecimal()
+
+      Return True if all characters in the LangString are decimal characters and there is at least one character.
+
+      This method mimics the behavior of the standard string's isdecimal method.
+
+      :return: True if the LangString is decimal, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("12345", "en")
+      >>> is_decimal = lang_str.isdecimal()
+      >>> print(is_decimal)  # Output: True
+
+      >>> lang_str = LangString("123.45", "en")
+      >>> is_decimal = lang_str.isdecimal()
+      >>> print(is_decimal)  # Output: False
+
 
 
    .. py:method:: isdigit()
 
+      Return True if all characters in the LangString are digits and there is at least one character.
+
+      This method mimics the behavior of the standard string's isdigit method.
+
+      :return: True if the LangString is numeric, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("12345", "en")
+      >>> is_digit = lang_str.isdigit()
+      >>> print(is_digit)  # Output: True
+
+      >>> lang_str = LangString("123.45", "en")
+      >>> is_digit = lang_str.isdigit()
+      >>> print(is_digit)  # Output: False
+
+
 
    .. py:method:: isidentifier()
+
+      Return True if the LangString is a valid identifier according to Python language definition.
+
+      This method mimics the behavior of the standard string's isidentifier method.
+
+      :return: True if the LangString is a valid identifier, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("variable_name", "en")
+      >>> is_identifier = lang_str.isidentifier()
+      >>> print(is_identifier)  # Output: True
+
+      >>> lang_str = LangString("123variable", "en")
+      >>> is_identifier = lang_str.isidentifier()
+      >>> print(is_identifier)  # Output: False
+
 
 
    .. py:method:: islower()
 
+      Return True if all cased characters in the LangString are lowercase and there is at least one cased character.
+
+      This method mimics the behavior of the standard string's islower method.
+
+      :return: True if the LangString is in lowercase, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("hello", "en")
+      >>> is_lower = lang_str.islower()
+      >>> print(is_lower)  # Output: True
+
+      >>> lang_str = LangString("Hello", "en")
+      >>> is_lower = lang_str.islower()
+      >>> print(is_lower)  # Output: False
+
+
 
    .. py:method:: isnumeric()
+
+      Return True if all characters in the LangString are numeric characters and there is at least one character.
+
+      This method mimics the behavior of the standard string's isnumeric method.
+
+      :return: True if the LangString is numeric, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("12345", "en")
+      >>> is_numeric = lang_str.isnumeric()
+      >>> print(is_numeric)  # Output: True
+
+      >>> lang_str = LangString("123.45", "en")
+      >>> is_numeric = lang_str.isnumeric()
+      >>> print(is_numeric)  # Output: False
+
 
 
    .. py:method:: isprintable()
 
+      Return True if all characters in the LangString are printable or the LangString is empty.
+
+      This method mimics the behavior of the standard string's isprintable method.
+
+      :return: True if the LangString is printable, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("Hello, world!", "en")
+      >>> is_printable = lang_str.isprintable()
+      >>> print(is_printable)  # Output: True
+
+      >>> lang_str = LangString("Hello,       world!", "en")
+      >>> is_printable = lang_str.isprintable()
+      >>> print(is_printable)  # Output: False
+
+
 
    .. py:method:: isspace()
 
+      Return True if there are only whitespace characters in the LangString and there is at least one character.
+
+      This method mimics the behavior of the standard string's isspace method.
+
+      :return: True if the LangString is whitespace, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("   ", "en")
+      >>> is_space = lang_str.isspace()
+      >>> print(is_space)  # Output: True
+
+      >>> lang_str = LangString("Hello, world!", "en")
+      >>> is_space = lang_str.isspace()
+      >>> print(is_space)  # Output: False
+
+
 
    .. py:method:: istitle()
+
+      Return True if the LangString is a titlecased string and there is at least one character.
+
+      This method mimics the behavior of the standard string's istitle method.
+
+      :return: True if the LangString is titlecased, otherwise False.
+      :rtype: bool
+
+      :Example:
+
+      >>> lang_str = LangString("Hello, World!", "en")
+      >>> is_title = lang_str.istitle()
+      >>> print(is_title)  # Output: True
+
+      >>> lang_str = LangString("hello, world!", "en")
+      >>> is_title = lang_str.istitle()
+      >>> print(is_title)  # Output: False
+
 
 
    .. py:method:: isupper()

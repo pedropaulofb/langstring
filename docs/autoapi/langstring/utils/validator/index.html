@@ -142,7 +142,7 @@ and language tag validity. The validation rules are determined by control flags 
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p>Optional[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -158,7 +158,24 @@ and language tag validity. The validation rules are determined by control flags 
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p>Optional[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.utils.validator.Validator._check_arg">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_check_arg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator._check_arg" title="Link to this definition"></a></dt>
+<dd><p>Check if the argument matches the type hint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg</strong> (<em>Any</em>)</p></li>
+<li><p><strong>hint</strong> (<em>type</em><em>[</em><em>Any</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -166,20 +183,38 @@ and language tag validity. The validation rules are determined by control flags 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validator.Validator.validate_type_decorator">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_type_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator.validate_type_decorator" title="Link to this definition"></a></dt>
-<dd><p>Validate the types of arguments passed to a function or method based on their type hints. Used as decorator.</p>
+<dd><p>Decorator to validate the types of arguments passed to a function or method based on their type hints.</p>
 <p>This method checks if each argument’s type matches its corresponding type hint. It is intended for use with
-functions or class methods where explicit type hints are provided for all arguments.</p>
+functions or instance methods where explicit type hints are provided for all arguments.</p>
 <dl>
-<dt>Note:</dt><dd><p>This decorator is designed for use with functions, instance methods, and static methods where explicit
-type hints are provided for all arguments. It automatically adjusts for the ‘self’ parameter in instance
-methods. However, it is not suitable for class methods or setters in classes, as it does not handle
-the ‘cls’ parameter in class methods and may lead to incorrect behavior with setters. For class methods
-and setters, manual type validation is recommended.</p>
-<p>The decorator should not be used with methods that have parameters of generic types, such as <cite>list</cite>, <cite>set</cite>,
-or other collections that are parameterized with type variables (e.g., <cite>list[str]</cite> or <cite>set[MyClass]</cite>).
-This limitation stems from the dynamic nature of generic types in Python, which can lead to runtime errors
-when attempting to check against a parameterized type. Therefore, it is recommended to avoid applying this
-decorator to methods where the parameters or return types involve generic collections directly.</p>
+<dt>Usage:</dt><dd><ul class="simple">
+<li><p>Apply this decorator to functions or instance methods that require type validation based on type hints.</p></li>
+</ul>
+</dd>
+<dt>When to Use:</dt><dd><ul class="simple">
+<li><p>Use this decorator for functions or methods where argument types need to be strictly validated.</p></li>
+<li><p>Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.</p></li>
+<li><p>Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and
+its contents match the specified types.</p></li>
+<li><p>Appropriate for instance methods, adjusting for the ‘self’ parameter automatically.</p></li>
+<li><p>Suitable for static methods but requires manual validation for class methods and setters.</p></li>
+</ul>
+</dd>
+<dt>When Not to Use:</dt><dd><ul class="simple">
+<li><p>Do not use this decorator for class methods with the ‘cls’ parameter,</p></li>
+</ul>
+<p>as it does not handle ‘cls’ explicitly.
+- Avoid using this decorator for property setters.
+- This decorator is not suitable for methods with parameters involving generic collections parameterized</p>
+<blockquote>
+<div><p>with type variables (e.g., List[T] where T is a type variable).</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Complex nested generics (e.g., List[Dict[str, Union[int, List[str]]]]) might not be fully validated.</p></li>
+<li><p>Specifically, cases like <cite>([“test”, 1], list, False)</cite> (List with mixed types) and nested <cite>Union</cite> within</p></li>
+</ul>
+<p>parameterized generics (e.g., <cite>list[Union[int, str]]</cite>) are out of scope and will not be correctly validated
+by this decorator.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -194,32 +229,6 @@ decorator to methods where the parameters or return types involve generic collec
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If an argument’s type does not match its type hint.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validator.Validator._get_origin">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_origin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator._get_origin" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tp</strong> (<em>Any</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Any</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validator.Validator._get_args">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validator.Validator._get_args" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tp</strong> (<em>Any</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[Any, Ellipsis]</p>
 </dd>
 </dl>
 </dd></dl>

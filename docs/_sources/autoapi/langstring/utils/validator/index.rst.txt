@@ -48,43 +48,51 @@ Module Contents
 
 
 
+   .. py:method:: _check_arg(arg, hint)
+      :staticmethod:
+
+
+      Check if the argument matches the type hint.
+
+
+
    .. py:method:: validate_type_decorator(func)
       :classmethod:
 
 
-      Validate the types of arguments passed to a function or method based on their type hints. Used as decorator.
+      Decorator to validate the types of arguments passed to a function or method based on their type hints.
 
       This method checks if each argument's type matches its corresponding type hint. It is intended for use with
-      functions or class methods where explicit type hints are provided for all arguments.
+      functions or instance methods where explicit type hints are provided for all arguments.
 
-      Note:
-          This decorator is designed for use with functions, instance methods, and static methods where explicit
-          type hints are provided for all arguments. It automatically adjusts for the 'self' parameter in instance
-          methods. However, it is not suitable for class methods or setters in classes, as it does not handle
-          the 'cls' parameter in class methods and may lead to incorrect behavior with setters. For class methods
-          and setters, manual type validation is recommended.
+      Usage:
+          - Apply this decorator to functions or instance methods that require type validation based on type hints.
 
-          The decorator should not be used with methods that have parameters of generic types, such as `list`, `set`,
-          or other collections that are parameterized with type variables (e.g., `list[str]` or `set[MyClass]`).
-          This limitation stems from the dynamic nature of generic types in Python, which can lead to runtime errors
-          when attempting to check against a parameterized type. Therefore, it is recommended to avoid applying this
-          decorator to methods where the parameters or return types involve generic collections directly.
+      When to Use:
+          - Use this decorator for functions or methods where argument types need to be strictly validated.
+          - Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.
+          - Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and
+            its contents match the specified types.
+          - Appropriate for instance methods, adjusting for the 'self' parameter automatically.
+          - Suitable for static methods but requires manual validation for class methods and setters.
+
+      When Not to Use:
+          - Do not use this decorator for class methods with the 'cls' parameter,
+          as it does not handle 'cls' explicitly.
+          - Avoid using this decorator for property setters.
+          - This decorator is not suitable for methods with parameters involving generic collections parameterized
+            with type variables (e.g., List[T] where T is a type variable).
+          - Complex nested generics (e.g., List[Dict[str, Union[int, List[str]]]]) might not be fully validated.
+          - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) and nested `Union` within
+          parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly validated
+          by this decorator.
+
 
       :param func: The function or method to be decorated.
       :type func: Callable[..., T]
       :return: The decorated function or method with type validation applied.
       :rtype: Callable[..., T]
       :raises TypeError: If an argument's type does not match its type hint.
-
-
-
-   .. py:method:: _get_origin(tp)
-      :staticmethod:
-
-
-
-   .. py:method:: _get_args(tp)
-      :staticmethod:
 
 
 

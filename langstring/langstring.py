@@ -41,8 +41,6 @@ Modules:
     utils.validator: Provides validation methods used within the LangString class.
 """
 
-
-
 from typing import Any
 from typing import Iterable
 from typing import Iterator
@@ -359,52 +357,316 @@ class LangString:
         return self.text.index(sub, start, end)
 
     def isalnum(self) -> bool:
+        """
+        Return True if all characters in the LangString are alphanumeric and there is at least one character.
+
+        This method mimics the behavior of the standard string's isalnum method.
+
+        :return: True if the LangString is alphanumeric, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello123", "en")
+        >>> is_alnum = lang_str.isalnum()
+        >>> print(is_alnum)  # Output: True
+
+        >>> lang_str = LangString("Hello 123", "en")
+        >>> is_alnum = lang_str.isalnum()
+        >>> print(is_alnum)  # Output: False
+        """
         return (self.text).isalnum()
 
     def isalpha(self) -> bool:
+        """
+        Return True if all characters in the LangString are alphabetic and there is at least one character.
+
+        This method mimics the behavior of the standard string's isalpha method.
+
+        :return: True if the LangString is alphabetic, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello", "en")
+        >>> is_alpha = lang_str.isalpha()
+        >>> print(is_alpha)  # Output: True
+
+        >>> lang_str = LangString("Hello123", "en")
+        >>> is_alpha = lang_str.isalpha()
+        >>> print(is_alpha)  # Output: False
+        """
         return (self.text).isalpha()
 
     def isascii(self) -> bool:
+        """
+        Return True if all characters in the LangString are ASCII characters.
+
+        This method mimics the behavior of the standard string's isascii method.
+
+        :return: True if the LangString is ASCII, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello", "en")
+        >>> is_ascii = lang_str.isascii()
+        >>> print(is_ascii)  # Output: True
+
+        >>> lang_str = LangString("Héllo", "en")
+        >>> is_ascii = lang_str.isascii()
+        >>> print(is_ascii)  # Output: False
+        """
         return (self.text).isascii()
 
     def isdecimal(self) -> bool:
+        """
+        Return True if all characters in the LangString are decimal characters and there is at least one character.
+
+        This method mimics the behavior of the standard string's isdecimal method.
+
+        :return: True if the LangString is decimal, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("12345", "en")
+        >>> is_decimal = lang_str.isdecimal()
+        >>> print(is_decimal)  # Output: True
+
+        >>> lang_str = LangString("123.45", "en")
+        >>> is_decimal = lang_str.isdecimal()
+        >>> print(is_decimal)  # Output: False
+        """
         return (self.text).isdecimal()
 
     def isdigit(self) -> bool:
+        """
+        Return True if all characters in the LangString are digits and there is at least one character.
+
+        This method mimics the behavior of the standard string's isdigit method.
+
+        :return: True if the LangString is numeric, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("12345", "en")
+        >>> is_digit = lang_str.isdigit()
+        >>> print(is_digit)  # Output: True
+
+        >>> lang_str = LangString("123.45", "en")
+        >>> is_digit = lang_str.isdigit()
+        >>> print(is_digit)  # Output: False
+        """
         return (self.text).isdigit()
 
     def isidentifier(self) -> bool:
+        """
+        Return True if the LangString is a valid identifier according to Python language definition.
+
+        This method mimics the behavior of the standard string's isidentifier method.
+
+        :return: True if the LangString is a valid identifier, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("variable_name", "en")
+        >>> is_identifier = lang_str.isidentifier()
+        >>> print(is_identifier)  # Output: True
+
+        >>> lang_str = LangString("123variable", "en")
+        >>> is_identifier = lang_str.isidentifier()
+        >>> print(is_identifier)  # Output: False
+        """
         return (self.text).isidentifier()
 
     def islower(self) -> bool:
+        """
+        Return True if all cased characters in the LangString are lowercase and there is at least one cased character.
+
+        This method mimics the behavior of the standard string's islower method.
+
+        :return: True if the LangString is in lowercase, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> is_lower = lang_str.islower()
+        >>> print(is_lower)  # Output: True
+
+        >>> lang_str = LangString("Hello", "en")
+        >>> is_lower = lang_str.islower()
+        >>> print(is_lower)  # Output: False
+        """
         return (self.text).islower()
 
     def isnumeric(self) -> bool:
+        """
+        Return True if all characters in the LangString are numeric characters and there is at least one character.
+
+        This method mimics the behavior of the standard string's isnumeric method.
+
+        :return: True if the LangString is numeric, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("12345", "en")
+        >>> is_numeric = lang_str.isnumeric()
+        >>> print(is_numeric)  # Output: True
+
+        >>> lang_str = LangString("123.45", "en")
+        >>> is_numeric = lang_str.isnumeric()
+        >>> print(is_numeric)  # Output: False
+        """
         return (self.text).isnumeric()
 
     def isprintable(self) -> bool:
+        """
+        Return True if all characters in the LangString are printable or the LangString is empty.
+
+        This method mimics the behavior of the standard string's isprintable method.
+
+        :return: True if the LangString is printable, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> is_printable = lang_str.isprintable()
+        >>> print(is_printable)  # Output: True
+
+        >>> lang_str = LangString("Hello,\tworld!", "en")
+        >>> is_printable = lang_str.isprintable()
+        >>> print(is_printable)  # Output: False
+        """
         return (self.text).isprintable()
 
     def isspace(self) -> bool:
+        """
+        Return True if there are only whitespace characters in the LangString and there is at least one character.
+
+        This method mimics the behavior of the standard string's isspace method.
+
+        :return: True if the LangString is whitespace, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("   ", "en")
+        >>> is_space = lang_str.isspace()
+        >>> print(is_space)  # Output: True
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> is_space = lang_str.isspace()
+        >>> print(is_space)  # Output: False
+        """
         return (self.text).isspace()
 
     def istitle(self) -> bool:
+        """
+        Return True if the LangString is a titlecased string and there is at least one character.
+
+        This method mimics the behavior of the standard string's istitle method.
+
+        :return: True if the LangString is titlecased, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, World!", "en")
+        >>> is_title = lang_str.istitle()
+        >>> print(is_title)  # Output: True
+
+        >>> lang_str = LangString("hello, world!", "en")
+        >>> is_title = lang_str.istitle()
+        >>> print(is_title)  # Output: False
+        """
         return (self.text).istitle()
 
     def isupper(self) -> bool:
+        """
+        Return True if all cased characters in the LangString are uppercase and there is at least one cased character.
+
+        This method mimics the behavior of the standard string's isupper method.
+
+        :return: True if the LangString is in uppercase, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("HELLO, WORLD!", "en")
+        >>> is_upper = lang_str.isupper()
+        >>> print(is_upper)  # Output: True
+
+        >>> lang_str = LangString("Hello, World!", "en")
+        >>> is_upper = lang_str.isupper()
+        >>> print(is_upper)  # Output: False
+        """
         return (self.text).isupper()
 
     def join(self, iterable: Iterable[str]) -> "LangString":
-        """Join an iterable with the text of the LangString."""
+        """
+        Join an iterable of strings with the LangString's text.
+
+        This method mimics the behavior of the standard string's join method but returns a LangString object.
+
+        :param iterable: An iterable of strings to be joined.
+        :type iterable: Iterable[str]
+        :return: A new LangString with the joined text.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString(", ", "en")
+        >>> joined_lang_str = lang_str.join(["Hello", "world"])
+        >>> print(joined_lang_str.to_string())  # Output: "Hello, world"@en
+        """
         joined_text = self.text.join(iterable)
         return LangString(joined_text, self.lang)
 
     def ljust(self, width: int, fillchar: str = " ") -> "LangString":
-        """Left justify the text."""
+        """
+        Return a left-justified LangString of length width.
+
+        Padding is done using the specified fill character (default is a space).
+
+        This method mimics the behavior of the standard string's ljust method but returns a LangString object.
+
+        :param width: The total width of the resulting LangString.
+        :type width: int
+        :param fillchar: The character to fill the padding with.
+        :type fillchar: str
+        :return: A new LangString left-justified with padding.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> left_justified_lang_str = lang_str.ljust(10, "*")
+        >>> print(left_justified_lang_str.to_string())  # Output: "hello*****"@en
+        """
         justified_text = self.text.ljust(width, fillchar)
         return LangString(justified_text, self.lang)
 
     def lower(self) -> "LangString":
+        """
+        Return a copy of the LangString with all the cased characters converted to lowercase.
+
+        This method mimics the behavior of the standard string's lower method but returns a LangString object.
+
+        :return: A new LangString with all characters in lowercase.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("HELLO, WORLD!", "en")
+        >>> lower_lang_str = lang_str.lower()
+        >>> print(lower_lang_str.to_string())  # Output: "hello, world!"@en
+        """
         return LangString(self.text.lower(), self.lang)
 
     def lstrip(self, chars: Optional[str] = None) -> "LangString":

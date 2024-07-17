@@ -749,8 +749,22 @@ class LangString:
         If the text starts with the prefix string, return a new LangString with the prefix string removed.
         Otherwise, return a copy of the original LangString.
 
+        This method mimics the behavior of the standard string's removeprefix method but returns a LangString object.
+
         :param prefix: The prefix to remove from the text.
-        :return: A new LangString with the prefix removed.
+        :type prefix: str
+        :return: A new LangString with the prefix removed, or the original LangString if the prefix is not found.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> removed_prefix_lang_str = lang_str.removeprefix("Hello, ")
+        >>> print(removed_prefix_lang_str.to_string())  # Output: "world!"@en
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> removed_prefix_lang_str = lang_str.removeprefix("Goodbye, ")
+        >>> print(removed_prefix_lang_str.to_string())  # Output: "Hello, world!"@en
         """
         return LangString((self.text).removeprefix(prefix), self.lang)
 
@@ -761,33 +775,184 @@ class LangString:
         If the text ends with the suffix string, return a new LangString with the suffix string removed.
         Otherwise, return a copy of the original LangString.
 
+        This method mimics the behavior of the standard string's removesuffix method but returns a LangString object.
+
         :param suffix: The suffix to remove from the text.
-        :return: A new LangString with the suffix removed.
+        :type suffix: str
+        :return: A new LangString with the suffix removed, or the original LangString if the suffix is not found.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> removed_suffix_lang_str = lang_str.removesuffix(", world!")
+        >>> print(removed_suffix_lang_str.to_string())  # Output: "Hello"@en
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> removed_suffix_lang_str = lang_str.removesuffix("planet")
+        >>> print(removed_suffix_lang_str.to_string())  # Output: "Hello, world!"@en
         """
         return LangString((self.text).removesuffix(suffix), self.lang)
 
     def rfind(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
+        """
+        Return the highest index in the LangString where substring sub is found, such that sub is contained within
+        [start, end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
+        not found.
+
+        This method mimics the behavior of the standard string's rfind method.
+
+        :param sub: The substring to find.
+        :type sub: str
+        :param start: The starting position (default is 0).
+        :type start: int, optional
+        :param end: The ending position (default is the end of the string).
+        :type end: int, optional
+        :return: The highest index where the substring is found, or -1 if not found.
+        :rtype: int
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
+        >>> index = lang_str.rfind("Hello")
+        >>> print(index)  # Output: 14
+        """
         return self.text.rfind(sub, start, end)
 
     def rindex(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
+        """
+        Return the highest index in the LangString where substring sub is found, such that sub is contained within
+        [start, end]. Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
+        the substring is not found.
+
+        This method mimics the behavior of the standard string's rindex method.
+
+        :param sub: The substring to find.
+        :type sub: str
+        :param start: The starting position (default is 0).
+        :type start: int, optional
+        :param end: The ending position (default is the end of the string).
+        :type end: int, optional
+        :return: The highest index where the substring is found.
+        :rtype: int
+        :raises ValueError: If the substring is not found.
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
+        >>> index = lang_str.rindex("Hello")
+        >>> print(index)  # Output: 14
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> index = lang_str.rindex("Hi")
+        >>> print(index)  # Output: ValueError
+        """
         return self.text.rindex(sub, start, end)
 
     def rjust(self, width: int, fillchar: str = " ") -> "LangString":
-        """Right justify the text."""
+        """
+        Return a right-justified LangString of length width.
+
+        Padding is done using the specified fill character (default is a space).
+
+        This method mimics the behavior of the standard string's rjust method but returns a LangString object.
+
+        :param width: The total width of the resulting LangString.
+        :type width: int
+        :param fillchar: The character to fill the padding with.
+        :type fillchar: str
+        :return: A new LangString right-justified with padding.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> right_justified_lang_str = lang_str.rjust(10, "*")
+        >>> print(right_justified_lang_str.to_string())  # Output: "*****hello"@en
+        """
         justified_text = self.text.rjust(width, fillchar)
         return LangString(justified_text, self.lang)
 
     def rpartition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
-        """Partition the text from the right."""
+        """
+        Split the LangString at the last occurrence of sep, and return a 3-tuple containing the part before the separator,
+        the separator itself, and the part after the separator.
+
+        This method mimics the behavior of the standard string's rpartition method but returns LangString objects.
+
+        :param sep: The separator to split the LangString.
+        :type sep: str
+        :return: A 3-tuple containing the part before the separator, the separator itself, and the part after the separator.
+        :rtype: tuple[LangString, LangString, LangString]
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
+        >>> before, sep, after = lang_str.rpartition("Hello")
+        >>> print(before.to_string())  # Output: "Hello, world! "@en
+        >>> print(sep.to_string())     # Output: "Hello"@en
+        >>> print(after.to_string())   # Output: ", universe!"@en
+        """
         before, sep, after = self.text.rpartition(sep)
         return LangString(before, self.lang), LangString(sep, self.lang), LangString(after, self.lang)
 
     def rsplit(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:
-        """Split the text from the right."""
+        """
+        Return a list of the words in the LangString, using sep as the delimiter string. The list is split from the right
+        starting from the end of the string.
+
+        This method mimics the behavior of the standard string's rsplit method but returns a list of LangString objects.
+
+        :param sep: The delimiter string. If None, any whitespace string is a separator.
+        :type sep: Optional[str]
+        :param maxsplit: Maximum number of splits. If -1, there is no limit.
+        :type maxsplit: int
+        :return: A list of LangString objects.
+        :rtype: list[LangString]
+
+        :Example:
+
+        >>> lang_str = LangString("one two three", "en")
+        >>> split_lang_str = lang_str.rsplit()
+        >>> for part in split_lang_str:
+        ...     print(part.to_string())
+        ...
+        >>> # Output: "one"@en
+        >>> #         "two"@en
+        >>> #         "three"@en
+
+        >>> lang_str = LangString("one,two,three", "en")
+        >>> split_lang_str = lang_str.rsplit(",", 1)
+        >>> for part in split_lang_str:
+        ...     print(part.to_string())
+        ...
+        >>> # Output: "one,two"@en
+        >>> #         "three"@en
+        """
         split_texts = self.text.rsplit(sep, maxsplit)
         return [LangString(part, self.lang) for part in split_texts]
 
     def rstrip(self, chars: Optional[str] = None) -> "LangString":
+        """
+        Return a copy of the LangString with trailing characters removed.
+
+        This method mimics the behavior of the standard string's rstrip method but returns a LangString object.
+
+        :param chars: A string specifying the set of characters to be removed. If None, whitespace characters are removed.
+        :type chars: Optional[str]
+        :return: A new LangString with trailing characters removed.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world!   ", "en")
+        >>> stripped_lang_str = lang_str.rstrip()
+        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world!"@en
+
+        >>> lang_str = LangString("Hello, world!!!", "en")
+        >>> stripped_lang_str = lang_str.rstrip("!")
+        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world"@en
+        """
         return LangString(self.text.rstrip(chars), self.lang)
 
     def split(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:

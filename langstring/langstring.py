@@ -670,14 +670,76 @@ class LangString:
         return LangString(self.text.lower(), self.lang)
 
     def lstrip(self, chars: Optional[str] = None) -> "LangString":
+        """
+        Return a copy of the LangString with leading characters removed.
+
+        This method mimics the behavior of the standard string's lstrip method but returns a LangString object.
+
+        :param chars: A string specifying the set of characters to be removed. If None, whitespace characters are removed.
+        :type chars: Optional[str]
+        :return: A new LangString with leading characters removed.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("   Hello, world!", "en")
+        >>> stripped_lang_str = lang_str.lstrip()
+        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world!"@en
+
+        >>> lang_str = LangString("...Hello, world!", "en")
+        >>> stripped_lang_str = lang_str.lstrip(".")
+        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world!"@en
+        """
         return LangString(self.text.lstrip(chars), self.lang)
 
     def partition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
-        """Partition the text."""
+        """
+        Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part before the separator,
+        the separator itself, and the part after the separator.
+
+        This method mimics the behavior of the standard string's partition method but returns LangString objects.
+
+        :param sep: The separator to split the LangString.
+        :type sep: str
+        :return: A 3-tuple containing the part before the separator, the separator itself, and the part after the separator.
+        :rtype: tuple[LangString, LangString, LangString]
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> before, sep, after = lang_str.partition(", ")
+        >>> print(before.to_string())  # Output: "Hello"@en
+        >>> print(sep.to_string())     # Output: ", "@en
+        >>> print(after.to_string())   # Output: "world!"@en
+        """
         before, sep, after = self.text.partition(sep)
         return LangString(before, self.lang), LangString(sep, self.lang), LangString(after, self.lang)
 
     def replace(self, old: str, new: str, count: int = -1) -> "LangString":
+        """
+        Return a copy of the LangString with all occurrences of substring old replaced by new.
+
+        This method mimics the behavior of the standard string's replace method but returns a LangString object.
+
+        :param old: The substring to be replaced.
+        :type old: str
+        :param new: The substring to replace with.
+        :type new: str
+        :param count: The maximum number of occurrences to replace. If -1, all occurrences are replaced.
+        :type count: int
+        :return: A new LangString with the replacements.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> replaced_lang_str = lang_str.replace("world", "Python")
+        >>> print(replaced_lang_str.to_string())  # Output: "Hello, Python!"@en
+
+        >>> lang_str = LangString("abababab", "en")
+        >>> replaced_lang_str = lang_str.replace("ab", "cd", 2)
+        >>> print(replaced_lang_str.to_string())  # Output: "cdcdabab"@en
+        """
         return LangString(self.text.replace(old, new, count), self.lang)
 
     def removeprefix(self, prefix: str) -> "LangString":

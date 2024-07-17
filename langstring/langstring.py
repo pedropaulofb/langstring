@@ -150,33 +150,212 @@ class LangString:
     # ---------------------------------------------
 
     def capitalize(self) -> "LangString":
+        """
+        Return a copy of the LangString with its first character capitalized and the rest lowercased.
+
+        This method mimics the behavior of the standard string's capitalize method but returns a LangString object.
+
+        :return: A new LangString with the first character capitalized.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello, world!", "en")
+        >>> capitalized_lang_str = lang_str.capitalize()
+        >>> print(capitalized_lang_str.to_string())  # Output: "Hello, world!"@en
+        """
         return LangString(self.text.capitalize(), self.lang)
 
     def casefold(self) -> "LangString":
+        """
+        Return a casefolded copy of the LangString. Casefolding is a more aggressive version of lowercasing.
+
+        This method mimics the behavior of the standard string's casefold method but returns a LangString object.
+
+        :return: A new LangString that is casefolded.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, WORLD!", "en")
+        >>> casefolded_lang_str = lang_str.casefold()
+        >>> print(casefolded_lang_str.to_string())  # Output: "hello, world!"@en
+        """
         return LangString(self.text.casefold(), self.lang)
 
     def center(self, width: int, fillchar: str = " ") -> "LangString":
+        """
+        Return a centered LangString of length width.
+
+        Padding is done using the specified fill character (default is a space).
+
+        This method mimics the behavior of the standard string's center method but returns a LangString object.
+
+        :param width: The total width of the resulting LangString.
+        :type width: int
+        :param fillchar: The character to fill the padding with.
+        :type fillchar: str
+        :return: A new LangString centered with padding.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> centered_lang_str = lang_str.center(11, "*")
+        >>> print(centered_lang_str.to_string())  # Output: "***hello***"@en
+        """
         return LangString(self.text.center(width, fillchar), self.lang)
 
     def count(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
+        """
+        Return the number of non-overlapping occurrences of substring sub in the LangString.
+
+        This method mimics the behavior of the standard string's count method.
+
+        :param sub: The substring to count.
+        :type sub: str
+        :param start: The starting position (default is 0).
+        :type start: int, optional
+        :param end: The ending position (default is the end of the string).
+        :type end: int, optional
+        :return: The number of occurrences of the substring.
+        :rtype: int
+
+        :Example:
+
+        >>> lang_str = LangString("hello, hello, hello!", "en")
+        >>> count_hello = lang_str.count("hello")
+        >>> print(count_hello)  # Output: 3
+        """
         return (self.text).count(sub, start, end)
 
     def endswith(self, suffix: str, start: int = 0, end: Optional[int] = None) -> bool:
+        """
+        Return True if the LangString ends with the specified suffix, otherwise return False.
+
+        This method mimics the behavior of the standard string's endswith method.
+
+        :param suffix: The suffix to check.
+        :type suffix: str
+        :param start: The starting position (default is 0).
+        :type start: int, optional
+        :param end: The ending position (default is the end of the string).
+        :type end: int, optional
+        :return: True if the LangString ends with the suffix, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("hello, world!", "en")
+        >>> ends_with_world = lang_str.endswith("world!")
+        >>> print(ends_with_world)  # Output: True
+        """
         return self.text.endswith(suffix, start, end)
 
     def expandtabs(self, tabsize: int = 8) -> "LangString":
+        """
+        Return a copy of the LangString where all tab characters are expanded using spaces.
+
+        This method mimics the behavior of the standard string's expandtabs method but returns a LangString object.
+
+        :param tabsize: The number of spaces to use for each tab character.
+        :type tabsize: int
+        :return: A new LangString with tabs expanded.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello\tworld", "en")
+        >>> expanded_lang_str = lang_str.expandtabs(4)
+        >>> print(expanded_lang_str.to_string())  # Output: "hello   world"@en
+        """
         return LangString(self.text.expandtabs(tabsize), self.lang)
 
     def find(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
+        """
+        Return the lowest index in the LangString where substring sub is found.
+
+        This method mimics the behavior of the standard string's find method.
+
+        :param sub: The substring to find.
+        :type sub: str
+        :param start: The starting position (default is 0).
+        :type start: int, optional
+        :param end: The ending position (default is the end of the string).
+        :type end: int, optional
+        :return: The lowest index where the substring is found, or -1 if not found.
+        :rtype: int
+
+        :Example:
+
+        >>> lang_str = LangString("hello, world", "en")
+        >>> index = lang_str.find("world")
+        >>> print(index)  # Output: 7
+        """
         return self.text.find(sub, start, end)
 
     def format(self, *args: Any, **kwargs: Any) -> "LangString":
+        """
+        Perform a string formatting operation on the LangString.
+
+        This method mimics the behavior of the standard string's format method but returns a LangString object.
+
+        :param args: Positional arguments for formatting.
+        :type args: Any
+        :param kwargs: Keyword arguments for formatting.
+        :type kwargs: Any
+        :return: A new LangString with the formatted text.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, {}!", "en")
+        >>> formatted_lang_str = lang_str.format("world")
+        >>> print(formatted_lang_str.to_string())  # Output: "Hello, world!"@en
+        """
         return LangString(self.text.format(*args, **kwargs), self.lang)
 
     def format_map(self, mapping: dict[Any, Any]) -> "LangString":
+        """
+        Perform a string formatting operation using a dictionary.
+
+        This method mimics the behavior of the standard string's format_map method but returns a LangString object.
+
+        :param mapping: A dictionary for formatting.
+        :type mapping: dict
+        :return: A new LangString with the formatted text.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, {name}!", "en")
+        >>> formatted_lang_str = lang_str.format_map({"name": "world"})
+        >>> print(formatted_lang_str.to_string())  # Output: "Hello, world!"@en
+        """
         return LangString(self.text.format_map(mapping), self.lang)
 
     def index(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
+        """
+        Return the lowest index in the LangString where substring sub is found.
+
+        This method mimics the behavior of the standard string's index method.
+
+        :param sub: The substring to find.
+        :type sub: str
+        :param start: The starting position (default is 0).
+        :type start: int, optional
+        :param end: The ending position (default is the end of the string).
+        :type end: int, optional
+        :return: The lowest index where the substring is found.
+        :rtype: int
+        :raises ValueError: If the substring is not found.
+
+        :Example:
+
+        >>> lang_str = LangString("hello, world", "en")
+        >>> index = lang_str.index("world")
+        >>> print(index)  # Output: 7
+        """
         return self.text.index(sub, start, end)
 
     def isalnum(self) -> bool:

@@ -566,14 +566,16 @@ class MultiLangString:
         if self.contains_entry(text=text, lang=lang):
             new_ls = self.get_langstring(text=text, lang=lang)
             self.remove_entry(text=text, lang=lang)
-            return new_ls
+            return new_ls  # noqa: R504
+        return None
 
     @Validator.validate_type_decorator
     def pop_setlangstring(self, lang: str) -> Optional[SetLangString]:
         if self.contains_lang(lang=lang):
             new_sls = self.get_setlangstring(lang=lang)
             self.remove_lang(lang=lang)
-            return new_sls
+            return new_sls  # noqa: R504
+        return None
 
     def pop_multilangstring(self, langs: list[str]) -> "MultiLangString":
         Validator.validate_type_iterable(langs, list, str)
@@ -581,7 +583,7 @@ class MultiLangString:
         new_mls = self.get_multilangstring(langs)
         for lang in langs:
             self.discard_lang(lang)
-        return new_mls
+        return new_mls  # noqa: R504
 
     # ----- GENERAL METHODS -----
 
@@ -737,8 +739,7 @@ class MultiLangString:
 
         # TODO: JUSTIFY IN DOCSTRINGS THAT IT IS SORTED TO BE DETERMINISTIC
         sorted_formatted_items = sorted(formatted_items)  # Sort the formatted items
-        result_string = ", ".join(sorted_formatted_items)
-        return result_string
+        return ", ".join(sorted_formatted_items)
 
     # --------------------------------------------------
     # Static Methods

@@ -308,6 +308,8 @@ class LangString:
         if isinstance(other, str):
             return LangString(self.text + other, self.lang)
 
+        return NotImplemented
+
     @Validator.validate_type_decorator
     def __contains__(self, item: str) -> bool:
         """Check if a substring exists within the LangString's text."""
@@ -330,6 +332,7 @@ class LangString:
             return self.text == other
         if isinstance(other, LangString):
             return self.text == other.text and self.lang.casefold() == other.lang.casefold()
+        return NotImplemented
 
     def __ge__(self, other: object) -> bool:
         """Check if this LangString is greater than or equal to another str or LangString object."""
@@ -342,6 +345,7 @@ class LangString:
             return self.text >= other
         if isinstance(other, LangString):
             return self.text >= other.text
+        return NotImplemented
 
     def __getitem__(self, key: Union[int, slice]) -> "LangString":
         """Retrieve a substring or a reversed string from the LangString's text."""
@@ -364,6 +368,7 @@ class LangString:
             return self.text > other
         if isinstance(other, LangString):
             return self.text > other.text
+        return NotImplemented
 
     def __hash__(self) -> int:
         """Generate a hash new_text for a LangString object.
@@ -413,6 +418,7 @@ class LangString:
             return self.text <= other
         if isinstance(other, LangString):
             return self.text <= other.text
+        return NotImplemented
 
     def __len__(self) -> int:
         """Return the length of the LangString's text."""
@@ -429,6 +435,7 @@ class LangString:
             return self.text < other
         if isinstance(other, LangString):
             return self.text < other.text
+        return NotImplemented
 
     @Validator.validate_type_decorator
     def __mul__(self, other: int) -> "LangString":

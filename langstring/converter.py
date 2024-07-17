@@ -255,9 +255,7 @@ class Converter(metaclass=NonInstantiable):
         for langstring in merged_lagnstrings:
             setlangstrings.append(cls.from_langstrings_to_setlangstring([langstring]))
 
-        final_setlangstrings = SetLangString.merge_setlangstrings(setlangstrings)
-
-        return final_setlangstrings
+        return SetLangString.merge_setlangstrings(setlangstrings)
 
     @Validator.validate_type_decorator
     @staticmethod

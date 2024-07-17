@@ -232,6 +232,8 @@ class SetLangString:
         if isinstance(element, LangString):
             return element.text in self.texts
 
+        return False
+
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, SetLangString):
             return NotImplemented

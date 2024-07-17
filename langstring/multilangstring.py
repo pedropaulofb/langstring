@@ -291,8 +291,8 @@ class MultiLangString:
             return
 
         raise TypeError(
-            f"Argument with value '{arg}' must be of type 'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', "
-            f"but got '{type(arg).__name__}'."
+            f"Argument with value '{arg}' must be of type 'tuple[str,str]', 'LangString', 'SetLangString', "
+            f"or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
     @Validator.validate_type_decorator

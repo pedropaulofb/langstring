@@ -331,3 +331,30 @@ def test_validate_flags_lang_whitespace_characters(
     Controller.set_flag(flag_type.STRIP_LANG, True)
     Controller.set_flag(flag_type.LOWERCASE_LANG, True)
     assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
+
+class MockFlag(Enum):
+    STRIP_TEXT = 1
+    DEFINED_TEXT = 2
+    VALID_LANG = 3
+    STRIP_LANG = 4
+    LOWERCASE_LANG = 5
+    DEFINED_LANG = 6
+
+def test_validate_flags_lang_warns_if_langcodes_missing(monkeypatch):
+    """Test Validator.validate_flags_lang warns if 'langcodes' is missing."""
+    def mock_get_flag(flag):
+        if flag == MockFlag.VALID_LANG:
+            return True
+        return False
+
+    def mock_import_langcodes(name, globals=None, locals=None, fromlist=(), level=0):
+        if name == "langcodes":
+            raise ImportError("No module named 'langcodes'")
+        return original_import(name, globals, locals, fromlist, level)
+
+    original_import = __import__
+    monkeypatch.setattr(Controller, "get_flag", mock_get_flag)
+    monkeypatch.setattr("builtins.__import__", mock_import_langcodes)
+
+    with pytest.warns(UserWarning, match="Language validation skipped. VALID_LANG functionality requires the 'langcodes' library."):
+        Validator.validate_flags_lang(MockFlag, "en")

@@ -30,9 +30,6 @@ from .utils.non_instantiable import NonInstantiable
 from .utils.validator import Validator
 
 
-# TODO (@pedropaulofb): Check for redundant type validations.
-
-
 class Converter(metaclass=NonInstantiable):
     """A utility class for converting between different string types used in language processing.
 
@@ -69,10 +66,11 @@ class Converter(metaclass=NonInstantiable):
 
         if method == "manual":
             return cls.from_string_to_langstring_manual(input_string, lang)
-        elif method == "parse":
+
+        if method == "parse":
             return cls.from_string_to_langstring_parse(input_string, separator)
-        else:
-            raise ValueError(f"Unknown method: {method}. Valid methods are 'manual' and 'parse'.")
+
+        raise ValueError(f"Unknown method: {method}. Valid methods are 'manual' and 'parse'.")
 
     @Validator.validate_type_decorator
     @staticmethod

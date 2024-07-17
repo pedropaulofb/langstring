@@ -85,8 +85,8 @@ class Validator(metaclass=NonInstantiable):
 
                 if not tag_is_valid(transformed_lang):
                     raise ValueError(
-                        f"Invalid 'lang' value received ('{original_lang}'). '{flag_type.__name__}.VALID_LANG' is enabled. "
-                        f"Expected valid language code."
+                        f"Invalid 'lang' value received ('{original_lang}'). "
+                        f"'{flag_type.__name__}.VALID_LANG' is enabled. Expected valid language code."
                     )
             except ImportError as e:
                 if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
@@ -114,14 +114,16 @@ class Validator(metaclass=NonInstantiable):
             if not any(isinstance(arg, t) for t in args):
                 allowed_types = " or ".join(f"'{t.__name__}'" for t in args)
                 raise TypeError(
-                    f"Invalid argument with value '{arg}'. Expected one of {allowed_types}, but got '{type(arg).__name__}'."
+                    f"Invalid argument with value '{arg}'. "
+                    f"Expected one of {allowed_types}, but got '{type(arg).__name__}'."
                 )
             return True
 
         if origin is not None:  # This handles parameterized generics like list[int]
             if not isinstance(arg, origin):
                 raise TypeError(
-                    f"Invalid argument with value '{arg}'. Expected '{origin.__name__}', but got '{type(arg).__name__}'."
+                    f"Invalid argument with value '{arg}'. "
+                    f"Expected '{origin.__name__}', but got '{type(arg).__name__}'."
                 )
             if args:
                 if origin in (list, set, tuple):
@@ -178,12 +180,15 @@ class Validator(metaclass=NonInstantiable):
             - Suitable for static methods but requires manual validation for class methods and setters.
 
         When Not to Use:
-            - Do not use this decorator for class methods with the 'cls' parameter, as it does not handle 'cls' explicitly.
+            - Do not use this decorator for class methods with the 'cls' parameter,
+            as it does not handle 'cls' explicitly.
             - Avoid using this decorator for property setters.
             - This decorator is not suitable for methods with parameters involving generic collections parameterized
               with type variables (e.g., List[T] where T is a type variable).
             - Complex nested generics (e.g., List[Dict[str, Union[int, List[str]]]]) might not be fully validated.
-            - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) and nested `Union` within parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly validated by this decorator.
+            - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) and nested `Union` within
+            parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly validated
+            by this decorator.
 
 
         :param func: The function or method to be decorated.
@@ -207,12 +212,14 @@ class Validator(metaclass=NonInstantiable):
             for arg, (name, hint) in zip(args_to_check, zip(param_names, type_hints.values())):
                 if not Validator._check_arg(arg, hint):
                     raise TypeError(
-                        f"Invalid argument with value '{arg}'. Expected '{hint.__name__}', but got '{type(arg).__name__}'."
+                        f"Invalid argument with value '{arg}'. Expected '{hint.__name__}', "
+                        f"but got '{type(arg).__name__}'."
                     )
             for kwarg, hint in type_hints.items():
                 if kwarg in kwargs and not Validator._check_arg(kwargs[kwarg], hint):
                     raise TypeError(
-                        f"Invalid argument with value '{kwarg}'. Expected '{hint.__name__}', but got '{type(kwargs[kwarg]).__name__}'."
+                        f"Invalid argument with value '{kwarg}'. Expected '{hint.__name__}', "
+                        f"but got '{type(kwargs[kwarg]).__name__}'."
                     )
             return func(*args, **kwargs)
 

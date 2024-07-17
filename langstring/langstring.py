@@ -20,11 +20,11 @@ matching language tags, and merging LangString objects.
     lang_str = LangString("Hello, World!", "en")
 
     # Print the string representation
-    print(lang_str.to_string())  # Output: '"Hello, World!"@en'
+    print(lang_str)  # Output: '"Hello, World!"@en'
 
     # Convert to uppercase
     upper_lang_str = lang_str.upper()
-    print(upper_lang_str.to_string())  # Output: '"HELLO, WORLD!"@en'
+    print(upper_lang_str)  # Output: '"HELLO, WORLD!"@en'
 
     # Check if the text contains a substring
     contains_substring = "World" in lang_str
@@ -33,7 +33,7 @@ matching language tags, and merging LangString objects.
     # Concatenate two LangString objects
     lang_str2 = LangString(" How are you?", "en")
     combined_lang_str = lang_str + lang_str2
-    print(combined_lang_str.to_string())  # Output: '"Hello, World! How are you?"@en'
+    print(combined_lang_str)  # Output: '"Hello, World! How are you?"@en'
 
 Modules:
     controller: Provides control flags that influence the behavior of the LangString class.
@@ -160,7 +160,7 @@ class LangString:
 
         >>> lang_str = LangString("hello, world!", "en")
         >>> capitalized_lang_str = lang_str.capitalize()
-        >>> print(capitalized_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(capitalized_lang_str)  # Output: "Hello, world!"@en
         """
         return LangString(self.text.capitalize(), self.lang)
 
@@ -177,7 +177,7 @@ class LangString:
 
         >>> lang_str = LangString("Hello, WORLD!", "en")
         >>> casefolded_lang_str = lang_str.casefold()
-        >>> print(casefolded_lang_str.to_string())  # Output: "hello, world!"@en
+        >>> print(casefolded_lang_str)  # Output: "hello, world!"@en
         """
         return LangString(self.text.casefold(), self.lang)
 
@@ -200,7 +200,7 @@ class LangString:
 
         >>> lang_str = LangString("hello", "en")
         >>> centered_lang_str = lang_str.center(11, "*")
-        >>> print(centered_lang_str.to_string())  # Output: "***hello***"@en
+        >>> print(centered_lang_str)  # Output: "***hello***"@en
         """
         return LangString(self.text.center(width, fillchar), self.lang)
 
@@ -265,7 +265,7 @@ class LangString:
 
         >>> lang_str = LangString("hello\tworld", "en")
         >>> expanded_lang_str = lang_str.expandtabs(4)
-        >>> print(expanded_lang_str.to_string())  # Output: "hello   world"@en
+        >>> print(expanded_lang_str)  # Output: "hello   world"@en
         """
         return LangString(self.text.expandtabs(tabsize), self.lang)
 
@@ -309,7 +309,7 @@ class LangString:
 
         >>> lang_str = LangString("Hello, {}!", "en")
         >>> formatted_lang_str = lang_str.format("world")
-        >>> print(formatted_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
         """
         return LangString(self.text.format(*args, **kwargs), self.lang)
 
@@ -328,7 +328,7 @@ class LangString:
 
         >>> lang_str = LangString("Hello, {name}!", "en")
         >>> formatted_lang_str = lang_str.format_map({"name": "world"})
-        >>> print(formatted_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
         """
         return LangString(self.text.format_map(mapping), self.lang)
 
@@ -623,7 +623,7 @@ class LangString:
 
         >>> lang_str = LangString(", ", "en")
         >>> joined_lang_str = lang_str.join(["Hello", "world"])
-        >>> print(joined_lang_str.to_string())  # Output: "Hello, world"@en
+        >>> print(joined_lang_str)  # Output: "Hello, world"@en
         """
         joined_text = self.text.join(iterable)
         return LangString(joined_text, self.lang)
@@ -647,7 +647,7 @@ class LangString:
 
         >>> lang_str = LangString("hello", "en")
         >>> left_justified_lang_str = lang_str.ljust(10, "*")
-        >>> print(left_justified_lang_str.to_string())  # Output: "hello*****"@en
+        >>> print(left_justified_lang_str)  # Output: "hello*****"@en
         """
         justified_text = self.text.ljust(width, fillchar)
         return LangString(justified_text, self.lang)
@@ -665,7 +665,7 @@ class LangString:
 
         >>> lang_str = LangString("HELLO, WORLD!", "en")
         >>> lower_lang_str = lang_str.lower()
-        >>> print(lower_lang_str.to_string())  # Output: "hello, world!"@en
+        >>> print(lower_lang_str)  # Output: "hello, world!"@en
         """
         return LangString(self.text.lower(), self.lang)
 
@@ -684,11 +684,11 @@ class LangString:
 
         >>> lang_str = LangString("   Hello, world!", "en")
         >>> stripped_lang_str = lang_str.lstrip()
-        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
 
         >>> lang_str = LangString("...Hello, world!", "en")
         >>> stripped_lang_str = lang_str.lstrip(".")
-        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
         """
         return LangString(self.text.lstrip(chars), self.lang)
 
@@ -708,9 +708,9 @@ class LangString:
 
         >>> lang_str = LangString("Hello, world!", "en")
         >>> before, sep, after = lang_str.partition(", ")
-        >>> print(before.to_string())  # Output: "Hello"@en
-        >>> print(sep.to_string())     # Output: ", "@en
-        >>> print(after.to_string())   # Output: "world!"@en
+        >>> print(before)  # Output: "Hello"@en
+        >>> print(sep)     # Output: ", "@en
+        >>> print(after)   # Output: "world!"@en
         """
         before, sep, after = self.text.partition(sep)
         return LangString(before, self.lang), LangString(sep, self.lang), LangString(after, self.lang)
@@ -734,11 +734,11 @@ class LangString:
 
         >>> lang_str = LangString("Hello, world!", "en")
         >>> replaced_lang_str = lang_str.replace("world", "Python")
-        >>> print(replaced_lang_str.to_string())  # Output: "Hello, Python!"@en
+        >>> print(replaced_lang_str)  # Output: "Hello, Python!"@en
 
         >>> lang_str = LangString("abababab", "en")
         >>> replaced_lang_str = lang_str.replace("ab", "cd", 2)
-        >>> print(replaced_lang_str.to_string())  # Output: "cdcdabab"@en
+        >>> print(replaced_lang_str)  # Output: "cdcdabab"@en
         """
         return LangString(self.text.replace(old, new, count), self.lang)
 
@@ -760,11 +760,11 @@ class LangString:
 
         >>> lang_str = LangString("Hello, world!", "en")
         >>> removed_prefix_lang_str = lang_str.removeprefix("Hello, ")
-        >>> print(removed_prefix_lang_str.to_string())  # Output: "world!"@en
+        >>> print(removed_prefix_lang_str)  # Output: "world!"@en
 
         >>> lang_str = LangString("Hello, world!", "en")
         >>> removed_prefix_lang_str = lang_str.removeprefix("Goodbye, ")
-        >>> print(removed_prefix_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(removed_prefix_lang_str)  # Output: "Hello, world!"@en
         """
         return LangString((self.text).removeprefix(prefix), self.lang)
 
@@ -786,11 +786,11 @@ class LangString:
 
         >>> lang_str = LangString("Hello, world!", "en")
         >>> removed_suffix_lang_str = lang_str.removesuffix(", world!")
-        >>> print(removed_suffix_lang_str.to_string())  # Output: "Hello"@en
+        >>> print(removed_suffix_lang_str)  # Output: "Hello"@en
 
         >>> lang_str = LangString("Hello, world!", "en")
         >>> removed_suffix_lang_str = lang_str.removesuffix("planet")
-        >>> print(removed_suffix_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(removed_suffix_lang_str)  # Output: "Hello, world!"@en
         """
         return LangString((self.text).removesuffix(suffix), self.lang)
 
@@ -868,7 +868,7 @@ class LangString:
 
         >>> lang_str = LangString("hello", "en")
         >>> right_justified_lang_str = lang_str.rjust(10, "*")
-        >>> print(right_justified_lang_str.to_string())  # Output: "*****hello"@en
+        >>> print(right_justified_lang_str)  # Output: "*****hello"@en
         """
         justified_text = self.text.rjust(width, fillchar)
         return LangString(justified_text, self.lang)
@@ -889,9 +889,9 @@ class LangString:
 
         >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
         >>> before, sep, after = lang_str.rpartition("Hello")
-        >>> print(before.to_string())  # Output: "Hello, world! "@en
-        >>> print(sep.to_string())     # Output: "Hello"@en
-        >>> print(after.to_string())   # Output: ", universe!"@en
+        >>> print(before)  # Output: "Hello, world! "@en
+        >>> print(sep)     # Output: "Hello"@en
+        >>> print(after)   # Output: ", universe!"@en
         """
         before, sep, after = self.text.rpartition(sep)
         return LangString(before, self.lang), LangString(sep, self.lang), LangString(after, self.lang)
@@ -915,7 +915,7 @@ class LangString:
         >>> lang_str = LangString("one two three", "en")
         >>> split_lang_str = lang_str.rsplit()
         >>> for part in split_lang_str:
-        ...     print(part.to_string())
+        ...     print(part)
         ...
         >>> # Output: "one"@en
         >>> #         "two"@en
@@ -924,7 +924,7 @@ class LangString:
         >>> lang_str = LangString("one,two,three", "en")
         >>> split_lang_str = lang_str.rsplit(",", 1)
         >>> for part in split_lang_str:
-        ...     print(part.to_string())
+        ...     print(part)
         ...
         >>> # Output: "one,two"@en
         >>> #         "three"@en
@@ -947,44 +947,217 @@ class LangString:
 
         >>> lang_str = LangString("Hello, world!   ", "en")
         >>> stripped_lang_str = lang_str.rstrip()
-        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world!"@en
+        >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
 
         >>> lang_str = LangString("Hello, world!!!", "en")
         >>> stripped_lang_str = lang_str.rstrip("!")
-        >>> print(stripped_lang_str.to_string())  # Output: "Hello, world"@en
+        >>> print(stripped_lang_str)  # Output: "Hello, world"@en
         """
         return LangString(self.text.rstrip(chars), self.lang)
 
     def split(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:
-        """Split the text."""
+        """
+        Return a list of the words in the LangString, using sep as the delimiter string.
+
+        This method mimics the behavior of the standard string's split method but returns a list of LangString objects.
+
+        :param sep: The delimiter string. If None, any whitespace string is a separator.
+        :type sep: Optional[str]
+        :param maxsplit: Maximum number of splits. If -1, there is no limit.
+        :type maxsplit: int
+        :return: A list of LangString objects.
+        :rtype: list[LangString]
+
+        :Example:
+
+        >>> lang_str = LangString("one two three", "en")
+        >>> split_lang_str = lang_str.split()
+        >>> for part in split_lang_str:
+        ...     print(part)
+        ...
+        >>> # Output: "one"@en
+        >>> #         "two"@en
+        >>> #         "three"@en
+
+        >>> lang_str = LangString("one,two,three", "en")
+        >>> split_lang_str = lang_str.split(",")
+        >>> for part in split_lang_str:
+        ...     print(part)
+        ...
+        >>> # Output: "one"@en
+        >>> #         "two"@en
+        >>> #         "three"@en
+        """
         split_texts = self.text.split(sep, maxsplit)
         return [LangString(part, self.lang) for part in split_texts]
 
     def splitlines(self, keepends: bool = False) -> list["LangString"]:
-        """Split the text into lines."""
+        """
+        Return a list of the lines in the LangString, breaking at line boundaries.
+
+        This method mimics the behavior of the standard string's splitlines method but returns a list of LangString objects.
+
+        :param keepends: If True, line breaks are included in the resulting list.
+        :type keepends: bool
+        :return: A list of LangString objects.
+        :rtype: list[LangString]
+
+        :Example:
+
+        >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+        >>> split_lang_str = lang_str.splitlines()
+        >>> print(split_lang_str)
+        # Output:
+        # [LangString(text='Hello', lang='en'), LangString(text='world', lang='en')]
+
+        >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+        >>> split_lang_str = lang_str.splitlines(True)
+        >>> print(split_lang_str)
+        # Output:
+        # [LangString(text='Hello\n', lang='en'), LangString(text='world', lang='en')]
+        """
         lines = self.text.splitlines(keepends)
         return [LangString(line, self.lang) for line in lines]
 
     def startswith(self, prefix: str, start: int = 0, end: Optional[int] = None) -> bool:
+        """
+        Return True if the LangString starts with the specified prefix, otherwise return False.
+
+        This method mimics the behavior of the standard string's startswith method.
+
+        :param prefix: The prefix to check.
+        :type prefix: str
+        :param start: The starting position (default is 0).
+        :type start: int, optional
+        :param end: The ending position (default is the end of the string).
+        :type end: int, optional
+        :return: True if the LangString starts with the prefix, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> starts_with_hello = lang_str.startswith("Hello")
+        >>> print(starts_with_hello)  # Output: True
+
+        >>> lang_str = LangString("Hello, world!", "en")
+        >>> starts_with_hello = lang_str.startswith("world")
+        >>> print(starts_with_hello)  # Output: False
+        """
         return self.text.startswith(prefix, start, end)
 
     def strip(self, chars: Optional[str] = None) -> "LangString":
+        """
+        Return a copy of the LangString with leading and trailing characters removed.
+
+        This method mimics the behavior of the standard string's strip method but returns a LangString object.
+
+        :param chars: A string specifying the set of characters to be removed. If None, whitespace characters are removed.
+        :type chars: Optional[str]
+        :return: A new LangString with leading and trailing characters removed.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("   Hello, world!   ", "en")
+        >>> stripped_lang_str = lang_str.strip()
+        >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
+
+        >>> lang_str = LangString("***Hello, world!***", "en")
+        >>> stripped_lang_str = lang_str.strip("*")
+        >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
+        """
         return LangString(self.text.strip(chars), self.lang)
 
     def swapcase(self) -> "LangString":
+        """
+        Return a copy of the LangString with uppercase characters converted to lowercase and vice versa.
+
+        This method mimics the behavior of the standard string's swapcase method but returns a LangString object.
+
+        :return: A new LangString with swapped case.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, WORLD!", "en")
+        >>> swapcase_lang_str = lang_str.swapcase()
+        >>> print(swapcase_lang_str)  # Output: "hELLO, world!"@en
+        """
         return LangString(self.text.swapcase(), self.lang)
 
     def title(self) -> "LangString":
+        """
+        Return a titlecased version of the LangString where words start with an uppercase character and the remaining
+        characters are lowercase.
+
+        This method mimics the behavior of the standard string's title method but returns a LangString object.
+
+        :return: A new LangString that is titlecased.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello world", "en")
+        >>> title_lang_str = lang_str.title()
+        >>> print(title_lang_str)  # Output: "Hello World"@en
+        """
         return LangString(self.text.title(), self.lang)
 
     def translate(self, table: dict[int, str]) -> "LangString":
-        """Translate the text using a translation table."""
+        """
+        Return a copy of the LangString in which each character has been mapped through the given translation table.
+
+        This method mimics the behavior of the standard string's translate method but returns a LangString object.
+
+        :param table: A translation table mapping Unicode ordinals to Unicode ordinals, strings, or None.
+        :type table: dict[int, str]
+        :return: A new LangString with the characters translated.
+        :rtype: LangString
+
+        :Example:
+
+        >>> translation_table = str.maketrans("aeiou", "12345")
+        >>> lang_str = LangString("hello world", "en")
+        >>> translated_lang_str = lang_str.translate(translation_table)
+        >>> print(translated_lang_str) # Output: "h2ll4 w4rld"@en
+        """
         return LangString(self.text.translate(table), self.lang)
 
     def upper(self) -> "LangString":
+        """
+        Return a copy of the LangString with all the characters converted to uppercase.
+
+        This method mimics the behavior of the standard string's upper method but returns a LangString object.
+
+        :return: A new LangString with all characters in uppercase.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello world", "en")
+        >>> upper_lang_str = lang_str.upper()
+        >>> print(upper_lang_str)  # Output: "HELLO WORLD"@en
+        """
         return LangString(self.text.upper(), self.lang)
 
     def zfill(self, width: int) -> "LangString":
+        """
+        Return a copy of the LangString left filled with ASCII '0' digits to make a string of length width.
+
+        This method mimics the behavior of the standard string's zfill method but returns a LangString object.
+
+        :param width: The total width of the resulting LangString.
+        :type width: int
+        :return: A new LangString left filled with '0' digits.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("42", "en")
+        >>> zfilled_lang_str = lang_str.zfill(5)
+        >>> print(zfilled_lang_str)  # Output: "00042"@en
+        """
         return LangString(self.text.zfill(width), self.lang)
 
     # ---------------------------------------------
@@ -995,22 +1168,75 @@ class LangString:
     def to_string(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> str:
+        """
+        Return a string representation of the LangString with options for including quotes and language tag.
+
+        :param print_quotes: If True, wrap the text in quotes. If None, use the default setting from the Controller.
+        :type print_quotes: Optional[bool]
+        :param separator: The separator to use between the text and language tag.
+        :type separator: str
+        :param print_lang: If True, include the language tag. If None, use the default setting from the Controller.
+        :type print_lang: Optional[bool]
+        :return: A string representation of the LangString.
+        :rtype: str
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, World!", "en")
+        >>> print(lang_str.to_string())  # Output: '"Hello, World!"@en'
+        >>> print(lang_str.to_string(print_quotes=False))  # Output: 'Hello, World!@en'
+        >>> print(lang_str.to_string(print_lang=False))  # Output: '"Hello, World!"'
+        """
         if print_quotes is None:
+            # Get the default setting for print_quotes from the Controller
             print_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
         if print_lang is None:
+            # Get the default setting for print_lang from the Controller
             print_lang = Controller.get_flag(LangStringFlag.PRINT_WITH_LANG)
 
+        # Wrap text in quotes if print_quotes is True
         text_value: str = f'"{self.text}"' if print_quotes else f"{self.text}"
+        # Append the language tag if print_lang is True
         lang_value: str = f"{separator}{self.lang}" if print_lang else ""
 
         return text_value + lang_value
 
     @Validator.validate_type_decorator
     def equals_str(self, other: str) -> bool:
+        """
+        Compare the LangString's text with a given string for equality.
+
+        :param other: The string to compare with.
+        :type other: str
+        :return: True if the text matches the given string, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, World!", "en")
+        >>> print(lang_str.equals_str("Hello, World!"))  # Output: True
+        >>> print(lang_str.equals_str("hello, world!"))  # Output: False
+        """
         return self.text == other
 
     @Validator.validate_type_decorator
     def equals_langstring(self, other: "LangString") -> bool:
+        """
+        Compare the LangString with another LangString for equality of text and language tag (case-insensitive).
+
+        :param other: The LangString to compare with.
+        :type other: LangString
+        :return: True if both text and language tag match (case-insensitive), otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str1 = LangString("Hello, World!", "en")
+        >>> lang_str2 = LangString("Hello, World!", "EN")
+        >>> print(lang_str1.equals_langstring(lang_str2))  # Output: True
+        >>> lang_str3 = LangString("Hello, World!", "fr")
+        >>> print(lang_str1.equals_langstring(lang_str3))  # Output: False
+        """
         return self.text == other.text and self.lang.casefold() == other.lang.casefold()
 
     # ---------------------------------------------
@@ -1268,6 +1494,25 @@ class LangString:
 
     @Validator.validate_type_decorator
     def _validate_match_types(self, other: Union[object, str, "LangString"], overwrite_strict: bool = False) -> None:
+        """
+        Validate that the type of the other operand matches the expected type.
+
+        This method checks if the operand type is valid based on the control flag for type matching.
+        If strict type matching is enabled, only LangString type is allowed. The strict mode can be
+        overridden by passing the `overwrite_strict` parameter.
+
+        :param other: The operand to be validated.
+        :type other: Union[object, str, LangString]
+        :param overwrite_strict: If True, enforces strict type matching regardless of the control flag.
+        :type overwrite_strict: bool
+        :raises TypeError: If strict mode is enabled and the operand is not of type LangString.
+
+        :Example:
+
+        >>> lang_str = LangString("Hello", "en")
+        >>> lang_str._validate_match_types(lang_str, False)  # No exception
+        >>> lang_str._validate_match_types(lang_str, True)  # Raises TypeError
+        """
         strict = Controller.get_flag(LangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
 
         # If strict mode is enabled, only allow LangString type
@@ -1278,6 +1523,23 @@ class LangString:
 
     @Validator.validate_type_decorator
     def _validate_match_langs(self, other: object) -> None:
+        """
+        Validate that the language of the other LangString operand matches the current LangString's language.
+
+        This method checks if the language tags of both LangString objects are compatible. If the languages
+        do not match, a ValueError is raised.
+
+        :param other: The operand to be validated.
+        :type other: object
+        :raises ValueError: If the languages of both LangString objects do not match.
+
+        :Example:
+
+        >>> lang_str1 = LangString("Hello", "en")
+        >>> lang_str2 = LangString("Bonjour", "fr")
+        >>> lang_str1._validate_match_langs(LangString("world", "en"))  # No exception
+        >>> lang_str1._validate_match_langs(lang_str2)  # Raises ValueError due to incompatible languages
+        """
         # Check language compatibility for LangString type
         if isinstance(other, LangString) and self.lang.casefold() != other.lang.casefold():
             raise ValueError(

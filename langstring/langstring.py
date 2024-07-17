@@ -1,12 +1,18 @@
-"""The langstring module provides the LangString class to encapsulate a string with its language information.
+"""
+The langstring module provides the LangString class to encapsulate a string with its language information.
 
 This module is designed to work with text strings and their associated language tags, offering functionalities
-such as validation of language tags, handling of empty strings and language tags based on control flags, and
-logging of warnings for invalid language tags. It utilizes the langcodes library for validating language tags and
-the loguru library for logging warnings in case of invalid language tags.
+such as validation of language tags, handling of empty strings and language tags based on control flags. It optionally
+utilizes the langcodes library for validating language tags, enhancing the robustness of the language tag validation
+process.
 
-Control flags from the langstring_control module are used to enforce certain behaviors like ensuring non-empty
-text and valid language tags. These flags can be set externally to alter the behavior of the LangString class.
+Control flags from the controller module are used to enforce certain behaviors like ensuring non-empty text and valid
+language tags. These flags can be set externally to alter the behavior of the LangString class.
+
+The LangString class aims to make user interaction as similar as possible to working with regular strings. To achieve
+this, many of the standard string methods have been overridden to return LangString objects, allowing seamless
+integration and extended functionality. Additionally, the class provides mechanisms for validating input types,
+matching language tags, and merging LangString objects.
 
 :Example:
 
@@ -15,7 +21,27 @@ text and valid language tags. These flags can be set externally to alter the beh
 
     # Print the string representation
     print(lang_str.to_string())  # Output: '"Hello, World!"@en'
+
+    # Convert to uppercase
+    upper_lang_str = lang_str.upper()
+    print(upper_lang_str.to_string())  # Output: '"HELLO, WORLD!"@en'
+
+    # Check if the text contains a substring
+    contains_substring = "World" in lang_str
+    print(contains_substring)  # Output: True
+
+    # Concatenate two LangString objects
+    lang_str2 = LangString(" How are you?", "en")
+    combined_lang_str = lang_str + lang_str2
+    print(combined_lang_str.to_string())  # Output: '"Hello, World! How are you?"@en'
+
+Modules:
+    controller: Provides control flags that influence the behavior of the LangString class.
+    flags: Defines the LangStringFlag class with various control flags for the LangString class.
+    utils.validator: Provides validation methods used within the LangString class.
 """
+
+
 
 from typing import Any
 from typing import Iterable
@@ -29,28 +55,38 @@ from .utils.validator import Validator
 
 
 class LangString:
-    """A class to encapsulate a string with its language information.
+    """
+    A class to encapsulate a string with its language information.
 
     This class provides functionality to associate a text string with a language tag, offering methods for string
     representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
     from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.
 
+    Many standard string methods are overridden to return LangString objects, allowing seamless integration and
+    extended functionality. This design ensures that users can work with LangString instances similarly to regular
+    strings.
+
     :ivar text: The text string.
     :vartype text: Optional[str]
     :ivar lang: The language tag of the text.
     :vartype lang: str
+    :raises ValueError: If control flags enforce non-empty text and the text is empty.
+    :raises TypeError: If the types of parameters are incorrect based on validation.
     """
 
     def __init__(self, text: str = "", lang: str = "") -> None:
-        """Initialize a new LangString object with text and an optional language tag.
+        """
+        Initialize a new LangString object with text and an optional language tag.
 
-        The behavior of this method is influenced by control flags set in Controller. For instance, if the
+        The behavior of this method is influenced by control flags set in the Controller. For instance, if the
         DEFINED_TEXT flag is enabled, an empty 'text' string will raise a ValueError.
 
         :param text: The text string.
         :type text: str
         :param lang: The language tag of the text.
         :type lang: str
+        :raises ValueError: If the DEFINED_TEXT flag is enabled and the text string is empty.
+        :raises TypeError: If the provided text or lang is not a string.
         """
         self.text: str = text
         self.lang: str = lang
@@ -61,24 +97,50 @@ class LangString:
 
     @property
     def text(self) -> str:
-        """Getter for text."""
+        """
+        Get the text string.
+
+        :return: The text string.
+        :rtype: str
+        """
         return self._text
 
     @text.setter
     def text(self, new_text: str) -> None:
-        """Setter for text."""
+        """
+        Set the text string. If the provided text is None, it defaults to an empty string.
+        This method also validates the type and the text based on control flags.
+
+        :param new_text: The new text string.
+        :type new_text: str
+        :raises TypeError: If the new text is not of type str.
+        :raises ValueError: If the control flags enforce non-empty text and the new text is empty.
+        """
         new_text = "" if new_text is None else new_text
         Validator.validate_type_single(new_text, str)
         self._text = Validator.validate_flags_text(LangStringFlag, new_text)
 
     @property
     def lang(self) -> str:
-        """Getter for lang."""
+        """
+        Get the language tag.
+
+        :return: The language tag.
+        :rtype: str
+        """
         return self._lang
 
     @lang.setter
     def lang(self, new_lang: str) -> None:
-        """Setter for lang."""
+        """
+        Set the language tag. If the provided language tag is None, it defaults to an empty string. This method also
+        validates the type and the language tag based on control flags.
+
+        :param new_lang: The new language tag.
+        :type new_lang: str
+        :raises TypeError: If the new language tag is not of type str.
+        :raises ValueError: If the control flags enforce valid language tags and the new language tag is invalid.
+        """
         new_lang = "" if new_lang is None else new_lang
         Validator.validate_type_single(new_lang, str)
         self._lang = Validator.validate_flags_lang(LangStringFlag, new_lang)

@@ -1456,16 +1456,29 @@ class LangString:
     @staticmethod
     def merge_langstrings(langstrings: list["LangString"]) -> list["LangString"]:
         """
-        Merges duplicated LangStrings in a list based on content and language tags.
+        Merge duplicated LangStrings in a list based on content and language tags.
 
-        If there's a single casing used for LangStrings with the same content, that casing is used.
-        If there are LangStrings with the same content but different casings, the resulting LangString uses
-        a casefolded version of the language tag.
+        This method processes a list of LangString instances, identifying and merging duplicates
+        based on their text and language tags. If there are multiple LangStrings with the same text
+        but different language tag casings, the resulting LangString will use a casefolded version
+        of the language tag.
 
         :param langstrings: List of LangString instances to be merged.
-        :type langstrings: List[LangString]
+        :type langstrings: list[LangString]
         :return: A list of merged LangString instances without duplicates.
-        :rtype: list
+        :rtype: list[LangString]
+
+        :Example:
+
+        >>> lang_str1 = LangString("Hello", "en")
+        >>> lang_str2 = LangString("Hello", "EN")
+        >>> lang_str3 = LangString("Bonjour", "fr")
+        >>> merged_list = LangString.merge_langstrings([lang_str1, lang_str2, lang_str3])
+        >>> for ls in merged_list:
+        ...     print(ls)
+        ...
+        >>> # Output: '"Hello"@en'
+        >>> #         '"Bonjour"@fr'
         """
         Validator.validate_type_iterable(langstrings, list, LangString)
 

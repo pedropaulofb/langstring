@@ -59,7 +59,7 @@ class MultiLangString:
         :type pref_lang: str
         :raises TypeError: If mls_dict is not a dictionary or pref_lang is not a string.
         """
-        self.mls_dict = mls_dict
+        self.mls_dict: Optional[dict[str, set[str]]] = mls_dict
         self.pref_lang: str = pref_lang
 
     # --------------------------------------------------

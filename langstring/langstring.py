@@ -1499,6 +1499,33 @@ class LangString:
 
         return list(merged.values())
 
+    @staticmethod
+    def print_list(
+        langstring_list: list["LangString"], print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
+    ) -> None:
+        """
+        Print a string representation of a list of LangString instances using the to_string method
+        with specified formatting options.
+
+        :param langstring_list: The list of LangString instances.
+        :type langstring_list: list[LangString]
+        :param print_quotes: If True, wrap the text in quotes. If None, use the default setting from the Controller.
+        :type print_quotes: Optional[bool]
+        :param separator: The separator to use between the text and language tag.
+        :type separator: str
+        :param print_lang: If True, include the language tag. If None, use the default setting from the Controller.
+        :type print_lang: Optional[bool]
+
+        :Example:
+
+        >>> lang_str1 = LangString("a", "b")
+        >>> lang_str2 = LangString("c", "d")
+        >>> ls_list = [lang_str1, lang_str2]
+        >>> LangString.print_list(ls_list)  # Output: ['"a"@b', '"c"@d']
+        """
+        formatted_strings = [ls.to_string(print_quotes, separator, print_lang) for ls in langstring_list]
+        print('[' + ', '.join(formatted_strings) + ']')
+
     # ---------------------------------------------
     # Private Methods
     # ---------------------------------------------

@@ -675,7 +675,8 @@ class LangString:
 
         This method mimics the behavior of the standard string's lstrip method but returns a LangString object.
 
-        :param chars: A string specifying the set of characters to be removed. If None, whitespace characters are removed.
+        :param chars: A string specifying the set of characters to be removed.
+        If None, whitespace characters are removed.
         :type chars: Optional[str]
         :return: A new LangString with leading characters removed.
         :rtype: LangString
@@ -694,14 +695,15 @@ class LangString:
 
     def partition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """
-        Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part before the separator,
-        the separator itself, and the part after the separator.
+        Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part
+        before the separator, the separator itself, and the part after the separator.
 
         This method mimics the behavior of the standard string's partition method but returns LangString objects.
 
         :param sep: The separator to split the LangString.
         :type sep: str
-        :return: A 3-tuple containing the part before the separator, the separator itself, and the part after the separator.
+        :return: A 3-tuple containing the part before the separator, the separator itself,
+                 and the part after the separator.
         :rtype: tuple[LangString, LangString, LangString]
 
         :Example:
@@ -875,14 +877,15 @@ class LangString:
 
     def rpartition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """
-        Split the LangString at the last occurrence of sep, and return a 3-tuple containing the part before the separator,
-        the separator itself, and the part after the separator.
+        Split the LangString at the last occurrence of sep, and return a 3-tuple containing the
+        part before the separator, the separator itself, and the part after the separator.
 
         This method mimics the behavior of the standard string's rpartition method but returns LangString objects.
 
         :param sep: The separator to split the LangString.
         :type sep: str
-        :return: A 3-tuple containing the part before the separator, the separator itself, and the part after the separator.
+        :return: A 3-tuple containing the part before the separator, the separator itself,
+                 and the part after the separator.
         :rtype: tuple[LangString, LangString, LangString]
 
         :Example:
@@ -898,8 +901,8 @@ class LangString:
 
     def rsplit(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:
         """
-        Return a list of the words in the LangString, using sep as the delimiter string. The list is split from the right
-        starting from the end of the string.
+        Return a list of the words in the LangString, using sep as the delimiter string.
+        The list is split from the right starting from the end of the string.
 
         This method mimics the behavior of the standard string's rsplit method but returns a list of LangString objects.
 
@@ -938,7 +941,8 @@ class LangString:
 
         This method mimics the behavior of the standard string's rstrip method but returns a LangString object.
 
-        :param chars: A string specifying the set of characters to be removed. If None, whitespace characters are removed.
+        :param chars: A string specifying the set of characters to be removed.
+                      If None, whitespace characters are removed.
         :type chars: Optional[str]
         :return: A new LangString with trailing characters removed.
         :rtype: LangString
@@ -995,7 +999,8 @@ class LangString:
         """
         Return a list of the lines in the LangString, breaking at line boundaries.
 
-        This method mimics the behavior of the standard string's splitlines method but returns a list of LangString objects.
+        This method mimics the behavior of the standard string's splitlines method but returns
+        a list of LangString objects.
 
         :param keepends: If True, line breaks are included in the resulting list.
         :type keepends: bool
@@ -1052,7 +1057,8 @@ class LangString:
 
         This method mimics the behavior of the standard string's strip method but returns a LangString object.
 
-        :param chars: A string specifying the set of characters to be removed. If None, whitespace characters are removed.
+        :param chars: A string specifying the set of characters to be removed.
+                      If None, whitespace characters are removed.
         :type chars: Optional[str]
         :return: A new LangString with leading and trailing characters removed.
         :rtype: LangString
@@ -1465,7 +1471,8 @@ class LangString:
         Implement in-place addition for LangString objects.
 
         This method allows the LangString's text to be concatenated with another LangString's text or a regular string.
-        The operation is only allowed if both LangString objects have the same language tag or if the other operand is a string.
+        The operation is only allowed if both LangString objects have the same language tag or if the other operand
+        is a string.
 
         :param other: The LangString or string to add.
         :type other: Union[LangString, str]
@@ -1642,8 +1649,9 @@ class LangString:
         """
         Handle concatenation when LangString is on the right side of the '+' operator.
 
-        This method is only defined for 'other' of type string because the __add__ method is used when 'other' is a LangString.
-        It concatenates the other's text to the LangString's text (in this order) and returns a string, which loses its language tag.
+        This method is only defined for 'other' of type string because the __add__ method is used when 'other'
+        is a LangString. It concatenates the other's text to the LangString's text (in this order) and returns a
+        string, which loses its language tag.
 
         :param other: The string to concatenate with.
         :type other: str

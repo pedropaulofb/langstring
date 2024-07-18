@@ -29,7 +29,7 @@ class Validator(metaclass=NonInstantiable):
     """
 
     @classmethod
-    def validate_flags_text(cls, flag_type: type[Enum], text: Optional[str]) -> Optional[str]:
+    def validate_flags_text(cls, flag_type: type[Enum], text: Optional[str]) -> str:
         cls.validate_type_single(flag_type, type)
         cls.validate_type_single(text, str, optional=True)
 

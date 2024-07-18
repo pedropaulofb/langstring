@@ -1179,7 +1179,7 @@ strings.</p>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">capitalized_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">capitalized_lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">capitalized_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1201,7 +1201,7 @@ strings.</p>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">casefolded_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">casefolded_lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &quot;hello, world!&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">casefolded_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello, world!&quot;@en</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1230,7 +1230,7 @@ strings.</p>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">centered_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">centered_lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &quot;***hello***&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">centered_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;***hello***&quot;@en</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1313,7 +1313,7 @@ strings.</p>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello        world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expanded_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">expandtabs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">expanded_lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &quot;hello   world&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">expanded_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello   world&quot;@en</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1370,7 +1370,7 @@ strings.</p>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">formatted_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">formatted_lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">formatted_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1395,7 +1395,7 @@ strings.</p>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{name}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">formatted_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">format_map</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">formatted_lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">formatted_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1732,96 +1732,196 @@ strings.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.isupper">
 <span class="sig-name descname"><span class="pre">isupper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.isupper" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
+<dd><p>Return True if all cased characters in the LangString are uppercase and there is at least one cased character.</p>
+<p>This method mimics the behavior of the standard string’s isupper method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the LangString is in uppercase, otherwise False.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;HELLO, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_upper</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_upper</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_upper</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_upper</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.join">
 <span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.join" title="Link to this definition"></a></dt>
-<dd><p>Join an iterable with the text of the LangString.</p>
+<dd><p>Join an iterable of strings with the LangString’s text.</p>
+<p>This method mimics the behavior of the standard string’s join method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>iterable</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>iterable</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – An iterable of strings to be joined.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with the joined text.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">joined_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">joined_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.ljust">
 <span class="sig-name descname"><span class="pre">ljust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillchar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.ljust" title="Link to this definition"></a></dt>
-<dd><p>Left justify the text.</p>
+<dd><p>Return a left-justified LangString of length width.</p>
+<p>Padding is done using the specified fill character (default is a space).</p>
+<p>This method mimics the behavior of the standard string’s ljust method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<em>int</em>)</p></li>
-<li><p><strong>fillchar</strong> (<em>str</em>)</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – The total width of the resulting LangString.</p></li>
+<li><p><strong>fillchar</strong> (<em>str</em>) – The character to fill the padding with.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString left-justified with padding.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left_justified_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">left_justified_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello*****&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.lower">
 <span class="sig-name descname"><span class="pre">lower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.lower" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dd><p>Return a copy of the LangString with all the cased characters converted to lowercase.</p>
+<p>This method mimics the behavior of the standard string’s lower method but returns a LangString object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new LangString with all characters in lowercase.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;HELLO, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lower_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lower_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello, world!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.lstrip">
 <span class="sig-name descname"><span class="pre">lstrip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.lstrip" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return a copy of the LangString with leading characters removed.</p>
+<p>This method mimics the behavior of the standard string’s lstrip method but returns a LangString object.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – A string specifying the set of characters to be removed. If None, whitespace characters are removed.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with leading characters removed.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;...Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.partition">
 <span class="sig-name descname"><span class="pre">partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.partition" title="Link to this definition"></a></dt>
-<dd><p>Partition the text.</p>
+<dd><p>Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part before the separator,
+the separator itself, and the part after the separator.</p>
+<p>This method mimics the behavior of the standard string’s partition method but returns LangString objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sep</strong> (<em>str</em>)</p>
+<dd class="field-odd"><p><strong>sep</strong> (<em>str</em>) – The separator to split the LangString.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 3-tuple containing the part before the separator, the separator itself, and the part after the separator.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">before</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">after</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">before</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span>     <span class="c1"># Output: &quot;, &quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">after</span><span class="p">)</span>   <span class="c1"># Output: &quot;world!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.replace">
 <span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.replace" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return a copy of the LangString with all occurrences of substring old replaced by new.</p>
+<p>This method mimics the behavior of the standard string’s replace method but returns a LangString object.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>old</strong> (<em>str</em>)</p></li>
-<li><p><strong>new</strong> (<em>str</em>)</p></li>
-<li><p><strong>count</strong> (<em>int</em>)</p></li>
+<li><p><strong>old</strong> (<em>str</em>) – The substring to be replaced.</p></li>
+<li><p><strong>new</strong> (<em>str</em>) – The substring to replace with.</p></li>
+<li><p><strong>count</strong> (<em>int</em>) – The maximum number of occurrences to replace. If -1, all occurrences are replaced.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with the replacements.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replaced_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">replaced_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, Python!&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;abababab&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replaced_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;cd&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">replaced_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;cdcdabab&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1830,17 +1930,30 @@ strings.</p>
 <dd><p>Remove the specified prefix from the LangString’s text.</p>
 <p>If the text starts with the prefix string, return a new LangString with the prefix string removed.
 Otherwise, return a copy of the original LangString.</p>
+<p>This method mimics the behavior of the standard string’s removeprefix method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>prefix</strong> (<em>str</em>) – The prefix to remove from the text.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A new LangString with the prefix removed.</p>
+<dd class="field-even"><p>A new LangString with the prefix removed, or the original LangString if the prefix is not found.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">removed_prefix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s2">&quot;Hello, &quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_prefix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;world!&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">removed_prefix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s2">&quot;Goodbye, &quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_prefix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1849,135 +1962,313 @@ Otherwise, return a copy of the original LangString.</p>
 <dd><p>Remove the specified suffix from the LangString’s text.</p>
 <p>If the text ends with the suffix string, return a new LangString with the suffix string removed.
 Otherwise, return a copy of the original LangString.</p>
+<p>This method mimics the behavior of the standard string’s removesuffix method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>suffix</strong> (<em>str</em>) – The suffix to remove from the text.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A new LangString with the suffix removed.</p>
+<dd class="field-even"><p>A new LangString with the suffix removed, or the original LangString if the suffix is not found.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">removed_suffix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;, world!&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_suffix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">removed_suffix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;planet&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_suffix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.rfind">
 <span class="sig-name descname"><span class="pre">rfind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rfind" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return the highest index in the LangString where substring sub is found, such that sub is contained within
+[start, end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
+not found.</p>
+<p>This method mimics the behavior of the standard string’s rfind method.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sub</strong> (<em>str</em>)</p></li>
-<li><p><strong>start</strong> (<em>int</em>)</p></li>
-<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>sub</strong> (<em>str</em>) – The substring to find.</p></li>
+<li><p><strong>start</strong> (<em>int</em><em>, </em><em>optional</em>) – The starting position (default is 0).</p></li>
+<li><p><strong>end</strong> (<em>int</em><em>, </em><em>optional</em>) – The ending position (default is the end of the string).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The highest index where the substring is found, or -1 if not found.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: 14</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.rindex">
 <span class="sig-name descname"><span class="pre">rindex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rindex" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return the highest index in the LangString where substring sub is found, such that sub is contained within
+[start, end]. Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
+the substring is not found.</p>
+<p>This method mimics the behavior of the standard string’s rindex method.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sub</strong> (<em>str</em>)</p></li>
-<li><p><strong>start</strong> (<em>int</em>)</p></li>
-<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>sub</strong> (<em>str</em>) – The substring to find.</p></li>
+<li><p><strong>start</strong> (<em>int</em><em>, </em><em>optional</em>) – The starting position (default is 0).</p></li>
+<li><p><strong>end</strong> (<em>int</em><em>, </em><em>optional</em>) – The ending position (default is the end of the string).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The highest index where the substring is found.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the substring is not found.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: 14</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;Hi&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: ValueError</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.rjust">
 <span class="sig-name descname"><span class="pre">rjust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillchar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rjust" title="Link to this definition"></a></dt>
-<dd><p>Right justify the text.</p>
+<dd><p>Return a right-justified LangString of length width.</p>
+<p>Padding is done using the specified fill character (default is a space).</p>
+<p>This method mimics the behavior of the standard string’s rjust method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<em>int</em>)</p></li>
-<li><p><strong>fillchar</strong> (<em>str</em>)</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – The total width of the resulting LangString.</p></li>
+<li><p><strong>fillchar</strong> (<em>str</em>) – The character to fill the padding with.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString right-justified with padding.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">right_justified_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">right_justified_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;*****hello&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.rpartition">
 <span class="sig-name descname"><span class="pre">rpartition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rpartition" title="Link to this definition"></a></dt>
-<dd><p>Partition the text from the right.</p>
+<dd><p>Split the LangString at the last occurrence of sep, and return a 3-tuple containing the part before the separator,
+the separator itself, and the part after the separator.</p>
+<p>This method mimics the behavior of the standard string’s rpartition method but returns LangString objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sep</strong> (<em>str</em>)</p>
+<dd class="field-odd"><p><strong>sep</strong> (<em>str</em>) – The separator to split the LangString.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 3-tuple containing the part before the separator, the separator itself, and the part after the separator.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">before</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">after</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">before</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world! &quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span>     <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">after</span><span class="p">)</span>   <span class="c1"># Output: &quot;, universe!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.rsplit">
 <span class="sig-name descname"><span class="pre">rsplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rsplit" title="Link to this definition"></a></dt>
-<dd><p>Split the text from the right.</p>
+<dd><p>Return a list of the words in the LangString, using sep as the delimiter string. The list is split from the right
+starting from the end of the string.</p>
+<p>This method mimics the behavior of the standard string’s rsplit method but returns a list of LangString objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sep</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p></li>
-<li><p><strong>maxsplit</strong> (<em>int</em>)</p></li>
+<li><p><strong>sep</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The delimiter string. If None, any whitespace string is a separator.</p></li>
+<li><p><strong>maxsplit</strong> (<em>int</em>) – Maximum number of splits. If -1, there is no limit.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of LangString objects.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one two three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rsplit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output: &quot;one&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;two&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;three&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one,two,three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output: &quot;one,two&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;three&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.rstrip">
 <span class="sig-name descname"><span class="pre">rstrip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.rstrip" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return a copy of the LangString with trailing characters removed.</p>
+<p>This method mimics the behavior of the standard string’s rstrip method but returns a LangString object.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – A string specifying the set of characters to be removed. If None, whitespace characters are removed.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with trailing characters removed.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!!!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.split">
 <span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.split" title="Link to this definition"></a></dt>
-<dd><p>Split the text.</p>
+<dd><p>Return a list of the words in the LangString, using sep as the delimiter string.</p>
+<p>This method mimics the behavior of the standard string’s split method but returns a list of LangString objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sep</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p></li>
-<li><p><strong>maxsplit</strong> (<em>int</em>)</p></li>
+<li><p><strong>sep</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The delimiter string. If None, any whitespace string is a separator.</p></li>
+<li><p><strong>maxsplit</strong> (<em>int</em>) – Maximum number of splits. If -1, there is no limit.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of LangString objects.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one two three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output: &quot;one&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;two&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;three&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one,two,three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output: &quot;one&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;two&quot;@en</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;three&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.splitlines">
 <span class="sig-name descname"><span class="pre">splitlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keepends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.splitlines" title="Link to this definition"></a></dt>
-<dd><p>Split the text into lines.</p>
+<dd><blockquote>
+<div><p>Return a list of the lines in the LangString, breaking at line boundaries.</p>
+<p>This method mimics the behavior of the standard string’s splitlines method but returns a list of LangString objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param keepends<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If True, line breaks are included in the resulting list.</p>
+</dd>
+<dt class="field-even">type keepends<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of LangString objects.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[LangString]</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\n</span><span class="s2">world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
+<span class="go"># Output:</span>
+<span class="go"># [LangString(text=&#39;Hello&#39;, lang=&#39;en&#39;), LangString(text=&#39;world&#39;, lang=&#39;en&#39;)]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\n</span><span class="s2">world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
+<span class="go"># Output:</span>
+<span class="go"># [LangString(text=&#39;Hello</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>‘, lang=’en’), LangString(text=’world’, lang=’en’)]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>keepends</strong> (<em>bool</em>)</p>
@@ -1991,131 +2282,262 @@ Otherwise, return a copy of the original LangString.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.startswith">
 <span class="sig-name descname"><span class="pre">startswith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.startswith" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return True if the LangString starts with the specified prefix, otherwise return False.</p>
+<p>This method mimics the behavior of the standard string’s startswith method.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>prefix</strong> (<em>str</em>)</p></li>
-<li><p><strong>start</strong> (<em>int</em>)</p></li>
-<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – The prefix to check.</p></li>
+<li><p><strong>start</strong> (<em>int</em><em>, </em><em>optional</em>) – The starting position (default is 0).</p></li>
+<li><p><strong>end</strong> (<em>int</em><em>, </em><em>optional</em>) – The ending position (default is the end of the string).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the LangString starts with the prefix, otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">starts_with_hello</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">starts_with_hello</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">starts_with_hello</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">starts_with_hello</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.strip">
 <span class="sig-name descname"><span class="pre">strip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.strip" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return a copy of the LangString with leading and trailing characters removed.</p>
+<p>This method mimics the behavior of the standard string’s strip method but returns a LangString object.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – A string specifying the set of characters to be removed. If None, whitespace characters are removed.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with leading and trailing characters removed.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   Hello, world!   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;***Hello, world!***&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.swapcase">
 <span class="sig-name descname"><span class="pre">swapcase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.swapcase" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dd><p>Return a copy of the LangString with uppercase characters converted to lowercase and vice versa.</p>
+<p>This method mimics the behavior of the standard string’s swapcase method but returns a LangString object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new LangString with swapped case.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swapcase_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">swapcase_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hELLO, world!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.title">
 <span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.title" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dd><p>Return a titlecased version of the LangString where words start with an uppercase character and the remaining
+characters are lowercase.</p>
+<p>This method mimics the behavior of the standard string’s title method but returns a LangString object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new LangString that is titlecased.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">title_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">title_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.translate">
 <span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.translate" title="Link to this definition"></a></dt>
-<dd><p>Translate the text using a translation table.</p>
+<dd><p>Return a copy of the LangString in which each character has been mapped through the given translation table.</p>
+<p>This method mimics the behavior of the standard string’s translate method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>table</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em>) – A translation table mapping Unicode ordinals to Unicode ordinals, strings, or None.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with the characters translated.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">translation_table</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;aeiou&quot;</span><span class="p">,</span> <span class="s2">&quot;12345&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">translated_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">translation_table</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">translated_lang_str</span><span class="p">)</span> <span class="c1"># Output: &quot;h2ll4 w4rld&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.upper">
 <span class="sig-name descname"><span class="pre">upper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.upper" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dd><p>Return a copy of the LangString with all the characters converted to uppercase.</p>
+<p>This method mimics the behavior of the standard string’s upper method but returns a LangString object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new LangString with all characters in uppercase.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upper_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">upper_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;HELLO WORLD&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.zfill">
 <span class="sig-name descname"><span class="pre">zfill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.zfill" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return a copy of the LangString left filled with ASCII ‘0’ digits to make a string of length width.</p>
+<p>This method mimics the behavior of the standard string’s zfill method but returns a LangString object.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>width</strong> (<em>int</em>)</p>
+<dd class="field-odd"><p><strong>width</strong> (<em>int</em>) – The total width of the resulting LangString.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString left filled with ‘0’ digits.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zfilled_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">zfilled_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;00042&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.to_string">
 <span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.to_string" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return a string representation of the LangString with options for including quotes and language tag.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
-<li><p><strong>separator</strong> (<em>str</em>)</p></li>
-<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – If True, wrap the text in quotes. If None, use the default setting from the Controller.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between the text and language tag.</p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – If True, include the language tag. If None, use the default setting from the Controller.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string representation of the LangString.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &#39;&quot;Hello, World!&quot;@en&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>  <span class="c1"># Output: &#39;Hello, World!@en&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>  <span class="c1"># Output: &#39;&quot;Hello, World!&quot;&#39;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.equals_str">
 <span class="sig-name descname"><span class="pre">equals_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.equals_str" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Compare the LangString’s text with a given string for equality.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>str</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>str</em>) – The string to compare with.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the text matches the given string, otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">equals_str</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">))</span>  <span class="c1"># Output: True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">equals_str</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">))</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.equals_langstring">
 <span class="sig-name descname"><span class="pre">equals_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.equals_langstring" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Compare the LangString with another LangString for equality of text and language tag (case-insensitive).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a>) – The LangString to compare with.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if both text and language tag match (case-insensitive), otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span><span class="o">.</span><span class="n">equals_langstring</span><span class="p">(</span><span class="n">lang_str2</span><span class="p">))</span>  <span class="c1"># Output: True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span><span class="o">.</span><span class="n">equals_langstring</span><span class="p">(</span><span class="n">lang_str3</span><span class="p">))</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2132,13 +2554,26 @@ Otherwise, return a copy of the original LangString.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A new LangString with the concatenated text.</p>
 </dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>TypeError</strong> – If the objects are not compatible for addition.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the objects are not compatible for addition.</p>
 </dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot; World&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">+</span> <span class="n">lang_str2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">lang_str3</span> <span class="o">+</span> <span class="s2">&quot; World&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2147,12 +2582,26 @@ Otherwise, return a copy of the original LangString.</p>
 <dd><p>Check if a substring exists within the LangString’s text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>item</strong> (<em>str</em>)</p>
+<dd class="field-odd"><p><strong>item</strong> (<em>str</em>) – The substring to check.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the substring exists within the text, otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contains</span> <span class="o">=</span> <span class="s2">&quot;World&quot;</span> <span class="ow">in</span> <span class="n">lang_str</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">contains</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contains</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span> <span class="ow">in</span> <span class="n">lang_str</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">contains</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2164,12 +2613,33 @@ Otherwise, return a copy of the original LangString.</p>
 <dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – Another object to compare with.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p></p>
+<dd class="field-even"><p>True if the objects are equal, otherwise False.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="n">lang_str2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="n">lang_str3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="s2">&quot;Hello, World!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="s2">&quot;Bonjour, Monde!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2178,12 +2648,42 @@ Otherwise, return a copy of the original LangString.</p>
 <dd><p>Check if this LangString is greater than or equal to another str or LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – The str or LangString object to compare with.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this LangString is greater than or equal to the other, otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the objects are not compatible for comparison.</p></li>
+<li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;=</span> <span class="n">lang_str2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;=</span> <span class="n">lang_str3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;=</span> <span class="s2">&quot;banana&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;=</span> <span class="s2">&quot;cherry&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2192,12 +2692,26 @@ Otherwise, return a copy of the original LangString.</p>
 <dd><p>Retrieve a substring or a reversed string from the LangString’s text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>key</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>slice</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>key</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>slice</em><em>]</em>) – The index or slice to access.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with the substring or single character.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">substring</span> <span class="o">=</span> <span class="n">lang_str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_char</span> <span class="o">=</span> <span class="n">lang_str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">single_char</span><span class="p">)</span>  <span class="c1"># Output: &quot;e&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2206,46 +2720,108 @@ Otherwise, return a copy of the original LangString.</p>
 <dd><p>Check if this LangString is greater than another LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – The str or LangString object to compare with.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this LangString is greater than the other, otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the objects are not compatible for comparison.</p></li>
+<li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;</span> <span class="n">lang_str2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;</span> <span class="n">lang_str3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;</span> <span class="s2">&quot;apple&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;</span> <span class="s2">&quot;cherry&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__hash__">
 <span class="sig-name descname"><span class="pre">__hash__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__hash__" title="Link to this definition"></a></dt>
-<dd><p>Generate a hash new_text for a LangString object.</p>
+<dd><p>Generate a hash value for a LangString object.</p>
+<p>The hash value is computed based on the text and a casefolded version of the language tag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The hash new_text of the LangString object, based on its text and language tag.</p>
+<dd class="field-odd"><p>The hash value of the LangString object, based on its text and language tag.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hash_value</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hash_value</span><span class="p">)</span>  <span class="c1"># Output: A unique integer representing the hash value</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__iadd__">
 <span class="sig-name descname"><span class="pre">__iadd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__iadd__" title="Link to this definition"></a></dt>
-<dd><p>Implement in-place addition.</p>
+<dd><p>Implement in-place addition for LangString objects.</p>
+<p>This method allows the LangString’s text to be concatenated with another LangString’s text or a regular string.
+The operation is only allowed if both LangString objects have the same language tag or if the other operand is a string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><em>str</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><em>str</em><em>]</em>) – The LangString or string to add.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The same LangString instance with the concatenated text.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the objects are not compatible for addition.</p></li>
+<li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot; World&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">+=</span> <span class="n">lang_str2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">+=</span> <span class="s2">&quot;!&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World!&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__imul__">
 <span class="sig-name descname"><span class="pre">__imul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__imul__" title="Link to this definition"></a></dt>
-<dd><p>In-place multiplication of the LangString’s text.</p>
+<dd><p>Implement in-place multiplication of the LangString’s text.</p>
+<p>This method allows the LangString’s text to be repeated a specified number of times.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>int</em>) – The number of times to repeat the text.</p>
@@ -2256,32 +2832,77 @@ Otherwise, return a copy of the original LangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the operand is not an integer.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">*=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;HelloHelloHello&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__iter__">
 <span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__iter__" title="Link to this definition"></a></dt>
 <dd><p>Enable iteration over the text part of the LangString.</p>
+<p>This method allows the LangString to be iterable, returning each character in the text part one by one.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Iterator[str]</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator over the characters in the text.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterator[str]</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">lang_str</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go"># Output:   H</span>
+<span class="go">#           e</span>
+<span class="go">#           l</span>
+<span class="go">#           l</span>
+<span class="go">#           o</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__le__">
 <span class="sig-name descname"><span class="pre">__le__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__le__" title="Link to this definition"></a></dt>
-<dd><p>Check if this LangString is less than or equal to another LangString object.</p>
+<dd><p>Check if this LangString is less than or equal to another LangString object or string.</p>
+<p>This method compares the LangString’s text with another LangString’s text or a regular string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – The LangString or string to compare with.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this LangString’s text is less than or equal to the other text, otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the objects are not compatible for comparison.</p></li>
+<li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;=</span> <span class="n">lang_str2</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;=</span> <span class="s2">&quot;apple&quot;</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2289,30 +2910,59 @@ Otherwise, return a copy of the original LangString.</p>
 <span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__len__" title="Link to this definition"></a></dt>
 <dd><p>Return the length of the LangString’s text.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The length of the text.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>  <span class="c1"># Output: 5</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__lt__">
 <span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__lt__" title="Link to this definition"></a></dt>
-<dd><p>Check if this LangString is less than another LangString object.</p>
+<dd><p>Check if this LangString is less than another LangString object or string.</p>
+<p>This method compares the LangString’s text with another LangString’s text or a regular string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – The LangString or string to compare with.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this LangString’s text is less than the other text, otherwise False.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the objects are not compatible for comparison.</p></li>
+<li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;</span> <span class="n">lang_str2</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span><span class="p">)</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__mul__">
 <span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__mul__" title="Link to this definition"></a></dt>
 <dd><p>Multiply the LangString’s text a specified number of times.</p>
+<p>This method repeats the LangString’s text a specified number of times and returns a new LangString.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>int</em>) – The number of times to repeat the text.</p>
@@ -2323,24 +2973,46 @@ Otherwise, return a copy of the original LangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the operand is not an integer.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multiplied_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multiplied_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hellohellohello&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.__radd__">
 <span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__radd__" title="Link to this definition"></a></dt>
 <dd><p>Handle concatenation when LangString is on the right side of the ‘+’ operator.</p>
-<p>Only defined to ‘other’ of type string because the __add__ method is used when ‘other’ is a LangString.</p>
-<p>As it concatenates other’s text to the LangString’s text (in this order), it returns a string and, consequently,
-the result looses its language tag.</p>
+<p>This method is only defined for ‘other’ of type string because the __add__ method is used when ‘other’ is a LangString.
+It concatenates the other’s text to the LangString’s text (in this order) and returns a string, which loses its language tag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>str</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>str</em>) – The string to concatenate with.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new string with the concatenated text.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘other’ is not a string.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;hello &quot;</span> <span class="o">+</span> <span class="n">lang_str</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: &#39;hello world&#39;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2348,10 +3020,19 @@ the result looses its language tag.</p>
 <span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__repr__" title="Link to this definition"></a></dt>
 <dd><p>Return an unambiguous string representation of the LangString.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The unambiguous string representation of the LangString.</p>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">lang_str</span><span class="p">))</span>  <span class="c1"># Output: &#39;LangString(text=&quot;hello&quot;, lang=&quot;en&quot;)&#39;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2373,7 +3054,14 @@ It is typically used for repeating the LangString’s text a specified number of
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If ‘other’ is not an integer.</p>
 </dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multiplied_lang_str</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">lang_str</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multiplied_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hellohellohello&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2387,56 +3075,132 @@ It is typically used for repeating the LangString’s text a specified number of
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>  <span class="c1"># Output: &#39;&quot;hello&quot;@en&#39;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString.merge_langstrings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_langstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstrings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.merge_langstrings" title="Link to this definition"></a></dt>
-<dd><p>Merges duplicated LangStrings in a list based on content and language tags.</p>
-<p>If there’s a single casing used for LangStrings with the same content, that casing is used.
-If there are LangStrings with the same content but different casings, the resulting LangString uses
-a casefolded version of the language tag.</p>
+<dd><p>Merge duplicated LangStrings in a list based on content and language tags.</p>
+<p>This method processes a list of LangString instances, identifying and merging duplicates
+based on their text and language tags. If there are multiple LangStrings with the same text
+but different language tag casings, the resulting LangString will use a casefolded version
+of the language tag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>langstrings</strong> (<em>List</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – List of LangString instances to be merged.</p>
+<dd class="field-odd"><p><strong>langstrings</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – List of LangString instances to be merged.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A list of merged LangString instances without duplicates.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merged_list</span> <span class="o">=</span> <span class="n">LangString</span><span class="o">.</span><span class="n">merge_langstrings</span><span class="p">([</span><span class="n">lang_str1</span><span class="p">,</span> <span class="n">lang_str2</span><span class="p">,</span> <span class="n">lang_str3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">merged_list</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output: &#39;&quot;Hello&quot;@en&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &#39;&quot;Bonjour&quot;@fr&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="langstring.LangString.print_list">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.print_list" title="Link to this definition"></a></dt>
+<dd><p>Print a string representation of a list of LangString instances using the to_string method
+with specified formatting options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>langstring_list</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – The list of LangString instances.</p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – If True, wrap the text in quotes. If None, use the default setting from the Controller.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between the text and language tag.</p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – If True, include the language tag. If None, use the default setting from the Controller.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ls_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang_str1</span><span class="p">,</span> <span class="n">lang_str2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LangString</span><span class="o">.</span><span class="n">print_list</span><span class="p">(</span><span class="n">ls_list</span><span class="p">)</span>  <span class="c1"># Output: [&#39;&quot;a&quot;@b&#39;, &#39;&quot;c&quot;@d&#39;]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString._validate_match_types">
 <span class="sig-name descname"><span class="pre">_validate_match_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString._validate_match_types" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Validate that the type of the other operand matches the expected type.</p>
+<p>This method checks if the operand type is valid based on the control flag for type matching.
+If strict type matching is enabled, only LangString type is allowed. The strict mode can be
+overridden by passing the <cite>overwrite_strict</cite> parameter.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>other</strong> (<em>Union</em><em>[</em><em>object</em><em>, </em><em>str</em><em>, </em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>)</p></li>
-<li><p><strong>overwrite_strict</strong> (<em>bool</em>)</p></li>
+<li><p><strong>other</strong> (<em>Union</em><em>[</em><em>object</em><em>, </em><em>str</em><em>, </em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – The operand to be validated.</p></li>
+<li><p><strong>overwrite_strict</strong> (<em>bool</em>) – If True, enforces strict type matching regardless of the control flag.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If strict mode is enabled and the operand is not of type LangString.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span><span class="o">.</span><span class="n">_validate_match_types</span><span class="p">(</span><span class="n">lang_str</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># No exception</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span><span class="o">.</span><span class="n">_validate_match_types</span><span class="p">(</span><span class="n">lang_str</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.LangString._validate_match_langs">
 <span class="sig-name descname"><span class="pre">_validate_match_langs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString._validate_match_langs" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Validate that the language of the other LangString operand matches the current LangString’s language.</p>
+<p>This method checks if the language tags of both LangString objects are compatible. If the languages
+do not match, a ValueError is raised.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>)</p>
+<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – The operand to be validated.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the languages of both LangString objects do not match.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span><span class="o">.</span><span class="n">_validate_match_langs</span><span class="p">(</span><span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>  <span class="c1"># No exception</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span><span class="o">.</span><span class="n">_validate_match_langs</span><span class="p">(</span><span class="n">lang_str2</span><span class="p">)</span>  <span class="c1"># Raises ValueError due to incompatible languages</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>

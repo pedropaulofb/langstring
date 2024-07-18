@@ -1245,15 +1245,29 @@ class LangString:
 
     @Validator.validate_type_decorator
     def __add__(self, other: Union["LangString", str]) -> "LangString":
-        """Add another LangString or a string to this LangString.
+        """
+        Add another LangString or a string to this LangString.
 
         The operation can only be performed if:
         - Both are LangString objects with the same language tag.
         - The other is a string, which will be concatenated to the text of this LangString.
 
         :param other: The LangString or string to add.
+        :type other: Union[LangString, str]
         :return: A new LangString with the concatenated text.
+        :rtype: LangString
         :raises TypeError: If the objects are not compatible for addition.
+
+        :Example:
+
+        >>> lang_str1 = LangString("Hello", "en")
+        >>> lang_str2 = LangString(" World", "en")
+        >>> result = lang_str1 + lang_str2
+        >>> print(result)  # Output: "Hello World"@en
+
+        >>> lang_str3 = LangString("Hello", "en")
+        >>> result = lang_str3 + " World"
+        >>> print(result)  # Output: "Hello World"@en
         """
         self._validate_match_types(other)
         self._validate_match_langs(other)
@@ -1268,16 +1282,50 @@ class LangString:
 
     @Validator.validate_type_decorator
     def __contains__(self, item: str) -> bool:
-        """Check if a substring exists within the LangString's text."""
+        """
+        Check if a substring exists within the LangString's text.
+
+        :param item: The substring to check.
+        :type item: str
+        :return: True if the substring exists within the text, otherwise False.
+        :rtype: bool
+
+        :Example:
+
+        >>> lang_str = LangString("Hello, World!", "en")
+        >>> contains = "World" in lang_str
+        >>> print(contains)  # Output: True
+
+        >>> contains = "Python" in lang_str
+        >>> print(contains)  # Output: False
+        """
         return item in self.text
 
     def __eq__(self, other: object) -> bool:
-        """Check equality of this LangString with another object.
+        """
+        Check equality of this LangString with another object.
 
         :param other: Another object to compare with.
         :type other: object
-        :return:
+        :return: True if the objects are equal, otherwise False.
         :rtype: bool
+
+        :Example:
+
+        >>> lang_str1 = LangString("Hello, World!", "en")
+        >>> lang_str2 = LangString("Hello, World!", "en")
+        >>> is_equal = lang_str1 == lang_str2
+        >>> print(is_equal)  # Output: True
+
+        >>> lang_str3 = LangString("Hello, World!", "fr")
+        >>> is_equal = lang_str1 == lang_str3
+        >>> print(is_equal)  # Output: False
+
+        >>> is_equal = lang_str1 == "Hello, World!"
+        >>> print(is_equal)  # Output: True
+
+        >>> is_equal = lang_str1 == "Bonjour, Monde!"
+        >>> print(is_equal)  # Output: False
         """
         self._validate_match_types(other)
 
@@ -1291,7 +1339,33 @@ class LangString:
         return NotImplemented
 
     def __ge__(self, other: object) -> bool:
-        """Check if this LangString is greater than or equal to another str or LangString object."""
+        """
+        Check if this LangString is greater than or equal to another str or LangString object.
+
+        :param other: The str or LangString object to compare with.
+        :type other: object
+        :return: True if this LangString is greater than or equal to the other, otherwise False.
+        :rtype: bool
+        :raises TypeError: If the objects are not compatible for comparison.
+        :raises ValueError: If the language tags are incompatible.
+
+        :Example:
+
+        >>> lang_str1 = LangString("banana", "en")
+        >>> lang_str2 = LangString("apple", "en")
+        >>> is_ge = lang_str1 >= lang_str2
+        >>> print(is_ge)  # Output: True
+
+        >>> lang_str3 = LangString("apple", "en")
+        >>> is_ge = lang_str2 >= lang_str3
+        >>> print(is_ge)  # Output: True
+
+        >>> is_ge = lang_str1 >= "banana"
+        >>> print(is_ge)  # Output: True
+
+        >>> is_ge = lang_str2 >= "cherry"
+        >>> print(is_ge)  # Output: False
+        """
         self._validate_match_langs(other)  # remove diff langs
         self._validate_match_types(other)  # case strict is true, remove str
 
@@ -1304,7 +1378,23 @@ class LangString:
         return NotImplemented
 
     def __getitem__(self, key: Union[int, slice]) -> "LangString":
-        """Retrieve a substring or a reversed string from the LangString's text."""
+        """
+        Retrieve a substring or a reversed string from the LangString's text.
+
+        :param key: The index or slice to access.
+        :type key: Union[int, slice]
+        :return: A new LangString with the substring or single character.
+        :rtype: LangString
+
+        :Example:
+
+        >>> lang_str = LangString("hello, world", "en")
+        >>> substring = lang_str[0:5]
+        >>> print(substring)  # Output: "hello"@en
+
+        >>> single_char = lang_str[1]
+        >>> print(single_char)  # Output: "e"@en
+        """
         if isinstance(key, slice):
             # Handle slicing
             sliced_text = self.text[key]
@@ -1314,7 +1404,33 @@ class LangString:
         return LangString(self.text[key], self.lang)
 
     def __gt__(self, other: object) -> bool:
-        """Check if this LangString is greater than another LangString object."""
+        """
+        Check if this LangString is greater than another LangString object.
+
+        :param other: The str or LangString object to compare with.
+        :type other: object
+        :return: True if this LangString is greater than the other, otherwise False.
+        :rtype: bool
+        :raises TypeError: If the objects are not compatible for comparison.
+        :raises ValueError: If the language tags are incompatible.
+
+        :Example:
+
+        >>> lang_str1 = LangString("banana", "en")
+        >>> lang_str2 = LangString("apple", "en")
+        >>> is_gt = lang_str1 > lang_str2
+        >>> print(is_gt)  # Output: True
+
+        >>> lang_str3 = LangString("apple", "en")
+        >>> is_gt = lang_str2 > lang_str3
+        >>> print(is_gt)  # Output: False
+
+        >>> is_gt = lang_str1 > "apple"
+        >>> print(is_gt)  # Output: True
+
+        >>> is_gt = lang_str2 > "cherry"
+        >>> print(is_gt)  # Output: False
+        """
         self._validate_match_langs(other)
         self._validate_match_types(other)
 
@@ -1327,16 +1443,47 @@ class LangString:
         return NotImplemented
 
     def __hash__(self) -> int:
-        """Generate a hash new_text for a LangString object.
+        """
+        Generate a hash value for a LangString object.
 
-        :return: The hash new_text of the LangString object, based on its text and language tag.
+        The hash value is computed based on the text and a casefolded version of the language tag.
+
+        :return: The hash value of the LangString object, based on its text and language tag.
         :rtype: int
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> hash_value = hash(lang_str)
+        >>> print(hash_value)  # Output: A unique integer representing the hash value
         """
         return hash((self.text, self.lang.casefold()))
 
     @Validator.validate_type_decorator
     def __iadd__(self, other: Union["LangString", str]) -> "LangString":
-        """Implement in-place addition."""
+        """
+        Implement in-place addition for LangString objects.
+
+        This method allows the LangString's text to be concatenated with another LangString's text or a regular string.
+        The operation is only allowed if both LangString objects have the same language tag or if the other operand is a string.
+
+        :param other: The LangString or string to add.
+        :type other: Union[LangString, str]
+        :return: The same LangString instance with the concatenated text.
+        :rtype: LangString
+        :raises TypeError: If the objects are not compatible for addition.
+        :raises ValueError: If the language tags are incompatible.
+
+        :Example:
+
+        >>> lang_str1 = LangString("Hello", "en")
+        >>> lang_str2 = LangString(" World", "en")
+        >>> lang_str1 += lang_str2
+        >>> print(lang_str1)  # Output: "Hello World"@en
+
+        >>> lang_str1 += "!"
+        >>> print(lang_str1)  # Output: "Hello World!"@en
+        """
         self._validate_match_types(other)
         self._validate_match_langs(other)
 
@@ -1349,22 +1496,69 @@ class LangString:
 
     @Validator.validate_type_decorator
     def __imul__(self, other: int) -> "LangString":
-        """In-place multiplication of the LangString's text.
+        """
+        Implement in-place multiplication of the LangString's text.
+
+        This method allows the LangString's text to be repeated a specified number of times.
 
         :param other: The number of times to repeat the text.
         :type other: int
         :return: The same LangString instance with the text repeated.
         :rtype: LangString
+        :raises TypeError: If the operand is not an integer.
+
+        :Example:
+
+        >>> lang_str = LangString("Hello", "en")
+        >>> lang_str *= 3
+        >>> print(lang_str)  # Output: "HelloHelloHello"@en
         """
         self.text *= other
         return self
 
     def __iter__(self) -> Iterator[str]:
-        """Enable iteration over the text part of the LangString."""
+        """
+        Enable iteration over the text part of the LangString.
+
+        This method allows the LangString to be iterable, returning each character in the text part one by one.
+
+        :return: An iterator over the characters in the text.
+        :rtype: Iterator[str]
+
+        :Example:
+
+        >>> lang_str = LangString("Hello", "en")
+        >>> for char in lang_str:
+        ...     print(char)
+        ...
+        # Output:   H
+        #           e
+        #           l
+        #           l
+        #           o
+        """
         return iter(self.text)
 
     def __le__(self, other: object) -> bool:
-        """Check if this LangString is less than or equal to another LangString object."""
+        """
+        Check if this LangString is less than or equal to another LangString object or string.
+
+        This method compares the LangString's text with another LangString's text or a regular string.
+
+        :param other: The LangString or string to compare with.
+        :type other: object
+        :return: True if this LangString's text is less than or equal to the other text, otherwise False.
+        :rtype: bool
+        :raises TypeError: If the objects are not compatible for comparison.
+        :raises ValueError: If the language tags are incompatible.
+
+        :Example:
+
+        >>> lang_str1 = LangString("apple", "en")
+        >>> lang_str2 = LangString("banana", "en")
+        >>> print(lang_str1 <= lang_str2)  # Output: True
+        >>> print(lang_str1 <= "apple")  # Output: True
+        """
         self._validate_match_langs(other)
         self._validate_match_types(other)
 
@@ -1377,11 +1571,40 @@ class LangString:
         return NotImplemented
 
     def __len__(self) -> int:
-        """Return the length of the LangString's text."""
+        """
+        Return the length of the LangString's text.
+
+        :return: The length of the text.
+        :rtype: int
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> length = len(lang_str)
+        >>> print(length)  # Output: 5
+        """
         return len(self.text)
 
     def __lt__(self, other: object) -> bool:
-        """Check if this LangString is less than another LangString object."""
+        """
+        Check if this LangString is less than another LangString object or string.
+
+        This method compares the LangString's text with another LangString's text or a regular string.
+
+        :param other: The LangString or string to compare with.
+        :type other: object
+        :return: True if this LangString's text is less than the other text, otherwise False.
+        :rtype: bool
+        :raises TypeError: If the objects are not compatible for comparison.
+        :raises ValueError: If the language tags are incompatible.
+
+        :Example:
+
+        >>> lang_str1 = LangString("apple", "en")
+        >>> lang_str2 = LangString("banana", "en")
+        >>> print(lang_str1 < lang_str2)  # Output: True
+        >>> print(lang_str1 < "banana")  # Output: True
+        """
         self._validate_match_langs(other)
         self._validate_match_types(other)
 
@@ -1395,28 +1618,59 @@ class LangString:
 
     @Validator.validate_type_decorator
     def __mul__(self, other: int) -> "LangString":
-        """Multiply the LangString's text a specified number of times.
+        """
+        Multiply the LangString's text a specified number of times.
+
+        This method repeats the LangString's text a specified number of times and returns a new LangString.
 
         :param other: The number of times to repeat the text.
         :type other: int
         :return: A new LangString with the text repeated.
         :rtype: LangString
+        :raises TypeError: If the operand is not an integer.
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> multiplied_lang_str = lang_str * 3
+        >>> print(multiplied_lang_str)  # Output: "hellohellohello"@en
         """
         return LangString(self.text * other, self.lang)
 
     @Validator.validate_type_decorator
     def __radd__(self, other: str) -> str:
-        """Handle concatenation when LangString is on the right side of the '+' operator.
+        """
+        Handle concatenation when LangString is on the right side of the '+' operator.
 
-        Only defined to 'other' of type string because the __add__ method is used when 'other' is a LangString.
+        This method is only defined for 'other' of type string because the __add__ method is used when 'other' is a LangString.
+        It concatenates the other's text to the LangString's text (in this order) and returns a string, which loses its language tag.
 
-        As it concatenates other's text to the LangString's text (in this order), it returns a string and, consequently,
-        the result looses its language tag.
+        :param other: The string to concatenate with.
+        :type other: str
+        :return: A new string with the concatenated text.
+        :rtype: str
+        :raises TypeError: If 'other' is not a string.
+
+        :Example:
+
+        >>> lang_str = LangString("world", "en")
+        >>> result = "hello " + lang_str
+        >>> print(result)  # Output: 'hello world'
         """
         return other + self.text
 
     def __repr__(self) -> str:
-        """Return an unambiguous string representation of the LangString."""
+        """
+        Return an unambiguous string representation of the LangString.
+
+        :return: The unambiguous string representation of the LangString.
+        :rtype: str
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> print(repr(lang_str))  # Output: 'LangString(text="hello", lang="en")'
+        """
         return f"{self.__class__.__name__}(text={repr(self.text)}, lang={repr(self.lang)})"
 
     @Validator.validate_type_decorator
@@ -1432,14 +1686,26 @@ class LangString:
         :return: A new LangString with the text repeated.
         :rtype: LangString
         :raises TypeError: If 'other' is not an integer.
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> multiplied_lang_str = 3 * lang_str
+        >>> print(multiplied_lang_str)  # Output: "hellohellohello"@en
         """
         return LangString(self.text * other, self.lang)
 
     def __str__(self) -> str:
-        """Define the string representation of the LangString object.
+        """
+        Define the string representation of the LangString object.
 
         :return: The string representation of the LangString object.
         :rtype: str
+
+        :Example:
+
+        >>> lang_str = LangString("hello", "en")
+        >>> print(lang_str)  # Output: '"hello"@en'
         """
         print_with_quotes = Controller.get_flag(LangStringFlag.PRINT_WITH_QUOTES)
         print_with_lang = Controller.get_flag(LangStringFlag.PRINT_WITH_LANG)
@@ -1499,9 +1765,13 @@ class LangString:
 
         return list(merged.values())
 
+    @Validator.validate_type_decorator
     @staticmethod
     def print_list(
-        langstring_list: list["LangString"], print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
+        langstring_list: list["LangString"],
+        print_quotes: Optional[bool] = None,
+        separator: str = "@",
+        print_lang: Optional[bool] = None,
     ) -> None:
         """
         Print a string representation of a list of LangString instances using the to_string method
@@ -1524,7 +1794,7 @@ class LangString:
         >>> LangString.print_list(ls_list)  # Output: ['"a"@b', '"c"@d']
         """
         formatted_strings = [ls.to_string(print_quotes, separator, print_lang) for ls in langstring_list]
-        print('[' + ', '.join(formatted_strings) + ']')
+        print("[" + ", ".join(formatted_strings) + "]")
 
     # ---------------------------------------------
     # Private Methods

@@ -41,7 +41,6 @@ Modules:
     utils.validator: Provides validation methods used within the SetLangString class.
 """
 
-
 from typing import Iterator
 from typing import Optional
 from typing import Union
@@ -72,6 +71,7 @@ class SetLangString:
     :raises ValueError: If control flags enforce non-empty text and any text in the set is empty.
     :raises TypeError: If the types of parameters are incorrect based on validation.
     """
+
     def __init__(self, texts: Optional[Union[set[str], list[str]]] = None, lang: str = "") -> None:
         """
         Initialize a new SetLangString object with a set of texts and an optional language tag.

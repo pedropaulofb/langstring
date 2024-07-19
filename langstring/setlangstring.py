@@ -299,6 +299,25 @@ class SetLangString:
 
     @Validator.validate_type_decorator
     def to_langstrings(self) -> list[LangString]:
+        """
+        Convert the set of texts to a list of LangString objects.
+
+        This method creates a LangString object for each text in the set, associating it with the set's language tag.
+
+        :return: A list of LangString objects.
+        :rtype: list[LangString]
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> langstrings = set_lang_str.to_langstrings()
+        >>> for lang_str in langstrings:
+        ...     print(lang_str)
+        ...
+        # Output:
+        # "Hello"@en
+        # "World"en
+        """
         langstrings = []
         for text in self.texts:
             langstrings.append(LangString(text=text, lang=self.lang))
@@ -308,6 +327,39 @@ class SetLangString:
     def to_strings(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> list[str]:
+        """
+        Convert the set of texts to a list of formatted strings.
+
+        This method converts each text in the set to a formatted string, optionally including quotes and the language tag.
+        The behavior is influenced by control flags set in the Controller.
+
+        :param print_quotes: If True, wrap the text in quotes. If None, use the default setting from the Controller.
+        :type print_quotes: Optional[bool]
+        :param separator: The separator to use between the text and language tag.
+        :type separator: str
+        :param print_lang: If True, include the language tag. If None, use the default setting from the Controller.
+        :type print_lang: Optional[bool]
+        :return: A list of formatted strings.
+        :rtype: list[str]
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> strings = set_lang_str.to_strings()
+        >>> for s in strings:
+        ...     print(s)
+        ...
+        # Output:
+        # "Hello"@en
+        # "World"@en
+        >>> strings = set_lang_str.to_strings(print_quotes=False, print_lang=False)
+        >>> for s in strings:
+        ...     print(s)
+        ...
+        # Output:
+        # Hello
+        # World
+        """
         if print_quotes is None:
             print_quotes = Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES)
         if print_lang is None:
@@ -327,6 +379,28 @@ class SetLangString:
     # -------------------------------------------
 
     def add(self, new_element: Union[str, LangString]) -> None:
+        """
+        Add a new element to the set of texts.
+
+        This method adds a new element, which can be a string or a LangString object, to the set. It mimics the behavior
+        of the standard set's add method, allowing for seamless integration and extended functionality. The behavior is
+        influenced by control flags set in the Controller.
+
+        :param new_element: The element to add, either a text string or a LangString object.
+        :type new_element: Union[str, LangString]
+        :raises TypeError: If the provided new_element is neither a str nor a LangString.
+        :raises ValueError: If the control flags enforce valid language tags and the new_element's language tag is
+                            invalid, or if the language tag of the new_element does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello"}, "en")
+        >>> set_lang_str.add("World")
+        >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+        >>> lang_str = LangString("New String", "en")
+        >>> set_lang_str.add(lang_str)
+        >>> print(set_lang_str)  # Output: {'Hello', 'New String', 'World'}@en
+        """
         if isinstance(new_element, str):
             self.add_text(new_element)
         elif isinstance(new_element, LangString):
@@ -335,12 +409,60 @@ class SetLangString:
             raise TypeError(f"Invalid type. Expected 'str' or 'LangString', got '{type(new_element).__name__}'.")
 
     def clear(self) -> None:
+        """
+        Remove all elements from the set of texts.
+
+        This method clears all elements from the set, mimicking the behavior of the standard set's clear method,
+        resulting in an empty set.
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str.clear()
+        >>> print(set_lang_str)  # Output: {}@en
+        """
         self.texts.clear()
 
     def copy(self) -> "SetLangString":
+        """
+        Create a shallow copy of the SetLangString.
+
+        This method returns a new SetLangString object that is a shallow copy of the original, mimicking the behavior
+        of the standard set's copy method.
+
+        :return: A shallow copy of the SetLangString.
+        :rtype: SetLangString
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> copied_set_lang_str = set_lang_str.copy()
+        >>> print(copied_set_lang_str)  # Output: {'Hello', 'World'}@en
+        """
         return SetLangString(texts=self.texts.copy(), lang=self.lang)
 
     def discard(self, element: Union[str, LangString]) -> None:
+        """
+        Discard an element from the set of texts.
+
+        This method removes the element from the set if it is present. If the element is not present, the set remains
+        unchanged. It mimics the behavior of the standard set's discard method and does not raise an error if the
+        element is not found.
+
+        :param element: The element to discard, either a text string or a LangString object.
+        :type element: Union[str, LangString]
+        :raises TypeError: If the provided element is neither a str nor a LangString.
+        :raises ValueError: If the language tag of the LangString does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str.discard("World")
+        >>> print(set_lang_str)  # Output: {'Hello'}@en
+        >>> lang_str = LangString("Python", "en")
+        >>> set_lang_str.discard(lang_str)
+        >>> print(set_lang_str)  # Output: {'Hello'}@en
+        """
         if isinstance(element, str):
             self.discard_text(element)
         elif isinstance(element, LangString):
@@ -349,9 +471,46 @@ class SetLangString:
             raise TypeError(f"Invalid type. Expected 'str' or 'LangString', got '{type(element).__name__}'.")
 
     def pop(self) -> str:
+        """
+        Remove and return an arbitrary element from the set of texts.
+
+        This method removes and returns an arbitrary element from the set, mimicking the behavior of the standard set's
+        pop method. If the set is empty, a KeyError is raised.
+
+        :return: An arbitrary element from the set.
+        :rtype: str
+        :raises KeyError: If the set is empty.
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> element = set_lang_str.pop()
+        >>> print(element)  # Output: 'Hello' or 'World'
+        >>> print(set_lang_str)  # Output: {'World'}@en or {'Hello'}@en
+        """
         return self.texts.pop()
 
     def remove(self, element: Union[str, LangString]) -> None:
+        """
+        Remove an element from the set of texts.
+
+        This method removes the specified element from the set. If the element is not present, a KeyError is raised.
+        It mimics the behavior of the standard set's remove method.
+
+        :param element: The element to remove, either a text string or a LangString object.
+        :type element: Union[str, LangString]
+        :raises TypeError: If the provided element is neither a str nor a LangString.
+        :raises ValueError: If the language tag of the LangString does not match the set's language tag.
+        :raises KeyError: If the element is not found in the set.
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str.remove("World")
+        >>> print(set_lang_str)  # Output: {'Hello'}@en
+        >>> lang_str = LangString("Python", "en")
+        >>> set_lang_str.remove(lang_str)  # Raises KeyError
+        """
         if isinstance(element, str):
             self.remove_text(element)
         elif isinstance(element, LangString):
@@ -360,6 +519,25 @@ class SetLangString:
             raise TypeError(f"Invalid type. Expected 'str' or 'LangString', got '{type(element).__name__}'.")
 
     def difference(self, *others: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the difference of the set and another set or sets.
+
+        This method returns a new SetLangString containing elements that are in the set but not in the others. It
+        mimics the behavior of the standard set's difference method.
+
+        :param others: One or more sets or SetLangString objects to compute the difference with.
+        :type others: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the difference of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> diff_set_lang_str = set_lang_str1.difference(set_lang_str2)
+        >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
+        """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
             self._validate_match_types_and_langs(other)
@@ -367,27 +545,120 @@ class SetLangString:
         return SetLangString(texts=difference_texts, lang=self.lang)
 
     def difference_update(self, *others: Union[set[str], "SetLangString"]) -> None:
+        """
+        Update the set, removing elements found in others.
+
+        This method updates the set, removing all elements that are also in another set or sets. It mimics the behavior
+        of the standard set's difference_update method.
+
+        :param others: One or more sets or SetLangString objects to compute the difference with.
+        :type others: Union[set[str], SetLangString]
+        :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> set_lang_str1.difference_update(set_lang_str2)
+        >>> print(set_lang_str1)  # Output: {'Hello'}@en
+        """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
             self._validate_match_types_and_langs(other)
         self.texts.difference_update(*others_texts)
 
     def isdisjoint(self, other: Union[set[str], "SetLangString"]) -> bool:
+        """
+        Return True if the set has no elements in common with another set.
+
+        This method checks if the set has no elements in common with another set or SetLangString, mimicking the behavior
+        of the standard set's isdisjoint method.
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: True if the sets are disjoint, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"Python", "Java"}, "en")
+        >>> disjoint = set_lang_str1.isdisjoint(set_lang_str2)
+        >>> print(disjoint)  # Output: True
+        """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts.isdisjoint(other_texts)
 
     def issubset(self, other: Union[set[str], "SetLangString"]) -> bool:
+        """
+        Return True if the set is a subset of another set.
+
+        This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the standard
+        set's issubset method.
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: True if the set is a subset, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+        >>> subset = set_lang_str1.issubset(set_lang_str2)
+        >>> print(subset)  # Output: True
+        """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts.issubset(other_texts)
 
     def issuperset(self, other: Union[set[str], "SetLangString"]) -> bool:
+        """
+        Return True if the set is a superset of another set.
+
+        This method checks if the set is a superset of another set or SetLangString, mimicking the behavior of the
+        standard set's issuperset method.
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: True if the set is a superset, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+        >>> superset = set_lang_str1.issuperset(set_lang_str2)
+        >>> print(superset)  # Output: True
+        """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts.issuperset(other_texts)
 
     def intersection(self, *others: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the intersection of the set and other sets.
+
+        This method returns a new SetLangString containing elements that are common to the set and all of the others.
+        It mimics the behavior of the standard set's intersection method.
+
+        :param others: One or more sets or SetLangString objects to compute the intersection with.
+        :type others: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the intersection of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> intersect_set_lang_str = set_lang_str1.intersection(set_lang_str2)
+        >>> print(intersect_set_lang_str)  # Output: {'World'}@en
+        """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
             self._validate_match_types_and_langs(other)
@@ -395,23 +666,95 @@ class SetLangString:
         return SetLangString(texts=intersection_texts, lang=self.lang)
 
     def intersection_update(self, *others: Union[set[str], "SetLangString"]) -> None:
+        """
+        Update the set, keeping only elements found in it and all others.
+
+        This method updates the set, keeping only elements that are common to the set and all of the others. It mimics
+        the behavior of the standard set's intersection_update method.
+
+        :param others: One or more sets or SetLangString objects to compute the intersection with.
+        :type others: Union[set[str], SetLangString]
+        :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> set_lang_str1.intersection_update(set_lang_str2)
+        >>> print(set_lang_str1)  # Output: {'World'}@en
+        """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
             self._validate_match_types_and_langs(other)
         self.texts.intersection_update(*others_texts)
 
     def symmetric_difference(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the symmetric difference of the set and another set.
+
+        This method returns a new SetLangString containing elements that are in either the set or the other set, but not
+        in both. It mimics the behavior of the standard set's symmetric_difference method.
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the symmetric difference of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> sym_diff_set_lang_str = set_lang_str1.symmetric_difference(set_lang_str2)
+        >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
+        """
         other_texts = self._extract_texts(other)
         self._validate_match_types_and_langs(other)
         sym_diff_texts = self.texts.symmetric_difference(other_texts)
         return SetLangString(texts=sym_diff_texts, lang=self.lang)
 
     def symmetric_difference_update(self, other: Union[set[str], "SetLangString"]) -> None:
+        """
+        Update the set, keeping only elements found in either set, but not in both.
+
+        This method updates the set, keeping only elements that are in either the set or the other set, but not in both.
+        It mimics the behavior of the standard set's symmetric_difference_update method.
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> set_lang_str1.symmetric_difference_update(set_lang_str2)
+        >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
+        """
         other_texts = self._extract_texts(other)
         self._validate_match_types_and_langs(other)
         self.texts.symmetric_difference_update(other_texts)
 
     def union(self, *others: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the union of the set and other sets.
+
+        This method returns a new SetLangString containing all elements that are in the set, in others, or in both. It
+        mimics the behavior of the standard set's union method.
+
+        :param others: One or more sets or SetLangString objects to compute the union with.
+        :type others: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the union of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"World"}, "en")
+        >>> union_set_lang_str = set_lang_str1.union(set_lang_str2)
+        >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
+        """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
             self._validate_match_types_and_langs(other)
@@ -419,6 +762,23 @@ class SetLangString:
         return SetLangString(texts=union_texts, lang=self.lang)
 
     def update(self, *others: Union[set[str], "SetLangString"]) -> None:
+        """
+        Update the set, adding elements from all others.
+
+        This method updates the set, adding all elements that are in others. It mimics the behavior of the standard set's
+        update method.
+
+        :param others: One or more sets or SetLangString objects to update the set with.
+        :type others: Union[set[str], SetLangString]
+        :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"World"}, "en")
+        >>> set_lang_str1.update(set_lang_str2)
+        >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
+        """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
             self._validate_match_types_and_langs(other)
@@ -429,10 +789,51 @@ class SetLangString:
     # -------------------------------------------
 
     def __and__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the intersection of the set and another set.
+
+        This method returns a new SetLangString containing elements that are common to the set and the other set. It
+        mimics the behavior of the standard set's __and__ method (set intersection operator `&`).
+
+        :param other: The other set or SetLangString to intersect with.
+        :type other: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the intersection of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> intersect_set_lang_str = set_lang_str1 & set_lang_str2
+        >>> print(intersect_set_lang_str)  # Output: {'World'}@en
+        """
         return self.intersection(other)
 
     @Validator.validate_type_decorator
     def __contains__(self, element: Union[str, LangString]) -> bool:
+        """
+        Return True if the set contains the specified element.
+
+        This method checks if the specified element is in the set, mimicking the behavior of the standard set's
+        __contains__ method (membership test operator `in`).
+
+        :param element: The element to check for membership, either a text string or a LangString object.
+        :type element: Union[str, LangString]
+        :return: True if the element is in the set, False otherwise.
+        :rtype: bool
+        :raises TypeError: If the provided element is neither a str nor a LangString.
+        :raises ValueError: If the language tag of the LangString does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> contains_hello = "Hello" in set_lang_str
+        >>> print(contains_hello)  # Output: True
+        >>> lang_str = LangString("Python", "en")
+        >>> contains_python = lang_str in set_lang_str
+        >>> print(contains_python)  # Output: False
+        """
         # Check language compatibility
         self._validate_match_types_and_langs(element)
 
@@ -447,77 +848,330 @@ class SetLangString:
         return False
 
     def __eq__(self, other: object) -> bool:
+        """
+        Return True if the set is equal to another set.
+
+        This method checks if the set is equal to another SetLangString, mimicking the behavior of the standard set's
+        __eq__ method (equality operator `==`).
+
+        :param other: The other SetLangString to compare with.
+        :type other: object
+        :return: True if the sets are equal, False otherwise.
+        :rtype: bool
+        :raises NotImplementedError: If the other object is not a SetLangString.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Hello"}, "en")
+        >>> is_equal = set_lang_str1 == set_lang_str2
+        >>> print(is_equal)  # Output: True
+        """
         if not isinstance(other, SetLangString):
             return NotImplemented
 
         return self.texts == other.texts and self.lang.casefold() == other.lang.casefold()
 
     def __ge__(self, other: Union[set[str], "SetLangString"]) -> bool:
-        """Check if self is a superset of another."""
+        """
+        Return True if the set is a superset of another set.
+
+        This method checks if the set is a superset of another set or SetLangString, mimicking the behavior of the
+        standard set's __ge__ method (superset operator `>=`).
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: True if the set is a superset, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+        >>> is_superset = set_lang_str1 >= set_lang_str2
+        >>> print(is_superset)  # Output: True
+        """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts >= other_texts
 
     def __gt__(self, other: Union[set[str], "SetLangString"]) -> bool:
-        """Check if self is a proper superset of other."""
+        """
+        Return True if the set is a proper superset of another set.
+
+        This method checks if the set is a proper superset of another set or SetLangString, mimicking the behavior of the
+        standard set's __gt__ method (proper superset operator `>`).
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: True if the set is a proper superset, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+        >>> is_proper_superset = set_lang_str1 > set_lang_str2
+        >>> print(is_proper_superset)  # Output: True
+        """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts > other_texts
 
     def __hash__(self) -> int:
-        """Generate a hash for a SetLangString object."""
+        """
+        Generate a hash for a SetLangString object.
+
+        This method generates a hash value for the SetLangString object, mimicking the behavior of the standard set's
+        __hash__ method. The set of texts is converted to a frozenset for hashing, as sets are mutable and unhashable.
+
+        :return: The hash value of the SetLangString object.
+        :rtype: int
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> hash_value = hash(set_lang_str)
+        >>> print(hash_value)  # Output: A unique integer representing the hash value
+        """
         # Convert the set to a frozenset for hashing, as sets are mutable and, hence, unhashable.
         return hash((frozenset(self.texts), self.lang.casefold()))
 
     def __iand__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Update the set, keeping only elements found in it and another set.
+
+        This method updates the set, keeping only elements that are common to the set and the other set, mimicking the
+        behavior of the standard set's __iand__ method (in-place intersection operator `&=`).
+
+        :param other: The other set or SetLangString to intersect with.
+        :type other: Union[set[str], SetLangString]
+        :return: The updated SetLangString.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> set_lang_str1 &= set_lang_str2
+        >>> print(set_lang_str1)  # Output: {'World'}@en
+        """
         self.intersection_update(other)
         return self
 
     def __ior__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Update the set, adding elements from another set.
+
+        This method updates the set, adding all elements that are in the other set, mimicking the behavior of the standard
+        set's __ior__ method (in-place union operator `|=`).
+
+        :param other: The other set or SetLangString to union with.
+        :type other: Union[set[str], SetLangString]
+        :return: The updated SetLangString.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"World"}, "en")
+        >>> set_lang_str1 |= set_lang_str2
+        >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
+        """
         self.update(other)
         return self
 
     def __isub__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Update the set, removing elements found in another set.
+
+        This method updates the set, removing all elements that are also in the other set, mimicking the behavior of the
+        standard set's __isub__ method (in-place difference operator `-=`).
+
+        :param other: The other set or SetLangString to difference with.
+        :type other: Union[set[str], SetLangString]
+        :return: The updated SetLangString.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World"}, "en")
+        >>> set_lang_str1 -= set_lang_str2
+        >>> print(set_lang_str1)  # Output: {'Hello'}@en
+        """
         self.difference_update(other)
         return self
 
     def __iter__(self) -> Iterator[str]:
+        """
+        Return an iterator over the elements of the set.
+
+        This method returns an iterator over the elements of the set, mimicking the behavior of the standard set's
+        __iter__ method.
+
+        :return: An iterator over the elements of the set.
+        :rtype: Iterator[str]
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> for text in set_lang_str:
+        ...     print(text)
+        ...
+        >>> # Output: 'Hello'
+        >>> #         'World'
+        """
         return iter(self.texts)
 
     def __ixor__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Update the set, keeping only elements found in either set, but not in both.
+
+        This method updates the set, keeping only elements that are in either the set or the other set, but not in both,
+        mimicking the behavior of the standard set's __ixor__ method (in-place symmetric difference operator `^=`).
+
+        :param other: The other set or SetLangString to symmetric difference with.
+        :type other: Union[set[str], SetLangString]
+        :return: The updated SetLangString.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> set_lang_str1 ^= set_lang_str2
+        >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
+        """
         self.symmetric_difference_update(other)
         return self
 
     def __le__(self, other: Union[set[str], "SetLangString"]) -> bool:
-        """Check if self is a subset of other."""
+        """
+        Return True if the set is a subset of another set.
+
+        This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the
+        standard set's __le__ method (subset operator `<=`).
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: True if the set is a subset, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+        >>> is_subset = set_lang_str1 <= set_lang_str2
+        >>> print(is_subset)  # Output: True
+        """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts <= other_texts
 
     def __len__(self) -> int:
+        """
+        Return the number of elements in the set.
+
+        This method returns the number of elements in the set, mimicking the behavior of the standard set's __len__ method.
+
+        :return: The number of elements in the set.
+        :rtype: int
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> length = len(set_lang_str)
+        >>> print(length)  # Output: 2
+        """
         return len(self.texts)
 
     def __lt__(self, other: Union[set[str], "SetLangString"]) -> bool:
-        """Check if self is a proper subset of other."""
+        """
+        Return True if the set is a proper subset of another set.
+
+        This method checks if the set is a proper subset of another set or SetLangString, mimicking the behavior of the
+        standard set's __lt__ method (proper subset operator `<`).
+
+        :param other: The other set or SetLangString to compare with.
+        :type other: Union[set[str], SetLangString]
+        :return: True if the set is a proper subset, False otherwise.
+        :rtype: bool
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+        >>> is_proper_subset = set_lang_str1 < set_lang_str2
+        >>> print(is_proper_subset)  # Output: True
+        """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
         return self.texts < other_texts
 
     def __or__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the union of the set and another set.
+
+        This method returns a new SetLangString containing all elements that are in the set, in the other set, or in both.
+        It mimics the behavior of the standard set's __or__ method (union operator `|`).
+
+        :param other: The other set or SetLangString to union with.
+        :type other: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the union of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"World"}, "en")
+        >>> union_set_lang_str = set_lang_str1 | set_lang_str2
+        >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
+        """
         return self.union(other)
 
     def __repr__(self) -> str:
-        """Return the official string representation of the SetLangString object."""
+        """
+        Return the official string representation of the SetLangString object.
+
+        This method returns an official string representation of the SetLangString object, mimicking the behavior of the
+        standard set's __repr__ method. This representation can be used for debugging and logging.
+
+        :return: The official string representation of the SetLangString object.
+        :rtype: str
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> repr_str = repr(set_lang_str)
+        >>> print(repr_str)  # Output: SetLangString(texts={'Hello', 'World'}, lang='en')
+        """
         return f"{self.__class__.__name__}(texts={repr(self.texts)}, lang={repr(self.lang)})"
 
     def __str__(self) -> str:
-        """Define the string representation of the LangString object.
+        """
+        Return the string representation of the SetLangString object.
 
-        This method provides a concise string representation of the LangString, listing each text entry with its
-        associated language tag if the corresponding flags are set.
+        This method provides a concise string representation of the SetLangString, listing each text entry with its
+        associated language tag if the corresponding flags are set. It mimics the behavior of the standard set's
+        __str__ method.
 
-        :return: The string representation of the LangString object.
+        :return: The string representation of the SetLangString object.
         :rtype: str
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> print(str(set_lang_str))  # Output: {'Hello', 'World'}@en
         """
         if not self.texts:
             texts_str = "{}"
@@ -536,9 +1190,47 @@ class SetLangString:
         return texts_str
 
     def __sub__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the difference of the set and another set.
+
+        This method returns a new SetLangString containing elements that are in the set but not in the other set. It
+        mimics the behavior of the standard set's __sub__ method (difference operator `-`).
+
+        :param other: The other set or SetLangString to difference with.
+        :type other: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the difference of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> diff_set_lang_str = set_lang_str1 - set_lang_str2
+        >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
+        """
         return self.difference(other)
 
     def __xor__(self, other: Union[set[str], "SetLangString"]) -> "SetLangString":
+        """
+        Return the symmetric difference of the set and another set.
+
+        This method returns a new SetLangString containing elements that are in either the set or the other set, but not
+        in both. It mimics the behavior of the standard set's __xor__ method (symmetric difference operator `^`).
+
+        :param other: The other set or SetLangString to symmetric difference with.
+        :type other: Union[set[str], SetLangString]
+        :return: A new SetLangString containing the symmetric difference of the sets.
+        :rtype: SetLangString
+        :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+        >>> sym_diff_set_lang_str = set_lang_str1 ^ set_lang_str2
+        >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
+        """
         return self.symmetric_difference(other)
 
     # -------------------------------------------
@@ -548,13 +1240,30 @@ class SetLangString:
     @staticmethod
     def merge_setlangstrings(setlangstrings: list["SetLangString"]) -> list["SetLangString"]:
         """
-        Merges duplicated SetLangStrings based on their language tags using the union method.
+        Merge duplicated SetLangStrings based on their language tags using the union method.
 
-        If there's no case variation in the language tags among duplicates, the original casing is preserved.
+        This method processes a list of SetLangString instances, identifying and merging duplicates based on their
+        language tags. If there's no case variation in the language tags among duplicates, the original casing is preserved.
         If case variations are found, the casefolded version of the language tag is used in the merged SetLangString.
 
-        :param setlangstrings: The list of SetLangString instances.
+        :param setlangstrings: The list of SetLangString instances to be merged.
+        :type setlangstrings: list[SetLangString]
         :return: A list of merged SetLangString instances without duplicates.
+        :rtype: list[SetLangString]
+        :raises TypeError: If the input is not a list of SetLangString instances.
+
+        :Example:
+
+        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+        >>> set_lang_str2 = SetLangString({"World"}, "en")
+        >>> set_lang_str3 = SetLangString({"Bonjour"}, "fr")
+        >>> set_lang_str4 = SetLangString({"Hello"}, "EN")
+        >>> merged_list = SetLangString.merge_setlangstrings([set_lang_str1, set_lang_str2, set_lang_str3, set_lang_str4])
+        >>> for s in merged_list:
+        ...     print(s)
+        ...
+        >>> # Output: {'Hello', 'World'}@en
+        >>> #         {'Bonjour'}@fr
         """
         Validator.validate_type_iterable(setlangstrings, list, SetLangString)
         merged: dict[str, SetLangString] = {}
@@ -583,6 +1292,29 @@ class SetLangString:
     def _validate_match_types_and_langs(
         self, other: Union[str, set[str], "SetLangString", "LangString"], overwrite_strict: bool = False
     ) -> None:
+        """
+        Validate that the type and language of the other operand match the expected type and language.
+
+        This method checks if the operand type is valid based on the control flag for type matching. If strict type
+        matching is enabled, only SetLangString or LangString types are allowed. Additionally, it checks if the language
+        tags of both LangString and SetLangString objects are compatible.
+
+        :param other: The operand to be validated.
+        :type other: Union[str, set[str], SetLangString, LangString]
+        :param overwrite_strict: If True, enforces strict type matching regardless of the control flag.
+        :type overwrite_strict: bool
+        :raises TypeError: If strict mode is enabled and the operand is not of type SetLangString or LangString.
+        :raises ValueError: If the languages of both objects do not match.
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> lang_str = LangString("Python", "en")
+        >>> set_lang_str._validate_match_types_and_langs(lang_str, True)  # No exception
+        >>> lang_str_fr = LangString("Bonjour", "fr")
+        >>> set_lang_str._validate_match_types_and_langs(lang_str_fr, True)  # Raises ValueError due to incompatible languages
+        >>> set_lang_str._validate_match_types_and_langs(123, True)  # Raises TypeError due to strict mode
+        """
         strict = (
             Controller.get_flag(SetLangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
         )
@@ -599,4 +1331,23 @@ class SetLangString:
             )
 
     def _extract_texts(self, other: Union[set[str], "SetLangString"]) -> set[str]:
+        """
+        Extract the set of texts from the other operand.
+
+        This method extracts the set of texts from the other operand, which can be either a regular set of strings or
+        a SetLangString object.
+
+        :param other: The operand from which to extract the texts.
+        :type other: Union[set[str], SetLangString]
+        :return: The set of texts extracted from the operand.
+        :rtype: set[str]
+
+        :Example:
+
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> texts = set_lang_str._extract_texts({"Python", "Java"})
+        >>> print(texts)  # Output: {'Python', 'Java'}
+        >>> texts = set_lang_str._extract_texts(set_lang_str)
+        >>> print(texts)  # Output: {'Hello', 'World'}
+        """
         return other.texts if isinstance(other, SetLangString) else other

@@ -332,6 +332,25 @@ class MultiLangString:
     def discard(
         self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
     ) -> None:
+        """
+        Discard an entry, LangString, SetLangString, or MultiLangString from the MultiLangString.
+
+        This method discards the specified entry from the MultiLangString. It can handle tuples, LangString,
+        SetLangString, or MultiLangString objects. Optionally, it can remove empty language entries after discarding.
+
+        :param arg: The entry to discard, which can be a tuple, LangString, SetLangString, or MultiLangString.
+        :type arg: Union[tuple[str, str], LangString, SetLangString, MultiLangString]
+        :param clean_empty: If True, remove empty language entries after discarding. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> mls.discard(("Hello", "en"))
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> lang_str = LangString("Bonjour", "fr")
+        >>> mls.discard(lang_str)
+        >>> print(mls)  # Output: {}@en, {}@fr
+        """
         if isinstance(arg, LangString):
             self.discard_langstring(arg, clean_empty)
             return
@@ -355,6 +374,26 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def discard_entry(self, text: str, lang: str, clean_empty: bool = False) -> None:
+        """
+        Discard a text entry from a specified language in the MultiLangString.
+
+        This method removes the specified text entry from the set associated with the given language.
+        If the set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param text: The text to discard.
+        :type text: str
+        :param lang: The language of the text to discard.
+        :type lang: str
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> mls.discard_entry("Hello", "en")
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> mls.discard_entry("World", "en", clean_empty=True)
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        """
         registered_lang = self._get_registered_lang(lang)
 
         if registered_lang in self.mls_dict and text in self.mls_dict[registered_lang]:
@@ -364,26 +403,118 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def discard_text_in_pref_lang(self, text: str, clean_empty: bool = False) -> None:
-        """Discard a text entry from the preferred language."""
+        """
+        Discard a text entry from the preferred language.
+
+        This method removes the specified text entry from the set associated with the preferred language.
+        If the set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param text: The text to discard.
+        :type text: str
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> mls.discard_text_in_pref_lang("Hello")
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> mls.discard_text_in_pref_lang("World", clean_empty=True)
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        """
         self.discard_entry(text, self.pref_lang, clean_empty)
 
     @Validator.validate_type_decorator
     def discard_langstring(self, langstring: LangString, clean_empty: bool = False) -> None:
+        """
+        Discard a LangString from the MultiLangString.
+
+        This method removes the specified LangString from the set associated with its language.
+        If the set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param langstring: The LangString object to discard.
+        :type langstring: LangString
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> lang_str = LangString("Hello", "en")
+        >>> mls.discard_langstring(lang_str)
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> lang_str = LangString("World", "en")
+        >>> mls.discard_langstring(lang_str, clean_empty=True)
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        """
         self.discard_entry(text=langstring.text, lang=langstring.lang, clean_empty=clean_empty)
 
     @Validator.validate_type_decorator
     def discard_setlangstring(self, setlangstring: SetLangString, clean_empty: bool = False) -> None:
+        """
+        Discard a SetLangString from the MultiLangString.
+
+        This method removes the specified SetLangString from the sets associated with its language.
+        If the set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param setlangstring: The SetLangString object to discard.
+        :type setlangstring: SetLangString
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> mls.discard_setlangstring(set_lang_str)
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+        >>> mls.discard_setlangstring(set_lang_str, clean_empty=True)
+        >>> print(mls)  # Output: {}@en
+        """
         for text in setlangstring.texts:
             self.discard_entry(text=text, lang=setlangstring.lang, clean_empty=clean_empty)
 
     @Validator.validate_type_decorator
     def discard_multilangstring(self, multilangstring: "MultiLangString", clean_empty: bool = False) -> None:
+        """
+        Discard a MultiLangString from the current MultiLangString.
+
+        This method removes the specified MultiLangString from the sets associated with its languages.
+        If a set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param multilangstring: The MultiLangString object to discard.
+        :type multilangstring: MultiLangString
+        :param clean_empty: If True, remove empty language entries after discarding. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+        >>> mls_to_discard = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+        >>> mls.discard_multilangstring(mls_to_discard)
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> mls_to_discard = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
+        >>> mls.discard_multilangstring(mls_to_discard, clean_empty=True)
+        >>> print(mls)  # Output: {}
+        """
         for lang in multilangstring.mls_dict:
             for text in list(multilangstring.mls_dict[lang]):
                 self.discard_entry(text=text, lang=lang, clean_empty=clean_empty)
 
     @Validator.validate_type_decorator
     def discard_lang(self, lang: str) -> None:
+        """
+        Discard all entries for a specified language.
+
+        This method removes all entries associated with the given language from the MultiLangString.
+
+        :param lang: The language to discard.
+        :type lang: str
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+        >>> mls.discard_lang("en")
+        >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
+        >>> mls.discard_lang("fr")
+        >>> print(mls)  # Output: {}
+        """
         registered_lang = self._get_registered_lang(lang)
         if registered_lang is not None:
             del self.mls_dict[registered_lang]

@@ -1,25 +1,41 @@
-"""The MultiLangString module provides a class for managing and manipulating multilingual text strings.
-
-It allows for the storage, retrieval, and manipulation of text strings in multiple languages, offering a flexible and
-efficient way to handle multilingual content in applications.
-
-The MultiLangString class utilizes a dictionary to store text entries associated with language tags, enabling the
-representation and handling of text in various languages. It supports adding new entries, removing entries, and
-retrieving entries in specific languages or across all languages. The class also allows setting a preferred language,
-which can be used as a default for operations that involve retrieving text entries.
-
-This module is designed to be used in applications that require handling of text in multiple languages, providing a
-convenient and standardized way to store and manipulate multilingual text data.
-
-Usage:
-The MultiLangString class can be used to create multilingual text containers, add text entries in various languages,
-retrieve entries based on language, and perform other operations related to multilingual text management. It is
-particularly useful in applications where content needs to be presented in multiple languages, such as websites,
-applications with internationalization support, and data processing tools that handle multilingual data.
-
-By providing a comprehensive set of methods for managing multilingual text, the MultiLangString class aims to simplify
-the development of multilingual applications and facilitate the handling of text in multiple languages.
 """
+The multilangstring module provides the MultiLangString class to manage and manipulate multilingual text strings.
+
+This module is designed to store, retrieve, and handle text strings in multiple languages, offering a flexible
+and efficient way to manage multilingual content in various applications. The MultiLangString class uses a dictionary
+to store text entries associated with language tags, allowing the representation and manipulation of text in
+different languages. It supports adding new entries, removing entries, and retrieving entries based on specific
+languages or across all languages. Additionally, the class allows setting a preferred language, which can be used
+as a default for operations involving text retrieval.
+
+The module integrates seamlessly with other components like `LangString` and `SetLangString`, enabling robust
+multilingual text management and operations. It ensures that user interaction is as intuitive as possible, while
+offering extensive functionality for handling multilingual text data.
+
+:Example:
+
+    mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}}, "en")
+
+    # Add a new entry
+    mls.add_entry("Hola", "es")
+    print(mls)  # Output: {'Bonjour', 'Monde'}@fr, {'Hello', 'World'}@en, {'Hola'}@es
+
+    # Retrieve texts in a specific language
+    english_texts = mls["en"]
+    print(english_texts)  # Output: {'Hello', 'World'}
+
+    # Remove an entry
+    mls.remove_entry("Hello", "en")
+    print(mls)  # Output: {'Bonjour', 'Monde'}@fr, {'Hola'}@es, {'World'}@en
+
+Modules:
+    controller: Provides control flags that influence the behavior of the MultiLangString class.
+    flags: Defines the MultiLangStringFlag class with various control flags for the MultiLangString class.
+    langstring: Provides the LangString class used within the MultiLangString class.
+    setlangstring: Provides the SetLangString class used within the MultiLangString class.
+    utils.validator: Provides validation methods used within the MultiLangString class.
+"""
+
 
 from typing import Optional
 from typing import Union
@@ -32,19 +48,29 @@ from .utils.validator import Validator
 
 
 class MultiLangString:
-    """A class for managing multilingual text strings with various language tags.
+    """
+    A class for managing multilingual text strings with various language tags.
 
-    Utilizes a global control strategy set in Controller to handle duplicate language tags. Supports
-    operations like adding, removing, and retrieving language strings in multiple languages.
+    This class provides functionality for storing, retrieving, and manipulating text strings in multiple languages.
+    It uses a dictionary to maintain text entries associated with language tags, allowing efficient handling of
+    multilingual content. The MultiLangString class supports operations like adding new entries, removing entries,
+    and retrieving entries in specific languages or across all languages. Additionally, it allows setting a preferred
+    language, which can be used as a default for text retrieval operations.
 
-    :cvar mls_dict: A dictionary representing the internal structure of the MultiLangString.
+    The behavior of this class is influenced by control flags set in the Controller, which can enforce constraints
+    like valid language tags and non-empty text entries. The class integrates seamlessly with other components like
+    LangString and SetLangString, providing a comprehensive solution for managing multilingual text data.
+
+    :ivar mls_dict: A dictionary representing the internal structure of the MultiLangString, where keys are language
+                    codes and values are sets of text entries.
     :vartype mls_dict: Optional[dict[str, set[str]]]
     :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
     :vartype pref_lang: str
     """
 
     def __init__(self, mls_dict: Optional[dict[str, set[str]]] = None, pref_lang: Optional[str] = "en") -> None:
-        """Initialize a MultiLangString object with an optional dictionary and preferred language.
+        """
+        Initialize a MultiLangString object with an optional dictionary and preferred language.
 
         Validates the provided mls_dict against the current flag settings. If mls_dict is not provided, initializes
         with an empty dictionary. The preferred language is set, which is used as a default when retrieving entries
@@ -68,12 +94,26 @@ class MultiLangString:
 
     @property
     def mls_dict(self) -> dict[str, set[str]]:
-        """Getter for texts."""
+        """
+        Get the dictionary representing the internal structure of the MultiLangString.
+
+        :return: The dictionary where keys are language codes and values are sets of text entries.
+        :rtype: dict[str, set[str]]
+        """
         return self._mls_dict
 
     @mls_dict.setter
     def mls_dict(self, in_mls_dict: Optional[dict[str, set[str]]]) -> None:
-        """Setter for mls_dict that ensures keys are strings and values are sets of strings."""
+        """
+        Set the dictionary representing the internal structure of the MultiLangString.
+
+        Ensures keys are strings and values are sets of strings. Validates and merges entries with case-insensitive
+        language keys, and validates the texts in the merged dictionary.
+
+        :param in_mls_dict: A dictionary where keys are language codes and values are sets of text entries.
+        :type in_mls_dict: Optional[dict[str, set[str]]]
+        :raises TypeError: If the keys or values are not of the expected types.
+        """
 
         in_mls_dict = {} if in_mls_dict is None else in_mls_dict
 
@@ -99,18 +139,22 @@ class MultiLangString:
 
     @property
     def pref_lang(self) -> str:
-        """Get the preferred language for this MultiLangString.
+        """
+        Get the preferred language for this MultiLangString.
 
         :return: The preferred language as a string.
+        :rtype: str
         """
         return self._pref_lang
 
     @pref_lang.setter
     def pref_lang(self, new_pref_lang: Optional[str]) -> None:
-        """Set the preferred language for this MultiLangString.
+        """
+        Set the preferred language for this MultiLangString.
 
         :param new_pref_lang: The preferred language as a string.
         :type new_pref_lang: str
+        :raises TypeError: If the new preferred language is not a string.
         """
         new_pref_lang = "en" if new_pref_lang is None else new_pref_lang
         Validator.validate_type_single(new_pref_lang, str)
@@ -123,6 +167,21 @@ class MultiLangString:
     # ----- ADD METHODS -----
 
     def add(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> None:
+        """
+        Add an element to the MultiLangString.
+
+        This method determines the type of the argument and calls the appropriate add method.
+
+        :param arg: The element to add, which can be a tuple of (text, language), LangString, SetLangString, or MultiLangString.
+        :type arg: Union[tuple[str, str], LangString, SetLangString, MultiLangString]
+        :raises TypeError: If the argument is not of a supported type.
+
+        :Example:
+        >>> mls = MultiLangString()
+        >>> mls.add(("Hello", "en"))
+        >>> mls.add(LangString("Bonjour", "fr"))
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'Hello'}@en
+        """
         if isinstance(arg, LangString):
             self.add_langstring(arg)
             return
@@ -146,7 +205,8 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def add_entry(self, text: str, lang: Optional[str]) -> None:
-        """Add a text entry to the MultiLangString under a specified language.
+        """
+        Add a text entry to the MultiLangString under a specified language.
 
         Validates the provided text and language against the current flag settings before adding. If the specified
         language does not exist in the mls_dict, a new set for that language is created. The text is then added to
@@ -156,6 +216,12 @@ class MultiLangString:
         :type text: str
         :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
         :type lang: str
+
+        :Example:
+        >>> mls = MultiLangString()
+        >>> mls.add_entry("Hello", "en")
+        >>> mls.add_entry("Bonjour", "fr")
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'Hello'}@en
         """
         validated_text = Validator.validate_flags_text(MultiLangStringFlag, text)
         validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
@@ -170,24 +236,50 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def add_text_in_pref_lang(self, text: str) -> None:
-        """Add a text entry to the preferred language."""
+        """
+        Add a text entry to the preferred language.
+
+        :param text: The text to be added to the preferred language.
+        :type text: str
+
+        :Example:
+        >>> mls = MultiLangString(pref_lang="en")
+        >>> mls.add_text_in_pref_lang("Hello")
+        >>> print(mls)  # Output: {'Hello'}@en
+        """
         self.add_entry(text, self.pref_lang)
 
     @Validator.validate_type_decorator
     def add_langstring(self, langstring: LangString) -> None:
-        """Add a LangString to the MultiLangString.
+        """
+        Add a LangString to the MultiLangString.
 
         :param langstring: The LangString object to be added, representing a text in a specific language.
         :type langstring: LangString
+
+        :Example:
+        >>> mls = MultiLangString()
+        >>> langstring = LangString("Hello", "en")
+        >>> mls.add_langstring(langstring)
+        >>> print(mls)  # Output: {'Hello'}@en
         """
         self.add_entry(text=langstring.text, lang=langstring.lang)
 
     @Validator.validate_type_decorator
     def add_setlangstring(self, setlangstring: SetLangString) -> None:
-        """Add a SetLangString to the MultiLangString.
+        """
+        Add a SetLangString to the MultiLangString.
+
+        This method adds all text entries from a SetLangString to the MultiLangString under the specified language.
 
         :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
         :type setlangstring: SetLangString
+
+        :Example:
+        >>> mls = MultiLangString()
+        >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
+        >>> mls.add_setlangstring(setlangstring)
+        >>> print(mls)  # Output: {'Hello', 'Hi'}@en
         """
         self.add_empty_lang(setlangstring.lang)
         # Iterate through the texts in SetLangString and add them to the mls_dict
@@ -196,6 +288,20 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def add_multilangstring(self, multilangstring: "MultiLangString") -> None:
+        """
+        Add a MultiLangString to the MultiLangString.
+
+        This method adds all text entries from another MultiLangString to the current MultiLangString.
+
+        :param multilangstring: The MultiLangString object to be added.
+        :type multilangstring: MultiLangString
+
+        :Example:
+        >>> mls1 = MultiLangString()
+        >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> mls1.add_multilangstring(mls2)
+        >>> print(mls1)  # Output: {'Bonjour'}@fr, {'Hello'}@en
+        """
         for lang in multilangstring.mls_dict:
             self.add_empty_lang(lang)
             for text in multilangstring.mls_dict[lang]:
@@ -203,6 +309,19 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def add_empty_lang(self, lang: str) -> None:
+        """
+        Add an empty language to the MultiLangString.
+
+        This method adds an empty set for the specified language to the MultiLangString if it does not already exist.
+
+        :param lang: The language to add.
+        :type lang: str
+
+        :Example:
+        >>> mls = MultiLangString()
+        >>> mls.add_empty_lang("en")
+        >>> print(mls)  # Output: {}@en
+        """
         validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
         registered_lang = self._get_registered_lang(validated_lang)
         if registered_lang is None:

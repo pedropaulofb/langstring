@@ -524,6 +524,25 @@ class MultiLangString:
     def remove(
         self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
     ) -> None:
+        """
+        Remove an entry, LangString, SetLangString, or MultiLangString from the MultiLangString.
+
+        This method removes the specified entry from the MultiLangString. It can handle tuples, LangString,
+        SetLangString, or MultiLangString objects. Optionally, it can remove empty language entries after removing.
+
+        :param arg: The entry to remove, which can be a tuple, LangString, SetLangString, or MultiLangString.
+        :type arg: Union[tuple[str, str], LangString, SetLangString, MultiLangString]
+        :param clean_empty: If True, remove empty language entries after removing. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> mls.remove(("Hello", "en"))
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> lang_str = LangString("Bonjour", "fr")
+        >>> mls.remove(lang_str)
+        >>> print(mls)  # Output: {}@en, {}@fr
+        """
         if isinstance(arg, LangString):
             self.remove_langstring(arg, clean_empty)
             return
@@ -547,7 +566,8 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def remove_entry(self, text: str, lang: str, clean_empty: bool = False) -> None:
-        """Remove a single entry from the set of a given language key in the dictionary.
+        """
+        Remove a single entry from the set of a given language key in the dictionary.
 
         If the specified language key exists and the text is in its set, the text is removed. If this results in an
         empty set for the language, the language key is also removed from the dictionary.
@@ -556,6 +576,15 @@ class MultiLangString:
         :type text: str
         :param lang: The language key from which the text should be removed.
         :type lang: str
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> mls.remove_entry("Hello", "en")
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> mls.remove_entry("World", "en", clean_empty=True)
+        >>> print(mls)  # Output: {'Bonjour'}@fr
         """
         if self.contains_entry(text, lang):
             self.discard_entry(text, lang, clean_empty)
@@ -564,32 +593,117 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def remove_text_in_pref_lang(self, text: str, clean_empty: bool = False) -> None:
-        """Remove a text entry from the preferred language."""
+        """
+        Remove a text entry from the preferred language.
+
+        This method removes the specified text entry from the set associated with the preferred language.
+        If the set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param text: The text to remove.
+        :type text: str
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> mls.remove_text_in_pref_lang("Hello")
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> mls.remove_text_in_pref_lang("World", clean_empty=True)
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        """
         self.remove_entry(text, self.pref_lang, clean_empty)
 
     @Validator.validate_type_decorator
     def remove_langstring(self, langstring: LangString, clean_empty: bool = False) -> None:
+        """
+        Remove a LangString from the MultiLangString.
+
+        This method removes the specified LangString from the set associated with its language.
+        If the set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param langstring: The LangString object to remove.
+        :type langstring: LangString
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> lang_str = LangString("Hello", "en")
+        >>> mls.remove_langstring(lang_str)
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> lang_str = LangString("World", "en")
+        >>> mls.remove_langstring(lang_str, clean_empty=True)
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        """
         self.remove_entry(langstring.text, langstring.lang, clean_empty)
 
     @Validator.validate_type_decorator
     def remove_setlangstring(self, setlangstring: SetLangString, clean_empty: bool = False) -> None:
+        """
+        Remove a SetLangString from the MultiLangString.
+
+        This method removes the specified SetLangString from the sets associated with its language.
+        If the set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param setlangstring: The SetLangString object to remove.
+        :type setlangstring: SetLangString
+        :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+        >>> mls.remove_setlangstring(set_lang_str)
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+        >>> mls.remove_setlangstring(set_lang_str, clean_empty=True)
+        >>> print(mls)  # Output: {}@en
+        """
         for text in setlangstring.texts:
             self.remove_entry(text, setlangstring.lang, clean_empty)
 
     @Validator.validate_type_decorator
     def remove_multilangstring(self, multilangstring: "MultiLangString", clean_empty: bool = False) -> None:
+        """
+        Remove a MultiLangString from the current MultiLangString.
+
+        This method removes the specified MultiLangString from the sets associated with its languages.
+        If a set becomes empty and clean_empty is True, the language entry is removed.
+
+        :param multilangstring: The MultiLangString object to remove.
+        :type multilangstring: MultiLangString
+        :param clean_empty: If True, remove empty language entries after removing. Defaults to False.
+        :type clean_empty: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+        >>> mls_to_remove = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+        >>> mls.remove_multilangstring(mls_to_remove)
+        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> mls_to_remove = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
+        >>> mls.remove_multilangstring(mls_to_remove, clean_empty=True)
+        >>> print(mls)  # Output: {}
+        """
         for lang in multilangstring.mls_dict:
             for text in multilangstring.mls_dict[lang]:
                 self.remove_entry(text=text, lang=lang, clean_empty=clean_empty)
 
     @Validator.validate_type_decorator
     def remove_lang(self, lang: str) -> None:
-        """Remove all entries of a given language from the dictionary.
+        """
+        Remove all entries of a given language from the dictionary.
 
         If the specified language key exists, it and all its associated texts are removed from the dictionary.
 
         :param lang: The language key to be removed along with all its texts.
         :type lang: str
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+        >>> mls.remove_lang("en")
+        >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
+        >>> mls.remove_lang("fr")
+        >>> print(mls)  # Output: {}
         """
         registered_lang = self._get_registered_lang(lang)
         if registered_lang is not None:
@@ -598,6 +712,16 @@ class MultiLangString:
             raise ValueError(f"Lang '{lang}' not found in the MultiLangString.")
 
     def remove_empty_langs(self) -> None:
+        """
+        Remove all empty language entries from the dictionary.
+
+        This method checks for languages that have no associated text entries and removes them from the dictionary.
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": set()})
+        >>> mls.remove_empty_langs()
+        >>> print(mls)  # Output: {'Hello'}@en
+        """
         empty_langs = [lang for lang, text in self.mls_dict.items() if not text]
         for lang in empty_langs:
             del self.mls_dict[lang]
@@ -1054,3 +1178,5 @@ class MultiLangString:
                 merged_dict[langs[0]] = merged_texts  # Preserve original case for unique entries
 
         return merged_dict
+
+# TODO: Check if all methods that return sorted values inform this in their docstrings (check for MLS, SLS and LS).

@@ -18,7 +18,7 @@ offering extensive functionality for handling multilingual text data.
 
     # Add a new entry
     mls.add_entry("Hola", "es")
-    print(mls)  # Output: {'Bonjour', 'Monde'}@fr, {'Hello', 'World'}@en, {'Hola'}@es
+    print(mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es, {'Bonjour', 'Monde'}@fr
 
     # Retrieve texts in a specific language
     english_texts = mls["en"]
@@ -26,7 +26,7 @@ offering extensive functionality for handling multilingual text data.
 
     # Remove an entry
     mls.remove_entry("Hello", "en")
-    print(mls)  # Output: {'Bonjour', 'Monde'}@fr, {'Hola'}@es, {'World'}@en
+    print(mls)  # Output: {'World'}@en, {'Hola'}@es, {'Bonjour', 'Monde'}@fr
 
 Modules:
     controller: Provides control flags that influence the behavior of the MultiLangString class.
@@ -180,7 +180,7 @@ class MultiLangString:
         >>> mls = MultiLangString()
         >>> mls.add(("Hello", "en"))
         >>> mls.add(LangString("Bonjour", "fr"))
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'Hello'}@en
+        >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
         """
         if isinstance(arg, LangString):
             self.add_langstring(arg)
@@ -221,7 +221,7 @@ class MultiLangString:
         >>> mls = MultiLangString()
         >>> mls.add_entry("Hello", "en")
         >>> mls.add_entry("Bonjour", "fr")
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'Hello'}@en
+        >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
         """
         validated_text = Validator.validate_flags_text(MultiLangStringFlag, text)
         validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
@@ -300,7 +300,7 @@ class MultiLangString:
         >>> mls1 = MultiLangString()
         >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
         >>> mls1.add_multilangstring(mls2)
-        >>> print(mls1)  # Output: {'Bonjour'}@fr, {'Hello'}@en
+        >>> print(mls1)  # Output: {'Hello'}@en, {'Bonjour'}@fr
         """
         for lang in multilangstring.mls_dict:
             self.add_empty_lang(lang)
@@ -346,7 +346,7 @@ class MultiLangString:
         :Example:
         >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
         >>> mls.discard(("Hello", "en"))
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
         >>> lang_str = LangString("Bonjour", "fr")
         >>> mls.discard(lang_str)
         >>> print(mls)  # Output: {}@en, {}@fr
@@ -390,7 +390,7 @@ class MultiLangString:
         :Example:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> mls.discard_entry("Hello", "en")
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> mls.discard_entry("World", "en", clean_empty=True)
         >>> print(mls)  # Output: {'Bonjour'}@fr
         """
@@ -417,7 +417,7 @@ class MultiLangString:
         :Example:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> mls.discard_text_in_pref_lang("Hello")
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> mls.discard_text_in_pref_lang("World", clean_empty=True)
         >>> print(mls)  # Output: {'Bonjour'}@fr
         """
@@ -440,7 +440,7 @@ class MultiLangString:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> lang_str = LangString("Hello", "en")
         >>> mls.discard_langstring(lang_str)
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> lang_str = LangString("World", "en")
         >>> mls.discard_langstring(lang_str, clean_empty=True)
         >>> print(mls)  # Output: {'Bonjour'}@fr
@@ -464,7 +464,7 @@ class MultiLangString:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
         >>> mls.discard_setlangstring(set_lang_str)
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
         >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
         >>> mls.discard_setlangstring(set_lang_str, clean_empty=True)
         >>> print(mls)  # Output: {}@en
@@ -489,7 +489,7 @@ class MultiLangString:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
         >>> mls_to_discard = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
         >>> mls.discard_multilangstring(mls_to_discard)
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> mls_to_discard = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
         >>> mls.discard_multilangstring(mls_to_discard, clean_empty=True)
         >>> print(mls)  # Output: {}
@@ -538,7 +538,7 @@ class MultiLangString:
         :Example:
         >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
         >>> mls.remove(("Hello", "en"))
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
         >>> lang_str = LangString("Bonjour", "fr")
         >>> mls.remove(lang_str)
         >>> print(mls)  # Output: {}@en, {}@fr
@@ -582,7 +582,7 @@ class MultiLangString:
         :Example:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> mls.remove_entry("Hello", "en")
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> mls.remove_entry("World", "en", clean_empty=True)
         >>> print(mls)  # Output: {'Bonjour'}@fr
         """
@@ -607,7 +607,7 @@ class MultiLangString:
         :Example:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> mls.remove_text_in_pref_lang("Hello")
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> mls.remove_text_in_pref_lang("World", clean_empty=True)
         >>> print(mls)  # Output: {'Bonjour'}@fr
         """
@@ -630,7 +630,7 @@ class MultiLangString:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> lang_str = LangString("Hello", "en")
         >>> mls.remove_langstring(lang_str)
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> lang_str = LangString("World", "en")
         >>> mls.remove_langstring(lang_str, clean_empty=True)
         >>> print(mls)  # Output: {'Bonjour'}@fr
@@ -654,7 +654,7 @@ class MultiLangString:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
         >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
         >>> mls.remove_setlangstring(set_lang_str)
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {}@en
+        >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
         >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
         >>> mls.remove_setlangstring(set_lang_str, clean_empty=True)
         >>> print(mls)  # Output: {}@en
@@ -679,7 +679,7 @@ class MultiLangString:
         >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
         >>> mls_to_remove = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
         >>> mls.remove_multilangstring(mls_to_remove)
-        >>> print(mls)  # Output: {'Bonjour'}@fr, {'World'}@en
+        >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
         >>> mls_to_remove = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
         >>> mls.remove_multilangstring(mls_to_remove, clean_empty=True)
         >>> print(mls)  # Output: {}
@@ -839,8 +839,8 @@ class MultiLangString:
         >>> for setlangstring in setlangstrings:
         ...     print(setlangstring)
         ...
-        # Output:   {'Hello', 'World'}@en
-        #           {'Bonjour'}@fr
+        >>> # Output:   {'Hello', 'World'}@en
+        >>> #           {'Bonjour'}@fr
         """
         Validator.validate_type_iterable(langs, list, str, optional=True)
 
@@ -1157,27 +1157,110 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def get_langs(self, casefold: bool = False) -> list[str]:
-        """Return a list with all languages in the MultiLangString."""
+        """
+        Return a list of all languages in the MultiLangString.
+
+        This method returns a list of all language codes present in the MultiLangString. If casefold is True,
+        the language codes are returned in lowercase.
+
+        :param casefold: If True, return the language codes in lowercase. Defaults to False.
+        :type casefold: bool
+        :return: A list of language codes.
+        :rtype: list[str]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> langs = mls.get_langs()
+        >>> print(langs)  # Output: ['en', 'fr']
+        >>> langs_casefolded = mls.get_langs(casefold=True)
+        >>> print(langs_casefolded)  # Output: ['en', 'fr']
+        """
         return [lang.lower() for lang in self.mls_dict.keys()] if casefold else list(self.mls_dict.keys())
 
     def get_texts(self) -> list[str]:
-        """Return a sorted list with all texts in the MultiLangString."""
+        """
+        Return a sorted list of all texts in the MultiLangString.
+
+        This method returns a list of all text entries present in the MultiLangString, sorted in alphabetical order.
+
+        :return: A sorted list of text entries.
+        :rtype: list[str]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> texts = mls.get_texts()
+        >>> print(texts)  # Output: ['Bonjour', 'Hello', 'World']
+        """
         result = [item for subset in self.mls_dict.values() for item in subset]
         result.sort()
         return result
 
     @Validator.validate_type_decorator
     def get_langstring(self, text: str, lang: str) -> LangString:
+        """
+        Retrieve a LangString from the MultiLangString.
+
+        This method returns a LangString object if the specified text and language are present in the MultiLangString.
+        If the text and language are not found, it returns a LangString with only the language set.
+
+        :param text: The text entry to retrieve.
+        :type text: str
+        :param lang: The language of the text entry.
+        :type lang: str
+        :return: A LangString object with the specified text and language, or a LangString with only the language if not found.
+        :rtype: LangString
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> lang_str = mls.get_langstring("Hello", "en")
+        >>> print(lang_str)  # Output: "Hello"@en
+        >>> lang_str = mls.get_langstring("Hola", "es")
+        >>> print(lang_str)  # Output: ""@es
+        """
         return LangString(text=text, lang=lang) if self.contains_entry(text=text, lang=lang) else LangString(lang=lang)
 
     @Validator.validate_type_decorator
     def get_setlangstring(self, lang: str) -> SetLangString:
+        """
+        Retrieve a SetLangString from the MultiLangString.
+
+        This method returns a SetLangString object if the specified language is present in the MultiLangString.
+        If the language is not found, it returns an empty SetLangString with the language set.
+
+        :param lang: The language to retrieve the SetLangString for.
+        :type lang: str
+        :return: A SetLangString object with the texts for the specified language, or an empty SetLangString if not found.
+        :rtype: SetLangString
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> set_lang_str = mls.get_setlangstring("en")
+        >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+        >>> set_lang_str = mls.get_setlangstring("es")
+        >>> print(set_lang_str)  # Output: {}es
+        """
         registered_lang = self._get_registered_lang(lang)
         if registered_lang is not None:
             return SetLangString(texts=self.mls_dict[registered_lang], lang=lang)
         return SetLangString(lang=lang)
 
     def get_multilangstring(self, langs: list[str]) -> "MultiLangString":
+        """
+        Retrieve a MultiLangString containing only the specified languages.
+
+        This method returns a new MultiLangString object containing only the specified languages and their texts
+        from the current MultiLangString.
+
+        :param langs: A list of languages to include in the new MultiLangString.
+        :type langs: list[str]
+        :return: A new MultiLangString object with the specified languages and their texts.
+        :rtype: MultiLangString
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
+        >>> new_mls = mls.get_multilangstring(["en", "es"])
+        >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+        """
         Validator.validate_type_iterable(langs, list, str)
 
         new_mls = MultiLangString()
@@ -1192,6 +1275,28 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def pop_langstring(self, text: str, lang: str) -> Optional[LangString]:
+        """
+        Remove and return a LangString from the MultiLangString.
+
+        This method removes the specified text entry and its language from the MultiLangString,
+        and returns it as a LangString object. If the entry is not found, it returns None.
+
+        :param text: The text entry to remove.
+        :type text: str
+        :param lang: The language of the text entry.
+        :type lang: str
+        :return: The removed LangString object, or None if the entry was not found.
+        :rtype: Optional[LangString]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> lang_str = mls.pop_langstring("Hello", "en")
+        >>> print(lang_str)  # Output: "Hello"@en
+        >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr,
+        >>> lang_str = mls.pop_langstring("Hola", "es")
+        >>> print(lang_str)  # Output: None
+        >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+        """
         if self.contains_entry(text=text, lang=lang):
             new_ls = self.get_langstring(text=text, lang=lang)
             self.remove_entry(text=text, lang=lang)
@@ -1200,6 +1305,26 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def pop_setlangstring(self, lang: str) -> Optional[SetLangString]:
+        """
+        Remove and return a SetLangString from the MultiLangString.
+
+        This method removes all text entries associated with the specified language from the MultiLangString,
+        and returns them as a SetLangString object. If the language is not found, it returns None.
+
+        :param lang: The language to remove the SetLangString for.
+        :type lang: str
+        :return: The removed SetLangString object, or None if the language was not found.
+        :rtype: Optional[SetLangString]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> set_lang_str = mls.pop_setlangstring("en")
+        >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        >>> set_lang_str = mls.pop_setlangstring("es")
+        >>> print(set_lang_str)  # Output: None
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        """
         if self.contains_lang(lang=lang):
             new_sls = self.get_setlangstring(lang=lang)
             self.remove_lang(lang=lang)
@@ -1207,6 +1332,23 @@ class MultiLangString:
         return None
 
     def pop_multilangstring(self, langs: list[str]) -> "MultiLangString":
+        """
+        Remove and return a MultiLangString containing the specified languages.
+
+        This method removes all text entries associated with the specified languages from the MultiLangString,
+        and returns them as a new MultiLangString object.
+
+        :param langs: A list of languages to remove.
+        :type langs: list[str]
+        :return: A new MultiLangString object with the specified languages and their texts.
+        :rtype: MultiLangString
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
+        >>> new_mls = mls.pop_multilangstring(["en", "es"])
+        >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        """
         Validator.validate_type_iterable(langs, list, str)
 
         new_mls = self.get_multilangstring(langs)
@@ -1217,6 +1359,22 @@ class MultiLangString:
     # ----- GENERAL METHODS -----
 
     def has_pref_lang_entries(self) -> bool:
+        """
+        Check if there are any entries in the preferred language.
+
+        This method checks whether there are any text entries in the MultiLangString for the preferred language.
+
+        :return: True if there are entries in the preferred language, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> has_entries = mls.has_pref_lang_entries()
+        >>> print(has_entries)  # Output: True
+        >>> mls.pop_setlangstring("en")
+        >>> has_entries = mls.has_pref_lang_entries()
+        >>> print(has_entries)  # Output: False
+        """
         registered_lang = self._get_registered_lang(self.pref_lang)
         return len(self.mls_dict[registered_lang]) > 0 if (registered_lang is not None) else False
 
@@ -1226,12 +1384,42 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def __contains__(self, lang: str) -> bool:
-        """Check if a language is in the MultiLangString."""
+        """
+        Check if a language is in the MultiLangString.
+
+        This method mimics the behavior of the 'in' operator for dictionaries, allowing users to check if a language
+        exists in the MultiLangString.
+
+        :param lang: The language code to check for.
+        :type lang: str
+        :return: True if the language is present, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> print("en" in mls)  # Output: True
+        >>> print("es" in mls)  # Output: False
+        """
         return self.contains_lang(lang)
 
     @Validator.validate_type_decorator
     def __delitem__(self, lang: str) -> None:
-        """Allow deletion of language entries."""
+        """
+        Allow deletion of language entries.
+
+        This method mimics the behavior of the 'del' operator for dictionaries, allowing users to delete a language
+        entry from the MultiLangString.
+
+        :param lang: The language code to delete.
+        :type lang: str
+        :raises KeyError: If the language is not found in the MultiLangString.
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> del mls["en"]
+        >>> print(mls)  # Output: {'Bonjour'}@fr
+        >>> del mls["es"]  # Raises KeyError
+        """
         reg_lang = self._get_registered_lang(lang)
 
         # Del valid using registered lang or raise KeyError when invalid (not registered in any case)
@@ -1240,15 +1428,24 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def __eq__(self, other: object) -> bool:
-        """Check equality of this MultiLangString with another MultiLangString.
+        """
+        Check equality of this MultiLangString with another MultiLangString.
 
-        Equality is determined based on the mls_dict attribute. The pref_lang attribute is not considered in the
-        equality check.
+        This method mimics the behavior of the '==' operator for dictionaries, allowing users to compare two
+        MultiLangString objects for equality based on their mls_dict attributes.
+        The pref_lang attribute is not considered in the equality check.
 
         :param other: Another object to compare with.
         :type other: object
         :return: True if both MultiLangString objects have the same mls_dict, False otherwise.
         :rtype: bool
+
+        :Example:
+        >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> print(mls1 == mls2)  # Output: True
+        >>> mls3 = MultiLangString({"en": {"Hi"}, "fr": {"Salut"}})
+        >>> print(mls1 == mls3)  # Output: False
         """
         if not isinstance(other, MultiLangString):
             return NotImplemented
@@ -1270,8 +1467,23 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def __getitem__(self, lang: str) -> set[str]:
-        """Allow retrieval of entries by language."""
+        """
+        Allow retrieval of entries by language.
 
+        This method mimics the behavior of the dictionary 'getitem' method, allowing users to retrieve the set of text entries
+        associated with a specified language code from the MultiLangString. Raises KeyError if the language is not found.
+
+        :param lang: The language code to retrieve entries for.
+        :type lang: str
+        :return: A set of text entries associated with the specified language.
+        :rtype: set[str]
+        :raises KeyError: If the language is not found in the MultiLangString.
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> print(mls["en"])  # Output: {'Hello', 'World'}
+        >>> print(mls["es"])  # Raises KeyError
+        """
         reg_lang = self._get_registered_lang(lang)
 
         # Get valid using registered lang or raise KeyError when invalid (not registered in any case)
@@ -1279,13 +1491,21 @@ class MultiLangString:
         return self.mls_dict[get_lang]
 
     def __hash__(self) -> int:
-        """Generate a hash new_text for a MultiLangString object.
+        """
+        Generate a hash value for a MultiLangString object.
 
-        The hash is computed based on the 'mls_dict' attribute of the MultiLangString. This approach ensures that
-        MultiLangString objects with the same content will have the same hash new_text.
+        This method mimics the behavior of the dictionary 'hash' method, allowing users to obtain a hash value
+        for the MultiLangString. The hash is computed based on the 'mls_dict' attribute, ensuring that
+        MultiLangString objects with the same content will have the same hash value.
+        I.e., the pref_lang attribute is not considered in the hash creation.
 
-        :return: The hash new_text of the MultiLangString object.
+        :return: The hash value of the MultiLangString object.
         :rtype: int
+
+        :Example:
+        >>> mls1 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="en")
+        >>> mls2 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="pt")
+        >>> print(hash(mls1) == hash(mls2))  # Output: True
         """
         # Create a casefolded version of mls_dict with sorted values
         hashable_data = tuple(
@@ -1297,30 +1517,92 @@ class MultiLangString:
         return hash(hashable_data)
 
     def __iter__(self):
-        """Allow iteration over the dictionary keys (language codes)."""
+        """
+        Allow iteration over the dictionary keys (language codes).
+
+        This method mimics the behavior of the dictionary 'iter' method, allowing users to iterate over the
+        language codes present in the MultiLangString.
+
+        :return: An iterator over the language codes.
+        :rtype: iterator
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> for lang in mls:
+        >>>     print(lang)
+        >>> # Output:   en
+        >>> #           fr
+        """
         return iter(self.mls_dict)
 
     def __len__(self) -> int:
-        """Return the number of languages in the dictionary."""
+        """
+        Return the number of languages in the dictionary.
+
+        This method mimics the behavior of the dictionary 'len' method, allowing users to get the number of
+        language entries present in the MultiLangString.
+
+        :return: The number of language entries.
+        :rtype: int
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> print(len(mls))  # Output: 2
+        """
         return len(self.mls_dict)
 
     def __repr__(self) -> str:
-        """Return a detailed string representation of the MultiLangString object.
+        """
+        Return a detailed string representation of the MultiLangString object.
 
         This method provides a more verbose string representation of the MultiLangString, which includes the full
         dictionary of language strings and the preferred language, making it useful for debugging.
 
         :return: A detailed string representation of the MultiLangString.
         :rtype: str
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> print(repr(mls))  # Output: 'MultiLangString(mls_dict={'en': {'Hello'}, 'fr': {'Bonjour'}}, pref_lang='en')'
         """
         return f"{self.__class__.__name__}(mls_dict={repr(self.mls_dict)}, pref_lang={repr(self.pref_lang)})"
 
     def __reversed__(self):
-        """Return a reverse iterator over the dictionary keys."""
+        """
+        Return a reverse iterator over the dictionary keys.
+
+        This method allows for iterating over the language codes in the MultiLangString in reverse order.
+
+        :return: A reverse iterator over the dictionary keys.
+        :rtype: reverse_iterator
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> reversed_langs = list(reversed(mls))
+        >>> print(reversed_langs)  # Output: ['fr', 'en']
+        """
         return reversed(self.mls_dict)
 
     def __setitem__(self, lang: str, texts: set[str]) -> None:
-        """Allow setting entries by language."""
+        """
+        Allow setting entries by language.
+
+        This method allows for setting the text entries for a given language in the MultiLangString, mimicking
+        dictionary behavior. If the language does not exist, it is added.
+
+        :param lang: The language code.
+        :type lang: str
+        :param texts: A set of text entries to associate with the language.
+        :type texts: set[str]
+
+        :Example:
+        >>> mls = MultiLangString()
+        >>> mls["en"] = {"Hello", "World"}
+        >>> mls["es"] = {"Hola"}
+        >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+        >>> mls["en"] = {"Bye"}
+        >>> print(mls)  # Output: {'Bye'}@en, {'Hola'}@es
+        """
         Validator.validate_type_single(lang, str)
         Validator.validate_type_iterable(texts, set, str)
 
@@ -1333,13 +1615,18 @@ class MultiLangString:
                 self.add_entry(text, add_lang)
 
     def __str__(self) -> str:
-        """Return a string representation of the MultiLangString, including language tags.
+        """
+        Return a string representation of the MultiLangString, including language tags.
 
         This method provides a concise string representation of the MultiLangString, listing each text entry with its
-        associated language tag.
+        associated language tag. The output is sorted alphabetically by language and then by text within each language.
 
         :return: A string representation of the MultiLangString with language tags.
         :rtype: str
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"World", "Hello"}, "fr": {"Bonjour"}})
+        >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Bonjour'}@fr
         """
         if not self.mls_dict:
             return "{}"
@@ -1347,6 +1634,8 @@ class MultiLangString:
         formatted_items = []
         print_lang = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_LANG)
         print_quotes = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_QUOTES)
+
+        # Sorted to produce a deterministic output
         for lang, texts in sorted(self.mls_dict.items()):  # Sort languages
             if texts:
                 sorted_texts = sorted(texts)  # Sort texts within the language
@@ -1365,9 +1654,7 @@ class MultiLangString:
 
             formatted_items.append(formatted_item)
 
-        # sorted to be deterministic
-        sorted_formatted_items = sorted(formatted_items)  # Sort the formatted items
-        return ", ".join(sorted_formatted_items)
+        return ", ".join(formatted_items)
 
     # --------------------------------------------------
     # Static Methods
@@ -1375,6 +1662,24 @@ class MultiLangString:
 
     @staticmethod
     def merge_multilangstrings(multilangstrings: list["MultiLangString"]) -> "MultiLangString":
+        """
+        Merge multiple MultiLangString instances into a single MultiLangString.
+
+        This static method takes a list of MultiLangString instances and merges them into a single
+        MultiLangString. The resulting MultiLangString contains all languages and texts from the provided
+        instances. If the list is empty, an empty MultiLangString is returned.
+
+        :param multilangstrings: A list of MultiLangString instances to merge.
+        :type multilangstrings: list[MultiLangString]
+        :return: A new MultiLangString containing all languages and texts from the provided instances.
+        :rtype: MultiLangString
+
+        :Example:
+        >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> mls2 = MultiLangString({"es": {"Hola"}, "en": {"World"}})
+        >>> merged_mls = MultiLangString.merge_multilangstrings([mls1, mls2])
+        >>> print(merged_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es, {'Bonjour'}@fr
+        """
         Validator.validate_type_iterable(multilangstrings, list, MultiLangString)
 
         if len(multilangstrings):
@@ -1392,6 +1697,22 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def _get_registered_lang(self, lang: str) -> Union[str, None]:
+        """
+        Retrieve the registered language key from the MultiLangString.
+
+        This method performs a case-insensitive lookup to find and return the registered language key
+        in the MultiLangString. If the language key is not found, it returns None.
+
+        :param lang: The language key to look up.
+        :type lang: str
+        :return: The registered language key, or None if not found.
+        :rtype: Union[str, None]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> registered_lang = mls._get_registered_lang("EN")
+        >>> print(registered_lang)  # Output: en
+        """
         lang_register = {s.casefold(): s for s in self.mls_dict.keys()}
         if lang.casefold() in lang_register:
             return lang_register[lang.casefold()]
@@ -1399,14 +1720,23 @@ class MultiLangString:
 
     @staticmethod
     def _merge_language_entries(mls_dict: dict[str, set[str]]) -> dict[str, set[str]]:
-        """Merge entries in the provided dict where the lang codes match case-insensitively. For duplicates,
-        the entries are merged under their casefolded version. Original language codes are preserved
-        if no case-insensitive duplicates are found.
-
-        :param mls_dict: Dictionary with language codes as keys and sets of strings as values.
-        :return: A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.
         """
+        Merge language entries in a dictionary where the language codes match case-insensitively.
 
+        This static method takes a dictionary with language codes as keys and sets of strings as values.
+        It merges entries with case-insensitive language codes, combining their text sets. The original
+        language codes are preserved if there are no case-insensitive duplicates.
+
+        :param mls_dict: A dictionary with language codes as keys and sets of strings as values.
+        :type mls_dict: dict[str, set[str]]
+        :return: A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.
+        :rtype: dict[str, set[str]]
+
+        :Example:
+        >>> mls_dict = {"en": {"Hello"}, "EN": {"World"}, "fr": {"Bonjour"}}
+        >>> merged_dict = MultiLangString._merge_language_entries(mls_dict)
+        >>> print(merged_dict)  # Output: {'en': {'Hello', 'World'}, 'fr': {'Bonjour'}}
+        """
         Validator.validate_type_iterable(mls_dict, dict, str)
         for key in mls_dict:
             Validator.validate_type_iterable(mls_dict[key], set, str)

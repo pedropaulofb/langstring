@@ -57,8 +57,8 @@ def normalize_string(s: str) -> str:
         ),  # Mixed case languages.
         (
             [("Hello😊", "en"), ("😢", "emoji")],
-            "{'Hello😊'}@en, {'😢'}@emoji",
-            "{'Hello😊'}, {'😢'}",
+            "{'😢'}@emoji, {'Hello😊'}@en",
+            "{'😢'}, {'Hello😊'}",
         ),  # Emojis in text and as a language.
         (
             [("Hello\nWorld", "en"), ("Line\nBreak", "mult")],
@@ -67,8 +67,8 @@ def normalize_string(s: str) -> str:
         ),  # Newline characters in text.
         (
             [("Speci@l Ch@racters", "en"), ("<XML>", "markup")],
-            "{'<XML>'}@markup, {'Speci@l Ch@racters'}@en",
-            "{'<XML>'}, {'Speci@l Ch@racters'}",
+            "{'Speci@l Ch@racters'}@en, {'<XML>'}@markup",
+            "{'Speci@l Ch@racters'}, {'<XML>'}",
         ),  # Special characters.
         ([("Hello", "en"), ("hello", "en")], "{'Hello', 'hello'}@en", "{'Hello', 'hello'}"),
         (
@@ -78,7 +78,7 @@ def normalize_string(s: str) -> str:
         ),
         ([("", "en")], "{''}@en", "{''}"),
         ([(" ", "en")], "{' '}@en", "{' '}"),
-        ([("مرحبا", "ar"), ("שלום", "he")], "{'שלום'}@he, {'مرحبا'}@ar", "{'שלום'}, {'مرحبا'}"),
+        ([("مرحبا", "ar"), ("שלום", "he")], "{'مرحبا'}@ar, {'שלום'}@he", "{'مرحبا'}, {'שלום'}"),
         ([("Line1\\nLine2", "en")], "{'Line1\\nLine2'}@en", "{'Line1\\nLine2'}"),
     ],
 )

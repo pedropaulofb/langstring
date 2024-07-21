@@ -45,7 +45,7 @@ def test_from_multilangstring_to_string_special_characters() -> None:
     """
     multilangstring = MultiLangString({"en": {"Hello😊"}, "el": {"Γειά σου Κόσμε"}, "ja": {"こんにちは世界"}})
     result = Converter.from_multilangstring_to_string(multilangstring)
-    expected = "{'Hello😊'}@en, {'Γειά σου Κόσμε'}@el, {'こんにちは世界'}@ja"
+    expected = "{'Γειά σου Κόσμε'}@el, {'Hello😊'}@en, {'こんにちは世界'}@ja"
     assert result == expected, f"Expected '{expected}', got {result}"
 
 
@@ -56,7 +56,7 @@ def test_from_multilangstring_to_string_edge_cases() -> None:
     """
     multilangstring = MultiLangString({"": {""}, " ": {" "}, "en": {"Hello\nWorld"}})
     result = Converter.from_multilangstring_to_string(multilangstring)
-    expected = "{' '}@ , {''}@, {'Hello\nWorld'}@en"
+    expected = "{''}@, {' '}@ , {'Hello\nWorld'}@en"
     assert result == expected, f"Expected '{expected}', got {result}"
 
 
@@ -78,7 +78,7 @@ def test_from_multilangstring_to_string_unusual_but_valid_usage() -> None:
     """
     multilangstring = MultiLangString({"en": {"Hello\nWorld"}, "es": {"\tHola"}})
     result = Converter.from_multilangstring_to_string(multilangstring)
-    expected = "{'\tHola'}@es, {'Hello\nWorld'}@en"
+    expected = "{'Hello\nWorld'}@en, {'\tHola'}@es"
     assert result == expected, f"Expected '{expected}', got {result}"
 
 
@@ -117,15 +117,15 @@ def test_from_multilangstring_to_string_operation_on_itself() -> None:
         ({"en": {"Hello"}, "es": {"Hola"}}, "{'Hello'}@en, {'Hola'}@es"),
         (
             {"en": {"Hello😊"}, "el": {"Γειά σου Κόσμε"}, "ja": {"こんにちは世界"}},
-            "{'Hello😊'}@en, {'Γειά σου Κόσμε'}@el, {'こんにちは世界'}@ja",
+            "{'Γειά σου Κόσμε'}@el, {'Hello😊'}@en, {'こんにちは世界'}@ja",
         ),
-        ({"": {""}, " ": {" "}, "en": {"Hello\nWorld"}}, "{' '}@ , {''}@, {'Hello\nWorld'}@en"),
-        ({"en": {"Hello\nWorld"}, "es": {"\tHola"}}, "{'\tHola'}@es, {'Hello\nWorld'}@en"),
+        ({"": {""}, " ": {" "}, "en": {"Hello\nWorld"}}, "{''}@, {' '}@ , {'Hello\nWorld'}@en"),
+        ({"en": {"Hello\nWorld"}, "es": {"\tHola"}}, "{'Hello\nWorld'}@en, {'\tHola'}@es"),
         # New cases
         ({"en": {""}, "es": {""}}, "{''}@en, {''}@es"),
         ({"en": {"hello", "HELLO", "Hello"}}, "{'HELLO', 'Hello', 'hello'}@en"),
         ({"en": {"hello world", " hello world "}}, "{' hello world ', 'hello world'}@en"),
-        ({"en": {"你好"}, "zh": {"世界"}}, "{'世界'}@zh, {'你好'}@en"),
+        ({"en": {"你好"}, "zh": {"世界"}}, "{'你好'}@en, {'世界'}@zh"),
         ({"en": {"Hello 🌍"}}, "{'Hello 🌍'}@en"),
         ({"en": {"Hello!", "@Hello", "#Hello"}}, "{'#Hello', '@Hello', 'Hello!'}@en"),
     ],
@@ -165,7 +165,7 @@ def test_from_multilangstring_to_string_various_cases(mls_dict, expected) -> Non
         (
             {"en": {"Hello 😊"}, "fr": {"Bonjour"}},
             {MultiLangStringFlag.PRINT_WITH_QUOTES: False, MultiLangStringFlag.PRINT_WITH_LANG: True},
-            "{Bonjour}@fr, {Hello 😊}@en",
+            "{Hello 😊}@en, {Bonjour}@fr",
         ),
         (
             {"en": {"Hello"}, "es": {"Hola"}},
@@ -194,7 +194,7 @@ def test_from_multilangstring_to_string_with_flags_effect_various_cases(mls_dict
     [
         ({"en": {"Hello"}, "es": {"Hola"}}, "{Hello}@en, {Hola}@es@en, {{Hello}@en, {Hola}@es}@en@es"),
         # New cases
-        ({"en": {"你好"}, "zh": {"世界"}}, "{世界}@zh, {你好}@en@en, {{世界}@zh, {你好}@en}@en@es"),
+        ({"en": {"你好"}, "zh": {"世界"}}, "{你好}@en, {世界}@zh@en, {{你好}@en, {世界}@zh}@en@es"),
         ({"en": {"Hello😊"}}, "{Hello😊}@en@en, {{Hello😊}@en}@en@es"),
         ({"en": {"HELLO"}, "es": {"HOLA"}}, "{HELLO}@en, {HOLA}@es@en, {{HELLO}@en, {HOLA}@es}@en@es"),
     ],

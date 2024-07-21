@@ -735,6 +735,30 @@ class MultiLangString:
         separator: str = "@",
         print_lang: Optional[bool] = None,
     ) -> list[str]:
+        """
+        Convert the MultiLangString to a list of formatted strings.
+
+        This method converts the text entries of the MultiLangString into a list of strings,
+        optionally formatted with quotes and language tags.
+
+        :param langs: A list of languages to include in the output. If None, includes all languages.
+        :type langs: Optional[list[str]]
+        :param print_quotes: If True, wraps the text in quotes. Defaults to the controller flag.
+        :type print_quotes: Optional[bool]
+        :param separator: The separator between the text and the language tag. Defaults to "@".
+        :type separator: str
+        :param print_lang: If True, includes the language tag in the output. Defaults to the controller flag.
+        :type print_lang: Optional[bool]
+        :return: A sorted list of formatted strings.
+        :rtype: list[str]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> strings = mls.to_strings()
+        >>> print(strings)  # Output: ['"Bonjour"@fr', '"Hello"@en', '"World"@en']
+        >>> strings = mls.to_strings(print_quotes=False, print_lang=False)
+        >>> print(strings)  # Output: ['Bonjour', 'Hello', 'World']
+        """
         Validator.validate_type_iterable(langs, list, str, optional=True)
         Validator.validate_type_single(print_quotes, bool, optional=True)
         Validator.validate_type_single(separator, str)
@@ -760,6 +784,26 @@ class MultiLangString:
         return sorted(strings)
 
     def to_langstrings(self, langs: Optional[list[str]] = None) -> list[LangString]:
+        """
+        Convert the MultiLangString to a list of LangString objects.
+
+        This method converts the text entries of the MultiLangString into a list of LangString objects.
+
+        :param langs: A list of languages to include in the output. If None, includes all languages.
+        :type langs: Optional[list[str]]
+        :return: A list of LangString objects.
+        :rtype: list[LangString]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> langstrings = mls.to_langstrings()
+        >>> for langstring in langstrings:
+        ...     print(langstring)
+        ...
+        # Output:   "Hello"@en
+        #           "World"@en
+        #           "Bonjour"@fr
+        """
         Validator.validate_type_iterable(langs, list, str, optional=True)
 
         langstrings = []
@@ -779,6 +823,25 @@ class MultiLangString:
         return langstrings
 
     def to_setlangstrings(self, langs: Optional[list[str]] = None) -> list[SetLangString]:
+        """
+        Convert the MultiLangString to a list of SetLangString objects.
+
+        This method converts the text entries of the MultiLangString into a list of SetLangString objects.
+
+        :param langs: A list of languages to include in the output. If None, includes all languages.
+        :type langs: Optional[list[str]]
+        :return: A list of SetLangString objects.
+        :rtype: list[SetLangString]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> setlangstrings = mls.to_setlangstrings()
+        >>> for setlangstring in setlangstrings:
+        ...     print(setlangstring)
+        ...
+        # Output:   {'Hello', 'World'}@en
+        #           {'Bonjour'}@fr
+        """
         Validator.validate_type_iterable(langs, list, str, optional=True)
 
         setlangstrings = []

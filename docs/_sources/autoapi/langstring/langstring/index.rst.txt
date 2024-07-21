@@ -79,6 +79,14 @@ Module Contents
    :raises TypeError: If the types of parameters are incorrect based on validation.
 
 
+   .. py:attribute:: text
+      :type:  str
+
+
+   .. py:attribute:: lang
+      :type:  str
+
+
    .. py:property:: text
       :type: str
 

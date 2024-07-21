@@ -36,7 +36,6 @@ Modules:
     utils.validator: Provides validation methods used within the MultiLangString class.
 """
 
-
 from typing import Optional
 from typing import Union
 
@@ -740,6 +739,7 @@ class MultiLangString:
 
         This method converts the text entries of the MultiLangString into a list of strings,
         optionally formatted with quotes and language tags.
+        The resulting list of strings is sorted to generate a deterministic output.
 
         :param langs: A list of languages to include in the output. If None, includes all languages.
         :type langs: Optional[list[str]]
@@ -1763,5 +1763,3 @@ class MultiLangString:
                 merged_dict[langs[0]] = merged_texts  # Preserve original case for unique entries
 
         return merged_dict
-
-# TODO: Check if all methods that return sorted values inform this in their docstrings (check for MLS, SLS and LS).

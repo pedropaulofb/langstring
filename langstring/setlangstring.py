@@ -332,6 +332,7 @@ class SetLangString:
 
         This method converts each text in the set to a formatted string, optionally including quotes and the language tag.
         The behavior is influenced by control flags set in the Controller.
+        The resulting list of strings is sorted to generate a deterministic output.
 
         :param print_quotes: If True, wrap the text in quotes. If None, use the default setting from the Controller.
         :type print_quotes: Optional[bool]
@@ -339,7 +340,7 @@ class SetLangString:
         :type separator: str
         :param print_lang: If True, include the language tag. If None, use the default setting from the Controller.
         :type print_lang: Optional[bool]
-        :return: A list of formatted strings.
+        :return: A sorted list of formatted strings.
         :rtype: list[str]
 
         :Example:
@@ -1164,6 +1165,7 @@ class SetLangString:
         This method provides a concise string representation of the SetLangString, listing each text entry with its
         associated language tag if the corresponding flags are set. It mimics the behavior of the standard set's
         __str__ method.
+        The method provide a deterministic output by sorting the elements before printing.
 
         :return: The string representation of the SetLangString object.
         :rtype: str

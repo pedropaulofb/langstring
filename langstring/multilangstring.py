@@ -934,6 +934,31 @@ class MultiLangString:
     # ----- CONTAIN METHODS -----
 
     def contains(self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"]) -> bool:
+        """
+        Check if the MultiLangString contains the specified entry, LangString, SetLangString, or MultiLangString.
+
+        This method checks if the specified entry is present in the MultiLangString. It can handle tuples, LangString,
+        SetLangString, or MultiLangString objects.
+
+        :param arg: The entry to check, which can be a tuple, LangString, SetLangString, or MultiLangString.
+        :type arg: Union[tuple[str, str], LangString, SetLangString, MultiLangString]
+        :return: True if the entry is present, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> result = mls.contains(("Hello", "en"))
+        >>> print(result)  # Output: True
+        >>> lang_str = LangString("Bonjour", "fr")
+        >>> result = mls.contains(lang_str)
+        >>> print(result)  # Output: True
+        >>> set_lang_str = SetLangString({"Hello"}, "en")
+        >>> result = mls.contains(set_lang_str)
+        >>> print(result)  # Output: True
+        >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> result = mls.contains(mls_to_check)
+        >>> print(result)  # Output: True
+        """
         if isinstance(arg, LangString):
             return self.contains_langstring(arg)
 
@@ -953,21 +978,95 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def contains_entry(self, text: str, lang: str) -> bool:
+        """
+        Check if a specific text entry exists in a given language.
+
+        This method checks if the specified text entry is present in the set associated with the given language.
+
+        :param text: The text entry to check.
+        :type text: str
+        :param lang: The language of the text entry.
+        :type lang: str
+        :return: True if the text entry is present, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> result = mls.contains_entry("Hello", "en")
+        >>> print(result)  # Output: True
+        >>> result = mls.contains_entry("Bonjour", "fr")
+        >>> print(result)  # Output: True
+        >>> result = mls.contains_entry("Hello", "fr")
+        >>> print(result)  # Output: False
+        """
         registered_lang = self._get_registered_lang(lang)
         return False if (registered_lang is None) else (text in self.mls_dict[registered_lang])
 
     @Validator.validate_type_decorator
     def contains_lang(self, lang: str) -> bool:
+        """
+        Check if a specific language exists in the MultiLangString.
+
+        This method checks if the specified language is present in the MultiLangString.
+
+        :param lang: The language to check.
+        :type lang: str
+        :return: True if the language is present, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> result = mls.contains_lang("en")
+        >>> print(result)  # Output: True
+        >>> result = mls.contains_lang("fr")
+        >>> print(result)  # Output: True
+        >>> result = mls.contains_lang("es")
+        >>> print(result)  # Output: False
+        """
         return self._get_registered_lang(lang) is not None
 
     @Validator.validate_type_decorator
     def contains_text_in_pref_lang(self, text: str) -> bool:
-        """Check if a specific text exists in the preferred language."""
+        """
+        Check if a specific text exists in the preferred language.
+
+        This method checks if the specified text entry is present in the set associated with the preferred language.
+
+        :param text: The text entry to check.
+        :type text: str
+        :return: True if the text entry is present in the preferred language, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> result = mls.contains_text_in_pref_lang("Hello")
+        >>> print(result)  # Output: True
+        >>> result = mls.contains_text_in_pref_lang("Bonjour")
+        >>> print(result)  # Output: False
+        """
         return self.contains_entry(text, self.pref_lang)
 
     @Validator.validate_type_decorator
     def contains_text_in_any_lang(self, text: str) -> bool:
-        """Check if a specific text exists in the preferred language."""
+        """
+        Check if a specific text exists in any language.
+
+        This method checks if the specified text entry is present in the sets associated with any language in the MultiLangString.
+
+        :param text: The text entry to check.
+        :type text: str
+        :return: True if the text entry is present in any language, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> result = mls.contains_text_in_any_lang("Hello")
+        >>> print(result)  # Output: True
+        >>> result = mls.contains_text_in_any_lang("Bonjour")
+        >>> print(result)  # Output: True
+        >>> result = mls.contains_text_in_any_lang("Hola")
+        >>> print(result)  # Output: False
+        """
         for lang in self.mls_dict:
             if text in self.mls_dict[lang]:
                 return True
@@ -975,20 +1074,51 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def contains_langstring(self, langstring: LangString) -> bool:
-        """Check if the given LangString's text and lang are part of this MultiLangString.
+        """
+        Check if the given LangString's text and language are part of this MultiLangString.
+
+        This method checks if the specified LangString is present in the set associated with its language.
 
         :param langstring: A LangString object to check.
+        :type langstring: LangString
         :return: True if the LangString's text is found within the specified language's set; otherwise, False.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> lang_str = LangString("Hello", "en")
+        >>> result = mls.contains_langstring(lang_str)
+        >>> print(result)  # Output: True
+        >>> lang_str = LangString("Hola", "es")
+        >>> result = mls.contains_langstring(lang_str)
+        >>> print(result)  # Output: False
         """
         return self.contains_entry(langstring.text, langstring.lang)
 
     @Validator.validate_type_decorator
     def contains_setlangstring(self, setlangstring: SetLangString) -> bool:
-        """Check if all texts and the language of a SetLangString are part of this MultiLangString.
+        """
+        Check if all texts and the language of a SetLangString are part of this MultiLangString.
+
+        This method checks if the specified SetLangString's language exists and all its texts are found within the specified
+        language's set.
 
         :param setlangstring: A SetLangString object to check.
-        :return: True if the SetLangString's language exists and all its texts are found within the specified
-        language's set; otherwise, False.
+        :type setlangstring: SetLangString
+        :return: True if the SetLangString's language exists and all its texts are found within the specified language's set; otherwise, False.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> set_lang_str = SetLangString({"Hello"}, "en")
+        >>> result = mls.contains_setlangstring(set_lang_str)
+        >>> print(result)  # Output: True
+        >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+        >>> result = mls.contains_setlangstring(set_lang_str)
+        >>> print(result)  # Output: True
+        >>> set_lang_str = SetLangString({"Hola"}, "es")
+        >>> result = mls.contains_setlangstring(set_lang_str)
+        >>> print(result)  # Output: False
         """
         # If the setlangstring.texts is empty, it will return true
         for text in setlangstring.texts:
@@ -998,11 +1128,24 @@ class MultiLangString:
 
     @Validator.validate_type_decorator
     def contains_multilangstring(self, multilangstring: "MultiLangString") -> bool:
-        """Check if the current instance contains all languages and texts of another MultiLangString instance.
+        """
+        Check if the current instance contains all languages and texts of another MultiLangString instance.
+
+        This method checks if all languages and their respective texts in the specified MultiLangString are contained in this instance.
 
         :param multilangstring: The MultiLangString instance to check against.
-        :return: True if all languages and their respective texts in `multilangstring` are contained in this instance,
-        False otherwise.
+        :type multilangstring: MultiLangString
+        :return: True if all languages and their respective texts in `multilangstring` are contained in this instance, False otherwise.
+        :rtype: bool
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+        >>> result = mls.contains_multilangstring(mls_to_check)
+        >>> print(result)  # Output: True
+        >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+        >>> result = mls.contains_multilangstring(mls_to_check)
+        >>> print(result)  # Output: False
         """
         for lang, texts in multilangstring.mls_dict.items():
             for text in texts:

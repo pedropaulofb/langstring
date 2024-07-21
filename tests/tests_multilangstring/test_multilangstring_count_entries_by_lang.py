@@ -33,7 +33,7 @@ def test_count_entries_by_lang(lang: str, expected_count: int):
     :param expected_count: The expected number of entries for the given language.
     """
     mls = MultiLangString({"en": {"Hello", "Goodbye"}, "fr": {"Bonjour"}})
-    count = mls.count_entries_by_lang(lang)
+    count = mls.count_entries_of_lang(lang)
     assert count == expected_count, f"Expected {expected_count} entries for lang '{lang}', got {count}"
 
 
@@ -44,4 +44,4 @@ def test_count_entries_by_lang_invalid_lang_type(invalid_lang):
     """
     mls = MultiLangString()
     with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
-        mls.count_entries_by_lang(invalid_lang)
+        mls.count_entries_of_lang(invalid_lang)

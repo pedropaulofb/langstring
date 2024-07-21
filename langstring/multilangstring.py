@@ -862,24 +862,73 @@ class MultiLangString:
     # ----- COUNT METHODS -----
 
     @Validator.validate_type_decorator
-    def count_entries_by_lang(self, lang: str) -> int:
-        # Count the number of texts a given lang has.
+    def count_entries_of_lang(self, lang: str) -> int:
+        """
+        Count the number of text entries for a given language.
+
+        This method returns the number of text entries associated with the specified language.
+
+        :param lang: The language to count the entries for.
+        :type lang: str
+        :return: The number of text entries for the specified language.
+        :rtype: int
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> count = mls.count_entries_of_lang("en")
+        >>> print(count)  # Output: 2
+        >>> count = mls.count_entries_of_lang("fr")
+        >>> print(count)  # Output: 1
+        """
         registered_lang = self._get_registered_lang(lang)
         return 0 if registered_lang is None else len(self.mls_dict[registered_lang])
 
     def count_entries_per_lang(self) -> dict[str, int]:
-        """Return the number of text entries for each language.
+        """
+        Return the number of text entries for each language.
+
+        This method returns a dictionary with language codes as keys and the counts of text entries as values.
 
         :return: A dictionary with language codes as keys and counts of text entries as values.
+        :rtype: dict[str, int]
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> counts = mls.count_entries_per_lang()
+        >>> print(counts)  # Output: {'en': 2, 'fr': 1}
         """
         return {lang: len(texts) for lang, texts in self.mls_dict.items()}
 
     def count_entries_total(self) -> int:
-        """Return the total number of text entries across all languages."""
+        """
+        Return the total number of text entries across all languages.
+
+        This method returns the total count of text entries in the MultiLangString.
+
+        :return: The total number of text entries.
+        :rtype: int
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> total_count = mls.count_entries_total()
+        >>> print(total_count)  # Output: 3
+        """
         return sum(len(texts) for texts in self.mls_dict.values())
 
     def count_langs_total(self) -> int:
-        # Count the total number of langs the MultiLangString has.
+        """
+        Count the total number of languages in the MultiLangString.
+
+        This method returns the number of unique languages in the MultiLangString.
+
+        :return: The total number of languages.
+        :rtype: int
+
+        :Example:
+        >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+        >>> total_langs = mls.count_langs_total()
+        >>> print(total_langs)  # Output: 2
+        """
         return len(self.mls_dict)
 
     # ----- CONTAIN METHODS -----

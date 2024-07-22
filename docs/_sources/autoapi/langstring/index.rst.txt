@@ -483,13 +483,29 @@ Package Contents
 
    Enumeration for global control flags.
 
-   This enum defines various flags that can be used to configure the behavior of all classes.
+   This enum defines various flags that can be used to configure the behavior of all classes in the multilingual text
+   handling system. These flags provide a flexible way to enforce constraints and manage behavior consistently across
+   different classes.
 
-   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of all classes.
+   :cvar DEFINED_LANG: Ensures that a non-empty string is used for the 'lang' field of all classes.
+   :vartype DEFINED_LANG: Enum
+   :cvar DEFINED_TEXT: Ensures that a non-empty string is used for the 'text' field of all classes.
    :vartype DEFINED_TEXT: Enum
-   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of all classes.
-   :vartype ENSURE_ANY_LANG: Enum
-   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for all classes' field 'lang'.
+   :cvar ENFORCE_EXTRA_DEPEND: Enforces additional dependencies required by all classes.
+   :vartype ENFORCE_EXTRA_DEPEND: Enum
+   :cvar LOWERCASE_LANG: Converts all language codes to lowercase.
+   :vartype LOWERCASE_LANG: Enum
+   :cvar METHODS_MATCH_TYPES: Ensures that methods match the expected types for arguments and return values.
+   :vartype METHODS_MATCH_TYPES: Enum
+   :cvar PRINT_WITH_LANG: Includes language tags when printing multilingual text.
+   :vartype PRINT_WITH_LANG: Enum
+   :cvar PRINT_WITH_QUOTES: Wraps text entries in quotes when printing multilingual text.
+   :vartype PRINT_WITH_QUOTES: Enum
+   :cvar STRIP_LANG: Removes leading and trailing whitespace from language codes.
+   :vartype STRIP_LANG: Enum
+   :cvar STRIP_TEXT: Removes leading and trailing whitespace from text entries.
+   :vartype STRIP_TEXT: Enum
+   :cvar VALID_LANG: Ensures that a valid language code string is used for the 'lang' field of all classes.
    :vartype VALID_LANG: Enum
 
 
@@ -530,13 +546,27 @@ Package Contents
 
    Enumeration for LangString control flags.
 
-   This enum defines various flags that can be used to configure the behavior of the LangString class.
+   This enum defines various flags that can be used to configure the behavior of the LangString class. These flags
+   provide a flexible way to enforce constraints and manage the behavior of multilingual text handling within the
+   LangString class.
 
-   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a LangString.
+   :cvar DEFINED_LANG: Ensures that a non-empty string is used for the 'lang' field of a LangString.
+   :vartype DEFINED_LANG: Enum
+   :cvar DEFINED_TEXT: Ensures that a non-empty string is used for the 'text' field of a LangString.
    :vartype DEFINED_TEXT: Enum
-   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a LangString.
-   :vartype ENSURE_ANY_LANG: Enum
-   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the LangString's field 'lang'.
+   :cvar LOWERCASE_LANG: Converts all language codes to lowercase within a LangString.
+   :vartype LOWERCASE_LANG: Enum
+   :cvar METHODS_MATCH_TYPES: Ensures that methods match the expected types for arguments and return values within a LangString.
+   :vartype METHODS_MATCH_TYPES: Enum
+   :cvar PRINT_WITH_LANG: Includes language tags when printing a LangString.
+   :vartype PRINT_WITH_LANG: Enum
+   :cvar PRINT_WITH_QUOTES: Wraps text entries in quotes when printing a LangString.
+   :vartype PRINT_WITH_QUOTES: Enum
+   :cvar STRIP_LANG: Removes leading and trailing whitespace from language codes within a LangString.
+   :vartype STRIP_LANG: Enum
+   :cvar STRIP_TEXT: Removes leading and trailing whitespace from text entries within a LangString.
+   :vartype STRIP_TEXT: Enum
+   :cvar VALID_LANG: Ensures that a valid language code string is used for the 'lang' field of a LangString.
    :vartype VALID_LANG: Enum
 
 
@@ -574,13 +604,25 @@ Package Contents
 
    Enumeration for MultiLangString control flags.
 
-   This enum defines various flags that can be used to configure the behavior of the MultiLangString class.
+   This enum defines various flags that can be used to configure the behavior of the MultiLangString class. These flags
+   provide a flexible way to enforce constraints and manage the behavior of multilingual text handling within the
+   MultiLangString class.
 
-   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a MultiLangString.
+   :cvar DEFINED_LANG: Ensures that a non-empty string is used for the 'lang' field of a MultiLangString.
+   :vartype DEFINED_LANG: Enum
+   :cvar DEFINED_TEXT: Ensures that a non-empty string is used for the 'text' field of a MultiLangString.
    :vartype DEFINED_TEXT: Enum
-   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a MultiLangString.
-   :vartype ENSURE_ANY_LANG: Enum
-   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the MultiLangString's field 'lang'.
+   :cvar LOWERCASE_LANG: Converts all language codes to lowercase within a MultiLangString.
+   :vartype LOWERCASE_LANG: Enum
+   :cvar PRINT_WITH_LANG: Includes language tags when printing a MultiLangString.
+   :vartype PRINT_WITH_LANG: Enum
+   :cvar PRINT_WITH_QUOTES: Wraps text entries in quotes when printing a MultiLangString.
+   :vartype PRINT_WITH_QUOTES: Enum
+   :cvar STRIP_LANG: Removes leading and trailing whitespace from language codes within a MultiLangString.
+   :vartype STRIP_LANG: Enum
+   :cvar STRIP_TEXT: Removes leading and trailing whitespace from text entries within a MultiLangString.
+   :vartype STRIP_TEXT: Enum
+   :cvar VALID_LANG: Ensures that a valid language code string is used for the 'lang' field of a MultiLangString.
    :vartype VALID_LANG: Enum
 
 
@@ -615,13 +657,27 @@ Package Contents
 
    Enumeration for SetLangString control flags.
 
-   This enum defines various flags that can be used to configure the behavior of the SetLangString class.
+   This enum defines various flags that can be used to configure the behavior of the SetLangString class. These flags
+   provide a flexible way to enforce constraints and manage the behavior of multilingual text handling within the
+   SetLangString class.
 
-   :cvar DEFINED_TEXT: Makes mandatory the use of a non-empty string for the field 'text' of a SetLangString.
+   :cvar DEFINED_LANG: Ensures that a non-empty string is used for the 'lang' field of a SetLangString.
+   :vartype DEFINED_LANG: Enum
+   :cvar DEFINED_TEXT: Ensures that a non-empty string is used for the 'text' field of a SetLangString.
    :vartype DEFINED_TEXT: Enum
-   :cvar ENSURE_ANY_LANG: Makes mandatory the use of a non-empty string for the field 'lang' of a SetLangString.
-   :vartype ENSURE_ANY_LANG: Enum
-   :cvar VALID_LANG: Makes mandatory the use of a valid language code string for the SetLangString's field 'lang'.
+   :cvar LOWERCASE_LANG: Converts all language codes to lowercase within a SetLangString.
+   :vartype LOWERCASE_LANG: Enum
+   :cvar METHODS_MATCH_TYPES: Ensures that methods match the expected types for arguments and return values within a SetLangString.
+   :vartype METHODS_MATCH_TYPES: Enum
+   :cvar PRINT_WITH_LANG: Includes language tags when printing a SetLangString.
+   :vartype PRINT_WITH_LANG: Enum
+   :cvar PRINT_WITH_QUOTES: Wraps text entries in quotes when printing a SetLangString.
+   :vartype PRINT_WITH_QUOTES: Enum
+   :cvar STRIP_LANG: Removes leading and trailing whitespace from language codes within a SetLangString.
+   :vartype STRIP_LANG: Enum
+   :cvar STRIP_TEXT: Removes leading and trailing whitespace from text entries within a SetLangString.
+   :vartype STRIP_TEXT: Enum
+   :cvar VALID_LANG: Ensures that a valid language code string is used for the 'lang' field of a SetLangString.
    :vartype VALID_LANG: Enum
 
 

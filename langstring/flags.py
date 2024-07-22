@@ -25,7 +25,6 @@ Using these flags, developers can customize and control the behavior of multilin
 that they meet the specific needs of their applications.
 """
 
-
 from enum import auto
 from enum import Enum
 

@@ -1,3 +1,30 @@
+"""
+The `controller` module provides the `Controller` class, a non-instantiable class designed to manage and manipulate
+configuration flags for the `LangString`, `SetLangString`, and `MultiLangString` classes.
+
+This module defines the `Controller` class, which offers class methods to set, retrieve, print, and reset configuration
+flags. These flags influence the behavior and validation rules of the multilingual text handling classes within the
+application. By centralizing flag management, the `Controller` ensures consistent configuration and behavior across
+the system.
+
+Key Features:
+- **Global Configuration**: The `Controller` manages flags globally, allowing uniform behavior across different
+  multilingual text classes.
+- **Non-Instantiable Design**: The `Controller` class uses the `NonInstantiable` metaclass to prevent instantiation,
+  emphasizing its role as a static configuration manager.
+- **Flexible Flag Management**: Methods are provided to set, retrieve, print, and reset individual or all flags, enabling
+  dynamic configuration during runtime.
+
+Enums Utilized:
+- **GlobalFlag**: Flags affecting the behavior of all classes.
+- **LangStringFlag**: Flags specific to the `LangString` class.
+- **SetLangStringFlag**: Flags specific to the `SetLangString` class.
+- **MultiLangStringFlag**: Flags specific to the `MultiLangString` class.
+
+The `Controller` class ensures that the multilingual text handling classes adhere to specified rules and constraints,
+enhancing the robustness and reliability of multilingual content management.
+"""
+
 from typing import Optional
 from typing import Union
 
@@ -9,16 +36,45 @@ from .utils.non_instantiable import NonInstantiable
 
 
 class Controller(metaclass=NonInstantiable):
-    """Control class for managing configuration flags, designed to be non-instantiable.
+    """
+    Control class for managing configuration flags, designed to be non-instantiable.
 
-    This class uses class methods to set and retrieve configuration flags for language classes' behavior, ensuring a
-    consistent global configuration state. It is made non-instantiable by using the NonInstantiable metaclass,
-    emphasizing its role as a static configuration manager rather than an object to be instantiated.
+    This class uses class methods to set and retrieve configuration flags for the behavior of the `LangString`,
+    `SetLangString`, and `MultiLangString` classes, ensuring a consistent global configuration state. It is made
+    non-instantiable by using the `NonInstantiable` metaclass, emphasizing its role as a static configuration manager
+    rather than an object to be instantiated.
 
     :cvar DEFAULT_FLAGS: The default state of each flag.
     :vartype DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
     :cvar flags: Stores the current state of each flag.
     :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
+
+    :Example:
+
+    Set a flag:
+    >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+
+    Get a flag:
+    >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+    # Output: True
+
+    Reset a flag to its default value:
+    >>> Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
+    >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+    # Output: False
+
+    Print the state of a specific flag:
+    >>> Controller.print_flag(GlobalFlag.LOWERCASE_LANG)
+    # Output: GlobalFlag.LOWERCASE_LANG = False
+
+    Print the states of all flags:
+    >>> Controller.print_flags()
+    # Output: (Output of all flags with their states)
+
+    Reset all flags to their default values:
+    >>> Controller.reset_flags()
+    >>> Controller.print_flags()
+    # Output: (Output of all flags reset to their default states)
     """
 
     # Define the default values as a class-level constant
@@ -72,16 +128,21 @@ class Controller(metaclass=NonInstantiable):
     def set_flag(
         cls, flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], state: bool
     ) -> None:
-        """Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.
+        """
+        Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.
 
-        If a GlobalFlag is set, it also sets the corresponding flags in LangStringFlag, SetLangStringFlag,
-        and MultiLangStringFlag to the same state.
+        If a GlobalFlag is set, it also sets the corresponding flags in LangStringFlag, SetLangStringFlag, and MultiLangStringFlag to the same state.
 
         :param flag: The flag to be set, either an instance of one of the flag enums.
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
         :param state: Setting this to True or False will enable or disable the flag, respectively.
         :type state: bool
-        :raises TypeError: If 'flag' is not an instance of one of the flag enums, or if 'state' is not a Boolean.
+        :raises TypeError: If 'flag' is not an instance of one of the flag enums, or if 'state' is not a boolean.
+
+        :Example:
+
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: True
         """
         if not isinstance(state, bool):
             raise TypeError("Invalid state received. State must be a boolean new_text.")
@@ -103,19 +164,23 @@ class Controller(metaclass=NonInstantiable):
 
     @classmethod
     def get_flag(cls, flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]) -> bool:
-        """Retrieve the current state of a specified configuration flag.
+        """
+        Retrieve the current state of a specified configuration flag.
 
         Available for GlobalFlag, LangString, SetLangString, or MultiLangString.
 
-        This class method provides a way to access the state of a flag globally for both LangString and
-        MultiLangString classes.
+        This class method provides a way to access the state of a flag globally for LangString, SetLangString, and MultiLangString classes.
 
-        :param flag: The flag whose state is to be retrieved,
-        either an instance of LangStringFlag or MultiLangStringFlag.
+        :param flag: The flag whose state is to be retrieved, either an instance of GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag.
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
         :return: The current state of the flag.
         :rtype: bool
-        :raises TypeError: If 'flag' is not a member of LangStringFlag or MultiLangStringFlag.
+        :raises TypeError: If 'flag' is not a member of GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag.
+
+        :Example:
+
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: True
         """
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
@@ -127,31 +192,39 @@ class Controller(metaclass=NonInstantiable):
 
     @classmethod
     def get_flags(cls) -> dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]:
-        """Retrieve the current state of all configuration flags.
+        """
+        Retrieve the current state of all configuration flags.
 
-        Available for GlobalFlag, LangString, SetLangString, or MultiLangString.
+        This class method provides a way to access the states of all flags globally for LangString, SetLangString, and MultiLangString classes.
+        It returns a copy of the flags dictionary, ensuring that the original data is not modified.
 
-        This class method provides a way to access the states of all flags globally for both LangString and
-        MultiLangString classes. It returns a copy of the flags dictionary, ensuring that the original data is not
-        modified.
-
-        :return: A dictionary mapping each flag to its boolean state, either for LangStringFlag or MultiLangStringFlag.
+        :return: A dictionary mapping each flag to its boolean state.
         :rtype: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
+
+        :Example:
+
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        >>> flags = Controller.get_flags()
+        >>> print(flags[GlobalFlag.LOWERCASE_LANG])  # Output: True
         """
         return cls.flags.copy()
 
     @classmethod
     def print_flag(cls, flag: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]) -> None:
-        """Print the current state of a specific configuration flag.
+        """
+        Print the current state of a specific configuration flag.
 
-        This class method prints the state of the specified flag to the console. It is useful for checking the state of
-        an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.
+        This class method prints the state of the specified flag to the console. It is useful for checking the state of an
+        individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.
 
         :param flag: The flag whose state is to be printed.
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+        :raises TypeError: If 'flag' is not an instance of one of the flag enums.
 
-        Note:
-            This method is typically used for debugging or quick monitoring, to display the state of a specific flag.
+        :Example:
+
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        >>> Controller.print_flag(GlobalFlag.LOWERCASE_LANG)  # Output: GlobalFlag.LOWERCASE_LANG = True
         """
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
@@ -170,9 +243,15 @@ class Controller(metaclass=NonInstantiable):
         If a flag type is specified, only flags of that type are printed.
         If no flag type is specified, all flags are printed.
 
-        :param flag_type: The type of flags to print (e.g., GlobalFlag, LangStringFlag).
-                          If None, all flags are printed.
-        :type flag_type: Optional[Type]
+        :param flag_type: The type of flags to print (e.g., GlobalFlag, LangStringFlag). If None, all flags are printed.
+        :type flag_type: Optional[type]
+        :raises TypeError: If 'flag_type' is not a valid flag type.
+
+        :Example:
+
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        >>> Controller.print_flags()
+        # Output: Prints all flags and their current state.
         """
         if flag_type:
             if not isinstance(flag_type, type):
@@ -191,11 +270,22 @@ class Controller(metaclass=NonInstantiable):
 
     @classmethod
     def reset_flag(cls, flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]) -> None:
-        """Reset a specific flag to its default value.
+        """
+        Reset a specific flag to its default value.
 
         If the flag is of type GlobalFlag, reset all equivalent flags of other types.
-        E.g., reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT,
-        LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.
+        For example, reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT, LangStringFlag.VALID_TEXT,
+        SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.
+
+        :param flag: The flag to be reset.
+        :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+        :raises TypeError: If 'flag' is not an instance of one of the flag enums.
+
+        :Example:
+
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        >>> Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
+        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: False
         """
         all_flag_types = (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)
 
@@ -218,7 +308,19 @@ class Controller(metaclass=NonInstantiable):
 
     @classmethod
     def reset_flags(cls, flag_type: Optional[type] = GlobalFlag) -> None:
-        """Reset all flags of a specific type to their default values."""
+        """
+        Reset all flags of a specific type to their default values.
+
+        :param flag_type: The type of flags to reset (e.g., GlobalFlag, LangStringFlag). If None, all flags are reset.
+        :type flag_type: Optional[type]
+        :raises TypeError: If 'flag_type' is not a valid flag type.
+
+        :Example:
+
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        >>> Controller.reset_flags(GlobalFlag)
+        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: False
+        """
         if flag_type is not None and not isinstance(flag_type, type):
             raise TypeError("Invalid flag type. Expected a class type.")
 

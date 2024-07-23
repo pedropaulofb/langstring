@@ -36,7 +36,7 @@ import inspect
 import warnings
 from enum import Enum
 from functools import wraps
-from typing import Any
+from typing import Any, Protocol
 from typing import Callable
 from typing import get_args
 from typing import get_origin
@@ -46,11 +46,36 @@ from typing import TypeVar
 from typing import Union
 
 from ..controller import Controller
-from ..flags import GlobalFlag
+from ..flags import GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag
 from .non_instantiable import NonInstantiable
 
 # Generic type variable used for type hinting in the Validator class methods
 T = TypeVar("T")
+
+
+# Protocol for expliciting the expected Enum attributes' types
+class FlagType(Protocol):
+    """
+    Protocol to define the expected attributes of flag Enums used for validation.
+
+    The `FlagType` protocol specifies the attributes that flag Enums, such as `GlobalFlag` and `LangStringFlag`,
+    must have for type checking purposes. These attributes correspond to various validation and transformation
+    flags used within the `FlagValidator` class to ensure consistent and correct behavior.
+
+    Attributes:
+    - STRIP_TEXT: Enum flag for stripping text.
+    - DEFINED_TEXT: Enum flag for ensuring text is defined.
+    - STRIP_LANG: Enum flag for stripping language codes.
+    - LOWERCASE_LANG: Enum flag for converting language codes to lowercase.
+    - DEFINED_LANG: Enum flag for ensuring language codes are defined.
+    - VALID_LANG: Enum flag for validating language codes.
+    """
+    STRIP_TEXT: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+    DEFINED_TEXT: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+    STRIP_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+    LOWERCASE_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+    DEFINED_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+    VALID_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
 
 class FlagValidator(metaclass=NonInstantiable):
     """
@@ -89,9 +114,8 @@ class FlagValidator(metaclass=NonInstantiable):
                       # Expected non-empty 'str' or 'str' with non-space characters.
     """
 
-
     @staticmethod
-    def validate_flags_text(flag_type: type[Enum], text: Optional[str]) -> str:
+    def validate_flags_text(flag_type: type[FlagType], text: Optional[str]) -> str:
         """
         Validate and transform the 'text' based on the specified flag type.
 
@@ -100,7 +124,7 @@ class FlagValidator(metaclass=NonInstantiable):
         Additionally, it can strip whitespace from the 'text' based on the `STRIP_TEXT` flag.
 
         :param flag_type: The type of flags to be used for validation.
-        :type flag_type: type[Enum]
+        :type flag_type: type[FlagType]
         :param text: The text to be validated and transformed.
         :type text: Optional[str]
         :return: The validated and transformed text.
@@ -140,24 +164,26 @@ class FlagValidator(metaclass=NonInstantiable):
         return text
 
     @staticmethod
-    def validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> Optional[str]:
+    def validate_flags_lang(flag_type: type[FlagType], lang: Optional[str]) -> Optional[str]:
         """
         Validate and transform the 'lang' argument based on the specified flags.
 
         This method ensures that the 'lang' argument adheres to the constraints defined by various flags such as
         `STRIP_LANG`, `LOWERCASE_LANG`, `DEFINED_LANG`, and `VALID_LANG`. If `DEFINED_LANG` is enabled, it ensures
         that 'lang' is a non-empty string. If `VALID_LANG` is enabled, it verifies that 'lang' is a valid language code.
-        Additionally, it can strip whitespace and convert the language code to lowercase based on the corresponding flags.
+        Additionally, it can strip whitespace and convert the language code to lowercase based on the corresp. flags.
 
         :param flag_type: The type of flags to be used for validation, which should be one of the flag enums.
-        :type flag_type: type[Enum]
+        :type flag_type: type[FlagType]
         :param lang: The language string to be validated and transformed. It can be None.
         :type lang: Optional[str]
         :return: The transformed language string if valid; otherwise, it raises an appropriate error.
         :rtype: Optional[str]
-        :raises ValueError: If 'lang' is empty and `DEFINED_LANG` is enabled, or if 'lang' is invalid and `VALID_LANG` is enabled.
+        :raises ValueError: If 'lang' is empty and `DEFINED_LANG` is enabled, or if 'lang' is invalid and `VALID_LANG`
+                            is enabled.
         :raises TypeError: If 'flag_type' is not of type 'Enum', or if 'lang' is not of type 'str' or 'None'.
-        :raises ImportError: If 'VALID_LANG' is enabled but the 'langcodes' library is not installed and `ENFORCE_EXTRA_DEPEND` is enabled.
+        :raises ImportError: If 'VALID_LANG' is enabled but the 'langcodes' library is not installed and
+                             `ENFORCE_EXTRA_DEPEND` is enabled.
 
         :Example:
 
@@ -172,6 +198,46 @@ class FlagValidator(metaclass=NonInstantiable):
         ...     print(e)  # Output: Invalid 'lang' value received ('  '). 'LangStringFlag.DEFINED_LANG' is enabled.
                           # Expected non-empty 'str' or 'str' with non-space characters.
         """
+
+        def handle_validation_error(original_lang: Optional[str], flag_type: type[FlagType]) -> None:
+            """
+            Raise a ValueError indicating the 'lang' value is invalid according to the specified flag type.
+
+            :param original_lang: The original language value that was validated.
+            :type original_lang: Optional[str]
+            :param flag_type: The type of flag that indicates the validation rule.
+            :type flag_type: type[FlagType]
+            :raises ValueError: If the 'lang' value is invalid.
+            """
+            raise ValueError(
+                f"Invalid 'lang' value received ('{original_lang}'). "
+                f"'{flag_type.__name__}.VALID_LANG' is enabled. Expected valid language code."
+            )
+
+        def handle_import_error(e: ImportError) -> None:
+            """
+            Handle ImportError for the 'langcodes' library.
+
+            Depending on the ENFORCE_EXTRA_DEPEND flag, this function either raises an ImportError with an appropriate
+            message or issues a warning about the missing 'langcodes' library.
+
+            :param e: The original ImportError exception.
+            :type e: ImportError
+            :raises ImportError: If the ENFORCE_EXTRA_DEPEND flag is set.
+            :raises UserWarning: If the ENFORCE_EXTRA_DEPEND flag is not set.
+            """
+            if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
+                error_message = (
+                    str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
+                    "Install it with 'pip install langstring[extras]'."
+                )
+                raise ImportError(error_message) from e
+
+            warnings.warn(
+                "Language validation skipped. VALID_LANG functionality requires the 'langcodes' library. "
+                "Install it with 'pip install langstring[extras]' to enable this feature.",
+                UserWarning,
+            )
 
         TypeValidator.validate_type_single(flag_type, type)
         TypeValidator.validate_type_single(lang, str, optional=True)
@@ -204,45 +270,33 @@ class FlagValidator(metaclass=NonInstantiable):
                 from langcodes import tag_is_valid  # type: ignore
 
                 if not tag_is_valid(transformed_lang):
-                    raise ValueError(
-                        f"Invalid 'lang' value received ('{original_lang}'). "
-                        f"'{flag_type.__name__}.VALID_LANG' is enabled. Expected valid language code."
-                    )
+                    handle_validation_error(original_lang, flag_type)
             except ImportError as e:
-                # Check if ENFORCE_EXTRA_DEPEND flag is enabled and langcodes is not installed
-                if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
-                    error_message = (
-                        str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
-                        "Install it with 'pip install langstring[extras]'."
-                    )
-                    raise ImportError(error_message) from e
-
-                # Warn the user if the langcodes library is not installed
-                warnings.warn(
-                    "Language validation skipped. VALID_LANG functionality requires the 'langcodes' library. "
-                    "Install it with 'pip install langstring[extras]' to enable this feature.",
-                    UserWarning,
-                )
+                handle_import_error(e)
 
         return transformed_lang
+
 
 class TypeValidator(metaclass=NonInstantiable):
     """
     A utility class for validating the types of arguments passed to functions and methods.
 
-    The `TypeValidator` class provides static methods to validate single arguments, iterables, and to apply type validation
-    decorators to functions or methods. The validation ensures that the arguments match the specified type hints.
+    The `TypeValidator` class provides static methods to validate single arguments, iterables, and to apply type
+    validation decorators to functions or methods.
+    The validation ensures that the arguments match the specified type hints.
 
     The `TypeValidator` class is non-instantiable, emphasizing its role as a static utility class.
 
     Methods:
     - `_check_arg(arg: Any, hint: type[Any]) -> bool`: Check if the argument matches the type hint.
-    - `validate_type_decorator(func: Callable[..., T]) -> Callable[..., T]`: Decorator to validate the types of arguments
-      passed to a function or method based on their type hints.
-    - `validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -> None`: Validate that a single argument
-      matches the expected type.
-    - `validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False) -> None`:
-      Validate that an argument is an iterable of the expected type and that its contents match the expected content type.
+    - `validate_type_decorator(func: Callable[..., T]) -> Callable[..., T]`: Decorator to validate the types of
+       arguments passed to a function or method based on their type hints.
+    - `validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -> None`: Validate that a single
+       argument matches the expected type.
+    - `validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False)
+                                                                                                            -> None`:
+      Validate that an argument is an iterable of the expected type and that its contents match the expected
+      content type.
 
     Examples:
     - Using the type validation decorator:
@@ -278,20 +332,26 @@ class TypeValidator(metaclass=NonInstantiable):
     >>> TypeValidator.validate_type_iterable(None, list, int, optional=True)  # Does not raise error.
     """
 
-
     @staticmethod
     def _check_arg(arg: Any, hint: type[Any]) -> bool:
         """
         Check if the argument matches the type hint.
 
-        This private method validates that the provided argument matches the specified type hint. It supports basic types,
-        parameterized generics like lists and dictionaries, and unions of types. It is intended to be used internally by
-        the `validate_type_decorator` method for argument validation.
+        This private method validates that the provided argument matches the specified type hint.
+        It supports basic types, parameterized generics like lists and dictionaries, and unions of types.
+        It is intended to be used internally by the `validate_type_decorator` method for argument validation.
 
-        This method has functionalities that the `validate_type_single` and `validate_type_iterable` methods do not fully cover:
-        1. **Handling Union Types**: `_check_arg` can handle `Union` types, allowing for type hints that specify multiple possible types for an argument (e.g., `Union[int, str]`).
-        2. **Parameterized Generics**: `_check_arg` supports parameterized generics such as `List[int]`, `Set[str]`, `Tuple[int, str]`, and `Dict[str, int]`. It checks both the container type and the types of the items within the container.
-        3. **Nested Types**: `_check_arg` can validate more complex nested types, such as a list of dictionaries or a dictionary with tuple values.
+        This method has functionalities that the `validate_type_single` and `validate_type_iterable` methods do
+        not fully cover:
+        1. **Handling Union Types**:
+            `_check_arg` can handle `Union` types, allowing for type hints that specify multiple possible
+            types for an argument (e.g., `Union[int, str]`).
+        2. **Parameterized Generics**:
+            `_check_arg` supports parameterized generics such as `List[int]`, `Set[str]`, `Tuple[int, str]`,
+            and `Dict[str, int]`. It checks both the container type and the types of the items within the container.
+        3. **Nested Types**:
+            `_check_arg` can validate more complex nested types,
+            such as a list of dictionaries or a dictionary with tuple values.
 
         :param arg: The argument to be checked.
         :type arg: Any
@@ -335,19 +395,21 @@ class TypeValidator(metaclass=NonInstantiable):
         if origin is not None:
             TypeValidator.validate_type_single(arg, origin)
             if args:
+                # fmt: off
                 if origin in (list, set, tuple):
                     for item in arg:
                         if not any(
-                                isinstance(item, arg_type)
-                                or (get_origin(arg_type) is Union and any(
-                                    isinstance(item, t) for t in get_args(arg_type)))
-                                for arg_type in args
+                            isinstance(item, arg_type) or (
+                                get_origin(arg_type) is Union and isinstance(item, tuple(get_args(arg_type)))
+                            )
+                            for arg_type in args
                         ):
                             allowed_types = " or ".join(f"'{t.__name__}'" for t in args)
                             raise TypeError(
                                 f"Invalid item with value '{item}' in '{origin.__name__}'. "
                                 f"Expected one of {allowed_types}, but got '{type(item).__name__}'."
                             )
+                # fmt: on
                 elif origin is dict:
                     key_type, value_type = args
                     # Validate the dictionary keys and values
@@ -374,20 +436,20 @@ class TypeValidator(metaclass=NonInstantiable):
         When to Use:
             - Use this decorator for functions or methods where argument types need to be strictly validated.
             - Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.
-            - Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and its contents
-              match the specified types.
+            - Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and its
+            contents match the specified types.
             - Appropriate for instance methods, adjusting for the 'self' parameter automatically.
             - Suitable for static methods but requires manual validation for class methods and setters.
 
         When Not to Use:
-            - Do not use this decorator for class methods with the 'cls' parameter, as it does not handle 'cls' explicitly.
+            - Do not use this decorator for class methods with the 'cls' parameter. It doesn`t handle 'cls' explicitly.
             - Avoid using this decorator for property setters.
-            - This decorator is not suitable for methods with parameters involving generic collections parameterized with
-              type variables (e.g., List[T] where T is a type variable).
+            - This decorator is not suitable for methods with parameters involving generic collections parameterized
+              with type variables (e.g., List[T] where T is a type variable).
             - Complex nested generics (e.g., List[Dict[str, Union[int, List[str]]]]) might not be fully validated.
             - Specifically, cases like `(["test", 1], list, False)` (List with mixed types) and nested `Union` within
-              parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly validated
-              by this decorator.
+              parameterized generics (e.g., `list[Union[int, str]]`) are out of scope and will not be correctly
+              validated by this decorator.
 
         :param func: The function or method to be decorated.
         :type func: Callable[..., T]
@@ -509,7 +571,8 @@ class TypeValidator(metaclass=NonInstantiable):
         arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False
     ) -> None:
         """
-        Validate that an argument is an iterable of the expected type and that its contents match the expected content type.
+        Validate that an argument is an iterable of the expected type and that its contents match the expected \
+        content type.
 
         This method checks if the provided argument is of the expected iterable type (e.g., list, set, tuple)
         and that each element within the iterable matches the expected content type.
@@ -533,10 +596,12 @@ class TypeValidator(metaclass=NonInstantiable):
         >>> TypeValidator.validate_type_iterable(None, list, int, optional=True)
 
         # This will raise a TypeError because the argument is not of the expected iterable type
-        >>> TypeValidator.validate_type_iterable([1, 2, 3], set, int)  # Raises TypeError: Invalid argument with value '[1, 2, 3]'. Expected 'set', but got 'list'.
+        >>> TypeValidator.validate_type_iterable([1, 2, 3], set, int)
+        # Raises TypeError: Invalid argument with value '[1, 2, 3]'. Expected 'set', but got 'list'.
 
         # This will also raise a TypeError because the contents are not of the expected type
-        >>> TypeValidator.validate_type_iterable([1, "2", 3], list, int)  # Raises TypeError: Invalid argument with value '2'. Expected 'int', but got 'str'.
+        >>> TypeValidator.validate_type_iterable([1, "2", 3], list, int)
+        # Raises TypeError: Invalid argument with value '2'. Expected 'int', but got 'str'.
         """
         if optional and arg is None:
             return

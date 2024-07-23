@@ -130,7 +130,7 @@ print(mls)  # Output: <a class="reference external" href="mailto:{'World'}&#37;&
 flags: Defines the MultiLangStringFlag class with various control flags for the MultiLangString class.
 langstring: Provides the LangString class used within the MultiLangString class.
 setlangstring: Provides the SetLangString class used within the MultiLangString class.
-utils.validator: Provides validation methods used within the MultiLangString class.</p>
+utils.validators: Provides validation methods used within the MultiLangString class.</p>
 </dd>
 </dl>
 <section id="classes">
@@ -227,7 +227,8 @@ codes and values are sets of text entries.</p></li>
 <p>This method determines the type of the argument and calls the appropriate add method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – The element to add, which can be a tuple of (text, language), LangString, SetLangString, or MultiLangString.</p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – The element to add, which can be a tuple of (text, language), LangString, SetLangString,
+or MultiLangString.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the argument is not of a supported type.</p>
@@ -1117,7 +1118,8 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.contains_text_in_any_lang">
 <span class="sig-name descname"><span class="pre">contains_text_in_any_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.contains_text_in_any_lang" title="Link to this definition"></a></dt>
 <dd><p>Check if a specific text exists in any language.</p>
-<p>This method checks if the specified text entry is present in the sets associated with any language in the MultiLangString.</p>
+<p>This method checks if the specified text entry is present in the sets associated with any language
+in the MultiLangString.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text entry to check.</p>
@@ -1175,14 +1177,15 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.contains_setlangstring">
 <span class="sig-name descname"><span class="pre">contains_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.contains_setlangstring" title="Link to this definition"></a></dt>
 <dd><p>Check if all texts and the language of a SetLangString are part of this MultiLangString.</p>
-<p>This method checks if the specified SetLangString’s language exists and all its texts are found within the specified
-language’s set.</p>
+<p>This method checks if the specified SetLangString’s language exists and all its texts are found within the
+specified language’s set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>setlangstring</strong> (<a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a>) – A SetLangString object to check.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if the SetLangString’s language exists and all its texts are found within the specified language’s set; otherwise, False.</p>
+<dd class="field-even"><p>True if the SetLangString’s language exists and all its texts are found within the specified
+language’s set; otherwise, False.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1208,13 +1211,15 @@ language’s set.</p>
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.contains_multilangstring">
 <span class="sig-name descname"><span class="pre">contains_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multilangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.contains_multilangstring" title="Link to this definition"></a></dt>
 <dd><p>Check if the current instance contains all languages and texts of another MultiLangString instance.</p>
-<p>This method checks if all languages and their respective texts in the specified MultiLangString are contained in this instance.</p>
+<p>This method checks if all languages and their respective texts in the specified MultiLangString are contained
+in this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>multilangstring</strong> (<a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString instance to check against.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if all languages and their respective texts in <cite>multilangstring</cite> are contained in this instance, False otherwise.</p>
+<dd class="field-even"><p>True if all languages and their respective texts in <cite>multilangstring</cite> are contained in this instance,
+False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1297,7 +1302,8 @@ If the text and language are not found, it returns a LangString with only the la
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A LangString object with the specified text and language, or a LangString with only the language if not found.</p>
+<dd class="field-even"><p>A LangString object with the specified text and language, or a LangString with only the language if
+not found.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a></p>
@@ -1325,7 +1331,8 @@ If the language is not found, it returns an empty SetLangString with the languag
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language to retrieve the SetLangString for.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A SetLangString object with the texts for the specified language, or an empty SetLangString if not found.</p>
+<dd class="field-even"><p>A SetLangString object with the texts for the specified language, or an empty SetLangString
+if not found.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a></p>
@@ -1569,8 +1576,9 @@ The pref_lang attribute is not considered in the equality check.</p>
 <dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString.__getitem__">
 <span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.__getitem__" title="Link to this definition"></a></dt>
 <dd><p>Allow retrieval of entries by language.</p>
-<p>This method mimics the behavior of the dictionary ‘getitem’ method, allowing users to retrieve the set of text entries
-associated with a specified language code from the MultiLangString. Raises KeyError if the language is not found.</p>
+<p>This method mimics the behavior of the dictionary ‘getitem’ method, allowing users to retrieve the set of
+text entries associated with a specified language code from the MultiLangString.
+Raises KeyError if the language is not found.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language code to retrieve entries for.</p>

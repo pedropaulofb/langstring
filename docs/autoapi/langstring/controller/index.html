@@ -25,7 +25,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="langstring.converter" href="../converter/index.html" />
-    <link rel="prev" title="langstring.utils.validator" href="../utils/validator/index.html" /> 
+    <link rel="prev" title="langstring.utils.validators" href="../utils/validators/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -101,6 +101,30 @@
              
   <section id="module-langstring.controller">
 <span id="langstring-controller"></span><h1>langstring.controller<a class="headerlink" href="#module-langstring.controller" title="Link to this heading"></a></h1>
+<p>The <cite>controller</cite> module provides the <cite>Controller</cite> class, a non-instantiable class designed to manage and manipulate
+configuration flags for the <cite>LangString</cite>, <cite>SetLangString</cite>, and <cite>MultiLangString</cite> classes.</p>
+<p>This module defines the <cite>Controller</cite> class, which offers class methods to set, retrieve, print, and reset configuration
+flags. These flags influence the behavior and validation rules of the multilingual text handling classes within the
+application. By centralizing flag management, the <cite>Controller</cite> ensures consistent configuration and behavior across
+the system.</p>
+<p>Key Features:
+- <strong>Global Configuration</strong>: The <cite>Controller</cite> manages flags globally, allowing uniform behavior across different</p>
+<blockquote>
+<div><p>multilingual text classes.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Non-Instantiable Design</strong>: The <cite>Controller</cite> class uses the <cite>NonInstantiable</cite> metaclass to prevent instantiation,
+emphasizing its role as a static configuration manager.</p></li>
+<li><p><strong>Flexible Flag Management</strong>: Methods are provided to set, retrieve, print, and reset individual or all flags,
+enabling dynamic configuration during runtime.</p></li>
+</ul>
+<p>Enums Utilized:
+- <strong>GlobalFlag</strong>: Flags affecting the behavior of all classes.
+- <strong>LangStringFlag</strong>: Flags specific to the <cite>LangString</cite> class.
+- <strong>SetLangStringFlag</strong>: Flags specific to the <cite>SetLangString</cite> class.
+- <strong>MultiLangStringFlag</strong>: Flags specific to the <cite>MultiLangString</cite> class.</p>
+<p>The <cite>Controller</cite> class ensures that the multilingual text handling classes adhere to specified rules and constraints,
+enhancing the robustness and reliability of multilingual content management.</p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -117,9 +141,10 @@
 <dt class="sig sig-object py" id="langstring.controller.Controller">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.controller.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><a class="headerlink" href="#langstring.controller.Controller" title="Link to this definition"></a></dt>
 <dd><p>Control class for managing configuration flags, designed to be non-instantiable.</p>
-<p>This class uses class methods to set and retrieve configuration flags for language classes’ behavior, ensuring a
-consistent global configuration state. It is made non-instantiable by using the NonInstantiable metaclass,
-emphasizing its role as a static configuration manager rather than an object to be instantiated.</p>
+<p>This class uses class methods to set and retrieve configuration flags for the behavior of the <cite>LangString</cite>,
+<cite>SetLangString</cite>, and <cite>MultiLangString</cite> classes, ensuring a consistent global configuration state. It is made
+non-instantiable by using the <cite>NonInstantiable</cite> metaclass, emphasizing its role as a static configuration manager
+rather than an object to be instantiated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -127,7 +152,28 @@ emphasizing its role as a static configuration manager rather than an object to 
 <li><p><strong>flags</strong> (<em>dict</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>, </em><em>bool</em><em>]</em>) – Stores the current state of each flag.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<p>Set a flag:
+&gt;&gt;&gt; Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)</p>
+<p>Get a flag:
+&gt;&gt;&gt; print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+# Output: True</p>
+<p>Reset a flag to its default value:
+&gt;&gt;&gt; Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
+&gt;&gt;&gt; print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+# Output: False</p>
+<p>Print the state of a specific flag:
+&gt;&gt;&gt; Controller.print_flag(GlobalFlag.LOWERCASE_LANG)
+# Output: GlobalFlag.LOWERCASE_LANG = False</p>
+<p>Print the states of all flags:
+&gt;&gt;&gt; Controller.print_flags()
+# Output: (Output of all flags with their states)</p>
+<p>Reset all flags to their default values:
+&gt;&gt;&gt; Controller.reset_flags()
+&gt;&gt;&gt; Controller.print_flags()
+# Output: (Output of all flags reset to their default states)</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="langstring.controller.Controller.DEFAULT_FLAGS">
 <span class="sig-name descname"><span class="pre">DEFAULT_FLAGS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.controller.Controller.DEFAULT_FLAGS" title="Link to this definition"></a></dt>
@@ -152,12 +198,18 @@ and MultiLangStringFlag to the same state.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums, or if ‘state’ is not a Boolean.</p>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums, or if ‘state’ is not a boolean.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -165,59 +217,79 @@ and MultiLangStringFlag to the same state.</p>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.controller.Controller.get_flag" title="Link to this definition"></a></dt>
 <dd><p>Retrieve the current state of a specified configuration flag.</p>
 <p>Available for GlobalFlag, LangString, SetLangString, or MultiLangString.</p>
-<p>This class method provides a way to access the state of a flag globally for both LangString and
-MultiLangString classes.</p>
+<p>This class method provides a way to access the state of a flag globally for LangString, SetLangString,
+and MultiLangString classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>langstring.flags.GlobalFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>langstring.flags.LangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>langstring.flags.SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>langstring.flags.MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be retrieved,</p>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be retrieved, either an instance of GlobalFlag, LangStringFlag,
+SetLangStringFlag, or MultiLangStringFlag.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current state of the flag.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not a member of GlobalFlag, LangStringFlag, SetLangStringFlag,
+or MultiLangStringFlag.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
-<p>either an instance of LangStringFlag or MultiLangStringFlag.
-:type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-:return: The current state of the flag.
-:rtype: bool
-:raises TypeError: If ‘flag’ is not a member of LangStringFlag or MultiLangStringFlag.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.controller.Controller.get_flags">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.controller.Controller.get_flags" title="Link to this definition"></a></dt>
 <dd><p>Retrieve the current state of all configuration flags.</p>
-<p>Available for GlobalFlag, LangString, SetLangString, or MultiLangString.</p>
-<p>This class method provides a way to access the states of all flags globally for both LangString and
-MultiLangString classes. It returns a copy of the flags dictionary, ensuring that the original data is not
-modified.</p>
+<p>This class method provides a way to access the states of all flags globally for LangString, SetLangString,
+and MultiLangString classes.
+It returns a copy of the flags dictionary, ensuring that the original data is not modified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A dictionary mapping each flag to its boolean state, either for LangStringFlag or MultiLangStringFlag.</p>
+<dd class="field-odd"><p>A dictionary mapping each flag to its boolean state.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict[Union[<a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag">GlobalFlag</a>, <a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag">LangStringFlag</a>, <a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag">SetLangStringFlag</a>, <a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag">MultiLangStringFlag</a>], bool]</p>
 </dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span> <span class="o">=</span> <span class="n">Controller</span><span class="o">.</span><span class="n">get_flags</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">flags</span><span class="p">[</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">])</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.controller.Controller.print_flag">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.controller.Controller.print_flag" title="Link to this definition"></a></dt>
 <dd><p>Print the current state of a specific configuration flag.</p>
-<p>This class method prints the state of the specified flag to the console. It is useful for checking the state of
-an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.</p>
+<p>This class method prints the state of the specified flag to the console. It is useful for checking the state
+of an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be printed.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>Note:</dt><dd><p>This method is typically used for debugging or quick monitoring, to display the state of a specific flag.</p>
-</dd>
-</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">print_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">)</span>  <span class="c1"># Output: GlobalFlag.LOWERCASE_LANG = True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -228,13 +300,22 @@ an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag
 If no flag type is specified, all flags are printed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>Type</em><em>]</em>) – The type of flags to print (e.g., GlobalFlag, LangStringFlag).
-If None, all flags are printed.</p>
+<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>type</em><em>]</em>) – The type of flags to print (e.g., GlobalFlag, LangStringFlag). If None, all flags are printed.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag_type’ is not a valid flag type.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">print_flags</span><span class="p">()</span>
+<span class="go"># Output: Prints all flags and their current state.</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -242,16 +323,26 @@ If None, all flags are printed.</p>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.controller.Controller.reset_flag" title="Link to this definition"></a></dt>
 <dd><p>Reset a specific flag to its default value.</p>
 <p>If the flag is of type GlobalFlag, reset all equivalent flags of other types.
-E.g., reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT,
-LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.</p>
+For example, reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT, LangStringFlag.VALID_TEXT,
+SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>langstring.flags.GlobalFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>langstring.flags.LangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>langstring.flags.SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>langstring.flags.MultiLangStringFlag</em></a><em>]</em>)</p>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag to be reset.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">reset_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -260,12 +351,22 @@ LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag
 <dd><p>Reset all flags of a specific type to their default values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>type</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>type</em><em>]</em>) – The type of flags to reset (e.g., GlobalFlag, LangStringFlag). If None, all flags are reset.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag_type’ is not a valid flag type.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">reset_flags</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -277,7 +378,7 @@ LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../utils/validator/index.html" class="btn btn-neutral float-left" title="langstring.utils.validator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../utils/validators/index.html" class="btn btn-neutral float-left" title="langstring.utils.validators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../converter/index.html" class="btn btn-neutral float-right" title="langstring.converter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

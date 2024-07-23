@@ -177,9 +177,10 @@
 <dt class="sig sig-object py" id="langstring.Controller">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><a class="headerlink" href="#langstring.Controller" title="Link to this definition"></a></dt>
 <dd><p>Control class for managing configuration flags, designed to be non-instantiable.</p>
-<p>This class uses class methods to set and retrieve configuration flags for language classes’ behavior, ensuring a
-consistent global configuration state. It is made non-instantiable by using the NonInstantiable metaclass,
-emphasizing its role as a static configuration manager rather than an object to be instantiated.</p>
+<p>This class uses class methods to set and retrieve configuration flags for the behavior of the <cite>LangString</cite>,
+<cite>SetLangString</cite>, and <cite>MultiLangString</cite> classes, ensuring a consistent global configuration state. It is made
+non-instantiable by using the <cite>NonInstantiable</cite> metaclass, emphasizing its role as a static configuration manager
+rather than an object to be instantiated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -187,7 +188,28 @@ emphasizing its role as a static configuration manager rather than an object to 
 <li><p><strong>flags</strong> (<em>dict</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>, </em><em>bool</em><em>]</em>) – Stores the current state of each flag.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<p>Set a flag:
+&gt;&gt;&gt; Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)</p>
+<p>Get a flag:
+&gt;&gt;&gt; print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+# Output: True</p>
+<p>Reset a flag to its default value:
+&gt;&gt;&gt; Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
+&gt;&gt;&gt; print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+# Output: False</p>
+<p>Print the state of a specific flag:
+&gt;&gt;&gt; Controller.print_flag(GlobalFlag.LOWERCASE_LANG)
+# Output: GlobalFlag.LOWERCASE_LANG = False</p>
+<p>Print the states of all flags:
+&gt;&gt;&gt; Controller.print_flags()
+# Output: (Output of all flags with their states)</p>
+<p>Reset all flags to their default values:
+&gt;&gt;&gt; Controller.reset_flags()
+&gt;&gt;&gt; Controller.print_flags()
+# Output: (Output of all flags reset to their default states)</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="langstring.Controller.DEFAULT_FLAGS">
 <span class="sig-name descname"><span class="pre">DEFAULT_FLAGS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#langstring.Controller.DEFAULT_FLAGS" title="Link to this definition"></a></dt>
@@ -212,12 +234,18 @@ and MultiLangStringFlag to the same state.</p>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums, or if ‘state’ is not a Boolean.</p>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums, or if ‘state’ is not a boolean.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -225,59 +253,79 @@ and MultiLangStringFlag to the same state.</p>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.get_flag" title="Link to this definition"></a></dt>
 <dd><p>Retrieve the current state of a specified configuration flag.</p>
 <p>Available for GlobalFlag, LangString, SetLangString, or MultiLangString.</p>
-<p>This class method provides a way to access the state of a flag globally for both LangString and
-MultiLangString classes.</p>
+<p>This class method provides a way to access the state of a flag globally for LangString, SetLangString,
+and MultiLangString classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>langstring.flags.GlobalFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>langstring.flags.LangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>langstring.flags.SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>langstring.flags.MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be retrieved,</p>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be retrieved, either an instance of GlobalFlag, LangStringFlag,
+SetLangStringFlag, or MultiLangStringFlag.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current state of the flag.</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not a member of GlobalFlag, LangStringFlag, SetLangStringFlag,
+or MultiLangStringFlag.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
-<p>either an instance of LangStringFlag or MultiLangStringFlag.
-:type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-:return: The current state of the flag.
-:rtype: bool
-:raises TypeError: If ‘flag’ is not a member of LangStringFlag or MultiLangStringFlag.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Controller.get_flags">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.get_flags" title="Link to this definition"></a></dt>
 <dd><p>Retrieve the current state of all configuration flags.</p>
-<p>Available for GlobalFlag, LangString, SetLangString, or MultiLangString.</p>
-<p>This class method provides a way to access the states of all flags globally for both LangString and
-MultiLangString classes. It returns a copy of the flags dictionary, ensuring that the original data is not
-modified.</p>
+<p>This class method provides a way to access the states of all flags globally for LangString, SetLangString,
+and MultiLangString classes.
+It returns a copy of the flags dictionary, ensuring that the original data is not modified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A dictionary mapping each flag to its boolean state, either for LangStringFlag or MultiLangStringFlag.</p>
+<dd class="field-odd"><p>A dictionary mapping each flag to its boolean state.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict[Union[<a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag">GlobalFlag</a>, <a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag">LangStringFlag</a>, <a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag">SetLangStringFlag</a>, <a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag">MultiLangStringFlag</a>], bool]</p>
 </dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span> <span class="o">=</span> <span class="n">Controller</span><span class="o">.</span><span class="n">get_flags</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">flags</span><span class="p">[</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">])</span>  <span class="c1"># Output: True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Controller.print_flag">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.print_flag" title="Link to this definition"></a></dt>
 <dd><p>Print the current state of a specific configuration flag.</p>
-<p>This class method prints the state of the specified flag to the console. It is useful for checking the state of
-an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.</p>
+<p>This class method prints the state of the specified flag to the console. It is useful for checking the state
+of an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag whose state is to be printed.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>Note:</dt><dd><p>This method is typically used for debugging or quick monitoring, to display the state of a specific flag.</p>
-</dd>
-</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">print_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">)</span>  <span class="c1"># Output: GlobalFlag.LOWERCASE_LANG = True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -288,13 +336,22 @@ an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag
 If no flag type is specified, all flags are printed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>Type</em><em>]</em>) – The type of flags to print (e.g., GlobalFlag, LangStringFlag).
-If None, all flags are printed.</p>
+<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>type</em><em>]</em>) – The type of flags to print (e.g., GlobalFlag, LangStringFlag). If None, all flags are printed.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag_type’ is not a valid flag type.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">print_flags</span><span class="p">()</span>
+<span class="go"># Output: Prints all flags and their current state.</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -302,16 +359,26 @@ If None, all flags are printed.</p>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Controller.reset_flag" title="Link to this definition"></a></dt>
 <dd><p>Reset a specific flag to its default value.</p>
 <p>If the flag is of type GlobalFlag, reset all equivalent flags of other types.
-E.g., reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT,
-LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.</p>
+For example, reset_flag(GlobalFlag.VALID_TEXT) will reset GlobalFlag.VALID_TEXT, LangStringFlag.VALID_TEXT,
+SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>langstring.flags.GlobalFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>langstring.flags.LangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>langstring.flags.SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>langstring.flags.MultiLangStringFlag</em></a><em>]</em>)</p>
+<dd class="field-odd"><p><strong>flag</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.GlobalFlag" title="langstring.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="#langstring.LangStringFlag" title="langstring.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangStringFlag" title="langstring.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangStringFlag" title="langstring.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em>) – The flag to be reset.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag’ is not an instance of one of the flag enums.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">reset_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -320,12 +387,22 @@ LangStringFlag.VALID_TEXT, SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag
 <dd><p>Reset all flags of a specific type to their default values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>type</em><em>]</em>)</p>
+<dd class="field-odd"><p><strong>flag_type</strong> (<em>Optional</em><em>[</em><em>type</em><em>]</em>) – The type of flags to reset (e.g., GlobalFlag, LangStringFlag). If None, all flags are reset.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If ‘flag_type’ is not a valid flag type.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">reset_flags</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Controller</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">))</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -946,7 +1023,8 @@ LangString class.</p>
 <li><p><strong>DEFINED_LANG</strong> (<em>Enum</em>) – Ensures that a non-empty string is used for the ‘lang’ field of a LangString.</p></li>
 <li><p><strong>DEFINED_TEXT</strong> (<em>Enum</em>) – Ensures that a non-empty string is used for the ‘text’ field of a LangString.</p></li>
 <li><p><strong>LOWERCASE_LANG</strong> (<em>Enum</em>) – Converts all language codes to lowercase within a LangString.</p></li>
-<li><p><strong>METHODS_MATCH_TYPES</strong> (<em>Enum</em>) – Ensures that methods match the expected types for arguments and return values within a LangString.</p></li>
+<li><p><strong>METHODS_MATCH_TYPES</strong> (<em>Enum</em>) – Ensures that methods match the expected types for arguments and return values within
+a LangString.</p></li>
 <li><p><strong>PRINT_WITH_LANG</strong> (<em>Enum</em>) – Includes language tags when printing a LangString.</p></li>
 <li><p><strong>PRINT_WITH_QUOTES</strong> (<em>Enum</em>) – Wraps text entries in quotes when printing a LangString.</p></li>
 <li><p><strong>STRIP_LANG</strong> (<em>Enum</em>) – Removes leading and trailing whitespace from language codes within a LangString.</p></li>
@@ -1080,7 +1158,8 @@ SetLangString class.</p>
 <li><p><strong>DEFINED_LANG</strong> (<em>Enum</em>) – Ensures that a non-empty string is used for the ‘lang’ field of a SetLangString.</p></li>
 <li><p><strong>DEFINED_TEXT</strong> (<em>Enum</em>) – Ensures that a non-empty string is used for the ‘text’ field of a SetLangString.</p></li>
 <li><p><strong>LOWERCASE_LANG</strong> (<em>Enum</em>) – Converts all language codes to lowercase within a SetLangString.</p></li>
-<li><p><strong>METHODS_MATCH_TYPES</strong> (<em>Enum</em>) – Ensures that methods match the expected types for arguments and return values within a SetLangString.</p></li>
+<li><p><strong>METHODS_MATCH_TYPES</strong> (<em>Enum</em>) – Ensures that methods match the expected types for arguments and return values within
+a SetLangString.</p></li>
 <li><p><strong>PRINT_WITH_LANG</strong> (<em>Enum</em>) – Includes language tags when printing a SetLangString.</p></li>
 <li><p><strong>PRINT_WITH_QUOTES</strong> (<em>Enum</em>) – Wraps text entries in quotes when printing a SetLangString.</p></li>
 <li><p><strong>STRIP_LANG</strong> (<em>Enum</em>) – Removes leading and trailing whitespace from language codes within a SetLangString.</p></li>
@@ -3355,7 +3434,8 @@ codes and values are sets of text entries.</p></li>
 <p>This method determines the type of the argument and calls the appropriate add method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – The element to add, which can be a tuple of (text, language), LangString, SetLangString, or MultiLangString.</p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>Union</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>, </em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – The element to add, which can be a tuple of (text, language), LangString, SetLangString,
+or MultiLangString.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the argument is not of a supported type.</p>
@@ -4245,7 +4325,8 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="sig sig-object py" id="langstring.MultiLangString.contains_text_in_any_lang">
 <span class="sig-name descname"><span class="pre">contains_text_in_any_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.contains_text_in_any_lang" title="Link to this definition"></a></dt>
 <dd><p>Check if a specific text exists in any language.</p>
-<p>This method checks if the specified text entry is present in the sets associated with any language in the MultiLangString.</p>
+<p>This method checks if the specified text entry is present in the sets associated with any language
+in the MultiLangString.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text entry to check.</p>
@@ -4303,14 +4384,15 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="sig sig-object py" id="langstring.MultiLangString.contains_setlangstring">
 <span class="sig-name descname"><span class="pre">contains_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.contains_setlangstring" title="Link to this definition"></a></dt>
 <dd><p>Check if all texts and the language of a SetLangString are part of this MultiLangString.</p>
-<p>This method checks if the specified SetLangString’s language exists and all its texts are found within the specified
-language’s set.</p>
+<p>This method checks if the specified SetLangString’s language exists and all its texts are found within the
+specified language’s set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>setlangstring</strong> (<a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a>) – A SetLangString object to check.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if the SetLangString’s language exists and all its texts are found within the specified language’s set; otherwise, False.</p>
+<dd class="field-even"><p>True if the SetLangString’s language exists and all its texts are found within the specified
+language’s set; otherwise, False.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -4336,13 +4418,15 @@ language’s set.</p>
 <dt class="sig sig-object py" id="langstring.MultiLangString.contains_multilangstring">
 <span class="sig-name descname"><span class="pre">contains_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multilangstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.contains_multilangstring" title="Link to this definition"></a></dt>
 <dd><p>Check if the current instance contains all languages and texts of another MultiLangString instance.</p>
-<p>This method checks if all languages and their respective texts in the specified MultiLangString are contained in this instance.</p>
+<p>This method checks if all languages and their respective texts in the specified MultiLangString are contained
+in this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>multilangstring</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString instance to check against.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if all languages and their respective texts in <cite>multilangstring</cite> are contained in this instance, False otherwise.</p>
+<dd class="field-even"><p>True if all languages and their respective texts in <cite>multilangstring</cite> are contained in this instance,
+False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -4425,7 +4509,8 @@ If the text and language are not found, it returns a LangString with only the la
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A LangString object with the specified text and language, or a LangString with only the language if not found.</p>
+<dd class="field-even"><p>A LangString object with the specified text and language, or a LangString with only the language if
+not found.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
@@ -4453,7 +4538,8 @@ If the language is not found, it returns an empty SetLangString with the languag
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language to retrieve the SetLangString for.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A SetLangString object with the texts for the specified language, or an empty SetLangString if not found.</p>
+<dd class="field-even"><p>A SetLangString object with the texts for the specified language, or an empty SetLangString
+if not found.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a></p>
@@ -4697,8 +4783,9 @@ The pref_lang attribute is not considered in the equality check.</p>
 <dt class="sig sig-object py" id="langstring.MultiLangString.__getitem__">
 <span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.MultiLangString.__getitem__" title="Link to this definition"></a></dt>
 <dd><p>Allow retrieval of entries by language.</p>
-<p>This method mimics the behavior of the dictionary ‘getitem’ method, allowing users to retrieve the set of text entries
-associated with a specified language code from the MultiLangString. Raises KeyError if the language is not found.</p>
+<p>This method mimics the behavior of the dictionary ‘getitem’ method, allowing users to retrieve the set of
+text entries associated with a specified language code from the MultiLangString.
+Raises KeyError if the language is not found.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language code to retrieve entries for.</p>
@@ -5272,7 +5359,7 @@ text is not present, a KeyError is raised.</p>
 <dt class="sig sig-object py" id="langstring.SetLangString.to_strings">
 <span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.to_strings" title="Link to this definition"></a></dt>
 <dd><p>Convert the set of texts to a list of formatted strings.</p>
-<p>This method converts each text in the set to a formatted string, optionally including quotes and the language tag.
+<p>Converts each text in the set to a formatted string, optionally including quotes and the language tag.
 The behavior is influenced by control flags set in the Controller.
 The resulting list of strings is sorted to generate a deterministic output.</p>
 <dl class="field-list simple">
@@ -5541,8 +5628,8 @@ of the standard set’s difference_update method.</p>
 <dt class="sig sig-object py" id="langstring.SetLangString.isdisjoint">
 <span class="sig-name descname"><span class="pre">isdisjoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.isdisjoint" title="Link to this definition"></a></dt>
 <dd><p>Return True if the set has no elements in common with another set.</p>
-<p>This method checks if the set has no elements in common with another set or SetLangString, mimicking the behavior
-of the standard set’s isdisjoint method.</p>
+<p>This method checks if the set has no elements in common with another set or SetLangString,
+mimicking the behavior of the standard set’s isdisjoint method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to compare with.</p>
@@ -5571,8 +5658,8 @@ of the standard set’s isdisjoint method.</p>
 <dt class="sig sig-object py" id="langstring.SetLangString.issubset">
 <span class="sig-name descname"><span class="pre">issubset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.issubset" title="Link to this definition"></a></dt>
 <dd><p>Return True if the set is a subset of another set.</p>
-<p>This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the standard
-set’s issubset method.</p>
+<p>This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the
+standard set’s issubset method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to compare with.</p>
@@ -5775,8 +5862,8 @@ mimics the behavior of the standard set’s union method.</p>
 <dt class="sig sig-object py" id="langstring.SetLangString.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">others</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.update" title="Link to this definition"></a></dt>
 <dd><p>Update the set, adding elements from all others.</p>
-<p>This method updates the set, adding all elements that are in others. It mimics the behavior of the standard set’s
-update method.</p>
+<p>This method updates the set, adding all elements that are in others. It mimics the behavior of the standard
+set’s update method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>others</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – One or more sets or SetLangString objects to update the set with.</p>
@@ -5927,8 +6014,8 @@ standard set’s __ge__ method (superset operator <cite>&gt;=</cite>).</p>
 <dt class="sig sig-object py" id="langstring.SetLangString.__gt__">
 <span class="sig-name descname"><span class="pre">__gt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.__gt__" title="Link to this definition"></a></dt>
 <dd><p>Return True if the set is a proper superset of another set.</p>
-<p>This method checks if the set is a proper superset of another set or SetLangString, mimicking the behavior of the
-standard set’s __gt__ method (proper superset operator <cite>&gt;</cite>).</p>
+<p>This method checks if the set is a proper superset of another set or SetLangString, mimicking the behavior
+of the standard set’s __gt__ method (proper superset operator <cite>&gt;</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to compare with.</p>
@@ -6010,8 +6097,8 @@ behavior of the standard set’s __iand__ method (in-place intersection operator
 <dt class="sig sig-object py" id="langstring.SetLangString.__ior__">
 <span class="sig-name descname"><span class="pre">__ior__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.__ior__" title="Link to this definition"></a></dt>
 <dd><p>Update the set, adding elements from another set.</p>
-<p>This method updates the set, adding all elements that are in the other set, mimicking the behavior of the standard
-set’s __ior__ method (in-place union operator <cite>|=</cite>).</p>
+<p>This method updates the set, adding all elements that are in the other set, mimicking the behavior of the
+standard set’s __ior__ method (in-place union operator <cite>|=</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to union with.</p>
@@ -6156,7 +6243,8 @@ standard set’s __le__ method (subset operator <cite>&lt;=</cite>).</p>
 <dt class="sig sig-object py" id="langstring.SetLangString.__len__">
 <span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.__len__" title="Link to this definition"></a></dt>
 <dd><p>Return the number of elements in the set.</p>
-<p>This method returns the number of elements in the set, mimicking the behavior of the standard set’s __len__ method.</p>
+<p>This method returns the number of elements in the set,
+mimicking the behavior of the standard set’s __len__ method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The number of elements in the set.</p>
@@ -6208,8 +6296,8 @@ standard set’s __lt__ method (proper subset operator <cite>&lt;</cite>).</p>
 <dt class="sig sig-object py" id="langstring.SetLangString.__or__">
 <span class="sig-name descname"><span class="pre">__or__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.__or__" title="Link to this definition"></a></dt>
 <dd><p>Return the union of the set and another set.</p>
-<p>This method returns a new SetLangString containing all elements that are in the set, in the other set, or in both.
-It mimics the behavior of the standard set’s __or__ method (union operator <cite>|</cite>).</p>
+<p>This method returns a new SetLangString containing all elements that are in the set,
+in the other set, or in both. It mimics the behavior of the standard set’s __or__ method (union operator <cite>|</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to union with.</p>
@@ -6346,7 +6434,8 @@ in both. It mimics the behavior of the standard set’s __xor__ method (symmetri
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_setlangstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstrings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.SetLangString.merge_setlangstrings" title="Link to this definition"></a></dt>
 <dd><p>Merge duplicated SetLangStrings based on their language tags using the union method.</p>
 <p>This method processes a list of SetLangString instances, identifying and merging duplicates based on their
-language tags. If there’s no case variation in the language tags among duplicates, the original casing is preserved.
+language tags.
+If there’s no case variation in the language tags among duplicates, the original casing is preserved.
 If case variations are found, the casefolded version of the language tag is used in the merged SetLangString.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -6364,11 +6453,11 @@ If case variations are found, the casefolded version of the language tag is used
 <dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str1</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str2</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str3</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str4</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">merged_list</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="o">.</span><span class="n">merge_setlangstrings</span><span class="p">([</span><span class="n">set_lang_str1</span><span class="p">,</span> <span class="n">set_lang_str2</span><span class="p">,</span> <span class="n">set_lang_str3</span><span class="p">,</span> <span class="n">set_lang_str4</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr1</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr2</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr3</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr4</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merged_list</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="o">.</span><span class="n">merge_setlangstrings</span><span class="p">([</span><span class="n">setlangstr1</span><span class="p">,</span> <span class="n">setlangstr2</span><span class="p">,</span> <span class="n">setlangstr3</span><span class="p">,</span> <span class="n">setlangstr4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">merged_list</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -6408,8 +6497,10 @@ tags of both LangString and SetLangString objects are compatible.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="n">lang_str</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># No exception</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str_fr</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="n">lang_str_fr</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Raises ValueError due to incompatible languages</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="mi">123</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Raises TypeError due to strict mode</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="n">lang_str_fr</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go"># Raises ValueError due to incompatible languages</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="mi">123</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go"># Raises TypeError due to strict mode</span>
 </pre></div>
 </div>
 </dd></dl>

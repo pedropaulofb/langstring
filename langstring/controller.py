@@ -12,8 +12,8 @@ Key Features:
   multilingual text classes.
 - **Non-Instantiable Design**: The `Controller` class uses the `NonInstantiable` metaclass to prevent instantiation,
   emphasizing its role as a static configuration manager.
-- **Flexible Flag Management**: Methods are provided to set, retrieve, print, and reset individual or all flags, enabling
-  dynamic configuration during runtime.
+- **Flexible Flag Management**: Methods are provided to set, retrieve, print, and reset individual or all flags,
+  enabling dynamic configuration during runtime.
 
 Enums Utilized:
 - **GlobalFlag**: Flags affecting the behavior of all classes.
@@ -131,7 +131,8 @@ class Controller(metaclass=NonInstantiable):
         """
         Set the state of a specified configuration flag for LangString, SetLangString, or MultiLangString.
 
-        If a GlobalFlag is set, it also sets the corresponding flags in LangStringFlag, SetLangStringFlag, and MultiLangStringFlag to the same state.
+        If a GlobalFlag is set, it also sets the corresponding flags in LangStringFlag, SetLangStringFlag,
+        and MultiLangStringFlag to the same state.
 
         :param flag: The flag to be set, either an instance of one of the flag enums.
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
@@ -169,13 +170,16 @@ class Controller(metaclass=NonInstantiable):
 
         Available for GlobalFlag, LangString, SetLangString, or MultiLangString.
 
-        This class method provides a way to access the state of a flag globally for LangString, SetLangString, and MultiLangString classes.
+        This class method provides a way to access the state of a flag globally for LangString, SetLangString,
+        and MultiLangString classes.
 
-        :param flag: The flag whose state is to be retrieved, either an instance of GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag.
+        :param flag: The flag whose state is to be retrieved, either an instance of GlobalFlag, LangStringFlag,
+                     SetLangStringFlag, or MultiLangStringFlag.
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
         :return: The current state of the flag.
         :rtype: bool
-        :raises TypeError: If 'flag' is not a member of GlobalFlag, LangStringFlag, SetLangStringFlag, or MultiLangStringFlag.
+        :raises TypeError: If 'flag' is not a member of GlobalFlag, LangStringFlag, SetLangStringFlag,
+                           or MultiLangStringFlag.
 
         :Example:
 
@@ -195,7 +199,8 @@ class Controller(metaclass=NonInstantiable):
         """
         Retrieve the current state of all configuration flags.
 
-        This class method provides a way to access the states of all flags globally for LangString, SetLangString, and MultiLangString classes.
+        This class method provides a way to access the states of all flags globally for LangString, SetLangString,
+        and MultiLangString classes.
         It returns a copy of the flags dictionary, ensuring that the original data is not modified.
 
         :return: A dictionary mapping each flag to its boolean state.
@@ -214,8 +219,8 @@ class Controller(metaclass=NonInstantiable):
         """
         Print the current state of a specific configuration flag.
 
-        This class method prints the state of the specified flag to the console. It is useful for checking the state of an
-        individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.
+        This class method prints the state of the specified flag to the console. It is useful for checking the state
+        of an individual flag for LangString, SetLangString, MultiLangString, or GlobalFlag.
 
         :param flag: The flag whose state is to be printed.
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]

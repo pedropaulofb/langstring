@@ -36,14 +36,15 @@ Modules:
     utils.validators: Provides validation methods used within the MultiLangString class.
 """
 
-from typing import Optional
+from typing import Optional, Iterator
 from typing import Union
 
 from .controller import Controller
 from .flags import MultiLangStringFlag
 from .langstring import LangString
 from .setlangstring import SetLangString
-from .utils.validators import FlagValidator, TypeValidator
+from .utils.validators import FlagValidator
+from .utils.validators import TypeValidator
 
 
 class MultiLangString:
@@ -171,7 +172,8 @@ class MultiLangString:
 
         This method determines the type of the argument and calls the appropriate add method.
 
-        :param arg: The element to add, which can be a tuple of (text, language), LangString, SetLangString, or MultiLangString.
+        :param arg: The element to add, which can be a tuple of (text, language), LangString, SetLangString,
+                    or MultiLangString.
         :type arg: Union[tuple[str, str], LangString, SetLangString, MultiLangString]
         :raises TypeError: If the argument is not of a supported type.
 
@@ -1051,7 +1053,8 @@ class MultiLangString:
         """
         Check if a specific text exists in any language.
 
-        This method checks if the specified text entry is present in the sets associated with any language in the MultiLangString.
+        This method checks if the specified text entry is present in the sets associated with any language
+        in the MultiLangString.
 
         :param text: The text entry to check.
         :type text: str
@@ -1100,12 +1103,13 @@ class MultiLangString:
         """
         Check if all texts and the language of a SetLangString are part of this MultiLangString.
 
-        This method checks if the specified SetLangString's language exists and all its texts are found within the specified
-        language's set.
+        This method checks if the specified SetLangString's language exists and all its texts are found within the
+        specified language's set.
 
         :param setlangstring: A SetLangString object to check.
         :type setlangstring: SetLangString
-        :return: True if the SetLangString's language exists and all its texts are found within the specified language's set; otherwise, False.
+        :return: True if the SetLangString's language exists and all its texts are found within the specified
+                 language's set; otherwise, False.
         :rtype: bool
 
         :Example:
@@ -1131,11 +1135,13 @@ class MultiLangString:
         """
         Check if the current instance contains all languages and texts of another MultiLangString instance.
 
-        This method checks if all languages and their respective texts in the specified MultiLangString are contained in this instance.
+        This method checks if all languages and their respective texts in the specified MultiLangString are contained
+        in this instance.
 
         :param multilangstring: The MultiLangString instance to check against.
         :type multilangstring: MultiLangString
-        :return: True if all languages and their respective texts in `multilangstring` are contained in this instance, False otherwise.
+        :return: True if all languages and their respective texts in `multilangstring` are contained in this instance,
+                 False otherwise.
         :rtype: bool
 
         :Example:
@@ -1207,7 +1213,8 @@ class MultiLangString:
         :type text: str
         :param lang: The language of the text entry.
         :type lang: str
-        :return: A LangString object with the specified text and language, or a LangString with only the language if not found.
+        :return: A LangString object with the specified text and language, or a LangString with only the language if
+                 not found.
         :rtype: LangString
 
         :Example:
@@ -1229,7 +1236,8 @@ class MultiLangString:
 
         :param lang: The language to retrieve the SetLangString for.
         :type lang: str
-        :return: A SetLangString object with the texts for the specified language, or an empty SetLangString if not found.
+        :return: A SetLangString object with the texts for the specified language, or an empty SetLangString
+                 if not found.
         :rtype: SetLangString
 
         :Example:
@@ -1470,8 +1478,9 @@ class MultiLangString:
         """
         Allow retrieval of entries by language.
 
-        This method mimics the behavior of the dictionary 'getitem' method, allowing users to retrieve the set of text entries
-        associated with a specified language code from the MultiLangString. Raises KeyError if the language is not found.
+        This method mimics the behavior of the dictionary 'getitem' method, allowing users to retrieve the set of
+        text entries associated with a specified language code from the MultiLangString.
+        Raises KeyError if the language is not found.
 
         :param lang: The language code to retrieve entries for.
         :type lang: str
@@ -1516,7 +1525,7 @@ class MultiLangString:
         # Hash the hashable_data
         return hash(hashable_data)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         """
         Allow iteration over the dictionary keys (language codes).
 
@@ -1567,7 +1576,7 @@ class MultiLangString:
         """
         return f"{self.__class__.__name__}(mls_dict={repr(self.mls_dict)}, pref_lang={repr(self.pref_lang)})"
 
-    def __reversed__(self):
+    def __reversed__(self) -> Iterator[str]:
         """
         Return a reverse iterator over the dictionary keys.
 
@@ -1742,7 +1751,7 @@ class MultiLangString:
             TypeValidator.validate_type_iterable(mls_dict[key], set, str)
 
         # Step 1: Identify case-insensitive duplicates and prepare for merging
-        duplicates = {}
+        duplicates: dict[str, list[str]] = {}
         for lang in mls_dict:
             lang_cf = lang.casefold()
             if lang_cf in duplicates:

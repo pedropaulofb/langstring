@@ -132,7 +132,7 @@ print(contains_hello)  # Output: True</p>
 <dt>Modules:</dt><dd><p>controller: Provides control flags that influence the behavior of the SetLangString class.
 flags: Defines the SetLangStringFlag class with various control flags for the SetLangString class.
 langstring: Provides the LangString class used within the SetLangString class.
-utils.validator: Provides validation methods used within the SetLangString class.</p>
+utils.validators: Provides validation methods used within the SetLangString class.</p>
 </dd>
 </dl>
 <section id="classes">
@@ -447,7 +447,7 @@ text is not present, a KeyError is raised.</p>
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.to_strings">
 <span class="sig-name descname"><span class="pre">to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.to_strings" title="Link to this definition"></a></dt>
 <dd><p>Convert the set of texts to a list of formatted strings.</p>
-<p>This method converts each text in the set to a formatted string, optionally including quotes and the language tag.
+<p>Converts each text in the set to a formatted string, optionally including quotes and the language tag.
 The behavior is influenced by control flags set in the Controller.
 The resulting list of strings is sorted to generate a deterministic output.</p>
 <dl class="field-list simple">
@@ -716,8 +716,8 @@ of the standard set’s difference_update method.</p>
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.isdisjoint">
 <span class="sig-name descname"><span class="pre">isdisjoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.isdisjoint" title="Link to this definition"></a></dt>
 <dd><p>Return True if the set has no elements in common with another set.</p>
-<p>This method checks if the set has no elements in common with another set or SetLangString, mimicking the behavior
-of the standard set’s isdisjoint method.</p>
+<p>This method checks if the set has no elements in common with another set or SetLangString,
+mimicking the behavior of the standard set’s isdisjoint method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to compare with.</p>
@@ -746,8 +746,8 @@ of the standard set’s isdisjoint method.</p>
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.issubset">
 <span class="sig-name descname"><span class="pre">issubset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.issubset" title="Link to this definition"></a></dt>
 <dd><p>Return True if the set is a subset of another set.</p>
-<p>This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the standard
-set’s issubset method.</p>
+<p>This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the
+standard set’s issubset method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to compare with.</p>
@@ -950,8 +950,8 @@ mimics the behavior of the standard set’s union method.</p>
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">others</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.update" title="Link to this definition"></a></dt>
 <dd><p>Update the set, adding elements from all others.</p>
-<p>This method updates the set, adding all elements that are in others. It mimics the behavior of the standard set’s
-update method.</p>
+<p>This method updates the set, adding all elements that are in others. It mimics the behavior of the standard
+set’s update method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>others</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – One or more sets or SetLangString objects to update the set with.</p>
@@ -1102,8 +1102,8 @@ standard set’s __ge__ method (superset operator <cite>&gt;=</cite>).</p>
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.__gt__">
 <span class="sig-name descname"><span class="pre">__gt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.__gt__" title="Link to this definition"></a></dt>
 <dd><p>Return True if the set is a proper superset of another set.</p>
-<p>This method checks if the set is a proper superset of another set or SetLangString, mimicking the behavior of the
-standard set’s __gt__ method (proper superset operator <cite>&gt;</cite>).</p>
+<p>This method checks if the set is a proper superset of another set or SetLangString, mimicking the behavior
+of the standard set’s __gt__ method (proper superset operator <cite>&gt;</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to compare with.</p>
@@ -1185,8 +1185,8 @@ behavior of the standard set’s __iand__ method (in-place intersection operator
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.__ior__">
 <span class="sig-name descname"><span class="pre">__ior__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.__ior__" title="Link to this definition"></a></dt>
 <dd><p>Update the set, adding elements from another set.</p>
-<p>This method updates the set, adding all elements that are in the other set, mimicking the behavior of the standard
-set’s __ior__ method (in-place union operator <cite>|=</cite>).</p>
+<p>This method updates the set, adding all elements that are in the other set, mimicking the behavior of the
+standard set’s __ior__ method (in-place union operator <cite>|=</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to union with.</p>
@@ -1331,7 +1331,8 @@ standard set’s __le__ method (subset operator <cite>&lt;=</cite>).</p>
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.__len__">
 <span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.__len__" title="Link to this definition"></a></dt>
 <dd><p>Return the number of elements in the set.</p>
-<p>This method returns the number of elements in the set, mimicking the behavior of the standard set’s __len__ method.</p>
+<p>This method returns the number of elements in the set,
+mimicking the behavior of the standard set’s __len__ method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The number of elements in the set.</p>
@@ -1383,8 +1384,8 @@ standard set’s __lt__ method (proper subset operator <cite>&lt;</cite>).</p>
 <dt class="sig sig-object py" id="langstring.setlangstring.SetLangString.__or__">
 <span class="sig-name descname"><span class="pre">__or__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.__or__" title="Link to this definition"></a></dt>
 <dd><p>Return the union of the set and another set.</p>
-<p>This method returns a new SetLangString containing all elements that are in the set, in the other set, or in both.
-It mimics the behavior of the standard set’s __or__ method (union operator <cite>|</cite>).</p>
+<p>This method returns a new SetLangString containing all elements that are in the set,
+in the other set, or in both. It mimics the behavior of the standard set’s __or__ method (union operator <cite>|</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>, </em><a class="reference internal" href="#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The other set or SetLangString to union with.</p>
@@ -1521,7 +1522,8 @@ in both. It mimics the behavior of the standard set’s __xor__ method (symmetri
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_setlangstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setlangstrings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.setlangstring.SetLangString.merge_setlangstrings" title="Link to this definition"></a></dt>
 <dd><p>Merge duplicated SetLangStrings based on their language tags using the union method.</p>
 <p>This method processes a list of SetLangString instances, identifying and merging duplicates based on their
-language tags. If there’s no case variation in the language tags among duplicates, the original casing is preserved.
+language tags.
+If there’s no case variation in the language tags among duplicates, the original casing is preserved.
 If case variations are found, the casefolded version of the language tag is used in the merged SetLangString.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1539,11 +1541,11 @@ If case variations are found, the casefolded version of the language tag is used
 <dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str1</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str2</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str3</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str4</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">merged_list</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="o">.</span><span class="n">merge_setlangstrings</span><span class="p">([</span><span class="n">set_lang_str1</span><span class="p">,</span> <span class="n">set_lang_str2</span><span class="p">,</span> <span class="n">set_lang_str3</span><span class="p">,</span> <span class="n">set_lang_str4</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr1</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr2</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr3</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstr4</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merged_list</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="o">.</span><span class="n">merge_setlangstrings</span><span class="p">([</span><span class="n">setlangstr1</span><span class="p">,</span> <span class="n">setlangstr2</span><span class="p">,</span> <span class="n">setlangstr3</span><span class="p">,</span> <span class="n">setlangstr4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">merged_list</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -1583,8 +1585,10 @@ tags of both LangString and SetLangString objects are compatible.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="n">lang_str</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># No exception</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str_fr</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="n">lang_str_fr</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Raises ValueError due to incompatible languages</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="mi">123</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Raises TypeError due to strict mode</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="n">lang_str_fr</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go"># Raises ValueError due to incompatible languages</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span><span class="o">.</span><span class="n">_validate_match_types_and_langs</span><span class="p">(</span><span class="mi">123</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go"># Raises TypeError due to strict mode</span>
 </pre></div>
 </div>
 </dd></dl>

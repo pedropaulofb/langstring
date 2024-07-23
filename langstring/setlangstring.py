@@ -48,7 +48,8 @@ from typing import Union
 from .controller import Controller
 from .flags import SetLangStringFlag
 from .langstring import LangString
-from .utils.validators import TypeValidator, FlagValidator
+from .utils.validators import FlagValidator
+from .utils.validators import TypeValidator
 
 
 class SetLangString:
@@ -330,7 +331,7 @@ class SetLangString:
         """
         Convert the set of texts to a list of formatted strings.
 
-        This method converts each text in the set to a formatted string, optionally including quotes and the language tag.
+        Converts each text in the set to a formatted string, optionally including quotes and the language tag.
         The behavior is influenced by control flags set in the Controller.
         The resulting list of strings is sorted to generate a deterministic output.
 
@@ -572,8 +573,8 @@ class SetLangString:
         """
         Return True if the set has no elements in common with another set.
 
-        This method checks if the set has no elements in common with another set or SetLangString, mimicking the behavior
-        of the standard set's isdisjoint method.
+        This method checks if the set has no elements in common with another set or SetLangString,
+        mimicking the behavior of the standard set's isdisjoint method.
 
         :param other: The other set or SetLangString to compare with.
         :type other: Union[set[str], SetLangString]
@@ -596,8 +597,8 @@ class SetLangString:
         """
         Return True if the set is a subset of another set.
 
-        This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the standard
-        set's issubset method.
+        This method checks if the set is a subset of another set or SetLangString, mimicking the behavior of the
+        standard set's issubset method.
 
         :param other: The other set or SetLangString to compare with.
         :type other: Union[set[str], SetLangString]
@@ -766,8 +767,8 @@ class SetLangString:
         """
         Update the set, adding elements from all others.
 
-        This method updates the set, adding all elements that are in others. It mimics the behavior of the standard set's
-        update method.
+        This method updates the set, adding all elements that are in others. It mimics the behavior of the standard
+        set's update method.
 
         :param others: One or more sets or SetLangString objects to update the set with.
         :type others: Union[set[str], SetLangString]
@@ -901,8 +902,8 @@ class SetLangString:
         """
         Return True if the set is a proper superset of another set.
 
-        This method checks if the set is a proper superset of another set or SetLangString, mimicking the behavior of the
-        standard set's __gt__ method (proper superset operator `>`).
+        This method checks if the set is a proper superset of another set or SetLangString, mimicking the behavior
+        of the standard set's __gt__ method (proper superset operator `>`).
 
         :param other: The other set or SetLangString to compare with.
         :type other: Union[set[str], SetLangString]
@@ -967,8 +968,8 @@ class SetLangString:
         """
         Update the set, adding elements from another set.
 
-        This method updates the set, adding all elements that are in the other set, mimicking the behavior of the standard
-        set's __ior__ method (in-place union operator `|=`).
+        This method updates the set, adding all elements that are in the other set, mimicking the behavior of the
+        standard set's __ior__ method (in-place union operator `|=`).
 
         :param other: The other set or SetLangString to union with.
         :type other: Union[set[str], SetLangString]
@@ -1081,7 +1082,8 @@ class SetLangString:
         """
         Return the number of elements in the set.
 
-        This method returns the number of elements in the set, mimicking the behavior of the standard set's __len__ method.
+        This method returns the number of elements in the set,
+        mimicking the behavior of the standard set's __len__ method.
 
         :return: The number of elements in the set.
         :rtype: int
@@ -1122,8 +1124,8 @@ class SetLangString:
         """
         Return the union of the set and another set.
 
-        This method returns a new SetLangString containing all elements that are in the set, in the other set, or in both.
-        It mimics the behavior of the standard set's __or__ method (union operator `|`).
+        This method returns a new SetLangString containing all elements that are in the set,
+        in the other set, or in both. It mimics the behavior of the standard set's __or__ method (union operator `|`).
 
         :param other: The other set or SetLangString to union with.
         :type other: Union[set[str], SetLangString]
@@ -1245,7 +1247,8 @@ class SetLangString:
         Merge duplicated SetLangStrings based on their language tags using the union method.
 
         This method processes a list of SetLangString instances, identifying and merging duplicates based on their
-        language tags. If there's no case variation in the language tags among duplicates, the original casing is preserved.
+        language tags.
+        If there's no case variation in the language tags among duplicates, the original casing is preserved.
         If case variations are found, the casefolded version of the language tag is used in the merged SetLangString.
 
         :param setlangstrings: The list of SetLangString instances to be merged.
@@ -1256,11 +1259,11 @@ class SetLangString:
 
         :Example:
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"World"}, "en")
-        >>> set_lang_str3 = SetLangString({"Bonjour"}, "fr")
-        >>> set_lang_str4 = SetLangString({"Hello"}, "EN")
-        >>> merged_list = SetLangString.merge_setlangstrings([set_lang_str1, set_lang_str2, set_lang_str3, set_lang_str4])
+        >>> setlangstr1 = SetLangString({"Hello"}, "en")
+        >>> setlangstr2 = SetLangString({"World"}, "en")
+        >>> setlangstr3 = SetLangString({"Bonjour"}, "fr")
+        >>> setlangstr4 = SetLangString({"Hello"}, "EN")
+        >>> merged_list = SetLangString.merge_setlangstrings([setlangstr1, setlangstr2, setlangstr3, setlangstr4])
         >>> for s in merged_list:
         ...     print(s)
         ...
@@ -1314,8 +1317,10 @@ class SetLangString:
         >>> lang_str = LangString("Python", "en")
         >>> set_lang_str._validate_match_types_and_langs(lang_str, True)  # No exception
         >>> lang_str_fr = LangString("Bonjour", "fr")
-        >>> set_lang_str._validate_match_types_and_langs(lang_str_fr, True)  # Raises ValueError due to incompatible languages
-        >>> set_lang_str._validate_match_types_and_langs(123, True)  # Raises TypeError due to strict mode
+        >>> set_lang_str._validate_match_types_and_langs(lang_str_fr, True)
+        # Raises ValueError due to incompatible languages
+        >>> set_lang_str._validate_match_types_and_langs(123, True)
+        # Raises TypeError due to strict mode
         """
         strict = (
             Controller.get_flag(SetLangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict

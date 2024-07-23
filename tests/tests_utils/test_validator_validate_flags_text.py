@@ -289,7 +289,9 @@ def test_validate_flags_text_strip_text_effects() -> None:
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
     text = " text with spaces "
     expected = "text with spaces"
-    assert FlagValidator.validate_flags_text(LangStringFlag, text) == expected, "Expected text to be stripped of spaces."
+    assert (
+        FlagValidator.validate_flags_text(LangStringFlag, text) == expected
+    ), "Expected text to be stripped of spaces."
 
 
 def test_validate_flags_text_defined_text_empty_string() -> None:

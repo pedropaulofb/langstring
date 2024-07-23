@@ -17,7 +17,8 @@ Enums defined in this module:
 - **MultiLangStringFlag**: Flags specific to the `MultiLangString` class. These flags configure the behavior of
   multilingual string collections, enabling complex multilingual text management.
 
-Each enumeration includes flags for various aspects such as text validation, language code handling, and output formatting.
+Each enumeration includes flags for various aspects such as text validation, language code handling,
+and output formatting.
 These flags can be used to enforce rules like ensuring non-empty strings, validating language codes, converting language
 codes to lowercase, and controlling the inclusion of quotes and language tags in output.
 
@@ -85,7 +86,8 @@ class LangStringFlag(Enum):
     :vartype DEFINED_TEXT: Enum
     :cvar LOWERCASE_LANG: Converts all language codes to lowercase within a LangString.
     :vartype LOWERCASE_LANG: Enum
-    :cvar METHODS_MATCH_TYPES: Ensures that methods match the expected types for arguments and return values within a LangString.
+    :cvar METHODS_MATCH_TYPES: Ensures that methods match the expected types for arguments and return values within
+                               a LangString.
     :vartype METHODS_MATCH_TYPES: Enum
     :cvar PRINT_WITH_LANG: Includes language tags when printing a LangString.
     :vartype PRINT_WITH_LANG: Enum
@@ -124,7 +126,8 @@ class SetLangStringFlag(Enum):
     :vartype DEFINED_TEXT: Enum
     :cvar LOWERCASE_LANG: Converts all language codes to lowercase within a SetLangString.
     :vartype LOWERCASE_LANG: Enum
-    :cvar METHODS_MATCH_TYPES: Ensures that methods match the expected types for arguments and return values within a SetLangString.
+    :cvar METHODS_MATCH_TYPES: Ensures that methods match the expected types for arguments and return values within
+                               a SetLangString.
     :vartype METHODS_MATCH_TYPES: Enum
     :cvar PRINT_WITH_LANG: Includes language tags when printing a SetLangString.
     :vartype PRINT_WITH_LANG: Enum

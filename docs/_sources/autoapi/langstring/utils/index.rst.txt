@@ -18,6 +18,6 @@ Submodules
    :maxdepth: 1
 
    /autoapi/langstring/utils/non_instantiable/index
-   /autoapi/langstring/utils/validator/index
+   /autoapi/langstring/utils/validators/index
 
 

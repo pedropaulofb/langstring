@@ -49,7 +49,8 @@ from typing import Union
 
 from .controller import Controller
 from .flags import LangStringFlag
-from .utils.validators import TypeValidator, FlagValidator
+from .utils.validators import FlagValidator
+from .utils.validators import TypeValidator
 
 
 class LangString:

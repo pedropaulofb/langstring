@@ -27,7 +27,7 @@ from .langstring import LangString
 from .multilangstring import MultiLangString
 from .setlangstring import SetLangString
 from .utils.non_instantiable import NonInstantiable
-from .utils.validator import Validator
+from .utils.validators import TypeValidator
 
 
 class Converter(metaclass=NonInstantiable):
@@ -59,10 +59,10 @@ class Converter(metaclass=NonInstantiable):
         :rtype: LangString
         :raises ValueError: If the method is unknown.
         """
-        Validator.validate_type_single(input_string, str)
-        Validator.validate_type_single(method, str)
-        Validator.validate_type_single(lang, str, optional=True)
-        Validator.validate_type_single(separator, str)
+        TypeValidator.validate_type_single(input_string, str)
+        TypeValidator.validate_type_single(method, str)
+        TypeValidator.validate_type_single(lang, str, optional=True)
+        TypeValidator.validate_type_single(separator, str)
 
         if method == "manual":
             return cls.from_string_to_langstring_manual(input_string, lang)
@@ -72,7 +72,7 @@ class Converter(metaclass=NonInstantiable):
 
         raise ValueError(f"Unknown method: {method}. Valid methods are 'manual' and 'parse'.")
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_string_to_langstring_manual(input_string: Optional[str], lang: Optional[str]) -> LangString:
         """Convert a string to a LangString with the specified language.
@@ -86,7 +86,7 @@ class Converter(metaclass=NonInstantiable):
         """
         return LangString(text=input_string, lang=lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_string_to_langstring_parse(input_string: str, separator: str = "@") -> LangString:
         """Convert a string to a LangString by parsing it with the given separator.
@@ -131,10 +131,10 @@ class Converter(metaclass=NonInstantiable):
         :raises ValueError: If an unknown method is specified.
         :raises TypeError: If the input types are incorrect.
         """
-        Validator.validate_type_iterable(strings, list, str)
-        Validator.validate_type_single(method, str)
-        Validator.validate_type_single(lang, str, optional=True)
-        Validator.validate_type_single(separator, str)
+        TypeValidator.validate_type_iterable(strings, list, str)
+        TypeValidator.validate_type_single(method, str)
+        TypeValidator.validate_type_single(lang, str, optional=True)
+        TypeValidator.validate_type_single(separator, str)
 
         langstrings = []
         for string in strings:
@@ -151,8 +151,8 @@ class Converter(metaclass=NonInstantiable):
         :param lang: Language code for the 'manual' method. Optional.
         :return: A SetLangString object.
         """
-        Validator.validate_type_iterable(strings, list, str)
-        Validator.validate_type_single(lang, str, optional=True)
+        TypeValidator.validate_type_iterable(strings, list, str)
+        TypeValidator.validate_type_single(lang, str, optional=True)
 
         return SetLangString(set(strings), lang=lang)
 
@@ -168,10 +168,10 @@ class Converter(metaclass=NonInstantiable):
         :param separator: Separator for the "parse" method. Default is "@".
         :return: A MultiLangString object.
         """
-        Validator.validate_type_single(method, str)
-        Validator.validate_type_iterable(strings, list, str)
-        Validator.validate_type_single(lang, str, optional=True)
-        Validator.validate_type_single(separator, str)
+        TypeValidator.validate_type_single(method, str)
+        TypeValidator.validate_type_iterable(strings, list, str)
+        TypeValidator.validate_type_single(lang, str, optional=True)
+        TypeValidator.validate_type_single(separator, str)
 
         multilangstring = MultiLangString()
 
@@ -185,7 +185,7 @@ class Converter(metaclass=NonInstantiable):
     # LangStrings' Conversion Methods
     # ---------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_langstring_to_string(
         arg: LangString, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
@@ -199,17 +199,17 @@ class Converter(metaclass=NonInstantiable):
         separator: str = "@",
         print_lang: Optional[bool] = None,
     ) -> list[str]:
-        Validator.validate_type_iterable(arg, list, LangString)
-        Validator.validate_type_single(print_quotes, bool, optional=True)
-        Validator.validate_type_single(separator, str)
-        Validator.validate_type_single(print_lang, bool, optional=True)
+        TypeValidator.validate_type_iterable(arg, list, LangString)
+        TypeValidator.validate_type_single(print_quotes, bool, optional=True)
+        TypeValidator.validate_type_single(separator, str)
+        TypeValidator.validate_type_single(print_lang, bool, optional=True)
 
         strings = []
         for langstring in arg:
             strings.append(langstring.to_string(print_quotes=print_quotes, separator=separator, print_lang=print_lang))
         return strings
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_langstring_to_setlangstring(arg: LangString) -> SetLangString:
         """
@@ -228,7 +228,7 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_langstrings_to_setlangstring(arg: list[LangString]) -> SetLangString:
-        Validator.validate_type_iterable(arg, list, LangString)
+        TypeValidator.validate_type_iterable(arg, list, LangString)
         merged_langstrings = LangString.merge_langstrings(arg)
 
         new_texts = set()
@@ -247,7 +247,7 @@ class Converter(metaclass=NonInstantiable):
 
     @classmethod
     def from_langstrings_to_setlangstrings(cls, arg: list[LangString]) -> list[SetLangString]:
-        Validator.validate_type_iterable(arg, list, LangString)
+        TypeValidator.validate_type_iterable(arg, list, LangString)
 
         merged_lagnstrings = LangString.merge_langstrings(arg)
 
@@ -257,7 +257,7 @@ class Converter(metaclass=NonInstantiable):
 
         return SetLangString.merge_setlangstrings(setlangstrings)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_langstring_to_multilangstring(arg: LangString) -> MultiLangString:
         """Convert a LangString to a MultiLangString.
@@ -276,7 +276,7 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_langstrings_to_multilangstring(arg: list[LangString]) -> MultiLangString:
-        Validator.validate_type_iterable(arg, list, LangString)
+        TypeValidator.validate_type_iterable(arg, list, LangString)
         new_mls = MultiLangString()
         merged_langstrings = LangString.merge_langstrings(arg)
 
@@ -289,12 +289,12 @@ class Converter(metaclass=NonInstantiable):
     # SetLangStrings' Conversion Methods
     # ---------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_string(arg: SetLangString) -> str:
         return arg.__str__()
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_strings(
         arg: SetLangString, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
@@ -308,10 +308,10 @@ class Converter(metaclass=NonInstantiable):
         separator: str = "@",
         print_lang: Optional[bool] = None,
     ) -> list[str]:
-        Validator.validate_type_iterable(arg, list, SetLangString)
-        Validator.validate_type_single(print_quotes, bool, optional=True)
-        Validator.validate_type_single(separator, str)
-        Validator.validate_type_single(print_lang, bool, optional=True)
+        TypeValidator.validate_type_iterable(arg, list, SetLangString)
+        TypeValidator.validate_type_single(print_quotes, bool, optional=True)
+        TypeValidator.validate_type_single(separator, str)
+        TypeValidator.validate_type_single(print_lang, bool, optional=True)
 
         merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
 
@@ -322,7 +322,7 @@ class Converter(metaclass=NonInstantiable):
             )
         return strings
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_langstrings(arg: SetLangString) -> list[LangString]:
         """Convert a SetLangString to a list of LangStrings.
@@ -340,7 +340,7 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_setlangstrings_to_langstrings(arg: list[SetLangString]) -> list[LangString]:
-        Validator.validate_type_iterable(arg, list, SetLangString)
+        TypeValidator.validate_type_iterable(arg, list, SetLangString)
         merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
 
         langstrings = []
@@ -348,7 +348,7 @@ class Converter(metaclass=NonInstantiable):
             langstrings.extend(setlangstring.to_langstrings())
         return langstrings
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_multilangstring(arg: SetLangString) -> MultiLangString:
         """Convert a SetLangString to a MultiLangString.
@@ -376,7 +376,7 @@ class Converter(metaclass=NonInstantiable):
         :param setlangstrings: List of SetLangString instances to be converted.
         :return: A MultiLangString instance with aggregated texts under normalized language tags.
         """
-        Validator.validate_type_iterable(arg, list, SetLangString)
+        TypeValidator.validate_type_iterable(arg, list, SetLangString)
         merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
 
         multilangstring = MultiLangString()
@@ -388,12 +388,12 @@ class Converter(metaclass=NonInstantiable):
     # MultiLangStrings' Conversion Methods
     # ---------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_multilangstring_to_string(arg: MultiLangString) -> str:
         return arg.__str__()
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def from_multilangstring_to_strings(
         arg: MultiLangString,
@@ -412,7 +412,7 @@ class Converter(metaclass=NonInstantiable):
         separator: str = "@",
         print_lang: bool = True,
     ) -> list[str]:
-        Validator.validate_type_iterable(arg, list, MultiLangString)
+        TypeValidator.validate_type_iterable(arg, list, MultiLangString)
         # Other argument types are already validated in the 'to_strings' method.
 
         unified_mls = MultiLangString.merge_multilangstrings(arg)
@@ -436,16 +436,16 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[LangString]
         :raises TypeError: If the arg is not of type MultiLangString.
         """
-        Validator.validate_type_single(arg, MultiLangString)
-        Validator.validate_type_iterable(languages, list, str, optional=True)
+        TypeValidator.validate_type_single(arg, MultiLangString)
+        TypeValidator.validate_type_iterable(languages, list, str, optional=True)
         return arg.to_langstrings(langs=languages)
 
     @staticmethod
     def from_multilangstrings_to_langstrings(
         arg: list[MultiLangString], languages: Optional[list[str]] = None
     ) -> list[LangString]:
-        Validator.validate_type_iterable(arg, list, MultiLangString)
-        Validator.validate_type_iterable(languages, list, str, optional=True)
+        TypeValidator.validate_type_iterable(arg, list, MultiLangString)
+        TypeValidator.validate_type_iterable(languages, list, str, optional=True)
 
         unified_mls = MultiLangString.merge_multilangstrings(arg)
 
@@ -466,16 +466,16 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[SetLangString]
         :raises TypeError: If the arg is not of type MultiLangString.
         """
-        Validator.validate_type_single(arg, MultiLangString)
-        Validator.validate_type_iterable(languages, list, str, optional=True)
+        TypeValidator.validate_type_single(arg, MultiLangString)
+        TypeValidator.validate_type_iterable(languages, list, str, optional=True)
         return arg.to_setlangstrings(langs=languages)
 
     @staticmethod
     def from_multilangstrings_to_setlangstrings(
         arg: list[MultiLangString], languages: Optional[list[str]] = None
     ) -> list[SetLangString]:
-        Validator.validate_type_iterable(arg, list, MultiLangString)
-        Validator.validate_type_iterable(languages, list, str, optional=True)
+        TypeValidator.validate_type_iterable(arg, list, MultiLangString)
+        TypeValidator.validate_type_iterable(languages, list, str, optional=True)
 
         unified_mls = MultiLangString.merge_multilangstrings(arg)
 

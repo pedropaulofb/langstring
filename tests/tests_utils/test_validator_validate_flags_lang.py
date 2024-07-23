@@ -7,7 +7,7 @@ import pytest
 from langstring import Controller
 from langstring import GlobalFlag
 from langstring import LangStringFlag
-from langstring.utils.validator import Validator
+from langstring.utils.validators import FlagValidator
 
 
 @pytest.mark.parametrize(
@@ -39,7 +39,7 @@ def test_validate_flags_lang_basic(flag_type: type[Enum], lang: Optional[str], e
     :param msg: Assertion message in case of failure.
     :type msg: str
     """
-    assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
+    assert FlagValidator.validate_flags_lang(flag_type, lang) == expected, msg
 
 
 @pytest.mark.parametrize(
@@ -75,7 +75,7 @@ def test_validate_flags_lang_defined_lang(flag_type: type[Enum], lang: Optional[
     """
     Controller.set_flag(flag_type.DEFINED_LANG, True)
     with pytest.raises(ValueError, match=msg):
-        Validator.validate_flags_lang(flag_type, lang)
+        FlagValidator.validate_flags_lang(flag_type, lang)
     Controller.set_flag(flag_type.DEFINED_LANG, False)
 
 
@@ -124,7 +124,7 @@ def test_validate_flags_lang_strip_lowercase(flag_type: type[Enum], lang: str, e
     """
     Controller.set_flag(flag_type.STRIP_LANG, True)
     Controller.set_flag(flag_type.LOWERCASE_LANG, True)
-    assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
+    assert FlagValidator.validate_flags_lang(flag_type, lang) == expected, msg
     Controller.set_flag(flag_type.STRIP_LANG, False)
     Controller.set_flag(flag_type.LOWERCASE_LANG, False)
 
@@ -148,7 +148,7 @@ def test_validate_flags_lang_import_error() -> None:
 
     with patch("builtins.__import__", side_effect=mocked_import):
         with pytest.raises(ImportError, match=r"VALID_LANG functionality requires the 'langcodes' library"):
-            Validator.validate_flags_lang(LangStringFlag, "en")
+            FlagValidator.validate_flags_lang(LangStringFlag, "en")
 
     Controller.set_flag(LangStringFlag.VALID_LANG, False)
     Controller.set_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND, False)
@@ -202,7 +202,7 @@ def test_validate_flags_lang_invalid(flag_type: type[Enum], lang: str, msg: str)
     """
     Controller.set_flag(flag_type.VALID_LANG, True)
     with pytest.raises(ValueError, match=msg):
-        Validator.validate_flags_lang(flag_type, lang)
+        FlagValidator.validate_flags_lang(flag_type, lang)
     Controller.set_flag(flag_type.VALID_LANG, False)
 
 
@@ -226,7 +226,7 @@ def test_validate_flags_lang_edge_cases(flag_type: type[Enum], lang: str, expect
     :param msg: Assertion message in case of failure.
     :type msg: str
     """
-    assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
+    assert FlagValidator.validate_flags_lang(flag_type, lang) == expected, msg
 
 
 @pytest.mark.parametrize(
@@ -273,7 +273,7 @@ def test_validate_flags_lang_unusual_usage(
     """
     for flag in flags_combination:
         Controller.set_flag(flag, True)
-    assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
+    assert FlagValidator.validate_flags_lang(flag_type, lang) == expected, msg
     for flag in flags_combination:
         Controller.set_flag(flag, False)
 
@@ -330,7 +330,7 @@ def test_validate_flags_lang_whitespace_characters(
     """
     Controller.set_flag(flag_type.STRIP_LANG, True)
     Controller.set_flag(flag_type.LOWERCASE_LANG, True)
-    assert Validator.validate_flags_lang(flag_type, lang) == expected, msg
+    assert FlagValidator.validate_flags_lang(flag_type, lang) == expected, msg
 
 
 class MockFlag(Enum):
@@ -343,7 +343,7 @@ class MockFlag(Enum):
 
 
 def test_validate_flags_lang_warns_if_langcodes_missing(monkeypatch):
-    """Test Validator.validate_flags_lang warns if 'langcodes' is missing."""
+    """Test FlagValidator.validate_flags_lang warns if 'langcodes' is missing."""
 
     def mock_get_flag(flag):
         if flag == MockFlag.VALID_LANG:
@@ -362,4 +362,4 @@ def test_validate_flags_lang_warns_if_langcodes_missing(monkeypatch):
     with pytest.warns(
         UserWarning, match="Language validation skipped. VALID_LANG functionality requires the 'langcodes' library."
     ):
-        Validator.validate_flags_lang(MockFlag, "en")
+        FlagValidator.validate_flags_lang(MockFlag, "en")

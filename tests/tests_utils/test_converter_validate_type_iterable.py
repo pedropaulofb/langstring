@@ -4,7 +4,7 @@ from typing import Optional
 
 import pytest
 
-from langstring.utils.validator import Validator
+from langstring.utils.validators import TypeValidator
 
 
 @pytest.mark.parametrize(
@@ -40,7 +40,7 @@ from langstring.utils.validator import Validator
 def test_validate_type_iterable_valid_cases(
     arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool
 ) -> None:
-    """Test Validator.validate_type_iterable with valid cases.
+    """Test TypeValidator.validate_type_iterable with valid cases.
 
     :param arg: The iterable argument to check.
     :param arg_exp_type: The expected type of the iterable argument.
@@ -50,7 +50,7 @@ def test_validate_type_iterable_valid_cases(
     :raises: None
     """
     try:
-        Validator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)
+        TypeValidator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)
     except TypeError:
         pytest.fail(
             f"validate_type_iterable raised TypeError unexpectedly for arg: {arg}, type: {arg_exp_type}, content type: {arg_content_exp_type}"
@@ -142,7 +142,7 @@ def test_validate_type_iterable_valid_cases(
 def test_validate_type_iterable_invalid_cases(
     arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool, error_message: str
 ) -> None:
-    """Test Validator.validate_type_iterable with invalid cases.
+    """Test TypeValidator.validate_type_iterable with invalid cases.
 
     :param arg: The iterable argument to check.
     :param arg_exp_type: The expected type of the iterable argument.
@@ -153,7 +153,7 @@ def test_validate_type_iterable_invalid_cases(
     :raises TypeError: If the argument does not match the expected type or if its contents do not match the expected type.
     """
     with pytest.raises(TypeError, match=error_message):
-        Validator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)
+        TypeValidator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)
 
 
 @pytest.mark.parametrize(
@@ -176,7 +176,7 @@ def test_validate_type_iterable_invalid_cases(
 def test_validate_type_iterable_nested_valid_cases(
     arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool
 ) -> None:
-    """Test Validator.validate_type_iterable with nested valid cases.
+    """Test TypeValidator.validate_type_iterable with nested valid cases.
 
     :param arg: The iterable argument to check.
     :param arg_exp_type: The expected type of the iterable argument.
@@ -186,7 +186,7 @@ def test_validate_type_iterable_nested_valid_cases(
     :raises: None
     """
     try:
-        Validator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)
+        TypeValidator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)
     except TypeError:
         pytest.fail(
             f"validate_type_iterable raised TypeError unexpectedly for arg: {arg}, type: {arg_exp_type}, content type: {arg_content_exp_type}"
@@ -236,7 +236,7 @@ def test_validate_type_iterable_nested_valid_cases(
 def test_validate_type_iterable_nested_invalid_cases(
     arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool, error_message: str
 ) -> None:
-    """Test Validator.validate_type_iterable with nested invalid cases.
+    """Test TypeValidator.validate_type_iterable with nested invalid cases.
 
     :param arg: The iterable argument to check.
     :param arg_exp_type: The expected type of the iterable argument.
@@ -247,4 +247,4 @@ def test_validate_type_iterable_nested_invalid_cases(
     :raises TypeError: If the argument does not match the expected type or if its contents do not match the expected type.
     """
     with pytest.raises(TypeError, match=error_message):
-        Validator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)
+        TypeValidator.validate_type_iterable(arg, arg_exp_type, arg_content_exp_type, optional)

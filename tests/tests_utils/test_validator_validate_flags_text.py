@@ -5,7 +5,7 @@ import pytest
 
 from langstring import Controller
 from langstring import LangStringFlag
-from langstring.utils.validator import Validator
+from langstring.utils.validators import FlagValidator
 
 
 def test_validate_flags_text_strip_text_enabled() -> None:
@@ -17,7 +17,7 @@ def test_validate_flags_text_strip_text_enabled() -> None:
     text = "  sample text  "
     expected = "sample text"
     assert (
-        Validator.validate_flags_text(LangStringFlag, text) == expected
+        FlagValidator.validate_flags_text(LangStringFlag, text) == expected
     ), "Expected text to be stripped of leading and trailing spaces."
 
 
@@ -30,7 +30,7 @@ def test_validate_flags_text_strip_text_disabled() -> None:
     text = "  sample text  "
     expected = "  sample text  "
     assert (
-        Validator.validate_flags_text(LangStringFlag, text) == expected
+        FlagValidator.validate_flags_text(LangStringFlag, text) == expected
     ), "Expected text to remain unchanged when STRIP_TEXT flag is disabled."
 
 
@@ -88,7 +88,7 @@ def test_validate_flags_text_defined_text_invalid(flag_type: type[Enum], text: s
     """
     Controller.set_flag(flag_type.DEFINED_TEXT, True)
     with pytest.raises(ValueError, match=msg):
-        Validator.validate_flags_text(flag_type, text)
+        FlagValidator.validate_flags_text(flag_type, text)
 
 
 def test_validate_flags_text_defined_text_valid() -> None:
@@ -99,7 +99,7 @@ def test_validate_flags_text_defined_text_valid() -> None:
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, True)
     text = "valid text"
     assert (
-        Validator.validate_flags_text(LangStringFlag, text) == text
+        FlagValidator.validate_flags_text(LangStringFlag, text) == text
     ), "Expected valid text to remain unchanged when DEFINED_TEXT flag is enabled."
 
 
@@ -110,7 +110,7 @@ def test_validate_flags_text_optional_none() -> None:
     """
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)  # Ensure DEFINED_TEXT is not enabled
     text = None
-    assert Validator.validate_flags_text(LangStringFlag, text) == text, "Expected None to remain unchanged."
+    assert FlagValidator.validate_flags_text(LangStringFlag, text) == text, "Expected None to remain unchanged."
 
 
 def test_validate_flags_text_none_with_defined_text() -> None:
@@ -124,7 +124,7 @@ def test_validate_flags_text_none_with_defined_text() -> None:
         ValueError,
         match="Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\.",
     ):
-        Validator.validate_flags_text(LangStringFlag, text)
+        FlagValidator.validate_flags_text(LangStringFlag, text)
 
 
 @pytest.mark.parametrize(
@@ -188,7 +188,7 @@ def test_validate_flags_text_strip_text_various(flag_type: type[Enum], text: str
     :raises AssertionError: If the transformation does not meet the expected outcome.
     """
     Controller.set_flag(flag_type.STRIP_TEXT, True)
-    assert Validator.validate_flags_text(flag_type, text) == expected, msg
+    assert FlagValidator.validate_flags_text(flag_type, text) == expected, msg
 
 
 @pytest.mark.parametrize(
@@ -229,7 +229,7 @@ def test_validate_flags_text_invalid_types(flag_type: type[Enum], text: Any, msg
     """
     Controller.set_flag(flag_type.DEFINED_TEXT, True)
     with pytest.raises(TypeError, match=msg):
-        Validator.validate_flags_text(flag_type, text)
+        FlagValidator.validate_flags_text(flag_type, text)
 
 
 @pytest.mark.parametrize(
@@ -263,7 +263,7 @@ def test_validate_flags_text_strip_text_enabled(flag_type: type[Enum], text: str
     :raises AssertionError: If the transformation does not meet the expected outcome.
     """
     Controller.set_flag(flag_type.STRIP_TEXT, True)
-    assert Validator.validate_flags_text(flag_type, text) == expected, msg
+    assert FlagValidator.validate_flags_text(flag_type, text) == expected, msg
 
 
 def test_validate_flags_text_none_with_defined_text_enabled() -> None:
@@ -278,7 +278,7 @@ def test_validate_flags_text_none_with_defined_text_enabled() -> None:
         match=r"Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. "
         r"Expected non-empty 'str' or 'str' with non-space characters\.",
     ):
-        Validator.validate_flags_text(LangStringFlag, text)
+        FlagValidator.validate_flags_text(LangStringFlag, text)
 
 
 def test_validate_flags_text_strip_text_effects() -> None:
@@ -289,7 +289,7 @@ def test_validate_flags_text_strip_text_effects() -> None:
     Controller.set_flag(LangStringFlag.STRIP_TEXT, True)
     text = " text with spaces "
     expected = "text with spaces"
-    assert Validator.validate_flags_text(LangStringFlag, text) == expected, "Expected text to be stripped of spaces."
+    assert FlagValidator.validate_flags_text(LangStringFlag, text) == expected, "Expected text to be stripped of spaces."
 
 
 def test_validate_flags_text_defined_text_empty_string() -> None:
@@ -304,4 +304,4 @@ def test_validate_flags_text_defined_text_empty_string() -> None:
         match=r"Invalid 'text' value received \(''\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. "
         r"Expected non-empty 'str' or 'str' with non-space characters\.",
     ):
-        Validator.validate_flags_text(LangStringFlag, text)
+        FlagValidator.validate_flags_text(LangStringFlag, text)

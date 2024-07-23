@@ -4,7 +4,7 @@ from typing import Optional
 
 import pytest
 
-from langstring.utils.validator import Validator
+from langstring.utils.validators import TypeValidator
 
 
 @pytest.mark.parametrize(
@@ -53,7 +53,7 @@ from langstring.utils.validator import Validator
     ],
 )
 def test_validate_type_single_valid_cases(arg: Any, arg_exp_type: type, optional: bool) -> None:
-    """Test Validator.validate_type_single with valid cases.
+    """Test TypeValidator.validate_type_single with valid cases.
 
     :param arg: The argument to check.
     :param arg_exp_type: The expected type of the argument.
@@ -62,7 +62,7 @@ def test_validate_type_single_valid_cases(arg: Any, arg_exp_type: type, optional
     :raises: None
     """
     try:
-        Validator.validate_type_single(arg, arg_exp_type, optional)
+        TypeValidator.validate_type_single(arg, arg_exp_type, optional)
     except TypeError:
         pytest.fail(f"validate_type_single raised TypeError unexpectedly for arg: {arg} and type: {arg_exp_type}")
 
@@ -110,7 +110,7 @@ def test_validate_type_single_valid_cases(arg: Any, arg_exp_type: type, optional
     ],
 )
 def test_validate_type_single_invalid_cases(arg: Any, arg_exp_type: type, optional: bool, error_message: str) -> None:
-    """Test Validator.validate_type_single with invalid cases.
+    """Test TypeValidator.validate_type_single with invalid cases.
 
     :param arg: The argument to check.
     :param arg_exp_type: The expected type of the argument.
@@ -120,17 +120,17 @@ def test_validate_type_single_invalid_cases(arg: Any, arg_exp_type: type, option
     :raises TypeError: If the argument does not match the expected type.
     """
     with pytest.raises(TypeError, match=error_message):
-        Validator.validate_type_single(arg, arg_exp_type, optional)
+        TypeValidator.validate_type_single(arg, arg_exp_type, optional)
 
 
 def test_validate_type_single_none_optional() -> None:
-    """Test Validator.validate_type_single with None value when optional.
+    """Test TypeValidator.validate_type_single with None value when optional.
 
     :return: None
     :raises: None
     """
     try:
-        Validator.validate_type_single(None, int, True)
+        TypeValidator.validate_type_single(None, int, True)
     except TypeError:
         pytest.fail(
             "validate_type_single raised TypeError unexpectedly for arg: None and type: int when optional is True"
@@ -148,7 +148,7 @@ def test_validate_type_single_none_optional() -> None:
     ],
 )
 def test_validate_type_single_optional_cases(arg: Any, arg_exp_type: type, optional: bool) -> None:
-    """Test Validator.validate_type_single with optional cases.
+    """Test TypeValidator.validate_type_single with optional cases.
 
     :param arg: The argument to check.
     :param arg_exp_type: The expected type of the argument.
@@ -157,7 +157,7 @@ def test_validate_type_single_optional_cases(arg: Any, arg_exp_type: type, optio
     :raises: None
     """
     try:
-        Validator.validate_type_single(arg, arg_exp_type, optional)
+        TypeValidator.validate_type_single(arg, arg_exp_type, optional)
     except TypeError:
         pytest.fail(f"validate_type_single raised TypeError unexpectedly for arg: {arg} and type: {arg_exp_type}")
 
@@ -191,7 +191,7 @@ def test_validate_type_single_optional_cases(arg: Any, arg_exp_type: type, optio
 def test_validate_type_single_additional_invalid_cases(
     arg: Any, arg_exp_type: type, optional: bool, error_message: str
 ) -> None:
-    """Test Validator.validate_type_single with additional invalid cases.
+    """Test TypeValidator.validate_type_single with additional invalid cases.
 
     :param arg: The argument to check.
     :param arg_exp_type: The expected type of the argument.
@@ -201,4 +201,4 @@ def test_validate_type_single_additional_invalid_cases(
     :raises TypeError: If the argument does not match the expected type.
     """
     with pytest.raises(TypeError, match=error_message):
-        Validator.validate_type_single(arg, arg_exp_type, optional)
+        TypeValidator.validate_type_single(arg, arg_exp_type, optional)

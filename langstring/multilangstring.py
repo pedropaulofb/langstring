@@ -43,7 +43,7 @@ from .controller import Controller
 from .flags import MultiLangStringFlag
 from .langstring import LangString
 from .setlangstring import SetLangString
-from .utils.validator import Validator
+from .utils.validators import FlagValidator, TypeValidator
 
 
 class MultiLangString:
@@ -117,9 +117,9 @@ class MultiLangString:
         in_mls_dict = {} if in_mls_dict is None else in_mls_dict
 
         # Validate input before merging
-        Validator.validate_type_iterable(in_mls_dict, dict, str)
+        TypeValidator.validate_type_iterable(in_mls_dict, dict, str)
         for key in in_mls_dict:
-            Validator.validate_type_iterable(in_mls_dict[key], set, str)
+            TypeValidator.validate_type_iterable(in_mls_dict[key], set, str)
 
         # Merge entries with case-insensitive language keys
         new_mls_dict = self._merge_language_entries(in_mls_dict)
@@ -127,11 +127,11 @@ class MultiLangString:
         # Validate and transform texts in the merged dictionary
         temp_dict: dict[str, set[str]] = {}
         for lang, texts in new_mls_dict.items():
-            validated_key = Validator.validate_flags_lang(MultiLangStringFlag, lang)
+            validated_key = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)
             temp_dict[validated_key] = set()
             # Validating texts inside the dict's values
             for text in texts:
-                validated_value = Validator.validate_flags_text(MultiLangStringFlag, text)
+                validated_value = FlagValidator.validate_flags_text(MultiLangStringFlag, text)
                 temp_dict[validated_key].add(validated_value)
 
         self._mls_dict = temp_dict
@@ -156,8 +156,8 @@ class MultiLangString:
         :raises TypeError: If the new preferred language is not a string.
         """
         new_pref_lang = "en" if new_pref_lang is None else new_pref_lang
-        Validator.validate_type_single(new_pref_lang, str)
-        self._pref_lang = Validator.validate_flags_lang(MultiLangStringFlag, new_pref_lang)
+        TypeValidator.validate_type_single(new_pref_lang, str)
+        self._pref_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, new_pref_lang)
 
     # --------------------------------------------------
     # MultiLangString's Regular Methods
@@ -202,7 +202,7 @@ class MultiLangString:
             f"'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_entry(self, text: str, lang: Optional[str]) -> None:
         """
         Add a text entry to the MultiLangString under a specified language.
@@ -222,8 +222,8 @@ class MultiLangString:
         >>> mls.add_entry("Bonjour", "fr")
         >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
         """
-        validated_text = Validator.validate_flags_text(MultiLangStringFlag, text)
-        validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
+        validated_text = FlagValidator.validate_flags_text(MultiLangStringFlag, text)
+        validated_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)
 
         registered_lang = self._get_registered_lang(validated_lang)
 
@@ -233,7 +233,7 @@ class MultiLangString:
         else:
             self.mls_dict[registered_lang].add(validated_text)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_text_in_pref_lang(self, text: str) -> None:
         """
         Add a text entry to the preferred language.
@@ -248,7 +248,7 @@ class MultiLangString:
         """
         self.add_entry(text, self.pref_lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_langstring(self, langstring: LangString) -> None:
         """
         Add a LangString to the MultiLangString.
@@ -264,7 +264,7 @@ class MultiLangString:
         """
         self.add_entry(text=langstring.text, lang=langstring.lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_setlangstring(self, setlangstring: SetLangString) -> None:
         """
         Add a SetLangString to the MultiLangString.
@@ -285,7 +285,7 @@ class MultiLangString:
         for text in setlangstring.texts:
             self.add_entry(text=text, lang=setlangstring.lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_multilangstring(self, multilangstring: "MultiLangString") -> None:
         """
         Add a MultiLangString to the MultiLangString.
@@ -306,7 +306,7 @@ class MultiLangString:
             for text in multilangstring.mls_dict[lang]:
                 self.add_entry(text=text, lang=lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_empty_lang(self, lang: str) -> None:
         """
         Add an empty language to the MultiLangString.
@@ -321,7 +321,7 @@ class MultiLangString:
         >>> mls.add_empty_lang("en")
         >>> print(mls)  # Output: {}@en
         """
-        validated_lang = Validator.validate_flags_lang(MultiLangStringFlag, lang)
+        validated_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)
         registered_lang = self._get_registered_lang(validated_lang)
         if registered_lang is None:
             self.mls_dict[validated_lang] = set()
@@ -371,7 +371,7 @@ class MultiLangString:
             f"'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_entry(self, text: str, lang: str, clean_empty: bool = False) -> None:
         """
         Discard a text entry from a specified language in the MultiLangString.
@@ -400,7 +400,7 @@ class MultiLangString:
             if len(self.mls_dict[registered_lang]) == 0 and clean_empty:
                 del self.mls_dict[registered_lang]
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_text_in_pref_lang(self, text: str, clean_empty: bool = False) -> None:
         """
         Discard a text entry from the preferred language.
@@ -422,7 +422,7 @@ class MultiLangString:
         """
         self.discard_entry(text, self.pref_lang, clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_langstring(self, langstring: LangString, clean_empty: bool = False) -> None:
         """
         Discard a LangString from the MultiLangString.
@@ -446,7 +446,7 @@ class MultiLangString:
         """
         self.discard_entry(text=langstring.text, lang=langstring.lang, clean_empty=clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_setlangstring(self, setlangstring: SetLangString, clean_empty: bool = False) -> None:
         """
         Discard a SetLangString from the MultiLangString.
@@ -471,7 +471,7 @@ class MultiLangString:
         for text in setlangstring.texts:
             self.discard_entry(text=text, lang=setlangstring.lang, clean_empty=clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_multilangstring(self, multilangstring: "MultiLangString", clean_empty: bool = False) -> None:
         """
         Discard a MultiLangString from the current MultiLangString.
@@ -497,7 +497,7 @@ class MultiLangString:
             for text in list(multilangstring.mls_dict[lang]):
                 self.discard_entry(text=text, lang=lang, clean_empty=clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_lang(self, lang: str) -> None:
         """
         Discard all entries for a specified language.
@@ -563,7 +563,7 @@ class MultiLangString:
             f"or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_entry(self, text: str, lang: str, clean_empty: bool = False) -> None:
         """
         Remove a single entry from the set of a given language key in the dictionary.
@@ -590,7 +590,7 @@ class MultiLangString:
         else:
             raise ValueError(f"Entry '{text}@{lang}' not found in the MultiLangString.")
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_text_in_pref_lang(self, text: str, clean_empty: bool = False) -> None:
         """
         Remove a text entry from the preferred language.
@@ -612,7 +612,7 @@ class MultiLangString:
         """
         self.remove_entry(text, self.pref_lang, clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_langstring(self, langstring: LangString, clean_empty: bool = False) -> None:
         """
         Remove a LangString from the MultiLangString.
@@ -636,7 +636,7 @@ class MultiLangString:
         """
         self.remove_entry(langstring.text, langstring.lang, clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_setlangstring(self, setlangstring: SetLangString, clean_empty: bool = False) -> None:
         """
         Remove a SetLangString from the MultiLangString.
@@ -661,7 +661,7 @@ class MultiLangString:
         for text in setlangstring.texts:
             self.remove_entry(text, setlangstring.lang, clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_multilangstring(self, multilangstring: "MultiLangString", clean_empty: bool = False) -> None:
         """
         Remove a MultiLangString from the current MultiLangString.
@@ -687,7 +687,7 @@ class MultiLangString:
             for text in multilangstring.mls_dict[lang]:
                 self.remove_entry(text=text, lang=lang, clean_empty=clean_empty)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_lang(self, lang: str) -> None:
         """
         Remove all entries of a given language from the dictionary.
@@ -759,10 +759,10 @@ class MultiLangString:
         >>> strings = mls.to_strings(print_quotes=False, print_lang=False)
         >>> print(strings)  # Output: ['Bonjour', 'Hello', 'World']
         """
-        Validator.validate_type_iterable(langs, list, str, optional=True)
-        Validator.validate_type_single(print_quotes, bool, optional=True)
-        Validator.validate_type_single(separator, str)
-        Validator.validate_type_single(print_lang, bool, optional=True)
+        TypeValidator.validate_type_iterable(langs, list, str, optional=True)
+        TypeValidator.validate_type_single(print_quotes, bool, optional=True)
+        TypeValidator.validate_type_single(separator, str)
+        TypeValidator.validate_type_single(print_lang, bool, optional=True)
 
         if print_quotes is None:
             print_quotes = Controller.get_flag(MultiLangStringFlag.PRINT_WITH_QUOTES)
@@ -804,7 +804,7 @@ class MultiLangString:
         #           "World"@en
         #           "Bonjour"@fr
         """
-        Validator.validate_type_iterable(langs, list, str, optional=True)
+        TypeValidator.validate_type_iterable(langs, list, str, optional=True)
 
         langstrings = []
         self_reg_langs = []
@@ -842,7 +842,7 @@ class MultiLangString:
         >>> # Output:   {'Hello', 'World'}@en
         >>> #           {'Bonjour'}@fr
         """
-        Validator.validate_type_iterable(langs, list, str, optional=True)
+        TypeValidator.validate_type_iterable(langs, list, str, optional=True)
 
         setlangstrings = []
         self_reg_langs = []
@@ -861,7 +861,7 @@ class MultiLangString:
 
     # ----- COUNT METHODS -----
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def count_entries_of_lang(self, lang: str) -> int:
         """
         Count the number of text entries for a given language.
@@ -976,7 +976,7 @@ class MultiLangString:
             f"'tuple[str,str]', 'LangString', 'SetLangString', or 'MultiLangString', but got '{type(arg).__name__}'."
         )
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def contains_entry(self, text: str, lang: str) -> bool:
         """
         Check if a specific text entry exists in a given language.
@@ -1002,7 +1002,7 @@ class MultiLangString:
         registered_lang = self._get_registered_lang(lang)
         return False if (registered_lang is None) else (text in self.mls_dict[registered_lang])
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def contains_lang(self, lang: str) -> bool:
         """
         Check if a specific language exists in the MultiLangString.
@@ -1025,7 +1025,7 @@ class MultiLangString:
         """
         return self._get_registered_lang(lang) is not None
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def contains_text_in_pref_lang(self, text: str) -> bool:
         """
         Check if a specific text exists in the preferred language.
@@ -1046,7 +1046,7 @@ class MultiLangString:
         """
         return self.contains_entry(text, self.pref_lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def contains_text_in_any_lang(self, text: str) -> bool:
         """
         Check if a specific text exists in any language.
@@ -1072,7 +1072,7 @@ class MultiLangString:
                 return True
         return False
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def contains_langstring(self, langstring: LangString) -> bool:
         """
         Check if the given LangString's text and language are part of this MultiLangString.
@@ -1095,7 +1095,7 @@ class MultiLangString:
         """
         return self.contains_entry(langstring.text, langstring.lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def contains_setlangstring(self, setlangstring: SetLangString) -> bool:
         """
         Check if all texts and the language of a SetLangString are part of this MultiLangString.
@@ -1126,7 +1126,7 @@ class MultiLangString:
                 return False
         return True
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def contains_multilangstring(self, multilangstring: "MultiLangString") -> bool:
         """
         Check if the current instance contains all languages and texts of another MultiLangString instance.
@@ -1155,7 +1155,7 @@ class MultiLangString:
 
     # ----- GET METHODS -----
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def get_langs(self, casefold: bool = False) -> list[str]:
         """
         Return a list of all languages in the MultiLangString.
@@ -1195,7 +1195,7 @@ class MultiLangString:
         result.sort()
         return result
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def get_langstring(self, text: str, lang: str) -> LangString:
         """
         Retrieve a LangString from the MultiLangString.
@@ -1219,7 +1219,7 @@ class MultiLangString:
         """
         return LangString(text=text, lang=lang) if self.contains_entry(text=text, lang=lang) else LangString(lang=lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def get_setlangstring(self, lang: str) -> SetLangString:
         """
         Retrieve a SetLangString from the MultiLangString.
@@ -1261,7 +1261,7 @@ class MultiLangString:
         >>> new_mls = mls.get_multilangstring(["en", "es"])
         >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
         """
-        Validator.validate_type_iterable(langs, list, str)
+        TypeValidator.validate_type_iterable(langs, list, str)
 
         new_mls = MultiLangString()
         for lang in langs:
@@ -1273,7 +1273,7 @@ class MultiLangString:
 
     # ----- POP METHODS -----
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def pop_langstring(self, text: str, lang: str) -> Optional[LangString]:
         """
         Remove and return a LangString from the MultiLangString.
@@ -1303,7 +1303,7 @@ class MultiLangString:
             return new_ls  # noqa: R504
         return None
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def pop_setlangstring(self, lang: str) -> Optional[SetLangString]:
         """
         Remove and return a SetLangString from the MultiLangString.
@@ -1349,7 +1349,7 @@ class MultiLangString:
         >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
         >>> print(mls)  # Output: {'Bonjour'}@fr
         """
-        Validator.validate_type_iterable(langs, list, str)
+        TypeValidator.validate_type_iterable(langs, list, str)
 
         new_mls = self.get_multilangstring(langs)
         for lang in langs:
@@ -1382,7 +1382,7 @@ class MultiLangString:
     # Overwritten Dictionary's Dunder Methods
     # --------------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __contains__(self, lang: str) -> bool:
         """
         Check if a language is in the MultiLangString.
@@ -1402,7 +1402,7 @@ class MultiLangString:
         """
         return self.contains_lang(lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __delitem__(self, lang: str) -> None:
         """
         Allow deletion of language entries.
@@ -1426,7 +1426,7 @@ class MultiLangString:
         del_lang = reg_lang if (reg_lang is not None) else lang
         del self.mls_dict[del_lang]
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __eq__(self, other: object) -> bool:
         """
         Check equality of this MultiLangString with another MultiLangString.
@@ -1465,7 +1465,7 @@ class MultiLangString:
 
         return True
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __getitem__(self, lang: str) -> set[str]:
         """
         Allow retrieval of entries by language.
@@ -1603,8 +1603,8 @@ class MultiLangString:
         >>> mls["en"] = {"Bye"}
         >>> print(mls)  # Output: {'Bye'}@en, {'Hola'}@es
         """
-        Validator.validate_type_single(lang, str)
-        Validator.validate_type_iterable(texts, set, str)
+        TypeValidator.validate_type_single(lang, str)
+        TypeValidator.validate_type_iterable(texts, set, str)
 
         registered_lang = self._get_registered_lang(lang)
         add_lang = registered_lang if (registered_lang is not None) else lang
@@ -1680,7 +1680,7 @@ class MultiLangString:
         >>> merged_mls = MultiLangString.merge_multilangstrings([mls1, mls2])
         >>> print(merged_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es, {'Bonjour'}@fr
         """
-        Validator.validate_type_iterable(multilangstrings, list, MultiLangString)
+        TypeValidator.validate_type_iterable(multilangstrings, list, MultiLangString)
 
         if len(multilangstrings):
             unified_mls = multilangstrings[0]  # Initialize with the first element
@@ -1695,7 +1695,7 @@ class MultiLangString:
     # Private Methods
     # --------------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def _get_registered_lang(self, lang: str) -> Union[str, None]:
         """
         Retrieve the registered language key from the MultiLangString.
@@ -1737,9 +1737,9 @@ class MultiLangString:
         >>> merged_dict = MultiLangString._merge_language_entries(mls_dict)
         >>> print(merged_dict)  # Output: {'en': {'Hello', 'World'}, 'fr': {'Bonjour'}}
         """
-        Validator.validate_type_iterable(mls_dict, dict, str)
+        TypeValidator.validate_type_iterable(mls_dict, dict, str)
         for key in mls_dict:
-            Validator.validate_type_iterable(mls_dict[key], set, str)
+            TypeValidator.validate_type_iterable(mls_dict[key], set, str)
 
         # Step 1: Identify case-insensitive duplicates and prepare for merging
         duplicates = {}

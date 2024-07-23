@@ -48,7 +48,7 @@ from typing import Union
 from .controller import Controller
 from .flags import SetLangStringFlag
 from .langstring import LangString
-from .utils.validator import Validator
+from .utils.validators import TypeValidator, FlagValidator
 
 
 class SetLangString:
@@ -117,15 +117,15 @@ class SetLangString:
         new_texts = set() if new_texts is None else new_texts
 
         if isinstance(new_texts, list):
-            Validator.validate_type_iterable(new_texts, list, str)
+            TypeValidator.validate_type_iterable(new_texts, list, str)
             new_texts = set(new_texts)
 
-        Validator.validate_type_iterable(new_texts, set, str)
+        TypeValidator.validate_type_iterable(new_texts, set, str)
 
         self._texts = set()
 
         for text_value in new_texts:
-            self._texts.add(Validator.validate_flags_text(SetLangStringFlag, text_value))
+            self._texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text_value))
 
     @property
     def lang(self) -> str:
@@ -149,14 +149,14 @@ class SetLangString:
         :raises ValueError: If the control flags enforce valid language tags and the new language tag is invalid.
         """
         new_lang = "" if new_lang is None else new_lang
-        Validator.validate_type_single(new_lang, str)
-        self._lang = Validator.validate_flags_lang(SetLangStringFlag, new_lang)
+        TypeValidator.validate_type_single(new_lang, str)
+        self._lang = FlagValidator.validate_flags_lang(SetLangStringFlag, new_lang)
 
     # -------------------------------------------
     # SetLangString's Regular Methods
     # -------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_langstring(self, langstring: LangString) -> None:
         """
         Add a LangString object to the set of texts.
@@ -178,9 +178,9 @@ class SetLangString:
         >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         self._validate_match_types_and_langs(langstring, True)
-        self.texts.add(Validator.validate_flags_text(SetLangStringFlag, langstring.text))
+        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, langstring.text))
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def add_text(self, text: str) -> None:
         """
         Add a text string to the set of texts.
@@ -199,9 +199,9 @@ class SetLangString:
         >>> set_lang_str.add_text("World")
         >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
-        self.texts.add(Validator.validate_flags_text(SetLangStringFlag, text))
+        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text))
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_text(self, text: str) -> None:
         """
         Discard a text string from the set of texts.
@@ -223,7 +223,7 @@ class SetLangString:
         """
         self.texts.discard(text)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def discard_langstring(self, langstring: LangString) -> None:
         """
         Discard a LangString object from the set of texts.
@@ -250,7 +250,7 @@ class SetLangString:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.discard(langstring.text)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_langstring(self, langstring: LangString) -> None:
         """
         Remove a text string from the set of texts.
@@ -272,7 +272,7 @@ class SetLangString:
         self._validate_match_types_and_langs(langstring, True)
         self.texts.remove(langstring.text)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def remove_text(self, text: str) -> None:
         """
         Remove a LangString object from the set of texts.
@@ -297,7 +297,7 @@ class SetLangString:
         """
         self.texts.remove(text)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def to_langstrings(self) -> list[LangString]:
         """
         Convert the set of texts to a list of LangString objects.
@@ -323,7 +323,7 @@ class SetLangString:
             langstrings.append(LangString(text=text, lang=self.lang))
         return langstrings
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def to_strings(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> list[str]:
@@ -811,7 +811,7 @@ class SetLangString:
         """
         return self.intersection(other)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __contains__(self, element: Union[str, LangString]) -> bool:
         """
         Return True if the set contains the specified element.
@@ -1267,7 +1267,7 @@ class SetLangString:
         >>> # Output: {'Hello', 'World'}@en
         >>> #         {'Bonjour'}@fr
         """
-        Validator.validate_type_iterable(setlangstrings, list, SetLangString)
+        TypeValidator.validate_type_iterable(setlangstrings, list, SetLangString)
         merged: dict[str, SetLangString] = {}
         lang_case_map: dict[str, str] = {}
         for setlangstring in setlangstrings:

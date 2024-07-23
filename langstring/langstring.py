@@ -49,7 +49,7 @@ from typing import Union
 
 from .controller import Controller
 from .flags import LangStringFlag
-from .utils.validator import Validator
+from .utils.validators import TypeValidator, FlagValidator
 
 
 class LangString:
@@ -115,8 +115,8 @@ class LangString:
         :raises ValueError: If the control flags enforce non-empty text and the new text is empty.
         """
         new_text = "" if new_text is None else new_text
-        Validator.validate_type_single(new_text, str)
-        self._text = Validator.validate_flags_text(LangStringFlag, new_text)
+        TypeValidator.validate_type_single(new_text, str)
+        self._text = FlagValidator.validate_flags_text(LangStringFlag, new_text)
 
     @property
     def lang(self) -> str:
@@ -140,8 +140,8 @@ class LangString:
         :raises ValueError: If the control flags enforce valid language tags and the new language tag is invalid.
         """
         new_lang = "" if new_lang is None else new_lang
-        Validator.validate_type_single(new_lang, str)
-        self._lang = Validator.validate_flags_lang(LangStringFlag, new_lang)
+        TypeValidator.validate_type_single(new_lang, str)
+        self._lang = FlagValidator.validate_flags_lang(LangStringFlag, new_lang)
 
     # ---------------------------------------------
     # Overwritten String's Built-in Regular Methods
@@ -1170,7 +1170,7 @@ class LangString:
     # LangString's Regular Methods
     # ---------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def to_string(
         self, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> str:
@@ -1207,7 +1207,7 @@ class LangString:
 
         return text_value + lang_value
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def equals_str(self, other: str) -> bool:
         """
         Compare the LangString's text with a given string for equality.
@@ -1225,7 +1225,7 @@ class LangString:
         """
         return self.text == other
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def equals_langstring(self, other: "LangString") -> bool:
         """
         Compare the LangString with another LangString for equality of text and language tag (case-insensitive).
@@ -1249,7 +1249,7 @@ class LangString:
     # Overwritten String's Built-in Dunder Methods
     # ---------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __add__(self, other: Union["LangString", str]) -> "LangString":
         """
         Add another LangString or a string to this LangString.
@@ -1286,7 +1286,7 @@ class LangString:
 
         return NotImplemented
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __contains__(self, item: str) -> bool:
         """
         Check if a substring exists within the LangString's text.
@@ -1465,7 +1465,7 @@ class LangString:
         """
         return hash((self.text, self.lang.casefold()))
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __iadd__(self, other: Union["LangString", str]) -> "LangString":
         """
         Implement in-place addition for LangString objects.
@@ -1501,7 +1501,7 @@ class LangString:
 
         return self
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __imul__(self, other: int) -> "LangString":
         """
         Implement in-place multiplication of the LangString's text.
@@ -1623,7 +1623,7 @@ class LangString:
             return self.text < other.text
         return NotImplemented
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __mul__(self, other: int) -> "LangString":
         """
         Multiply the LangString's text a specified number of times.
@@ -1644,7 +1644,7 @@ class LangString:
         """
         return LangString(self.text * other, self.lang)
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __radd__(self, other: str) -> str:
         """
         Handle concatenation when LangString is on the right side of the '+' operator.
@@ -1681,7 +1681,7 @@ class LangString:
         """
         return f"{self.__class__.__name__}(text={repr(self.text)}, lang={repr(self.lang)})"
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def __rmul__(self, other: int) -> "LangString":
         """
         Implement right multiplication.
@@ -1754,7 +1754,7 @@ class LangString:
         >>> # Output: '"Hello"@en'
         >>> #         '"Bonjour"@fr'
         """
-        Validator.validate_type_iterable(langstrings, list, LangString)
+        TypeValidator.validate_type_iterable(langstrings, list, LangString)
 
         merged: dict[tuple[str, str], LangString] = {}
         lang_case_map: dict[tuple[str, str], str] = {}
@@ -1773,7 +1773,7 @@ class LangString:
 
         return list(merged.values())
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     @staticmethod
     def print_list(
         langstring_list: list["LangString"],
@@ -1808,7 +1808,7 @@ class LangString:
     # Private Methods
     # ---------------------------------------------
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def _validate_match_types(self, other: Union[object, str, "LangString"], overwrite_strict: bool = False) -> None:
         """
         Validate that the type of the other operand matches the expected type.
@@ -1837,7 +1837,7 @@ class LangString:
                 f"Strict mode is enabled. Operand must be of type LangString, but got {type(other).__name__}."
             )
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def _validate_match_langs(self, other: object) -> None:
         """
         Validate that the language of the other LangString operand matches the current LangString's language.

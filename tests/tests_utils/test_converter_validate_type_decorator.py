@@ -7,7 +7,7 @@ from typing import Union
 
 import pytest
 
-from langstring.utils.validator import Validator
+from langstring.utils.validators import TypeValidator
 
 
 @pytest.mark.parametrize(
@@ -38,7 +38,7 @@ from langstring.utils.validator import Validator
     ],
 )
 def test_check_arg_valid_cases(arg: Any, hint: type, expected: bool) -> None:
-    """Test Validator._check_arg with valid cases.
+    """Test TypeValidator._check_arg with valid cases.
 
     :param arg: The argument to check.
     :param hint: The type hint to check against.
@@ -47,7 +47,7 @@ def test_check_arg_valid_cases(arg: Any, hint: type, expected: bool) -> None:
     :raises: None
     """
     try:
-        result = Validator._check_arg(arg, hint)
+        result = TypeValidator._check_arg(arg, hint)
         assert result == expected, f"Expected {expected} but got {result} for arg: {arg} and hint: {hint}"
     except TypeError:
         assert not expected, f"Expected {expected} but got a TypeError for arg: {arg} and hint: {hint}"
@@ -60,7 +60,7 @@ def test_validate_type_decorator_with_valid_types() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, _: str) -> None:
         pass
 
@@ -119,7 +119,7 @@ def test_validate_type_decorator_with_invalid_types(args: tuple, kwargs: dict, m
     :raises: TypeError: If the argument types do not match the type hints.
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, b: str) -> None:  # noqa: Vulture
         pass
 
@@ -141,7 +141,7 @@ def test_validate_type_decorator_instance_method() -> None:
     """
 
     class TestClass:
-        @Validator.validate_type_decorator
+        @TypeValidator.validate_type_decorator
         def instance_method(self, a: int, _: str) -> None:
             pass
 
@@ -159,7 +159,7 @@ def test_validate_type_decorator_with_default_values() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int = 1, _: str = "default") -> None:
         pass
 
@@ -178,7 +178,7 @@ def test_validate_type_decorator_with_empty_values() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: list[int]) -> None:
         pass
 
@@ -195,7 +195,7 @@ def test_validate_type_decorator_with_null_values() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: Optional[int]) -> None:
         pass
 
@@ -212,7 +212,7 @@ def test_validate_type_decorator_with_optional_arguments() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, _: Optional[str] = None) -> None:
         pass
 
@@ -231,7 +231,7 @@ def test_validate_type_decorator_with_keyword_arguments() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, b: str) -> None:  # noqa: Vulture
         pass
 
@@ -248,7 +248,7 @@ def test_validate_type_decorator_with_unusual_but_valid_usage() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, _: str = "test") -> None:
         pass
 
@@ -274,7 +274,7 @@ def test_validate_type_decorator_with_nested_decorators() -> None:
         return wrapper
 
     @example_decorator
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, _: str) -> None:
         pass
 
@@ -304,7 +304,7 @@ def test_validate_type_decorator_with_nested_decorators() -> None:
 def test_check_arg_with_parametrized_generics(
     arg: Any, hint: type, expected: bool, error_message: Optional[str]
 ) -> None:
-    """Test Validator._check_arg with parameterized generics and invalid items.
+    """Test TypeValidator._check_arg with parameterized generics and invalid items.
 
     :param arg: The argument to check.
     :param hint: The type hint to check against.
@@ -315,13 +315,13 @@ def test_check_arg_with_parametrized_generics(
     """
     if expected:
         try:
-            result = Validator._check_arg(arg, hint)
+            result = TypeValidator._check_arg(arg, hint)
             assert result == expected, f"Expected {expected} but got {result} for arg: {arg} and hint: {hint}"
         except TypeError:
             assert not expected, f"Expected {expected} but got a TypeError for arg: {arg} and hint: {hint}"
     else:
         with pytest.raises(TypeError, match=error_message):
-            Validator._check_arg(arg, hint)
+            TypeValidator._check_arg(arg, hint)
 
 
 def test_validate_type_decorator_invalid_positional_arg() -> None:
@@ -331,7 +331,7 @@ def test_validate_type_decorator_invalid_positional_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, _: str) -> None:
         pass
 
@@ -346,7 +346,7 @@ def test_validate_type_decorator_invalid_keyword_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, b: str) -> None:  # noqa: Vulture
         pass
 
@@ -361,7 +361,7 @@ def test_validate_type_decorator_invalid_positional_and_keyword_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int, _: str) -> None:
         pass
 
@@ -376,7 +376,7 @@ def test_validate_type_decorator_invalid_default_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: int = 1, _: str = "default") -> None:
         pass
 
@@ -391,7 +391,7 @@ def test_validate_type_decorator_invalid_list_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: list[int]) -> None:
         pass
 
@@ -408,11 +408,11 @@ def test_validate_type_decorator_invalid_dict_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: dict[str, int]) -> None:
         pass
 
-    with pytest.raises(TypeError, match="Invalid key with value '1' in 'dict'. Expected 'str', but got 'int'."):
+    with pytest.raises(TypeError, match="Invalid argument with value '1'. Expected 'str', but got 'int'."):
         func({1: 1})
 
 
@@ -423,7 +423,7 @@ def test_validate_type_decorator_invalid_optional_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: Optional[int] = None) -> None:
         pass
 
@@ -440,11 +440,11 @@ def test_validate_type_decorator_invalid_dict_value_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: dict[str, int]) -> None:
         pass
 
-    with pytest.raises(TypeError, match="Invalid value with value 'test' in 'dict'. Expected 'int', but got 'str'."):
+    with pytest.raises(TypeError, match="Invalid argument with value 'test'. Expected 'int', but got 'str'."):
         func({"key": "test"})
 
 
@@ -455,7 +455,7 @@ def test_validate_type_decorator_invalid_mixed_list_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: list[int]) -> None:
         pass
 
@@ -472,7 +472,7 @@ def test_validate_type_decorator_invalid_union_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: Union[int, str]) -> None:
         pass
 
@@ -489,7 +489,7 @@ def test_validate_type_decorator_invalid_set_arg() -> None:
     :raises: None
     """
 
-    @Validator.validate_type_decorator
+    @TypeValidator.validate_type_decorator
     def func(a: set[int]) -> None:
         pass
 
@@ -500,11 +500,11 @@ def test_validate_type_decorator_invalid_set_arg() -> None:
 
 
 def test_check_arg_invalid_origin_type() -> None:
-    """Test Validator._check_arg with an invalid origin type.
+    """Test TypeValidator._check_arg with an invalid origin type.
 
     This test ensures that a TypeError is raised when the argument type does not match the expected origin type.
     """
     with pytest.raises(
         TypeError, match="Invalid argument with value '\\[1, 2, 3\\]'. Expected 'dict', but got 'list'."
     ):
-        Validator._check_arg([1, 2, 3], dict[str, int])
+        TypeValidator._check_arg([1, 2, 3], dict[str, int])

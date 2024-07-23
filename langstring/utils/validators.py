@@ -1,20 +1,36 @@
 """
-The `validator` module provides the `Validator` class, which offers generic validation methods and
-specific validation methods for classes handling language strings.
+The `validators` module provides two classes, `TypeValidator` and `FlagValidator`, for validating argument types and
+flag-based constraints, respectively.
 
-This module defines the `Validator` class, which ensures that text and language arguments meet specific criteria such as
-type correctness, non-emptiness, and language tag validity.
-Some validation rules are determined by control flags from the `Controller` class.
+This module defines two classes:
+- `TypeValidator`: Handles type validation for arguments based on type hints. It includes methods for validating
+  single arguments, iterables, and decorated functions or methods.
+- `FlagValidator`: Handles validation and transformation of text and language arguments based on configuration flags
+  managed by the `Controller`.
+
+The validators ensure that arguments and values adhere to specified types and constraints, enhancing the robustness
+and reliability of the application.
 
 Key Features:
-- **Text Validation**: Methods to validate and transform text arguments based on specified flags.
-- **Language Validation**: Methods to validate and transform language arguments based on specified flags.
-- **Type Validation**: Methods and decorators to enforce type correctness for function arguments.
+- **Type Validation**: `TypeValidator` offers methods to validate single arguments, iterables, and function/method
+  arguments based on type hints.
+- **Flag-based Validation**: `FlagValidator` provides methods to validate and transform text and language arguments
+  according to control flags.
+- **Separation of Concerns**: By separating type validation and flag-based validation into different classes, the module
+  maintains a clear and organized structure.
 
-The `Validator` class ensures that the `LangString`, `SetLangString`, and `MultiLangString` classes adhere to specified
-rules and constraints, enhancing the robustness and reliability of multilingual content management.
+Classes:
+- **TypeValidator**: Validates argument types based on type hints.
+- **FlagValidator**: Validates and transforms arguments based on control flags.
+
+Enums Utilized:
+- **GlobalFlag**: Flags affecting the behavior of all classes.
+- **LangStringFlag**: Flags specific to the `LangString` class.
+- **SetLangStringFlag**: Flags specific to the `SetLangString` class.
+- **MultiLangStringFlag**: Flags specific to the `MultiLangString` class.
+
+The validators in this module are designed to be non-instantiable, emphasizing their role as static utility classes.
 """
-
 
 import inspect
 import warnings
@@ -37,6 +53,42 @@ from .non_instantiable import NonInstantiable
 T = TypeVar("T")
 
 class FlagValidator(metaclass=NonInstantiable):
+    """
+    A utility class for validating and transforming text and language arguments based on configuration flags.
+
+    The `FlagValidator` class provides static methods to validate and transform `text` and `lang` arguments
+    according to the specified flag type. The validation rules and transformations are controlled by flags
+    managed by the `Controller` class.
+
+    The `FlagValidator` class is non-instantiable, emphasizing its role as a static utility class.
+
+    Methods:
+    - `validate_flags_text(flag_type: type[Enum], text: Optional[str]) -> str`: Validate and transform the `text`
+      argument based on the specified flag type.
+    - `validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> Optional[str]`: Validate and transform the
+      `lang` argument based on the specified flag type.
+
+    Examples:
+    - Validating and transforming text:
+    >>> Controller.set_flag(GlobalFlag.STRIP_TEXT, True)
+    >>> Controller.set_flag(GlobalFlag.DEFINED_TEXT, True)
+    >>> print(FlagValidator.validate_flags_text(GlobalFlag, "  Hello  "))  # Output: Hello
+    >>> print(FlagValidator.validate_flags_text(GlobalFlag, "     "))  # Raises ValueError
+    >>> print(FlagValidator.validate_flags_text(GlobalFlag, None))  # Raises ValueError
+
+    - Validating and transforming language:
+    >>> Controller.set_flag(LangStringFlag.STRIP_LANG, True)
+    >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'EN'
+    >>> Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
+    >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'en'
+    >>> Controller.set_flag(LangStringFlag.DEFINED_LANG, True)
+    >>> try:
+    ...     print(FlagValidator.validate_flags_lang(LangStringFlag, "  "))
+    ... except ValueError as e:
+    ...     print(e)  # Output: Invalid 'lang' value received ('  '). 'LangStringFlag.DEFINED_LANG' is enabled.
+                      # Expected non-empty 'str' or 'str' with non-space characters.
+    """
+
 
     @staticmethod
     def validate_flags_text(flag_type: type[Enum], text: Optional[str]) -> str:
@@ -175,6 +227,57 @@ class FlagValidator(metaclass=NonInstantiable):
         return transformed_lang
 
 class TypeValidator(metaclass=NonInstantiable):
+    """
+    A utility class for validating the types of arguments passed to functions and methods.
+
+    The `TypeValidator` class provides static methods to validate single arguments, iterables, and to apply type validation
+    decorators to functions or methods. The validation ensures that the arguments match the specified type hints.
+
+    The `TypeValidator` class is non-instantiable, emphasizing its role as a static utility class.
+
+    Methods:
+    - `_check_arg(arg: Any, hint: type[Any]) -> bool`: Check if the argument matches the type hint.
+    - `validate_type_decorator(func: Callable[..., T]) -> Callable[..., T]`: Decorator to validate the types of arguments
+      passed to a function or method based on their type hints.
+    - `validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -> None`: Validate that a single argument
+      matches the expected type.
+    - `validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False) -> None`:
+      Validate that an argument is an iterable of the expected type and that its contents match the expected content type.
+
+    Examples:
+    - Using the type validation decorator:
+    >>> @TypeValidator.validate_type_decorator
+    ... def greet(name: str, age: int) -> str:
+    ...     return f"Hello, {name}. You are {age} years old."
+    ...
+    >>> print(greet("Alice", 30))  # Output: Hello, Alice. You are 30 years old.
+
+    >>> @TypeValidator.validate_type_decorator
+    ... def process_list(data: list[int]) -> int:
+    ...     return sum(data)
+    ...
+    >>> print(process_list([1, 2, 3]))  # Output: 6
+
+    >>> @TypeValidator.validate_type_decorator
+    ... def union_example(value: Union[int, str]) -> str:
+    ...     return f"Received: {value}"
+    ...
+    >>> print(union_example(42))  # Output: Received: 42
+    >>> print(union_example("42"))  # Output: Received: 42
+
+    - Validating a single argument:
+    >>> TypeValidator.validate_type_single(5, int)  # Does not raise error.
+    >>> TypeValidator.validate_type_single(5, str)  # Raise TypeError
+    >>> TypeValidator.validate_type_single(None, str, optional=True)  # Does not raise error.
+
+    - Validating an iterable:
+    >>> TypeValidator.validate_type_iterable([1, 2, 3], list, int)  # Does not raise error.
+    >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, str)  # Does not raise error.
+    >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, list, str)  # Raises TypeError
+    >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, int)  # Raises TypeError
+    >>> TypeValidator.validate_type_iterable(None, list, int, optional=True)  # Does not raise error.
+    """
+
 
     @staticmethod
     def _check_arg(arg: Any, hint: type[Any]) -> bool:

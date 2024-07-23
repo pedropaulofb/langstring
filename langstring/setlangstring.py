@@ -38,7 +38,7 @@ Modules:
     controller: Provides control flags that influence the behavior of the SetLangString class.
     flags: Defines the SetLangStringFlag class with various control flags for the SetLangString class.
     langstring: Provides the LangString class used within the SetLangString class.
-    utils.validator: Provides validation methods used within the SetLangString class.
+    utils.validators: Provides validation methods used within the SetLangString class.
 """
 
 from typing import Iterator

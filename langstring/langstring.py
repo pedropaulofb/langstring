@@ -38,7 +38,7 @@ matching language tags, and merging LangString objects.
 Modules:
     controller: Provides control flags that influence the behavior of the LangString class.
     flags: Defines the LangStringFlag class with various control flags for the LangString class.
-    utils.validator: Provides validation methods used within the LangString class.
+    utils.validators: Provides validation methods used within the LangString class.
 """
 
 from typing import Any

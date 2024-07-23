@@ -33,7 +33,7 @@ Modules:
     flags: Defines the MultiLangStringFlag class with various control flags for the MultiLangString class.
     langstring: Provides the LangString class used within the MultiLangString class.
     setlangstring: Provides the SetLangString class used within the MultiLangString class.
-    utils.validator: Provides validation methods used within the MultiLangString class.
+    utils.validators: Provides validation methods used within the MultiLangString class.
 """
 
 from typing import Optional

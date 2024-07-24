@@ -36,7 +36,8 @@ Modules:
     utils.validators: Provides validation methods used within the MultiLangString class.
 """
 
-from typing import Optional, Iterator
+from typing import Iterator
+from typing import Optional
 from typing import Union
 
 from .controller import Controller

@@ -80,14 +80,6 @@ Module Contents
    :raises TypeError: If the types of parameters are incorrect based on validation.
 
 
-   .. py:attribute:: texts
-      :type:  Union[set[str], list[str]]
-
-
-   .. py:attribute:: lang
-      :type:  str
-
-
    .. py:property:: texts
       :type: set[str]
 

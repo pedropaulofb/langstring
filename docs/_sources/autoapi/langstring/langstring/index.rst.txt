@@ -79,12 +79,16 @@ Module Contents
    :raises TypeError: If the types of parameters are incorrect based on validation.
 
 
-   .. py:attribute:: text
+   .. py:attribute:: _text
       :type:  str
+      :value: ''
 
 
-   .. py:attribute:: lang
+
+   .. py:attribute:: _lang
       :type:  str
+      :value: ''
+
 
 
    .. py:property:: text
@@ -1360,7 +1364,7 @@ Module Contents
 
       :param other: The LangString or string to add.
       :type other: Union[LangString, str]
-      :return: The same LangString instance with the concatenated text.
+      :return: A new LangString instance with the concatenated text.
       :rtype: LangString
       :raises TypeError: If the objects are not compatible for addition.
       :raises ValueError: If the language tags are incompatible.

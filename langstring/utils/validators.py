@@ -34,19 +34,22 @@ The validators in this module are designed to be non-instantiable, emphasizing t
 
 import inspect
 import warnings
-from enum import Enum
 from functools import wraps
-from typing import Any, Protocol
+from typing import Any
 from typing import Callable
 from typing import get_args
 from typing import get_origin
 from typing import get_type_hints
 from typing import Optional
+from typing import Protocol
 from typing import TypeVar
 from typing import Union
 
 from ..controller import Controller
-from ..flags import GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag
+from ..flags import GlobalFlag
+from ..flags import LangStringFlag
+from ..flags import MultiLangStringFlag
+from ..flags import SetLangStringFlag
 from .non_instantiable import NonInstantiable
 
 # Generic type variable used for type hinting in the Validator class methods
@@ -70,12 +73,14 @@ class FlagType(Protocol):
     - DEFINED_LANG: Enum flag for ensuring language codes are defined.
     - VALID_LANG: Enum flag for validating language codes.
     """
+
     STRIP_TEXT: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
     DEFINED_TEXT: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
     STRIP_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
     LOWERCASE_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
     DEFINED_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
     VALID_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
+
 
 class FlagValidator(metaclass=NonInstantiable):
     """
@@ -129,7 +134,7 @@ class FlagValidator(metaclass=NonInstantiable):
         :type text: Optional[str]
         :return: The validated and transformed text.
         :rtype: str
-        :raises TypeError: If 'flag_type' is not an instance of type or 'text' is not a string.
+        :raises TypeError: If 'flag_type' is not an instance of type or 'text' is not a string or 'None'.
         :raises ValueError: If the text does not meet the criteria specified by the control flags.
 
         :Example:
@@ -161,10 +166,10 @@ class FlagValidator(metaclass=NonInstantiable):
                 f"Expected non-empty 'str' or 'str' with non-space characters."
             )
 
-        return text
+        return text or ""
 
     @staticmethod
-    def validate_flags_lang(flag_type: type[FlagType], lang: Optional[str]) -> Optional[str]:
+    def validate_flags_lang(flag_type: type[FlagType], lang: Optional[str]) -> str:
         """
         Validate and transform the 'lang' argument based on the specified flags.
 
@@ -178,7 +183,7 @@ class FlagValidator(metaclass=NonInstantiable):
         :param lang: The language string to be validated and transformed. It can be None.
         :type lang: Optional[str]
         :return: The transformed language string if valid; otherwise, it raises an appropriate error.
-        :rtype: Optional[str]
+        :rtype: str
         :raises ValueError: If 'lang' is empty and `DEFINED_LANG` is enabled, or if 'lang' is invalid and `VALID_LANG`
                             is enabled.
         :raises TypeError: If 'flag_type' is not of type 'Enum', or if 'lang' is not of type 'str' or 'None'.
@@ -254,8 +259,8 @@ class FlagValidator(metaclass=NonInstantiable):
             )  # Apply LOWERCASE_LANG if enabled
             validate_lang = transformed_lang.strip()  # Remove 'whitespace characters' for validation
         else:
-            transformed_lang = None
-            validate_lang = None
+            transformed_lang = ""
+            validate_lang = ""
 
         # Check if DEFINED_LANG flag is enabled and lang is empty or only whitespace
         if Controller.get_flag(flag_type.DEFINED_LANG) and not validate_lang:
@@ -267,10 +272,10 @@ class FlagValidator(metaclass=NonInstantiable):
         # Perform language validation if VALID_LANG flag is enabled
         if Controller.get_flag(flag_type.VALID_LANG):
             try:
-                from langcodes import tag_is_valid  # type: ignore
+                from langcodes import tag_is_valid  # type: ignore[import-not-found]
 
                 if not tag_is_valid(transformed_lang):
-                    handle_validation_error(original_lang, flag_type)
+                    handle_validation_error(original_lang or "", flag_type)
             except ImportError as e:
                 handle_import_error(e)
 

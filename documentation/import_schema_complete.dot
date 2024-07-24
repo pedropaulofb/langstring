@@ -14,21 +14,21 @@ digraph G {
     langstring_setlangstring [fillcolor="#20b6b6",label="setlangstring"];
     langstring_utils [fillcolor="#16f3f3",label="utils"];
     langstring_utils_non_instantiable [fillcolor="#2fdbdb",label="utils\.\nnon_instantiable"];
-    langstring_utils_validator [fillcolor="#16caca",label="utils\.\nvalidator"];
+    langstring_utils_validators [fillcolor="#16caca",label="utils\.\nvalidators"];
     langcodes [fillcolor="#c04040",fontcolor="#ffffff",shape="folder"];
-    langcodes -> langstring_utils_validator [fillcolor="#c04040",minlen="3"];
+    langcodes -> langstring_utils_validators [fillcolor="#c04040",minlen="3"];
     langstring_controller -> langstring [fillcolor="#0bdfdf"];
     langstring_controller -> langstring_langstring [fillcolor="#0bdfdf"];
     langstring_controller -> langstring_multilangstring [fillcolor="#0bdfdf"];
     langstring_controller -> langstring_setlangstring [fillcolor="#0bdfdf"];
-    langstring_controller -> langstring_utils_validator [fillcolor="#0bdfdf",minlen="2"];
+    langstring_controller -> langstring_utils_validators [fillcolor="#0bdfdf",minlen="2"];
     langstring_converter -> langstring [fillcolor="#339999"];
     langstring_flags -> langstring [fillcolor="#10f9f9"];
     langstring_flags -> langstring_controller [fillcolor="#10f9f9"];
     langstring_flags -> langstring_langstring [fillcolor="#10f9f9"];
     langstring_flags -> langstring_multilangstring [fillcolor="#10f9f9"];
     langstring_flags -> langstring_setlangstring [fillcolor="#10f9f9"];
-    langstring_flags -> langstring_utils_validator [fillcolor="#10f9f9",minlen="2"];
+    langstring_flags -> langstring_utils_validators [fillcolor="#10f9f9",minlen="2"];
     langstring_langstring -> langstring [fillcolor="#16caca"];
     langstring_langstring -> langstring_converter [fillcolor="#16caca"];
     langstring_langstring -> langstring_multilangstring [fillcolor="#16caca"];
@@ -45,10 +45,10 @@ digraph G {
     langstring_utils -> langstring_setlangstring [fillcolor="#16f3f3"];
     langstring_utils_non_instantiable -> langstring_controller [fillcolor="#2fdbdb",minlen="2"];
     langstring_utils_non_instantiable -> langstring_converter [fillcolor="#2fdbdb",minlen="2"];
-    langstring_utils_non_instantiable -> langstring_utils_validator [fillcolor="#2fdbdb",weight="2"];
-    langstring_utils_validator -> langstring_converter [fillcolor="#16caca",minlen="2"];
-    langstring_utils_validator -> langstring_langstring [fillcolor="#16caca",minlen="2"];
-    langstring_utils_validator -> langstring_multilangstring [fillcolor="#16caca",minlen="2"];
-    langstring_utils_validator -> langstring_setlangstring [fillcolor="#16caca",minlen="2"];
+    langstring_utils_non_instantiable -> langstring_utils_validators [fillcolor="#2fdbdb",weight="2"];
+    langstring_utils_validators -> langstring_converter [fillcolor="#16caca",minlen="2"];
+    langstring_utils_validators -> langstring_langstring [fillcolor="#16caca",minlen="2"];
+    langstring_utils_validators -> langstring_multilangstring [fillcolor="#16caca",minlen="2"];
+    langstring_utils_validators -> langstring_setlangstring [fillcolor="#16caca",minlen="2"];
 }
 

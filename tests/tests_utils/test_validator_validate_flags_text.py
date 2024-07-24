@@ -110,7 +110,7 @@ def test_validate_flags_text_optional_none() -> None:
     """
     Controller.set_flag(LangStringFlag.DEFINED_TEXT, False)  # Ensure DEFINED_TEXT is not enabled
     text = None
-    assert FlagValidator.validate_flags_text(LangStringFlag, text) == text, "Expected None to remain unchanged."
+    assert FlagValidator.validate_flags_text(LangStringFlag, text) == "", "Expected None to return empty string."
 
 
 def test_validate_flags_text_none_with_defined_text() -> None:

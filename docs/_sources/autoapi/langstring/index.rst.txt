@@ -802,12 +802,16 @@ Package Contents
    :raises TypeError: If the types of parameters are incorrect based on validation.
 
 
-   .. py:attribute:: text
+   .. py:attribute:: _text
       :type:  str
+      :value: ''
 
 
-   .. py:attribute:: lang
+
+   .. py:attribute:: _lang
       :type:  str
+      :value: ''
+
 
 
    .. py:property:: text
@@ -2083,7 +2087,7 @@ Package Contents
 
       :param other: The LangString or string to add.
       :type other: Union[LangString, str]
-      :return: The same LangString instance with the concatenated text.
+      :return: A new LangString instance with the concatenated text.
       :rtype: LangString
       :raises TypeError: If the objects are not compatible for addition.
       :raises ValueError: If the language tags are incompatible.
@@ -2409,14 +2413,6 @@ Package Contents
    :vartype mls_dict: Optional[dict[str, set[str]]]
    :ivar pref_lang: The preferred language for this MultiLangString. Defaults to "en".
    :vartype pref_lang: str
-
-
-   .. py:attribute:: mls_dict
-      :type:  Optional[dict[str, set[str]]]
-
-
-   .. py:attribute:: pref_lang
-      :type:  str
 
 
    .. py:property:: mls_dict
@@ -3685,14 +3681,6 @@ Package Contents
    :vartype lang: str
    :raises ValueError: If control flags enforce non-empty text and any text in the set is empty.
    :raises TypeError: If the types of parameters are incorrect based on validation.
-
-
-   .. py:attribute:: texts
-      :type:  Union[set[str], list[str]]
-
-
-   .. py:attribute:: lang
-      :type:  str
 
 
    .. py:property:: texts

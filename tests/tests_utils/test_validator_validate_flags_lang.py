@@ -13,7 +13,7 @@ from langstring.utils.validators import FlagValidator
 @pytest.mark.parametrize(
     "flag_type,lang,expected,msg",
     [
-        (LangStringFlag, None, None, "Expected no error when lang is None"),
+        (LangStringFlag, None, "", "Expected no error when lang is None"),
         (LangStringFlag, "", "", "Expected no error when lang is an empty string"),
         (LangStringFlag, "en", "en", "Expected lang 'en' to be valid"),
         (LangStringFlag, "EN", "EN", "Expected lang 'EN' to be valid"),

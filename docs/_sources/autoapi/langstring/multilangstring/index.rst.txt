@@ -75,14 +75,6 @@ Module Contents
    :vartype pref_lang: str
 
 
-   .. py:attribute:: mls_dict
-      :type:  Optional[dict[str, set[str]]]
-
-
-   .. py:attribute:: pref_lang
-      :type:  str
-
-
    .. py:property:: mls_dict
       :type: dict[str, set[str]]
 

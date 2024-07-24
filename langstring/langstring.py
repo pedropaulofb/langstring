@@ -87,6 +87,8 @@ class LangString:
         :raises ValueError: If the DEFINED_TEXT flag is enabled and the text string is empty.
         :raises TypeError: If the provided text or lang is not a string.
         """
+        self._text: str = ""
+        self._lang: str = ""
         self.text: str = text
         self.lang: str = lang
 
@@ -105,19 +107,19 @@ class LangString:
         return self._text
 
     @text.setter
-    def text(self, new_text: str) -> None:
+    def text(self, new_text: Optional[str]) -> None:
         """
         Set the text string. If the provided text is None, it defaults to an empty string.
         This method also validates the type and the text based on control flags.
 
         :param new_text: The new text string.
-        :type new_text: str
-        :raises TypeError: If the new text is not of type str.
+        :type new_text: Optional[str]
+        :raises TypeError: If the new text is not of type str or None.
         :raises ValueError: If the control flags enforce non-empty text and the new text is empty.
         """
-        new_text = "" if new_text is None else new_text
-        TypeValidator.validate_type_single(new_text, str)
-        self._text = FlagValidator.validate_flags_text(LangStringFlag, new_text)
+        TypeValidator.validate_type_single(new_text, str, optional=True)
+        new_text = new_text or ""
+        self._text = FlagValidator.validate_flags_text(LangStringFlag, new_text)  # type: ignore[arg-type]
 
     @property
     def lang(self) -> str:
@@ -130,19 +132,19 @@ class LangString:
         return self._lang
 
     @lang.setter
-    def lang(self, new_lang: str) -> None:
+    def lang(self, new_lang: Optional[str]) -> None:
         """
         Set the language tag. If the provided language tag is None, it defaults to an empty string. This method also
         validates the type and the language tag based on control flags.
 
         :param new_lang: The new language tag.
-        :type new_lang: str
-        :raises TypeError: If the new language tag is not of type str.
+        :type new_lang: Optional[str]
+        :raises TypeError: If the new language tag is not of type str or None.
         :raises ValueError: If the control flags enforce valid language tags and the new language tag is invalid.
         """
-        new_lang = "" if new_lang is None else new_lang
-        TypeValidator.validate_type_single(new_lang, str)
-        self._lang = FlagValidator.validate_flags_lang(LangStringFlag, new_lang)
+        TypeValidator.validate_type_single(new_lang, str, optional=True)
+        new_lang = new_lang or ""
+        self._lang = FlagValidator.validate_flags_lang(LangStringFlag, new_lang)  # type: ignore[arg-type]
 
     # ---------------------------------------------
     # Overwritten String's Built-in Regular Methods
@@ -1477,7 +1479,7 @@ class LangString:
 
         :param other: The LangString or string to add.
         :type other: Union[LangString, str]
-        :return: The same LangString instance with the concatenated text.
+        :return: A new LangString instance with the concatenated text.
         :rtype: LangString
         :raises TypeError: If the objects are not compatible for addition.
         :raises ValueError: If the language tags are incompatible.
@@ -1492,15 +1494,8 @@ class LangString:
         >>> lang_str1 += "!"
         >>> print(lang_str1)  # Output: "Hello World!"@en
         """
-        self._validate_match_types(other)
-        self._validate_match_langs(other)
-
-        if isinstance(other, LangString):
-            self.text += other.text
-        elif isinstance(other, str):
-            self.text += other
-
-        return self
+        result = self + other
+        return result
 
     @TypeValidator.validate_type_decorator
     def __imul__(self, other: int) -> "LangString":

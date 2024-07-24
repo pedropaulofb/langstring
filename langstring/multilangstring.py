@@ -129,11 +129,11 @@ class MultiLangString:
         # Validate and transform texts in the merged dictionary
         temp_dict: dict[str, set[str]] = {}
         for lang, texts in new_mls_dict.items():
-            validated_key = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)
+            validated_key = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)  # type: ignore[arg-type]
             temp_dict[validated_key] = set()
             # Validating texts inside the dict's values
             for text in texts:
-                validated_value = FlagValidator.validate_flags_text(MultiLangStringFlag, text)
+                validated_value = FlagValidator.validate_flags_text(MultiLangStringFlag, text)  # type: ignore[arg-type]
                 temp_dict[validated_key].add(validated_value)
 
         self._mls_dict = temp_dict
@@ -159,7 +159,8 @@ class MultiLangString:
         """
         new_pref_lang = "en" if new_pref_lang is None else new_pref_lang
         TypeValidator.validate_type_single(new_pref_lang, str)
-        self._pref_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, new_pref_lang)
+        self._pref_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, # type: ignore[arg-type]
+                                                            new_pref_lang)
 
     # --------------------------------------------------
     # MultiLangString's Regular Methods
@@ -225,8 +226,8 @@ class MultiLangString:
         >>> mls.add_entry("Bonjour", "fr")
         >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
         """
-        validated_text = FlagValidator.validate_flags_text(MultiLangStringFlag, text)
-        validated_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)
+        validated_text = FlagValidator.validate_flags_text(MultiLangStringFlag, text)  # type: ignore[arg-type]
+        validated_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)  # type: ignore[arg-type]
 
         registered_lang = self._get_registered_lang(validated_lang)
 
@@ -324,7 +325,7 @@ class MultiLangString:
         >>> mls.add_empty_lang("en")
         >>> print(mls)  # Output: {}@en
         """
-        validated_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)
+        validated_lang = FlagValidator.validate_flags_lang(MultiLangStringFlag, lang)  # type: ignore[arg-type]
         registered_lang = self._get_registered_lang(validated_lang)
         if registered_lang is None:
             self.mls_dict[validated_lang] = set()
@@ -332,7 +333,7 @@ class MultiLangString:
     # ----- DISCARD METHODS -----
 
     def discard(
-        self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
+            self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
     ) -> None:
         """
         Discard an entry, LangString, SetLangString, or MultiLangString from the MultiLangString.
@@ -524,7 +525,7 @@ class MultiLangString:
     # ----- REMOVE METHODS -----
 
     def remove(
-        self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
+            self, arg: Union[tuple[str, str], LangString, SetLangString, "MultiLangString"], clean_empty: bool = False
     ) -> None:
         """
         Remove an entry, LangString, SetLangString, or MultiLangString from the MultiLangString.
@@ -731,11 +732,11 @@ class MultiLangString:
     # ----- CONVERSION METHODS -----
 
     def to_strings(
-        self,
-        langs: Optional[list[str]] = None,
-        print_quotes: Optional[bool] = None,
-        separator: str = "@",
-        print_lang: Optional[bool] = None,
+            self,
+            langs: Optional[list[str]] = None,
+            print_quotes: Optional[bool] = None,
+            separator: str = "@",
+            print_lang: Optional[bool] = None,
     ) -> list[str]:
         """
         Convert the MultiLangString to a list of formatted strings.

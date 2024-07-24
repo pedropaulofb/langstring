@@ -126,7 +126,7 @@ class SetLangString:
         self._texts = set()
 
         for text_value in new_texts:
-            self._texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text_value))
+            self._texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text_value))  # type: ignore[arg-type]
 
     @property
     def lang(self) -> str:
@@ -151,7 +151,7 @@ class SetLangString:
         """
         new_lang = "" if new_lang is None else new_lang
         TypeValidator.validate_type_single(new_lang, str)
-        self._lang = FlagValidator.validate_flags_lang(SetLangStringFlag, new_lang)
+        self._lang = FlagValidator.validate_flags_lang(SetLangStringFlag, new_lang)  # type: ignore[arg-type]
 
     # -------------------------------------------
     # SetLangString's Regular Methods
@@ -179,7 +179,7 @@ class SetLangString:
         >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         self._validate_match_types_and_langs(langstring, True)
-        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, langstring.text))
+        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, langstring.text))  # type: ignore[arg-type]
 
     @TypeValidator.validate_type_decorator
     def add_text(self, text: str) -> None:
@@ -200,7 +200,7 @@ class SetLangString:
         >>> set_lang_str.add_text("World")
         >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
-        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text))
+        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text))  # type: ignore[arg-type]
 
     @TypeValidator.validate_type_decorator
     def discard_text(self, text: str) -> None:

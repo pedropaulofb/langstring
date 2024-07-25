@@ -1,5 +1,5 @@
 """
-The `converter` module provides a utility class for converting between different string types used in language
+The `converter` module provides a utility class for converting between different string types used in language \
 processing.
 
 The `Converter` class facilitates conversions between `LangString`, `SetLangString`, and `MultiLangString` objects.
@@ -515,6 +515,20 @@ class Converter(metaclass=NonInstantiable):
     @TypeValidator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_string(arg: SetLangString) -> str:
+        """
+        Convert a SetLangString to a string.
+
+        :param arg: The SetLangString to be converted.
+        :type arg: SetLangString
+        :return: The string representation of the SetLangString.
+        :rtype: str
+
+        Examples:
+            # Convert a SetLangString to a string:
+            >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
+            >>> string = Converter.from_setlangstring_to_string(setlangstring)
+            >>> print(string)  # Output: {'Hello', 'Hi'}@en
+        """
         return arg.__str__()
 
     @TypeValidator.validate_type_decorator
@@ -522,6 +536,34 @@ class Converter(metaclass=NonInstantiable):
     def from_setlangstring_to_strings(
         arg: SetLangString, print_quotes: Optional[bool] = None, separator: str = "@", print_lang: Optional[bool] = None
     ) -> list[str]:
+        """
+        Convert a SetLangString to a list of strings.
+
+        :param arg: The SetLangString to be converted.
+        :type arg: SetLangString
+        :param print_quotes: Whether to include quotes around the text in the output.
+        :type print_quotes: Optional[bool]
+        :param separator: The separator to use between text and language.
+        :type separator: str
+        :param print_lang: Whether to include the language in the output.
+        :type print_lang: Optional[bool]
+        :return: A list of string representations of the SetLangString.
+        :rtype: list[str]
+
+        Examples:
+            # Convert a SetLangString to a list of strings with quotes and language:
+            >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
+            >>> strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=True, separator="@")
+            >>> for s in strings:
+            >>>     print(s)  # Output: "Hello"@en
+            >>>                #         "Hi"@en
+
+            # Convert a SetLangString to a list of strings without quotes and language:
+            >>> strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=False, separator="@", print_lang=False)
+            >>> for s in strings:
+            >>>     print(s)  # Output: Hello
+            >>>                #         Hi
+        """
         return arg.to_strings(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
     @staticmethod
@@ -531,6 +573,34 @@ class Converter(metaclass=NonInstantiable):
         separator: str = "@",
         print_lang: Optional[bool] = None,
     ) -> list[str]:
+        """
+        Convert a list of SetLangStrings to a list of strings.
+
+        :param arg: List of SetLangStrings to be converted.
+        :type arg: list[SetLangString]
+        :param print_quotes: Whether to include quotes around the text in the output.
+        :type print_quotes: Optional[bool]
+        :param separator: The separator to use between text and language.
+        :type separator: str
+        :param print_lang: Whether to include the language in the output.
+        :type print_lang: Optional[bool]
+        :return: A list of string representations of the SetLangStrings.
+        :rtype: list[str]
+
+        Examples:
+            # Convert a list of SetLangStrings to a list of strings with quotes and language:
+            >>> setlangstrings = [SetLangString({"Hello"}, "en"), SetLangString({"Bonjour"}, "fr")]
+            >>> strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=True, separator="@")
+            >>> for s in strings:
+            >>>     print(s)  # Output: "Hello"@en
+            >>>                #         "Bonjour"@fr
+
+            # Convert a list of SetLangStrings to a list of strings without quotes and language:
+            >>> strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=False, separator="@", print_lang=False)
+            >>> for s in strings:
+            >>>     print(s)  # Output: Hello
+            >>>                #         Bonjour
+        """
         TypeValidator.validate_type_iterable(arg, list, SetLangString)
         TypeValidator.validate_type_single(print_quotes, bool, optional=True)
         TypeValidator.validate_type_single(separator, str)
@@ -548,7 +618,8 @@ class Converter(metaclass=NonInstantiable):
     @TypeValidator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_langstrings(arg: SetLangString) -> list[LangString]:
-        """Convert a SetLangString to a list of LangStrings.
+        """
+        Convert a SetLangString to a list of LangStrings.
 
         This method takes a SetLangString and converts it into a list of LangStrings, each containing one of the texts
         from the SetLangString and its associated language.
@@ -558,11 +629,42 @@ class Converter(metaclass=NonInstantiable):
         :return: A list of LangStrings, each corresponding to a text in the arg SetLangString.
         :rtype: list[LangString]
         :raises TypeError: If the arg is not of type SetLangString.
+
+        Examples:
+            # Convert a SetLangString to a list of LangStrings:
+            >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
+            >>> langstrings = Converter.from_setlangstring_to_langstrings(setlangstring)
+            >>> for ls in langstrings:
+            >>>     print(ls)  # Output: "Hi"@en
+            >>>                #         "Hello"@en
+
+        Note:
+            The order of elements in the output list is not guaranteed, as sets do not maintain order.
         """
         return arg.to_langstrings()
 
     @staticmethod
     def from_setlangstrings_to_langstrings(arg: list[SetLangString]) -> list[LangString]:
+        """
+        Convert a list of SetLangStrings to a list of LangStrings.
+
+        This method merges a list of SetLangStrings into a single list of LangStrings. Each LangString in the output
+        list corresponds to one of the texts in the SetLangStrings, retaining their associated languages.
+
+        :param arg: The list of SetLangStrings to be converted.
+        :type arg: list[SetLangString]
+        :return: A list of LangStrings, each corresponding to a text in the SetLangStrings.
+        :rtype: list[LangString]
+        :raises TypeError: If the input types are incorrect.
+
+        Examples:
+            # Convert a list of SetLangStrings to a list of LangStrings:
+            >>> setlangstrings = [SetLangString({"Hello"}, "en"), SetLangString({"Bonjour"}, "fr")]
+            >>> langstrings = Converter.from_setlangstrings_to_langstrings(setlangstrings)
+            >>> for ls in langstrings:
+            >>>     print(ls)  # Output: "Hello"@en
+            >>>                #         "Bonjour"@fr
+        """
         TypeValidator.validate_type_iterable(arg, list, SetLangString)
         merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
 
@@ -574,7 +676,8 @@ class Converter(metaclass=NonInstantiable):
     @TypeValidator.validate_type_decorator
     @staticmethod
     def from_setlangstring_to_multilangstring(arg: SetLangString) -> MultiLangString:
-        """Convert a SetLangString to a MultiLangString.
+        """
+        Convert a SetLangString to a MultiLangString.
 
         This method creates a MultiLangString from a SetLangString. The resulting MultiLangString contains all texts
         from the SetLangString, associated with its language.
@@ -584,6 +687,12 @@ class Converter(metaclass=NonInstantiable):
         :return: A MultiLangString containing all texts from the arg SetLangString.
         :rtype: MultiLangString
         :raises TypeError: If the arg is not of type SetLangString.
+
+        Examples:
+            # Convert a SetLangString to a MultiLangString:
+            >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
+            >>> multilangstring = Converter.from_setlangstring_to_multilangstring(setlangstring)
+            >>> print(multilangstring)  # Output: {'Hello', 'Hi'}@en
         """
         new_mls = MultiLangString()
         new_mls.add_setlangstring(arg)
@@ -591,13 +700,23 @@ class Converter(metaclass=NonInstantiable):
 
     @staticmethod
     def from_setlangstrings_to_multilangstring(arg: list[SetLangString]) -> MultiLangString:
-        """Convert a list of SetLangString objects to a MultiLangString object.
+        """
+        Convert a list of SetLangString objects to a MultiLangString object.
 
         If there are different casings for the same lang tag among the SetLangString objects in the input list,
         the casefolded version of the lang tag is used. If only a single case is used, that case is adopted.
 
-        :param setlangstrings: List of SetLangString instances to be converted.
+        :param arg: List of SetLangString instances to be converted.
+        :type arg: list[SetLangString]
         :return: A MultiLangString instance with aggregated texts under normalized language tags.
+        :rtype: MultiLangString
+        :raises TypeError: If the input types are incorrect.
+
+        Examples:
+            # Convert a list of SetLangStrings to a MultiLangString:
+            >>> setlangstrings = [SetLangString({"Hello"}, "en"), SetLangString({"Bonjour"}, "fr")]
+            >>> multilangstring = Converter.from_setlangstrings_to_multilangstring(setlangstrings)
+            >>> print(multilangstring)  # Output: {'Hello'}@en, {'Bonjour'}@fr
         """
         TypeValidator.validate_type_iterable(arg, list, SetLangString)
         merged_setlangstrings = SetLangString.merge_setlangstrings(arg)
@@ -614,6 +733,20 @@ class Converter(metaclass=NonInstantiable):
     @TypeValidator.validate_type_decorator
     @staticmethod
     def from_multilangstring_to_string(arg: MultiLangString) -> str:
+        """
+        Convert a MultiLangString to a string.
+
+        :param arg: The MultiLangString to be converted.
+        :type arg: MultiLangString
+        :return: The string representation of the MultiLangString.
+        :rtype: str
+
+        Examples:
+            # Convert a MultiLangString to a string:
+            >>> multilangstring = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour"}})
+            >>> string = Converter.from_multilangstring_to_string(multilangstring)
+            >>> print(string)  # Output: {'Hello', 'Hi'}@en, {'Bonjour'}@fr
+        """
         return arg.__str__()
 
     @TypeValidator.validate_type_decorator
@@ -625,6 +758,43 @@ class Converter(metaclass=NonInstantiable):
         separator: str = "@",
         print_lang: Optional[bool] = None,
     ) -> list[str]:
+        """
+        Convert a MultiLangString to a list of strings.
+
+        The method sorts the output strings both by language and by text within each language.
+
+        :param arg: The MultiLangString to be converted.
+        :type arg: MultiLangString
+        :param langs: List of languages to include in the output. If None, all languages are included.
+        :type langs: Optional[list[str]]
+        :param print_quotes: Whether to include quotes around the text in the output.
+        :type print_quotes: Optional[bool]
+        :param separator: The separator to use between text and language.
+        :type separator: str
+        :param print_lang: Whether to include the language in the output.
+        :type print_lang: Optional[bool]
+        :return: A list of string representations of the MultiLangString.
+        :rtype: list[str]
+
+        Examples:
+            # Convert a MultiLangString to a list of strings with quotes and language:
+            >>> multilangstring = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour"}})
+            >>> strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=True, separator="@")
+            >>> for s in strings:
+            >>>     print(s)  # Output: "Bonjour"@fr
+            >>>                #         "Hello"@en
+            >>>                #         "Hi"@en
+
+            # Convert a MultiLangString to a list of strings without quotes and language:
+            >>> strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=False, separator="@", print_lang=False)
+            >>> for s in strings:
+            >>>     print(s)  # Output: Bonjour
+            >>>                #         Hello
+            >>>                #         Hi
+
+        Note:
+            The output strings are sorted by language and by text within each language.
+        """
         return arg.to_strings(langs=langs, print_quotes=print_quotes, separator=separator, print_lang=print_lang)
 
     @staticmethod
@@ -635,6 +805,46 @@ class Converter(metaclass=NonInstantiable):
         separator: str = "@",
         print_lang: bool = True,
     ) -> list[str]:
+        """
+        Convert a list of MultiLangStrings to a list of strings.
+
+        The method sorts the output strings both by language and by text within each language.
+
+        :param arg: List of MultiLangStrings to be converted.
+        :type arg: list[MultiLangString]
+        :param languages: List of languages to include in the output. If None, all languages are included.
+        :type languages: Optional[list[str]]
+        :param print_quotes: Whether to include quotes around the text in the output.
+        :type print_quotes: bool
+        :param separator: The separator to use between text and language.
+        :type separator: str
+        :param print_lang: Whether to include the language in the output.
+        :type print_lang: bool
+        :return: A list of string representations of the MultiLangStrings.
+        :rtype: list[str]
+
+        Examples:
+            # Convert a list of MultiLangStrings to a list of strings with quotes and language:
+            >>> mls1 = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
+            >>> mls2 = MultiLangString(mls_dict={"en": {"Hi"}, "fr": {"Salut"}})
+            >>> strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=True, separator="@")
+            >>> for s in strings:
+            >>>     print(s)  # Output: "Bonjour"@fr
+            >>>                #         "Hello"@en
+            >>>                #         "Hi"@en
+            >>>                #         "Salut"@fr
+
+            # Convert a list of MultiLangStrings to a list of strings without quotes and language:
+            >>> strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=False, separator="@", print_lang=False)
+            >>> for s in strings:
+            >>>     print(s)  # Output: Bonjour
+            >>>                #         Hello
+            >>>                #         Hi
+            >>>                #         Salut
+
+        Note:
+            The output strings are sorted by language and by text within each language.
+        """
         TypeValidator.validate_type_iterable(arg, list, MultiLangString)
         # Other argument types are already validated in the 'to_strings' method.
 
@@ -648,16 +858,31 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstring_to_langstrings(
         arg: MultiLangString, languages: Optional[list[str]] = None
     ) -> list[LangString]:
-        """Convert a MultiLangString to a list of LangStrings.
+        """
+        Convert a MultiLangString to a list of LangStrings.
 
         This method takes a MultiLangString and converts it into a list of LangStrings, each representing one of the
         texts in the MultiLangString along with its associated language.
 
         :param arg: The MultiLangString to be converted.
         :type arg: MultiLangString
+        :param languages: List of languages to include in the output. If None, all languages are included.
+        :type languages: Optional[list[str]]
         :return: A list of LangStrings, each corresponding to a text in the arg MultiLangString.
         :rtype: list[LangString]
         :raises TypeError: If the arg is not of type MultiLangString.
+
+        Examples:
+            # Convert a MultiLangString to a list of LangStrings:
+            >>> multilangstring = MultiLangString(mls_dict={"en": {"Hi", "Hello"}, "fr": {"Bonjour"}})
+            >>> langstrings = Converter.from_multilangstring_to_langstrings(multilangstring)
+            >>> for ls in langstrings:
+            >>>     print(ls)  # Output: "Hi"@en
+            >>>                #         "Hello"@en
+            >>>                #         "Bonjour"@fr
+
+        Note:
+            The output strings are in the order of insertion within each language.
         """
         TypeValidator.validate_type_single(arg, MultiLangString)
         TypeValidator.validate_type_iterable(languages, list, str, optional=True)
@@ -667,6 +892,33 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstrings_to_langstrings(
         arg: list[MultiLangString], languages: Optional[list[str]] = None
     ) -> list[LangString]:
+        """
+        Convert a list of MultiLangStrings to a list of LangStrings.
+
+        This method takes a list of MultiLangStrings and converts them into a list of LangStrings,
+        each representing one of the texts in the MultiLangStrings along with its associated language.
+
+        :param arg: List of MultiLangStrings to be converted.
+        :type arg: list[MultiLangString]
+        :param languages: List of languages to include in the output. If None, all languages are included.
+        :type languages: Optional[list[str]]
+        :return: A list of LangStrings, each corresponding to a text in the MultiLangStrings.
+        :rtype: list[LangString]
+        :raises TypeError: If any of the arguments are not of the expected type.
+
+        Examples:
+            # Convert a list of MultiLangStrings to a list of LangStrings:
+            >>> mls1 = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour"}})
+            >>> mls2 = MultiLangString(mls_dict={"en": {"Hey"}, "fr": {"Salut"}})
+            >>> langstrings = Converter.from_multilangstrings_to_langstrings([mls1, mls2])
+            >>> for ls in langstrings:
+            >>>     print(ls)  # Output could vary as texts within each language may not be sorted. Possible outputs:
+            >>>                #         "Hello"@en
+            >>>                #         "Hi"@en
+            >>>                #         "Hey"@en
+            >>>                #         "Bonjour"@fr
+            >>>                #         "Salut"@fr
+        """
         TypeValidator.validate_type_iterable(arg, list, MultiLangString)
         TypeValidator.validate_type_iterable(languages, list, str, optional=True)
 
@@ -678,16 +930,30 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstring_to_setlangstrings(
         arg: MultiLangString, languages: Optional[list[str]] = None
     ) -> list[SetLangString]:
-        """Convert a MultiLangString to a list of SetLangStrings.
+        """
+        Convert a MultiLangString to a list of SetLangStrings.
 
         This method creates a list of SetLangStrings from a MultiLangString. Each SetLangString in the list contains
         texts of a single language from the MultiLangString.
 
         :param arg: The MultiLangString to be converted.
         :type arg: MultiLangString
+        :param languages: List of languages to include in the output. If None, all languages are included.
+        :type languages: Optional[list[str]]
         :return: A list of SetLangStrings, each containing texts of a single language from the arg MultiLangString.
         :rtype: list[SetLangString]
         :raises TypeError: If the arg is not of type MultiLangString.
+
+        Examples:
+            # Convert a MultiLangString to a list of SetLangStrings:
+            >>> multilangstring = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour", "Salut"}})
+            >>> setlangstrings = Converter.from_multilangstring_to_setlangstrings(multilangstring)
+            >>> for sls in setlangstrings:
+            >>>     print(sls)  # Output: {'Hello', 'Hi'}@en
+            >>>                #         {'Bonjour', 'Salut'}@fr
+
+        Note:
+            The texts within each language are sorted.
         """
         TypeValidator.validate_type_single(arg, MultiLangString)
         TypeValidator.validate_type_iterable(languages, list, str, optional=True)
@@ -697,6 +963,32 @@ class Converter(metaclass=NonInstantiable):
     def from_multilangstrings_to_setlangstrings(
         arg: list[MultiLangString], languages: Optional[list[str]] = None
     ) -> list[SetLangString]:
+        """
+        Convert a list of MultiLangString objects to a list of SetLangString objects.
+
+        This method creates a list of SetLangStrings from multiple MultiLangStrings. Each SetLangString in the list contains
+        texts of a single language from the merged MultiLangStrings.
+
+        :param arg: List of MultiLangStrings to be converted.
+        :type arg: list[MultiLangString]
+        :param languages: List of languages to include in the output. If None, all languages are included.
+        :type languages: Optional[list[str]]
+        :return: A list of SetLangStrings, each containing texts of a single language from the merged MultiLangStrings.
+        :rtype: list[SetLangString]
+        :raises TypeError: If any of the arguments are not of the expected type.
+
+        Examples:
+            # Convert a list of MultiLangStrings to a list of SetLangStrings:
+            >>> mls1 = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
+            >>> mls2 = MultiLangString(mls_dict={"en": {"Hi"}, "fr": {"Salut"}})
+            >>> setlangstrings = Converter.from_multilangstrings_to_setlangstrings([mls1, mls2])
+            >>> for sls in setlangstrings:
+            >>>     print(sls)  # Output: {'Hello', 'Hi'}@en
+            >>>                #         {'Bonjour', 'Salut'}@fr
+
+        Note:
+            The texts within each language are sorted.
+        """
         TypeValidator.validate_type_iterable(arg, list, MultiLangString)
         TypeValidator.validate_type_iterable(languages, list, str, optional=True)
 

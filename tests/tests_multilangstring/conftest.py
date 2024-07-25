@@ -1,4 +1,4 @@
-"""Specific conftest for multilangstring tests"""
+"""Specific conftest for multilangstring tests."""
 
 import pytest
 

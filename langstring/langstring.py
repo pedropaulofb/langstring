@@ -109,7 +109,9 @@ class LangString:
     @text.setter
     def text(self, new_text: Optional[str]) -> None:
         """
-        Set the text string. If the provided text is None, it defaults to an empty string.
+        Set the text string.
+
+        If the provided text is None, it defaults to an empty string.
         This method also validates the type and the text based on control flags.
 
         :param new_text: The new text string.
@@ -119,7 +121,7 @@ class LangString:
         """
         TypeValidator.validate_type_single(new_text, str, optional=True)
         new_text = new_text or ""
-        self._text = FlagValidator.validate_flags_text(LangStringFlag, new_text)  # type: ignore[arg-type]
+        self._text = FlagValidator.validate_flags_text(LangStringFlag, new_text)
 
     @property
     def lang(self) -> str:
@@ -134,7 +136,9 @@ class LangString:
     @lang.setter
     def lang(self, new_lang: Optional[str]) -> None:
         """
-        Set the language tag. If the provided language tag is None, it defaults to an empty string. This method also
+        Set the language tag.
+
+        If the provided language tag is None, it defaults to an empty string. This method also
         validates the type and the language tag based on control flags.
 
         :param new_lang: The new language tag.
@@ -144,7 +148,7 @@ class LangString:
         """
         TypeValidator.validate_type_single(new_lang, str, optional=True)
         new_lang = new_lang or ""
-        self._lang = FlagValidator.validate_flags_lang(LangStringFlag, new_lang)  # type: ignore[arg-type]
+        self._lang = FlagValidator.validate_flags_lang(LangStringFlag, new_lang)
 
     # ---------------------------------------------
     # Overwritten String's Built-in Regular Methods
@@ -698,7 +702,7 @@ class LangString:
 
     def partition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """
-        Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part
+        Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part \
         before the separator, the separator itself, and the part after the separator.
 
         This method mimics the behavior of the standard string's partition method but returns LangString objects.
@@ -801,8 +805,10 @@ class LangString:
 
     def rfind(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
         """
-        Return the highest index in the LangString where substring sub is found, such that sub is contained within
-        [start, end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
+        Return the highest index in the LangString where substring sub is found, such that sub is contained within \
+        [start, end].
+
+        Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
         not found.
 
         This method mimics the behavior of the standard string's rfind method.
@@ -826,8 +832,10 @@ class LangString:
 
     def rindex(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:
         """
-        Return the highest index in the LangString where substring sub is found, such that sub is contained within
-        [start, end]. Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
+        Return the highest index in the LangString where substring sub is found, such that sub is contained within \
+        [start, end].
+
+        Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
         the substring is not found.
 
         This method mimics the behavior of the standard string's rindex method.
@@ -880,7 +888,7 @@ class LangString:
 
     def rpartition(self, sep: str) -> tuple["LangString", "LangString", "LangString"]:
         """
-        Split the LangString at the last occurrence of sep, and return a 3-tuple containing the
+        Split the LangString at the last occurrence of sep, and return a 3-tuple containing the \
         part before the separator, the separator itself, and the part after the separator.
 
         This method mimics the behavior of the standard string's rpartition method but returns LangString objects.
@@ -905,6 +913,7 @@ class LangString:
     def rsplit(self, sep: Optional[str] = None, maxsplit: int = -1) -> list["LangString"]:
         """
         Return a list of the words in the LangString, using sep as the delimiter string.
+
         The list is split from the right starting from the end of the string.
 
         This method mimics the behavior of the standard string's rsplit method but returns a list of LangString objects.
@@ -1097,7 +1106,7 @@ class LangString:
 
     def title(self) -> "LangString":
         """
-        Return a titlecased version of the LangString where words start with an uppercase character and the remaining
+        Return a titlecased version of the LangString where words start with an uppercase character and the remaining \
         characters are lowercase.
 
         This method mimics the behavior of the standard string's title method but returns a LangString object.
@@ -1494,8 +1503,7 @@ class LangString:
         >>> lang_str1 += "!"
         >>> print(lang_str1)  # Output: "Hello World!"@en
         """
-        result = self + other
-        return result
+        return self + other
 
     @TypeValidator.validate_type_decorator
     def __imul__(self, other: int) -> "LangString":
@@ -1778,7 +1786,7 @@ class LangString:
         print_lang: Optional[bool] = None,
     ) -> None:
         """
-        Print a string representation of a list of LangString instances using the to_string method
+        Print a string representation of a list of LangString instances using the to_string method \
         with specified formatting options.
 
         :param langstring_list: The list of LangString instances.

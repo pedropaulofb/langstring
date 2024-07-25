@@ -1,5 +1,5 @@
 """
-The `validators` module provides two classes, `TypeValidator` and `FlagValidator`, for validating argument types and
+The `validators` module provides two classes, `TypeValidator` and `FlagValidator`, for validating argument types and \
 flag-based constraints, respectively.
 
 This module defines two classes:
@@ -41,7 +41,6 @@ from typing import get_args
 from typing import get_origin
 from typing import get_type_hints
 from typing import Optional
-from typing import Protocol
 from typing import TypeVar
 from typing import Union
 
@@ -54,32 +53,6 @@ from .non_instantiable import NonInstantiable
 
 # Generic type variable used for type hinting in the Validator class methods
 T = TypeVar("T")
-
-
-# Protocol for expliciting the expected Enum attributes' types
-class FlagType(Protocol):
-    """
-    Protocol to define the expected attributes of flag Enums used for validation.
-
-    The `FlagType` protocol specifies the attributes that flag Enums, such as `GlobalFlag` and `LangStringFlag`,
-    must have for type checking purposes. These attributes correspond to various validation and transformation
-    flags used within the `FlagValidator` class to ensure consistent and correct behavior.
-
-    Attributes:
-    - STRIP_TEXT: Enum flag for stripping text.
-    - DEFINED_TEXT: Enum flag for ensuring text is defined.
-    - STRIP_LANG: Enum flag for stripping language codes.
-    - LOWERCASE_LANG: Enum flag for converting language codes to lowercase.
-    - DEFINED_LANG: Enum flag for ensuring language codes are defined.
-    - VALID_LANG: Enum flag for validating language codes.
-    """
-
-    STRIP_TEXT: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-    DEFINED_TEXT: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-    STRIP_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-    LOWERCASE_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-    DEFINED_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
-    VALID_LANG: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
 
 
 class FlagValidator(metaclass=NonInstantiable):
@@ -120,7 +93,9 @@ class FlagValidator(metaclass=NonInstantiable):
     """
 
     @staticmethod
-    def validate_flags_text(flag_type: type[FlagType], text: Optional[str]) -> str:
+    def validate_flags_text(
+        flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]], text: Optional[str]
+    ) -> str:
         """
         Validate and transform the 'text' based on the specified flag type.
 
@@ -129,7 +104,7 @@ class FlagValidator(metaclass=NonInstantiable):
         Additionally, it can strip whitespace from the 'text' based on the `STRIP_TEXT` flag.
 
         :param flag_type: The type of flags to be used for validation.
-        :type flag_type: type[FlagType]
+        :type flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
         :param text: The text to be validated and transformed.
         :type text: Optional[str]
         :return: The validated and transformed text.
@@ -169,7 +144,9 @@ class FlagValidator(metaclass=NonInstantiable):
         return text or ""
 
     @staticmethod
-    def validate_flags_lang(flag_type: type[FlagType], lang: Optional[str]) -> str:
+    def validate_flags_lang(
+        flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]], lang: Optional[str]
+    ) -> str:
         """
         Validate and transform the 'lang' argument based on the specified flags.
 
@@ -179,7 +156,7 @@ class FlagValidator(metaclass=NonInstantiable):
         Additionally, it can strip whitespace and convert the language code to lowercase based on the corresp. flags.
 
         :param flag_type: The type of flags to be used for validation, which should be one of the flag enums.
-        :type flag_type: type[FlagType]
+        :type flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
         :param lang: The language string to be validated and transformed. It can be None.
         :type lang: Optional[str]
         :return: The transformed language string if valid; otherwise, it raises an appropriate error.
@@ -204,14 +181,17 @@ class FlagValidator(metaclass=NonInstantiable):
                           # Expected non-empty 'str' or 'str' with non-space characters.
         """
 
-        def handle_validation_error(original_lang: Optional[str], flag_type: type[FlagType]) -> None:
+        def handle_validation_error(
+            original_lang: Optional[str],
+            flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]],
+        ) -> None:
             """
             Raise a ValueError indicating the 'lang' value is invalid according to the specified flag type.
 
             :param original_lang: The original language value that was validated.
             :type original_lang: Optional[str]
             :param flag_type: The type of flag that indicates the validation rule.
-            :type flag_type: type[FlagType]
+            :type flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
             :raises ValueError: If the 'lang' value is invalid.
             """
             raise ValueError(
@@ -430,7 +410,7 @@ class TypeValidator(metaclass=NonInstantiable):
     @staticmethod
     def validate_type_decorator(func: Callable[..., T]) -> Callable[..., T]:
         """
-        Decorator to validate the types of arguments passed to a function or method based on their type hints.
+        Is a decorator to validate the types of arguments passed to a function or method based on their type hints.
 
         This method checks if each argument's type matches its corresponding type hint. It is intended for use with
         functions or instance methods where explicit type hints are provided for all arguments.

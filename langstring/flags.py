@@ -1,5 +1,5 @@
 """
-The `flags` module provides enumerations for various control flags used to configure the behavior of the `LangString`,
+The `flags` module provides enumerations for various control flags used to configure the behavior of the `LangString`, \
 `SetLangString`, and `MultiLangString` classes.
 
 This module defines several enumerations (`Enums`), each specifying different flags that can be set to influence the

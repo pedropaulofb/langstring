@@ -1,5 +1,5 @@
 """
-The `controller` module provides the `Controller` class, a non-instantiable class designed to manage and manipulate
+The `controller` module provides the `Controller` class, a non-instantiable class designed to manage and manipulate \
 configuration flags for the `LangString`, `SetLangString`, and `MultiLangString` classes.
 
 This module defines the `Controller` class, which offers class methods to set, retrieve, print, and reset configuration

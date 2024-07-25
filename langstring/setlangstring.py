@@ -87,7 +87,13 @@ class SetLangString:
         :raises ValueError: If the DEFINED_TEXT flag is enabled and any text string is empty.
         :raises TypeError: If the provided texts are not a set or list of strings, or if the lang is not a string.
         """
-        self.texts: Union[set[str], list[str]] = texts if texts is not None else set()
+        if isinstance(texts, list):
+            TypeValidator.validate_type_iterable(texts, list, str, optional=True)
+            texts = set(texts)
+        else:
+            TypeValidator.validate_type_iterable(texts, set, str, optional=True)
+
+        self.texts: set[str] = texts if texts is not None else set()
         self.lang: str = lang
 
     # -------------------------------------------
@@ -107,7 +113,9 @@ class SetLangString:
     @texts.setter
     def texts(self, new_texts: Optional[Union[set[str], list[str]]]) -> None:
         """
-        Set the set of text strings. If the provided texts are None, it defaults to an empty set.
+        Set the set of text strings.
+
+        If the provided texts are None, it defaults to an empty set.
         This method also validates the type and the texts based on control flags.
 
         :param new_texts: The new set of text strings or a list of text strings.
@@ -126,7 +134,7 @@ class SetLangString:
         self._texts = set()
 
         for text_value in new_texts:
-            self._texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text_value))  # type: ignore[arg-type]
+            self._texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text_value))
 
     @property
     def lang(self) -> str:
@@ -141,7 +149,9 @@ class SetLangString:
     @lang.setter
     def lang(self, new_lang: str) -> None:
         """
-        Set the language tag. If the provided language tag is None, it defaults to an empty string. This method also
+        Set the language tag.
+
+        If the provided language tag is None, it defaults to an empty string. This method also
         validates the type and the language tag based on control flags.
 
         :param new_lang: The new language tag.
@@ -151,7 +161,7 @@ class SetLangString:
         """
         new_lang = "" if new_lang is None else new_lang
         TypeValidator.validate_type_single(new_lang, str)
-        self._lang = FlagValidator.validate_flags_lang(SetLangStringFlag, new_lang)  # type: ignore[arg-type]
+        self._lang = FlagValidator.validate_flags_lang(SetLangStringFlag, new_lang)
 
     # -------------------------------------------
     # SetLangString's Regular Methods
@@ -179,7 +189,7 @@ class SetLangString:
         >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         self._validate_match_types_and_langs(langstring, True)
-        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, langstring.text))  # type: ignore[arg-type]
+        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, langstring.text))
 
     @TypeValidator.validate_type_decorator
     def add_text(self, text: str) -> None:
@@ -200,7 +210,7 @@ class SetLangString:
         >>> set_lang_str.add_text("World")
         >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
-        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text))  # type: ignore[arg-type]
+        self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text))
 
     @TypeValidator.validate_type_decorator
     def discard_text(self, text: str) -> None:

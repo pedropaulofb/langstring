@@ -84,7 +84,7 @@ class Converter(metaclass=NonInstantiable):
         :return: A LangString object with the provided text and language.
         :rtype: LangString
         """
-        return LangString(text=input_string, lang=lang)
+        return LangString(text=input_string or "", lang=lang or "")
 
     @TypeValidator.validate_type_decorator
     @staticmethod
@@ -154,7 +154,7 @@ class Converter(metaclass=NonInstantiable):
         TypeValidator.validate_type_iterable(strings, list, str)
         TypeValidator.validate_type_single(lang, str, optional=True)
 
-        return SetLangString(set(strings), lang=lang)
+        return SetLangString(set(strings), lang=lang or "")
 
     @classmethod
     def from_strings_to_multilangstring(

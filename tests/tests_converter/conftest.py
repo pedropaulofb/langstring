@@ -1,4 +1,4 @@
-"""Specific conftest for converter tests"""
+"""Specific conftest for converter tests."""
 
 import pytest
 

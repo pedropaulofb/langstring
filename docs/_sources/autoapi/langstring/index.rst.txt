@@ -950,7 +950,7 @@ Package Contents
 
       :Example:
 
-      >>> lang_str = LangString("hello        world", "en")
+      >>> lang_str = LangString("hello\tworld", "en")
       >>> expanded_lang_str = lang_str.expandtabs(4)
       >>> print(expanded_lang_str)  # Output: "hello   world"@en
 
@@ -1226,7 +1226,7 @@ Package Contents
       >>> is_printable = lang_str.isprintable()
       >>> print(is_printable)  # Output: True
 
-      >>> lang_str = LangString("Hello,       world!", "en")
+      >>> lang_str = LangString("Hello,\tworld!", "en")
       >>> is_printable = lang_str.isprintable()
       >>> print(is_printable)  # Output: False
 
@@ -1380,8 +1380,7 @@ Package Contents
 
    .. py:method:: partition(sep)
 
-      Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part
-      before the separator, the separator itself, and the part after the separator.
+      Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part         before the separator, the separator itself, and the part after the separator.
 
       This method mimics the behavior of the standard string's partition method but returns LangString objects.
 
@@ -1482,8 +1481,9 @@ Package Contents
 
    .. py:method:: rfind(sub, start = 0, end = None)
 
-      Return the highest index in the LangString where substring sub is found, such that sub is contained within
-      [start, end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
+      Return the highest index in the LangString where substring sub is found, such that sub is contained within         [start, end].
+
+      Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
       not found.
 
       This method mimics the behavior of the standard string's rfind method.
@@ -1507,8 +1507,9 @@ Package Contents
 
    .. py:method:: rindex(sub, start = 0, end = None)
 
-      Return the highest index in the LangString where substring sub is found, such that sub is contained within
-      [start, end]. Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
+      Return the highest index in the LangString where substring sub is found, such that sub is contained within         [start, end].
+
+      Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
       the substring is not found.
 
       This method mimics the behavior of the standard string's rindex method.
@@ -1560,8 +1561,7 @@ Package Contents
 
    .. py:method:: rpartition(sep)
 
-      Split the LangString at the last occurrence of sep, and return a 3-tuple containing the
-      part before the separator, the separator itself, and the part after the separator.
+      Split the LangString at the last occurrence of sep, and return a 3-tuple containing the         part before the separator, the separator itself, and the part after the separator.
 
       This method mimics the behavior of the standard string's rpartition method but returns LangString objects.
 
@@ -1584,6 +1584,7 @@ Package Contents
    .. py:method:: rsplit(sep = None, maxsplit = -1)
 
       Return a list of the words in the LangString, using sep as the delimiter string.
+
       The list is split from the right starting from the end of the string.
 
       This method mimics the behavior of the standard string's rsplit method but returns a list of LangString objects.
@@ -1677,31 +1678,29 @@ Package Contents
 
    .. py:method:: splitlines(keepends = False)
 
-              Return a list of the lines in the LangString, breaking at line boundaries.
+      Return a list of the lines in the LangString, breaking at line boundaries.
 
-              This method mimics the behavior of the standard string's splitlines method but returns
-              a list of LangString objects.
+      This method mimics the behavior of the standard string's splitlines method but returns
+      a list of LangString objects.
 
-              :param keepends: If True, line breaks are included in the resulting list.
-              :type keepends: bool
-              :return: A list of LangString objects.
-              :rtype: list[LangString]
+      :param keepends: If True, line breaks are included in the resulting list.
+      :type keepends: bool
+      :return: A list of LangString objects.
+      :rtype: list[LangString]
 
-              :Example:
+      :Example:
 
-              >>> lang_str = LangString("Hello\nworld", "en") # For the test, remove one escape char before the line break.
-              >>> split_lang_str = lang_str.splitlines()
-              >>> print(split_lang_str)
-              # Output:
-              # [LangString(text='Hello', lang='en'), LangString(text='world', lang='en')]
+      >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+      >>> split_lang_str = lang_str.splitlines()
+      >>> print(split_lang_str)
+      # Output:
+      # [LangString(text='Hello', lang='en'), LangString(text='world', lang='en')]
 
-              >>> lang_str = LangString("Hello\nworld", "en") # For the test, remove one escape char before the line break.
-              >>> split_lang_str = lang_str.splitlines(True)
-              >>> print(split_lang_str)
-              # Output:
-              # [LangString(text='Hello
-      ', lang='en'), LangString(text='world', lang='en')]
-              
+      >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+      >>> split_lang_str = lang_str.splitlines(True)
+      >>> print(split_lang_str)
+      # Output:
+      # [LangString(text='Hello\n', lang='en'), LangString(text='world', lang='en')]
 
 
 
@@ -1775,8 +1774,7 @@ Package Contents
 
    .. py:method:: title()
 
-      Return a titlecased version of the LangString where words start with an uppercase character and the remaining
-      characters are lowercase.
+      Return a titlecased version of the LangString where words start with an uppercase character and the remaining         characters are lowercase.
 
       This method mimics the behavior of the standard string's title method but returns a LangString object.
 
@@ -2331,8 +2329,7 @@ Package Contents
       :staticmethod:
 
 
-      Print a string representation of a list of LangString instances using the to_string method
-      with specified formatting options.
+      Print a string representation of a list of LangString instances using the to_string method         with specified formatting options.
 
       :param langstring_list: The list of LangString instances.
       :type langstring_list: list[LangString]

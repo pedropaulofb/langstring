@@ -258,7 +258,7 @@ class LangString:
         return self.text.endswith(suffix, start, end)
 
     def expandtabs(self, tabsize: int = 8) -> "LangString":
-        """
+        r"""
         Return a copy of the LangString where all tab characters are expanded using spaces.
 
         This method mimics the behavior of the standard string's expandtabs method but returns a LangString object.
@@ -532,7 +532,7 @@ class LangString:
         return (self.text).isnumeric()
 
     def isprintable(self) -> bool:
-        """
+        r"""
         Return True if all characters in the LangString are printable or the LangString is empty.
 
         This method mimics the behavior of the standard string's isprintable method.
@@ -1008,7 +1008,7 @@ class LangString:
         return [LangString(part, self.lang) for part in split_texts]
 
     def splitlines(self, keepends: bool = False) -> list["LangString"]:
-        """
+        r"""
         Return a list of the lines in the LangString, breaking at line boundaries.
 
         This method mimics the behavior of the standard string's splitlines method but returns

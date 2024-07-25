@@ -5,8 +5,7 @@ langstring.utils.validators
 
 .. autoapi-nested-parse::
 
-   The `validators` module provides two classes, `TypeValidator` and `FlagValidator`, for validating argument types and
-   flag-based constraints, respectively.
+   The `validators` module provides two classes, `TypeValidator` and `FlagValidator`, for validating argument types and flag-based constraints, respectively.
 
    This module defines two classes:
    - `TypeValidator`: Handles type validation for arguments based on type hints. It includes methods for validating
@@ -52,7 +51,6 @@ Classes
 
 .. autoapisummary::
 
-   langstring.utils.validators.FlagType
    langstring.utils.validators.FlagValidator
    langstring.utils.validators.TypeValidator
 
@@ -61,50 +59,6 @@ Module Contents
 ---------------
 
 .. py:data:: T
-
-.. py:class:: FlagType
-
-   Bases: :py:obj:`Protocol`
-
-
-   Protocol to define the expected attributes of flag Enums used for validation.
-
-   The `FlagType` protocol specifies the attributes that flag Enums, such as `GlobalFlag` and `LangStringFlag`,
-   must have for type checking purposes. These attributes correspond to various validation and transformation
-   flags used within the `FlagValidator` class to ensure consistent and correct behavior.
-
-   Attributes:
-   - STRIP_TEXT: Enum flag for stripping text.
-   - DEFINED_TEXT: Enum flag for ensuring text is defined.
-   - STRIP_LANG: Enum flag for stripping language codes.
-   - LOWERCASE_LANG: Enum flag for converting language codes to lowercase.
-   - DEFINED_LANG: Enum flag for ensuring language codes are defined.
-   - VALID_LANG: Enum flag for validating language codes.
-
-
-   .. py:attribute:: STRIP_TEXT
-      :type:  Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag]
-
-
-   .. py:attribute:: DEFINED_TEXT
-      :type:  Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag]
-
-
-   .. py:attribute:: STRIP_LANG
-      :type:  Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag]
-
-
-   .. py:attribute:: LOWERCASE_LANG
-      :type:  Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag]
-
-
-   .. py:attribute:: DEFINED_LANG
-      :type:  Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag]
-
-
-   .. py:attribute:: VALID_LANG
-      :type:  Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag]
-
 
 .. py:class:: FlagValidator
 
@@ -154,7 +108,7 @@ Module Contents
       Additionally, it can strip whitespace from the 'text' based on the `STRIP_TEXT` flag.
 
       :param flag_type: The type of flags to be used for validation.
-      :type flag_type: type[FlagType]
+      :type flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
       :param text: The text to be validated and transformed.
       :type text: Optional[str]
       :return: The validated and transformed text.
@@ -184,7 +138,7 @@ Module Contents
       Additionally, it can strip whitespace and convert the language code to lowercase based on the corresp. flags.
 
       :param flag_type: The type of flags to be used for validation, which should be one of the flag enums.
-      :type flag_type: type[FlagType]
+      :type flag_type: type[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]]
       :param lang: The language string to be validated and transformed. It can be None.
       :type lang: Optional[str]
       :return: The transformed language string if valid; otherwise, it raises an appropriate error.
@@ -318,7 +272,7 @@ Module Contents
       :staticmethod:
 
 
-      Decorator to validate the types of arguments passed to a function or method based on their type hints.
+      Is a decorator to validate the types of arguments passed to a function or method based on their type hints.
 
       This method checks if each argument's type matches its corresponding type hint. It is intended for use with
       functions or instance methods where explicit type hints are provided for all arguments.

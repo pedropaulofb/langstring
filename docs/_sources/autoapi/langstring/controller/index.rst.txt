@@ -5,8 +5,7 @@ langstring.controller
 
 .. autoapi-nested-parse::
 
-   The `controller` module provides the `Controller` class, a non-instantiable class designed to manage and manipulate
-   configuration flags for the `LangString`, `SetLangString`, and `MultiLangString` classes.
+   The `controller` module provides the `Controller` class, a non-instantiable class designed to manage and manipulate configuration flags for the `LangString`, `SetLangString`, and `MultiLangString` classes.
 
    This module defines the `Controller` class, which offers class methods to set, retrieve, print, and reset configuration
    flags. These flags influence the behavior and validation rules of the multilingual text handling classes within the

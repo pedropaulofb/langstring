@@ -97,8 +97,7 @@
              
   <section id="module-langstring.utils.validators">
 <span id="langstring-utils-validators"></span><h1>langstring.utils.validators<a class="headerlink" href="#module-langstring.utils.validators" title="Link to this heading"></a></h1>
-<p>The <cite>validators</cite> module provides two classes, <cite>TypeValidator</cite> and <cite>FlagValidator</cite>, for validating argument types and
-flag-based constraints, respectively.</p>
+<p>The <cite>validators</cite> module provides two classes, <cite>TypeValidator</cite> and <cite>FlagValidator</cite>, for validating argument types and flag-based constraints, respectively.</p>
 <p>This module defines two classes:
 - <cite>TypeValidator</cite>: Handles type validation for arguments based on type hints. It includes methods for validating</p>
 <blockquote>
@@ -144,13 +143,10 @@ maintains a clear and organized structure.</p></li>
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.utils.validators.FlagType" title="langstring.utils.validators.FlagType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlagType</span></code></a></p></td>
-<td><p>Protocol to define the expected attributes of flag Enums used for validation.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langstring.utils.validators.FlagValidator" title="langstring.utils.validators.FlagValidator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlagValidator</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.utils.validators.FlagValidator" title="langstring.utils.validators.FlagValidator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlagValidator</span></code></a></p></td>
 <td><p>A utility class for validating and transforming text and language arguments based on configuration flags.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langstring.utils.validators.TypeValidator" title="langstring.utils.validators.TypeValidator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TypeValidator</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langstring.utils.validators.TypeValidator" title="langstring.utils.validators.TypeValidator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TypeValidator</span></code></a></p></td>
 <td><p>A utility class for validating the types of arguments passed to functions and methods.</p></td>
 </tr>
 </tbody>
@@ -162,53 +158,6 @@ maintains a clear and organized structure.</p></li>
 <dt class="sig sig-object py" id="langstring.utils.validators.T">
 <span class="sig-prename descclassname"><span class="pre">langstring.utils.validators.</span></span><span class="sig-name descname"><span class="pre">T</span></span><a class="headerlink" href="#langstring.utils.validators.T" title="Link to this definition"></a></dt>
 <dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="langstring.utils.validators.FlagType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.utils.validators.</span></span><span class="sig-name descname"><span class="pre">FlagType</span></span><a class="headerlink" href="#langstring.utils.validators.FlagType" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Protocol</span></code></p>
-<p>Protocol to define the expected attributes of flag Enums used for validation.</p>
-<p>The <cite>FlagType</cite> protocol specifies the attributes that flag Enums, such as <cite>GlobalFlag</cite> and <cite>LangStringFlag</cite>,
-must have for type checking purposes. These attributes correspond to various validation and transformation
-flags used within the <cite>FlagValidator</cite> class to ensure consistent and correct behavior.</p>
-<p>Attributes:
-- STRIP_TEXT: Enum flag for stripping text.
-- DEFINED_TEXT: Enum flag for ensuring text is defined.
-- STRIP_LANG: Enum flag for stripping language codes.
-- LOWERCASE_LANG: Enum flag for converting language codes to lowercase.
-- DEFINED_LANG: Enum flag for ensuring language codes are defined.
-- VALID_LANG: Enum flag for validating language codes.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.utils.validators.FlagType.STRIP_TEXT">
-<span class="sig-name descname"><span class="pre">STRIP_TEXT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a></em><a class="headerlink" href="#langstring.utils.validators.FlagType.STRIP_TEXT" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.utils.validators.FlagType.DEFINED_TEXT">
-<span class="sig-name descname"><span class="pre">DEFINED_TEXT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a></em><a class="headerlink" href="#langstring.utils.validators.FlagType.DEFINED_TEXT" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.utils.validators.FlagType.STRIP_LANG">
-<span class="sig-name descname"><span class="pre">STRIP_LANG</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a></em><a class="headerlink" href="#langstring.utils.validators.FlagType.STRIP_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.utils.validators.FlagType.LOWERCASE_LANG">
-<span class="sig-name descname"><span class="pre">LOWERCASE_LANG</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a></em><a class="headerlink" href="#langstring.utils.validators.FlagType.LOWERCASE_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.utils.validators.FlagType.DEFINED_LANG">
-<span class="sig-name descname"><span class="pre">DEFINED_LANG</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a></em><a class="headerlink" href="#langstring.utils.validators.FlagType.DEFINED_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.utils.validators.FlagType.VALID_LANG">
-<span class="sig-name descname"><span class="pre">VALID_LANG</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><span class="pre">langstring.flags.GlobalFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><span class="pre">langstring.flags.LangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><span class="pre">langstring.flags.SetLangStringFlag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><span class="pre">langstring.flags.MultiLangStringFlag</span></a></em><a class="headerlink" href="#langstring.utils.validators.FlagType.VALID_LANG" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="langstring.utils.validators.FlagValidator">
@@ -259,7 +208,7 @@ Additionally, it can strip whitespace from the ‘text’ based on the <cite>STR
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>flag_type</strong> (<em>type</em><em>[</em><a class="reference internal" href="#langstring.utils.validators.FlagType" title="langstring.utils.validators.FlagType"><em>FlagType</em></a><em>]</em>) – The type of flags to be used for validation.</p></li>
+<li><p><strong>flag_type</strong> (<em>type</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>]</em>) – The type of flags to be used for validation.</p></li>
 <li><p><strong>text</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The text to be validated and transformed.</p></li>
 </ul>
 </dd>
@@ -298,7 +247,7 @@ Additionally, it can strip whitespace and convert the language code to lowercase
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>flag_type</strong> (<em>type</em><em>[</em><a class="reference internal" href="#langstring.utils.validators.FlagType" title="langstring.utils.validators.FlagType"><em>FlagType</em></a><em>]</em>) – The type of flags to be used for validation, which should be one of the flag enums.</p></li>
+<li><p><strong>flag_type</strong> (<em>type</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../../flags/index.html#langstring.flags.GlobalFlag" title="langstring.flags.GlobalFlag"><em>GlobalFlag</em></a><em>, </em><a class="reference internal" href="../../flags/index.html#langstring.flags.LangStringFlag" title="langstring.flags.LangStringFlag"><em>LangStringFlag</em></a><em>, </em><a class="reference internal" href="../../flags/index.html#langstring.flags.SetLangStringFlag" title="langstring.flags.SetLangStringFlag"><em>SetLangStringFlag</em></a><em>, </em><a class="reference internal" href="../../flags/index.html#langstring.flags.MultiLangStringFlag" title="langstring.flags.MultiLangStringFlag"><em>MultiLangStringFlag</em></a><em>]</em><em>]</em>) – The type of flags to be used for validation, which should be one of the flag enums.</p></li>
 <li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The language string to be validated and transformed. It can be None.</p></li>
 </ul>
 </dd>
@@ -466,7 +415,7 @@ such as a list of dictionaries or a dictionary with tuple values.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validators.TypeValidator.validate_type_decorator">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_type_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validators.TypeValidator.validate_type_decorator" title="Link to this definition"></a></dt>
-<dd><p>Decorator to validate the types of arguments passed to a function or method based on their type hints.</p>
+<dd><p>Is a decorator to validate the types of arguments passed to a function or method based on their type hints.</p>
 <p>This method checks if each argument’s type matches its corresponding type hint. It is intended for use with
 functions or instance methods where explicit type hints are provided for all arguments.</p>
 <dl>

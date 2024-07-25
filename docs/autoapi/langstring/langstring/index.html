@@ -365,7 +365,7 @@ strings.</p>
 <dt class="field-even">Example<span class="colon">:</span></dt>
 <dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello        world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello</span><span class="se">\t</span><span class="s2">world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expanded_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">expandtabs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">expanded_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello   world&quot;@en</span>
 </pre></div>
@@ -722,7 +722,7 @@ strings.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_printable</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello,       world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello,</span><span class="se">\t</span><span class="s2">world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_printable</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isprintable</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_printable</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -928,8 +928,7 @@ strings.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.partition">
 <span class="sig-name descname"><span class="pre">partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.partition" title="Link to this definition"></a></dt>
-<dd><p>Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part
-before the separator, the separator itself, and the part after the separator.</p>
+<dd><p>Split the LangString at the first occurrence of sep, and return a 3-tuple containing the part         before the separator, the separator itself, and the part after the separator.</p>
 <p>This method mimics the behavior of the standard string’s partition method but returns LangString objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1055,8 +1054,8 @@ Otherwise, return a copy of the original LangString.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.rfind">
 <span class="sig-name descname"><span class="pre">rfind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.rfind" title="Link to this definition"></a></dt>
-<dd><p>Return the highest index in the LangString where substring sub is found, such that sub is contained within
-[start, end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
+<dd><p>Return the highest index in the LangString where substring sub is found, such that sub is contained within         [start, end].</p>
+<p>Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is
 not found.</p>
 <p>This method mimics the behavior of the standard string’s rfind method.</p>
 <dl class="field-list simple">
@@ -1086,8 +1085,8 @@ not found.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.rindex">
 <span class="sig-name descname"><span class="pre">rindex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.rindex" title="Link to this definition"></a></dt>
-<dd><p>Return the highest index in the LangString where substring sub is found, such that sub is contained within
-[start, end]. Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
+<dd><p>Return the highest index in the LangString where substring sub is found, such that sub is contained within         [start, end].</p>
+<p>Optional arguments start and end are interpreted as in slice notation. Raises ValueError when
 the substring is not found.</p>
 <p>This method mimics the behavior of the standard string’s rindex method.</p>
 <dl class="field-list simple">
@@ -1154,8 +1153,7 @@ the substring is not found.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.rpartition">
 <span class="sig-name descname"><span class="pre">rpartition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.rpartition" title="Link to this definition"></a></dt>
-<dd><p>Split the LangString at the last occurrence of sep, and return a 3-tuple containing the
-part before the separator, the separator itself, and the part after the separator.</p>
+<dd><p>Split the LangString at the last occurrence of sep, and return a 3-tuple containing the         part before the separator, the separator itself, and the part after the separator.</p>
 <p>This method mimics the behavior of the standard string’s rpartition method but returns LangString objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1183,8 +1181,8 @@ and the part after the separator.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.rsplit">
 <span class="sig-name descname"><span class="pre">rsplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxsplit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.rsplit" title="Link to this definition"></a></dt>
-<dd><p>Return a list of the words in the LangString, using sep as the delimiter string.
-The list is split from the right starting from the end of the string.</p>
+<dd><p>Return a list of the words in the LangString, using sep as the delimiter string.</p>
+<p>The list is split from the right starting from the end of the string.</p>
 <p>This method mimics the behavior of the standard string’s rsplit method but returns a list of LangString objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1300,50 +1298,36 @@ If None, whitespace characters are removed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.splitlines">
 <span class="sig-name descname"><span class="pre">splitlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keepends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.splitlines" title="Link to this definition"></a></dt>
-<dd><blockquote>
-<div><p>Return a list of the lines in the LangString, breaking at line boundaries.</p>
+<dd><p>Return a list of the lines in the LangString, breaking at line boundaries.</p>
 <p>This method mimics the behavior of the standard string’s splitlines method but returns
 a list of LangString objects.</p>
 <dl class="field-list simple">
-<dt class="field-odd">param keepends<span class="colon">:</span></dt>
-<dd class="field-odd"><p>If True, line breaks are included in the resulting list.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keepends</strong> (<em>bool</em>) – If True, line breaks are included in the resulting list.</p>
 </dd>
-<dt class="field-even">type keepends<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of LangString objects.</p>
 </dd>
-<dt class="field-odd">return<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of LangString objects.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.langstring.LangString" title="langstring.langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">rtype<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[LangString]</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\n</span><span class="s2">world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
 <span class="go"># Output:</span>
 <span class="go"># [LangString(text=&#39;Hello&#39;, lang=&#39;en&#39;), LangString(text=&#39;world&#39;, lang=&#39;en&#39;)]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\n</span><span class="s2">world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
 <span class="go"># Output:</span>
-<span class="go"># [LangString(text=&#39;Hello</span>
+<span class="go"># [LangString(text=&#39;Hello\n&#39;, lang=&#39;en&#39;), LangString(text=&#39;world&#39;, lang=&#39;en&#39;)]</span>
 </pre></div>
 </div>
-</div></blockquote>
-<p>‘, lang=’en’), LangString(text=’world’, lang=’en’)]</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>keepends</strong> (<em>bool</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="#langstring.langstring.LangString" title="langstring.langstring.LangString">LangString</a>]</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1436,8 +1420,7 @@ If None, whitespace characters are removed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.title">
 <span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.title" title="Link to this definition"></a></dt>
-<dd><p>Return a titlecased version of the LangString where words start with an uppercase character and the remaining
-characters are lowercase.</p>
+<dd><p>Return a titlecased version of the LangString where words start with an uppercase character and the remaining         characters are lowercase.</p>
 <p>This method mimics the behavior of the standard string’s title method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2191,8 +2174,7 @@ of the language tag.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.print_list">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">langstring_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.print_list" title="Link to this definition"></a></dt>
-<dd><p>Print a string representation of a list of LangString instances using the to_string method
-with specified formatting options.</p>
+<dd><p>Print a string representation of a list of LangString instances using the to_string method         with specified formatting options.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

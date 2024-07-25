@@ -1,6 +1,63 @@
-"""The langstring package provides classes and utilities for handling multilingual text.
+"""
+The langstring package provides classes and utilities for handling multilingual text.
 
-It includes classes for single and multiple language strings, along with their control and validation mechanisms.
+This package is designed to support the management and manipulation of strings in multiple languages, providing a
+framework for applications that require multilingual support.
+
+Modules and Classes:
+--------------------
+- controller:
+    Handles the control mechanisms for language strings.
+
+- converter:
+    Provides utilities for converting language strings between different formats.
+
+- flags:
+    Defines various flag classes used for global settings and specific types of language strings.
+
+    - GlobalFlag:
+        A flag for global settings affecting all language string types.
+
+    - LangStringFlag:
+        A flag specific to single language strings.
+
+    - SetLangStringFlag:
+        A flag specific to sets of language strings.
+
+    - MultiLangStringFlag:
+        A flag specific to multi-language strings.
+
+- langstring:
+    Represents a single language string, encapsulating its properties and behaviors.
+
+- multilangstring:
+    Represents a string in multiple langs, providing methods to manage and manipulate the different language variants.
+
+- setlangstring:
+    Represents a set of language strings, facilitating operations on groups of multilingual texts.
+
+Package Contents:
+-----------------
+The package exports the following classes and flags for use in external modules:
+
+- LangString
+- SetLangString
+- MultiLangString
+- Controller
+- GlobalFlag
+- LangStringFlag
+- SetLangStringFlag
+- MultiLangStringFlag
+- Converter
+
+Usage:
+------
+To use this package, import the necessary classes and flags as follows:
+
+    from langstring import (
+        LangString, MultiLangString, SetLangString, Controller,
+        GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag, Converter
+    )
 """
 
 from .controller import Controller
@@ -13,6 +70,14 @@ from .langstring import LangString
 from .multilangstring import MultiLangString
 from .setlangstring import SetLangString
 
+"""
+The __all__ variable defines the public interface of the module.
+
+It is a list of the module's public classes, functions, and variables that will be imported
+when `from langstring import *` is used.
+
+This helps to control the namespace and avoids importing unnecessary components.
+"""
 __all__ = [
     "LangString",
     "SetLangString",

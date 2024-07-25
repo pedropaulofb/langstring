@@ -39,8 +39,6 @@ This module is part of a larger package dealing with language processing and RDF
 foundational tools for handling multilingual text data in various formats.
 """
 
-
-
 from typing import Optional
 
 from .langstring import LangString
@@ -265,7 +263,8 @@ class Converter(metaclass=NonInstantiable):
             >>> print(multilangstring)  # Output: {'Hello', 'Hi'}@en
 
             # Convert a list of strings to a MultiLangString using the 'parse' method:
-            >>> multilangstring = Converter.from_strings_to_multilangstring("parse", ["Hello@en", "Bonjour@fr"], separator="@")
+            >>> multilangstring = Converter.from_strings_to_multilangstring("parse", ["Hello@en", "Bonjour@fr"],
+                                                                                                        separator="@")
             >>> print(multilangstring)  # Output: {'Hello', 'Bonjour'}@en,fr
         """
         TypeValidator.validate_type_single(method, str)
@@ -311,7 +310,8 @@ class Converter(metaclass=NonInstantiable):
             >>> print(string)  # Output: "Hello"@en
 
             # Convert a LangString to a string without quotes and language:
-            >>> string = Converter.from_langstring_to_string(langstring, print_quotes=False, separator="@", print_lang=False)
+            >>> string = Converter.from_langstring_to_string(langstring, print_quotes=False, separator="@",
+                                                                                                    print_lang=False)
             >>> print(string)  # Output: "Hello"
         """
         return arg.to_string(print_quotes=print_quotes, separator=separator, print_lang=print_lang)
@@ -346,7 +346,8 @@ class Converter(metaclass=NonInstantiable):
             >>>                #         "Bonjour"@fr
 
             # Convert a list of LangStrings to a list of strings without quotes and language:
-            >>> strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=False, separator="@", print_lang=False)
+            >>> strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=False, separator="@",
+                                                                                                    print_lang=False)
             >>> for s in strings:
             >>>     print(s)  # Output: "Hello"
             >>>                #         "Bonjour"
@@ -559,7 +560,8 @@ class Converter(metaclass=NonInstantiable):
             >>>                #         "Hi"@en
 
             # Convert a SetLangString to a list of strings without quotes and language:
-            >>> strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=False, separator="@", print_lang=False)
+            >>> strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=False, separator="@",
+                                                                                                    print_lang=False)
             >>> for s in strings:
             >>>     print(s)  # Output: Hello
             >>>                #         Hi
@@ -596,7 +598,8 @@ class Converter(metaclass=NonInstantiable):
             >>>                #         "Bonjour"@fr
 
             # Convert a list of SetLangStrings to a list of strings without quotes and language:
-            >>> strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=False, separator="@", print_lang=False)
+            >>> strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=False, separator="@",
+                                                                                                    print_lang=False)
             >>> for s in strings:
             >>>     print(s)  # Output: Hello
             >>>                #         Bonjour
@@ -786,7 +789,8 @@ class Converter(metaclass=NonInstantiable):
             >>>                #         "Hi"@en
 
             # Convert a MultiLangString to a list of strings without quotes and language:
-            >>> strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=False, separator="@", print_lang=False)
+            >>> strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=False, separator="@",
+                                                                                                    print_lang=False)
             >>> for s in strings:
             >>>     print(s)  # Output: Bonjour
             >>>                #         Hello
@@ -835,7 +839,8 @@ class Converter(metaclass=NonInstantiable):
             >>>                #         "Salut"@fr
 
             # Convert a list of MultiLangStrings to a list of strings without quotes and language:
-            >>> strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=False, separator="@", print_lang=False)
+            >>> strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=False, separator="@",
+                                                                                                    print_lang=False)
             >>> for s in strings:
             >>>     print(s)  # Output: Bonjour
             >>>                #         Hello
@@ -966,8 +971,8 @@ class Converter(metaclass=NonInstantiable):
         """
         Convert a list of MultiLangString objects to a list of SetLangString objects.
 
-        This method creates a list of SetLangStrings from multiple MultiLangStrings. Each SetLangString in the list contains
-        texts of a single language from the merged MultiLangStrings.
+        This method creates a list of SetLangStrings from multiple MultiLangStrings. Each SetLangString in the list
+        contains texts of a single language from the merged MultiLangStrings.
 
         :param arg: List of MultiLangStrings to be converted.
         :type arg: list[MultiLangString]

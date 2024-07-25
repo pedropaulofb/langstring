@@ -55,6 +55,9 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">langstring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules-and-classes">Modules and Classes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="utils/index.html">langstring.utils</a></li>
 </ul>
@@ -69,7 +72,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Package Contents</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#langstring.Controller"><code class="docutils literal notranslate"><span class="pre">Controller</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#langstring.Converter"><code class="docutils literal notranslate"><span class="pre">Converter</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#langstring.GlobalFlag"><code class="docutils literal notranslate"><span class="pre">GlobalFlag</span></code></a></li>
@@ -115,7 +118,92 @@
   <section id="module-langstring">
 <span id="langstring"></span><h1>langstring<a class="headerlink" href="#module-langstring" title="Link to this heading"></a></h1>
 <p>The langstring package provides classes and utilities for handling multilingual text.</p>
-<p>It includes classes for single and multiple language strings, along with their control and validation mechanisms.</p>
+<p>This package is designed to support the management and manipulation of strings in multiple languages, providing a
+framework for applications that require multilingual support.</p>
+<section id="modules-and-classes">
+<h2>Modules and Classes:<a class="headerlink" href="#modules-and-classes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>controller:</dt><dd><p>Handles the control mechanisms for language strings.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>converter:</dt><dd><p>Provides utilities for converting language strings between different formats.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flags:</dt><dd><p>Defines various flag classes used for global settings and specific types of language strings.</p>
+<ul>
+<li><dl class="simple">
+<dt>GlobalFlag:</dt><dd><p>A flag for global settings affecting all language string types.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>LangStringFlag:</dt><dd><p>A flag specific to single language strings.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>SetLangStringFlag:</dt><dd><p>A flag specific to sets of language strings.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MultiLangStringFlag:</dt><dd><p>A flag specific to multi-language strings.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>langstring:</dt><dd><p>Represents a single language string, encapsulating its properties and behaviors.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>multilangstring:</dt><dd><p>Represents a string in multiple langs, providing methods to manage and manipulate the different language variants.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>setlangstring:</dt><dd><p>Represents a set of language strings, facilitating operations on groups of multilingual texts.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="package-contents">
+<h2>Package Contents:<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
+<p>The package exports the following classes and flags for use in external modules:</p>
+<ul class="simple">
+<li><p>LangString</p></li>
+<li><p>SetLangString</p></li>
+<li><p>MultiLangString</p></li>
+<li><p>Controller</p></li>
+<li><p>GlobalFlag</p></li>
+<li><p>LangStringFlag</p></li>
+<li><p>SetLangStringFlag</p></li>
+<li><p>MultiLangStringFlag</p></li>
+<li><p>Converter</p></li>
+</ul>
+</section>
+<section id="usage">
+<h2>Usage:<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>To use this package, import the necessary classes and flags as follows:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>from langstring import (</dt><dd><p>LangString, MultiLangString, SetLangString, Controller,
+GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag, Converter</p>
+</dd>
+</dl>
+<p>)</p>
+</div></blockquote>
+</section>
 <section id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -171,8 +259,8 @@
 </tbody>
 </table>
 </section>
-<section id="package-contents">
-<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
+<section id="id1">
+<h2>Package Contents<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="langstring.Controller">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><a class="headerlink" href="#langstring.Controller" title="Link to this definition"></a></dt>
@@ -413,6 +501,21 @@ SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.</p>
 <dd><p>A utility class for converting between different string types used in language processing.</p>
 <p>This class provides methods to convert between <cite>LangString</cite>, <cite>SetLangString</cite>, and <cite>MultiLangString</cite> types.
 It is designed to be non-instantiable as it serves as a utility class with class methods only.</p>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
+&gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“manual”, “Hello”, “en”)
+&gt;&gt;&gt; print(langstring)  #Output: “Hello”&#64;en</p>
+<p># Convert a list of strings to a list of LangStrings using the ‘parse’ method:
+&gt;&gt;&gt; langstrings = Converter.from_strings_to_langstrings(“parse”, [”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “<a class="reference external" href="mailto:Bonjour&#37;&#52;&#48;fr">Bonjour<span>&#64;</span>fr</a>”], separator=”&#64;”)
+&gt;&gt;&gt; for ls in langstrings:
+&gt;&gt;&gt;     print(ls)  #Output: “Hello”&#64;en
+&gt;&gt;&gt;                #        “Bonjour”&#64;fr</p>
+<p># Convert a SetLangString to a MultiLangString:
+&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
+&gt;&gt;&gt; multilangstring = Converter.from_setlangstring_to_multilangstring(setlangstring)
+&gt;&gt;&gt; print(multilangstring)  #Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_string_to_langstring">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring" title="Link to this definition"></a></dt>
@@ -436,6 +539,15 @@ It is designed to be non-instantiable as it serves as a utility class with class
 <dd class="field-even"><p><strong>ValueError</strong> – If the method is unknown.</p>
 </dd>
 </dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
+&gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“manual”, “Hello”, “en”)
+&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
+<p># Convert a string to a LangString using the ‘parse’ method:
+&gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“parse”, “<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”)
+&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -454,6 +566,12 @@ It is designed to be non-instantiable as it serves as a utility class with class
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a string to a LangString with the specified language:
+&gt;&gt;&gt; langstring = Converter.from_string_to_langstring_manual(“Hello”, “en”)
+&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
 </dd>
 </dl>
 </dd></dl>
@@ -477,6 +595,15 @@ to “” (empty string).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a string to a LangString by parsing it with the given separator:
+&gt;&gt;&gt; langstring = Converter.from_string_to_langstring_parse(”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “&#64;”)
+&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
+<p># Convert a string to a LangString with no separator found:
+&gt;&gt;&gt; langstring = Converter.from_string_to_langstring_parse(“Hello”, “&#64;”)
+&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;</p>
 </dd>
 </dl>
 </dd></dl>
@@ -507,6 +634,19 @@ to “” (empty string).</p>
 </ul>
 </dd>
 </dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a list of strings to a list of LangStrings using the ‘manual’ method:
+&gt;&gt;&gt; langstrings = Converter.from_strings_to_langstrings(“manual”, [“Hello”, “Hi”], “en”)
+&gt;&gt;&gt; for ls in langstrings:
+&gt;&gt;&gt;     print(ls)  # Output: “Hello”&#64;en
+&gt;&gt;&gt;                #         “Hi”&#64;en</p>
+<p># Convert a list of strings to a list of LangStrings using the ‘parse’ method:
+&gt;&gt;&gt; langstrings = Converter.from_strings_to_langstrings(“parse”, [”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “<a class="reference external" href="mailto:Bonjour&#37;&#52;&#48;fr">Bonjour<span>&#64;</span>fr</a>”], separator=”&#64;”)
+&gt;&gt;&gt; for ls in langstrings:
+&gt;&gt;&gt;     print(ls)  # Output: “Hello”&#64;en
+&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -524,7 +664,13 @@ to “” (empty string).</p>
 <dd class="field-even"><p>A SetLangString object.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString">langstring.setlangstring.SetLangString</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of strings to a SetLangString using the ‘manual’ method:
+&gt;&gt;&gt; setlangstring = Converter.from_strings_to_setlangstring([“Hello”, “Hi”], “en”)
+&gt;&gt;&gt; print(setlangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -546,7 +692,21 @@ to “” (empty string).</p>
 <dd class="field-even"><p>A MultiLangString object.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">langstring.multilangstring.MultiLangString</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString">MultiLangString</a></p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a list of strings to a MultiLangString using the ‘manual’ method:
+&gt;&gt;&gt; multilangstring = Converter.from_strings_to_multilangstring(“manual”, [“Hello”, “Hi”], “en”)
+&gt;&gt;&gt; print(multilangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
+<p># Convert a list of strings to a MultiLangString using the ‘parse’ method:
+&gt;&gt;&gt; multilangstring = Converter.from_strings_to_multilangstring(“parse”, [”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “<a class="reference external" href="mailto:Bonjour&#37;&#52;&#48;fr">Bonjour<span>&#64;</span>fr</a>”],</p>
+<blockquote>
+<div><p>separator=”&#64;”)</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Bonjour&#39;}@en,fr</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -554,17 +714,36 @@ to “” (empty string).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_langstring_to_string">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstring_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_langstring_to_string" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a LangString to a string.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a>)</p></li>
-<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
-<li><p><strong>separator</strong> (<em>str</em>)</p></li>
-<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+<li><p><strong>arg</strong> (<a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a>) – The LangString to be converted.</p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include quotes around the text in the output.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between text and language.</p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include the language in the output.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The string representation of the LangString.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a LangString to a string with quotes and language:
+&gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
+&gt;&gt;&gt; string = Converter.from_langstring_to_string(langstring, print_quotes=True, separator=”&#64;”)
+&gt;&gt;&gt; print(string)  # Output: “Hello”&#64;en</p>
+<p># Convert a LangString to a string without quotes and language:
+&gt;&gt;&gt; string = Converter.from_langstring_to_string(langstring, print_quotes=False, separator=”&#64;”,</p>
+<blockquote>
+<div><p>print_lang=False)</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -572,17 +751,40 @@ to “” (empty string).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_langstrings_to_strings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstrings_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_langstrings_to_strings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of LangStrings to a list of strings.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>)</p></li>
-<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
-<li><p><strong>separator</strong> (<em>str</em>)</p></li>
-<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – List of LangStrings to be converted.</p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include quotes around the text in the output.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between text and language.</p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include the language in the output.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of string representations of the LangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a list of strings with quotes and language:
+&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
+&gt;&gt;&gt; strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=True, separator=”&#64;”)
+&gt;&gt;&gt; for s in strings:
+&gt;&gt;&gt;     print(s)  # Output: “Hello”&#64;en
+&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
+<p># Convert a list of LangStrings to a list of strings without quotes and language:
+&gt;&gt;&gt; strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=False, separator=”&#64;”,</p>
+<blockquote>
+<div><p>print_lang=False)</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         &quot;Bonjour&quot;</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -607,17 +809,44 @@ LangString in a set and retains its language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type LangString.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a LangString to a SetLangString:
+&gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
+&gt;&gt;&gt; setlangstring = Converter.from_langstring_to_setlangstring(langstring)
+&gt;&gt;&gt; print(setlangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_langstrings_to_setlangstring">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstrings_to_setlangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_langstrings_to_setlangstring" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of LangStrings to a SetLangString.</p>
+<p>This method merges a list of LangStrings into a single SetLangString. The resulting SetLangString contains
+all the unique texts from the LangStrings and retains a common language if all LangStrings have the same
+language.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>)</p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – The list of LangStrings to be converted.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString">langstring.setlangstring.SetLangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A SetLangString containing the texts from the list of LangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the LangStrings have different languages.</p></li>
+<li><p><strong>TypeError</strong> – If the input types are incorrect.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a SetLangString:
+&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Hi”, “en”)]
+&gt;&gt;&gt; setlangstring = Converter.from_langstrings_to_setlangstring(langstrings)
+&gt;&gt;&gt; print(setlangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -625,12 +854,30 @@ LangString in a set and retains its language.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_langstrings_to_setlangstrings">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstrings_to_setlangstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_langstrings_to_setlangstrings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of LangStrings to a list of SetLangStrings.</p>
+<p>This method merges a list of LangStrings into multiple SetLangStrings based on their languages. Each
+SetLangString contains all the unique texts for a specific language from the LangStrings.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>)</p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – The list of LangStrings to be converted.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString">langstring.setlangstring.SetLangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of SetLangStrings, each containing texts of a specific language from the LangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a list of SetLangStrings:
+&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
+&gt;&gt;&gt; setlangstrings = Converter.from_langstrings_to_setlangstrings(langstrings)
+&gt;&gt;&gt; for sls in setlangstrings:
+&gt;&gt;&gt;     print(sls)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>
+&gt;&gt;&gt;                 #         <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -655,17 +902,40 @@ contains the text and language of the arg LangString.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type LangString.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a LangString to a MultiLangString:
+&gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
+&gt;&gt;&gt; multilangstring = Converter.from_langstring_to_multilangstring(langstring)
+&gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_langstrings_to_multilangstring">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_langstrings_to_multilangstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_langstrings_to_multilangstring" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of LangStrings to a MultiLangString.</p>
+<p>This method merges a list of LangStrings into a single MultiLangString. The resulting MultiLangString
+contains all the unique texts and languages from the LangStrings.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>langstring.langstring.LangString</em></a><em>]</em>)</p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>]</em>) – The list of LangStrings to be converted.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">langstring.multilangstring.MultiLangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A MultiLangString containing the texts and languages from the list of LangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString">MultiLangString</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a MultiLangString:
+&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
+&gt;&gt;&gt; multilangstring = Converter.from_langstrings_to_multilangstring(langstrings)
+&gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -673,12 +943,23 @@ contains the text and language of the arg LangString.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_setlangstring_to_string">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstring_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_setlangstring_to_string" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a SetLangString to a string.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>)</p>
+<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a>) – The SetLangString to be converted.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The string representation of the SetLangString.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a SetLangString to a string:
+&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
+&gt;&gt;&gt; string = Converter.from_setlangstring_to_string(setlangstring)
+&gt;&gt;&gt; print(string)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -686,17 +967,40 @@ contains the text and language of the arg LangString.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_setlangstring_to_strings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstring_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_setlangstring_to_strings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a SetLangString to a list of strings.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a>)</p></li>
-<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
-<li><p><strong>separator</strong> (<em>str</em>)</p></li>
-<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+<li><p><strong>arg</strong> (<a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a>) – The SetLangString to be converted.</p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include quotes around the text in the output.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between text and language.</p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include the language in the output.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of string representations of the SetLangString.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a SetLangString to a list of strings with quotes and language:
+&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
+&gt;&gt;&gt; strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=True, separator=”&#64;”)
+&gt;&gt;&gt; for s in strings:
+&gt;&gt;&gt;     print(s)  # Output: “Hello”&#64;en
+&gt;&gt;&gt;                #         “Hi”&#64;en</p>
+<p># Convert a SetLangString to a list of strings without quotes and language:
+&gt;&gt;&gt; strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=False, separator=”&#64;”,</p>
+<blockquote>
+<div><p>print_lang=False)</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Hello</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hi</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -704,17 +1008,40 @@ contains the text and language of the arg LangString.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_setlangstrings_to_strings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstrings_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_setlangstrings_to_strings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of SetLangStrings to a list of strings.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>)</p></li>
-<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
-<li><p><strong>separator</strong> (<em>str</em>)</p></li>
-<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – List of SetLangStrings to be converted.</p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include quotes around the text in the output.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between text and language.</p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include the language in the output.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of string representations of the SetLangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a list of SetLangStrings to a list of strings with quotes and language:
+&gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
+&gt;&gt;&gt; strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=True, separator=”&#64;”)
+&gt;&gt;&gt; for s in strings:
+&gt;&gt;&gt;     print(s)  # Output: “Hello”&#64;en
+&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
+<p># Convert a list of SetLangStrings to a list of strings without quotes and language:
+&gt;&gt;&gt; strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=False, separator=”&#64;”,</p>
+<blockquote>
+<div><p>print_lang=False)</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Hello</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Bonjour</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -739,17 +1066,46 @@ from the SetLangString and its associated language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type SetLangString.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a SetLangString to a list of LangStrings:
+&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
+&gt;&gt;&gt; langstrings = Converter.from_setlangstring_to_langstrings(setlangstring)
+&gt;&gt;&gt; for ls in langstrings:
+&gt;&gt;&gt;     print(ls)  # Output: “Hi”&#64;en
+&gt;&gt;&gt;                #         “Hello”&#64;en</p>
+</dd>
+<dt>Note:</dt><dd><p>The order of elements in the output list is not guaranteed, as sets do not maintain order.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_setlangstrings_to_langstrings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_setlangstrings_to_langstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_setlangstrings_to_langstrings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of SetLangStrings to a list of LangStrings.</p>
+<p>This method merges a list of SetLangStrings into a single list of LangStrings. Each LangString in the output
+list corresponds to one of the texts in the SetLangStrings, retaining their associated languages.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>)</p>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – The list of SetLangStrings to be converted.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString">langstring.langstring.LangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of LangStrings, each corresponding to a text in the SetLangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of SetLangStrings to a list of LangStrings:
+&gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
+&gt;&gt;&gt; langstrings = Converter.from_setlangstrings_to_langstrings(setlangstrings)
+&gt;&gt;&gt; for ls in langstrings:
+&gt;&gt;&gt;     print(ls)  # Output: “Hello”&#64;en
+&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
 </dd>
 </dl>
 </dd></dl>
@@ -774,6 +1130,13 @@ from the SetLangString, associated with its language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type SetLangString.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a SetLangString to a MultiLangString:
+&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
+&gt;&gt;&gt; multilangstring = Converter.from_setlangstring_to_multilangstring(setlangstring)
+&gt;&gt;&gt; print(multilangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -784,16 +1147,23 @@ from the SetLangString, associated with its language.</p>
 the casefolded version of the lang tag is used. If only a single case is used, that case is adopted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>setlangstrings</strong> – List of SetLangString instances to be converted.</p></li>
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString"><em>langstring.setlangstring.SetLangString</em></a><em>]</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a><em>]</em>) – List of SetLangString instances to be converted.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A MultiLangString instance with aggregated texts under normalized language tags.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">langstring.multilangstring.MultiLangString</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString">MultiLangString</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of SetLangStrings to a MultiLangString:
+&gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
+&gt;&gt;&gt; multilangstring = Converter.from_setlangstrings_to_multilangstring(setlangstrings)
+&gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -801,12 +1171,23 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_multilangstring_to_string">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstring_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_multilangstring_to_string" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a MultiLangString to a string.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a>)</p>
+<dd class="field-odd"><p><strong>arg</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString to be converted.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The string representation of the MultiLangString.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a MultiLangString to a string:
+&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
+&gt;&gt;&gt; string = Converter.from_multilangstring_to_string(multilangstring)
+&gt;&gt;&gt; print(string)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -814,18 +1195,46 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_multilangstring_to_strings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstring_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">langs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_multilangstring_to_strings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a MultiLangString to a list of strings.</p>
+<p>The method sorts the output strings both by language and by text within each language.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a>)</p></li>
-<li><p><strong>langs</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
-<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
-<li><p><strong>separator</strong> (<em>str</em>)</p></li>
-<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>)</p></li>
+<li><p><strong>arg</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString to be converted.</p></li>
+<li><p><strong>langs</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of languages to include in the output. If None, all languages are included.</p></li>
+<li><p><strong>print_quotes</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include quotes around the text in the output.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between text and language.</p></li>
+<li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Whether to include the language in the output.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of string representations of the MultiLangString.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a MultiLangString to a list of strings with quotes and language:
+&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
+&gt;&gt;&gt; strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=True, separator=”&#64;”)
+&gt;&gt;&gt; for s in strings:
+&gt;&gt;&gt;     print(s)  # Output: “Bonjour”&#64;fr
+&gt;&gt;&gt;                #         “Hello”&#64;en
+&gt;&gt;&gt;                #         “Hi”&#64;en</p>
+<p># Convert a MultiLangString to a list of strings without quotes and language:
+&gt;&gt;&gt; strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=False, separator=”&#64;”,</p>
+<blockquote>
+<div><p>print_lang=False)</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Bonjour</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hello</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hi</span>
+</pre></div>
+</div>
+</dd>
+<dt>Note:</dt><dd><p>The output strings are sorted by language and by text within each language.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -833,18 +1242,49 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_multilangstrings_to_strings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstrings_to_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_quotes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_multilangstrings_to_strings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of MultiLangStrings to a list of strings.</p>
+<p>The method sorts the output strings both by language and by text within each language.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>)</p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
-<li><p><strong>print_quotes</strong> (<em>bool</em>)</p></li>
-<li><p><strong>separator</strong> (<em>str</em>)</p></li>
-<li><p><strong>print_lang</strong> (<em>bool</em>)</p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – List of MultiLangStrings to be converted.</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of languages to include in the output. If None, all languages are included.</p></li>
+<li><p><strong>print_quotes</strong> (<em>bool</em>) – Whether to include quotes around the text in the output.</p></li>
+<li><p><strong>separator</strong> (<em>str</em>) – The separator to use between text and language.</p></li>
+<li><p><strong>print_lang</strong> (<em>bool</em>) – Whether to include the language in the output.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of string representations of the MultiLangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+<dl>
+<dt>Examples:</dt><dd><p># Convert a list of MultiLangStrings to a list of strings with quotes and language:
+&gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”}, “fr”: {“Bonjour”}})
+&gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hi”}, “fr”: {“Salut”}})
+&gt;&gt;&gt; strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=True, separator=”&#64;”)
+&gt;&gt;&gt; for s in strings:
+&gt;&gt;&gt;     print(s)  # Output: “Bonjour”&#64;fr
+&gt;&gt;&gt;                #         “Hello”&#64;en
+&gt;&gt;&gt;                #         “Hi”&#64;en
+&gt;&gt;&gt;                #         “Salut”&#64;fr</p>
+<p># Convert a list of MultiLangStrings to a list of strings without quotes and language:
+&gt;&gt;&gt; strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=False, separator=”&#64;”,</p>
+<blockquote>
+<div><p>print_lang=False)</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Bonjour</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hello</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hi</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Salut</span>
+</pre></div>
+</div>
+</dd>
+<dt>Note:</dt><dd><p>The output strings are sorted by language and by text within each language.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -859,7 +1299,7 @@ texts in the MultiLangString along with its associated language.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arg</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString to be converted.</p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of languages to include in the output. If None, all languages are included.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -872,20 +1312,55 @@ texts in the MultiLangString along with its associated language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type MultiLangString.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a MultiLangString to a list of LangStrings:
+&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hi”, “Hello”}, “fr”: {“Bonjour”}})
+&gt;&gt;&gt; langstrings = Converter.from_multilangstring_to_langstrings(multilangstring)
+&gt;&gt;&gt; for ls in langstrings:
+&gt;&gt;&gt;     print(ls)  # Output: “Hi”&#64;en
+&gt;&gt;&gt;                #         “Hello”&#64;en
+&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
+</dd>
+<dt>Note:</dt><dd><p>The output strings are in the order of insertion within each language.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_multilangstrings_to_langstrings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstrings_to_langstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_multilangstrings_to_langstrings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of MultiLangStrings to a list of LangStrings.</p>
+<p>This method takes a list of MultiLangStrings and converts them into a list of LangStrings,
+each representing one of the texts in the MultiLangStrings along with its associated language.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>)</p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – List of MultiLangStrings to be converted.</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of languages to include in the output. If None, all languages are included.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="langstring/index.html#langstring.langstring.LangString" title="langstring.langstring.LangString">langstring.langstring.LangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of LangStrings, each corresponding to a text in the MultiLangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If any of the arguments are not of the expected type.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of MultiLangStrings to a list of LangStrings:
+&gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
+&gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hey”}, “fr”: {“Salut”}})
+&gt;&gt;&gt; langstrings = Converter.from_multilangstrings_to_langstrings([mls1, mls2])
+&gt;&gt;&gt; for ls in langstrings:
+&gt;&gt;&gt;     print(ls)  # Output could vary as texts within each language may not be sorted. Possible outputs:
+&gt;&gt;&gt;                #         “Hello”&#64;en
+&gt;&gt;&gt;                #         “Hi”&#64;en
+&gt;&gt;&gt;                #         “Hey”&#64;en
+&gt;&gt;&gt;                #         “Bonjour”&#64;fr
+&gt;&gt;&gt;                #         “Salut”&#64;fr</p>
 </dd>
 </dl>
 </dd></dl>
@@ -900,7 +1375,7 @@ texts of a single language from the MultiLangString.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arg</strong> (<a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString to be converted.</p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of languages to include in the output. If None, all languages are included.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -913,20 +1388,52 @@ texts of a single language from the MultiLangString.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type MultiLangString.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a MultiLangString to a list of SetLangStrings:
+&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”, “Salut”}})
+&gt;&gt;&gt; setlangstrings = Converter.from_multilangstring_to_setlangstrings(multilangstring)
+&gt;&gt;&gt; for sls in setlangstrings:
+&gt;&gt;&gt;     print(sls)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a>
+&gt;&gt;&gt;                #         {‘Bonjour’, <a class="reference external" href="mailto:'Salut'}&#37;&#52;&#48;fr">‘Salut’}<span>&#64;</span>fr</a></p>
+</dd>
+<dt>Note:</dt><dd><p>The texts within each language are sorted.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_multilangstrings_to_setlangstrings">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_multilangstrings_to_setlangstrings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_multilangstrings_to_setlangstrings" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a list of MultiLangString objects to a list of SetLangString objects.</p>
+<p>This method creates a list of SetLangStrings from multiple MultiLangStrings. Each SetLangString in the list
+contains texts of a single language from the merged MultiLangStrings.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="multilangstring/index.html#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>langstring.multilangstring.MultiLangString</em></a><em>]</em>)</p></li>
-<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>arg</strong> (<em>list</em><em>[</em><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString"><em>MultiLangString</em></a><em>]</em>) – List of MultiLangStrings to be converted.</p></li>
+<li><p><strong>languages</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of languages to include in the output. If None, all languages are included.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="setlangstring/index.html#langstring.setlangstring.SetLangString" title="langstring.setlangstring.SetLangString">langstring.setlangstring.SetLangString</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of SetLangStrings, each containing texts of a single language from the merged MultiLangStrings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If any of the arguments are not of the expected type.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Examples:</dt><dd><p># Convert a list of MultiLangStrings to a list of SetLangStrings:
+&gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”}, “fr”: {“Bonjour”}})
+&gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hi”}, “fr”: {“Salut”}})
+&gt;&gt;&gt; setlangstrings = Converter.from_multilangstrings_to_setlangstrings([mls1, mls2])
+&gt;&gt;&gt; for sls in setlangstrings:
+&gt;&gt;&gt;     print(sls)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a>
+&gt;&gt;&gt;                #         {‘Bonjour’, <a class="reference external" href="mailto:'Salut'}&#37;&#52;&#48;fr">‘Salut’}<span>&#64;</span>fr</a></p>
+</dd>
+<dt>Note:</dt><dd><p>The texts within each language are sorted.</p>
 </dd>
 </dl>
 </dd></dl>

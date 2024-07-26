@@ -158,3 +158,94 @@ def test_setlangstring_operation_on_itself(texts: Set[str]) -> None:
     lang_string = SetLangString(texts=texts, lang="en")
     lang_string.texts = texts  # Re-assigning to itself
     assert lang_string.texts == texts, "Failed operation on itself with texts reassignment."
+
+
+class TypeValidator:
+    @staticmethod
+    def validate_type_iterable(value, expected_type, item_type, optional=False):
+        if optional and value is None:
+            return
+        if not isinstance(value, expected_type):
+            raise TypeError(f"Expected {expected_type}, got {type(value)}")
+        for item in value:
+            if not isinstance(item, item_type):
+                raise TypeError(
+                    f"Invalid argument with value '{item}'. Expected '{item_type.__name__}', but got '{type(item).__name__}'."
+                )
+
+
+def test_texts_setter_with_list_of_strings():
+    """
+    Test that the `texts` setter correctly converts a list of strings to a set and validates the types.
+
+    :raises AssertionError: If the assertion fails.
+    """
+    sls = SetLangString()
+    sls.texts = ["hello", "world"]
+    assert sls.texts == {"hello", "world"}, "The list of strings should be converted to a set of strings"
+
+
+@pytest.mark.parametrize(
+    "invalid_list, error_message",
+    [
+        (["hello", 123], "Invalid argument with value '123'. Expected 'str', but got 'int'."),
+        ([None, "world"], "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
+    ],
+)
+def test_texts_setter_with_invalid_list_items(invalid_list: list[Optional[str]], error_message: str):
+    """
+    Test that the `texts` setter raises a TypeError when a list contains non-string items.
+
+    :param invalid_list: A list of items to be set as texts.
+    :type invalid_list: List[Optional[str]]
+    :param error_message: The expected error message.
+    :type error_message: str
+    :raises TypeError: When the list contains non-string items.
+    """
+    sls = SetLangString()
+    with pytest.raises(TypeError, match=error_message):
+        sls.texts = invalid_list
+
+
+def test_texts_setter_with_none():
+    """
+    Test that the `texts` setter correctly handles None by converting it to an empty set.
+
+    :raises AssertionError: If the assertion fails.
+    """
+    sls = SetLangString()
+    sls.texts = None
+    assert sls.texts == set(), "None should be converted to an empty set"
+
+
+def test_texts_setter_with_set_of_strings():
+    """
+    Test that the `texts` setter correctly accepts a set of strings and validates the types.
+
+    :raises AssertionError: If the assertion fails.
+    """
+    sls = SetLangString()
+    sls.texts = {"hello", "world"}
+    assert sls.texts == {"hello", "world"}, "The set of strings should be correctly assigned"
+
+
+@pytest.mark.parametrize(
+    "invalid_set, error_message",
+    [
+        ({"hello", 123}, "Invalid argument with value '123'. Expected 'str', but got 'int'."),
+        ({None, "world"}, "Invalid argument with value 'None'. Expected 'str', but got 'NoneType'."),
+    ],
+)
+def test_texts_setter_with_invalid_set_items(invalid_set: Set[Optional[str]], error_message: str):
+    """
+    Test that the `texts` setter raises a TypeError when a set contains non-string items.
+
+    :param invalid_set: A set of items to be set as texts.
+    :type invalid_set: Set[Optional[str]]
+    :param error_message: The expected error message.
+    :type error_message: str
+    :raises TypeError: When the set contains non-string items.
+    """
+    sls = SetLangString()
+    with pytest.raises(TypeError, match=error_message):
+        sls.texts = invalid_set

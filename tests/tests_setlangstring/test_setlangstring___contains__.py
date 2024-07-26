@@ -4,6 +4,7 @@ from langstring import Controller
 from langstring import LangString
 from langstring import SetLangString
 from langstring import SetLangStringFlag
+from tests.conftest import TYPEERROR_MSG_PLURAL
 
 
 def calculate_expected_result(texts, lang, element, strict_mode):
@@ -99,3 +100,39 @@ def test_setlangstring_contains_additional(texts, lang, element, strict_mode):
         ) == expected_result, (
             f"Containment check failed for element '{element}' in SetLangString with texts {texts} and lang '{lang}'"
         )
+
+
+@pytest.mark.parametrize("element", [123, 45.67, None, True, [], {}, set()])
+def test_contains_with_invalid_elements(element):
+    """
+    Test that the `__contains__` method returns False for invalid element types.
+
+    :param element: An element of invalid type.
+    :type element: Any
+    :raises AssertionError: If the assertion fails.
+    """
+    set_lang_str = SetLangString({"Hello", "World"}, "en")
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_PLURAL):
+        element in set_lang_str
+
+
+def test_contains_with_valid_langstring():
+    """
+    Test that the `__contains__` method returns True for a LangString with the same language tag and text in the set.
+
+    :raises AssertionError: If the assertion fails.
+    """
+    set_lang_str = SetLangString({"Hello", "World"}, "en")
+    lang_str = LangString("Hello", "en")
+    assert lang_str in set_lang_str, "LangString with same language tag and text should be in the set"
+
+
+def test_contains_with_valid_string():
+    """
+    Test that the `__contains__` method returns True for a valid string in the set.
+
+    :raises AssertionError: If the assertion fails.
+    """
+    set_lang_str = SetLangString({"Hello", "World"}, "en")
+    assert "Hello" in set_lang_str, "String 'Hello' should be in the set"
+    assert "Python" not in set_lang_str, "String 'Python' should not be in the set"

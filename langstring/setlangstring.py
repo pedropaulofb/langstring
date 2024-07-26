@@ -854,10 +854,8 @@ class SetLangString:
             return element in self.texts
 
         # If element is a LangString, check if its text is in the texts
-        if isinstance(element, LangString):
-            return element.text in self.texts
-
-        return False
+        # No need to check 'isinstance(element, LangString)' as type validation assures that
+        return element.text in self.texts
 
     def __eq__(self, other: object) -> bool:
         """

@@ -1293,10 +1293,8 @@ class LangString:
         if isinstance(other, LangString):
             return LangString(self.text + other.text, self.lang)
 
-        if isinstance(other, str):
-            return LangString(self.text + other, self.lang)
-
-        return NotImplemented
+        # No need to check 'isinstance(other, str)' as type validation assures that
+        return LangString(self.text + other, self.lang)
 
     @TypeValidator.validate_type_decorator
     def __contains__(self, item: str) -> bool:
@@ -1347,9 +1345,6 @@ class LangString:
         """
         self._validate_match_types(other)
 
-        if not isinstance(other, (str, LangString)):
-            return NotImplemented
-
         if isinstance(other, str):
             return self.text == other
         if isinstance(other, LangString):
@@ -1387,8 +1382,6 @@ class LangString:
         self._validate_match_langs(other)  # remove diff langs
         self._validate_match_types(other)  # case strict is true, remove str
 
-        if not isinstance(other, (str, LangString)):
-            return NotImplemented
         if isinstance(other, str):
             return self.text >= other
         if isinstance(other, LangString):
@@ -1452,8 +1445,6 @@ class LangString:
         self._validate_match_langs(other)
         self._validate_match_types(other)
 
-        if not isinstance(other, (str, LangString)):
-            return NotImplemented
         if isinstance(other, str):
             return self.text > other
         if isinstance(other, LangString):
@@ -1573,8 +1564,6 @@ class LangString:
         self._validate_match_langs(other)
         self._validate_match_types(other)
 
-        if not isinstance(other, (str, LangString)):
-            return NotImplemented
         if isinstance(other, str):
             return self.text <= other
         if isinstance(other, LangString):
@@ -1619,8 +1608,6 @@ class LangString:
         self._validate_match_langs(other)
         self._validate_match_types(other)
 
-        if not isinstance(other, (str, LangString)):
-            return NotImplemented
         if isinstance(other, str):
             return self.text < other
         if isinstance(other, LangString):

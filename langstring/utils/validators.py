@@ -493,19 +493,12 @@ class TypeValidator(metaclass=NonInstantiable):
 
             # Validate positional arguments against their type hints
             for arg, (name, hint) in zip(args_to_check, zip(param_names, type_hints.values())):
-                if not TypeValidator._check_arg(arg, hint):
-                    raise TypeError(
-                        f"Invalid argument with value '{arg}'. Expected '{hint.__name__}', "
-                        f"but got '{type(arg).__name__}'."
-                    )
+                TypeValidator._check_arg(arg, hint)
 
             # Validate keyword arguments against their type hints
             for kwarg, hint in type_hints.items():
-                if kwarg in kwargs and not TypeValidator._check_arg(kwargs[kwarg], hint):
-                    raise TypeError(
-                        f"Invalid argument with value '{kwarg}'. Expected '{hint.__name__}', "
-                        f"but got '{type(kwargs[kwarg]).__name__}'."
-                    )
+                if kwarg in kwargs:
+                    TypeValidator._check_arg(kwargs[kwarg], hint)
 
             # Call the original function with validated arguments
             return func(*args, **kwargs)

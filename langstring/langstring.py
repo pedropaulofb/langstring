@@ -320,6 +320,7 @@ class LangString:
         """
         return LangString(self.text.format(*args, **kwargs), self.lang)
 
+
     def format_map(self, mapping: dict[Any, Any]) -> "LangString":
         """
         Perform a string formatting operation using a dictionary.
@@ -330,6 +331,7 @@ class LangString:
         :type mapping: dict
         :return: A new LangString with the formatted text.
         :rtype: LangString
+        :raises TypeError: If the provided mapping is not a dictionary.
 
         :Example:
 
@@ -337,6 +339,7 @@ class LangString:
         >>> formatted_lang_str = lang_str.format_map({"name": "world"})
         >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
         """
+        TypeValidator.validate_type_single(mapping, dict)
         return LangString(self.text.format_map(mapping), self.lang)
 
     def index(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:

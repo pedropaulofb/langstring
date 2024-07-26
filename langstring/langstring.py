@@ -47,6 +47,7 @@ from typing import Iterator
 from typing import Optional
 from typing import Union
 
+
 from .controller import Controller
 from .flags import LangStringFlag
 from .utils.validators import FlagValidator
@@ -320,7 +321,6 @@ class LangString:
         """
         return LangString(self.text.format(*args, **kwargs), self.lang)
 
-
     def format_map(self, mapping: dict[Any, Any]) -> "LangString":
         """
         Perform a string formatting operation using a dictionary.
@@ -340,6 +340,7 @@ class LangString:
         >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
         """
         TypeValidator.validate_type_single(mapping, dict)
+
         return LangString(self.text.format_map(mapping), self.lang)
 
     def index(self, sub: str, start: int = 0, end: Optional[int] = None) -> int:

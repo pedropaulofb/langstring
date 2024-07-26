@@ -1,7 +1,6 @@
 from typing import Set
 
 import pytest
-
 from langstring import LangString
 from langstring import MultiLangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR

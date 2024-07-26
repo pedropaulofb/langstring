@@ -1,7 +1,6 @@
 from typing import Optional
 
 import pytest
-
 from langstring import Converter
 
 

@@ -2,7 +2,6 @@ from typing import List
 from typing import Optional
 
 import pytest
-
 from langstring import LangString
 
 

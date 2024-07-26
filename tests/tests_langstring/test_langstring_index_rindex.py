@@ -1,5 +1,4 @@
 import pytest
-
 from langstring import LangString
 
 index_methods_to_test = ["index", "rindex"]

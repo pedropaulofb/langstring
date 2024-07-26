@@ -5,7 +5,6 @@ consistent setup and teardown processes across multiple tests, ensuring a clean 
 """
 
 import pytest
-
 from langstring import Controller
 
 

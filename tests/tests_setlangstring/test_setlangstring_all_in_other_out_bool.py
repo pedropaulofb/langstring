@@ -1,5 +1,4 @@
 import pytest
-
 from langstring import Controller
 from langstring import SetLangString
 from langstring import SetLangStringFlag

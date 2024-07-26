@@ -1,7 +1,6 @@
 """Specific conftest for multilangstring tests."""
 
 import pytest
-
 from langstring import Controller
 
 

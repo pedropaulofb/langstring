@@ -1,5 +1,4 @@
 import pytest
-
 from langstring import LangString
 
 find_methods_to_test = ["find", "rfind"]

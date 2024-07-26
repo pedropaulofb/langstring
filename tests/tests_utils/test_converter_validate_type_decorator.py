@@ -6,7 +6,6 @@ from typing import Optional
 from typing import Union
 
 import pytest
-
 from langstring.utils.validators import TypeValidator
 
 

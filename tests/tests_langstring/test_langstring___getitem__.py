@@ -1,7 +1,6 @@
 from typing import Union
 
 import pytest
-
 from langstring import LangString
 
 

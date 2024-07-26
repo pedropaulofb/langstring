@@ -1,7 +1,6 @@
 import copy
 
 import pytest
-
 from langstring import LangString
 
 split_methods_to_test = ["split", "rsplit"]

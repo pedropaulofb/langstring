@@ -1,7 +1,6 @@
 from copy import deepcopy
 
 import pytest
-
 from langstring import MultiLangString
 
 

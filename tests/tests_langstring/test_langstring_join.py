@@ -1,7 +1,6 @@
 from typing import Iterable
 
 import pytest
-
 from langstring import LangString
 
 

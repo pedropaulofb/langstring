@@ -1,7 +1,6 @@
 """Specific conftest for converter tests."""
 
 import pytest
-
 from langstring import Controller
 
 

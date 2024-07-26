@@ -1,7 +1,6 @@
 import copy
 
 import pytest
-
 from langstring import LangString
 
 methods_to_test = ["rstrip", "lstrip", "strip"]

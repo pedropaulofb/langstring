@@ -2,7 +2,6 @@ from enum import Enum
 from typing import Any
 
 import pytest
-
 from langstring import Controller
 from langstring import LangStringFlag
 from langstring.utils.validators import FlagValidator

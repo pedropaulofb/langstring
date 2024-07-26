@@ -1,5 +1,4 @@
 import pytest
-
 from langstring.utils.non_instantiable import NonInstantiable
 
 

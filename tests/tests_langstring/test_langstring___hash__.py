@@ -1,5 +1,4 @@
 import pytest
-
 from langstring import LangString
 
 # Test cases for __hash__ method

@@ -2,7 +2,6 @@ import re
 from typing import Optional
 
 import pytest
-
 from langstring import Converter
 from langstring import SetLangString
 

@@ -1,8 +1,7 @@
 import pytest
-from pytest import raises
-
 from langstring import LangString
 from langstring import MultiLangString
+from pytest import raises
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 

@@ -1,5 +1,4 @@
 import pytest
-
 from langstring import LangString
 from tests.conftest import TYPEERROR_MSG_SINGULAR
 

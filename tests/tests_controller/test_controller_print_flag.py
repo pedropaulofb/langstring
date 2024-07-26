@@ -2,7 +2,6 @@ import sys
 from io import StringIO
 
 import pytest
-
 from langstring import Controller
 from langstring import GlobalFlag
 from langstring import LangStringFlag

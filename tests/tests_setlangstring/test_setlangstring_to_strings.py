@@ -1,5 +1,4 @@
 import pytest
-
 from langstring.setlangstring import SetLangString
 
 

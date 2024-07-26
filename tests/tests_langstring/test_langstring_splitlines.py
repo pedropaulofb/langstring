@@ -1,9 +1,10 @@
 import pytest
 from langstring import LangString
+from tests.conftest import TYPEERROR_MSG_SINGULAR
 
 
 class SplitLinesTestCase:
-    def __init__(self, input_string, keepends):
+    def __init__(self, input_string: str, keepends: bool) -> None:
         self.input_string = input_string
         self.keepends = keepends
         self.expected_output = input_string.splitlines(keepends)
@@ -27,12 +28,6 @@ splitlines_test_cases = [
     SplitLinesTestCase("\nStarts and ends\n", False),
     SplitLinesTestCase("Mixed\r\nNewlines\nHere", False),
     SplitLinesTestCase("Multiple\n\nNewlines\n\n", False),
-    # Test cases with non-boolean keepends
-    SplitLinesTestCase("Hello\nWorld", 123),  # Integer
-    SplitLinesTestCase("Hello\nWorld", "string"),  # String
-    SplitLinesTestCase("Hello\nWorld", None),  # NoneType
-    SplitLinesTestCase("Hello\nWorld", []),  # List
-    SplitLinesTestCase("Hello\nWorld", {}),  # Dictionary
 ]
 
 
@@ -68,3 +63,26 @@ def test_additional_splitlines(test_case: SplitLinesTestCase) -> None:
     assert [
         item.text for item in result
     ] == test_case.expected_output, f"splitlines({test_case.keepends}) failed for '{test_case.input_string}'"
+
+
+# Test cases with invalid keepends values
+invalid_keepends_test_cases = [
+    ("Hello\nWorld", 123),
+    ("Hello\nWorld", "string"),
+    ("Hello\nWorld", None),
+    ("Hello\nWorld", []),
+    ("Hello\nWorld", {}),
+]
+
+
+@pytest.mark.parametrize("input_string, keepends", invalid_keepends_test_cases)
+def test_splitlines_invalid_keepends(input_string: str, keepends: any) -> None:
+    """
+    Test the splitlines method of LangString with invalid keepends values.
+
+    :param input_string: The input string to split.
+    :param keepends: The invalid keepends value to test.
+    """
+    lang_string = LangString(input_string, "en")
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_SINGULAR):
+        lang_string.splitlines(keepends)

@@ -1007,6 +1007,7 @@ class LangString:
         split_texts = self.text.split(sep, maxsplit)
         return [LangString(part, self.lang) for part in split_texts]
 
+    @TypeValidator.validate_type_decorator
     def splitlines(self, keepends: bool = False) -> list["LangString"]:
         r"""
         Return a list of the lines in the LangString, breaking at line boundaries.

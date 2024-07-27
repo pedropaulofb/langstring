@@ -1556,6 +1556,7 @@ Package Contents
       :type mapping: dict
       :return: A new LangString with the formatted text.
       :rtype: LangString
+      :raises TypeError: If the provided mapping is not a dictionary.
 
       :Example:
 

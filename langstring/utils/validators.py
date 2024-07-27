@@ -214,13 +214,13 @@ class FlagValidator(metaclass=NonInstantiable):
             if Controller.get_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND):
                 error_message = (
                     str(e) + ". VALID_LANG functionality requires the 'langcodes' library. "
-                    "Install it with 'pip install langstring[extras]'."
+                    "Install it with 'pip install langstring[langcodes]'."
                 )
                 raise ImportError(error_message) from e
 
             warnings.warn(
                 "Language validation skipped. VALID_LANG functionality requires the 'langcodes' library. "
-                "Install it with 'pip install langstring[extras]' to enable this feature.",
+                "Install it with 'pip install langstring[langcodes]' to enable this feature.",
                 UserWarning,
             )
 

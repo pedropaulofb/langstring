@@ -15,6 +15,7 @@
 ![Website](https://img.shields.io/website/http/pedropaulofb.github.io/langstring.svg)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/pedropaulofb/langstring/code_testing.yml)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8328/badge)](https://www.bestpractices.dev/projects/8328)
+![Static Badge](https://img.shields.io/badge/Test_Coverage-100%25-green)
 
 # LangString Python Library
 
@@ -31,71 +32,62 @@ For detailed documentation and code examples, please refer to the library's [doc
 <!-- TOC -->
 * [LangString Python Library](#langstring-python-library)
   * [Contents](#contents)
-  * [LangString Library](#langstring-library)
-    * [Purpose and Contextualization](#purpose-and-contextualization)
-    * [Key Components](#key-components)
-    * [Practical Use Cases](#practical-use-cases)
-    * [Related Work and Differences](#related-work-and-differences)
-    * [Installation and Use](#installation-and-use)
-  * [LangStrings](#langstrings)
-    * [LangStrings’ Methods](#langstrings-methods)
-  * [`__init__`](#init)
-  * [`to_string`](#tostring)
-  * [`__str__`](#str)
-  * [`__eq__`](#eq)
-  * [`__hash__`](#hash)
-  * [MultiLangStrings](#multilangstrings)
-    * [MultiLangStrings’ Methods](#multilangstrings-methods)
-  * [`__init__`](#init-1)
-  * [`add_entry`](#addentry)
-  * [`add_langstring`](#addlangstring)
-  * [`remove_entry`](#removeentry)
-  * [`remove_lang`](#removelang)
-  * [`get_langstring`](#getlangstring)
-  * [`get_langstrings_lang`](#getlangstringslang)
-  * [`get_langstrings_all`](#getlangstringsall)
-  * [`get_langstrings_pref_lang`](#getlangstringspreflang)
-  * [`get_strings_lang`](#getstringslang)
-  * [`get_strings_pref_lang`](#getstringspreflang)
-  * [`get_strings_all`](#getstringsall)
-  * [`get_strings_langstring_lang`](#getstringslangstringlang)
-  * [`get_strings_langstring_pref_lang`](#getstringslangstringpreflang)
-  * [`get_strings_langstring_all`](#getstringslangstringall)
-  * [`len_entries_all`](#lenentriesall)
-  * [`len_entries_lang`](#lenentrieslang)
-  * [`len_langs`](#lenlangs)
-  * [`__repr__`](#repr)
-  * [`__str__`](#str-1)
-  * [`__eq__`](#eq-1)
-  * [`__hash__`](#hash-1)
-  * [Control and Flags](#control-and-flags)
-    * [Flags](#flags)
-  * [`ENSURE_TEXT`](#ensuretext)
-  * [`ENSURE_ANY_LANG`](#ensureanylang)
-  * [`ENSURE_VALID_LANG`](#ensurevalidlang)
-    * [Control](#control)
-  * [Control Methods](#control-methods)
-    * [`set_flag`](#setflag)
-    * [`get_flag`](#getflag)
-    * [`reset_flags`](#resetflags)
-    * [`print_flags`](#printflags)
-  * [Code Testing](#code-testing)
-  * [Version 2: Key Differences and Improvements](#version-2-key-differences-and-improvements)
+  * [Installation and Usage](#installation-and-usage)
+    * [Dependencies](#dependencies)
+      * [Mandatory Dependencies](#mandatory-dependencies)
+      * [Optional Dependencies](#optional-dependencies)
+      * [Dev Dependencies](#dev-dependencies)
+    * [Installation](#installation)
+      * [Basic Installation](#basic-installation)
+      * [Full Installation](#full-installation)
+      * [Dev Installation](#dev-installation)
+    * [Importing Elements](#importing-elements)
+    * [Basic Usage](#basic-usage)
+  * [Library Reference](#library-reference)
+    * [Classes](#classes)
+      * [LangStrings](#langstrings)
+      * [SetLangStrings](#setlangstrings)
+      * [MultiLangStrings](#multilangstrings)
+      * [Controller](#controller)
+      * [Converter](#converter)
+    * [Configuration](#configuration)
+    * [Elements' Relations](#elements-relations)
+  * [Testing](#testing)
+    * [Test Organization](#test-organization)
+    * [Running the Tests](#running-the-tests)
+    * [Continuous Integration](#continuous-integration)
   * [How to Contribute](#how-to-contribute)
     * [Reporting Issues](#reporting-issues)
     * [Code Contributions](#code-contributions)
     * [Test Contributions](#test-contributions)
     * [General Guidelines](#general-guidelines)
-  * [Dependencies](#dependencies)
-    * [Using Poetry](#using-poetry)
-    * [Using `requirements.txt`](#using-requirementstxt)
+  * [Related Libraries and Differences](#related-libraries-and-differences)
   * [License](#license)
   * [Author](#author)
 <!-- TOC -->
 
 ## Installation and Usage
 
-### Basic Installation
+### Dependencies
+
+The LangString Python Library has been designed to be lightweight and easy to install. It has no mandatory dependencies and a single optional dependency to keep the installation process straightforward and ensure compatibility with various environments.
+
+All dependencies of the LangString library can be found in its [`pyproject.toml` file](https://github.com/pedropaulofb/langstring/blob/main/pyproject.toml).
+
+#### Mandatory Dependencies
+The LangString Library does not require mandatory dependencies.
+
+#### Optional Dependencies
+
+The LangString Library has a single optional dependency, the [langcodes package](https://pypi.org/project/langcodes/). It is used  particularly for validating language tags when the `ENSURE_VALID_LANG` flag is enabled. This dependency is crucial for ensuring that language tags used in LangString and `MultiLangString` instances are valid and conform to international standards, thereby maintaining the integrity and reliability of multilingual text processing.
+
+#### Dev Dependencies
+
+For a complete list of development dependencies, please refer to the [Dev Dependencies List](https://github.com/pedropaulofb/langstring/blob/main/documentation/dev_dependencies_md).
+
+### Installation
+
+#### Basic Installation
 
 To install the LangString library using `pip`, which is the package installer for Python, run the following command in your terminal or command prompt:
 
@@ -105,7 +97,7 @@ pip install langstring
 
 This will download and install the latest version of the LangString library from [PyPI (Python Package Index)](https://pypi.org/project/langstring/).
 
-### Full Installation
+#### Full Installation
 
 For the full functionally of the LangString library, you need to install it together with its [optional dependency](#optional-dependencies) [langcodes](https://github.com/rspeer/langcodes/). To do that, use the following `pip` command:
 
@@ -115,7 +107,7 @@ pip install langstring[langcodes]
 
 This command will install LangString along with the `langcodes` package.
 
-### Dev Installation
+#### Dev Installation
 
 If you are planning to contribute to the development of `langstring`, you should install the [development dependencies](#dev-dependencies). First, you need to clone the repository. Run the following commands:
 
@@ -127,7 +119,7 @@ pip install -r requirements.txt
 
 This will clone the repository, navigate into the project directory, and install all the necessary packages needed for development.
 
-### Importing
+### Importing Elements
 
 After installation, you can use the following elements in your project: LangString, SetLangString, MultiLangString, Controller, GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag, and Converter.
 
@@ -137,7 +129,7 @@ To import these elements, use the following import statement:
 from langstring import LangString, SetLangString, MultiLangString, Controller, GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag, Converter
 ```
 
-### Usage
+### Basic Usage
 
 1. **LangString** is used to handle a string in a specific language.
 
@@ -204,25 +196,7 @@ from langstring import LangString, SetLangString, MultiLangString, Controller, G
    ```
 
 
-
-## Dependencies
-
-The LangString Python Library has been designed to be lightweight and easy to install. It has no mandatory dependencies and a single optional dependency to keep the installation process straightforward and ensure compatibility with various environments.
-
-All dependencies of the LangString library can be found in its [`pyproject.toml` file](https://github.com/pedropaulofb/langstring/blob/main/pyproject.toml).
-
-### Mandatory Dependencies
-The LangString Library does not require mandatory dependencies.
-
-### Optional Dependencies
-
-The LangString Library has a single optional dependency, the [langcodes package](https://pypi.org/project/langcodes/). It is used  particularly for validating language tags when the `ENSURE_VALID_LANG` flag is enabled. This dependency is crucial for ensuring that language tags used in LangString and `MultiLangString` instances are valid and conform to international standards, thereby maintaining the integrity and reliability of multilingual text processing.
-
-### Dev Dependencies
-
-For a complete list of development dependencies, please refer to the [Dev Dependencies List](https://github.com/pedropaulofb/langstring/blob/main/documentation/dev_dependencies_md).
-
-## Library Content
+## Library Reference
 
 ### Classes
 

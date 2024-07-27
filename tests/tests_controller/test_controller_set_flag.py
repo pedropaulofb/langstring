@@ -106,7 +106,7 @@ def test_set_flag_with_different_enum_instance(flag):
 @pytest.mark.parametrize("flag", all_flags)
 def test_set_flag_reset_and_check_default(flag):
     """Test setting a flag, resetting it, and checking if it returns to default."""
-    default_state = Controller.DEFAULT_FLAGS[flag]
+    default_state = Controller._DEFAULT_FLAGS[flag]
     Controller.set_flag(flag, not default_state)
     Controller.reset_flag(flag)
     assert Controller.get_flag(flag) == default_state, "Flag should return to default state after reset"

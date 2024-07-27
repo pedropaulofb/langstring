@@ -18,10 +18,10 @@ all_flags = (
 def test_reset_specific_flag(flag):
     """Test resetting a specific flag to its default value."""
     # Set the flag to a non-default state and then reset it
-    non_default_state = not Controller.DEFAULT_FLAGS[flag]
+    non_default_state = not Controller._DEFAULT_FLAGS[flag]
     Controller.set_flag(flag, non_default_state)
     Controller.reset_flag(flag)
-    assert Controller.get_flag(flag) == Controller.DEFAULT_FLAGS[flag], f"{flag} should be reset to its default state"
+    assert Controller.get_flag(flag) == Controller._DEFAULT_FLAGS[flag], f"{flag} should be reset to its default state"
 
 
 @pytest.mark.parametrize("invalid_flag", [0, "invalid_flag", None, 123.456])
@@ -44,7 +44,7 @@ def test_reset_flag_affects_only_specified_flag():
     """Test that resetting one flag does not affect the state of other flags."""
     # Set all flags to a non-default state
     for f in all_flags:
-        Controller.set_flag(f, not Controller.DEFAULT_FLAGS[f])
+        Controller.set_flag(f, not Controller._DEFAULT_FLAGS[f])
 
     # Reset one flag
     test_flag = GlobalFlag.DEFINED_TEXT
@@ -53,9 +53,9 @@ def test_reset_flag_affects_only_specified_flag():
     # Check that only the reset flag and its equivalents are affected
     for f in all_flags:
         if f.name == test_flag.name:
-            expected_state = Controller.DEFAULT_FLAGS[f]  # Reset to default
+            expected_state = Controller._DEFAULT_FLAGS[f]  # Reset to default
         else:
-            expected_state = not Controller.DEFAULT_FLAGS[f]  # Remain unchanged
+            expected_state = not Controller._DEFAULT_FLAGS[f]  # Remain unchanged
         assert Controller.get_flag(f) == expected_state, f"Flag {f} was incorrectly affected by resetting {test_flag}"
 
 

@@ -73,7 +73,7 @@ def test_get_flag_equals_get_flags():
 def test_reset_flag_global_equals_reset_flags():
     # Set all flags to a non-default state
     for flag in all_flags:
-        Controller.set_flag(flag, not Controller.DEFAULT_FLAGS[flag])
+        Controller.set_flag(flag, not Controller._DEFAULT_FLAGS[flag])
 
     # Reset GlobalFlag
     for global_flag in list(GlobalFlag.__members__.values()):
@@ -86,7 +86,7 @@ def test_reset_flag_global_equals_reset_flags():
 
     # Set all flags to a non-default state
     for flag in all_flags:
-        Controller.set_flag(flag, not Controller.DEFAULT_FLAGS[flag])
+        Controller.set_flag(flag, not Controller._DEFAULT_FLAGS[flag])
 
     # Reset all flags
     Controller.reset_flags()
@@ -105,38 +105,38 @@ def test_reset_flag_global_equals_reset_flags():
 def test_reset_flags_to_default_after_modification():
     # Modify flags
     for flag in all_flags:
-        Controller.set_flag(flag, not Controller.DEFAULT_FLAGS[flag])
+        Controller.set_flag(flag, not Controller._DEFAULT_FLAGS[flag])
     # Reset flags
     Controller.reset_flags()
     # Verify flags are reset to default
     for flag in all_flags:
-        assert Controller.get_flag(flag) == Controller.DEFAULT_FLAGS[flag], f"{flag} should be reset to default"
+        assert Controller.get_flag(flag) == Controller._DEFAULT_FLAGS[flag], f"{flag} should be reset to default"
 
 
 def test_partial_reset_consistency():
     # Set all flags to a non-default state
     for flag in all_flags:
-        Controller.set_flag(flag, not Controller.DEFAULT_FLAGS[flag])
+        Controller.set_flag(flag, not Controller._DEFAULT_FLAGS[flag])
     # Reset only LangStringFlag type flags
     Controller.reset_flags(LangStringFlag)
     # Check if other flag types remain unchanged
     for flag in all_flags:
         if isinstance(flag, LangStringFlag):
-            expected_state = Controller.DEFAULT_FLAGS[flag]
+            expected_state = Controller._DEFAULT_FLAGS[flag]
         else:
-            expected_state = not Controller.DEFAULT_FLAGS[flag]
+            expected_state = not Controller._DEFAULT_FLAGS[flag]
         assert Controller.get_flag(flag) == expected_state, f"Flag {flag} state inconsistency after partial reset"
 
 
 def test_flag_state_after_sequential_resets():
     # Set all flags to a non-default state
     for flag in all_flags:
-        Controller.set_flag(flag, not Controller.DEFAULT_FLAGS[flag])
+        Controller.set_flag(flag, not Controller._DEFAULT_FLAGS[flag])
     # Sequentially reset different flag types
     Controller.reset_flags(GlobalFlag)
     Controller.reset_flags(LangStringFlag)
     # Verify flags are reset to default
     for flag in all_flags:
         assert (
-            Controller.get_flag(flag) == Controller.DEFAULT_FLAGS[flag]
+            Controller.get_flag(flag) == Controller._DEFAULT_FLAGS[flag]
         ), f"{flag} should be reset to default after sequential resets"

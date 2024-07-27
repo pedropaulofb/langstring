@@ -44,7 +44,7 @@ class Controller(metaclass=NonInstantiable):
     non-instantiable by using the `NonInstantiable` metaclass, emphasizing its role as a static configuration manager
     rather than an object to be instantiated.
 
-    :cvar DEFAULT_FLAGS: The default state of each flag.
+    :cvar _DEFAULT_FLAGS: The default state of each flag.
     :vartype DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
     :cvar flags: Stores the current state of each flag.
     :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
@@ -77,8 +77,8 @@ class Controller(metaclass=NonInstantiable):
     # Output: (Output of all flags reset to their default states)
     """
 
-    # Define the default values as a class-level constant
-    DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = {
+    # Define the default values of all flags as a class-level private constant
+    _DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = {
         # Default values for GlobalFlags
         GlobalFlag.DEFINED_LANG: False,
         GlobalFlag.DEFINED_TEXT: False,
@@ -121,8 +121,8 @@ class Controller(metaclass=NonInstantiable):
         MultiLangStringFlag.VALID_LANG: False,
     }
 
-    # Initialize the flags with the default values
-    flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = DEFAULT_FLAGS.copy()
+    # Mutable copy of default flag values to track the current state of flags.
+    flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool] = _DEFAULT_FLAGS.copy()
 
     @classmethod
     def set_flag(
@@ -307,9 +307,9 @@ class Controller(metaclass=NonInstantiable):
                 if hasattr(flag_type, flag_name):
                     # Access the specific member of the flag_type using its name
                     matching_flag = getattr(flag_type, flag_name)
-                    cls.flags[matching_flag] = cls.DEFAULT_FLAGS[matching_flag]
+                    cls.flags[matching_flag] = cls._DEFAULT_FLAGS[matching_flag]
         else:
-            cls.flags[flag] = cls.DEFAULT_FLAGS[flag]
+            cls.flags[flag] = cls._DEFAULT_FLAGS[flag]
 
     @classmethod
     def reset_flags(cls, flag_type: Optional[type] = GlobalFlag) -> None:
@@ -337,8 +337,8 @@ class Controller(metaclass=NonInstantiable):
             )
 
         if flag_type == GlobalFlag:
-            cls.flags = cls.DEFAULT_FLAGS.copy()
+            cls.flags = cls._DEFAULT_FLAGS.copy()
         else:
-            for flag, default_value in cls.DEFAULT_FLAGS.items():
+            for flag, default_value in cls._DEFAULT_FLAGS.items():
                 if isinstance(flag, flag_type):
                     cls.flags[flag] = default_value

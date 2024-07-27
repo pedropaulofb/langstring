@@ -222,24 +222,34 @@ The LangString Library has a single optional dependency, the [langcodes package]
 
 For a complete list of development dependencies, please refer to the [Dev Dependencies List](https://github.com/pedropaulofb/langstring/blob/main/documentation/dev_dependencies_md).
 
-## Main Elements
+## Library Content
 
-### LangStrings
+### Classes
+
+#### LangStrings
 
 The LangString class is a fundamental component of the LangString Library, designed to encapsulate a single string along with its associated language information. It is primarily used in scenarios where the language context of a text string is crucial, such as in multilingual applications, content management systems, or any software that deals with language-specific data. The class provides a structured way to manage text strings, ensuring that each piece of text is correctly associated with its respective language.
 
 In the LangString class, the string representation format varies based on the presence of a language tag. When a language tag is provided, the format is `text`. Without a language tag, it is formatted as `"text"@lang`, where lang is the language code.
 
-### SetLangStrings
+- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_langstring_md)
+- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/langstring/)
+
+#### SetLangStrings
 
 TODO
 
-### MultiLangStrings
+- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_setlangstring_md)
+- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/setlangstring/)
+
+#### MultiLangStrings
 
 The `MultiLangString` class is a key component of the LangString Library, designed to manage and manipulate text strings across multiple languages. This class is particularly useful in applications that require handling of text in a multilingual context, such as websites, applications with internationalization support, and data processing tools that deal with multilingual data. The primary purpose of `MultiLangString` is to store, retrieve, and manipulate text entries in various languages, offering a flexible and efficient way to handle multilingual content.
 
+- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_multilangstring_md)
+- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/multilangstring/)
 
-### Controller and Flags
+#### Controller
 
 The Control and Flags system in the LangString Library plays a pivotal role in managing and configuring the behavior of LangString and `MultiLangString` instances.
 
@@ -253,8 +263,23 @@ The LangString and MultiLangString classes use a set of flags to control various
 
 The Control classes, namely `Controller` and `MultiLangStringControl`, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of LangString and `MultiLangString`.
 
-### Converter
+- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_controller_md)
+- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/controller/)
 
+
+#### Converter
+
+- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_converter_md)
+- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/converter/)
+
+### Configuration
+
+- [Flags' List](https://github.com/pedropaulofb/langstring/blob/main/documentation/flags_list_md)
+- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/flags/)
+
+### Elements' Relations
+
+![](https://raw.githubusercontent.com/pedropaulofb/langstring/main/documentation/import_schema_basic.svg)
 
 ## Testing
 
@@ -316,7 +341,7 @@ We welcome and appreciate contributions from the community! Whether you want to 
 
 We appreciate your time and expertise in contributing to this project!
 
-## Related Work and Differences
+## Related Libraries and Differences
 
 The LangString Library offers unique functionalities for handling multilingual text in Python applications. While there are several libraries and tools available for internationalization, localization, and language processing, they differ from the LangString Library in scope and functionality. Below is an overview of related work and how they compare to the LangString library:
 
@@ -358,7 +383,7 @@ This project is licensed under the Apache License 2.0. See the [LICENSE](https:/
 
 ## Author
 
-The LangString library is primarily developed and maintained by:
+The LangString library is developed and maintained by:
 
 - Pedro Paulo Favato Barcelos [[GitHub](https://github.com/pedropaulofb)] [[LinkedIn](https://www.linkedin.com/in/pedro-paulo-favato-barcelos/)]
 

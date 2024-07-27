@@ -118,7 +118,7 @@ Package Contents
    non-instantiable by using the `NonInstantiable` metaclass, emphasizing its role as a static configuration manager
    rather than an object to be instantiated.
 
-   :cvar DEFAULT_FLAGS: The default state of each flag.
+   :cvar _DEFAULT_FLAGS: The default state of each flag.
    :vartype DEFAULT_FLAGS: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
    :cvar flags: Stores the current state of each flag.
    :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
@@ -151,7 +151,7 @@ Package Contents
    # Output: (Output of all flags reset to their default states)
 
 
-   .. py:attribute:: DEFAULT_FLAGS
+   .. py:attribute:: _DEFAULT_FLAGS
       :type:  dict[Union[langstring.flags.GlobalFlag, langstring.flags.LangStringFlag, langstring.flags.SetLangStringFlag, langstring.flags.MultiLangStringFlag], bool]
 
 

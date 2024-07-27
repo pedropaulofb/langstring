@@ -16,7 +16,7 @@ all_flags = (
 
 def test_get_flags() -> None:
     """Test retrieving the states of all flags."""
-    expected_flags = Controller.DEFAULT_FLAGS  # Use the actual default flags
+    expected_flags = Controller._DEFAULT_FLAGS  # Use the actual default flags
     assert Controller.get_flags() == expected_flags, "All flags should be retrieved correctly"
 
 
@@ -38,7 +38,7 @@ def test_get_flags_after_reset() -> None:
     for flag in all_flags:
         Controller.set_flag(flag, True)
     Controller.reset_flags()
-    expected_flags = Controller.DEFAULT_FLAGS  # Assuming DEFAULT_FLAGS is the correct default state
+    expected_flags = Controller._DEFAULT_FLAGS  # Assuming _DEFAULT_FLAGS is the correct default state
     assert Controller.get_flags() == expected_flags, "Flags should return to default states after reset"
 
 

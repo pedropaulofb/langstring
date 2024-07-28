@@ -83,7 +83,7 @@ The LangString Library has a single optional dependency, the [langcodes package]
 
 #### Dev Dependencies
 
-For a complete list of development dependencies, please refer to the [Dev Dependencies List](https://github.com/pedropaulofb/langstring/blob/main/documentation/dev_dependencies_md).
+For a complete list of development dependencies, please refer to the [Dev Dependencies List](https://github.com/pedropaulofb/langstring/blob/main/documentation/dev_dependencies.md).
 
 ### Installation
 
@@ -211,7 +211,7 @@ To use the `LangString` class, simply create an instance by providing the text a
 Note that in this library's context, language tags are case-insensitive, meaning `en`, `EN`, `En`, and `eN` are considered equivalent. However, subtags such as `en`, `en-UK`, and `en-US` are treated as distinct entities. Additionally, spaces in language tags are not automatically trimmed unless the classes' `STRIP_LANG` flags are set to True. As an example, `"en"` is not considered equal to `"en "`. However, if the `STRIP_LANG` flag is set to True, `"en "` will be converted to `"en"`, thereby making the languages equal.
 
 
-- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_langstring_md)
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_langstring.md)
 - [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/langstring/)
 
 #### SetLangString Class
@@ -222,7 +222,7 @@ Using `SetLangString` is beneficial when working with multilingual text data, as
 
 You should consider using `SetLangString` when you need to manage sets of text strings that are tagged with specific languages, such as in internationalization and localization projects, or when handling datasets that require strict validation of language tags. The `SetLangString` class makes it straightforward to add, remove, and manipulate text strings while maintaining the association with their respective language tags. For example, you can create a `SetLangString` object, add new strings, check for the existence of a string, and perform set operations like union and intersection, all while preserving language tag integrity.
 
-- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_setlangstring_md)
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_setlangstring.md)
 - [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/setlangstring/)
 
 #### MultiLangString Class
@@ -233,7 +233,7 @@ Using `MultiLangString` is beneficial when you need to manage and organize text 
 
 You should consider using `MultiLangString` when your application requires management of text data in multiple languages. The class simplifies tasks like adding new language entries, retrieving texts in a specific language, and ensuring data consistency across languages. For instance, you can create a `MultiLangString` object, add or remove text entries in different languages, and easily access or manipulate these entries as needed.
 
-- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_multilangstring_md)
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_multilangstring.md)
 - [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/multilangstring/)
 
 #### Controller Class
@@ -244,7 +244,7 @@ Using the `Controller` is beneficial because it enforces uniformity and reduces 
 
 You should use the `Controller` class when you need to enforce specific constraints or behaviors across multiple instances of multilingual text classes. It is especially useful in applications that require dynamic adjustments to text handling rules, such as ensuring non-empty strings, validating language codes, or controlling the inclusion of quotes and language tags in output. To use the `Controller`, simply call its class methods to set or get flag values, print the current states, or reset flags to their default settings. For example, `Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)` will set the lowercase language flag to true, affecting all relevant text handling classes.
 
-- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_controller_md)
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_controller.md)
 - [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/controller/)
 
 
@@ -257,7 +257,7 @@ Using the `Converter` class ensures compatibility and ease of use when transform
 The `Converter` class should be used whenever there is a need to convert between regular `str`, `LangString`, `SetLangString`, and `MultiLangString` objects. For instance, if an application requires converting a list of language-tagged strings into a unified multilingual format, the `Converter` provides the necessary methods to accomplish this efficiently. By calling methods like `Converter.from_string_to_langstring()` or `Converter.from_langstring_to_multilangstring()`, developers can perform these conversions with minimal code and maximum reliability.
 
 
-- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_converter_md)
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_converter.md)
 - [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/converter/)
 
 ### Configuration via Flags
@@ -268,7 +268,7 @@ Configuring behavior using flags is essential for several reasons. Firstly, it p
 
 Users should configure flags when they need to modify the default behavior of the library to suit their particular needs. For example, if a user needs to process multilingual data differently, they can set the appropriate flags to adjust the handling of language-tagged strings. Configurations can be made at the beginning of a session or dynamically throughout the usage of the library, depending on the context. To configure a flag, users simply need to call the `Controller` class’s methods designed for this purpose, such as `Controller.set_flag(flag_name, value)`. This straightforward approach makes it easy to manage and update configurations, ensuring the library operates as intended for any given application.
 
-- [Flags' List](https://github.com/pedropaulofb/langstring/blob/main/documentation/flags_list_md)
+- [Flags' List](https://github.com/pedropaulofb/langstring/blob/main/documentation/flags_list.md)
 - [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/flags/)
 
 ### Elements' Relationships
@@ -281,7 +281,9 @@ The data handling classes (`LangString`, `SetLangString`, and `MultiLangString`)
 
 In summary, the `Controller` and the flags define and manage configurations. The core data handling classes (`LangString`, `SetLangString`, `MultiLangString`) are manipulated based on these configurations and are used by the `Converter` class to enable transformations between different string representations. This structure, represented in the image below, allows the library to provide solutions for multilingual data processing.
 
-![](https://raw.githubusercontent.com/pedropaulofb/langstring/main/documentation/import_schema_basic.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/pedropaulofb/langstring/main/documentation/import_schema_basic.png" alt="Basic Import Scheme" width="300">
+</p>
 
 ## Testing
 

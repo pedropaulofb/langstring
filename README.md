@@ -282,7 +282,7 @@ The data handling classes (`LangString`, `SetLangString`, and `MultiLangString`)
 In summary, the `Controller` and the flags define and manage configurations. The core data handling classes (`LangString`, `SetLangString`, `MultiLangString`) are manipulated based on these configurations and are used by the `Converter` class to enable transformations between different string representations. This structure, represented in the image below, allows the library to provide solutions for multilingual data processing.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/pedropaulofb/langstring/main/documentation/import_schema_basic.png" alt="Basic Import Scheme" width="750">
+  <img src="https://raw.githubusercontent.com/pedropaulofb/langstring/main/documentation/import_schema_basic.png" alt="Basic Import Scheme" style="width:500px">
 </p>
 
 ## Testing

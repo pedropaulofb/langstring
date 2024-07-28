@@ -43,15 +43,15 @@ For detailed documentation and code examples, please refer to the library's [doc
       * [Dev Installation](#dev-installation)
     * [Importing Elements](#importing-elements)
     * [Basic Usage](#basic-usage)
-  * [Library Reference](#library-reference)
+  * [Basic Reference](#basic-reference)
     * [Classes](#classes)
-      * [LangStrings](#langstrings)
-      * [SetLangStrings](#setlangstrings)
-      * [MultiLangStrings](#multilangstrings)
-      * [Controller](#controller)
-      * [Converter](#converter)
-    * [Configuration](#configuration)
-    * [Elements' Relations](#elements-relations)
+      * [LangString Class](#langstring-class)
+      * [SetLangString Class](#setlangstring-class)
+      * [MultiLangString Class](#multilangstring-class)
+      * [Controller Class](#controller-class)
+      * [Converter Class](#converter-class)
+    * [Configuration via Flags](#configuration-via-flags)
+    * [Elements' Relationships](#elements-relationships)
   * [Testing](#testing)
     * [Test Organization](#test-organization)
     * [Running the Tests](#running-the-tests)
@@ -196,62 +196,90 @@ from langstring import LangString, SetLangString, MultiLangString, Controller, G
    ```
 
 
-## Library Reference
+## Basic Reference
 
 ### Classes
 
-#### LangStrings
+#### LangString Class
 
-The LangString class is a fundamental component of the LangString Library, designed to encapsulate a single string along with its associated language information. It is primarily used in scenarios where the language context of a text string is crucial, such as in multilingual applications, content management systems, or any software that deals with language-specific data. The class provides a structured way to manage text strings, ensuring that each piece of text is correctly associated with its respective language.
+The `LangString` class encapsulates a string along with its associated language information. It is designed to work seamlessly with text strings that require language tags, providing functionalities such as validation of language tags, handling of empty strings, and enforcement of constraints through control flags. It is also possible to validate language tags using the `langcodes` library, ensuring that the language information is accurate.
 
-In the LangString class, the string representation format varies based on the presence of a language tag. When a language tag is provided, the format is `text`. Without a language tag, it is formatted as `"text"@lang`, where lang is the language code.
+Using the `LangString` class is beneficial when you need to manage multilingual text data in your applications. It is particularly useful in scenarios where strings need to be associated with specific languages, such as in internationalization and localization projects, or when processing text data that must be tagged with its language for further analysis or processing. The class can be utilized in any context where you need to ensure the integrity of language-tagged strings, enhancing data consistency and reducing errors.
 
-- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_langstring_md)
-- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/langstring/)
+To use the `LangString` class, simply create an instance by providing the text and the corresponding language tag. The class supports many standard string operations, which have been overridden to return `LangString` objects, allowing for seamless integration and extended functionality. For example, you can concatenate two `LangString` objects, convert the text to uppercase, or check if the text contains a specific substring, all while maintaining the associated language tag. This makes it easy to work with multilingual text data as if you were handling regular strings, but with the added benefit of language context.
 
-#### SetLangStrings
-
-TODO
-
-- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_setlangstring_md)
-- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/setlangstring/)
-
-#### MultiLangStrings
-
-The `MultiLangString` class is a key component of the LangString Library, designed to manage and manipulate text strings across multiple languages. This class is particularly useful in applications that require handling of text in a multilingual context, such as websites, applications with internationalization support, and data processing tools that deal with multilingual data. The primary purpose of `MultiLangString` is to store, retrieve, and manipulate text entries in various languages, offering a flexible and efficient way to handle multilingual content.
-
-- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_multilangstring_md)
-- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/multilangstring/)
-
-#### Controller
-
-The Control and Flags system in the LangString Library plays a pivotal role in managing and configuring the behavior of LangString and `MultiLangString` instances.
-
-This system operates at a global, class-level context, meaning that the flags and controls applied have a uniform effect across all instances of these classes. In other words, when a flag is set or reset using the control classes, it impacts every instance of LangString and `MultiLangString` throughout the application. This ensures consistent behavior and validation rules across all instances, as individual instances cannot have differing flag values.
-
-In the following subsections, we will delve into the specifics of the available flags and the control methods. The flags define key aspects of how LangString and `MultiLangString` instances handle multilingual text, including validation rules and representation formats. Understanding these flags is crucial for effectively utilizing the library in various scenarios, especially those involving multilingual content.
-
-The control methods, shared between `Controller` and `MultiLangStringControl`, provide the mechanisms to set, retrieve, and reset these flags. These methods ensure that you can dynamically configure the behavior of the library to suit your application's needs. We will explore each method in detail, providing insights into their usage and impact on the library's functionality.
-
-The LangString and MultiLangString classes use a set of flags to control various aspects of their behavior. These flags are managed by `Controller` and `MultiLangStringControl` respectively. The flags provide a flexible way to customize the behavior of LangString and `MultiLangString` classes according to the specific needs of your application. By adjusting these flags, you can enforce different levels of validation and control over the language data being processed. The available flags and their effects are as follows.
-
-The Control classes, namely `Controller` and `MultiLangStringControl`, act as static managers for the flags. They provide methods to set, retrieve, and reset the states of these flags, ensuring consistent behavior across all instances of LangString and `MultiLangString`.
-
-- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_controller_md)
-- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/controller/)
+Note that in this library's context, language tags are case-insensitive, meaning `en`, `EN`, `En`, and `eN` are considered equivalent. However, subtags such as `en`, `en-UK`, and `en-US` are treated as distinct entities. Additionally, spaces in language tags are not automatically trimmed unless the classes' `STRIP_LANG` flags are set to True. As an example, `"en"` is not considered equal to `"en "`. However, if the `STRIP_LANG` flag is set to True, `"en "` will be converted to `"en"`, thereby making the languages equal.
 
 
-#### Converter
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_langstring_md)
+- [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/langstring/)
 
-- [Methods](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_converter_md)
-- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/converter/)
+#### SetLangString Class
 
-### Configuration
+The `SetLangString` class is a structure designed to encapsulate a set of strings with a common language tag. This class provides a way to manage collections of text strings, ensuring that each string within the set is associated with a specified language tag. By using the `SetLangString` class, you can easily handle multilingual datasets, validate language tags, and manage string sets with enhanced functionality compared to standard Python sets.
+
+Using `SetLangString` is beneficial when working with multilingual text data, as it integrates validation mechanisms and control flags to enforce constraints such as non-empty text strings and valid language tags. This ensures data integrity and consistency across your application. The class also overrides many standard set methods to return `SetLangString` objects, allowing seamless integration and extending the functionality of regular sets. This makes it an excellent choice for developers needing a more sophisticated way to manage and manipulate text data in different languages.
+
+You should consider using `SetLangString` when you need to manage sets of text strings that are tagged with specific languages, such as in internationalization and localization projects, or when handling datasets that require strict validation of language tags. The `SetLangString` class makes it straightforward to add, remove, and manipulate text strings while maintaining the association with their respective language tags. For example, you can create a `SetLangString` object, add new strings, check for the existence of a string, and perform set operations like union and intersection, all while preserving language tag integrity.
+
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_setlangstring_md)
+- [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/setlangstring/)
+
+#### MultiLangString Class
+
+The `MultiLangString` class is designed to manage and manipulate multilingual text strings, providing a flexible and efficient way to handle multilingual content in various applications. It uses a dictionary to store text entries associated with language tags, allowing easy representation and manipulation of text in different languages. The class supports adding new entries, removing entries, and retrieving entries based on specific languages or across all languages. Additionally, it allows setting a preferred language, which can be used as a default for operations involving text retrieval.
+
+Using `MultiLangString` is beneficial when you need to manage and organize text data in multiple languages within your application. This class integrates seamlessly with other components like `LangString` and `SetLangString`, offering extensive functionality for handling multilingual text data. By encapsulating text entries within a structured dictionary, it ensures that language-specific data is maintained with integrity, making it ideal for internationalization and localization projects. Furthermore, the class provides methods for merging multilingual data, validating inputs, and performing various set operations, enhancing its utility in complex multilingual environments.
+
+You should consider using `MultiLangString` when your application requires management of text data in multiple languages. The class simplifies tasks like adding new language entries, retrieving texts in a specific language, and ensuring data consistency across languages. For instance, you can create a `MultiLangString` object, add or remove text entries in different languages, and easily access or manipulate these entries as needed.
+
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_multilangstring_md)
+- [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/multilangstring/)
+
+#### Controller Class
+
+The `Controller` class is a non-instantiable class (hence, it provides only static methods) designed to manage and manipulate [configuration flags](#configuration-via-flags) for the `LangString`, `SetLangString`, and `MultiLangString` classes. By centralizing the management of these flags, the `Controller` ensures consistent behavior and validation rules across the entire system. The class offers methods to set, retrieve, print, and reset these flags.
+
+Using the `Controller` is beneficial because it enforces uniformity and reduces the potential for configuration errors across different parts of the application. It allows developers to dynamically adjust the behavior of multilingual text handling classes at runtime, catering to various needs and use cases. The centralized flag management system simplifies the maintenance and debugging processes, making it easier to track and modify configuration states.
+
+You should use the `Controller` class when you need to enforce specific constraints or behaviors across multiple instances of multilingual text classes. It is especially useful in applications that require dynamic adjustments to text handling rules, such as ensuring non-empty strings, validating language codes, or controlling the inclusion of quotes and language tags in output. To use the `Controller`, simply call its class methods to set or get flag values, print the current states, or reset flags to their default settings. For example, `Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)` will set the lowercase language flag to true, affecting all relevant text handling classes.
+
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_controller_md)
+- [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/controller/)
+
+
+#### Converter Class
+
+The `Converter` class is a utility class designed to facilitate conversions between different string types used in language processing, specifically regular `str`, `LangString`, `SetLangString`, and `MultiLangString`. These string types are integral to managing and manipulating multilingual text data, ensuring that language-specific text handling is seamless. The `Converter` class provides a range of static methods to perform these conversions.
+
+Using the `Converter` class ensures compatibility and ease of use when transforming between various string representations. This is particularly beneficial in scenarios where data interchange between different components or modules is required. By leveraging the `Converter`, developers can maintain consistency in data representation and avoid common pitfalls associated with manual string manipulation. The utility nature of the class, providing only static methods streamlines its integration into different parts of an application.
+
+The `Converter` class should be used whenever there is a need to convert between regular `str`, `LangString`, `SetLangString`, and `MultiLangString` objects. For instance, if an application requires converting a list of language-tagged strings into a unified multilingual format, the `Converter` provides the necessary methods to accomplish this efficiently. By calling methods like `Converter.from_string_to_langstring()` or `Converter.from_langstring_to_multilangstring()`, developers can perform these conversions with minimal code and maximum reliability.
+
+
+- [Functionalities' Descriptions](https://github.com/pedropaulofb/langstring/blob/main/documentation/methods_converter_md)
+- [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/converter/)
+
+### Configuration via Flags
+
+The configuration of behavior in this library is managed through a robust system of flags. These flags are predefined settings that control various aspects of how the library functions, allowing users to tailor its behavior to meet specific requirements. By adjusting these flags, users can enable or disable features, modify processing rules, and optimize performance for their particular use case. The flags are designed to be easily configurable, providing a flexible way to manage the library’s behavior without altering the underlying code.
+
+Configuring behavior using flags is essential for several reasons. Firstly, it provides a high level of customization, enabling users to fine-tune the library’s operations to better align with their specific needs and workflows. This customization can lead to improved efficiency and effectiveness, as the library can be adapted to handle specific tasks more optimally. Additionally, configuring flags allows for better maintenance and scalability. As requirements evolve, users can adjust the flags to meet new demands without the need for significant code changes, thus ensuring the library remains versatile and future-proof.
+
+Users should configure flags when they need to modify the default behavior of the library to suit their particular needs. For example, if a user needs to process multilingual data differently, they can set the appropriate flags to adjust the handling of language-tagged strings. Configurations can be made at the beginning of a session or dynamically throughout the usage of the library, depending on the context. To configure a flag, users simply need to call the `Controller` class’s methods designed for this purpose, such as `Controller.set_flag(flag_name, value)`. This straightforward approach makes it easy to manage and update configurations, ensuring the library operates as intended for any given application.
 
 - [Flags' List](https://github.com/pedropaulofb/langstring/blob/main/documentation/flags_list_md)
-- [Documentation](https://pedropaulofb.github.io/langstring/autoapi/langstring/flags/)
+- [Documentation with Examples](https://pedropaulofb.github.io/langstring/autoapi/langstring/flags/)
 
-### Elements' Relations
+### Elements' Relationships
+
+The elements of the library are interconnected to handle and manipulate multilingual data. Understanding these relationships is important for understanding the library's operations and how its components interact.
+
+At the core are the Controller and flags, which manage configurations and settings. The `Controller` class interacts directly with the main data handling classes: `LangString`, `SetLangString`, and `MultiLangString`. The flags, manipulated via the `Controller`, provides the settings that dictate how the other classes should behave, allowing customization based on user requirements.
+
+The data handling classes (`LangString`, `SetLangString`, and `MultiLangString`) are the backbone of the library, providing structures for representing and manipulating language-tagged strings. These classes are used by the `Converter` class, which offers functions for converting between these string types. This conversion ensures compatibility and ease of use across language processing tasks.
+
+In summary, the `Controller` and the flags define and manage configurations. The core data handling classes (`LangString`, `SetLangString`, `MultiLangString`) are manipulated based on these configurations and are used by the `Converter` class to enable transformations between different string representations. This structure, represented in the image below, allows the library to provide solutions for multilingual data processing.
 
 ![](https://raw.githubusercontent.com/pedropaulofb/langstring/main/documentation/import_schema_basic.svg)
 
@@ -349,7 +377,7 @@ The LangString Library offers unique functionalities for handling multilingual t
     - spaCy is a comprehensive NLP library that supports multiple languages.
     - Difference: spaCy is geared towards analyzing text, not managing it. The LangString Library, on the other hand, is designed for the structured handling and storage of multilingual text.
 
-In summary, while these related tools and libraries offer valuable functionalities for internationalization, localization, and language processing, the LangString Library stands out for its specific focus on managing and manipulating multilingual text strings in a structured and efficient manner.
+In summary, while these related tools and libraries offer valuable functionalities for internationalization, localization, and language processing, the LangString Library has specific focus on managing and manipulating multilingual text strings in a structured and efficient manner.
 
 ## License
 

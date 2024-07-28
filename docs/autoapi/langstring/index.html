@@ -41,7 +41,7 @@
               <img src="../../_static/langstring-lib-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.0.0-dev
+                3.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -57,6 +57,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">langstring</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#modules-and-classes">Modules and Classes:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#language-tag-handling">Language Tag Handling:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="utils/index.html">langstring.utils</a></li>
@@ -191,6 +192,14 @@ framework for applications that require multilingual support.</p>
 <li><p>MultiLangStringFlag</p></li>
 <li><p>Converter</p></li>
 </ul>
+</section>
+<section id="language-tag-handling">
+<h2>Language Tag Handling:<a class="headerlink" href="#language-tag-handling" title="Link to this heading"></a></h2>
+<p>In this library’s context, language tags are case-insensitive, meaning ,e.g., <cite>en</cite> and <cite>EN</cite> are considered equivalent.
+However, subtags such as <cite>en</cite>, <cite>en-UK</cite>, and <cite>en-US</cite> are treated as distinct entities.
+Additionally, spaces in language tags are not automatically trimmed unless the classes’ <cite>STRIP_LANG</cite> flags are True.
+As an example, <cite>“en”</cite> is not considered equal to <cite>“en “</cite>. However, if the <cite>STRIP_LANG</cite> flag is set to True, <cite>“en “</cite>
+will be converted to <cite>“en”</cite>, thereby making the languages equal.</p>
 </section>
 <section id="usage">
 <h2>Usage:<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>

@@ -50,6 +50,15 @@ The package exports the following classes and flags for use in external modules:
 - MultiLangStringFlag
 - Converter
 
+Language Tag Handling:
+----------------------
+In this library's context, language tags are case-insensitive, meaning ,e.g., `en` and `EN` are considered equivalent.
+However, subtags such as `en`, `en-UK`, and `en-US` are treated as distinct entities.
+Additionally, spaces in language tags are not automatically trimmed unless the classes' `STRIP_LANG` flags are True.
+As an example, `"en"` is not considered equal to `"en "`. However, if the `STRIP_LANG` flag is set to True, `"en "`
+will be converted to `"en"`, thereby making the languages equal.
+
+
 Usage:
 ------
 To use this package, import the necessary classes and flags as follows:

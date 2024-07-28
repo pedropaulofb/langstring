@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langstring"
-version = "3.0.0-dev"
+version = "3.0.0"
 description = "LangString Python Library"
 license = "Apache-2.0"
 authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]

@@ -4,7 +4,7 @@ Welcome to langstring's code documentation!
 .. raw:: html
 
     <div class="custom-logo">
-        <img src="../resources/langstring-lib-logo.png" alt="Library Logo">
+        <img src="https://raw.githubusercontent.com/pedropaulofb/langstring/main/resources/langstring-lib-logo.png" alt="Library Logo">
     </div>
 
 .. toctree::

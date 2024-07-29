@@ -2719,4 +2719,4 @@ langcodes = ["langcodes"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "dd465df70bbcd66510958200984623ddfd3197285b3d729584f1a68be114cb4e"
+content-hash = "3d403c51427bc90ac0c1d568041ef4ff1c4df39d66f5764ed87a07d0f1114253"

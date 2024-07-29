@@ -1701,18 +1701,18 @@ files = [
 
 [[package]]
 name = "pydoclint"
-version = "0.3.10"
+version = "0.5.6"
 description = "A Python docstring linter that checks arguments, returns, yields, and raises sections"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pydoclint-0.3.10-py2.py3-none-any.whl", hash = "sha256:aef97818334503693f5e291580b71432f39d1688eabdd4aeb3df0367472af39c"},
-    {file = "pydoclint-0.3.10.tar.gz", hash = "sha256:d078e521939e222f605e27b409383c9fc4ce64d805ca224612cdfb1040054e00"},
+    {file = "pydoclint-0.5.6-py2.py3-none-any.whl", hash = "sha256:991d336a8058d482e581f55e0b140c5757ce11d2baa2d2fca94b8f678c03831b"},
+    {file = "pydoclint-0.5.6.tar.gz", hash = "sha256:903a33a25504df85b200d3a3f1207688de208890b79730ceb6045978864ba7c9"},
 ]
 
 [package.dependencies]
-click = ">=8.0.0"
-docstring-parser-fork = ">=0.0.5"
+click = ">=8.1.0"
+docstring-parser-fork = ">=0.0.9"
 
 [package.extras]
 flake8 = ["flake8 (>=4)"]

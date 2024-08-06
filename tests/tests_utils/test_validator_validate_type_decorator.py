@@ -7,6 +7,7 @@ from typing import Union
 
 import pytest
 from langstring.utils.validators import TypeValidator
+from tests.conftest import TYPEERROR_MSG_PLURAL
 
 
 @pytest.mark.parametrize(
@@ -475,9 +476,7 @@ def test_validate_type_decorator_invalid_union_arg() -> None:
     def func(a: Union[int, str]) -> None:
         pass
 
-    with pytest.raises(
-        TypeError, match="Invalid argument with value '\[1, 2, 3\]'. Expected one of 'int' or 'str', but got 'list'."
-    ):
+    with pytest.raises(TypeError, match=TYPEERROR_MSG_PLURAL):
         func([1, 2, 3])
 
 

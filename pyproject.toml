@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langstring"
-version = "3.0.0"
+version = "3.0.1"
 description = "LangString Python Library"
 license = "Apache-2.0"
 authors = ["Pedro Paulo F. Barcelos <p.p.favatobarcelos@utwente.nl>"]
@@ -38,7 +38,6 @@ sphinx-autoapi = "^3.0.0"
 sphinx-rtd-size = "^0.2.0"
 sphinx-rtd-theme = "^2.0.0"
 sphinx-toolbox = "^3.5.0"
-myst-parser = "^3.0.0"
 # Flake8 and plugins
 flake8 = "^7.1.0"
 flake8-broken-line = "^1.0.0"

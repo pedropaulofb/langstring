@@ -12,7 +12,6 @@ Below is the complete list of development dependencies required for developing a
 - sphinx-rtd-size: Adjusts font size for Sphinx Read the Docs theme.
 - sphinx-rtd-theme: A Sphinx theme for Read the Docs.
 - sphinx-toolbox: A set of utilities and extensions for Sphinx.
-- myst-parser: A parser for MyST (Markedly Structured Text) to use with Sphinx.
 - flake8: A tool for style guide enforcement and linting.
 - flake8-broken-line: A Flake8 plugin for detecting broken lines.
 - flake8-fixme: A Flake8 plugin to track FIXME, TODO, and other markers.

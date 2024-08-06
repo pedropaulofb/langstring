@@ -121,7 +121,7 @@ def test_validate_flags_text_none_with_defined_text() -> None:
     text = None
     with pytest.raises(
         ValueError,
-        match="Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\.",
+        match=r"Invalid 'text' value received \('None'\)\. 'LangStringFlag\.DEFINED_TEXT' is enabled\. Expected non-empty 'str' or 'str' with non-space characters\.",
     ):
         FlagValidator.validate_flags_text(LangStringFlag, text)
 

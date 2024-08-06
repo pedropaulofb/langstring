@@ -1,5 +1,0 @@
-/* logo_resize.css */
-.custom-logo img {
-    width: 50%; /* percentage of original size */
-    height: auto; /* maintain aspect ratio */
-}

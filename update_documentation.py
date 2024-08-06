@@ -42,6 +42,7 @@ def execute_documentation_commands() -> None:
         logger.info(f"Empty directory '{docs_dir}' has been successfully created.")
     except OSError as e:
         logger.exception(f"Error: {e}")
+        exit(1)
 
     logger.info("Executing commands 'make clean' and 'make html' sequentially")
     try:
@@ -57,11 +58,15 @@ def execute_documentation_commands() -> None:
 
     try:
         sphinx_dir_html = os.path.join(sphinx_dir, "_build", "html")
+        if not os.path.exists(sphinx_dir_html):
+            logger.error(f"Directory '{sphinx_dir_html}' does not exist. The Sphinx build likely failed.")
+            exit(1)
         # Copy the contents of the source directory to the destination directory
         shutil.copytree(sphinx_dir_html, docs_dir, dirs_exist_ok=True)
         logger.info(f"Contents of '{sphinx_dir_html}' copied to '{docs_dir}' successfully.")
     except Exception as e:
         logger.exception(f"Error: {e}")
+        exit(1)
 
     logger.info("Executing command 'make clean'")
     try:

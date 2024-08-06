@@ -33,7 +33,6 @@ version = get_version_from_pyproject()
 
 extensions = [
     "autoapi.extension",
-    "myst_parser",
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.autosummary",
     "sphinx.ext.coverage",

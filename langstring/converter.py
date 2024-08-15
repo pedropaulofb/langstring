@@ -16,6 +16,7 @@ Usage:
     be an instance of `SetLangString` or `MultiLangString`.
 
 **Example**::
+
     # Convert a string to a LangString using the 'manual' method:
     >>> langstring = Converter.from_string_to_langstring("manual", "Hello", "en")
     >>> print(langstring)  #Output: "Hello"@en
@@ -56,6 +57,7 @@ class Converter(metaclass=NonInstantiable):
     It is designed to be non-instantiable as it serves as a utility class with class methods only.
 
     **Example**::
+
         # Convert a string to a LangString using the 'manual' method:
         >>> langstring = Converter.from_string_to_langstring("manual", "Hello", "en")
         >>> print(langstring)  #Output: "Hello"@en
@@ -96,6 +98,7 @@ class Converter(metaclass=NonInstantiable):
         :raises ValueError: If the method is unknown.
 
         **Example**::
+
             # Convert a string to a LangString using the 'manual' method:
             >>> langstring = Converter.from_string_to_langstring("manual", "Hello", "en")
             >>> print(langstring)  # Output: "Hello"@en
@@ -131,6 +134,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: LangString
 
         **Example**::
+
             # Convert a string to a LangString with the specified language:
             >>> langstring = Converter.from_string_to_langstring_manual("Hello", "en")
             >>> print(langstring)  # Output: "Hello"@en
@@ -155,6 +159,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: LangString
 
         **Example**::
+
             # Convert a string to a LangString by parsing it with the given separator:
             >>> langstring = Converter.from_string_to_langstring_parse("Hello@en", "@")
             >>> print(langstring)  # Output: "Hello"@en
@@ -193,6 +198,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input types are incorrect.
 
         **Example**::
+
             # Convert a list of strings to a list of LangStrings using the 'manual' method:
             >>> langstrings = Converter.from_strings_to_langstrings("manual", ["Hello", "Hi"], "en")
             >>> for ls in langstrings:
@@ -230,6 +236,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: SetLangString
 
         **Example**::
+
             # Convert a list of strings to a SetLangString using the 'manual' method:
             >>> setlangstring = Converter.from_strings_to_setlangstring(["Hello", "Hi"], "en")
             >>> print(setlangstring)  # Output: {'Hello', 'Hi'}@en
@@ -258,6 +265,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: MultiLangString
 
         **Example**::
+
             # Convert a list of strings to a MultiLangString using the 'manual' method:
             >>> multilangstring = Converter.from_strings_to_multilangstring("manual", ["Hello", "Hi"], "en")
             >>> print(multilangstring)  # Output: {'Hello', 'Hi'}@en
@@ -304,6 +312,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: str
 
         **Example**::
+
             # Convert a LangString to a string with quotes and language:
             >>> langstring = LangString("Hello", "en")
             >>> string = Converter.from_langstring_to_string(langstring, print_quotes=True, separator="@")
@@ -338,6 +347,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[str]
 
         **Example**::
+
             # Convert a list of LangStrings to a list of strings with quotes and language:
             >>> langstrings = [LangString("Hello", "en"), LangString("Bonjour", "fr")]
             >>> strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=True, separator="@")
@@ -378,6 +388,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type LangString.
 
         **Example**::
+
             # Convert a LangString to a SetLangString:
             >>> langstring = LangString("Hello", "en")
             >>> setlangstring = Converter.from_langstring_to_setlangstring(langstring)
@@ -402,6 +413,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input types are incorrect.
 
         **Example**::
+
             # Convert a list of LangStrings to a SetLangString:
             >>> langstrings = [LangString("Hello", "en"), LangString("Hi", "en")]
             >>> setlangstring = Converter.from_langstrings_to_setlangstring(langstrings)
@@ -439,6 +451,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input types are incorrect.
 
         **Example**::
+
             # Convert a list of LangStrings to a list of SetLangStrings:
             >>> langstrings = [LangString("Hello", "en"), LangString("Bonjour", "fr")]
             >>> setlangstrings = Converter.from_langstrings_to_setlangstrings(langstrings)
@@ -472,6 +485,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type LangString.
 
         **Example**::
+
             # Convert a LangString to a MultiLangString:
             >>> langstring = LangString("Hello", "en")
             >>> multilangstring = Converter.from_langstring_to_multilangstring(langstring)
@@ -495,6 +509,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input types are incorrect.
 
         **Example**::
+
             # Convert a list of LangStrings to a MultiLangString:
             >>> langstrings = [LangString("Hello", "en"), LangString("Bonjour", "fr")]
             >>> multilangstring = Converter.from_langstrings_to_multilangstring(langstrings)
@@ -525,6 +540,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: str
 
         **Example**::
+
             # Convert a SetLangString to a string:
             >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
             >>> string = Converter.from_setlangstring_to_string(setlangstring)
@@ -552,6 +568,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[str]
 
         **Example**::
+
             # Convert a SetLangString to a list of strings with quotes and language:
             >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
             >>> strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=True, separator="@")
@@ -590,6 +607,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[str]
 
         **Example**::
+
             # Convert a list of SetLangStrings to a list of strings with quotes and language:
             >>> setlangstrings = [SetLangString({"Hello"}, "en"), SetLangString({"Bonjour"}, "fr")]
             >>> strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=True, separator="@")
@@ -634,6 +652,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type SetLangString.
 
         **Example**::
+
             # Convert a SetLangString to a list of LangStrings:
             >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
             >>> langstrings = Converter.from_setlangstring_to_langstrings(setlangstring)
@@ -661,6 +680,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input types are incorrect.
 
         **Example**::
+
             # Convert a list of SetLangStrings to a list of LangStrings:
             >>> setlangstrings = [SetLangString({"Hello"}, "en"), SetLangString({"Bonjour"}, "fr")]
             >>> langstrings = Converter.from_setlangstrings_to_langstrings(setlangstrings)
@@ -692,6 +712,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type SetLangString.
 
         **Example**::
+
             # Convert a SetLangString to a MultiLangString:
             >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
             >>> multilangstring = Converter.from_setlangstring_to_multilangstring(setlangstring)
@@ -716,6 +737,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the input types are incorrect.
 
         **Example**::
+
             # Convert a list of SetLangStrings to a MultiLangString:
             >>> setlangstrings = [SetLangString({"Hello"}, "en"), SetLangString({"Bonjour"}, "fr")]
             >>> multilangstring = Converter.from_setlangstrings_to_multilangstring(setlangstrings)
@@ -745,6 +767,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: str
 
         **Example**::
+
             # Convert a MultiLangString to a string:
             >>> multilangstring = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour"}})
             >>> string = Converter.from_multilangstring_to_string(multilangstring)
@@ -780,6 +803,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[str]
 
         **Example**::
+
             # Convert a MultiLangString to a list of strings with quotes and language:
             >>> multilangstring = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour"}})
             >>> strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=True, separator="@")
@@ -828,6 +852,7 @@ class Converter(metaclass=NonInstantiable):
         :rtype: list[str]
 
         **Example**::
+
             # Convert a list of MultiLangStrings to a list of strings with quotes and language:
             >>> mls1 = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
             >>> mls2 = MultiLangString(mls_dict={"en": {"Hi"}, "fr": {"Salut"}})
@@ -878,6 +903,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type MultiLangString.
 
         **Example**::
+
             # Convert a MultiLangString to a list of LangStrings:
             >>> multilangstring = MultiLangString(mls_dict={"en": {"Hi", "Hello"}, "fr": {"Bonjour"}})
             >>> langstrings = Converter.from_multilangstring_to_langstrings(multilangstring)
@@ -912,6 +938,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If any of the arguments are not of the expected type.
 
         **Example**::
+
             # Convert a list of MultiLangStrings to a list of LangStrings:
             >>> mls1 = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour"}})
             >>> mls2 = MultiLangString(mls_dict={"en": {"Hey"}, "fr": {"Salut"}})
@@ -950,6 +977,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If the arg is not of type MultiLangString.
 
         **Example**::
+
             # Convert a MultiLangString to a list of SetLangStrings:
             >>> multilangstring = MultiLangString(mls_dict={"en": {"Hello", "Hi"}, "fr": {"Bonjour", "Salut"}})
             >>> setlangstrings = Converter.from_multilangstring_to_setlangstrings(multilangstring)
@@ -983,6 +1011,7 @@ class Converter(metaclass=NonInstantiable):
         :raises TypeError: If any of the arguments are not of the expected type.
 
         **Example**::
+
             # Convert a list of MultiLangStrings to a list of SetLangStrings:
             >>> mls1 = MultiLangString(mls_dict={"en": {"Hello"}, "fr": {"Bonjour"}})
             >>> mls2 = MultiLangString(mls_dict={"en": {"Hi"}, "fr": {"Salut"}})

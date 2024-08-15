@@ -504,21 +504,23 @@ SetLangStringFlag.VALID_TEXT, and MultiLangStringFlag.VALID_TEXT.</p>
 <dd><p>A utility class for converting between different string types used in language processing.</p>
 <p>This class provides methods to convert between <cite>LangString</cite>, <cite>SetLangString</cite>, and <cite>MultiLangString</cite> types.
 It is designed to be non-instantiable as it serves as a utility class with class methods only.</p>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
-&gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“manual”, “Hello”, “en”)
-&gt;&gt;&gt; print(langstring)  #Output: “Hello”&#64;en</p>
-<p># Convert a list of strings to a list of LangStrings using the ‘parse’ method:
-&gt;&gt;&gt; langstrings = Converter.from_strings_to_langstrings(“parse”, [”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “<a class="reference external" href="mailto:Bonjour&#37;&#52;&#48;fr">Bonjour<span>&#64;</span>fr</a>”], separator=”&#64;”)
-&gt;&gt;&gt; for ls in langstrings:
-&gt;&gt;&gt;     print(ls)  #Output: “Hello”&#64;en
-&gt;&gt;&gt;                #        “Bonjour”&#64;fr</p>
-<p># Convert a SetLangString to a MultiLangString:
-&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
-&gt;&gt;&gt; multilangstring = Converter.from_setlangstring_to_multilangstring(setlangstring)
-&gt;&gt;&gt; print(multilangstring)  #Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a string to a LangString using the &#39;manual&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_string_to_langstring</span><span class="p">(</span><span class="s2">&quot;manual&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>  <span class="c1">#Output: &quot;Hello&quot;@en</span>
+
+<span class="c1"># Convert a list of strings to a list of LangStrings using the &#39;parse&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_strings_to_langstrings</span><span class="p">(</span><span class="s2">&quot;parse&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Hello@en&quot;</span><span class="p">,</span> <span class="s2">&quot;Bonjour@fr&quot;</span><span class="p">],</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>  <span class="c1">#Output: &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#        &quot;Bonjour&quot;@fr</span>
+
+<span class="c1"># Convert a SetLangString to a MultiLangString:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstring_to_multilangstring</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1">#Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.Converter.from_string_to_langstring">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string_to_langstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.Converter.from_string_to_langstring" title="Link to this definition"></a></dt>
@@ -542,15 +544,16 @@ It is designed to be non-instantiable as it serves as a utility class with class
 <dd class="field-even"><p><strong>ValueError</strong> – If the method is unknown.</p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
-&gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“manual”, “Hello”, “en”)
-&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
-<p># Convert a string to a LangString using the ‘parse’ method:
-&gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“parse”, “<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”)
-&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a string to a LangString using the &#39;manual&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_string_to_langstring</span><span class="p">(</span><span class="s2">&quot;manual&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+
+<span class="c1"># Convert a string to a LangString using the &#39;parse&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_string_to_langstring</span><span class="p">(</span><span class="s2">&quot;parse&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello@en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -571,12 +574,12 @@ It is designed to be non-instantiable as it serves as a utility class with class
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString with the specified language:
-&gt;&gt;&gt; langstring = Converter.from_string_to_langstring_manual(“Hello”, “en”)
-&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a string to a LangString with the specified language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_string_to_langstring_manual</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -600,15 +603,16 @@ to “” (empty string).</p>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString by parsing it with the given separator:
-&gt;&gt;&gt; langstring = Converter.from_string_to_langstring_parse(”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “&#64;”)
-&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
-<p># Convert a string to a LangString with no separator found:
-&gt;&gt;&gt; langstring = Converter.from_string_to_langstring_parse(“Hello”, “&#64;”)
-&gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;</p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a string to a LangString by parsing it with the given separator:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_string_to_langstring_parse</span><span class="p">(</span><span class="s2">&quot;Hello@en&quot;</span><span class="p">,</span> <span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+
+<span class="c1"># Convert a string to a LangString with no separator found:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_string_to_langstring_parse</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -637,19 +641,20 @@ to “” (empty string).</p>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of strings to a list of LangStrings using the ‘manual’ method:
-&gt;&gt;&gt; langstrings = Converter.from_strings_to_langstrings(“manual”, [“Hello”, “Hi”], “en”)
-&gt;&gt;&gt; for ls in langstrings:
-&gt;&gt;&gt;     print(ls)  # Output: “Hello”&#64;en
-&gt;&gt;&gt;                #         “Hi”&#64;en</p>
-<p># Convert a list of strings to a list of LangStrings using the ‘parse’ method:
-&gt;&gt;&gt; langstrings = Converter.from_strings_to_langstrings(“parse”, [”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “<a class="reference external" href="mailto:Bonjour&#37;&#52;&#48;fr">Bonjour<span>&#64;</span>fr</a>”], separator=”&#64;”)
-&gt;&gt;&gt; for ls in langstrings:
-&gt;&gt;&gt;     print(ls)  # Output: “Hello”&#64;en
-&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of strings to a list of LangStrings using the &#39;manual&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_strings_to_langstrings</span><span class="p">(</span><span class="s2">&quot;manual&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">],</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hi&quot;@en</span>
+
+<span class="c1"># Convert a list of strings to a list of LangStrings using the &#39;parse&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_strings_to_langstrings</span><span class="p">(</span><span class="s2">&quot;parse&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Hello@en&quot;</span><span class="p">,</span> <span class="s2">&quot;Bonjour@fr&quot;</span><span class="p">],</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Bonjour&quot;@fr</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -670,12 +675,12 @@ to “” (empty string).</p>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a></p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of strings to a SetLangString using the ‘manual’ method:
-&gt;&gt;&gt; setlangstring = Converter.from_strings_to_setlangstring([“Hello”, “Hi”], “en”)
-&gt;&gt;&gt; print(setlangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of strings to a SetLangString using the &#39;manual&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_strings_to_setlangstring</span><span class="p">([</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">],</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -698,20 +703,17 @@ to “” (empty string).</p>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.MultiLangString" title="langstring.MultiLangString">MultiLangString</a></p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of strings to a MultiLangString using the ‘manual’ method:
-&gt;&gt;&gt; multilangstring = Converter.from_strings_to_multilangstring(“manual”, [“Hello”, “Hi”], “en”)
-&gt;&gt;&gt; print(multilangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
-<p># Convert a list of strings to a MultiLangString using the ‘parse’ method:
-&gt;&gt;&gt; multilangstring = Converter.from_strings_to_multilangstring(“parse”, [”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “<a class="reference external" href="mailto:Bonjour&#37;&#52;&#48;fr">Bonjour<span>&#64;</span>fr</a>”],</p>
-<blockquote>
-<div><p>separator=”&#64;”)</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Bonjour&#39;}@en,fr</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of strings to a MultiLangString using the &#39;manual&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_strings_to_multilangstring</span><span class="p">(</span><span class="s2">&quot;manual&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">],</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+
+<span class="c1"># Convert a list of strings to a MultiLangString using the &#39;parse&#39; method:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_strings_to_multilangstring</span><span class="p">(</span><span class="s2">&quot;parse&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Hello@en&quot;</span><span class="p">,</span> <span class="s2">&quot;Bonjour@fr&quot;</span><span class="p">],</span>
+                                                                                            <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Bonjour&#39;}@en,fr</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -734,21 +736,18 @@ to “” (empty string).</p>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a LangString to a string with quotes and language:
-&gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
-&gt;&gt;&gt; string = Converter.from_langstring_to_string(langstring, print_quotes=True, separator=”&#64;”)
-&gt;&gt;&gt; print(string)  # Output: “Hello”&#64;en</p>
-<p># Convert a LangString to a string without quotes and language:
-&gt;&gt;&gt; string = Converter.from_langstring_to_string(langstring, print_quotes=False, separator=”&#64;”,</p>
-<blockquote>
-<div><p>print_lang=False)</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a LangString to a string with quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstring_to_string</span><span class="p">(</span><span class="n">langstring</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+
+<span class="c1"># Convert a LangString to a string without quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstring_to_string</span><span class="p">(</span><span class="n">langstring</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+                                                                                        <span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -771,25 +770,22 @@ to “” (empty string).</p>
 <dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a list of strings with quotes and language:
-&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
-&gt;&gt;&gt; strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=True, separator=”&#64;”)
-&gt;&gt;&gt; for s in strings:
-&gt;&gt;&gt;     print(s)  # Output: “Hello”&#64;en
-&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
-<p># Convert a list of LangStrings to a list of strings without quotes and language:
-&gt;&gt;&gt; strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=False, separator=”&#64;”,</p>
-<blockquote>
-<div><p>print_lang=False)</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         &quot;Bonjour&quot;</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of LangStrings to a list of strings with quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="p">[</span><span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">),</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstrings_to_strings</span><span class="p">(</span><span class="n">langstrings</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Bonjour&quot;@fr</span>
+
+<span class="c1"># Convert a list of LangStrings to a list of strings without quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstrings_to_strings</span><span class="p">(</span><span class="n">langstrings</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+                                                                                        <span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Bonjour&quot;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -812,13 +808,13 @@ LangString in a set and retains its language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type LangString.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a LangString to a SetLangString:
-&gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
-&gt;&gt;&gt; setlangstring = Converter.from_langstring_to_setlangstring(langstring)
-&gt;&gt;&gt; print(setlangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a LangString to a SetLangString:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstring_to_setlangstring</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -845,13 +841,13 @@ language.</p>
 </ul>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a SetLangString:
-&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Hi”, “en”)]
-&gt;&gt;&gt; setlangstring = Converter.from_langstrings_to_setlangstring(langstrings)
-&gt;&gt;&gt; print(setlangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of LangStrings to a SetLangString:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="p">[</span><span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">),</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hi&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstrings_to_setlangstring</span><span class="p">(</span><span class="n">langstrings</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -874,15 +870,15 @@ SetLangString contains all the unique texts for a specific language from the Lan
 <dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a list of SetLangStrings:
-&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
-&gt;&gt;&gt; setlangstrings = Converter.from_langstrings_to_setlangstrings(langstrings)
-&gt;&gt;&gt; for sls in setlangstrings:
-&gt;&gt;&gt;     print(sls)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>
-&gt;&gt;&gt;                 #         <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of LangStrings to a list of SetLangStrings:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="p">[</span><span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">),</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstrings_to_setlangstrings</span><span class="p">(</span><span class="n">langstrings</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">sls</span> <span class="ow">in</span> <span class="n">setlangstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">sls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en</span>
+<span class="o">&gt;&gt;&gt;</span>                 <span class="c1">#         {&#39;Bonjour&#39;}@fr</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -905,13 +901,13 @@ contains the text and language of the arg LangString.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type LangString.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a LangString to a MultiLangString:
-&gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
-&gt;&gt;&gt; multilangstring = Converter.from_langstring_to_multilangstring(langstring)
-&gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a LangString to a MultiLangString:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstring</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstring_to_multilangstring</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -934,13 +930,13 @@ contains all the unique texts and languages from the LangStrings.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a MultiLangString:
-&gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
-&gt;&gt;&gt; multilangstring = Converter.from_langstrings_to_multilangstring(langstrings)
-&gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of LangStrings to a MultiLangString:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="p">[</span><span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">),</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_langstrings_to_multilangstring</span><span class="p">(</span><span class="n">langstrings</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -958,13 +954,13 @@ contains all the unique texts and languages from the LangStrings.</p>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a string:
-&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
-&gt;&gt;&gt; string = Converter.from_setlangstring_to_string(setlangstring)
-&gt;&gt;&gt; print(string)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a SetLangString to a string:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstring_to_string</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -987,25 +983,22 @@ contains all the unique texts and languages from the LangStrings.</p>
 <dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a list of strings with quotes and language:
-&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
-&gt;&gt;&gt; strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=True, separator=”&#64;”)
-&gt;&gt;&gt; for s in strings:
-&gt;&gt;&gt;     print(s)  # Output: “Hello”&#64;en
-&gt;&gt;&gt;                #         “Hi”&#64;en</p>
-<p># Convert a SetLangString to a list of strings without quotes and language:
-&gt;&gt;&gt; strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=False, separator=”&#64;”,</p>
-<blockquote>
-<div><p>print_lang=False)</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Hello</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hi</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a SetLangString to a list of strings with quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstring_to_strings</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hi&quot;@en</span>
+
+<span class="c1"># Convert a SetLangString to a list of strings without quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstring_to_strings</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+                                                                                        <span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Hello</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         Hi</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1028,25 +1021,22 @@ contains all the unique texts and languages from the LangStrings.</p>
 <dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of SetLangStrings to a list of strings with quotes and language:
-&gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
-&gt;&gt;&gt; strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=True, separator=”&#64;”)
-&gt;&gt;&gt; for s in strings:
-&gt;&gt;&gt;     print(s)  # Output: “Hello”&#64;en
-&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
-<p># Convert a list of SetLangStrings to a list of strings without quotes and language:
-&gt;&gt;&gt; strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=False, separator=”&#64;”,</p>
-<blockquote>
-<div><p>print_lang=False)</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Hello</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Bonjour</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of SetLangStrings to a list of strings with quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstrings</span> <span class="o">=</span> <span class="p">[</span><span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">),</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstrings_to_strings</span><span class="p">(</span><span class="n">setlangstrings</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Bonjour&quot;@fr</span>
+
+<span class="c1"># Convert a list of SetLangStrings to a list of strings without quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstrings_to_strings</span><span class="p">(</span><span class="n">setlangstrings</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+                                                                                        <span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Hello</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         Bonjour</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1069,14 +1059,16 @@ from the SetLangString and its associated language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type SetLangString.</p>
 </dd>
 </dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a SetLangString to a list of LangStrings:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstring_to_langstrings</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hi&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hello&quot;@en</span>
+</pre></div>
+</div>
 <dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a list of LangStrings:
-&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
-&gt;&gt;&gt; langstrings = Converter.from_setlangstring_to_langstrings(setlangstring)
-&gt;&gt;&gt; for ls in langstrings:
-&gt;&gt;&gt;     print(ls)  # Output: “Hi”&#64;en
-&gt;&gt;&gt;                #         “Hello”&#64;en</p>
-</dd>
 <dt>Note:</dt><dd><p>The order of elements in the output list is not guaranteed, as sets do not maintain order.</p>
 </dd>
 </dl>
@@ -1102,15 +1094,15 @@ list corresponds to one of the texts in the SetLangStrings, retaining their asso
 <dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of SetLangStrings to a list of LangStrings:
-&gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
-&gt;&gt;&gt; langstrings = Converter.from_setlangstrings_to_langstrings(setlangstrings)
-&gt;&gt;&gt; for ls in langstrings:
-&gt;&gt;&gt;     print(ls)  # Output: “Hello”&#64;en
-&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of SetLangStrings to a list of LangStrings:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstrings</span> <span class="o">=</span> <span class="p">[</span><span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">),</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstrings_to_langstrings</span><span class="p">(</span><span class="n">setlangstrings</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Bonjour&quot;@fr</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1133,13 +1125,13 @@ from the SetLangString, associated with its language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type SetLangString.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a MultiLangString:
-&gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
-&gt;&gt;&gt; multilangstring = Converter.from_setlangstring_to_multilangstring(setlangstring)
-&gt;&gt;&gt; print(multilangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a SetLangString to a MultiLangString:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstring</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstring_to_multilangstring</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1162,13 +1154,13 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dd class="field-even"><p><strong>TypeError</strong> – If the input types are incorrect.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of SetLangStrings to a MultiLangString:
-&gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
-&gt;&gt;&gt; multilangstring = Converter.from_setlangstrings_to_multilangstring(setlangstrings)
-&gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of SetLangStrings to a MultiLangString:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstrings</span> <span class="o">=</span> <span class="p">[</span><span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">),</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_setlangstrings_to_multilangstring</span><span class="p">(</span><span class="n">setlangstrings</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1186,13 +1178,13 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a string:
-&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
-&gt;&gt;&gt; string = Converter.from_multilangstring_to_string(multilangstring)
-&gt;&gt;&gt; print(string)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a MultiLangString to a string:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstring_to_string</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1217,26 +1209,25 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a list of strings with quotes and language:
-&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
-&gt;&gt;&gt; strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=True, separator=”&#64;”)
-&gt;&gt;&gt; for s in strings:
-&gt;&gt;&gt;     print(s)  # Output: “Bonjour”&#64;fr
-&gt;&gt;&gt;                #         “Hello”&#64;en
-&gt;&gt;&gt;                #         “Hi”&#64;en</p>
-<p># Convert a MultiLangString to a list of strings without quotes and language:
-&gt;&gt;&gt; strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=False, separator=”&#64;”,</p>
-<blockquote>
-<div><p>print_lang=False)</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Bonjour</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hello</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hi</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a MultiLangString to a list of strings with quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstring_to_strings</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Bonjour&quot;@fr</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hi&quot;@en</span>
+
+<span class="c1"># Convert a MultiLangString to a list of strings without quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstring_to_strings</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">,</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+                                                                                        <span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Bonjour</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         Hello</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         Hi</span>
 </pre></div>
 </div>
-</dd>
+<dl class="simple">
 <dt>Note:</dt><dd><p>The output strings are sorted by language and by text within each language.</p>
 </dd>
 </dl>
@@ -1264,29 +1255,28 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 <dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
-<dl>
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of MultiLangStrings to a list of strings with quotes and language:
-&gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”}, “fr”: {“Bonjour”}})
-&gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hi”}, “fr”: {“Salut”}})
-&gt;&gt;&gt; strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=True, separator=”&#64;”)
-&gt;&gt;&gt; for s in strings:
-&gt;&gt;&gt;     print(s)  # Output: “Bonjour”&#64;fr
-&gt;&gt;&gt;                #         “Hello”&#64;en
-&gt;&gt;&gt;                #         “Hi”&#64;en
-&gt;&gt;&gt;                #         “Salut”&#64;fr</p>
-<p># Convert a list of MultiLangStrings to a list of strings without quotes and language:
-&gt;&gt;&gt; strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=False, separator=”&#64;”,</p>
-<blockquote>
-<div><p>print_lang=False)</p>
-</div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Bonjour</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hello</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Hi</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="c1">#         Salut</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of MultiLangStrings to a list of strings with quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mls2</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstrings_to_strings</span><span class="p">([</span><span class="n">mls1</span><span class="p">,</span> <span class="n">mls2</span><span class="p">],</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: &quot;Bonjour&quot;@fr</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hi&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Salut&quot;@fr</span>
+
+<span class="c1"># Convert a list of MultiLangStrings to a list of strings without quotes and language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstrings_to_strings</span><span class="p">([</span><span class="n">mls1</span><span class="p">,</span> <span class="n">mls2</span><span class="p">],</span> <span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">,</span>
+                                                                                        <span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Output: Bonjour</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         Hello</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         Hi</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         Salut</span>
 </pre></div>
 </div>
-</dd>
+<dl class="simple">
 <dt>Note:</dt><dd><p>The output strings are sorted by language and by text within each language.</p>
 </dd>
 </dl>
@@ -1315,15 +1305,17 @@ texts in the MultiLangString along with its associated language.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type MultiLangString.</p>
 </dd>
 </dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a MultiLangString to a list of LangStrings:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hi&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstring_to_langstrings</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hi&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Bonjour&quot;@fr</span>
+</pre></div>
+</div>
 <dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a list of LangStrings:
-&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hi”, “Hello”}, “fr”: {“Bonjour”}})
-&gt;&gt;&gt; langstrings = Converter.from_multilangstring_to_langstrings(multilangstring)
-&gt;&gt;&gt; for ls in langstrings:
-&gt;&gt;&gt;     print(ls)  # Output: “Hi”&#64;en
-&gt;&gt;&gt;                #         “Hello”&#64;en
-&gt;&gt;&gt;                #         “Bonjour”&#64;fr</p>
-</dd>
 <dt>Note:</dt><dd><p>The output strings are in the order of insertion within each language.</p>
 </dd>
 </dl>
@@ -1352,20 +1344,20 @@ each representing one of the texts in the MultiLangStrings along with its associ
 <dd class="field-even"><p><strong>TypeError</strong> – If any of the arguments are not of the expected type.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of MultiLangStrings to a list of LangStrings:
-&gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
-&gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hey”}, “fr”: {“Salut”}})
-&gt;&gt;&gt; langstrings = Converter.from_multilangstrings_to_langstrings([mls1, mls2])
-&gt;&gt;&gt; for ls in langstrings:
-&gt;&gt;&gt;     print(ls)  # Output could vary as texts within each language may not be sorted. Possible outputs:
-&gt;&gt;&gt;                #         “Hello”&#64;en
-&gt;&gt;&gt;                #         “Hi”&#64;en
-&gt;&gt;&gt;                #         “Hey”&#64;en
-&gt;&gt;&gt;                #         “Bonjour”&#64;fr
-&gt;&gt;&gt;                #         “Salut”&#64;fr</p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of MultiLangStrings to a list of LangStrings:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mls2</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hey&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">langstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstrings_to_langstrings</span><span class="p">([</span><span class="n">mls1</span><span class="p">,</span> <span class="n">mls2</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">ls</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>  <span class="c1"># Output could vary as texts within each language may not be sorted. Possible outputs:</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hello&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hi&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Hey&quot;@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Bonjour&quot;@fr</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         &quot;Salut&quot;@fr</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1391,14 +1383,16 @@ texts of a single language from the MultiLangString.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If the arg is not of type MultiLangString.</p>
 </dd>
 </dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a MultiLangString to a list of SetLangStrings:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">multilangstring</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstring_to_setlangstrings</span><span class="p">(</span><span class="n">multilangstring</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">sls</span> <span class="ow">in</span> <span class="n">setlangstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">sls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         {&#39;Bonjour&#39;, &#39;Salut&#39;}@fr</span>
+</pre></div>
+</div>
 <dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a list of SetLangStrings:
-&gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”, “Salut”}})
-&gt;&gt;&gt; setlangstrings = Converter.from_multilangstring_to_setlangstrings(multilangstring)
-&gt;&gt;&gt; for sls in setlangstrings:
-&gt;&gt;&gt;     print(sls)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a>
-&gt;&gt;&gt;                #         {‘Bonjour’, <a class="reference external" href="mailto:'Salut'}&#37;&#52;&#48;fr">‘Salut’}<span>&#64;</span>fr</a></p>
-</dd>
 <dt>Note:</dt><dd><p>The texts within each language are sorted.</p>
 </dd>
 </dl>
@@ -1427,15 +1421,17 @@ contains texts of a single language from the merged MultiLangStrings.</p>
 <dd class="field-even"><p><strong>TypeError</strong> – If any of the arguments are not of the expected type.</p>
 </dd>
 </dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a list of MultiLangStrings to a list of SetLangStrings:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mls2</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">mls_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setlangstrings</span> <span class="o">=</span> <span class="n">Converter</span><span class="o">.</span><span class="n">from_multilangstrings_to_setlangstrings</span><span class="p">([</span><span class="n">mls1</span><span class="p">,</span> <span class="n">mls2</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">sls</span> <span class="ow">in</span> <span class="n">setlangstrings</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="nb">print</span><span class="p">(</span><span class="n">sls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
+<span class="o">&gt;&gt;&gt;</span>                <span class="c1">#         {&#39;Bonjour&#39;, &#39;Salut&#39;}@fr</span>
+</pre></div>
+</div>
 <dl class="simple">
-<dt><strong>Example</strong>::</dt><dd><p># Convert a list of MultiLangStrings to a list of SetLangStrings:
-&gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”}, “fr”: {“Bonjour”}})
-&gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hi”}, “fr”: {“Salut”}})
-&gt;&gt;&gt; setlangstrings = Converter.from_multilangstrings_to_setlangstrings([mls1, mls2])
-&gt;&gt;&gt; for sls in setlangstrings:
-&gt;&gt;&gt;     print(sls)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a>
-&gt;&gt;&gt;                #         {‘Bonjour’, <a class="reference external" href="mailto:'Salut'}&#37;&#52;&#48;fr">‘Salut’}<span>&#64;</span>fr</a></p>
-</dd>
 <dt>Note:</dt><dd><p>The texts within each language are sorted.</p>
 </dd>
 </dl>

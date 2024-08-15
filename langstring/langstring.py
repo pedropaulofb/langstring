@@ -1026,13 +1026,13 @@ class LangString:
 
         **Example**::
 
-            >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+            >>> lang_str = LangString("Hello\\nworld", "en") # To test, remove one escape char before the line break.
             >>> split_lang_str = lang_str.splitlines()
             >>> print(split_lang_str)
         # Output:
         # [LangString(text='Hello', lang='en'), LangString(text='world', lang='en')]
 
-            >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+            >>> lang_str = LangString("Hello\\nworld", "en") # To test, remove one escape char before the line break.
             >>> split_lang_str = lang_str.splitlines(True)
             >>> print(split_lang_str)
         # Output:

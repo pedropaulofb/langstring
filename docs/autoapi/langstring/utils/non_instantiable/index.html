@@ -102,18 +102,13 @@
   <section id="module-langstring.utils.non_instantiable">
 <span id="langstring-utils-non-instantiable"></span><h1>langstring.utils.non_instantiable<a class="headerlink" href="#module-langstring.utils.non_instantiable" title="Link to this heading"></a></h1>
 <p>The <cite>non_instantiable</cite> module provides the <cite>NonInstantiable</cite> metaclass, designed to prevent the instantiation of any class that uses it.</p>
-<p>This module is useful for creating classes intended solely as namespaces or containers for static methods and
-class variables, without allowing instances of such classes to be created.</p>
+<p>This module is useful for creating classes intended solely as namespaces or containers for static methods and class
+variables, without allowing instances of such classes to be created.</p>
 <p>Key Features:
-- <strong>Instantiation Prevention</strong>: <cite>NonInstantiable</cite> ensures that any attempt to instantiate a class using this</p>
-<blockquote>
-<div><p>metaclass will raise a <cite>TypeError</cite>.</p>
-</div></blockquote>
+- <strong>Instantiation Prevention</strong>: <cite>NonInstantiable</cite> ensures that any attempt to instantiate a class using this
+metaclass will raise a <cite>TypeError</cite>.</p>
 <p>Classes:
-- <strong>NonInstantiable</strong>: A metaclass that overrides the default instantiation behavior to prevent class</p>
-<blockquote>
-<div><p>instantiation.</p>
-</div></blockquote>
+- <strong>NonInstantiable</strong>: A metaclass that overrides the default instantiation behavior to prevent class instantiation.</p>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nd">@staticmethod</span>
@@ -127,8 +122,8 @@ class variables, without allowing instances of such classes to be created.</p>
 <span class="gp">...</span>
 </pre></div>
 </div>
-<p>The <cite>NonInstantiable</cite> metaclass is particularly useful for creating utility classes where instantiation does
-not make sense and should be prevented by design.</p>
+<p>The <cite>NonInstantiable</cite> metaclass is particularly useful for creating utility classes where instantiation does not make
+sense and should be prevented by design.</p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -150,14 +145,10 @@ not make sense and should be prevented by design.</p>
 result in a <cite>TypeError</cite>. This is useful for creating classes that are meant to be used as namespaces or
 containers for static methods and class variables, without the intention of creating instances.</p>
 <p>Key Features:
-- <strong>Prevent Instantiation</strong>: Ensures that any attempt to create an instance of a class using this metaclass</p>
-<blockquote>
-<div><p>will raise a <cite>TypeError</cite>.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p><strong>Namespace Utility</strong>: Ideal for defining classes that serve as namespaces or containers for static methods
-and constants.</p></li>
-</ul>
+- <strong>Prevent Instantiation</strong>: Ensures that any attempt to create an instance of a class using this metaclass
+will raise a <cite>TypeError</cite>.
+- <strong>Namespace Utility</strong>: Ideal for defining classes that serve as namespaces or containers for static methods
+and constants.</p>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nd">@staticmethod</span>

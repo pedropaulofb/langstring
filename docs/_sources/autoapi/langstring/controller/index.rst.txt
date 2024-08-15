@@ -17,11 +17,11 @@ langstring.controller
 
    Key Features:
    - **Global Configuration**: The `Controller` manages flags globally, allowing uniform behavior across different
-     multilingual text classes.
+   multilingual text classes.
    - **Non-Instantiable Design**: The `Controller` class uses the `NonInstantiable` metaclass to prevent instantiation,
-     emphasizing its role as a static configuration manager.
+   emphasizing its role as a static configuration manager.
    - **Flexible Flag Management**: Methods are provided to set, retrieve, print, and reset individual or all flags,
-     enabling dynamic configuration during runtime.
+   enabling dynamic configuration during runtime.
 
    Enums Utilized:
    - **GlobalFlag**: Flags affecting the behavior of all classes.

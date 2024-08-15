@@ -1625,7 +1625,8 @@ class MultiLangString:
         **Example**::
 
             >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-            >>> print(repr(mls))  # Output: 'MultiLangString(mls_dict={'en': {'Hello'}, 'fr': {'Bonjour'}}, pref_lang='en')'
+            >>> print(repr(mls))
+            # Output: 'MultiLangString(mls_dict={'en': {'Hello'}, 'fr': {'Bonjour'}}, pref_lang='en')'
         """
         return f"{self.__class__.__name__}(mls_dict={repr(self.mls_dict)}, pref_lang={repr(self.pref_lang)})"
 

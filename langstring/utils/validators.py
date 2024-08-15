@@ -4,20 +4,20 @@ flag-based constraints, respectively.
 
 This module defines two classes:
 - `TypeValidator`: Handles type validation for arguments based on type hints. It includes methods for validating
-  single arguments, iterables, and decorated functions or methods.
+single arguments, iterables, and decorated functions or methods.
 - `FlagValidator`: Handles validation and transformation of text and language arguments based on configuration flags
-  managed by the `Controller`.
+managed by the `Controller`.
 
 The validators ensure that arguments and values adhere to specified types and constraints, enhancing the robustness
 and reliability of the application.
 
 Key Features:
 - **Type Validation**: `TypeValidator` offers methods to validate single arguments, iterables, and function/method
-  arguments based on type hints.
+arguments based on type hints.
 - **Flag-based Validation**: `FlagValidator` provides methods to validate and transform text and language arguments
-  according to control flags.
+according to control flags.
 - **Separation of Concerns**: By separating type validation and flag-based validation into different classes, the module
-  maintains a clear and organized structure.
+maintains a clear and organized structure.
 
 Classes:
 - **TypeValidator**: Validates argument types based on type hints.
@@ -67,9 +67,9 @@ class FlagValidator(metaclass=NonInstantiable):
 
     Methods:
     - `validate_flags_text(flag_type: type[Enum], text: Optional[str]) -> str`: Validate and transform the `text`
-      argument based on the specified flag type.
+    argument based on the specified flag type.
     - `validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> Optional[str]`: Validate and transform the
-      `lang` argument based on the specified flag type.
+    `lang` argument based on the specified flag type.
 
     **Example**::
 
@@ -276,13 +276,12 @@ class TypeValidator(metaclass=NonInstantiable):
     Methods:
     - `_check_arg(arg: Any, hint: type[Any]) -> bool`: Check if the argument matches the type hint.
     - `validate_type_decorator(func: Callable[..., T]) -> Callable[..., T]`: Decorator to validate the types of
-       arguments passed to a function or method based on their type hints.
+    arguments passed to a function or method based on their type hints.
     - `validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -> None`: Validate that a single
-       argument matches the expected type.
-    - `validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False)
-                                                                                                            -> None`:
-      Validate that an argument is an iterable of the expected type and that its contents match the expected
-      content type.
+    argument matches the expected type.
+    - `validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False) ->
+    None`: Validate that an argument is an iterable of the expected type and that its contents match the expected
+    content type.
 
     **Example**::
 

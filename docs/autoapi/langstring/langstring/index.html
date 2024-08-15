@@ -1248,14 +1248,14 @@ a list of LangString objects.</p>
 </dd>
 </dl>
 <p><strong>Example</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># To test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
 </pre></div>
 </div>
 <p># Output:
 # [LangString(text=’Hello’, lang=’en’), LangString(text=’world’, lang=’en’)]</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># To test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
 </pre></div>

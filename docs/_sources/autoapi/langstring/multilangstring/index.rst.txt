@@ -18,7 +18,7 @@ langstring.multilangstring
    multilingual text management and operations. It ensures that user interaction is as intuitive as possible, while
    offering extensive functionality for handling multilingual text data.
 
-   :Example:
+   **Example**::
 
        mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Monde"}}, "en")
 
@@ -106,11 +106,12 @@ Module Contents
       :type arg: Union[tuple[str, str], LangString, SetLangString, MultiLangString]
       :raises TypeError: If the argument is not of a supported type.
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls.add(("Hello", "en"))
-      >>> mls.add(LangString("Bonjour", "fr"))
-      >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls.add(("Hello", "en"))
+          >>> mls.add(LangString("Bonjour", "fr"))
+          >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
 
 
 
@@ -127,11 +128,12 @@ Module Contents
       :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls.add_entry("Hello", "en")
-      >>> mls.add_entry("Bonjour", "fr")
-      >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls.add_entry("Hello", "en")
+          >>> mls.add_entry("Bonjour", "fr")
+          >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
 
 
 
@@ -142,10 +144,11 @@ Module Contents
       :param text: The text to be added to the preferred language.
       :type text: str
 
-      :Example:
-      >>> mls = MultiLangString(pref_lang="en")
-      >>> mls.add_text_in_pref_lang("Hello")
-      >>> print(mls)  # Output: {'Hello'}@en
+      **Example**::
+
+          >>> mls = MultiLangString(pref_lang="en")
+          >>> mls.add_text_in_pref_lang("Hello")
+          >>> print(mls)  # Output: {'Hello'}@en
 
 
 
@@ -156,11 +159,12 @@ Module Contents
       :param langstring: The LangString object to be added, representing a text in a specific language.
       :type langstring: LangString
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> langstring = LangString("Hello", "en")
-      >>> mls.add_langstring(langstring)
-      >>> print(mls)  # Output: {'Hello'}@en
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> langstring = LangString("Hello", "en")
+          >>> mls.add_langstring(langstring)
+          >>> print(mls)  # Output: {'Hello'}@en
 
 
 
@@ -173,11 +177,12 @@ Module Contents
       :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
       :type setlangstring: SetLangString
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
-      >>> mls.add_setlangstring(setlangstring)
-      >>> print(mls)  # Output: {'Hello', 'Hi'}@en
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
+          >>> mls.add_setlangstring(setlangstring)
+          >>> print(mls)  # Output: {'Hello', 'Hi'}@en
 
 
 
@@ -190,11 +195,12 @@ Module Contents
       :param multilangstring: The MultiLangString object to be added.
       :type multilangstring: MultiLangString
 
-      :Example:
-      >>> mls1 = MultiLangString()
-      >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls1.add_multilangstring(mls2)
-      >>> print(mls1)  # Output: {'Hello'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls1 = MultiLangString()
+          >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls1.add_multilangstring(mls2)
+          >>> print(mls1)  # Output: {'Hello'}@en, {'Bonjour'}@fr
 
 
 
@@ -207,10 +213,11 @@ Module Contents
       :param lang: The language to add.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls.add_empty_lang("en")
-      >>> print(mls)  # Output: {}@en
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls.add_empty_lang("en")
+          >>> print(mls)  # Output: {}@en
 
 
 
@@ -226,13 +233,14 @@ Module Contents
       :param clean_empty: If True, remove empty language entries after discarding. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls.discard(("Hello", "en"))
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("Bonjour", "fr")
-      >>> mls.discard(lang_str)
-      >>> print(mls)  # Output: {}@en, {}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls.discard(("Hello", "en"))
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("Bonjour", "fr")
+          >>> mls.discard(lang_str)
+          >>> print(mls)  # Output: {}@en, {}@fr
 
 
 
@@ -250,12 +258,13 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.discard_entry("Hello", "en")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.discard_entry("World", "en", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.discard_entry("Hello", "en")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.discard_entry("World", "en", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -271,12 +280,13 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.discard_text_in_pref_lang("Hello")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.discard_text_in_pref_lang("World", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.discard_text_in_pref_lang("Hello")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.discard_text_in_pref_lang("World", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -292,14 +302,15 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> lang_str = LangString("Hello", "en")
-      >>> mls.discard_langstring(lang_str)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("World", "en")
-      >>> mls.discard_langstring(lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> lang_str = LangString("Hello", "en")
+          >>> mls.discard_langstring(lang_str)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("World", "en")
+          >>> mls.discard_langstring(lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -315,14 +326,15 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> mls.discard_setlangstring(set_lang_str)
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
-      >>> mls.discard_setlangstring(set_lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {}@en
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> mls.discard_setlangstring(set_lang_str)
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+          >>> mls.discard_setlangstring(set_lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {}@en
 
 
 
@@ -338,14 +350,15 @@ Module Contents
       :param clean_empty: If True, remove empty language entries after discarding. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls_to_discard = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
-      >>> mls.discard_multilangstring(mls_to_discard)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls_to_discard = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
-      >>> mls.discard_multilangstring(mls_to_discard, clean_empty=True)
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls_to_discard = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+          >>> mls.discard_multilangstring(mls_to_discard)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls_to_discard = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
+          >>> mls.discard_multilangstring(mls_to_discard, clean_empty=True)
+          >>> print(mls)  # Output: {}
 
 
 
@@ -358,12 +371,13 @@ Module Contents
       :param lang: The language to discard.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls.discard_lang("en")
-      >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
-      >>> mls.discard_lang("fr")
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls.discard_lang("en")
+          >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
+          >>> mls.discard_lang("fr")
+          >>> print(mls)  # Output: {}
 
 
 
@@ -379,13 +393,14 @@ Module Contents
       :param clean_empty: If True, remove empty language entries after removing. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls.remove(("Hello", "en"))
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("Bonjour", "fr")
-      >>> mls.remove(lang_str)
-      >>> print(mls)  # Output: {}@en, {}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls.remove(("Hello", "en"))
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("Bonjour", "fr")
+          >>> mls.remove(lang_str)
+          >>> print(mls)  # Output: {}@en, {}@fr
 
 
 
@@ -403,12 +418,13 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.remove_entry("Hello", "en")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.remove_entry("World", "en", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.remove_entry("Hello", "en")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.remove_entry("World", "en", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -424,12 +440,13 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.remove_text_in_pref_lang("Hello")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.remove_text_in_pref_lang("World", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.remove_text_in_pref_lang("Hello")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.remove_text_in_pref_lang("World", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -445,14 +462,15 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> lang_str = LangString("Hello", "en")
-      >>> mls.remove_langstring(lang_str)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("World", "en")
-      >>> mls.remove_langstring(lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> lang_str = LangString("Hello", "en")
+          >>> mls.remove_langstring(lang_str)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("World", "en")
+          >>> mls.remove_langstring(lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -468,14 +486,15 @@ Module Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> mls.remove_setlangstring(set_lang_str)
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
-      >>> mls.remove_setlangstring(set_lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {}@en
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> mls.remove_setlangstring(set_lang_str)
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+          >>> mls.remove_setlangstring(set_lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {}@en
 
 
 
@@ -491,14 +510,15 @@ Module Contents
       :param clean_empty: If True, remove empty language entries after removing. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls_to_remove = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
-      >>> mls.remove_multilangstring(mls_to_remove)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls_to_remove = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
-      >>> mls.remove_multilangstring(mls_to_remove, clean_empty=True)
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls_to_remove = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+          >>> mls.remove_multilangstring(mls_to_remove)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls_to_remove = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
+          >>> mls.remove_multilangstring(mls_to_remove, clean_empty=True)
+          >>> print(mls)  # Output: {}
 
 
 
@@ -511,12 +531,13 @@ Module Contents
       :param lang: The language key to be removed along with all its texts.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls.remove_lang("en")
-      >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
-      >>> mls.remove_lang("fr")
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls.remove_lang("en")
+          >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
+          >>> mls.remove_lang("fr")
+          >>> print(mls)  # Output: {}
 
 
 
@@ -526,10 +547,11 @@ Module Contents
 
       This method checks for languages that have no associated text entries and removes them from the dictionary.
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": set()})
-      >>> mls.remove_empty_langs()
-      >>> print(mls)  # Output: {'Hello'}@en
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": set()})
+          >>> mls.remove_empty_langs()
+          >>> print(mls)  # Output: {'Hello'}@en
 
 
 
@@ -552,12 +574,13 @@ Module Contents
       :return: A sorted list of formatted strings.
       :rtype: list[str]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> strings = mls.to_strings()
-      >>> print(strings)  # Output: ['"Bonjour"@fr', '"Hello"@en', '"World"@en']
-      >>> strings = mls.to_strings(print_quotes=False, print_lang=False)
-      >>> print(strings)  # Output: ['Bonjour', 'Hello', 'World']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> strings = mls.to_strings()
+          >>> print(strings)  # Output: ['"Bonjour"@fr', '"Hello"@en', '"World"@en']
+          >>> strings = mls.to_strings(print_quotes=False, print_lang=False)
+          >>> print(strings)  # Output: ['Bonjour', 'Hello', 'World']
 
 
 
@@ -572,15 +595,16 @@ Module Contents
       :return: A list of LangString objects.
       :rtype: list[LangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> langstrings = mls.to_langstrings()
-      >>> for langstring in langstrings:
-      ...     print(langstring)
-      ...
-      # Output:   "Hello"@en
-      #           "World"@en
-      #           "Bonjour"@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> langstrings = mls.to_langstrings()
+          >>> for langstring in langstrings:
+          ...     print(langstring)
+          ...
+          # Output:   "Hello"@en
+          #           "World"@en
+          #           "Bonjour"@fr
 
 
 
@@ -595,14 +619,15 @@ Module Contents
       :return: A list of SetLangString objects.
       :rtype: list[SetLangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> setlangstrings = mls.to_setlangstrings()
-      >>> for setlangstring in setlangstrings:
-      ...     print(setlangstring)
-      ...
-      >>> # Output:   {'Hello', 'World'}@en
-      >>> #           {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> setlangstrings = mls.to_setlangstrings()
+          >>> for setlangstring in setlangstrings:
+          ...     print(setlangstring)
+          ...
+          # Output:   {'Hello', 'World'}@en
+          #           {'Bonjour'}@fr
 
 
 
@@ -617,12 +642,13 @@ Module Contents
       :return: The number of text entries for the specified language.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> count = mls.count_entries_of_lang("en")
-      >>> print(count)  # Output: 2
-      >>> count = mls.count_entries_of_lang("fr")
-      >>> print(count)  # Output: 1
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> count = mls.count_entries_of_lang("en")
+          >>> print(count)  # Output: 2
+          >>> count = mls.count_entries_of_lang("fr")
+          >>> print(count)  # Output: 1
 
 
 
@@ -635,10 +661,11 @@ Module Contents
       :return: A dictionary with language codes as keys and counts of text entries as values.
       :rtype: dict[str, int]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> counts = mls.count_entries_per_lang()
-      >>> print(counts)  # Output: {'en': 2, 'fr': 1}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> counts = mls.count_entries_per_lang()
+          >>> print(counts)  # Output: {'en': 2, 'fr': 1}
 
 
 
@@ -651,10 +678,11 @@ Module Contents
       :return: The total number of text entries.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> total_count = mls.count_entries_total()
-      >>> print(total_count)  # Output: 3
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> total_count = mls.count_entries_total()
+          >>> print(total_count)  # Output: 3
 
 
 
@@ -667,10 +695,11 @@ Module Contents
       :return: The total number of languages.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> total_langs = mls.count_langs_total()
-      >>> print(total_langs)  # Output: 2
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> total_langs = mls.count_langs_total()
+          >>> print(total_langs)  # Output: 2
 
 
 
@@ -686,19 +715,20 @@ Module Contents
       :return: True if the entry is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains(("Hello", "en"))
-      >>> print(result)  # Output: True
-      >>> lang_str = LangString("Bonjour", "fr")
-      >>> result = mls.contains(lang_str)
-      >>> print(result)  # Output: True
-      >>> set_lang_str = SetLangString({"Hello"}, "en")
-      >>> result = mls.contains(set_lang_str)
-      >>> print(result)  # Output: True
-      >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains(mls_to_check)
-      >>> print(result)  # Output: True
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains(("Hello", "en"))
+          >>> print(result)  # Output: True
+          >>> lang_str = LangString("Bonjour", "fr")
+          >>> result = mls.contains(lang_str)
+          >>> print(result)  # Output: True
+          >>> set_lang_str = SetLangString({"Hello"}, "en")
+          >>> result = mls.contains(set_lang_str)
+          >>> print(result)  # Output: True
+          >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains(mls_to_check)
+          >>> print(result)  # Output: True
 
 
 
@@ -715,14 +745,15 @@ Module Contents
       :return: True if the text entry is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_entry("Hello", "en")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_entry("Bonjour", "fr")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_entry("Hello", "fr")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_entry("Hello", "en")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_entry("Bonjour", "fr")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_entry("Hello", "fr")
+          >>> print(result)  # Output: False
 
 
 
@@ -737,14 +768,15 @@ Module Contents
       :return: True if the language is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_lang("en")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_lang("fr")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_lang("es")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_lang("en")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_lang("fr")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_lang("es")
+          >>> print(result)  # Output: False
 
 
 
@@ -759,12 +791,13 @@ Module Contents
       :return: True if the text entry is present in the preferred language, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_text_in_pref_lang("Hello")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_text_in_pref_lang("Bonjour")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_text_in_pref_lang("Hello")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_text_in_pref_lang("Bonjour")
+          >>> print(result)  # Output: False
 
 
 
@@ -780,14 +813,15 @@ Module Contents
       :return: True if the text entry is present in any language, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_text_in_any_lang("Hello")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_text_in_any_lang("Bonjour")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_text_in_any_lang("Hola")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_text_in_any_lang("Hello")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_text_in_any_lang("Bonjour")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_text_in_any_lang("Hola")
+          >>> print(result)  # Output: False
 
 
 
@@ -802,14 +836,15 @@ Module Contents
       :return: True if the LangString's text is found within the specified language's set; otherwise, False.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> lang_str = LangString("Hello", "en")
-      >>> result = mls.contains_langstring(lang_str)
-      >>> print(result)  # Output: True
-      >>> lang_str = LangString("Hola", "es")
-      >>> result = mls.contains_langstring(lang_str)
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> lang_str = LangString("Hello", "en")
+          >>> result = mls.contains_langstring(lang_str)
+          >>> print(result)  # Output: True
+          >>> lang_str = LangString("Hola", "es")
+          >>> result = mls.contains_langstring(lang_str)
+          >>> print(result)  # Output: False
 
 
 
@@ -826,17 +861,18 @@ Module Contents
                language's set; otherwise, False.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = SetLangString({"Hello"}, "en")
-      >>> result = mls.contains_setlangstring(set_lang_str)
-      >>> print(result)  # Output: True
-      >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
-      >>> result = mls.contains_setlangstring(set_lang_str)
-      >>> print(result)  # Output: True
-      >>> set_lang_str = SetLangString({"Hola"}, "es")
-      >>> result = mls.contains_setlangstring(set_lang_str)
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = SetLangString({"Hello"}, "en")
+          >>> result = mls.contains_setlangstring(set_lang_str)
+          >>> print(result)  # Output: True
+          >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+          >>> result = mls.contains_setlangstring(set_lang_str)
+          >>> print(result)  # Output: True
+          >>> set_lang_str = SetLangString({"Hola"}, "es")
+          >>> result = mls.contains_setlangstring(set_lang_str)
+          >>> print(result)  # Output: False
 
 
 
@@ -853,14 +889,15 @@ Module Contents
                False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_multilangstring(mls_to_check)
-      >>> print(result)  # Output: True
-      >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
-      >>> result = mls.contains_multilangstring(mls_to_check)
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_multilangstring(mls_to_check)
+          >>> print(result)  # Output: True
+          >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+          >>> result = mls.contains_multilangstring(mls_to_check)
+          >>> print(result)  # Output: False
 
 
 
@@ -876,12 +913,13 @@ Module Contents
       :return: A list of language codes.
       :rtype: list[str]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> langs = mls.get_langs()
-      >>> print(langs)  # Output: ['en', 'fr']
-      >>> langs_casefolded = mls.get_langs(casefold=True)
-      >>> print(langs_casefolded)  # Output: ['en', 'fr']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> langs = mls.get_langs()
+          >>> print(langs)  # Output: ['en', 'fr']
+          >>> langs_casefolded = mls.get_langs(casefold=True)
+          >>> print(langs_casefolded)  # Output: ['en', 'fr']
 
 
 
@@ -894,10 +932,11 @@ Module Contents
       :return: A sorted list of text entries.
       :rtype: list[str]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> texts = mls.get_texts()
-      >>> print(texts)  # Output: ['Bonjour', 'Hello', 'World']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> texts = mls.get_texts()
+          >>> print(texts)  # Output: ['Bonjour', 'Hello', 'World']
 
 
 
@@ -916,12 +955,13 @@ Module Contents
                not found.
       :rtype: LangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> lang_str = mls.get_langstring("Hello", "en")
-      >>> print(lang_str)  # Output: "Hello"@en
-      >>> lang_str = mls.get_langstring("Hola", "es")
-      >>> print(lang_str)  # Output: ""@es
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> lang_str = mls.get_langstring("Hello", "en")
+          >>> print(lang_str)  # Output: "Hello"@en
+          >>> lang_str = mls.get_langstring("Hola", "es")
+          >>> print(lang_str)  # Output: ""@es
 
 
 
@@ -938,12 +978,13 @@ Module Contents
                if not found.
       :rtype: SetLangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = mls.get_setlangstring("en")
-      >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
-      >>> set_lang_str = mls.get_setlangstring("es")
-      >>> print(set_lang_str)  # Output: {}es
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = mls.get_setlangstring("en")
+          >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str = mls.get_setlangstring("es")
+          >>> print(set_lang_str)  # Output: {}es
 
 
 
@@ -959,10 +1000,11 @@ Module Contents
       :return: A new MultiLangString object with the specified languages and their texts.
       :rtype: MultiLangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
-      >>> new_mls = mls.get_multilangstring(["en", "es"])
-      >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
+          >>> new_mls = mls.get_multilangstring(["en", "es"])
+          >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
 
 
 
@@ -980,14 +1022,15 @@ Module Contents
       :return: The removed LangString object, or None if the entry was not found.
       :rtype: Optional[LangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> lang_str = mls.pop_langstring("Hello", "en")
-      >>> print(lang_str)  # Output: "Hello"@en
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr,
-      >>> lang_str = mls.pop_langstring("Hola", "es")
-      >>> print(lang_str)  # Output: None
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> lang_str = mls.pop_langstring("Hello", "en")
+          >>> print(lang_str)  # Output: "Hello"@en
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr,
+          >>> lang_str = mls.pop_langstring("Hola", "es")
+          >>> print(lang_str)  # Output: None
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
 
 
 
@@ -1003,14 +1046,15 @@ Module Contents
       :return: The removed SetLangString object, or None if the language was not found.
       :rtype: Optional[SetLangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = mls.pop_setlangstring("en")
-      >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
-      >>> print(mls)  # Output: {'Bonjour'}@fr
-      >>> set_lang_str = mls.pop_setlangstring("es")
-      >>> print(set_lang_str)  # Output: None
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = mls.pop_setlangstring("en")
+          >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> print(mls)  # Output: {'Bonjour'}@fr
+          >>> set_lang_str = mls.pop_setlangstring("es")
+          >>> print(set_lang_str)  # Output: None
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -1026,11 +1070,12 @@ Module Contents
       :return: A new MultiLangString object with the specified languages and their texts.
       :rtype: MultiLangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
-      >>> new_mls = mls.pop_multilangstring(["en", "es"])
-      >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
+          >>> new_mls = mls.pop_multilangstring(["en", "es"])
+          >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -1043,13 +1088,14 @@ Module Contents
       :return: True if there are entries in the preferred language, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> has_entries = mls.has_pref_lang_entries()
-      >>> print(has_entries)  # Output: True
-      >>> mls.pop_setlangstring("en")
-      >>> has_entries = mls.has_pref_lang_entries()
-      >>> print(has_entries)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> has_entries = mls.has_pref_lang_entries()
+          >>> print(has_entries)  # Output: True
+          >>> mls.pop_setlangstring("en")
+          >>> has_entries = mls.has_pref_lang_entries()
+          >>> print(has_entries)  # Output: False
 
 
 
@@ -1065,10 +1111,11 @@ Module Contents
       :return: True if the language is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print("en" in mls)  # Output: True
-      >>> print("es" in mls)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print("en" in mls)  # Output: True
+          >>> print("es" in mls)  # Output: False
 
 
 
@@ -1083,11 +1130,12 @@ Module Contents
       :type lang: str
       :raises KeyError: If the language is not found in the MultiLangString.
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> del mls["en"]
-      >>> print(mls)  # Output: {'Bonjour'}@fr
-      >>> del mls["es"]  # Raises KeyError
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> del mls["en"]
+          >>> print(mls)  # Output: {'Bonjour'}@fr
+          >>> del mls["es"]  # Raises KeyError
 
 
 
@@ -1104,12 +1152,13 @@ Module Contents
       :return: True if both MultiLangString objects have the same mls_dict, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print(mls1 == mls2)  # Output: True
-      >>> mls3 = MultiLangString({"en": {"Hi"}, "fr": {"Salut"}})
-      >>> print(mls1 == mls3)  # Output: False
+      **Example**::
+
+          >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print(mls1 == mls2)  # Output: True
+          >>> mls3 = MultiLangString({"en": {"Hi"}, "fr": {"Salut"}})
+          >>> print(mls1 == mls3)  # Output: False
 
 
 
@@ -1127,10 +1176,11 @@ Module Contents
       :rtype: set[str]
       :raises KeyError: If the language is not found in the MultiLangString.
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> print(mls["en"])  # Output: {'Hello', 'World'}
-      >>> print(mls["es"])  # Raises KeyError
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> print(mls["en"])  # Output: {'Hello', 'World'}
+          >>> print(mls["es"])  # Raises KeyError
 
 
 
@@ -1146,10 +1196,11 @@ Module Contents
       :return: The hash value of the MultiLangString object.
       :rtype: int
 
-      :Example:
-      >>> mls1 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="en")
-      >>> mls2 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="pt")
-      >>> print(hash(mls1) == hash(mls2))  # Output: True
+      **Example**::
+
+          >>> mls1 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="en")
+          >>> mls2 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="pt")
+          >>> print(hash(mls1) == hash(mls2))  # Output: True
 
 
 
@@ -1163,12 +1214,13 @@ Module Contents
       :return: An iterator over the language codes.
       :rtype: iterator
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> for lang in mls:
-      >>>     print(lang)
-      >>> # Output:   en
-      >>> #           fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> for lang in mls:
+          >>>     print(lang)
+          >>> # Output:   en
+          >>> #           fr
 
 
 
@@ -1182,9 +1234,10 @@ Module Contents
       :return: The number of language entries.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print(len(mls))  # Output: 2
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print(len(mls))  # Output: 2
 
 
 
@@ -1198,9 +1251,10 @@ Module Contents
       :return: A detailed string representation of the MultiLangString.
       :rtype: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print(repr(mls))  # Output: 'MultiLangString(mls_dict={'en': {'Hello'}, 'fr': {'Bonjour'}}, pref_lang='en')'
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print(repr(mls))  # Output: 'MultiLangString(mls_dict={'en': {'Hello'}, 'fr': {'Bonjour'}}, pref_lang='en')'
 
 
 
@@ -1213,10 +1267,11 @@ Module Contents
       :return: A reverse iterator over the dictionary keys.
       :rtype: reverse_iterator
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> reversed_langs = list(reversed(mls))
-      >>> print(reversed_langs)  # Output: ['fr', 'en']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> reversed_langs = list(reversed(mls))
+          >>> print(reversed_langs)  # Output: ['fr', 'en']
 
 
 
@@ -1232,13 +1287,14 @@ Module Contents
       :param texts: A set of text entries to associate with the language.
       :type texts: set[str]
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls["en"] = {"Hello", "World"}
-      >>> mls["es"] = {"Hola"}
-      >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
-      >>> mls["en"] = {"Bye"}
-      >>> print(mls)  # Output: {'Bye'}@en, {'Hola'}@es
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls["en"] = {"Hello", "World"}
+          >>> mls["es"] = {"Hola"}
+          >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+          >>> mls["en"] = {"Bye"}
+          >>> print(mls)  # Output: {'Bye'}@en, {'Hola'}@es
 
 
 
@@ -1252,9 +1308,10 @@ Module Contents
       :return: A string representation of the MultiLangString with language tags.
       :rtype: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"World", "Hello"}, "fr": {"Bonjour"}})
-      >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"World", "Hello"}, "fr": {"Bonjour"}})
+          >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Bonjour'}@fr
 
 
 
@@ -1273,11 +1330,12 @@ Module Contents
       :return: A new MultiLangString containing all languages and texts from the provided instances.
       :rtype: MultiLangString
 
-      :Example:
-      >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls2 = MultiLangString({"es": {"Hola"}, "en": {"World"}})
-      >>> merged_mls = MultiLangString.merge_multilangstrings([mls1, mls2])
-      >>> print(merged_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls2 = MultiLangString({"es": {"Hola"}, "en": {"World"}})
+          >>> merged_mls = MultiLangString.merge_multilangstrings([mls1, mls2])
+          >>> print(merged_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es, {'Bonjour'}@fr
 
 
 

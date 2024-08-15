@@ -2969,11 +2969,12 @@ Package Contents
       :type arg: Union[tuple[str, str], LangString, SetLangString, MultiLangString]
       :raises TypeError: If the argument is not of a supported type.
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls.add(("Hello", "en"))
-      >>> mls.add(LangString("Bonjour", "fr"))
-      >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls.add(("Hello", "en"))
+          >>> mls.add(LangString("Bonjour", "fr"))
+          >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
 
 
 
@@ -2990,11 +2991,12 @@ Package Contents
       :param lang: The language under which the text should be added. If not specified, defaults to an empty string.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls.add_entry("Hello", "en")
-      >>> mls.add_entry("Bonjour", "fr")
-      >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls.add_entry("Hello", "en")
+          >>> mls.add_entry("Bonjour", "fr")
+          >>> print(mls)  # Output: {'Hello'}@en, {'Bonjour'}@fr
 
 
 
@@ -3005,10 +3007,11 @@ Package Contents
       :param text: The text to be added to the preferred language.
       :type text: str
 
-      :Example:
-      >>> mls = MultiLangString(pref_lang="en")
-      >>> mls.add_text_in_pref_lang("Hello")
-      >>> print(mls)  # Output: {'Hello'}@en
+      **Example**::
+
+          >>> mls = MultiLangString(pref_lang="en")
+          >>> mls.add_text_in_pref_lang("Hello")
+          >>> print(mls)  # Output: {'Hello'}@en
 
 
 
@@ -3019,11 +3022,12 @@ Package Contents
       :param langstring: The LangString object to be added, representing a text in a specific language.
       :type langstring: LangString
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> langstring = LangString("Hello", "en")
-      >>> mls.add_langstring(langstring)
-      >>> print(mls)  # Output: {'Hello'}@en
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> langstring = LangString("Hello", "en")
+          >>> mls.add_langstring(langstring)
+          >>> print(mls)  # Output: {'Hello'}@en
 
 
 
@@ -3036,11 +3040,12 @@ Package Contents
       :param setlangstring: The SetLangString object to be added, representing a text in a specific language.
       :type setlangstring: SetLangString
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
-      >>> mls.add_setlangstring(setlangstring)
-      >>> print(mls)  # Output: {'Hello', 'Hi'}@en
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> setlangstring = SetLangString({"Hello", "Hi"}, "en")
+          >>> mls.add_setlangstring(setlangstring)
+          >>> print(mls)  # Output: {'Hello', 'Hi'}@en
 
 
 
@@ -3053,11 +3058,12 @@ Package Contents
       :param multilangstring: The MultiLangString object to be added.
       :type multilangstring: MultiLangString
 
-      :Example:
-      >>> mls1 = MultiLangString()
-      >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls1.add_multilangstring(mls2)
-      >>> print(mls1)  # Output: {'Hello'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls1 = MultiLangString()
+          >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls1.add_multilangstring(mls2)
+          >>> print(mls1)  # Output: {'Hello'}@en, {'Bonjour'}@fr
 
 
 
@@ -3070,10 +3076,11 @@ Package Contents
       :param lang: The language to add.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls.add_empty_lang("en")
-      >>> print(mls)  # Output: {}@en
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls.add_empty_lang("en")
+          >>> print(mls)  # Output: {}@en
 
 
 
@@ -3089,13 +3096,14 @@ Package Contents
       :param clean_empty: If True, remove empty language entries after discarding. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls.discard(("Hello", "en"))
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("Bonjour", "fr")
-      >>> mls.discard(lang_str)
-      >>> print(mls)  # Output: {}@en, {}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls.discard(("Hello", "en"))
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("Bonjour", "fr")
+          >>> mls.discard(lang_str)
+          >>> print(mls)  # Output: {}@en, {}@fr
 
 
 
@@ -3113,12 +3121,13 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.discard_entry("Hello", "en")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.discard_entry("World", "en", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.discard_entry("Hello", "en")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.discard_entry("World", "en", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3134,12 +3143,13 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.discard_text_in_pref_lang("Hello")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.discard_text_in_pref_lang("World", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.discard_text_in_pref_lang("Hello")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.discard_text_in_pref_lang("World", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3155,14 +3165,15 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> lang_str = LangString("Hello", "en")
-      >>> mls.discard_langstring(lang_str)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("World", "en")
-      >>> mls.discard_langstring(lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> lang_str = LangString("Hello", "en")
+          >>> mls.discard_langstring(lang_str)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("World", "en")
+          >>> mls.discard_langstring(lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3178,14 +3189,15 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> mls.discard_setlangstring(set_lang_str)
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
-      >>> mls.discard_setlangstring(set_lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {}@en
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> mls.discard_setlangstring(set_lang_str)
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+          >>> mls.discard_setlangstring(set_lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {}@en
 
 
 
@@ -3201,14 +3213,15 @@ Package Contents
       :param clean_empty: If True, remove empty language entries after discarding. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls_to_discard = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
-      >>> mls.discard_multilangstring(mls_to_discard)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls_to_discard = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
-      >>> mls.discard_multilangstring(mls_to_discard, clean_empty=True)
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls_to_discard = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+          >>> mls.discard_multilangstring(mls_to_discard)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls_to_discard = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
+          >>> mls.discard_multilangstring(mls_to_discard, clean_empty=True)
+          >>> print(mls)  # Output: {}
 
 
 
@@ -3221,12 +3234,13 @@ Package Contents
       :param lang: The language to discard.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls.discard_lang("en")
-      >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
-      >>> mls.discard_lang("fr")
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls.discard_lang("en")
+          >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
+          >>> mls.discard_lang("fr")
+          >>> print(mls)  # Output: {}
 
 
 
@@ -3242,13 +3256,14 @@ Package Contents
       :param clean_empty: If True, remove empty language entries after removing. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls.remove(("Hello", "en"))
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("Bonjour", "fr")
-      >>> mls.remove(lang_str)
-      >>> print(mls)  # Output: {}@en, {}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls.remove(("Hello", "en"))
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("Bonjour", "fr")
+          >>> mls.remove(lang_str)
+          >>> print(mls)  # Output: {}@en, {}@fr
 
 
 
@@ -3266,12 +3281,13 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.remove_entry("Hello", "en")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.remove_entry("World", "en", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.remove_entry("Hello", "en")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.remove_entry("World", "en", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3287,12 +3303,13 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls.remove_text_in_pref_lang("Hello")
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls.remove_text_in_pref_lang("World", clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls.remove_text_in_pref_lang("Hello")
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls.remove_text_in_pref_lang("World", clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3308,14 +3325,15 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> lang_str = LangString("Hello", "en")
-      >>> mls.remove_langstring(lang_str)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> lang_str = LangString("World", "en")
-      >>> mls.remove_langstring(lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> lang_str = LangString("Hello", "en")
+          >>> mls.remove_langstring(lang_str)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> lang_str = LangString("World", "en")
+          >>> mls.remove_langstring(lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3331,14 +3349,15 @@ Package Contents
       :param clean_empty: If True, remove the language entry if it becomes empty. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> mls.remove_setlangstring(set_lang_str)
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
-      >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
-      >>> mls.remove_setlangstring(set_lang_str, clean_empty=True)
-      >>> print(mls)  # Output: {}@en
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> mls.remove_setlangstring(set_lang_str)
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+          >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+          >>> mls.remove_setlangstring(set_lang_str, clean_empty=True)
+          >>> print(mls)  # Output: {}@en
 
 
 
@@ -3354,14 +3373,15 @@ Package Contents
       :param clean_empty: If True, remove empty language entries after removing. Defaults to False.
       :type clean_empty: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls_to_remove = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
-      >>> mls.remove_multilangstring(mls_to_remove)
-      >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
-      >>> mls_to_remove = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
-      >>> mls.remove_multilangstring(mls_to_remove, clean_empty=True)
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls_to_remove = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+          >>> mls.remove_multilangstring(mls_to_remove)
+          >>> print(mls)  # Output: {'World'}@en, {'Bonjour'}@fr
+          >>> mls_to_remove = MultiLangString({"en": {"World"}, "fr": {"Bonjour"}})
+          >>> mls.remove_multilangstring(mls_to_remove, clean_empty=True)
+          >>> print(mls)  # Output: {}
 
 
 
@@ -3374,12 +3394,13 @@ Package Contents
       :param lang: The language key to be removed along with all its texts.
       :type lang: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
-      >>> mls.remove_lang("en")
-      >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
-      >>> mls.remove_lang("fr")
-      >>> print(mls)  # Output: {}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour", "Salut"}})
+          >>> mls.remove_lang("en")
+          >>> print(mls)  # Output: {'Bonjour', 'Salut'}@fr
+          >>> mls.remove_lang("fr")
+          >>> print(mls)  # Output: {}
 
 
 
@@ -3389,10 +3410,11 @@ Package Contents
 
       This method checks for languages that have no associated text entries and removes them from the dictionary.
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": set()})
-      >>> mls.remove_empty_langs()
-      >>> print(mls)  # Output: {'Hello'}@en
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": set()})
+          >>> mls.remove_empty_langs()
+          >>> print(mls)  # Output: {'Hello'}@en
 
 
 
@@ -3415,12 +3437,13 @@ Package Contents
       :return: A sorted list of formatted strings.
       :rtype: list[str]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> strings = mls.to_strings()
-      >>> print(strings)  # Output: ['"Bonjour"@fr', '"Hello"@en', '"World"@en']
-      >>> strings = mls.to_strings(print_quotes=False, print_lang=False)
-      >>> print(strings)  # Output: ['Bonjour', 'Hello', 'World']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> strings = mls.to_strings()
+          >>> print(strings)  # Output: ['"Bonjour"@fr', '"Hello"@en', '"World"@en']
+          >>> strings = mls.to_strings(print_quotes=False, print_lang=False)
+          >>> print(strings)  # Output: ['Bonjour', 'Hello', 'World']
 
 
 
@@ -3435,15 +3458,16 @@ Package Contents
       :return: A list of LangString objects.
       :rtype: list[LangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> langstrings = mls.to_langstrings()
-      >>> for langstring in langstrings:
-      ...     print(langstring)
-      ...
-      # Output:   "Hello"@en
-      #           "World"@en
-      #           "Bonjour"@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> langstrings = mls.to_langstrings()
+          >>> for langstring in langstrings:
+          ...     print(langstring)
+          ...
+          # Output:   "Hello"@en
+          #           "World"@en
+          #           "Bonjour"@fr
 
 
 
@@ -3458,14 +3482,15 @@ Package Contents
       :return: A list of SetLangString objects.
       :rtype: list[SetLangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> setlangstrings = mls.to_setlangstrings()
-      >>> for setlangstring in setlangstrings:
-      ...     print(setlangstring)
-      ...
-      >>> # Output:   {'Hello', 'World'}@en
-      >>> #           {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> setlangstrings = mls.to_setlangstrings()
+          >>> for setlangstring in setlangstrings:
+          ...     print(setlangstring)
+          ...
+          # Output:   {'Hello', 'World'}@en
+          #           {'Bonjour'}@fr
 
 
 
@@ -3480,12 +3505,13 @@ Package Contents
       :return: The number of text entries for the specified language.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> count = mls.count_entries_of_lang("en")
-      >>> print(count)  # Output: 2
-      >>> count = mls.count_entries_of_lang("fr")
-      >>> print(count)  # Output: 1
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> count = mls.count_entries_of_lang("en")
+          >>> print(count)  # Output: 2
+          >>> count = mls.count_entries_of_lang("fr")
+          >>> print(count)  # Output: 1
 
 
 
@@ -3498,10 +3524,11 @@ Package Contents
       :return: A dictionary with language codes as keys and counts of text entries as values.
       :rtype: dict[str, int]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> counts = mls.count_entries_per_lang()
-      >>> print(counts)  # Output: {'en': 2, 'fr': 1}
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> counts = mls.count_entries_per_lang()
+          >>> print(counts)  # Output: {'en': 2, 'fr': 1}
 
 
 
@@ -3514,10 +3541,11 @@ Package Contents
       :return: The total number of text entries.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> total_count = mls.count_entries_total()
-      >>> print(total_count)  # Output: 3
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> total_count = mls.count_entries_total()
+          >>> print(total_count)  # Output: 3
 
 
 
@@ -3530,10 +3558,11 @@ Package Contents
       :return: The total number of languages.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> total_langs = mls.count_langs_total()
-      >>> print(total_langs)  # Output: 2
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> total_langs = mls.count_langs_total()
+          >>> print(total_langs)  # Output: 2
 
 
 
@@ -3549,19 +3578,20 @@ Package Contents
       :return: True if the entry is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains(("Hello", "en"))
-      >>> print(result)  # Output: True
-      >>> lang_str = LangString("Bonjour", "fr")
-      >>> result = mls.contains(lang_str)
-      >>> print(result)  # Output: True
-      >>> set_lang_str = SetLangString({"Hello"}, "en")
-      >>> result = mls.contains(set_lang_str)
-      >>> print(result)  # Output: True
-      >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains(mls_to_check)
-      >>> print(result)  # Output: True
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains(("Hello", "en"))
+          >>> print(result)  # Output: True
+          >>> lang_str = LangString("Bonjour", "fr")
+          >>> result = mls.contains(lang_str)
+          >>> print(result)  # Output: True
+          >>> set_lang_str = SetLangString({"Hello"}, "en")
+          >>> result = mls.contains(set_lang_str)
+          >>> print(result)  # Output: True
+          >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains(mls_to_check)
+          >>> print(result)  # Output: True
 
 
 
@@ -3578,14 +3608,15 @@ Package Contents
       :return: True if the text entry is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_entry("Hello", "en")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_entry("Bonjour", "fr")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_entry("Hello", "fr")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_entry("Hello", "en")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_entry("Bonjour", "fr")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_entry("Hello", "fr")
+          >>> print(result)  # Output: False
 
 
 
@@ -3600,14 +3631,15 @@ Package Contents
       :return: True if the language is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_lang("en")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_lang("fr")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_lang("es")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_lang("en")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_lang("fr")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_lang("es")
+          >>> print(result)  # Output: False
 
 
 
@@ -3622,12 +3654,13 @@ Package Contents
       :return: True if the text entry is present in the preferred language, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_text_in_pref_lang("Hello")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_text_in_pref_lang("Bonjour")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_text_in_pref_lang("Hello")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_text_in_pref_lang("Bonjour")
+          >>> print(result)  # Output: False
 
 
 
@@ -3643,14 +3676,15 @@ Package Contents
       :return: True if the text entry is present in any language, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_text_in_any_lang("Hello")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_text_in_any_lang("Bonjour")
-      >>> print(result)  # Output: True
-      >>> result = mls.contains_text_in_any_lang("Hola")
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_text_in_any_lang("Hello")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_text_in_any_lang("Bonjour")
+          >>> print(result)  # Output: True
+          >>> result = mls.contains_text_in_any_lang("Hola")
+          >>> print(result)  # Output: False
 
 
 
@@ -3665,14 +3699,15 @@ Package Contents
       :return: True if the LangString's text is found within the specified language's set; otherwise, False.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> lang_str = LangString("Hello", "en")
-      >>> result = mls.contains_langstring(lang_str)
-      >>> print(result)  # Output: True
-      >>> lang_str = LangString("Hola", "es")
-      >>> result = mls.contains_langstring(lang_str)
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> lang_str = LangString("Hello", "en")
+          >>> result = mls.contains_langstring(lang_str)
+          >>> print(result)  # Output: True
+          >>> lang_str = LangString("Hola", "es")
+          >>> result = mls.contains_langstring(lang_str)
+          >>> print(result)  # Output: False
 
 
 
@@ -3689,17 +3724,18 @@ Package Contents
                language's set; otherwise, False.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = SetLangString({"Hello"}, "en")
-      >>> result = mls.contains_setlangstring(set_lang_str)
-      >>> print(result)  # Output: True
-      >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
-      >>> result = mls.contains_setlangstring(set_lang_str)
-      >>> print(result)  # Output: True
-      >>> set_lang_str = SetLangString({"Hola"}, "es")
-      >>> result = mls.contains_setlangstring(set_lang_str)
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = SetLangString({"Hello"}, "en")
+          >>> result = mls.contains_setlangstring(set_lang_str)
+          >>> print(result)  # Output: True
+          >>> set_lang_str = SetLangString({"Bonjour"}, "fr")
+          >>> result = mls.contains_setlangstring(set_lang_str)
+          >>> print(result)  # Output: True
+          >>> set_lang_str = SetLangString({"Hola"}, "es")
+          >>> result = mls.contains_setlangstring(set_lang_str)
+          >>> print(result)  # Output: False
 
 
 
@@ -3716,14 +3752,15 @@ Package Contents
                False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> result = mls.contains_multilangstring(mls_to_check)
-      >>> print(result)  # Output: True
-      >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
-      >>> result = mls.contains_multilangstring(mls_to_check)
-      >>> print(result)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> result = mls.contains_multilangstring(mls_to_check)
+          >>> print(result)  # Output: True
+          >>> mls_to_check = MultiLangString({"en": {"Hello"}, "fr": {"Salut"}})
+          >>> result = mls.contains_multilangstring(mls_to_check)
+          >>> print(result)  # Output: False
 
 
 
@@ -3739,12 +3776,13 @@ Package Contents
       :return: A list of language codes.
       :rtype: list[str]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> langs = mls.get_langs()
-      >>> print(langs)  # Output: ['en', 'fr']
-      >>> langs_casefolded = mls.get_langs(casefold=True)
-      >>> print(langs_casefolded)  # Output: ['en', 'fr']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> langs = mls.get_langs()
+          >>> print(langs)  # Output: ['en', 'fr']
+          >>> langs_casefolded = mls.get_langs(casefold=True)
+          >>> print(langs_casefolded)  # Output: ['en', 'fr']
 
 
 
@@ -3757,10 +3795,11 @@ Package Contents
       :return: A sorted list of text entries.
       :rtype: list[str]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> texts = mls.get_texts()
-      >>> print(texts)  # Output: ['Bonjour', 'Hello', 'World']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> texts = mls.get_texts()
+          >>> print(texts)  # Output: ['Bonjour', 'Hello', 'World']
 
 
 
@@ -3779,12 +3818,13 @@ Package Contents
                not found.
       :rtype: LangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> lang_str = mls.get_langstring("Hello", "en")
-      >>> print(lang_str)  # Output: "Hello"@en
-      >>> lang_str = mls.get_langstring("Hola", "es")
-      >>> print(lang_str)  # Output: ""@es
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> lang_str = mls.get_langstring("Hello", "en")
+          >>> print(lang_str)  # Output: "Hello"@en
+          >>> lang_str = mls.get_langstring("Hola", "es")
+          >>> print(lang_str)  # Output: ""@es
 
 
 
@@ -3801,12 +3841,13 @@ Package Contents
                if not found.
       :rtype: SetLangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = mls.get_setlangstring("en")
-      >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
-      >>> set_lang_str = mls.get_setlangstring("es")
-      >>> print(set_lang_str)  # Output: {}es
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = mls.get_setlangstring("en")
+          >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str = mls.get_setlangstring("es")
+          >>> print(set_lang_str)  # Output: {}es
 
 
 
@@ -3822,10 +3863,11 @@ Package Contents
       :return: A new MultiLangString object with the specified languages and their texts.
       :rtype: MultiLangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
-      >>> new_mls = mls.get_multilangstring(["en", "es"])
-      >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
+          >>> new_mls = mls.get_multilangstring(["en", "es"])
+          >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
 
 
 
@@ -3843,14 +3885,15 @@ Package Contents
       :return: The removed LangString object, or None if the entry was not found.
       :rtype: Optional[LangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> lang_str = mls.pop_langstring("Hello", "en")
-      >>> print(lang_str)  # Output: "Hello"@en
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr,
-      >>> lang_str = mls.pop_langstring("Hola", "es")
-      >>> print(lang_str)  # Output: None
-      >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> lang_str = mls.pop_langstring("Hello", "en")
+          >>> print(lang_str)  # Output: "Hello"@en
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr,
+          >>> lang_str = mls.pop_langstring("Hola", "es")
+          >>> print(lang_str)  # Output: None
+          >>> print(mls)  # Output: {}@en, {'Bonjour'}@fr
 
 
 
@@ -3866,14 +3909,15 @@ Package Contents
       :return: The removed SetLangString object, or None if the language was not found.
       :rtype: Optional[SetLangString]
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> set_lang_str = mls.pop_setlangstring("en")
-      >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
-      >>> print(mls)  # Output: {'Bonjour'}@fr
-      >>> set_lang_str = mls.pop_setlangstring("es")
-      >>> print(set_lang_str)  # Output: None
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> set_lang_str = mls.pop_setlangstring("en")
+          >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> print(mls)  # Output: {'Bonjour'}@fr
+          >>> set_lang_str = mls.pop_setlangstring("es")
+          >>> print(set_lang_str)  # Output: None
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3889,11 +3933,12 @@ Package Contents
       :return: A new MultiLangString object with the specified languages and their texts.
       :rtype: MultiLangString
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
-      >>> new_mls = mls.pop_multilangstring(["en", "es"])
-      >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
-      >>> print(mls)  # Output: {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}, "es": {"Hola"}})
+          >>> new_mls = mls.pop_multilangstring(["en", "es"])
+          >>> print(new_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+          >>> print(mls)  # Output: {'Bonjour'}@fr
 
 
 
@@ -3906,13 +3951,14 @@ Package Contents
       :return: True if there are entries in the preferred language, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> has_entries = mls.has_pref_lang_entries()
-      >>> print(has_entries)  # Output: True
-      >>> mls.pop_setlangstring("en")
-      >>> has_entries = mls.has_pref_lang_entries()
-      >>> print(has_entries)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> has_entries = mls.has_pref_lang_entries()
+          >>> print(has_entries)  # Output: True
+          >>> mls.pop_setlangstring("en")
+          >>> has_entries = mls.has_pref_lang_entries()
+          >>> print(has_entries)  # Output: False
 
 
 
@@ -3928,10 +3974,11 @@ Package Contents
       :return: True if the language is present, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print("en" in mls)  # Output: True
-      >>> print("es" in mls)  # Output: False
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print("en" in mls)  # Output: True
+          >>> print("es" in mls)  # Output: False
 
 
 
@@ -3946,11 +3993,12 @@ Package Contents
       :type lang: str
       :raises KeyError: If the language is not found in the MultiLangString.
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> del mls["en"]
-      >>> print(mls)  # Output: {'Bonjour'}@fr
-      >>> del mls["es"]  # Raises KeyError
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> del mls["en"]
+          >>> print(mls)  # Output: {'Bonjour'}@fr
+          >>> del mls["es"]  # Raises KeyError
 
 
 
@@ -3967,12 +4015,13 @@ Package Contents
       :return: True if both MultiLangString objects have the same mls_dict, False otherwise.
       :rtype: bool
 
-      :Example:
-      >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print(mls1 == mls2)  # Output: True
-      >>> mls3 = MultiLangString({"en": {"Hi"}, "fr": {"Salut"}})
-      >>> print(mls1 == mls3)  # Output: False
+      **Example**::
+
+          >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls2 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print(mls1 == mls2)  # Output: True
+          >>> mls3 = MultiLangString({"en": {"Hi"}, "fr": {"Salut"}})
+          >>> print(mls1 == mls3)  # Output: False
 
 
 
@@ -3990,10 +4039,11 @@ Package Contents
       :rtype: set[str]
       :raises KeyError: If the language is not found in the MultiLangString.
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
-      >>> print(mls["en"])  # Output: {'Hello', 'World'}
-      >>> print(mls["es"])  # Raises KeyError
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}})
+          >>> print(mls["en"])  # Output: {'Hello', 'World'}
+          >>> print(mls["es"])  # Raises KeyError
 
 
 
@@ -4009,10 +4059,11 @@ Package Contents
       :return: The hash value of the MultiLangString object.
       :rtype: int
 
-      :Example:
-      >>> mls1 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="en")
-      >>> mls2 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="pt")
-      >>> print(hash(mls1) == hash(mls2))  # Output: True
+      **Example**::
+
+          >>> mls1 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="en")
+          >>> mls2 = MultiLangString({"en": {"Hello", "World"}, "fr": {"Bonjour"}}, pref_lang="pt")
+          >>> print(hash(mls1) == hash(mls2))  # Output: True
 
 
 
@@ -4026,12 +4077,13 @@ Package Contents
       :return: An iterator over the language codes.
       :rtype: iterator
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> for lang in mls:
-      >>>     print(lang)
-      >>> # Output:   en
-      >>> #           fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> for lang in mls:
+          >>>     print(lang)
+          >>> # Output:   en
+          >>> #           fr
 
 
 
@@ -4045,9 +4097,10 @@ Package Contents
       :return: The number of language entries.
       :rtype: int
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print(len(mls))  # Output: 2
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print(len(mls))  # Output: 2
 
 
 
@@ -4061,9 +4114,10 @@ Package Contents
       :return: A detailed string representation of the MultiLangString.
       :rtype: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> print(repr(mls))  # Output: 'MultiLangString(mls_dict={'en': {'Hello'}, 'fr': {'Bonjour'}}, pref_lang='en')'
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> print(repr(mls))  # Output: 'MultiLangString(mls_dict={'en': {'Hello'}, 'fr': {'Bonjour'}}, pref_lang='en')'
 
 
 
@@ -4076,10 +4130,11 @@ Package Contents
       :return: A reverse iterator over the dictionary keys.
       :rtype: reverse_iterator
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> reversed_langs = list(reversed(mls))
-      >>> print(reversed_langs)  # Output: ['fr', 'en']
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> reversed_langs = list(reversed(mls))
+          >>> print(reversed_langs)  # Output: ['fr', 'en']
 
 
 
@@ -4095,13 +4150,14 @@ Package Contents
       :param texts: A set of text entries to associate with the language.
       :type texts: set[str]
 
-      :Example:
-      >>> mls = MultiLangString()
-      >>> mls["en"] = {"Hello", "World"}
-      >>> mls["es"] = {"Hola"}
-      >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
-      >>> mls["en"] = {"Bye"}
-      >>> print(mls)  # Output: {'Bye'}@en, {'Hola'}@es
+      **Example**::
+
+          >>> mls = MultiLangString()
+          >>> mls["en"] = {"Hello", "World"}
+          >>> mls["es"] = {"Hola"}
+          >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es
+          >>> mls["en"] = {"Bye"}
+          >>> print(mls)  # Output: {'Bye'}@en, {'Hola'}@es
 
 
 
@@ -4115,9 +4171,10 @@ Package Contents
       :return: A string representation of the MultiLangString with language tags.
       :rtype: str
 
-      :Example:
-      >>> mls = MultiLangString({"en": {"World", "Hello"}, "fr": {"Bonjour"}})
-      >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls = MultiLangString({"en": {"World", "Hello"}, "fr": {"Bonjour"}})
+          >>> print(mls)  # Output: {'Hello', 'World'}@en, {'Bonjour'}@fr
 
 
 
@@ -4136,11 +4193,12 @@ Package Contents
       :return: A new MultiLangString containing all languages and texts from the provided instances.
       :rtype: MultiLangString
 
-      :Example:
-      >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
-      >>> mls2 = MultiLangString({"es": {"Hola"}, "en": {"World"}})
-      >>> merged_mls = MultiLangString.merge_multilangstrings([mls1, mls2])
-      >>> print(merged_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es, {'Bonjour'}@fr
+      **Example**::
+
+          >>> mls1 = MultiLangString({"en": {"Hello"}, "fr": {"Bonjour"}})
+          >>> mls2 = MultiLangString({"es": {"Hola"}, "en": {"World"}})
+          >>> merged_mls = MultiLangString.merge_multilangstrings([mls1, mls2])
+          >>> print(merged_mls)  # Output: {'Hello', 'World'}@en, {'Hola'}@es, {'Bonjour'}@fr
 
 
 
@@ -4198,12 +4256,12 @@ Package Contents
       :raises ValueError: If the control flags enforce valid language tags and the langstring's language tag is
                           invalid, or if the language tag of the langstring does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello"}, "en")
-      >>> lang_str = LangString("World", "en")
-      >>> set_lang_str.add_langstring(lang_str)
-      >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str = SetLangString({"Hello"}, "en")
+          >>> lang_str = LangString("World", "en")
+          >>> set_lang_str.add_langstring(lang_str)
+          >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
 
 
 
@@ -4219,11 +4277,11 @@ Package Contents
       :raises TypeError: If the provided text is not of type str.
       :raises ValueError: If the control flags enforce non-empty text and the text string is empty.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello"}, "en")
-      >>> set_lang_str.add_text("World")
-      >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str = SetLangString({"Hello"}, "en")
+          >>> set_lang_str.add_text("World")
+          >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
 
 
 
@@ -4238,13 +4296,13 @@ Package Contents
       :type text: str
       :raises TypeError: If the provided text is not of type str.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str.discard_text("World")
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
-      >>> set_lang_str.discard_text("Python")
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str.discard_text("World")
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> set_lang_str.discard_text("Python")
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
 
 
 
@@ -4261,15 +4319,15 @@ Package Contents
       :raises TypeError: If the provided langstring is not of type LangString.
       :raises ValueError: If the language tag of the langstring does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> lang_str = LangString("World", "en")
-      >>> set_lang_str.discard_langstring(lang_str)
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
-      >>> lang_str = LangString("Python", "en")
-      >>> set_lang_str.discard_langstring(lang_str)
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> lang_str = LangString("World", "en")
+          >>> set_lang_str.discard_langstring(lang_str)
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> lang_str = LangString("Python", "en")
+          >>> set_lang_str.discard_langstring(lang_str)
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
 
 
 
@@ -4284,12 +4342,12 @@ Package Contents
       :raises TypeError: If the provided text is not of type str.
       :raises KeyError: If the text string is not found in the set.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str.remove_text("World")
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
-      >>> set_lang_str.remove_text("Python")  # Raises KeyError
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str.remove_text("World")
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> set_lang_str.remove_text("Python")  # Raises KeyError
 
 
 
@@ -4306,14 +4364,14 @@ Package Contents
       :raises ValueError: If the language tag of the langstring does not match the set's language tag.
       :raises KeyError: If the text string is not found in the set.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> lang_str = LangString("World", "en")
-      >>> set_lang_str.remove_langstring(lang_str)
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
-      >>> lang_str = LangString("Python", "en")
-      >>> set_lang_str.remove_langstring(lang_str)  # Raises KeyError
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> lang_str = LangString("World", "en")
+          >>> set_lang_str.remove_langstring(lang_str)
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> lang_str = LangString("Python", "en")
+          >>> set_lang_str.remove_langstring(lang_str)  # Raises KeyError
 
 
 
@@ -4326,16 +4384,16 @@ Package Contents
       :return: A list of LangString objects.
       :rtype: list[LangString]
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> langstrings = set_lang_str.to_langstrings()
-      >>> for lang_str in langstrings:
-      ...     print(lang_str)
-      ...
-      # Output:
-      # "Hello"@en
-      # "World"en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> langstrings = set_lang_str.to_langstrings()
+          >>> for lang_str in langstrings:
+          ...     print(lang_str)
+          ...
+          # Output:
+          # "Hello"@en
+          # "World"en
 
 
 
@@ -4356,23 +4414,23 @@ Package Contents
       :return: A sorted list of formatted strings.
       :rtype: list[str]
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> strings = set_lang_str.to_strings()
-      >>> for s in strings:
-      ...     print(s)
-      ...
-      # Output:
-      # "Hello"@en
-      # "World"@en
-      >>> strings = set_lang_str.to_strings(print_quotes=False, print_lang=False)
-      >>> for s in strings:
-      ...     print(s)
-      ...
-      # Output:
-      # Hello
-      # World
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> strings = set_lang_str.to_strings()
+          >>> for s in strings:
+          ...     print(s)
+          ...
+          # Output:
+          # "Hello"@en
+          # "World"@en
+          >>> strings = set_lang_str.to_strings(print_quotes=False, print_lang=False)
+          >>> for s in strings:
+          ...     print(s)
+          ...
+          # Output:
+          # Hello
+          # World
 
 
 
@@ -4390,14 +4448,14 @@ Package Contents
       :raises ValueError: If the control flags enforce valid language tags and the new_element's language tag is
                           invalid, or if the language tag of the new_element does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello"}, "en")
-      >>> set_lang_str.add("World")
-      >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
-      >>> lang_str = LangString("New String", "en")
-      >>> set_lang_str.add(lang_str)
-      >>> print(set_lang_str)  # Output: {'Hello', 'New String', 'World'}@en
+          >>> set_lang_str = SetLangString({"Hello"}, "en")
+          >>> set_lang_str.add("World")
+          >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> lang_str = LangString("New String", "en")
+          >>> set_lang_str.add(lang_str)
+          >>> print(set_lang_str)  # Output: {'Hello', 'New String', 'World'}@en
 
 
 
@@ -4408,11 +4466,11 @@ Package Contents
       This method clears all elements from the set, mimicking the behavior of the standard set's clear method,
       resulting in an empty set.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str.clear()
-      >>> print(set_lang_str)  # Output: {}@en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str.clear()
+          >>> print(set_lang_str)  # Output: {}@en
 
 
 
@@ -4426,11 +4484,11 @@ Package Contents
       :return: A shallow copy of the SetLangString.
       :rtype: SetLangString
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> copied_set_lang_str = set_lang_str.copy()
-      >>> print(copied_set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> copied_set_lang_str = set_lang_str.copy()
+          >>> print(copied_set_lang_str)  # Output: {'Hello', 'World'}@en
 
 
 
@@ -4447,14 +4505,14 @@ Package Contents
       :raises TypeError: If the provided element is neither a str nor a LangString.
       :raises ValueError: If the language tag of the LangString does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str.discard("World")
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
-      >>> lang_str = LangString("Python", "en")
-      >>> set_lang_str.discard(lang_str)
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str.discard("World")
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> lang_str = LangString("Python", "en")
+          >>> set_lang_str.discard(lang_str)
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
 
 
 
@@ -4469,12 +4527,12 @@ Package Contents
       :rtype: str
       :raises KeyError: If the set is empty.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> element = set_lang_str.pop()
-      >>> print(element)  # Output: 'Hello' or 'World'
-      >>> print(set_lang_str)  # Output: {'World'}@en or {'Hello'}@en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> element = set_lang_str.pop()
+          >>> print(element)  # Output: 'Hello' or 'World'
+          >>> print(set_lang_str)  # Output: {'World'}@en or {'Hello'}@en
 
 
 
@@ -4491,13 +4549,13 @@ Package Contents
       :raises ValueError: If the language tag of the LangString does not match the set's language tag.
       :raises KeyError: If the element is not found in the set.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str.remove("World")
-      >>> print(set_lang_str)  # Output: {'Hello'}@en
-      >>> lang_str = LangString("Python", "en")
-      >>> set_lang_str.remove(lang_str)  # Raises KeyError
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str.remove("World")
+          >>> print(set_lang_str)  # Output: {'Hello'}@en
+          >>> lang_str = LangString("Python", "en")
+          >>> set_lang_str.remove(lang_str)  # Raises KeyError
 
 
 
@@ -4514,12 +4572,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> diff_set_lang_str = set_lang_str1.difference(set_lang_str2)
-      >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> diff_set_lang_str = set_lang_str1.difference(set_lang_str2)
+          >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
 
 
 
@@ -4534,12 +4592,12 @@ Package Contents
       :type others: Union[set[str], SetLangString]
       :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> set_lang_str1.difference_update(set_lang_str2)
-      >>> print(set_lang_str1)  # Output: {'Hello'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> set_lang_str1.difference_update(set_lang_str2)
+          >>> print(set_lang_str1)  # Output: {'Hello'}@en
 
 
 
@@ -4556,12 +4614,12 @@ Package Contents
       :rtype: bool
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"Python", "Java"}, "en")
-      >>> disjoint = set_lang_str1.isdisjoint(set_lang_str2)
-      >>> print(disjoint)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"Python", "Java"}, "en")
+          >>> disjoint = set_lang_str1.isdisjoint(set_lang_str2)
+          >>> print(disjoint)  # Output: True
 
 
 
@@ -4578,12 +4636,12 @@ Package Contents
       :rtype: bool
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-      >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
-      >>> subset = set_lang_str1.issubset(set_lang_str2)
-      >>> print(subset)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+          >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+          >>> subset = set_lang_str1.issubset(set_lang_str2)
+          >>> print(subset)  # Output: True
 
 
 
@@ -4600,12 +4658,12 @@ Package Contents
       :rtype: bool
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"Hello"}, "en")
-      >>> superset = set_lang_str1.issuperset(set_lang_str2)
-      >>> print(superset)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+          >>> superset = set_lang_str1.issuperset(set_lang_str2)
+          >>> print(superset)  # Output: True
 
 
 
@@ -4622,12 +4680,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> intersect_set_lang_str = set_lang_str1.intersection(set_lang_str2)
-      >>> print(intersect_set_lang_str)  # Output: {'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> intersect_set_lang_str = set_lang_str1.intersection(set_lang_str2)
+          >>> print(intersect_set_lang_str)  # Output: {'World'}@en
 
 
 
@@ -4642,12 +4700,12 @@ Package Contents
       :type others: Union[set[str], SetLangString]
       :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> set_lang_str1.intersection_update(set_lang_str2)
-      >>> print(set_lang_str1)  # Output: {'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> set_lang_str1.intersection_update(set_lang_str2)
+          >>> print(set_lang_str1)  # Output: {'World'}@en
 
 
 
@@ -4664,12 +4722,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> sym_diff_set_lang_str = set_lang_str1.symmetric_difference(set_lang_str2)
-      >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> sym_diff_set_lang_str = set_lang_str1.symmetric_difference(set_lang_str2)
+          >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
 
 
 
@@ -4684,12 +4742,12 @@ Package Contents
       :type other: Union[set[str], SetLangString]
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> set_lang_str1.symmetric_difference_update(set_lang_str2)
-      >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> set_lang_str1.symmetric_difference_update(set_lang_str2)
+          >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
 
 
 
@@ -4706,12 +4764,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-      >>> set_lang_str2 = SetLangString({"World"}, "en")
-      >>> union_set_lang_str = set_lang_str1.union(set_lang_str2)
-      >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+          >>> set_lang_str2 = SetLangString({"World"}, "en")
+          >>> union_set_lang_str = set_lang_str1.union(set_lang_str2)
+          >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
 
 
 
@@ -4726,12 +4784,12 @@ Package Contents
       :type others: Union[set[str], SetLangString]
       :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-      >>> set_lang_str2 = SetLangString({"World"}, "en")
-      >>> set_lang_str1.update(set_lang_str2)
-      >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+          >>> set_lang_str2 = SetLangString({"World"}, "en")
+          >>> set_lang_str1.update(set_lang_str2)
+          >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
 
 
 
@@ -4748,12 +4806,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> intersect_set_lang_str = set_lang_str1 & set_lang_str2
-      >>> print(intersect_set_lang_str)  # Output: {'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> intersect_set_lang_str = set_lang_str1 & set_lang_str2
+          >>> print(intersect_set_lang_str)  # Output: {'World'}@en
 
 
 
@@ -4771,14 +4829,14 @@ Package Contents
       :raises TypeError: If the provided element is neither a str nor a LangString.
       :raises ValueError: If the language tag of the LangString does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> contains_hello = "Hello" in set_lang_str
-      >>> print(contains_hello)  # Output: True
-      >>> lang_str = LangString("Python", "en")
-      >>> contains_python = lang_str in set_lang_str
-      >>> print(contains_python)  # Output: False
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> contains_hello = "Hello" in set_lang_str
+          >>> print(contains_hello)  # Output: True
+          >>> lang_str = LangString("Python", "en")
+          >>> contains_python = lang_str in set_lang_str
+          >>> print(contains_python)  # Output: False
 
 
 
@@ -4795,12 +4853,12 @@ Package Contents
       :rtype: bool
       :raises NotImplementedError: If the other object is not a SetLangString.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Hello"}, "en")
-      >>> is_equal = set_lang_str1 == set_lang_str2
-      >>> print(is_equal)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Hello"}, "en")
+          >>> is_equal = set_lang_str1 == set_lang_str2
+          >>> print(is_equal)  # Output: True
 
 
 
@@ -4817,12 +4875,12 @@ Package Contents
       :rtype: bool
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"Hello"}, "en")
-      >>> is_superset = set_lang_str1 >= set_lang_str2
-      >>> print(is_superset)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+          >>> is_superset = set_lang_str1 >= set_lang_str2
+          >>> print(is_superset)  # Output: True
 
 
 
@@ -4839,12 +4897,12 @@ Package Contents
       :rtype: bool
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"Hello"}, "en")
-      >>> is_proper_superset = set_lang_str1 > set_lang_str2
-      >>> print(is_proper_superset)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+          >>> is_proper_superset = set_lang_str1 > set_lang_str2
+          >>> print(is_proper_superset)  # Output: True
 
 
 
@@ -4858,11 +4916,11 @@ Package Contents
       :return: The hash value of the SetLangString object.
       :rtype: int
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> hash_value = hash(set_lang_str)
-      >>> print(hash_value)  # Output: A unique integer representing the hash value
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> hash_value = hash(set_lang_str)
+          >>> print(hash_value)  # Output: A unique integer representing the hash value
 
 
 
@@ -4879,12 +4937,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> set_lang_str1 &= set_lang_str2
-      >>> print(set_lang_str1)  # Output: {'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> set_lang_str1 &= set_lang_str2
+          >>> print(set_lang_str1)  # Output: {'World'}@en
 
 
 
@@ -4901,12 +4959,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-      >>> set_lang_str2 = SetLangString({"World"}, "en")
-      >>> set_lang_str1 |= set_lang_str2
-      >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+          >>> set_lang_str2 = SetLangString({"World"}, "en")
+          >>> set_lang_str1 |= set_lang_str2
+          >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
 
 
 
@@ -4923,12 +4981,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World"}, "en")
-      >>> set_lang_str1 -= set_lang_str2
-      >>> print(set_lang_str1)  # Output: {'Hello'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World"}, "en")
+          >>> set_lang_str1 -= set_lang_str2
+          >>> print(set_lang_str1)  # Output: {'Hello'}@en
 
 
 
@@ -4942,14 +5000,14 @@ Package Contents
       :return: An iterator over the elements of the set.
       :rtype: Iterator[str]
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> for text in set_lang_str:
-      ...     print(text)
-      ...
-      >>> # Output: 'Hello'
-      >>> #         'World'
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> for text in set_lang_str:
+          ...     print(text)
+          ...
+          # Output: 'Hello'
+          #         'World'
 
 
 
@@ -4966,12 +5024,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> set_lang_str1 ^= set_lang_str2
-      >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> set_lang_str1 ^= set_lang_str2
+          >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
 
 
 
@@ -4988,12 +5046,12 @@ Package Contents
       :rtype: bool
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-      >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
-      >>> is_subset = set_lang_str1 <= set_lang_str2
-      >>> print(is_subset)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+          >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+          >>> is_subset = set_lang_str1 <= set_lang_str2
+          >>> print(is_subset)  # Output: True
 
 
 
@@ -5007,11 +5065,11 @@ Package Contents
       :return: The number of elements in the set.
       :rtype: int
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> length = len(set_lang_str)
-      >>> print(length)  # Output: 2
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> length = len(set_lang_str)
+          >>> print(length)  # Output: 2
 
 
 
@@ -5028,12 +5086,12 @@ Package Contents
       :rtype: bool
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-      >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
-      >>> is_proper_subset = set_lang_str1 < set_lang_str2
-      >>> print(is_proper_subset)  # Output: True
+          >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+          >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+          >>> is_proper_subset = set_lang_str1 < set_lang_str2
+          >>> print(is_proper_subset)  # Output: True
 
 
 
@@ -5050,12 +5108,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-      >>> set_lang_str2 = SetLangString({"World"}, "en")
-      >>> union_set_lang_str = set_lang_str1 | set_lang_str2
-      >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+          >>> set_lang_str2 = SetLangString({"World"}, "en")
+          >>> union_set_lang_str = set_lang_str1 | set_lang_str2
+          >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
 
 
 
@@ -5069,11 +5127,11 @@ Package Contents
       :return: The official string representation of the SetLangString object.
       :rtype: str
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> repr_str = repr(set_lang_str)
-      >>> print(repr_str)  # Output: SetLangString(texts={'Hello', 'World'}, lang='en')
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> repr_str = repr(set_lang_str)
+          >>> print(repr_str)  # Output: SetLangString(texts={'Hello', 'World'}, lang='en')
 
 
 
@@ -5089,10 +5147,10 @@ Package Contents
       :return: The string representation of the SetLangString object.
       :rtype: str
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-      >>> print(str(set_lang_str))  # Output: {'Hello', 'World'}@en
+          >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+          >>> print(str(set_lang_str))  # Output: {'Hello', 'World'}@en
 
 
 
@@ -5109,12 +5167,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> diff_set_lang_str = set_lang_str1 - set_lang_str2
-      >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> diff_set_lang_str = set_lang_str1 - set_lang_str2
+          >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
 
 
 
@@ -5131,12 +5189,12 @@ Package Contents
       :rtype: SetLangString
       :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-      :Example:
+      **Example**::
 
-      >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-      >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-      >>> sym_diff_set_lang_str = set_lang_str1 ^ set_lang_str2
-      >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
+          >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+          >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+          >>> sym_diff_set_lang_str = set_lang_str1 ^ set_lang_str2
+          >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
 
 
 
@@ -5157,18 +5215,18 @@ Package Contents
       :rtype: list[SetLangString]
       :raises TypeError: If the input is not a list of SetLangString instances.
 
-      :Example:
+      **Example**::
 
-      >>> setlangstr1 = SetLangString({"Hello"}, "en")
-      >>> setlangstr2 = SetLangString({"World"}, "en")
-      >>> setlangstr3 = SetLangString({"Bonjour"}, "fr")
-      >>> setlangstr4 = SetLangString({"Hello"}, "EN")
-      >>> merged_list = SetLangString.merge_setlangstrings([setlangstr1, setlangstr2, setlangstr3, setlangstr4])
-      >>> for s in merged_list:
-      ...     print(s)
-      ...
-      >>> # Output: {'Hello', 'World'}@en
-      >>> #         {'Bonjour'}@fr
+          >>> setlangstr1 = SetLangString({"Hello"}, "en")
+          >>> setlangstr2 = SetLangString({"World"}, "en")
+          >>> setlangstr3 = SetLangString({"Bonjour"}, "fr")
+          >>> setlangstr4 = SetLangString({"Hello"}, "EN")
+          >>> merged_list = SetLangString.merge_setlangstrings([setlangstr1, setlangstr2, setlangstr3, setlangstr4])
+          >>> for s in merged_list:
+          ...     print(s)
+          ...
+          # Output: {'Hello', 'World'}@en
+          #         {'Bonjour'}@fr
 
 
 

@@ -1791,10 +1791,9 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">capitalized_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">capitalized_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
@@ -1813,10 +1812,9 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">casefolded_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">casefolded_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello, world!&quot;@en</span>
 </pre></div>
@@ -1842,10 +1840,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">centered_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">centered_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;***hello***&quot;@en</span>
 </pre></div>
@@ -1871,10 +1868,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, hello, hello!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, hello, hello!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">count_hello</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_hello</span><span class="p">)</span>  <span class="c1"># Output: 3</span>
 </pre></div>
@@ -1900,10 +1896,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ends_with_world</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;world!&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ends_with_world</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 </pre></div>
@@ -1925,10 +1920,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello</span><span class="se">\t</span><span class="s2">world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello</span><span class="se">\t</span><span class="s2">world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expanded_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">expandtabs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">expanded_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello   world&quot;@en</span>
 </pre></div>
@@ -1954,10 +1948,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: 7</span>
 </pre></div>
@@ -1982,10 +1975,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">formatted_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">formatted_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
@@ -2010,10 +2002,9 @@ strings.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the provided mapping is not a dictionary.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{name}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{name}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">formatted_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">format_map</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">formatted_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
@@ -2042,10 +2033,9 @@ strings.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If the substring is not found.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: 7</span>
 </pre></div>
@@ -2064,15 +2054,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello123&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello123&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_alnum</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_alnum</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello 123&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello 123&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_alnum</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_alnum</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2091,15 +2079,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_alpha</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_alpha</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello123&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello123&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_alpha</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_alpha</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2118,15 +2104,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_ascii</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isascii</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ascii</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Héllo&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Héllo&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_ascii</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isascii</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ascii</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2145,15 +2129,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_decimal</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_decimal</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_decimal</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_decimal</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2172,15 +2154,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_digit</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_digit</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_digit</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_digit</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2199,15 +2179,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;variable_name&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;variable_name&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_identifier</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isidentifier</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_identifier</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123variable&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123variable&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_identifier</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isidentifier</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_identifier</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2226,15 +2204,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_lower</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_lower</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_lower</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_lower</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2253,15 +2229,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_numeric</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_numeric</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_numeric</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_numeric</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2280,15 +2254,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_printable</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isprintable</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_printable</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello,</span><span class="se">\t</span><span class="s2">world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello,</span><span class="se">\t</span><span class="s2">world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_printable</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isprintable</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_printable</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2307,15 +2279,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_space</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_space</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_space</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_space</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2334,15 +2304,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_title</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_title</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_title</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_title</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2361,15 +2329,13 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;HELLO, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;HELLO, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_upper</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_upper</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_upper</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_upper</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2391,10 +2357,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">joined_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">joined_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world&quot;@en</span>
 </pre></div>
@@ -2420,10 +2385,9 @@ strings.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">left_justified_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">left_justified_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello*****&quot;@en</span>
 </pre></div>
@@ -2442,10 +2406,9 @@ strings.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;HELLO, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;HELLO, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lower_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lower_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello, world!&quot;@en</span>
 </pre></div>
@@ -2469,22 +2432,12 @@ strings.</p>
 :type chars: Optional[str]
 :return: A new LangString with leading characters removed.
 :rtype: LangString</p>
-<dl class="field-list simple">
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
-</dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;...Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;...Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
@@ -2507,10 +2460,9 @@ and the part after the separator.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">before</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">after</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">before</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span>     <span class="c1"># Output: &quot;, &quot;@en</span>
@@ -2538,15 +2490,13 @@ and the part after the separator.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">replaced_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">replaced_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, Python!&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;abababab&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;abababab&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">replaced_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;cd&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">replaced_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;cdcdabab&quot;@en</span>
 </pre></div>
@@ -2570,15 +2520,13 @@ Otherwise, return a copy of the original LangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">removed_prefix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s2">&quot;Hello, &quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_prefix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;world!&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">removed_prefix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s2">&quot;Goodbye, &quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_prefix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
@@ -2602,15 +2550,13 @@ Otherwise, return a copy of the original LangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">removed_suffix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;, world!&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_suffix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">removed_suffix_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;planet&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">removed_suffix_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
@@ -2638,10 +2584,9 @@ not found.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: 14</span>
 </pre></div>
@@ -2672,15 +2617,13 @@ the substring is not found.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If the substring is not found.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: 14</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;Hi&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Output: ValueError</span>
 </pre></div>
@@ -2706,10 +2649,9 @@ the substring is not found.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">right_justified_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">right_justified_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;*****hello&quot;@en</span>
 </pre></div>
@@ -2732,10 +2674,9 @@ and the part after the separator.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>, <a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world! Hello, universe!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">before</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">after</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">before</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world! &quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span>     <span class="c1"># Output: &quot;Hello&quot;@en</span>
@@ -2763,10 +2704,9 @@ and the part after the separator.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one two three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one two three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rsplit</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
@@ -2774,9 +2714,8 @@ and the part after the separator.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output: &quot;one&quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;two&quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;three&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one,two,three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one,two,three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
@@ -2803,15 +2742,13 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!!!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!!!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world&quot;@en</span>
 </pre></div>
@@ -2836,10 +2773,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one two three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one two three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
@@ -2847,9 +2783,8 @@ If None, whitespace characters are removed.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output: &quot;one&quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;two&quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#         &quot;three&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one,two,three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;one,two,three&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">split_lang_str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
@@ -2877,23 +2812,22 @@ a list of LangString objects.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
-<span class="go"># Output:</span>
-<span class="go"># [LangString(text=&#39;Hello&#39;, lang=&#39;en&#39;), LangString(text=&#39;world&#39;, lang=&#39;en&#39;)]</span>
 </pre></div>
 </div>
+<p># Output:
+# [LangString(text=’Hello’, lang=’en’), LangString(text=’world’, lang=’en’)]</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># For the test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
-<span class="go"># Output:</span>
-<span class="go"># [LangString(text=&#39;Hello\n&#39;, lang=&#39;en&#39;), LangString(text=&#39;world&#39;, lang=&#39;en&#39;)]</span>
 </pre></div>
 </div>
+<p># Output:
+# [LangString(text=’Hellon’, lang=’en’), LangString(text=’world’, lang=’en’)]</p>
 </dd></dl>
 
 <dl class="py method">
@@ -2915,15 +2849,13 @@ a list of LangString objects.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starts_with_hello</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">starts_with_hello</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">starts_with_hello</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">starts_with_hello</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -2946,15 +2878,13 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   Hello, world!   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   Hello, world!   &quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;***Hello, world!***&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;***Hello, world!***&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stripped_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello, world!&quot;@en</span>
 </pre></div>
@@ -2973,10 +2903,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, WORLD!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">swapcase_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">swapcase_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hELLO, world!&quot;@en</span>
 </pre></div>
@@ -2995,10 +2924,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">title_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">title_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
 </pre></div>
@@ -3020,10 +2948,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">translation_table</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;aeiou&quot;</span><span class="p">,</span> <span class="s2">&quot;12345&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">translation_table</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;aeiou&quot;</span><span class="p">,</span> <span class="s2">&quot;12345&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">translated_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">translation_table</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">translated_lang_str</span><span class="p">)</span> <span class="c1"># Output: &quot;h2ll4 w4rld&quot;@en</span>
@@ -3043,10 +2970,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">upper_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">upper_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;HELLO WORLD&quot;@en</span>
 </pre></div>
@@ -3068,10 +2994,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zfilled_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">zfilled_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;00042&quot;@en</span>
 </pre></div>
@@ -3096,10 +3021,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>  <span class="c1"># Output: &#39;&quot;Hello, World!&quot;@en&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>  <span class="c1"># Output: &#39;Hello, World!@en&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>  <span class="c1"># Output: &#39;&quot;Hello, World!&quot;&#39;</span>
@@ -3121,10 +3045,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">equals_str</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">))</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="o">.</span><span class="n">equals_str</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">))</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -3145,10 +3068,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span><span class="o">.</span><span class="n">equals_langstring</span><span class="p">(</span><span class="n">lang_str2</span><span class="p">))</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -3177,16 +3099,14 @@ If None, whitespace characters are removed.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the objects are not compatible for addition.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot; World&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">+</span> <span class="n">lang_str2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">lang_str3</span> <span class="o">+</span> <span class="s2">&quot; World&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
 </pre></div>
@@ -3207,15 +3127,13 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">contains</span> <span class="o">=</span> <span class="s2">&quot;World&quot;</span> <span class="ow">in</span> <span class="n">lang_str</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">contains</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contains</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span> <span class="ow">in</span> <span class="n">lang_str</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contains</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span> <span class="ow">in</span> <span class="n">lang_str</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">contains</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
 </div>
@@ -3235,25 +3153,21 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="n">lang_str2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="n">lang_str3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: False</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="s2">&quot;Hello, World!&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="s2">&quot;Hello, World!&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="s2">&quot;Bonjour, Monde!&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_equal</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">==</span> <span class="s2">&quot;Bonjour, Monde!&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
 </div>
@@ -3279,25 +3193,21 @@ If None, whitespace characters are removed.</p>
 <li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;=</span> <span class="n">lang_str2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;=</span> <span class="n">lang_str3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;=</span> <span class="s2">&quot;banana&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;=</span> <span class="s2">&quot;banana&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;=</span> <span class="s2">&quot;cherry&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_ge</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;=</span> <span class="s2">&quot;cherry&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_ge</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
 </div>
@@ -3317,15 +3227,13 @@ If None, whitespace characters are removed.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello, world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">substring</span> <span class="o">=</span> <span class="n">lang_str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>  <span class="c1"># Output: &quot;hello&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_char</span> <span class="o">=</span> <span class="n">lang_str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single_char</span> <span class="o">=</span> <span class="n">lang_str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">single_char</span><span class="p">)</span>  <span class="c1"># Output: &quot;e&quot;@en</span>
 </pre></div>
 </div>
@@ -3351,25 +3259,21 @@ If None, whitespace characters are removed.</p>
 <li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;</span> <span class="n">lang_str2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;</span> <span class="n">lang_str3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: False</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;</span> <span class="s2">&quot;apple&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str1</span> <span class="o">&gt;</span> <span class="s2">&quot;apple&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: True</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;</span> <span class="s2">&quot;cherry&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt</span> <span class="o">=</span> <span class="n">lang_str2</span> <span class="o">&gt;</span> <span class="s2">&quot;cherry&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">is_gt</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
 </div>
@@ -3387,10 +3291,9 @@ If None, whitespace characters are removed.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hash_value</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hash_value</span><span class="p">)</span>  <span class="c1"># Output: A unique integer representing the hash value</span>
 </pre></div>
@@ -3420,16 +3323,14 @@ is a string.</p>
 <li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot; World&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">+=</span> <span class="n">lang_str2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World&quot;@en</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">+=</span> <span class="s2">&quot;!&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">+=</span> <span class="s2">&quot;!&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello World!&quot;@en</span>
 </pre></div>
 </div>
@@ -3453,10 +3354,9 @@ is a string.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the operand is not an integer.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">*=</span> <span class="mi">3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;HelloHelloHello&quot;@en</span>
 </pre></div>
@@ -3475,10 +3375,9 @@ is a string.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Iterator[str]</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">lang_str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -3512,10 +3411,9 @@ is a string.</p>
 <li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;=</span> <span class="n">lang_str2</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;=</span> <span class="s2">&quot;apple&quot;</span><span class="p">)</span>  <span class="c1"># Output: True</span>
@@ -3534,10 +3432,9 @@ is a string.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>  <span class="c1"># Output: 5</span>
 </pre></div>
@@ -3565,10 +3462,9 @@ is a string.</p>
 <li><p><strong>ValueError</strong> – If the language tags are incompatible.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;</span> <span class="n">lang_str2</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str1</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span><span class="p">)</span>  <span class="c1"># Output: True</span>
@@ -3594,10 +3490,9 @@ is a string.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the operand is not an integer.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">multiplied_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span> <span class="o">*</span> <span class="mi">3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multiplied_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hellohellohello&quot;@en</span>
 </pre></div>
@@ -3624,10 +3519,9 @@ string, which loses its language tag.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If ‘other’ is not a string.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;hello &quot;</span> <span class="o">+</span> <span class="n">lang_str</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: &#39;hello world&#39;</span>
 </pre></div>
@@ -3645,10 +3539,9 @@ string, which loses its language tag.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">lang_str</span><span class="p">))</span>  <span class="c1"># Output: &#39;LangString(text=&quot;hello&quot;, lang=&quot;en&quot;)&#39;</span>
 </pre></div>
 </div>
@@ -3673,10 +3566,9 @@ It is typically used for repeating the LangString’s text a specified number of
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If ‘other’ is not an integer.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">multiplied_lang_str</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">lang_str</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">multiplied_lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;hellohellohello&quot;@en</span>
 </pre></div>
@@ -3694,10 +3586,9 @@ It is typically used for repeating the LangString’s text a specified number of
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>  <span class="c1"># Output: &#39;&quot;hello&quot;@en&#39;</span>
 </pre></div>
 </div>
@@ -3721,10 +3612,9 @@ of the language tag.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;EN&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str3</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">merged_list</span> <span class="o">=</span> <span class="n">LangString</span><span class="o">.</span><span class="n">merge_langstrings</span><span class="p">([</span><span class="n">lang_str1</span><span class="p">,</span> <span class="n">lang_str2</span><span class="p">,</span> <span class="n">lang_str3</span><span class="p">])</span>
@@ -3750,13 +3640,12 @@ of the language tag.</p>
 <li><p><strong>print_lang</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – If True, include the language tag. If None, use the default setting from the Controller.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ls_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang_str1</span><span class="p">,</span> <span class="n">lang_str2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">LangString</span><span class="o">.</span><span class="n">print_list</span><span class="p">(</span><span class="n">ls_list</span><span class="p">)</span>  <span class="c1"># Output: [&#39;&quot;a&quot;@b&#39;, &#39;&quot;c&quot;@d&#39;]</span>

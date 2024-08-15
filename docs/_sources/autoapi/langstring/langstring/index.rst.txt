@@ -20,7 +20,7 @@ langstring.langstring
    integration and extended functionality. Additionally, the class provides mechanisms for validating input types,
    matching language tags, and merging LangString objects.
 
-   :Example:
+   **Example**::
 
        # Create a LangString object
        lang_str = LangString("Hello, World!", "en")
@@ -108,11 +108,11 @@ Module Contents
       :return: A new LangString with the first character capitalized.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello, world!", "en")
-      >>> capitalized_lang_str = lang_str.capitalize()
-      >>> print(capitalized_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("hello, world!", "en")
+          >>> capitalized_lang_str = lang_str.capitalize()
+          >>> print(capitalized_lang_str)  # Output: "Hello, world!"@en
 
 
 
@@ -125,11 +125,11 @@ Module Contents
       :return: A new LangString that is casefolded.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, WORLD!", "en")
-      >>> casefolded_lang_str = lang_str.casefold()
-      >>> print(casefolded_lang_str)  # Output: "hello, world!"@en
+          >>> lang_str = LangString("Hello, WORLD!", "en")
+          >>> casefolded_lang_str = lang_str.casefold()
+          >>> print(casefolded_lang_str)  # Output: "hello, world!"@en
 
 
 
@@ -148,11 +148,11 @@ Module Contents
       :return: A new LangString centered with padding.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> centered_lang_str = lang_str.center(11, "*")
-      >>> print(centered_lang_str)  # Output: "***hello***"@en
+          >>> lang_str = LangString("hello", "en")
+          >>> centered_lang_str = lang_str.center(11, "*")
+          >>> print(centered_lang_str)  # Output: "***hello***"@en
 
 
 
@@ -171,11 +171,11 @@ Module Contents
       :return: The number of occurrences of the substring.
       :rtype: int
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello, hello, hello!", "en")
-      >>> count_hello = lang_str.count("hello")
-      >>> print(count_hello)  # Output: 3
+          >>> lang_str = LangString("hello, hello, hello!", "en")
+          >>> count_hello = lang_str.count("hello")
+          >>> print(count_hello)  # Output: 3
 
 
 
@@ -194,11 +194,11 @@ Module Contents
       :return: True if the LangString ends with the suffix, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello, world!", "en")
-      >>> ends_with_world = lang_str.endswith("world!")
-      >>> print(ends_with_world)  # Output: True
+          >>> lang_str = LangString("hello, world!", "en")
+          >>> ends_with_world = lang_str.endswith("world!")
+          >>> print(ends_with_world)  # Output: True
 
 
 
@@ -213,11 +213,11 @@ Module Contents
       :return: A new LangString with tabs expanded.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello\tworld", "en")
-      >>> expanded_lang_str = lang_str.expandtabs(4)
-      >>> print(expanded_lang_str)  # Output: "hello   world"@en
+          >>> lang_str = LangString("hello\tworld", "en")
+          >>> expanded_lang_str = lang_str.expandtabs(4)
+          >>> print(expanded_lang_str)  # Output: "hello   world"@en
 
 
 
@@ -236,11 +236,11 @@ Module Contents
       :return: The lowest index where the substring is found, or -1 if not found.
       :rtype: int
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello, world", "en")
-      >>> index = lang_str.find("world")
-      >>> print(index)  # Output: 7
+          >>> lang_str = LangString("hello, world", "en")
+          >>> index = lang_str.find("world")
+          >>> print(index)  # Output: 7
 
 
 
@@ -257,11 +257,11 @@ Module Contents
       :return: A new LangString with the formatted text.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, {}!", "en")
-      >>> formatted_lang_str = lang_str.format("world")
-      >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("Hello, {}!", "en")
+          >>> formatted_lang_str = lang_str.format("world")
+          >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
 
 
 
@@ -277,11 +277,11 @@ Module Contents
       :rtype: LangString
       :raises TypeError: If the provided mapping is not a dictionary.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, {name}!", "en")
-      >>> formatted_lang_str = lang_str.format_map({"name": "world"})
-      >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("Hello, {name}!", "en")
+          >>> formatted_lang_str = lang_str.format_map({"name": "world"})
+          >>> print(formatted_lang_str)  # Output: "Hello, world!"@en
 
 
 
@@ -301,11 +301,11 @@ Module Contents
       :rtype: int
       :raises ValueError: If the substring is not found.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello, world", "en")
-      >>> index = lang_str.index("world")
-      >>> print(index)  # Output: 7
+          >>> lang_str = LangString("hello, world", "en")
+          >>> index = lang_str.index("world")
+          >>> print(index)  # Output: 7
 
 
 
@@ -318,15 +318,15 @@ Module Contents
       :return: True if the LangString is alphanumeric, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello123", "en")
-      >>> is_alnum = lang_str.isalnum()
-      >>> print(is_alnum)  # Output: True
+          >>> lang_str = LangString("Hello123", "en")
+          >>> is_alnum = lang_str.isalnum()
+          >>> print(is_alnum)  # Output: True
 
-      >>> lang_str = LangString("Hello 123", "en")
-      >>> is_alnum = lang_str.isalnum()
-      >>> print(is_alnum)  # Output: False
+          >>> lang_str = LangString("Hello 123", "en")
+          >>> is_alnum = lang_str.isalnum()
+          >>> print(is_alnum)  # Output: False
 
 
 
@@ -339,15 +339,15 @@ Module Contents
       :return: True if the LangString is alphabetic, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello", "en")
-      >>> is_alpha = lang_str.isalpha()
-      >>> print(is_alpha)  # Output: True
+          >>> lang_str = LangString("Hello", "en")
+          >>> is_alpha = lang_str.isalpha()
+          >>> print(is_alpha)  # Output: True
 
-      >>> lang_str = LangString("Hello123", "en")
-      >>> is_alpha = lang_str.isalpha()
-      >>> print(is_alpha)  # Output: False
+          >>> lang_str = LangString("Hello123", "en")
+          >>> is_alpha = lang_str.isalpha()
+          >>> print(is_alpha)  # Output: False
 
 
 
@@ -360,15 +360,15 @@ Module Contents
       :return: True if the LangString is ASCII, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello", "en")
-      >>> is_ascii = lang_str.isascii()
-      >>> print(is_ascii)  # Output: True
+          >>> lang_str = LangString("Hello", "en")
+          >>> is_ascii = lang_str.isascii()
+          >>> print(is_ascii)  # Output: True
 
-      >>> lang_str = LangString("Héllo", "en")
-      >>> is_ascii = lang_str.isascii()
-      >>> print(is_ascii)  # Output: False
+          >>> lang_str = LangString("Héllo", "en")
+          >>> is_ascii = lang_str.isascii()
+          >>> print(is_ascii)  # Output: False
 
 
 
@@ -381,15 +381,15 @@ Module Contents
       :return: True if the LangString is decimal, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("12345", "en")
-      >>> is_decimal = lang_str.isdecimal()
-      >>> print(is_decimal)  # Output: True
+          >>> lang_str = LangString("12345", "en")
+          >>> is_decimal = lang_str.isdecimal()
+          >>> print(is_decimal)  # Output: True
 
-      >>> lang_str = LangString("123.45", "en")
-      >>> is_decimal = lang_str.isdecimal()
-      >>> print(is_decimal)  # Output: False
+          >>> lang_str = LangString("123.45", "en")
+          >>> is_decimal = lang_str.isdecimal()
+          >>> print(is_decimal)  # Output: False
 
 
 
@@ -402,15 +402,15 @@ Module Contents
       :return: True if the LangString is numeric, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("12345", "en")
-      >>> is_digit = lang_str.isdigit()
-      >>> print(is_digit)  # Output: True
+          >>> lang_str = LangString("12345", "en")
+          >>> is_digit = lang_str.isdigit()
+          >>> print(is_digit)  # Output: True
 
-      >>> lang_str = LangString("123.45", "en")
-      >>> is_digit = lang_str.isdigit()
-      >>> print(is_digit)  # Output: False
+          >>> lang_str = LangString("123.45", "en")
+          >>> is_digit = lang_str.isdigit()
+          >>> print(is_digit)  # Output: False
 
 
 
@@ -423,15 +423,15 @@ Module Contents
       :return: True if the LangString is a valid identifier, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("variable_name", "en")
-      >>> is_identifier = lang_str.isidentifier()
-      >>> print(is_identifier)  # Output: True
+          >>> lang_str = LangString("variable_name", "en")
+          >>> is_identifier = lang_str.isidentifier()
+          >>> print(is_identifier)  # Output: True
 
-      >>> lang_str = LangString("123variable", "en")
-      >>> is_identifier = lang_str.isidentifier()
-      >>> print(is_identifier)  # Output: False
+          >>> lang_str = LangString("123variable", "en")
+          >>> is_identifier = lang_str.isidentifier()
+          >>> print(is_identifier)  # Output: False
 
 
 
@@ -444,15 +444,15 @@ Module Contents
       :return: True if the LangString is in lowercase, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> is_lower = lang_str.islower()
-      >>> print(is_lower)  # Output: True
+          >>> lang_str = LangString("hello", "en")
+          >>> is_lower = lang_str.islower()
+          >>> print(is_lower)  # Output: True
 
-      >>> lang_str = LangString("Hello", "en")
-      >>> is_lower = lang_str.islower()
-      >>> print(is_lower)  # Output: False
+          >>> lang_str = LangString("Hello", "en")
+          >>> is_lower = lang_str.islower()
+          >>> print(is_lower)  # Output: False
 
 
 
@@ -465,15 +465,15 @@ Module Contents
       :return: True if the LangString is numeric, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("12345", "en")
-      >>> is_numeric = lang_str.isnumeric()
-      >>> print(is_numeric)  # Output: True
+          >>> lang_str = LangString("12345", "en")
+          >>> is_numeric = lang_str.isnumeric()
+          >>> print(is_numeric)  # Output: True
 
-      >>> lang_str = LangString("123.45", "en")
-      >>> is_numeric = lang_str.isnumeric()
-      >>> print(is_numeric)  # Output: False
+          >>> lang_str = LangString("123.45", "en")
+          >>> is_numeric = lang_str.isnumeric()
+          >>> print(is_numeric)  # Output: False
 
 
 
@@ -486,15 +486,15 @@ Module Contents
       :return: True if the LangString is printable, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> is_printable = lang_str.isprintable()
-      >>> print(is_printable)  # Output: True
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> is_printable = lang_str.isprintable()
+          >>> print(is_printable)  # Output: True
 
-      >>> lang_str = LangString("Hello,\tworld!", "en")
-      >>> is_printable = lang_str.isprintable()
-      >>> print(is_printable)  # Output: False
+          >>> lang_str = LangString("Hello,\tworld!", "en")
+          >>> is_printable = lang_str.isprintable()
+          >>> print(is_printable)  # Output: False
 
 
 
@@ -507,15 +507,15 @@ Module Contents
       :return: True if the LangString is whitespace, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("   ", "en")
-      >>> is_space = lang_str.isspace()
-      >>> print(is_space)  # Output: True
+          >>> lang_str = LangString("   ", "en")
+          >>> is_space = lang_str.isspace()
+          >>> print(is_space)  # Output: True
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> is_space = lang_str.isspace()
-      >>> print(is_space)  # Output: False
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> is_space = lang_str.isspace()
+          >>> print(is_space)  # Output: False
 
 
 
@@ -528,15 +528,15 @@ Module Contents
       :return: True if the LangString is titlecased, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, World!", "en")
-      >>> is_title = lang_str.istitle()
-      >>> print(is_title)  # Output: True
+          >>> lang_str = LangString("Hello, World!", "en")
+          >>> is_title = lang_str.istitle()
+          >>> print(is_title)  # Output: True
 
-      >>> lang_str = LangString("hello, world!", "en")
-      >>> is_title = lang_str.istitle()
-      >>> print(is_title)  # Output: False
+          >>> lang_str = LangString("hello, world!", "en")
+          >>> is_title = lang_str.istitle()
+          >>> print(is_title)  # Output: False
 
 
 
@@ -549,15 +549,15 @@ Module Contents
       :return: True if the LangString is in uppercase, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("HELLO, WORLD!", "en")
-      >>> is_upper = lang_str.isupper()
-      >>> print(is_upper)  # Output: True
+          >>> lang_str = LangString("HELLO, WORLD!", "en")
+          >>> is_upper = lang_str.isupper()
+          >>> print(is_upper)  # Output: True
 
-      >>> lang_str = LangString("Hello, World!", "en")
-      >>> is_upper = lang_str.isupper()
-      >>> print(is_upper)  # Output: False
+          >>> lang_str = LangString("Hello, World!", "en")
+          >>> is_upper = lang_str.isupper()
+          >>> print(is_upper)  # Output: False
 
 
 
@@ -572,11 +572,11 @@ Module Contents
       :return: A new LangString with the joined text.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString(", ", "en")
-      >>> joined_lang_str = lang_str.join(["Hello", "world"])
-      >>> print(joined_lang_str)  # Output: "Hello, world"@en
+          >>> lang_str = LangString(", ", "en")
+          >>> joined_lang_str = lang_str.join(["Hello", "world"])
+          >>> print(joined_lang_str)  # Output: "Hello, world"@en
 
 
 
@@ -595,11 +595,11 @@ Module Contents
       :return: A new LangString left-justified with padding.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> left_justified_lang_str = lang_str.ljust(10, "*")
-      >>> print(left_justified_lang_str)  # Output: "hello*****"@en
+          >>> lang_str = LangString("hello", "en")
+          >>> left_justified_lang_str = lang_str.ljust(10, "*")
+          >>> print(left_justified_lang_str)  # Output: "hello*****"@en
 
 
 
@@ -612,11 +612,11 @@ Module Contents
       :return: A new LangString with all characters in lowercase.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("HELLO, WORLD!", "en")
-      >>> lower_lang_str = lang_str.lower()
-      >>> print(lower_lang_str)  # Output: "hello, world!"@en
+          >>> lang_str = LangString("HELLO, WORLD!", "en")
+          >>> lower_lang_str = lang_str.lower()
+          >>> print(lower_lang_str)  # Output: "hello, world!"@en
 
 
 
@@ -632,15 +632,15 @@ Module Contents
       :return: A new LangString with leading characters removed.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("   Hello, world!", "en")
-      >>> stripped_lang_str = lang_str.lstrip()
-      >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("   Hello, world!", "en")
+          >>> stripped_lang_str = lang_str.lstrip()
+          >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
 
-      >>> lang_str = LangString("...Hello, world!", "en")
-      >>> stripped_lang_str = lang_str.lstrip(".")
-      >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("...Hello, world!", "en")
+          >>> stripped_lang_str = lang_str.lstrip(".")
+          >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
 
 
 
@@ -656,13 +656,13 @@ Module Contents
                and the part after the separator.
       :rtype: tuple[LangString, LangString, LangString]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> before, sep, after = lang_str.partition(", ")
-      >>> print(before)  # Output: "Hello"@en
-      >>> print(sep)     # Output: ", "@en
-      >>> print(after)   # Output: "world!"@en
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> before, sep, after = lang_str.partition(", ")
+          >>> print(before)  # Output: "Hello"@en
+          >>> print(sep)     # Output: ", "@en
+          >>> print(after)   # Output: "world!"@en
 
 
 
@@ -681,15 +681,15 @@ Module Contents
       :return: A new LangString with the replacements.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> replaced_lang_str = lang_str.replace("world", "Python")
-      >>> print(replaced_lang_str)  # Output: "Hello, Python!"@en
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> replaced_lang_str = lang_str.replace("world", "Python")
+          >>> print(replaced_lang_str)  # Output: "Hello, Python!"@en
 
-      >>> lang_str = LangString("abababab", "en")
-      >>> replaced_lang_str = lang_str.replace("ab", "cd", 2)
-      >>> print(replaced_lang_str)  # Output: "cdcdabab"@en
+          >>> lang_str = LangString("abababab", "en")
+          >>> replaced_lang_str = lang_str.replace("ab", "cd", 2)
+          >>> print(replaced_lang_str)  # Output: "cdcdabab"@en
 
 
 
@@ -707,15 +707,15 @@ Module Contents
       :return: A new LangString with the prefix removed, or the original LangString if the prefix is not found.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> removed_prefix_lang_str = lang_str.removeprefix("Hello, ")
-      >>> print(removed_prefix_lang_str)  # Output: "world!"@en
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> removed_prefix_lang_str = lang_str.removeprefix("Hello, ")
+          >>> print(removed_prefix_lang_str)  # Output: "world!"@en
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> removed_prefix_lang_str = lang_str.removeprefix("Goodbye, ")
-      >>> print(removed_prefix_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> removed_prefix_lang_str = lang_str.removeprefix("Goodbye, ")
+          >>> print(removed_prefix_lang_str)  # Output: "Hello, world!"@en
 
 
 
@@ -733,15 +733,15 @@ Module Contents
       :return: A new LangString with the suffix removed, or the original LangString if the suffix is not found.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> removed_suffix_lang_str = lang_str.removesuffix(", world!")
-      >>> print(removed_suffix_lang_str)  # Output: "Hello"@en
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> removed_suffix_lang_str = lang_str.removesuffix(", world!")
+          >>> print(removed_suffix_lang_str)  # Output: "Hello"@en
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> removed_suffix_lang_str = lang_str.removesuffix("planet")
-      >>> print(removed_suffix_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> removed_suffix_lang_str = lang_str.removesuffix("planet")
+          >>> print(removed_suffix_lang_str)  # Output: "Hello, world!"@en
 
 
 
@@ -763,11 +763,11 @@ Module Contents
       :return: The highest index where the substring is found, or -1 if not found.
       :rtype: int
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
-      >>> index = lang_str.rfind("Hello")
-      >>> print(index)  # Output: 14
+          >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
+          >>> index = lang_str.rfind("Hello")
+          >>> print(index)  # Output: 14
 
 
 
@@ -790,15 +790,15 @@ Module Contents
       :rtype: int
       :raises ValueError: If the substring is not found.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
-      >>> index = lang_str.rindex("Hello")
-      >>> print(index)  # Output: 14
+          >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
+          >>> index = lang_str.rindex("Hello")
+          >>> print(index)  # Output: 14
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> index = lang_str.rindex("Hi")
-      >>> print(index)  # Output: ValueError
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> index = lang_str.rindex("Hi")
+          >>> print(index)  # Output: ValueError
 
 
 
@@ -817,11 +817,11 @@ Module Contents
       :return: A new LangString right-justified with padding.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> right_justified_lang_str = lang_str.rjust(10, "*")
-      >>> print(right_justified_lang_str)  # Output: "*****hello"@en
+          >>> lang_str = LangString("hello", "en")
+          >>> right_justified_lang_str = lang_str.rjust(10, "*")
+          >>> print(right_justified_lang_str)  # Output: "*****hello"@en
 
 
 
@@ -837,13 +837,13 @@ Module Contents
                and the part after the separator.
       :rtype: tuple[LangString, LangString, LangString]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
-      >>> before, sep, after = lang_str.rpartition("Hello")
-      >>> print(before)  # Output: "Hello, world! "@en
-      >>> print(sep)     # Output: "Hello"@en
-      >>> print(after)   # Output: ", universe!"@en
+          >>> lang_str = LangString("Hello, world! Hello, universe!", "en")
+          >>> before, sep, after = lang_str.rpartition("Hello")
+          >>> print(before)  # Output: "Hello, world! "@en
+          >>> print(sep)     # Output: "Hello"@en
+          >>> print(after)   # Output: ", universe!"@en
 
 
 
@@ -862,24 +862,24 @@ Module Contents
       :return: A list of LangString objects.
       :rtype: list[LangString]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("one two three", "en")
-      >>> split_lang_str = lang_str.rsplit()
-      >>> for part in split_lang_str:
-      ...     print(part)
-      ...
-      >>> # Output: "one"@en
-      >>> #         "two"@en
-      >>> #         "three"@en
+          >>> lang_str = LangString("one two three", "en")
+          >>> split_lang_str = lang_str.rsplit()
+          >>> for part in split_lang_str:
+          ...     print(part)
+          ...
+          >>> # Output: "one"@en
+          >>> #         "two"@en
+          >>> #         "three"@en
 
-      >>> lang_str = LangString("one,two,three", "en")
-      >>> split_lang_str = lang_str.rsplit(",", 1)
-      >>> for part in split_lang_str:
-      ...     print(part)
-      ...
-      >>> # Output: "one,two"@en
-      >>> #         "three"@en
+          >>> lang_str = LangString("one,two,three", "en")
+          >>> split_lang_str = lang_str.rsplit(",", 1)
+          >>> for part in split_lang_str:
+          ...     print(part)
+          ...
+          >>> # Output: "one,two"@en
+          >>> #         "three"@en
 
 
 
@@ -895,15 +895,15 @@ Module Contents
       :return: A new LangString with trailing characters removed.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world!   ", "en")
-      >>> stripped_lang_str = lang_str.rstrip()
-      >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("Hello, world!   ", "en")
+          >>> stripped_lang_str = lang_str.rstrip()
+          >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
 
-      >>> lang_str = LangString("Hello, world!!!", "en")
-      >>> stripped_lang_str = lang_str.rstrip("!")
-      >>> print(stripped_lang_str)  # Output: "Hello, world"@en
+          >>> lang_str = LangString("Hello, world!!!", "en")
+          >>> stripped_lang_str = lang_str.rstrip("!")
+          >>> print(stripped_lang_str)  # Output: "Hello, world"@en
 
 
 
@@ -920,25 +920,25 @@ Module Contents
       :return: A list of LangString objects.
       :rtype: list[LangString]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("one two three", "en")
-      >>> split_lang_str = lang_str.split()
-      >>> for part in split_lang_str:
-      ...     print(part)
-      ...
-      >>> # Output: "one"@en
-      >>> #         "two"@en
-      >>> #         "three"@en
+          >>> lang_str = LangString("one two three", "en")
+          >>> split_lang_str = lang_str.split()
+          >>> for part in split_lang_str:
+          ...     print(part)
+          ...
+          >>> # Output: "one"@en
+          >>> #         "two"@en
+          >>> #         "three"@en
 
-      >>> lang_str = LangString("one,two,three", "en")
-      >>> split_lang_str = lang_str.split(",")
-      >>> for part in split_lang_str:
-      ...     print(part)
-      ...
-      >>> # Output: "one"@en
-      >>> #         "two"@en
-      >>> #         "three"@en
+          >>> lang_str = LangString("one,two,three", "en")
+          >>> split_lang_str = lang_str.split(",")
+          >>> for part in split_lang_str:
+          ...     print(part)
+          ...
+          >>> # Output: "one"@en
+          >>> #         "two"@en
+          >>> #         "three"@en
 
 
 
@@ -954,17 +954,17 @@ Module Contents
       :return: A list of LangString objects.
       :rtype: list[LangString]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
-      >>> split_lang_str = lang_str.splitlines()
-      >>> print(split_lang_str)
+          >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+          >>> split_lang_str = lang_str.splitlines()
+          >>> print(split_lang_str)
       # Output:
       # [LangString(text='Hello', lang='en'), LangString(text='world', lang='en')]
 
-      >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
-      >>> split_lang_str = lang_str.splitlines(True)
-      >>> print(split_lang_str)
+          >>> lang_str = LangString("Hello\\nworld", "en") # For the test, remove one escape char before the line break.
+          >>> split_lang_str = lang_str.splitlines(True)
+          >>> print(split_lang_str)
       # Output:
       # [LangString(text='Hello\n', lang='en'), LangString(text='world', lang='en')]
 
@@ -985,15 +985,15 @@ Module Contents
       :return: True if the LangString starts with the prefix, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> starts_with_hello = lang_str.startswith("Hello")
-      >>> print(starts_with_hello)  # Output: True
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> starts_with_hello = lang_str.startswith("Hello")
+          >>> print(starts_with_hello)  # Output: True
 
-      >>> lang_str = LangString("Hello, world!", "en")
-      >>> starts_with_hello = lang_str.startswith("world")
-      >>> print(starts_with_hello)  # Output: False
+          >>> lang_str = LangString("Hello, world!", "en")
+          >>> starts_with_hello = lang_str.startswith("world")
+          >>> print(starts_with_hello)  # Output: False
 
 
 
@@ -1009,15 +1009,15 @@ Module Contents
       :return: A new LangString with leading and trailing characters removed.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("   Hello, world!   ", "en")
-      >>> stripped_lang_str = lang_str.strip()
-      >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("   Hello, world!   ", "en")
+          >>> stripped_lang_str = lang_str.strip()
+          >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
 
-      >>> lang_str = LangString("***Hello, world!***", "en")
-      >>> stripped_lang_str = lang_str.strip("*")
-      >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
+          >>> lang_str = LangString("***Hello, world!***", "en")
+          >>> stripped_lang_str = lang_str.strip("*")
+          >>> print(stripped_lang_str)  # Output: "Hello, world!"@en
 
 
 
@@ -1030,11 +1030,11 @@ Module Contents
       :return: A new LangString with swapped case.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, WORLD!", "en")
-      >>> swapcase_lang_str = lang_str.swapcase()
-      >>> print(swapcase_lang_str)  # Output: "hELLO, world!"@en
+          >>> lang_str = LangString("Hello, WORLD!", "en")
+          >>> swapcase_lang_str = lang_str.swapcase()
+          >>> print(swapcase_lang_str)  # Output: "hELLO, world!"@en
 
 
 
@@ -1047,11 +1047,11 @@ Module Contents
       :return: A new LangString that is titlecased.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello world", "en")
-      >>> title_lang_str = lang_str.title()
-      >>> print(title_lang_str)  # Output: "Hello World"@en
+          >>> lang_str = LangString("hello world", "en")
+          >>> title_lang_str = lang_str.title()
+          >>> print(title_lang_str)  # Output: "Hello World"@en
 
 
 
@@ -1066,12 +1066,12 @@ Module Contents
       :return: A new LangString with the characters translated.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> translation_table = str.maketrans("aeiou", "12345")
-      >>> lang_str = LangString("hello world", "en")
-      >>> translated_lang_str = lang_str.translate(translation_table)
-      >>> print(translated_lang_str) # Output: "h2ll4 w4rld"@en
+          >>> translation_table = str.maketrans("aeiou", "12345")
+          >>> lang_str = LangString("hello world", "en")
+          >>> translated_lang_str = lang_str.translate(translation_table)
+          >>> print(translated_lang_str) # Output: "h2ll4 w4rld"@en
 
 
 
@@ -1084,11 +1084,11 @@ Module Contents
       :return: A new LangString with all characters in uppercase.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello world", "en")
-      >>> upper_lang_str = lang_str.upper()
-      >>> print(upper_lang_str)  # Output: "HELLO WORLD"@en
+          >>> lang_str = LangString("hello world", "en")
+          >>> upper_lang_str = lang_str.upper()
+          >>> print(upper_lang_str)  # Output: "HELLO WORLD"@en
 
 
 
@@ -1103,11 +1103,11 @@ Module Contents
       :return: A new LangString left filled with '0' digits.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("42", "en")
-      >>> zfilled_lang_str = lang_str.zfill(5)
-      >>> print(zfilled_lang_str)  # Output: "00042"@en
+          >>> lang_str = LangString("42", "en")
+          >>> zfilled_lang_str = lang_str.zfill(5)
+          >>> print(zfilled_lang_str)  # Output: "00042"@en
 
 
 
@@ -1124,12 +1124,12 @@ Module Contents
       :return: A string representation of the LangString.
       :rtype: str
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, World!", "en")
-      >>> print(lang_str.to_string())  # Output: '"Hello, World!"@en'
-      >>> print(lang_str.to_string(print_quotes=False))  # Output: 'Hello, World!@en'
-      >>> print(lang_str.to_string(print_lang=False))  # Output: '"Hello, World!"'
+          >>> lang_str = LangString("Hello, World!", "en")
+          >>> print(lang_str.to_string())  # Output: '"Hello, World!"@en'
+          >>> print(lang_str.to_string(print_quotes=False))  # Output: 'Hello, World!@en'
+          >>> print(lang_str.to_string(print_lang=False))  # Output: '"Hello, World!"'
 
 
 
@@ -1142,11 +1142,11 @@ Module Contents
       :return: True if the text matches the given string, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, World!", "en")
-      >>> print(lang_str.equals_str("Hello, World!"))  # Output: True
-      >>> print(lang_str.equals_str("hello, world!"))  # Output: False
+          >>> lang_str = LangString("Hello, World!", "en")
+          >>> print(lang_str.equals_str("Hello, World!"))  # Output: True
+          >>> print(lang_str.equals_str("hello, world!"))  # Output: False
 
 
 
@@ -1159,13 +1159,13 @@ Module Contents
       :return: True if both text and language tag match (case-insensitive), otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("Hello, World!", "en")
-      >>> lang_str2 = LangString("Hello, World!", "EN")
-      >>> print(lang_str1.equals_langstring(lang_str2))  # Output: True
-      >>> lang_str3 = LangString("Hello, World!", "fr")
-      >>> print(lang_str1.equals_langstring(lang_str3))  # Output: False
+          >>> lang_str1 = LangString("Hello, World!", "en")
+          >>> lang_str2 = LangString("Hello, World!", "EN")
+          >>> print(lang_str1.equals_langstring(lang_str2))  # Output: True
+          >>> lang_str3 = LangString("Hello, World!", "fr")
+          >>> print(lang_str1.equals_langstring(lang_str3))  # Output: False
 
 
 
@@ -1183,16 +1183,16 @@ Module Contents
       :rtype: LangString
       :raises TypeError: If the objects are not compatible for addition.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("Hello", "en")
-      >>> lang_str2 = LangString(" World", "en")
-      >>> result = lang_str1 + lang_str2
-      >>> print(result)  # Output: "Hello World"@en
+          >>> lang_str1 = LangString("Hello", "en")
+          >>> lang_str2 = LangString(" World", "en")
+          >>> result = lang_str1 + lang_str2
+          >>> print(result)  # Output: "Hello World"@en
 
-      >>> lang_str3 = LangString("Hello", "en")
-      >>> result = lang_str3 + " World"
-      >>> print(result)  # Output: "Hello World"@en
+          >>> lang_str3 = LangString("Hello", "en")
+          >>> result = lang_str3 + " World"
+          >>> print(result)  # Output: "Hello World"@en
 
 
 
@@ -1205,14 +1205,14 @@ Module Contents
       :return: True if the substring exists within the text, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello, World!", "en")
-      >>> contains = "World" in lang_str
-      >>> print(contains)  # Output: True
+          >>> lang_str = LangString("Hello, World!", "en")
+          >>> contains = "World" in lang_str
+          >>> print(contains)  # Output: True
 
-      >>> contains = "Python" in lang_str
-      >>> print(contains)  # Output: False
+          >>> contains = "Python" in lang_str
+          >>> print(contains)  # Output: False
 
 
 
@@ -1225,22 +1225,22 @@ Module Contents
       :return: True if the objects are equal, otherwise False.
       :rtype: bool
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("Hello, World!", "en")
-      >>> lang_str2 = LangString("Hello, World!", "en")
-      >>> is_equal = lang_str1 == lang_str2
-      >>> print(is_equal)  # Output: True
+          >>> lang_str1 = LangString("Hello, World!", "en")
+          >>> lang_str2 = LangString("Hello, World!", "en")
+          >>> is_equal = lang_str1 == lang_str2
+          >>> print(is_equal)  # Output: True
 
-      >>> lang_str3 = LangString("Hello, World!", "fr")
-      >>> is_equal = lang_str1 == lang_str3
-      >>> print(is_equal)  # Output: False
+          >>> lang_str3 = LangString("Hello, World!", "fr")
+          >>> is_equal = lang_str1 == lang_str3
+          >>> print(is_equal)  # Output: False
 
-      >>> is_equal = lang_str1 == "Hello, World!"
-      >>> print(is_equal)  # Output: True
+          >>> is_equal = lang_str1 == "Hello, World!"
+          >>> print(is_equal)  # Output: True
 
-      >>> is_equal = lang_str1 == "Bonjour, Monde!"
-      >>> print(is_equal)  # Output: False
+          >>> is_equal = lang_str1 == "Bonjour, Monde!"
+          >>> print(is_equal)  # Output: False
 
 
 
@@ -1255,22 +1255,22 @@ Module Contents
       :raises TypeError: If the objects are not compatible for comparison.
       :raises ValueError: If the language tags are incompatible.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("banana", "en")
-      >>> lang_str2 = LangString("apple", "en")
-      >>> is_ge = lang_str1 >= lang_str2
-      >>> print(is_ge)  # Output: True
+          >>> lang_str1 = LangString("banana", "en")
+          >>> lang_str2 = LangString("apple", "en")
+          >>> is_ge = lang_str1 >= lang_str2
+          >>> print(is_ge)  # Output: True
 
-      >>> lang_str3 = LangString("apple", "en")
-      >>> is_ge = lang_str2 >= lang_str3
-      >>> print(is_ge)  # Output: True
+          >>> lang_str3 = LangString("apple", "en")
+          >>> is_ge = lang_str2 >= lang_str3
+          >>> print(is_ge)  # Output: True
 
-      >>> is_ge = lang_str1 >= "banana"
-      >>> print(is_ge)  # Output: True
+          >>> is_ge = lang_str1 >= "banana"
+          >>> print(is_ge)  # Output: True
 
-      >>> is_ge = lang_str2 >= "cherry"
-      >>> print(is_ge)  # Output: False
+          >>> is_ge = lang_str2 >= "cherry"
+          >>> print(is_ge)  # Output: False
 
 
 
@@ -1283,14 +1283,14 @@ Module Contents
       :return: A new LangString with the substring or single character.
       :rtype: LangString
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello, world", "en")
-      >>> substring = lang_str[0:5]
-      >>> print(substring)  # Output: "hello"@en
+          >>> lang_str = LangString("hello, world", "en")
+          >>> substring = lang_str[0:5]
+          >>> print(substring)  # Output: "hello"@en
 
-      >>> single_char = lang_str[1]
-      >>> print(single_char)  # Output: "e"@en
+          >>> single_char = lang_str[1]
+          >>> print(single_char)  # Output: "e"@en
 
 
 
@@ -1305,22 +1305,22 @@ Module Contents
       :raises TypeError: If the objects are not compatible for comparison.
       :raises ValueError: If the language tags are incompatible.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("banana", "en")
-      >>> lang_str2 = LangString("apple", "en")
-      >>> is_gt = lang_str1 > lang_str2
-      >>> print(is_gt)  # Output: True
+          >>> lang_str1 = LangString("banana", "en")
+          >>> lang_str2 = LangString("apple", "en")
+          >>> is_gt = lang_str1 > lang_str2
+          >>> print(is_gt)  # Output: True
 
-      >>> lang_str3 = LangString("apple", "en")
-      >>> is_gt = lang_str2 > lang_str3
-      >>> print(is_gt)  # Output: False
+          >>> lang_str3 = LangString("apple", "en")
+          >>> is_gt = lang_str2 > lang_str3
+          >>> print(is_gt)  # Output: False
 
-      >>> is_gt = lang_str1 > "apple"
-      >>> print(is_gt)  # Output: True
+          >>> is_gt = lang_str1 > "apple"
+          >>> print(is_gt)  # Output: True
 
-      >>> is_gt = lang_str2 > "cherry"
-      >>> print(is_gt)  # Output: False
+          >>> is_gt = lang_str2 > "cherry"
+          >>> print(is_gt)  # Output: False
 
 
 
@@ -1333,11 +1333,11 @@ Module Contents
       :return: The hash value of the LangString object, based on its text and language tag.
       :rtype: int
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> hash_value = hash(lang_str)
-      >>> print(hash_value)  # Output: A unique integer representing the hash value
+          >>> lang_str = LangString("hello", "en")
+          >>> hash_value = hash(lang_str)
+          >>> print(hash_value)  # Output: A unique integer representing the hash value
 
 
 
@@ -1356,15 +1356,15 @@ Module Contents
       :raises TypeError: If the objects are not compatible for addition.
       :raises ValueError: If the language tags are incompatible.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("Hello", "en")
-      >>> lang_str2 = LangString(" World", "en")
-      >>> lang_str1 += lang_str2
-      >>> print(lang_str1)  # Output: "Hello World"@en
+          >>> lang_str1 = LangString("Hello", "en")
+          >>> lang_str2 = LangString(" World", "en")
+          >>> lang_str1 += lang_str2
+          >>> print(lang_str1)  # Output: "Hello World"@en
 
-      >>> lang_str1 += "!"
-      >>> print(lang_str1)  # Output: "Hello World!"@en
+          >>> lang_str1 += "!"
+          >>> print(lang_str1)  # Output: "Hello World!"@en
 
 
 
@@ -1380,11 +1380,11 @@ Module Contents
       :rtype: LangString
       :raises TypeError: If the operand is not an integer.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello", "en")
-      >>> lang_str *= 3
-      >>> print(lang_str)  # Output: "HelloHelloHello"@en
+          >>> lang_str = LangString("Hello", "en")
+          >>> lang_str *= 3
+          >>> print(lang_str)  # Output: "HelloHelloHello"@en
 
 
 
@@ -1397,17 +1397,17 @@ Module Contents
       :return: An iterator over the characters in the text.
       :rtype: Iterator[str]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("Hello", "en")
-      >>> for char in lang_str:
-      ...     print(char)
-      ...
-      # Output:   H
-      #           e
-      #           l
-      #           l
-      #           o
+          >>> lang_str = LangString("Hello", "en")
+          >>> for char in lang_str:
+          ...     print(char)
+          ...
+          # Output:   H
+          #           e
+          #           l
+          #           l
+          #           o
 
 
 
@@ -1424,12 +1424,12 @@ Module Contents
       :raises TypeError: If the objects are not compatible for comparison.
       :raises ValueError: If the language tags are incompatible.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("apple", "en")
-      >>> lang_str2 = LangString("banana", "en")
-      >>> print(lang_str1 <= lang_str2)  # Output: True
-      >>> print(lang_str1 <= "apple")  # Output: True
+          >>> lang_str1 = LangString("apple", "en")
+          >>> lang_str2 = LangString("banana", "en")
+          >>> print(lang_str1 <= lang_str2)  # Output: True
+          >>> print(lang_str1 <= "apple")  # Output: True
 
 
 
@@ -1440,11 +1440,11 @@ Module Contents
       :return: The length of the text.
       :rtype: int
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> length = len(lang_str)
-      >>> print(length)  # Output: 5
+          >>> lang_str = LangString("hello", "en")
+          >>> length = len(lang_str)
+          >>> print(length)  # Output: 5
 
 
 
@@ -1461,12 +1461,12 @@ Module Contents
       :raises TypeError: If the objects are not compatible for comparison.
       :raises ValueError: If the language tags are incompatible.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("apple", "en")
-      >>> lang_str2 = LangString("banana", "en")
-      >>> print(lang_str1 < lang_str2)  # Output: True
-      >>> print(lang_str1 < "banana")  # Output: True
+          >>> lang_str1 = LangString("apple", "en")
+          >>> lang_str2 = LangString("banana", "en")
+          >>> print(lang_str1 < lang_str2)  # Output: True
+          >>> print(lang_str1 < "banana")  # Output: True
 
 
 
@@ -1482,11 +1482,11 @@ Module Contents
       :rtype: LangString
       :raises TypeError: If the operand is not an integer.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> multiplied_lang_str = lang_str * 3
-      >>> print(multiplied_lang_str)  # Output: "hellohellohello"@en
+          >>> lang_str = LangString("hello", "en")
+          >>> multiplied_lang_str = lang_str * 3
+          >>> print(multiplied_lang_str)  # Output: "hellohellohello"@en
 
 
 
@@ -1504,11 +1504,11 @@ Module Contents
       :rtype: str
       :raises TypeError: If 'other' is not a string.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("world", "en")
-      >>> result = "hello " + lang_str
-      >>> print(result)  # Output: 'hello world'
+          >>> lang_str = LangString("world", "en")
+          >>> result = "hello " + lang_str
+          >>> print(result)  # Output: 'hello world'
 
 
 
@@ -1519,10 +1519,10 @@ Module Contents
       :return: The unambiguous string representation of the LangString.
       :rtype: str
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> print(repr(lang_str))  # Output: 'LangString(text="hello", lang="en")'
+          >>> lang_str = LangString("hello", "en")
+          >>> print(repr(lang_str))  # Output: 'LangString(text="hello", lang="en")'
 
 
 
@@ -1539,11 +1539,11 @@ Module Contents
       :rtype: LangString
       :raises TypeError: If 'other' is not an integer.
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> multiplied_lang_str = 3 * lang_str
-      >>> print(multiplied_lang_str)  # Output: "hellohellohello"@en
+          >>> lang_str = LangString("hello", "en")
+          >>> multiplied_lang_str = 3 * lang_str
+          >>> print(multiplied_lang_str)  # Output: "hellohellohello"@en
 
 
 
@@ -1554,10 +1554,10 @@ Module Contents
       :return: The string representation of the LangString object.
       :rtype: str
 
-      :Example:
+      **Example**::
 
-      >>> lang_str = LangString("hello", "en")
-      >>> print(lang_str)  # Output: '"hello"@en'
+          >>> lang_str = LangString("hello", "en")
+          >>> print(lang_str)  # Output: '"hello"@en'
 
 
 
@@ -1577,17 +1577,17 @@ Module Contents
       :return: A list of merged LangString instances without duplicates.
       :rtype: list[LangString]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("Hello", "en")
-      >>> lang_str2 = LangString("Hello", "EN")
-      >>> lang_str3 = LangString("Bonjour", "fr")
-      >>> merged_list = LangString.merge_langstrings([lang_str1, lang_str2, lang_str3])
-      >>> for ls in merged_list:
-      ...     print(ls)
-      ...
-      >>> # Output: '"Hello"@en'
-      >>> #         '"Bonjour"@fr'
+          >>> lang_str1 = LangString("Hello", "en")
+          >>> lang_str2 = LangString("Hello", "EN")
+          >>> lang_str3 = LangString("Bonjour", "fr")
+          >>> merged_list = LangString.merge_langstrings([lang_str1, lang_str2, lang_str3])
+          >>> for ls in merged_list:
+          ...     print(ls)
+          ...
+          >>> # Output: '"Hello"@en'
+          >>> #         '"Bonjour"@fr'
 
 
 
@@ -1606,12 +1606,12 @@ Module Contents
       :param print_lang: If True, include the language tag. If None, use the default setting from the Controller.
       :type print_lang: Optional[bool]
 
-      :Example:
+      **Example**::
 
-      >>> lang_str1 = LangString("a", "b")
-      >>> lang_str2 = LangString("c", "d")
-      >>> ls_list = [lang_str1, lang_str2]
-      >>> LangString.print_list(ls_list)  # Output: ['"a"@b', '"c"@d']
+          >>> lang_str1 = LangString("a", "b")
+          >>> lang_str2 = LangString("c", "d")
+          >>> ls_list = [lang_str1, lang_str2]
+          >>> LangString.print_list(ls_list)  # Output: ['"a"@b', '"c"@d']
 
 
 

@@ -71,25 +71,26 @@ class FlagValidator(metaclass=NonInstantiable):
     - `validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -> Optional[str]`: Validate and transform the
       `lang` argument based on the specified flag type.
 
-    Examples:
-    - Validating and transforming text:
-    >>> Controller.set_flag(GlobalFlag.STRIP_TEXT, True)
-    >>> Controller.set_flag(GlobalFlag.DEFINED_TEXT, True)
-    >>> print(FlagValidator.validate_flags_text(GlobalFlag, "  Hello  "))  # Output: Hello
-    >>> print(FlagValidator.validate_flags_text(GlobalFlag, "     "))  # Raises ValueError
-    >>> print(FlagValidator.validate_flags_text(GlobalFlag, None))  # Raises ValueError
+    **Example**::
 
-    - Validating and transforming language:
-    >>> Controller.set_flag(LangStringFlag.STRIP_LANG, True)
-    >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'EN'
-    >>> Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
-    >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'en'
-    >>> Controller.set_flag(LangStringFlag.DEFINED_LANG, True)
-    >>> try:
-    ...     print(FlagValidator.validate_flags_lang(LangStringFlag, "  "))
-    ... except ValueError as e:
-    ...     print(e)  # Output: Invalid 'lang' value received ('  '). 'LangStringFlag.DEFINED_LANG' is enabled.
-                      # Expected non-empty 'str' or 'str' with non-space characters.
+        # Validating and transforming text:
+        >>> Controller.set_flag(GlobalFlag.STRIP_TEXT, True)
+        >>> Controller.set_flag(GlobalFlag.DEFINED_TEXT, True)
+        >>> print(FlagValidator.validate_flags_text(GlobalFlag, "  Hello  "))  # Output: Hello
+        >>> print(FlagValidator.validate_flags_text(GlobalFlag, "     "))  # Raises ValueError
+        >>> print(FlagValidator.validate_flags_text(GlobalFlag, None))  # Raises ValueError
+
+        # Validating and transforming language:
+        >>> Controller.set_flag(LangStringFlag.STRIP_LANG, True)
+        >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'EN'
+        >>> Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
+        >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'en'
+        >>> Controller.set_flag(LangStringFlag.DEFINED_LANG, True)
+        >>> try:
+        ...     print(FlagValidator.validate_flags_lang(LangStringFlag, "  "))
+        ... except ValueError as e:
+        ...     print(e)  # Output: Invalid 'lang' value received ('  '). 'LangStringFlag.DEFINED_LANG' is enabled.
+        ...               # Expected non-empty 'str' or 'str' with non-space characters.
     """
 
     @staticmethod
@@ -112,13 +113,13 @@ class FlagValidator(metaclass=NonInstantiable):
         :raises TypeError: If 'flag_type' is not an instance of type or 'text' is not a string or 'None'.
         :raises ValueError: If the text does not meet the criteria specified by the control flags.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.STRIP_TEXT, True)
-        >>> Controller.set_flag(GlobalFlag.DEFINED_TEXT, True)
-        >>> print(FlagValidator.validate_flags_text(GlobalFlag, "  Hello  "))  # Output: Hello
-        >>> print(FlagValidator.validate_flags_text(GlobalFlag, "     "))  # Raises ValueError
-        >>> print(FlagValidator.validate_flags_text(GlobalFlag, None))  # Raises ValueError
+            >>> Controller.set_flag(GlobalFlag.STRIP_TEXT, True)
+            >>> Controller.set_flag(GlobalFlag.DEFINED_TEXT, True)
+            >>> print(FlagValidator.validate_flags_text(GlobalFlag, "  Hello  "))  # Output: Hello
+            >>> print(FlagValidator.validate_flags_text(GlobalFlag, "     "))  # Raises ValueError
+            >>> print(FlagValidator.validate_flags_text(GlobalFlag, None))  # Raises ValueError
         """
         TypeValidator.validate_type_single(flag_type, type)
         TypeValidator.validate_type_single(text, str, optional=True)
@@ -167,18 +168,18 @@ class FlagValidator(metaclass=NonInstantiable):
         :raises ImportError: If 'VALID_LANG' is enabled but the 'langcodes' library is not installed and
                              `ENFORCE_EXTRA_DEPEND` is enabled.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(LangStringFlag.STRIP_LANG, True)
-        >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'EN'
-        >>> Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
-        >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'en'
-        >>> Controller.set_flag(LangStringFlag.DEFINED_LANG, True)
-        >>> try:
-        ...     print(FlagValidator.validate_flags_lang(LangStringFlag, "  "))
-        ... except ValueError as e:
-        ...     print(e)  # Output: Invalid 'lang' value received ('  '). 'LangStringFlag.DEFINED_LANG' is enabled.
-                          # Expected non-empty 'str' or 'str' with non-space characters.
+            >>> Controller.set_flag(LangStringFlag.STRIP_LANG, True)
+            >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'EN'
+            >>> Controller.set_flag(LangStringFlag.LOWERCASE_LANG, True)
+            >>> print(FlagValidator.validate_flags_lang(LangStringFlag, "  EN  "))  # Output: 'en'
+            >>> Controller.set_flag(LangStringFlag.DEFINED_LANG, True)
+            >>> try:
+            ...     print(FlagValidator.validate_flags_lang(LangStringFlag, "  "))
+            ... except ValueError as e:
+            ...     print(e)  # Output: Invalid 'lang' value received ('  '). 'LangStringFlag.DEFINED_LANG' is enabled.
+                              # Expected non-empty 'str' or 'str' with non-space characters.
         """
 
         def handle_validation_error(
@@ -283,38 +284,39 @@ class TypeValidator(metaclass=NonInstantiable):
       Validate that an argument is an iterable of the expected type and that its contents match the expected
       content type.
 
-    Examples:
-    - Using the type validation decorator:
-    >>> @TypeValidator.validate_type_decorator
-    ... def greet(name: str, age: int) -> str:
-    ...     return f"Hello, {name}. You are {age} years old."
-    ...
-    >>> print(greet("Alice", 30))  # Output: Hello, Alice. You are 30 years old.
+    **Example**::
 
-    >>> @TypeValidator.validate_type_decorator
-    ... def process_list(data: list[int]) -> int:
-    ...     return sum(data)
-    ...
-    >>> print(process_list([1, 2, 3]))  # Output: 6
+        # Using the type validation decorator:
+        >>> @TypeValidator.validate_type_decorator
+        ... def greet(name: str, age: int) -> str:
+        ...     return f"Hello, {name}. You are {age} years old."
+        ...
+        >>> print(greet("Alice", 30))  # Output: Hello, Alice. You are 30 years old.
 
-    >>> @TypeValidator.validate_type_decorator
-    ... def union_example(value: Union[int, str]) -> str:
-    ...     return f"Received: {value}"
-    ...
-    >>> print(union_example(42))  # Output: Received: 42
-    >>> print(union_example("42"))  # Output: Received: 42
+        >>> @TypeValidator.validate_type_decorator
+        ... def process_list(data: list[int]) -> int:
+        ...     return sum(data)
+        ...
+        >>> print(process_list([1, 2, 3]))  # Output: 6
 
-    - Validating a single argument:
-    >>> TypeValidator.validate_type_single(5, int)  # Does not raise error.
-    >>> TypeValidator.validate_type_single(5, str)  # Raise TypeError
-    >>> TypeValidator.validate_type_single(None, str, optional=True)  # Does not raise error.
+        >>> @TypeValidator.validate_type_decorator
+        ... def union_example(value: Union[int, str]) -> str:
+        ...     return f"Received: {value}"
+        ...
+        >>> print(union_example(42))  # Output: Received: 42
+        >>> print(union_example("42"))  # Output: Received: 42
 
-    - Validating an iterable:
-    >>> TypeValidator.validate_type_iterable([1, 2, 3], list, int)  # Does not raise error.
-    >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, str)  # Does not raise error.
-    >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, list, str)  # Raises TypeError
-    >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, int)  # Raises TypeError
-    >>> TypeValidator.validate_type_iterable(None, list, int, optional=True)  # Does not raise error.
+        # Validating a single argument:
+        >>> TypeValidator.validate_type_single(5, int)  # Does not raise error.
+        >>> TypeValidator.validate_type_single(5, str)  # Raises TypeError
+        >>> TypeValidator.validate_type_single(None, str, optional=True)  # Does not raise error.
+
+        # Validating an iterable:
+        >>> TypeValidator.validate_type_iterable([1, 2, 3], list, int)  # Does not raise error.
+        >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, str)  # Does not raise error.
+        >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, list, str)  # Raises TypeError
+        >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, int)  # Raises TypeError
+        >>> TypeValidator.validate_type_iterable(None, list, int, optional=True)  # Does not raise error.
     """
 
     @staticmethod
@@ -346,22 +348,22 @@ class TypeValidator(metaclass=NonInstantiable):
         :rtype: bool
         :raises TypeError: If the argument does not match the expected type hint.
 
-        :Example:
+        **Example**::
 
-        # Check a simple type
-        >>> print(TypeValidator._check_arg(5, int))  # Output: True
+            # Check a simple type
+            >>> print(TypeValidator._check_arg(5, int))  # Output: True
 
-        # Check a union type
-        >>> print(TypeValidator._check_arg("test", Union[str, int]))  # Output: True
+            # Check a union type
+            >>> print(TypeValidator._check_arg("test", Union[str, int]))  # Output: True
 
-        # Check a list of integers
-        >>> print(TypeValidator._check_arg([1, 2, 3], list[int]))  # Output: True
+            # Check a list of integers
+            >>> print(TypeValidator._check_arg([1, 2, 3], list[int]))  # Output: True
 
-        # Check a dictionary with string keys and integer values
-        >>> print(TypeValidator._check_arg({"a": 1, "b": 2}, dict[str, int]))  # Output: True
+            # Check a dictionary with string keys and integer values
+            >>> print(TypeValidator._check_arg({"a": 1, "b": 2}, dict[str, int]))  # Output: True
 
-        # This will raise a TypeError because the argument does not match the expected type
-        >>> print(TypeValidator._check_arg("test", int))  # Raises TypeError
+            # This will raise a TypeError because the argument does not match the expected type
+            >>> print(TypeValidator._check_arg("test", int))  # Raises TypeError
         """
         origin = get_origin(hint)
         args = get_args(hint)
@@ -442,35 +444,35 @@ class TypeValidator(metaclass=NonInstantiable):
         :rtype: Callable[..., T]
         :raises TypeError: If an argument's type does not match its type hint.
 
-        :Example:
+        **Example**::
 
-        >>> @TypeValidator.validate_type_decorator
-        ... def greet(name: str, age: int) -> str:
-        ...     return f"Hello, {name}. You are {age} years old."
-        ...
-        >>> print(greet("Alice", 30))  # Output: Hello, Alice. You are 30 years old.
+            >>> @TypeValidator.validate_type_decorator
+            ... def greet(name: str, age: int) -> str:
+            ...     return f"Hello, {name}. You are {age} years old."
+            ...
+            >>> print(greet("Alice", 30))  # Output: Hello, Alice. You are 30 years old.
 
-        >>> @TypeValidator.validate_type_decorator
-        ... def process_list(data: list[int]) -> int:
-        ...     return sum(data)
-        ...
-        >>> print(process_list([1, 2, 3]))  # Output: 6
+            >>> @TypeValidator.validate_type_decorator
+            ... def process_list(data: list[int]) -> int:
+            ...     return sum(data)
+            ...
+            >>> print(process_list([1, 2, 3]))  # Output: 6
 
-        # Raises TypeError because 'age' is expected to be an int, not a str
-        >>> greet("Alice", "30")  # Raises TypeError
+            # Raises TypeError because 'age' is expected to be an int, not a str
+            >>> greet("Alice", "30")  # Raises TypeError
 
-        # Raises TypeError because 'data' is expected to be a list[int], not a list[str]
-        >>> process_list(["1", "2", "3"])  # Raises TypeError
+            # Raises TypeError because 'data' is expected to be a list[int], not a list[str]
+            >>> process_list(["1", "2", "3"])  # Raises TypeError
 
-        >>> @TypeValidator.validate_type_decorator
-        ... def union_example(value: Union[int, str]) -> str:
-        ...     return f"Received: {value}"
-        ...
-        >>> print(union_example(42))  # Output: Received: 42
-        >>> print(union_example("42"))  # Output: Received: 42
+            >>> @TypeValidator.validate_type_decorator
+            ... def union_example(value: Union[int, str]) -> str:
+            ...     return f"Received: {value}"
+            ...
+            >>> print(union_example(42))  # Output: Received: 42
+            >>> print(union_example("42"))  # Output: Received: 42
 
-        # Raises TypeError because 'value' is expected to be Union[int, str], not a list
-        >>> union_example([42])  # Raises TypeError
+            # Raises TypeError because 'value' is expected to be Union[int, str], not a list
+            >>> union_example([42])  # Raises TypeError
         """
 
         @wraps(func)
@@ -521,19 +523,19 @@ class TypeValidator(metaclass=NonInstantiable):
         :type optional: bool
         :raises TypeError: If the argument does not match the expected type.
 
-        :Example:
+        **Example**::
 
-        >>> TypeValidator.validate_type_single(5, int)
-        >>> TypeValidator.validate_type_single("test", str)
-        >>> TypeValidator.validate_type_single(None, str, optional=True)
+            >>> TypeValidator.validate_type_single(5, int)
+            >>> TypeValidator.validate_type_single("test", str)
+            >>> TypeValidator.validate_type_single(None, str, optional=True)
 
-        # This will raise a TypeError because the argument is not of the expected type
-        >>> TypeValidator.validate_type_single(5, str)
-        # Raises TypeError: Invalid argument with value '5'. Expected 'str', but got 'int'.
+            # This will raise a TypeError because the argument is not of the expected type
+            >>> TypeValidator.validate_type_single(5, str)
+            # Raises TypeError: Invalid argument with value '5'. Expected 'str', but got 'int'.
 
-        # This will also raise a TypeError because the argument is not of the expected type
-        >>> TypeValidator.validate_type_single("test", int)
-        # Raises TypeError: Invalid argument with value 'test'. Expected 'int', but got 'str'.
+            # This will also raise a TypeError because the argument is not of the expected type
+            >>> TypeValidator.validate_type_single("test", int)
+            # Raises TypeError: Invalid argument with value 'test'. Expected 'int', but got 'str'.
         """
         if optional and arg is None:
             return
@@ -567,19 +569,19 @@ class TypeValidator(metaclass=NonInstantiable):
         :type optional: bool
         :raises TypeError: If the argument or its contents do not match the expected types.
 
-        :Example:
+        **Example**::
 
-        >>> TypeValidator.validate_type_iterable([1, 2, 3], list, int)
-        >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, str)
-        >>> TypeValidator.validate_type_iterable(None, list, int, optional=True)
+            >>> TypeValidator.validate_type_iterable([1, 2, 3], list, int)
+            >>> TypeValidator.validate_type_iterable({"a", "b", "c"}, set, str)
+            >>> TypeValidator.validate_type_iterable(None, list, int, optional=True)
 
-        # This will raise a TypeError because the argument is not of the expected iterable type
-        >>> TypeValidator.validate_type_iterable([1, 2, 3], set, int)
-        # Raises TypeError: Invalid argument with value '[1, 2, 3]'. Expected 'set', but got 'list'.
+            # This will raise a TypeError because the argument is not of the expected iterable type
+            >>> TypeValidator.validate_type_iterable([1, 2, 3], set, int)
+            # Raises TypeError: Invalid argument with value '[1, 2, 3]'. Expected 'set', but got 'list'.
 
-        # This will also raise a TypeError because the contents are not of the expected type
-        >>> TypeValidator.validate_type_iterable([1, "2", 3], list, int)
-        # Raises TypeError: Invalid argument with value '2'. Expected 'int', but got 'str'.
+            # This will also raise a TypeError because the contents are not of the expected type
+            >>> TypeValidator.validate_type_iterable([1, "2", 3], list, int)
+            # Raises TypeError: Invalid argument with value '2'. Expected 'int', but got 'str'.
         """
         if optional and arg is None:
             return

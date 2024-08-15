@@ -13,7 +13,7 @@ Classes:
 - **NonInstantiable**: A metaclass that overrides the default instantiation behavior to prevent class
   instantiation.
 
-:Example:
+**Example**::
 
     >>> class MyClass(metaclass=NonInstantiable):
     ...     @staticmethod
@@ -45,7 +45,7 @@ class NonInstantiable(type):
     - **Namespace Utility**: Ideal for defining classes that serve as namespaces or containers for static methods
       and constants.
 
-    :Example:
+    **Example**::
 
         >>> class MyClass(metaclass=NonInstantiable):
         ...     @staticmethod
@@ -71,7 +71,7 @@ class NonInstantiable(type):
 
         :raises TypeError: Always, to indicate that the class cannot be instantiated.
 
-        :Example:
+        **Example**::
 
             >>> class MyClass(metaclass=NonInstantiable):
             ...     @staticmethod

@@ -1781,59 +1781,6 @@ instances. If the list is empty, an empty MultiLangString is returned.</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._get_registered_lang">
-<span class="sig-name descname"><span class="pre">_get_registered_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._get_registered_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the registered language key from the MultiLangString.</p>
-<p>This method performs a case-insensitive lookup to find and return the registered language key
-in the MultiLangString. If the language key is not found, it returns None.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to look up.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The registered language key, or None if not found.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Union[str, None]</p>
-</dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">registered_lang</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">_get_registered_lang</span><span class="p">(</span><span class="s2">&quot;EN&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">registered_lang</span><span class="p">)</span>  <span class="c1"># Output: en</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._merge_language_entries">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_merge_language_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._merge_language_entries" title="Link to this definition"></a></dt>
-<dd><p>Merge language entries in a dictionary where the language codes match case-insensitively.</p>
-<p>This static method takes a dictionary with language codes as keys and sets of strings as values.
-It merges entries with case-insensitive language codes, combining their text sets. The original
-language codes are preserved if there are no case-insensitive duplicates.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mls_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – A dictionary with language codes as keys and sets of strings as values.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, set[str]]</p>
-</dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;EN&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">merged_dict</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="o">.</span><span class="n">_merge_language_entries</span><span class="p">(</span><span class="n">mls_dict</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">merged_dict</span><span class="p">)</span>  <span class="c1"># Output: {&#39;en&#39;: {&#39;Hello&#39;, &#39;World&#39;}, &#39;fr&#39;: {&#39;Bonjour&#39;}}</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </dd></dl>
 
 </section>

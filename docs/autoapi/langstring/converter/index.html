@@ -117,7 +117,7 @@ ensuring compatibility and ease of use in various language processing tasks.</p>
 directly to perform conversions. For example, <cite>Converter.to_langstring(arg_obj)</cite> where <cite>arg_obj</cite> could
 be an instance of <cite>SetLangString</cite> or <cite>MultiLangString</cite>.</p>
 </dd>
-<dt>Examples:</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
 &gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“manual”, “Hello”, “en”)
 &gt;&gt;&gt; print(langstring)  #Output: “Hello”&#64;en</p>
 <p># Convert a list of strings to a list of LangStrings using the ‘parse’ method:
@@ -155,7 +155,7 @@ foundational tools for handling multilingual text data in various formats.</p>
 <p>This class provides methods to convert between <cite>LangString</cite>, <cite>SetLangString</cite>, and <cite>MultiLangString</cite> types.
 It is designed to be non-instantiable as it serves as a utility class with class methods only.</p>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
 &gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“manual”, “Hello”, “en”)
 &gt;&gt;&gt; print(langstring)  #Output: “Hello”&#64;en</p>
 <p># Convert a list of strings to a list of LangStrings using the ‘parse’ method:
@@ -193,7 +193,7 @@ It is designed to be non-instantiable as it serves as a utility class with class
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString using the ‘manual’ method:
 &gt;&gt;&gt; langstring = Converter.from_string_to_langstring(“manual”, “Hello”, “en”)
 &gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
 <p># Convert a string to a LangString using the ‘parse’ method:
@@ -222,7 +222,7 @@ It is designed to be non-instantiable as it serves as a utility class with class
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a string to a LangString with the specified language:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString with the specified language:
 &gt;&gt;&gt; langstring = Converter.from_string_to_langstring_manual(“Hello”, “en”)
 &gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
 </dd>
@@ -251,7 +251,7 @@ to “” (empty string).</p>
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a string to a LangString by parsing it with the given separator:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a string to a LangString by parsing it with the given separator:
 &gt;&gt;&gt; langstring = Converter.from_string_to_langstring_parse(”<a class="reference external" href="mailto:Hello&#37;&#52;&#48;en">Hello<span>&#64;</span>en</a>”, “&#64;”)
 &gt;&gt;&gt; print(langstring)  # Output: “Hello”&#64;en</p>
 <p># Convert a string to a LangString with no separator found:
@@ -288,7 +288,7 @@ to “” (empty string).</p>
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a list of strings to a list of LangStrings using the ‘manual’ method:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of strings to a list of LangStrings using the ‘manual’ method:
 &gt;&gt;&gt; langstrings = Converter.from_strings_to_langstrings(“manual”, [“Hello”, “Hi”], “en”)
 &gt;&gt;&gt; for ls in langstrings:
 &gt;&gt;&gt;     print(ls)  # Output: “Hello”&#64;en
@@ -321,7 +321,7 @@ to “” (empty string).</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of strings to a SetLangString using the ‘manual’ method:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of strings to a SetLangString using the ‘manual’ method:
 &gt;&gt;&gt; setlangstring = Converter.from_strings_to_setlangstring([“Hello”, “Hi”], “en”)
 &gt;&gt;&gt; print(setlangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
 </dd>
@@ -349,7 +349,7 @@ to “” (empty string).</p>
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a list of strings to a MultiLangString using the ‘manual’ method:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of strings to a MultiLangString using the ‘manual’ method:
 &gt;&gt;&gt; multilangstring = Converter.from_strings_to_multilangstring(“manual”, [“Hello”, “Hi”], “en”)
 &gt;&gt;&gt; print(multilangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
 <p># Convert a list of strings to a MultiLangString using the ‘parse’ method:
@@ -385,7 +385,7 @@ to “” (empty string).</p>
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a LangString to a string with quotes and language:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a LangString to a string with quotes and language:
 &gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
 &gt;&gt;&gt; string = Converter.from_langstring_to_string(langstring, print_quotes=True, separator=”&#64;”)
 &gt;&gt;&gt; print(string)  # Output: “Hello”&#64;en</p>
@@ -422,7 +422,7 @@ to “” (empty string).</p>
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a list of strings with quotes and language:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a list of strings with quotes and language:
 &gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
 &gt;&gt;&gt; strings = Converter.from_langstrings_to_strings(langstrings, print_quotes=True, separator=”&#64;”)
 &gt;&gt;&gt; for s in strings:
@@ -463,7 +463,7 @@ LangString in a set and retains its language.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a LangString to a SetLangString:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a LangString to a SetLangString:
 &gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
 &gt;&gt;&gt; setlangstring = Converter.from_langstring_to_setlangstring(langstring)
 &gt;&gt;&gt; print(setlangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a></p>
@@ -496,7 +496,7 @@ language.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a SetLangString:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a SetLangString:
 &gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Hi”, “en”)]
 &gt;&gt;&gt; setlangstring = Converter.from_langstrings_to_setlangstring(langstrings)
 &gt;&gt;&gt; print(setlangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
@@ -525,7 +525,7 @@ SetLangString contains all the unique texts for a specific language from the Lan
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a list of SetLangStrings:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a list of SetLangStrings:
 &gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
 &gt;&gt;&gt; setlangstrings = Converter.from_langstrings_to_setlangstrings(langstrings)
 &gt;&gt;&gt; for sls in setlangstrings:
@@ -556,7 +556,7 @@ contains the text and language of the arg LangString.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a LangString to a MultiLangString:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a LangString to a MultiLangString:
 &gt;&gt;&gt; langstring = LangString(“Hello”, “en”)
 &gt;&gt;&gt; multilangstring = Converter.from_langstring_to_multilangstring(langstring)
 &gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a></p>
@@ -585,7 +585,7 @@ contains all the unique texts and languages from the LangStrings.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of LangStrings to a MultiLangString:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of LangStrings to a MultiLangString:
 &gt;&gt;&gt; langstrings = [LangString(“Hello”, “en”), LangString(“Bonjour”, “fr”)]
 &gt;&gt;&gt; multilangstring = Converter.from_langstrings_to_multilangstring(langstrings)
 &gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
@@ -609,7 +609,7 @@ contains all the unique texts and languages from the LangStrings.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a SetLangString to a string:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a string:
 &gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
 &gt;&gt;&gt; string = Converter.from_setlangstring_to_string(setlangstring)
 &gt;&gt;&gt; print(string)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
@@ -638,7 +638,7 @@ contains all the unique texts and languages from the LangStrings.</p>
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a SetLangString to a list of strings with quotes and language:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a list of strings with quotes and language:
 &gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
 &gt;&gt;&gt; strings = Converter.from_setlangstring_to_strings(setlangstring, print_quotes=True, separator=”&#64;”)
 &gt;&gt;&gt; for s in strings:
@@ -679,7 +679,7 @@ contains all the unique texts and languages from the LangStrings.</p>
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a list of SetLangStrings to a list of strings with quotes and language:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of SetLangStrings to a list of strings with quotes and language:
 &gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
 &gt;&gt;&gt; strings = Converter.from_setlangstrings_to_strings(setlangstrings, print_quotes=True, separator=”&#64;”)
 &gt;&gt;&gt; for s in strings:
@@ -720,7 +720,7 @@ from the SetLangString and its associated language.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a SetLangString to a list of LangStrings:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a list of LangStrings:
 &gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
 &gt;&gt;&gt; langstrings = Converter.from_setlangstring_to_langstrings(setlangstring)
 &gt;&gt;&gt; for ls in langstrings:
@@ -753,7 +753,7 @@ list corresponds to one of the texts in the SetLangStrings, retaining their asso
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of SetLangStrings to a list of LangStrings:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of SetLangStrings to a list of LangStrings:
 &gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
 &gt;&gt;&gt; langstrings = Converter.from_setlangstrings_to_langstrings(setlangstrings)
 &gt;&gt;&gt; for ls in langstrings:
@@ -784,7 +784,7 @@ from the SetLangString, associated with its language.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a SetLangString to a MultiLangString:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a SetLangString to a MultiLangString:
 &gt;&gt;&gt; setlangstring = SetLangString({“Hello”, “Hi”}, “en”)
 &gt;&gt;&gt; multilangstring = Converter.from_setlangstring_to_multilangstring(setlangstring)
 &gt;&gt;&gt; print(multilangstring)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a></p>
@@ -813,7 +813,7 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of SetLangStrings to a MultiLangString:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of SetLangStrings to a MultiLangString:
 &gt;&gt;&gt; setlangstrings = [SetLangString({“Hello”}, “en”), SetLangString({“Bonjour”}, “fr”)]
 &gt;&gt;&gt; multilangstring = Converter.from_setlangstrings_to_multilangstring(setlangstrings)
 &gt;&gt;&gt; print(multilangstring)  # Output: <a class="reference external" href="mailto:{'Hello'}&#37;&#52;&#48;en">{‘Hello’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
@@ -837,7 +837,7 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a MultiLangString to a string:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a string:
 &gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
 &gt;&gt;&gt; string = Converter.from_multilangstring_to_string(multilangstring)
 &gt;&gt;&gt; print(string)  # Output: {‘Hello’, <a class="reference external" href="mailto:'Hi'}&#37;&#52;&#48;en">‘Hi’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Bonjour'}&#37;&#52;&#48;fr">{‘Bonjour’}<span>&#64;</span>fr</a></p>
@@ -868,7 +868,7 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a MultiLangString to a list of strings with quotes and language:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a list of strings with quotes and language:
 &gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
 &gt;&gt;&gt; strings = Converter.from_multilangstring_to_strings(multilangstring, print_quotes=True, separator=”&#64;”)
 &gt;&gt;&gt; for s in strings:
@@ -915,7 +915,7 @@ the casefolded version of the lang tag is used. If only a single case is used, t
 </dd>
 </dl>
 <dl>
-<dt>Examples:</dt><dd><p># Convert a list of MultiLangStrings to a list of strings with quotes and language:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of MultiLangStrings to a list of strings with quotes and language:
 &gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”}, “fr”: {“Bonjour”}})
 &gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hi”}, “fr”: {“Salut”}})
 &gt;&gt;&gt; strings = Converter.from_multilangstrings_to_strings([mls1, mls2], print_quotes=True, separator=”&#64;”)
@@ -966,7 +966,7 @@ texts in the MultiLangString along with its associated language.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a MultiLangString to a list of LangStrings:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a list of LangStrings:
 &gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hi”, “Hello”}, “fr”: {“Bonjour”}})
 &gt;&gt;&gt; langstrings = Converter.from_multilangstring_to_langstrings(multilangstring)
 &gt;&gt;&gt; for ls in langstrings:
@@ -1003,7 +1003,7 @@ each representing one of the texts in the MultiLangStrings along with its associ
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of MultiLangStrings to a list of LangStrings:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of MultiLangStrings to a list of LangStrings:
 &gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”}})
 &gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hey”}, “fr”: {“Salut”}})
 &gt;&gt;&gt; langstrings = Converter.from_multilangstrings_to_langstrings([mls1, mls2])
@@ -1042,7 +1042,7 @@ texts of a single language from the MultiLangString.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a MultiLangString to a list of SetLangStrings:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a MultiLangString to a list of SetLangStrings:
 &gt;&gt;&gt; multilangstring = MultiLangString(mls_dict={“en”: {“Hello”, “Hi”}, “fr”: {“Bonjour”, “Salut”}})
 &gt;&gt;&gt; setlangstrings = Converter.from_multilangstring_to_setlangstrings(multilangstring)
 &gt;&gt;&gt; for sls in setlangstrings:
@@ -1078,7 +1078,7 @@ contains texts of a single language from the merged MultiLangStrings.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Examples:</dt><dd><p># Convert a list of MultiLangStrings to a list of SetLangStrings:
+<dt><strong>Example</strong>::</dt><dd><p># Convert a list of MultiLangStrings to a list of SetLangStrings:
 &gt;&gt;&gt; mls1 = MultiLangString(mls_dict={“en”: {“Hello”}, “fr”: {“Bonjour”}})
 &gt;&gt;&gt; mls2 = MultiLangString(mls_dict={“en”: {“Hi”}, “fr”: {“Salut”}})
 &gt;&gt;&gt; setlangstrings = Converter.from_multilangstrings_to_setlangstrings([mls1, mls2])

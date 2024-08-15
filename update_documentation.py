@@ -32,6 +32,7 @@ def execute_documentation_commands() -> None:
     sphinx_dir = os.path.join(base_dir, "sphinx")
     docs_dir = os.path.join(base_dir, "docs")
 
+    # Steps 1 and 2: Remove the 'docs' directory and its contents. Create a new 'docs' directory.
     logger.info("Deleting and creating again the existing docs/ directory")
     try:
         # Use shutil.rmtree to remove the directory and its contents
@@ -44,6 +45,7 @@ def execute_documentation_commands() -> None:
         logger.exception(f"Error: {e}")
         exit(1)
 
+    # Steps 3 and 4: Clean the Sphinx documentation build. Build the Sphinx HTML documentation.
     logger.info("Executing commands 'make clean' and 'make html' sequentially")
     try:
         subprocess.run(["make", "clean"], cwd=sphinx_dir, shell=True, check=True)
@@ -56,6 +58,8 @@ def execute_documentation_commands() -> None:
         logger.exception(f"An error occurred: {e}")
         exit(1)
 
+    # Step 5: Copy the HTML documentation to the 'docs' directory.
+    logger.info("Starting the process of copying the HTML documentation from the Sphinx build dir to the 'docs' dir.")
     try:
         sphinx_dir_html = os.path.join(sphinx_dir, "_build", "html")
         if not os.path.exists(sphinx_dir_html):
@@ -68,6 +72,7 @@ def execute_documentation_commands() -> None:
         logger.exception(f"Error: {e}")
         exit(1)
 
+    # Step 6: Clean the Sphinx documentation build again.
     logger.info("Executing command 'make clean'")
     try:
         subprocess.run(["make", "clean"], cwd=sphinx_dir, shell=True, check=True)

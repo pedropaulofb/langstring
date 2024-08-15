@@ -1,6 +1,8 @@
 """
-The `controller` module provides the `Controller` class, a non-instantiable class designed to manage and manipulate \
-configuration flags for the `LangString`, `SetLangString`, and `MultiLangString` classes.
+The `controller` module provides the `Controller` class.
+
+This class is a non-instantiable class designed to manage and manipulate configuration flags for the `LangString`,
+`SetLangString`, and `MultiLangString` classes.
 
 This module defines the `Controller` class, which offers class methods to set, retrieve, print, and reset configuration
 flags. These flags influence the behavior and validation rules of the multilingual text handling classes within the
@@ -49,32 +51,32 @@ class Controller(metaclass=NonInstantiable):
     :cvar flags: Stores the current state of each flag.
     :vartype flags: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
 
-    :Example:
+    **Example**::
 
-    Set a flag:
-    >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+        Set a flag:
+        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
 
-    Get a flag:
-    >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
-    # Output: True
+        Get a flag:
+        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+        # Output: True
 
-    Reset a flag to its default value:
-    >>> Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
-    >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
-    # Output: False
+        Reset a flag to its default value:
+        >>> Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
+        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))
+        # Output: False
 
-    Print the state of a specific flag:
-    >>> Controller.print_flag(GlobalFlag.LOWERCASE_LANG)
-    # Output: GlobalFlag.LOWERCASE_LANG = False
+        Print the state of a specific flag:
+        >>> Controller.print_flag(GlobalFlag.LOWERCASE_LANG)
+        # Output: GlobalFlag.LOWERCASE_LANG = False
 
-    Print the states of all flags:
-    >>> Controller.print_flags()
-    # Output: (Output of all flags with their states)
+        Print the states of all flags:
+        >>> Controller.print_flags()
+        # Output: (Output of all flags with their states)
 
-    Reset all flags to their default values:
-    >>> Controller.reset_flags()
-    >>> Controller.print_flags()
-    # Output: (Output of all flags reset to their default states)
+        Reset all flags to their default values:
+        >>> Controller.reset_flags()
+        >>> Controller.print_flags()
+        # Output: (Output of all flags reset to their default states)
     """
 
     # Define the default values of all flags as a class-level private constant
@@ -140,10 +142,10 @@ class Controller(metaclass=NonInstantiable):
         :type state: bool
         :raises TypeError: If 'flag' is not an instance of one of the flag enums, or if 'state' is not a boolean.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
-        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: True
+            >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+            >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: True
         """
         if not isinstance(state, bool):
             raise TypeError("Invalid state received. State must be a boolean new_text.")
@@ -181,10 +183,10 @@ class Controller(metaclass=NonInstantiable):
         :raises TypeError: If 'flag' is not a member of GlobalFlag, LangStringFlag, SetLangStringFlag,
                            or MultiLangStringFlag.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
-        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: True
+            >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+            >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: True
         """
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
@@ -206,11 +208,11 @@ class Controller(metaclass=NonInstantiable):
         :return: A dictionary mapping each flag to its boolean state.
         :rtype: dict[Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag], bool]
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
-        >>> flags = Controller.get_flags()
-        >>> print(flags[GlobalFlag.LOWERCASE_LANG])  # Output: True
+            >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+            >>> flags = Controller.get_flags()
+            >>> print(flags[GlobalFlag.LOWERCASE_LANG])  # Output: True
         """
         return cls.flags.copy()
 
@@ -226,10 +228,10 @@ class Controller(metaclass=NonInstantiable):
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
         :raises TypeError: If 'flag' is not an instance of one of the flag enums.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
-        >>> Controller.print_flag(GlobalFlag.LOWERCASE_LANG)  # Output: GlobalFlag.LOWERCASE_LANG = True
+            >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+            >>> Controller.print_flag(GlobalFlag.LOWERCASE_LANG)  # Output: GlobalFlag.LOWERCASE_LANG = True
         """
         if not isinstance(flag, (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)):
             raise TypeError(
@@ -252,11 +254,11 @@ class Controller(metaclass=NonInstantiable):
         :type flag_type: Optional[type]
         :raises TypeError: If 'flag_type' is not a valid flag type.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
-        >>> Controller.print_flags()
-        # Output: Prints all flags and their current state.
+            >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+            >>> Controller.print_flags()
+            # Output: Prints all flags and their current state.
         """
         if flag_type:
             if not isinstance(flag_type, type):
@@ -286,11 +288,11 @@ class Controller(metaclass=NonInstantiable):
         :type flag: Union[GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag]
         :raises TypeError: If 'flag' is not an instance of one of the flag enums.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
-        >>> Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
-        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: False
+            >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+            >>> Controller.reset_flag(GlobalFlag.LOWERCASE_LANG)
+            >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: False
         """
         all_flag_types = (GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag)
 
@@ -320,11 +322,11 @@ class Controller(metaclass=NonInstantiable):
         :type flag_type: Optional[type]
         :raises TypeError: If 'flag_type' is not a valid flag type.
 
-        :Example:
+        **Example**::
 
-        >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
-        >>> Controller.reset_flags(GlobalFlag)
-        >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: False
+            >>> Controller.set_flag(GlobalFlag.LOWERCASE_LANG, True)
+            >>> Controller.reset_flags(GlobalFlag)
+            >>> print(Controller.get_flag(GlobalFlag.LOWERCASE_LANG))  # Output: False
         """
         if flag_type is not None and not isinstance(flag_type, type):
             raise TypeError("Invalid flag type. Expected a class type.")

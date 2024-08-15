@@ -182,16 +182,6 @@ strings.</p>
 </ul>
 </dd>
 </dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.langstring.LangString._text">
-<span class="sig-name descname"><span class="pre">_text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#langstring.langstring.LangString._text" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="langstring.langstring.LangString._lang">
-<span class="sig-name descname"><span class="pre">_lang</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#langstring.langstring.LangString._lang" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="langstring.langstring.LangString.text">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#langstring.langstring.LangString.text" title="Link to this definition"></a></dt>
@@ -2201,63 +2191,6 @@ of the language tag.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ls_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang_str1</span><span class="p">,</span> <span class="n">lang_str2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">LangString</span><span class="o">.</span><span class="n">print_list</span><span class="p">(</span><span class="n">ls_list</span><span class="p">)</span>  <span class="c1"># Output: [&#39;&quot;a&quot;@b&#39;, &#39;&quot;c&quot;@d&#39;]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.langstring.LangString._validate_match_types">
-<span class="sig-name descname"><span class="pre">_validate_match_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString._validate_match_types" title="Link to this definition"></a></dt>
-<dd><p>Validate that the type of the other operand matches the expected type.</p>
-<p>This method checks if the operand type is valid based on the control flag for type matching.
-If strict type matching is enabled, only LangString type is allowed. The strict mode can be
-overridden by passing the <cite>overwrite_strict</cite> parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>other</strong> (<em>Union</em><em>[</em><em>object</em><em>, </em><em>str</em><em>, </em><a class="reference internal" href="#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>LangString</em></a><em>]</em>) – The operand to be validated.</p></li>
-<li><p><strong>overwrite_strict</strong> (<em>bool</em>) – If True, enforces strict type matching regardless of the control flag.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If strict mode is enabled and the operand is not of type LangString.</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span><span class="o">.</span><span class="n">_validate_match_types</span><span class="p">(</span><span class="n">lang_str</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># No exception</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span><span class="o">.</span><span class="n">_validate_match_types</span><span class="p">(</span><span class="n">lang_str</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.langstring.LangString._validate_match_langs">
-<span class="sig-name descname"><span class="pre">_validate_match_langs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString._validate_match_langs" title="Link to this definition"></a></dt>
-<dd><p>Validate that the language of the other LangString operand matches the current LangString’s language.</p>
-<p>This method checks if the language tags of both LangString objects are compatible. If the languages
-do not match, a ValueError is raised.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>object</em>) – The operand to be validated.</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the languages of both LangString objects do not match.</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str2</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span><span class="o">.</span><span class="n">_validate_match_langs</span><span class="p">(</span><span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>  <span class="c1"># No exception</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str1</span><span class="o">.</span><span class="n">_validate_match_langs</span><span class="p">(</span><span class="n">lang_str2</span><span class="p">)</span>  <span class="c1"># Raises ValueError due to incompatible languages</span>
 </pre></div>
 </div>
 </dd></dl>

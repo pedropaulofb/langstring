@@ -102,28 +102,40 @@
   <section id="module-langstring.utils.validators">
 <span id="langstring-utils-validators"></span><h1>langstring.utils.validators<a class="headerlink" href="#module-langstring.utils.validators" title="Link to this heading"></a></h1>
 <p>The <cite>validators</cite> module provides two classes, <cite>TypeValidator</cite> and <cite>FlagValidator</cite>, for validating argument types and flag-based constraints, respectively.</p>
-<p>This module defines two classes:
-- <cite>TypeValidator</cite>: Handles type validation for arguments based on type hints. It includes methods for validating
-single arguments, iterables, and decorated functions or methods.
-- <cite>FlagValidator</cite>: Handles validation and transformation of text and language arguments based on configuration flags
-managed by the <cite>Controller</cite>.</p>
+<dl class="simple">
+<dt>This module defines two classes:</dt><dd><ul class="simple">
+<li><p><cite>TypeValidator</cite>: Handles type validation for arguments based on type hints. It includes methods for validating
+single arguments, iterables, and decorated functions or methods.</p></li>
+<li><p><cite>FlagValidator</cite>: Handles validation and transformation of text and language arguments based on configuration flags
+managed by the <cite>Controller</cite>.</p></li>
+</ul>
+</dd>
+</dl>
 <p>The validators ensure that arguments and values adhere to specified types and constraints, enhancing the robustness
 and reliability of the application.</p>
-<p>Key Features:
-- <strong>Type Validation</strong>: <cite>TypeValidator</cite> offers methods to validate single arguments, iterables, and function/method
-arguments based on type hints.
-- <strong>Flag-based Validation</strong>: <cite>FlagValidator</cite> provides methods to validate and transform text and language arguments
-according to control flags.
-- <strong>Separation of Concerns</strong>: By separating type validation and flag-based validation into different classes, the module
-maintains a clear and organized structure.</p>
-<p>Classes:
-- <strong>TypeValidator</strong>: Validates argument types based on type hints.
-- <strong>FlagValidator</strong>: Validates and transforms arguments based on control flags.</p>
-<p>Enums Utilized:
-- <strong>GlobalFlag</strong>: Flags affecting the behavior of all classes.
-- <strong>LangStringFlag</strong>: Flags specific to the <cite>LangString</cite> class.
-- <strong>SetLangStringFlag</strong>: Flags specific to the <cite>SetLangString</cite> class.
-- <strong>MultiLangStringFlag</strong>: Flags specific to the <cite>MultiLangString</cite> class.</p>
+<dl class="simple">
+<dt>Key Features:</dt><dd><ul class="simple">
+<li><p><strong>Type Validation</strong>: <cite>TypeValidator</cite> offers methods to validate single arguments, iterables, and function/method
+arguments based on type hints.</p></li>
+<li><p><strong>Flag-based Validation</strong>: <cite>FlagValidator</cite> provides methods to validate and transform text and language arguments
+according to control flags.</p></li>
+<li><p><strong>Separation of Concerns</strong>: By separating type validation and flag-based validation into different classes, the module
+maintains a clear and organized structure.</p></li>
+</ul>
+</dd>
+<dt>Classes:</dt><dd><ul class="simple">
+<li><p><strong>TypeValidator</strong>: Validates argument types based on type hints.</p></li>
+<li><p><strong>FlagValidator</strong>: Validates and transforms arguments based on control flags.</p></li>
+</ul>
+</dd>
+<dt>Enums Utilized:</dt><dd><ul class="simple">
+<li><p><strong>GlobalFlag</strong>: Flags affecting the behavior of all classes.</p></li>
+<li><p><strong>LangStringFlag</strong>: Flags specific to the <cite>LangString</cite> class.</p></li>
+<li><p><strong>SetLangStringFlag</strong>: Flags specific to the <cite>SetLangString</cite> class.</p></li>
+<li><p><strong>MultiLangStringFlag</strong>: Flags specific to the <cite>MultiLangString</cite> class.</p></li>
+</ul>
+</dd>
+</dl>
 <p>The validators in this module are designed to be non-instantiable, emphasizing their role as static utility classes.</p>
 <section id="attributes">
 <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>

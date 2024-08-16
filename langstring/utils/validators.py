@@ -3,31 +3,31 @@ The `validators` module provides two classes, `TypeValidator` and `FlagValidator
 flag-based constraints, respectively.
 
 This module defines two classes:
-- `TypeValidator`: Handles type validation for arguments based on type hints. It includes methods for validating
-single arguments, iterables, and decorated functions or methods.
-- `FlagValidator`: Handles validation and transformation of text and language arguments based on configuration flags
-managed by the `Controller`.
+    - `TypeValidator`: Handles type validation for arguments based on type hints. It includes methods for validating
+      single arguments, iterables, and decorated functions or methods.
+    - `FlagValidator`: Handles validation and transformation of text and language arguments based on configuration flags
+      managed by the `Controller`.
 
 The validators ensure that arguments and values adhere to specified types and constraints, enhancing the robustness
 and reliability of the application.
 
 Key Features:
-- **Type Validation**: `TypeValidator` offers methods to validate single arguments, iterables, and function/method
-arguments based on type hints.
-- **Flag-based Validation**: `FlagValidator` provides methods to validate and transform text and language arguments
-according to control flags.
-- **Separation of Concerns**: By separating type validation and flag-based validation into different classes, the module
-maintains a clear and organized structure.
+    - **Type Validation**: `TypeValidator` offers methods to validate single arguments, iterables, and function/method
+      arguments based on type hints.
+    - **Flag-based Validation**: `FlagValidator` provides methods to validate and transform text and language arguments
+      according to control flags.
+    - **Separation of Concerns**: By separating type validation and flag-based validation into different classes, the module
+      maintains a clear and organized structure.
 
 Classes:
-- **TypeValidator**: Validates argument types based on type hints.
-- **FlagValidator**: Validates and transforms arguments based on control flags.
+    - **TypeValidator**: Validates argument types based on type hints.
+    - **FlagValidator**: Validates and transforms arguments based on control flags.
 
 Enums Utilized:
-- **GlobalFlag**: Flags affecting the behavior of all classes.
-- **LangStringFlag**: Flags specific to the `LangString` class.
-- **SetLangStringFlag**: Flags specific to the `SetLangString` class.
-- **MultiLangStringFlag**: Flags specific to the `MultiLangString` class.
+    - **GlobalFlag**: Flags affecting the behavior of all classes.
+    - **LangStringFlag**: Flags specific to the `LangString` class.
+    - **SetLangStringFlag**: Flags specific to the `SetLangString` class.
+    - **MultiLangStringFlag**: Flags specific to the `MultiLangString` class.
 
 The validators in this module are designed to be non-instantiable, emphasizing their role as static utility classes.
 """

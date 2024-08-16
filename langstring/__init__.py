@@ -61,7 +61,7 @@ will be converted to `"en"`, thereby making the languages equal.
 
 Usage:
 ------
-To use this package, import the necessary classes and flags as follows:
+To use this package, import the necessary classes and flags as follows::
 
     from langstring import (
         LangString, MultiLangString, SetLangString, Controller,

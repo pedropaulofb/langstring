@@ -204,14 +204,12 @@ will be converted to <cite>“en”</cite>, thereby making the languages equal.<
 <section id="usage">
 <h2>Usage:<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>To use this package, import the necessary classes and flags as follows:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>from langstring import (</dt><dd><p>LangString, MultiLangString, SetLangString, Controller,
-GlobalFlag, LangStringFlag, SetLangStringFlag, MultiLangStringFlag, Converter</p>
-</dd>
-</dl>
-<p>)</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langstring</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LangString</span><span class="p">,</span> <span class="n">MultiLangString</span><span class="p">,</span> <span class="n">SetLangString</span><span class="p">,</span> <span class="n">Controller</span><span class="p">,</span>
+    <span class="n">GlobalFlag</span><span class="p">,</span> <span class="n">LangStringFlag</span><span class="p">,</span> <span class="n">SetLangStringFlag</span><span class="p">,</span> <span class="n">MultiLangStringFlag</span><span class="p">,</span> <span class="n">Converter</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
@@ -1725,12 +1723,13 @@ a SetLangString.</p></li>
 <dt class="sig sig-object py" id="langstring.LangString">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langstring.</span></span><span class="sig-name descname"><span class="pre">LangString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString" title="Link to this definition"></a></dt>
 <dd><p>A class to encapsulate a string with its language information.</p>
-<p>This class provides functionality to associate a text string with a language tag, offering methods for string
-representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
-from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.</p>
-<p>Many standard string methods are overridden to return LangString objects, allowing seamless integration and
-extended functionality. This design ensures that users can work with LangString instances similarly to regular
-strings.</p>
+<p>This class provides functionality to associate a text string with a language tag, offering methods for
+string representation, equality comparison, and hashing. The behavior of this class is influenced by
+control flags from the Controller class, which can enforce non-empty text, valid language tags, and
+other constraints.</p>
+<p>Many standard string methods are overridden to return LangString objects, allowing seamless integration
+and extended functionality. This design ensures that users can work with LangString instances similarly
+to regular strings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2422,16 +2421,16 @@ strings.</p>
 <p>This method mimics the behavior of the standard string’s lstrip method but returns a LangString object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – A string specifying the set of characters to be removed.</p>
+<dd class="field-odd"><p><strong>chars</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – A string specifying the set of characters to be removed.
+If None, whitespace characters are removed.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new LangString with leading characters removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
 </dl>
-<p>If None, whitespace characters are removed.
-:type chars: Optional[str]
-:return: A new LangString with leading characters removed.
-:rtype: LangString</p>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;   Hello, world!&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
@@ -2817,17 +2816,14 @@ a list of LangString objects.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># To test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
-</pre></div>
-</div>
-<p># Output:
-# [LangString(text=’Hello’, lang=’en’), LangString(text=’world’, lang=’en’)]</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># To test, remove one escape char before the line break.</span>
+<span class="go"># Output: [LangString(text=&#39;Hello&#39;, lang=&#39;en&#39;), LangString(text=&#39;world&#39;, lang=&#39;en&#39;)]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello</span><span class="se">\\</span><span class="s2">nworld&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span> <span class="c1"># To test, remove one escape char before the line break.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split_lang_str</span> <span class="o">=</span> <span class="n">lang_str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">split_lang_str</span><span class="p">)</span>
+<span class="go"># Output: [LangString(text=&#39;Hello\n&#39;, lang=&#39;en&#39;), LangString(text=&#39;world&#39;, lang=&#39;en&#39;)]</span>
 </pre></div>
 </div>
-<p># Output:
-# [LangString(text=’Hellon’, lang=’en’), LangString(text=’world’, lang=’en’)]</p>
 </dd></dl>
 
 <dl class="py method">

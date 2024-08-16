@@ -63,13 +63,14 @@ Module Contents
 
    A class to encapsulate a string with its language information.
 
-   This class provides functionality to associate a text string with a language tag, offering methods for string
-   representation, equality comparison, and hashing. The behavior of this class is influenced by control flags
-   from the Controller class, which can enforce non-empty text, valid language tags, and other constraints.
+   This class provides functionality to associate a text string with a language tag, offering methods for
+   string representation, equality comparison, and hashing. The behavior of this class is influenced by
+   control flags from the Controller class, which can enforce non-empty text, valid language tags, and
+   other constraints.
 
-   Many standard string methods are overridden to return LangString objects, allowing seamless integration and
-   extended functionality. This design ensures that users can work with LangString instances similarly to regular
-   strings.
+   Many standard string methods are overridden to return LangString objects, allowing seamless integration
+   and extended functionality. This design ensures that users can work with LangString instances similarly
+   to regular strings.
 
    :ivar text: The text string.
    :vartype text: Optional[str]
@@ -627,7 +628,7 @@ Module Contents
       This method mimics the behavior of the standard string's lstrip method but returns a LangString object.
 
       :param chars: A string specifying the set of characters to be removed.
-      If None, whitespace characters are removed.
+                    If None, whitespace characters are removed.
       :type chars: Optional[str]
       :return: A new LangString with leading characters removed.
       :rtype: LangString
@@ -959,14 +960,12 @@ Module Contents
           >>> lang_str = LangString("Hello\\nworld", "en") # To test, remove one escape char before the line break.
           >>> split_lang_str = lang_str.splitlines()
           >>> print(split_lang_str)
-      # Output:
-      # [LangString(text='Hello', lang='en'), LangString(text='world', lang='en')]
+          # Output: [LangString(text='Hello', lang='en'), LangString(text='world', lang='en')]
 
           >>> lang_str = LangString("Hello\\nworld", "en") # To test, remove one escape char before the line break.
           >>> split_lang_str = lang_str.splitlines(True)
           >>> print(split_lang_str)
-      # Output:
-      # [LangString(text='Hello\n', lang='en'), LangString(text='world', lang='en')]
+          # Output: [LangString(text='Hello\n', lang='en'), LangString(text='world', lang='en')]
 
 
 

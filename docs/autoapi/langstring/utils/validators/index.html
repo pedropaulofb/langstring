@@ -331,7 +331,7 @@ content type.</p>
 <dd><p>Is a decorator to validate the types of arguments passed to a function or method based on their type hints.</p>
 <p>This method checks if each argument’s type matches its corresponding type hint. It is intended for use with
 functions or instance methods where explicit type hints are provided for all arguments.</p>
-<dl>
+<dl class="simple">
 <dt>Usage:</dt><dd><ul class="simple">
 <li><p>Apply this decorator to functions or instance methods that require type validation based on type hints.</p></li>
 </ul>
@@ -339,11 +339,11 @@ functions or instance methods where explicit type hints are provided for all arg
 <dt>When to Use:</dt><dd><ul class="simple">
 <li><p>Use this decorator for functions or methods where argument types need to be strictly validated.</p></li>
 <li><p>Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.</p></li>
-<li><p>Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and its</p></li>
+<li><p>Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and its
+contents match the specified types.</p></li>
+<li><p>Appropriate for instance methods, adjusting for the ‘self’ parameter automatically.</p></li>
+<li><p>Suitable for static methods but requires manual validation for class methods and setters.</p></li>
 </ul>
-<p>contents match the specified types.
-- Appropriate for instance methods, adjusting for the ‘self’ parameter automatically.
-- Suitable for static methods but requires manual validation for class methods and setters.</p>
 </dd>
 <dt>When Not to Use:</dt><dd><ul class="simple">
 <li><p>Do not use this decorator for class methods with the ‘cls’ parameter. It doesn`t handle ‘cls’ explicitly.</p></li>

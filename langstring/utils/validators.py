@@ -423,7 +423,7 @@ class TypeValidator(metaclass=NonInstantiable):
             - Use this decorator for functions or methods where argument types need to be strictly validated.
             - Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.
             - Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and its
-            contents match the specified types.
+              contents match the specified types.
             - Appropriate for instance methods, adjusting for the 'self' parameter automatically.
             - Suitable for static methods but requires manual validation for class methods and setters.
 

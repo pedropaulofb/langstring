@@ -8,10 +8,10 @@ and should not be directly accessed by end users of the langstring package.
 Modules:
 --------
 
-- non_instantiable:
-    Contains the NonInstantiable class which is used to prevent instantiation of certain classes.
+    - **non_instantiable**: Contains the NonInstantiable class which is used to prevent instantiation of certain
+      classes.
 
-- validators:
-    Provides validation functions for language strings and other components within the langstring package.
+    - **validators**: Provides validation functions for language strings and other components within the
+      langstring package.
 
 """

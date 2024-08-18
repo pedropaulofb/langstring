@@ -14,7 +14,7 @@ this, many of the standard set methods have been overridden to return SetLangStr
 integration and extended functionality. Additionally, the class provides mechanisms for validating input types,
 matching language tags, and merging SetLangString objects.
 
-:Example:
+**Example**::
 
     # Create a SetLangString object
     set_lang_str = SetLangString({"Hello", "World"}, "en")
@@ -181,12 +181,12 @@ class SetLangString:
         :raises ValueError: If the control flags enforce valid language tags and the langstring's language tag is
                             invalid, or if the language tag of the langstring does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello"}, "en")
-        >>> lang_str = LangString("World", "en")
-        >>> set_lang_str.add_langstring(lang_str)
-        >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str = SetLangString({"Hello"}, "en")
+            >>> lang_str = LangString("World", "en")
+            >>> set_lang_str.add_langstring(lang_str)
+            >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         self._validate_match_types_and_langs(langstring, True)
         self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, langstring.text))
@@ -204,11 +204,11 @@ class SetLangString:
         :raises TypeError: If the provided text is not of type str.
         :raises ValueError: If the control flags enforce non-empty text and the text string is empty.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello"}, "en")
-        >>> set_lang_str.add_text("World")
-        >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str = SetLangString({"Hello"}, "en")
+            >>> set_lang_str.add_text("World")
+            >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         self.texts.add(FlagValidator.validate_flags_text(SetLangStringFlag, text))
 
@@ -224,13 +224,13 @@ class SetLangString:
         :type text: str
         :raises TypeError: If the provided text is not of type str.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str.discard_text("World")
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
-        >>> set_lang_str.discard_text("Python")
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str.discard_text("World")
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> set_lang_str.discard_text("Python")
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
         """
         self.texts.discard(text)
 
@@ -248,15 +248,15 @@ class SetLangString:
         :raises TypeError: If the provided langstring is not of type LangString.
         :raises ValueError: If the language tag of the langstring does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> lang_str = LangString("World", "en")
-        >>> set_lang_str.discard_langstring(lang_str)
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
-        >>> lang_str = LangString("Python", "en")
-        >>> set_lang_str.discard_langstring(lang_str)
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> lang_str = LangString("World", "en")
+            >>> set_lang_str.discard_langstring(lang_str)
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> lang_str = LangString("Python", "en")
+            >>> set_lang_str.discard_langstring(lang_str)
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
         """
         self._validate_match_types_and_langs(langstring, True)
         self.texts.discard(langstring.text)
@@ -273,12 +273,12 @@ class SetLangString:
         :raises TypeError: If the provided text is not of type str.
         :raises KeyError: If the text string is not found in the set.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str.remove_text("World")
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
-        >>> set_lang_str.remove_text("Python")  # Raises KeyError
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str.remove_text("World")
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> set_lang_str.remove_text("Python")  # Raises KeyError
         """
         self._validate_match_types_and_langs(langstring, True)
         self.texts.remove(langstring.text)
@@ -297,14 +297,14 @@ class SetLangString:
         :raises ValueError: If the language tag of the langstring does not match the set's language tag.
         :raises KeyError: If the text string is not found in the set.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> lang_str = LangString("World", "en")
-        >>> set_lang_str.remove_langstring(lang_str)
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
-        >>> lang_str = LangString("Python", "en")
-        >>> set_lang_str.remove_langstring(lang_str)  # Raises KeyError
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> lang_str = LangString("World", "en")
+            >>> set_lang_str.remove_langstring(lang_str)
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> lang_str = LangString("Python", "en")
+            >>> set_lang_str.remove_langstring(lang_str)  # Raises KeyError
         """
         self.texts.remove(text)
 
@@ -318,16 +318,16 @@ class SetLangString:
         :return: A list of LangString objects.
         :rtype: list[LangString]
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> langstrings = set_lang_str.to_langstrings()
-        >>> for lang_str in langstrings:
-        ...     print(lang_str)
-        ...
-        # Output:
-        # "Hello"@en
-        # "World"en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> langstrings = set_lang_str.to_langstrings()
+            >>> for lang_str in langstrings:
+            ...     print(lang_str)
+            ...
+            # Output:
+            # "Hello"@en
+            # "World"en
         """
         langstrings = []
         for text in self.texts:
@@ -354,23 +354,23 @@ class SetLangString:
         :return: A sorted list of formatted strings.
         :rtype: list[str]
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> strings = set_lang_str.to_strings()
-        >>> for s in strings:
-        ...     print(s)
-        ...
-        # Output:
-        # "Hello"@en
-        # "World"@en
-        >>> strings = set_lang_str.to_strings(print_quotes=False, print_lang=False)
-        >>> for s in strings:
-        ...     print(s)
-        ...
-        # Output:
-        # Hello
-        # World
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> strings = set_lang_str.to_strings()
+            >>> for s in strings:
+            ...     print(s)
+            ...
+            # Output:
+            # "Hello"@en
+            # "World"@en
+            >>> strings = set_lang_str.to_strings(print_quotes=False, print_lang=False)
+            >>> for s in strings:
+            ...     print(s)
+            ...
+            # Output:
+            # Hello
+            # World
         """
         if print_quotes is None:
             print_quotes = Controller.get_flag(SetLangStringFlag.PRINT_WITH_QUOTES)
@@ -404,14 +404,14 @@ class SetLangString:
         :raises ValueError: If the control flags enforce valid language tags and the new_element's language tag is
                             invalid, or if the language tag of the new_element does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello"}, "en")
-        >>> set_lang_str.add("World")
-        >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
-        >>> lang_str = LangString("New String", "en")
-        >>> set_lang_str.add(lang_str)
-        >>> print(set_lang_str)  # Output: {'Hello', 'New String', 'World'}@en
+            >>> set_lang_str = SetLangString({"Hello"}, "en")
+            >>> set_lang_str.add("World")
+            >>> print(set_lang_str)  # Output: {'Hello', 'World'}@en
+            >>> lang_str = LangString("New String", "en")
+            >>> set_lang_str.add(lang_str)
+            >>> print(set_lang_str)  # Output: {'Hello', 'New String', 'World'}@en
         """
         if isinstance(new_element, str):
             self.add_text(new_element)
@@ -427,11 +427,11 @@ class SetLangString:
         This method clears all elements from the set, mimicking the behavior of the standard set's clear method,
         resulting in an empty set.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str.clear()
-        >>> print(set_lang_str)  # Output: {}@en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str.clear()
+            >>> print(set_lang_str)  # Output: {}@en
         """
         self.texts.clear()
 
@@ -445,11 +445,11 @@ class SetLangString:
         :return: A shallow copy of the SetLangString.
         :rtype: SetLangString
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> copied_set_lang_str = set_lang_str.copy()
-        >>> print(copied_set_lang_str)  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> copied_set_lang_str = set_lang_str.copy()
+            >>> print(copied_set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         return SetLangString(texts=self.texts.copy(), lang=self.lang)
 
@@ -466,14 +466,14 @@ class SetLangString:
         :raises TypeError: If the provided element is neither a str nor a LangString.
         :raises ValueError: If the language tag of the LangString does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str.discard("World")
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
-        >>> lang_str = LangString("Python", "en")
-        >>> set_lang_str.discard(lang_str)
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str.discard("World")
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> lang_str = LangString("Python", "en")
+            >>> set_lang_str.discard(lang_str)
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
         """
         if isinstance(element, str):
             self.discard_text(element)
@@ -493,12 +493,12 @@ class SetLangString:
         :rtype: str
         :raises KeyError: If the set is empty.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> element = set_lang_str.pop()
-        >>> print(element)  # Output: 'Hello' or 'World'
-        >>> print(set_lang_str)  # Output: {'World'}@en or {'Hello'}@en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> element = set_lang_str.pop()
+            >>> print(element)  # Output: 'Hello' or 'World'
+            >>> print(set_lang_str)  # Output: {'World'}@en or {'Hello'}@en
         """
         return self.texts.pop()
 
@@ -515,13 +515,13 @@ class SetLangString:
         :raises ValueError: If the language tag of the LangString does not match the set's language tag.
         :raises KeyError: If the element is not found in the set.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str.remove("World")
-        >>> print(set_lang_str)  # Output: {'Hello'}@en
-        >>> lang_str = LangString("Python", "en")
-        >>> set_lang_str.remove(lang_str)  # Raises KeyError
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str.remove("World")
+            >>> print(set_lang_str)  # Output: {'Hello'}@en
+            >>> lang_str = LangString("Python", "en")
+            >>> set_lang_str.remove(lang_str)  # Raises KeyError
         """
         if isinstance(element, str):
             self.remove_text(element)
@@ -543,12 +543,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> diff_set_lang_str = set_lang_str1.difference(set_lang_str2)
-        >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> diff_set_lang_str = set_lang_str1.difference(set_lang_str2)
+            >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
         """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
@@ -567,12 +567,12 @@ class SetLangString:
         :type others: Union[set[str], SetLangString]
         :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> set_lang_str1.difference_update(set_lang_str2)
-        >>> print(set_lang_str1)  # Output: {'Hello'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> set_lang_str1.difference_update(set_lang_str2)
+            >>> print(set_lang_str1)  # Output: {'Hello'}@en
         """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
@@ -592,12 +592,12 @@ class SetLangString:
         :rtype: bool
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"Python", "Java"}, "en")
-        >>> disjoint = set_lang_str1.isdisjoint(set_lang_str2)
-        >>> print(disjoint)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"Python", "Java"}, "en")
+            >>> disjoint = set_lang_str1.isdisjoint(set_lang_str2)
+            >>> print(disjoint)  # Output: True
         """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
@@ -616,12 +616,12 @@ class SetLangString:
         :rtype: bool
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
-        >>> subset = set_lang_str1.issubset(set_lang_str2)
-        >>> print(subset)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+            >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+            >>> subset = set_lang_str1.issubset(set_lang_str2)
+            >>> print(subset)  # Output: True
         """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
@@ -640,12 +640,12 @@ class SetLangString:
         :rtype: bool
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"Hello"}, "en")
-        >>> superset = set_lang_str1.issuperset(set_lang_str2)
-        >>> print(superset)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+            >>> superset = set_lang_str1.issuperset(set_lang_str2)
+            >>> print(superset)  # Output: True
         """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
@@ -664,12 +664,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> intersect_set_lang_str = set_lang_str1.intersection(set_lang_str2)
-        >>> print(intersect_set_lang_str)  # Output: {'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> intersect_set_lang_str = set_lang_str1.intersection(set_lang_str2)
+            >>> print(intersect_set_lang_str)  # Output: {'World'}@en
         """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
@@ -688,12 +688,12 @@ class SetLangString:
         :type others: Union[set[str], SetLangString]
         :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> set_lang_str1.intersection_update(set_lang_str2)
-        >>> print(set_lang_str1)  # Output: {'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> set_lang_str1.intersection_update(set_lang_str2)
+            >>> print(set_lang_str1)  # Output: {'World'}@en
         """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
@@ -713,12 +713,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> sym_diff_set_lang_str = set_lang_str1.symmetric_difference(set_lang_str2)
-        >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> sym_diff_set_lang_str = set_lang_str1.symmetric_difference(set_lang_str2)
+            >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
         """
         other_texts = self._extract_texts(other)
         self._validate_match_types_and_langs(other)
@@ -736,12 +736,12 @@ class SetLangString:
         :type other: Union[set[str], SetLangString]
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> set_lang_str1.symmetric_difference_update(set_lang_str2)
-        >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> set_lang_str1.symmetric_difference_update(set_lang_str2)
+            >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
         """
         other_texts = self._extract_texts(other)
         self._validate_match_types_and_langs(other)
@@ -760,12 +760,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"World"}, "en")
-        >>> union_set_lang_str = set_lang_str1.union(set_lang_str2)
-        >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+            >>> set_lang_str2 = SetLangString({"World"}, "en")
+            >>> union_set_lang_str = set_lang_str1.union(set_lang_str2)
+            >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
@@ -784,12 +784,12 @@ class SetLangString:
         :type others: Union[set[str], SetLangString]
         :raises ValueError: If the language tag of any SetLangString in others does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"World"}, "en")
-        >>> set_lang_str1.update(set_lang_str2)
-        >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+            >>> set_lang_str2 = SetLangString({"World"}, "en")
+            >>> set_lang_str1.update(set_lang_str2)
+            >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
         """
         others_texts = [self._extract_texts(other) for other in others]
         for other in others:
@@ -813,12 +813,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> intersect_set_lang_str = set_lang_str1 & set_lang_str2
-        >>> print(intersect_set_lang_str)  # Output: {'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> intersect_set_lang_str = set_lang_str1 & set_lang_str2
+            >>> print(intersect_set_lang_str)  # Output: {'World'}@en
         """
         return self.intersection(other)
 
@@ -837,14 +837,14 @@ class SetLangString:
         :raises TypeError: If the provided element is neither a str nor a LangString.
         :raises ValueError: If the language tag of the LangString does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> contains_hello = "Hello" in set_lang_str
-        >>> print(contains_hello)  # Output: True
-        >>> lang_str = LangString("Python", "en")
-        >>> contains_python = lang_str in set_lang_str
-        >>> print(contains_python)  # Output: False
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> contains_hello = "Hello" in set_lang_str
+            >>> print(contains_hello)  # Output: True
+            >>> lang_str = LangString("Python", "en")
+            >>> contains_python = lang_str in set_lang_str
+            >>> print(contains_python)  # Output: False
         """
         # Check language compatibility
         self._validate_match_types_and_langs(element)
@@ -870,12 +870,12 @@ class SetLangString:
         :rtype: bool
         :raises NotImplementedError: If the other object is not a SetLangString.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Hello"}, "en")
-        >>> is_equal = set_lang_str1 == set_lang_str2
-        >>> print(is_equal)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Hello"}, "en")
+            >>> is_equal = set_lang_str1 == set_lang_str2
+            >>> print(is_equal)  # Output: True
         """
         if not isinstance(other, SetLangString):
             return NotImplemented
@@ -895,12 +895,12 @@ class SetLangString:
         :rtype: bool
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"Hello"}, "en")
-        >>> is_superset = set_lang_str1 >= set_lang_str2
-        >>> print(is_superset)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+            >>> is_superset = set_lang_str1 >= set_lang_str2
+            >>> print(is_superset)  # Output: True
         """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
@@ -919,12 +919,12 @@ class SetLangString:
         :rtype: bool
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"Hello"}, "en")
-        >>> is_proper_superset = set_lang_str1 > set_lang_str2
-        >>> print(is_proper_superset)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"Hello"}, "en")
+            >>> is_proper_superset = set_lang_str1 > set_lang_str2
+            >>> print(is_proper_superset)  # Output: True
         """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
@@ -940,11 +940,11 @@ class SetLangString:
         :return: The hash value of the SetLangString object.
         :rtype: int
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> hash_value = hash(set_lang_str)
-        >>> print(hash_value)  # Output: A unique integer representing the hash value
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> hash_value = hash(set_lang_str)
+            >>> print(hash_value)  # Output: A unique integer representing the hash value
         """
         # Convert the set to a frozenset for hashing, as sets are mutable and, hence, unhashable.
         return hash((frozenset(self.texts), self.lang.casefold()))
@@ -962,12 +962,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> set_lang_str1 &= set_lang_str2
-        >>> print(set_lang_str1)  # Output: {'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> set_lang_str1 &= set_lang_str2
+            >>> print(set_lang_str1)  # Output: {'World'}@en
         """
         self.intersection_update(other)
         return self
@@ -985,12 +985,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"World"}, "en")
-        >>> set_lang_str1 |= set_lang_str2
-        >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+            >>> set_lang_str2 = SetLangString({"World"}, "en")
+            >>> set_lang_str1 |= set_lang_str2
+            >>> print(set_lang_str1)  # Output: {'Hello', 'World'}@en
         """
         self.update(other)
         return self
@@ -1008,12 +1008,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World"}, "en")
-        >>> set_lang_str1 -= set_lang_str2
-        >>> print(set_lang_str1)  # Output: {'Hello'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World"}, "en")
+            >>> set_lang_str1 -= set_lang_str2
+            >>> print(set_lang_str1)  # Output: {'Hello'}@en
         """
         self.difference_update(other)
         return self
@@ -1028,14 +1028,14 @@ class SetLangString:
         :return: An iterator over the elements of the set.
         :rtype: Iterator[str]
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> for text in set_lang_str:
-        ...     print(text)
-        ...
-        >>> # Output: 'Hello'
-        >>> #         'World'
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> for text in set_lang_str:
+            ...     print(text)
+            ...
+            # Output: 'Hello'
+            #         'World'
         """
         return iter(self.texts)
 
@@ -1052,12 +1052,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> set_lang_str1 ^= set_lang_str2
-        >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> set_lang_str1 ^= set_lang_str2
+            >>> print(set_lang_str1)  # Output: {'Hello', 'Python'}@en
         """
         self.symmetric_difference_update(other)
         return self
@@ -1075,12 +1075,12 @@ class SetLangString:
         :rtype: bool
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
-        >>> is_subset = set_lang_str1 <= set_lang_str2
-        >>> print(is_subset)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+            >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+            >>> is_subset = set_lang_str1 <= set_lang_str2
+            >>> print(is_subset)  # Output: True
         """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
@@ -1096,11 +1096,11 @@ class SetLangString:
         :return: The number of elements in the set.
         :rtype: int
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> length = len(set_lang_str)
-        >>> print(length)  # Output: 2
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> length = len(set_lang_str)
+            >>> print(length)  # Output: 2
         """
         return len(self.texts)
 
@@ -1117,12 +1117,12 @@ class SetLangString:
         :rtype: bool
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
-        >>> is_proper_subset = set_lang_str1 < set_lang_str2
-        >>> print(is_proper_subset)  # Output: True
+            >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+            >>> set_lang_str2 = SetLangString({"Hello", "World"}, "en")
+            >>> is_proper_subset = set_lang_str1 < set_lang_str2
+            >>> print(is_proper_subset)  # Output: True
         """
         self._validate_match_types_and_langs(other)
         other_texts = self._extract_texts(other)
@@ -1141,12 +1141,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello"}, "en")
-        >>> set_lang_str2 = SetLangString({"World"}, "en")
-        >>> union_set_lang_str = set_lang_str1 | set_lang_str2
-        >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str1 = SetLangString({"Hello"}, "en")
+            >>> set_lang_str2 = SetLangString({"World"}, "en")
+            >>> union_set_lang_str = set_lang_str1 | set_lang_str2
+            >>> print(union_set_lang_str)  # Output: {'Hello', 'World'}@en
         """
         return self.union(other)
 
@@ -1160,11 +1160,11 @@ class SetLangString:
         :return: The official string representation of the SetLangString object.
         :rtype: str
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> repr_str = repr(set_lang_str)
-        >>> print(repr_str)  # Output: SetLangString(texts={'Hello', 'World'}, lang='en')
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> repr_str = repr(set_lang_str)
+            >>> print(repr_str)  # Output: SetLangString(texts={'Hello', 'World'}, lang='en')
         """
         return f"{self.__class__.__name__}(texts={repr(self.texts)}, lang={repr(self.lang)})"
 
@@ -1180,10 +1180,10 @@ class SetLangString:
         :return: The string representation of the SetLangString object.
         :rtype: str
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> print(str(set_lang_str))  # Output: {'Hello', 'World'}@en
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> print(str(set_lang_str))  # Output: {'Hello', 'World'}@en
         """
         if not self.texts:
             texts_str = "{}"
@@ -1214,12 +1214,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> diff_set_lang_str = set_lang_str1 - set_lang_str2
-        >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> diff_set_lang_str = set_lang_str1 - set_lang_str2
+            >>> print(diff_set_lang_str)  # Output: {'Hello'}@en
         """
         return self.difference(other)
 
@@ -1236,12 +1236,12 @@ class SetLangString:
         :rtype: SetLangString
         :raises ValueError: If the language tag of the SetLangString in other does not match the set's language tag.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
-        >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
-        >>> sym_diff_set_lang_str = set_lang_str1 ^ set_lang_str2
-        >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
+            >>> set_lang_str1 = SetLangString({"Hello", "World"}, "en")
+            >>> set_lang_str2 = SetLangString({"World", "Python"}, "en")
+            >>> sym_diff_set_lang_str = set_lang_str1 ^ set_lang_str2
+            >>> print(sym_diff_set_lang_str)  # Output: {'Hello', 'Python'}@en
         """
         return self.symmetric_difference(other)
 
@@ -1265,18 +1265,18 @@ class SetLangString:
         :rtype: list[SetLangString]
         :raises TypeError: If the input is not a list of SetLangString instances.
 
-        :Example:
+        **Example**::
 
-        >>> setlangstr1 = SetLangString({"Hello"}, "en")
-        >>> setlangstr2 = SetLangString({"World"}, "en")
-        >>> setlangstr3 = SetLangString({"Bonjour"}, "fr")
-        >>> setlangstr4 = SetLangString({"Hello"}, "EN")
-        >>> merged_list = SetLangString.merge_setlangstrings([setlangstr1, setlangstr2, setlangstr3, setlangstr4])
-        >>> for s in merged_list:
-        ...     print(s)
-        ...
-        >>> # Output: {'Hello', 'World'}@en
-        >>> #         {'Bonjour'}@fr
+            >>> setlangstr1 = SetLangString({"Hello"}, "en")
+            >>> setlangstr2 = SetLangString({"World"}, "en")
+            >>> setlangstr3 = SetLangString({"Bonjour"}, "fr")
+            >>> setlangstr4 = SetLangString({"Hello"}, "EN")
+            >>> merged_list = SetLangString.merge_setlangstrings([setlangstr1, setlangstr2, setlangstr3, setlangstr4])
+            >>> for s in merged_list:
+            ...     print(s)
+            ...
+            # Output: {'Hello', 'World'}@en
+            #         {'Bonjour'}@fr
         """
         TypeValidator.validate_type_iterable(setlangstrings, list, SetLangString)
         merged: dict[str, SetLangString] = {}
@@ -1319,16 +1319,16 @@ class SetLangString:
         :raises TypeError: If strict mode is enabled and the operand is not of type SetLangString or LangString.
         :raises ValueError: If the languages of both objects do not match.
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> lang_str = LangString("Python", "en")
-        >>> set_lang_str._validate_match_types_and_langs(lang_str, True)  # No exception
-        >>> lang_str_fr = LangString("Bonjour", "fr")
-        >>> set_lang_str._validate_match_types_and_langs(lang_str_fr, True)
-        # Raises ValueError due to incompatible languages
-        >>> set_lang_str._validate_match_types_and_langs(123, True)
-        # Raises TypeError due to strict mode
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> lang_str = LangString("Python", "en")
+            >>> set_lang_str._validate_match_types_and_langs(lang_str, True)  # No exception
+            >>> lang_str_fr = LangString("Bonjour", "fr")
+            >>> set_lang_str._validate_match_types_and_langs(lang_str_fr, True)
+            # Raises ValueError due to incompatible languages
+            >>> set_lang_str._validate_match_types_and_langs(123, True)
+            # Raises TypeError due to strict mode
         """
         strict = (
             Controller.get_flag(SetLangStringFlag.METHODS_MATCH_TYPES) if not overwrite_strict else overwrite_strict
@@ -1357,12 +1357,12 @@ class SetLangString:
         :return: The set of texts extracted from the operand.
         :rtype: set[str]
 
-        :Example:
+        **Example**::
 
-        >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
-        >>> texts = set_lang_str._extract_texts({"Python", "Java"})
-        >>> print(texts)  # Output: {'Python', 'Java'}
-        >>> texts = set_lang_str._extract_texts(set_lang_str)
-        >>> print(texts)  # Output: {'Hello', 'World'}
+            >>> set_lang_str = SetLangString({"Hello", "World"}, "en")
+            >>> texts = set_lang_str._extract_texts({"Python", "Java"})
+            >>> print(texts)  # Output: {'Python', 'Java'}
+            >>> texts = set_lang_str._extract_texts(set_lang_str)
+            >>> print(texts)  # Output: {'Hello', 'World'}
         """
         return other.texts if isinstance(other, SetLangString) else other

@@ -41,7 +41,7 @@
               <img src="../../../../_static/langstring-lib-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.0.1
+                3.0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -102,21 +102,23 @@
   <section id="module-langstring.utils.non_instantiable">
 <span id="langstring-utils-non-instantiable"></span><h1>langstring.utils.non_instantiable<a class="headerlink" href="#module-langstring.utils.non_instantiable" title="Link to this heading"></a></h1>
 <p>The <cite>non_instantiable</cite> module provides the <cite>NonInstantiable</cite> metaclass, designed to prevent the instantiation of any class that uses it.</p>
-<p>This module is useful for creating classes intended solely as namespaces or containers for static methods and
-class variables, without allowing instances of such classes to be created.</p>
-<p>Key Features:
-- <strong>Instantiation Prevention</strong>: <cite>NonInstantiable</cite> ensures that any attempt to instantiate a class using this</p>
+<p>This module is useful for creating classes intended solely as namespaces or containers for static methods and class
+variables, without allowing instances of such classes to be created.</p>
+<p>Key Features:</p>
 <blockquote>
-<div><p>metaclass will raise a <cite>TypeError</cite>.</p>
+<div><ul class="simple">
+<li><p><strong>Instantiation Prevention</strong>: <cite>NonInstantiable</cite> ensures that any attempt to instantiate a class using this
+metaclass will raise a <cite>TypeError</cite>.</p></li>
+</ul>
 </div></blockquote>
-<p>Classes:
-- <strong>NonInstantiable</strong>: A metaclass that overrides the default instantiation behavior to prevent class</p>
-<blockquote>
-<div><p>instantiation.</p>
-</div></blockquote>
-<dl class="field-list">
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
+<dl class="simple">
+<dt>Classes:</dt><dd><ul class="simple">
+<li><p><strong>NonInstantiable</strong>: A metaclass that overrides the default instantiation behavior to prevent class instantiation.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nd">@staticmethod</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">my_static_method</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="s2">&quot;This is a static method&quot;</span>
@@ -128,10 +130,8 @@ class variables, without allowing instances of such classes to be created.</p>
 <span class="gp">...</span>
 </pre></div>
 </div>
-</dd>
-</dl>
-<p>The <cite>NonInstantiable</cite> metaclass is particularly useful for creating utility classes where instantiation does
-not make sense and should be prevented by design.</p>
+<p>The <cite>NonInstantiable</cite> metaclass is particularly useful for creating utility classes where instantiation does not make
+sense and should be prevented by design.</p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -152,18 +152,17 @@ not make sense and should be prevented by design.</p>
 <p>When a class is defined with <cite>NonInstantiable</cite> as its metaclass, any attempt to instantiate that class will
 result in a <cite>TypeError</cite>. This is useful for creating classes that are meant to be used as namespaces or
 containers for static methods and class variables, without the intention of creating instances.</p>
-<p>Key Features:
-- <strong>Prevent Instantiation</strong>: Ensures that any attempt to create an instance of a class using this metaclass</p>
+<p>Key Features:</p>
 <blockquote>
-<div><p>will raise a <cite>TypeError</cite>.</p>
-</div></blockquote>
-<ul class="simple">
+<div><ul class="simple">
+<li><p><strong>Prevent Instantiation</strong>: Ensures that any attempt to create an instance of a class using this metaclass
+will raise a <cite>TypeError</cite>.</p></li>
 <li><p><strong>Namespace Utility</strong>: Ideal for defining classes that serve as namespaces or containers for static methods
 and constants.</p></li>
 </ul>
-<dl class="field-list">
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
+</div></blockquote>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nd">@staticmethod</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">my_static_method</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="s2">&quot;This is a static method&quot;</span>
@@ -175,8 +174,6 @@ and constants.</p></li>
 <span class="gp">...</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <dl class="simple">
 <dt>Methods:</dt><dd><p>__call__: Overrides the default call behavior to prevent instantiation.</p>
 </dd>
@@ -187,12 +184,16 @@ and constants.</p></li>
 <dd><p>Override the default call behavior to prevent instantiation of the class.</p>
 <p>When this method is called, it raises a <cite>TypeError</cite>, effectively preventing the creation of an instance of the
 class that uses <cite>NonInstantiable</cite> as its metaclass.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>TypeError</strong> – Always, to indicate that the class cannot be instantiated.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nd">@staticmethod</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">my_static_method</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="s2">&quot;This is a static method&quot;</span>
@@ -204,11 +205,6 @@ class that uses <cite>NonInstantiable</cite> as its metaclass.</p>
 <span class="gp">...</span>
 </pre></div>
 </div>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>

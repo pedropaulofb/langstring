@@ -47,6 +47,17 @@ github_username = "pedropaulofb"
 github_repository = "pedropaulofb/langstring"
 
 autoapi_dirs = ["../langstring/"]
+autoapi_generate_api_docs = True
+autoapi_keep_files = True  # Keep the generated .rst files for inspection
+autoapi_options = [
+    'members',
+    'undoc-members',
+    'show-inheritance',
+    'show-module-summary',
+    'special-members',
+    'imported-members',
+]
+
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]

@@ -41,7 +41,7 @@
               <img src="../../../_static/langstring-lib-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.0.1
+                3.0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -115,20 +115,22 @@ as a default for operations involving text retrieval.</p>
 <p>The module integrates seamlessly with other components like <cite>LangString</cite> and <cite>SetLangString</cite>, enabling robust
 multilingual text management and operations. It ensures that user interaction is as intuitive as possible, while
 offering extensive functionality for handling multilingual text data.</p>
-<dl class="field-list">
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>mls = MultiLangString({“en”: {“Hello”, “World”}, “fr”: {“Bonjour”, “Monde”}}, “en”)</p>
-<p># Add a new entry
-mls.add_entry(“Hola”, “es”)
-print(mls)  # Output: {‘Hello’, <a class="reference external" href="mailto:'World'}&#37;&#52;&#48;en">‘World’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Hola'}&#37;&#52;&#48;es">{‘Hola’}<span>&#64;</span>es</a>, {‘Bonjour’, <a class="reference external" href="mailto:'Monde'}&#37;&#52;&#48;fr">‘Monde’}<span>&#64;</span>fr</a></p>
-<p># Retrieve texts in a specific language
-english_texts = mls[“en”]
-print(english_texts)  # Output: {‘Hello’, ‘World’}</p>
-<p># Remove an entry
-mls.remove_entry(“Hello”, “en”)
-print(mls)  # Output: <a class="reference external" href="mailto:{'World'}&#37;&#52;&#48;en">{‘World’}<span>&#64;</span>en</a>, <a class="reference external" href="mailto:{'Hola'}&#37;&#52;&#48;es">{‘Hola’}<span>&#64;</span>es</a>, {‘Bonjour’, <a class="reference external" href="mailto:'Monde'}&#37;&#52;&#48;fr">‘Monde’}<span>&#64;</span>fr</a></p>
-</dd>
-</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Monde&quot;</span><span class="p">}},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add a new entry</span>
+<span class="n">mls</span><span class="o">.</span><span class="n">add_entry</span><span class="p">(</span><span class="s2">&quot;Hola&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en, {&#39;Hola&#39;}@es, {&#39;Bonjour&#39;, &#39;Monde&#39;}@fr</span>
+
+<span class="c1"># Retrieve texts in a specific language</span>
+<span class="n">english_texts</span> <span class="o">=</span> <span class="n">mls</span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">english_texts</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}</span>
+
+<span class="c1"># Remove an entry</span>
+<span class="n">mls</span><span class="o">.</span><span class="n">remove_entry</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Hola&#39;}@es, {&#39;Bonjour&#39;, &#39;Monde&#39;}@fr</span>
+</pre></div>
+</div>
 <dl class="simple">
 <dt>Modules:</dt><dd><p>controller: Provides control flags that influence the behavior of the MultiLangString class.
 flags: Defines the MultiLangStringFlag class with various control flags for the MultiLangString class.
@@ -217,13 +219,12 @@ or MultiLangString.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the argument is not of a supported type.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -245,13 +246,12 @@ this set. If the language already exists, the text is added to the existing set 
 <li><p><strong>lang</strong> (<em>str</em>) – The language under which the text should be added. If not specified, defaults to an empty string.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add_entry</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add_entry</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -267,13 +267,12 @@ this set. If the language already exists, the text is added to the existing set 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text to be added to the preferred language.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">pref_lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">(</span><span class="n">pref_lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add_text_in_pref_lang</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en</span>
 </pre></div>
@@ -288,13 +287,12 @@ this set. If the language already exists, the text is added to the existing set 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>langstring</strong> (<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString"><em>LangString</em></a>) – The LangString object to be added, representing a text in a specific language.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">langstring</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add_langstring</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en</span>
@@ -311,13 +309,12 @@ this set. If the language already exists, the text is added to the existing set 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>setlangstring</strong> (<a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString"><em>SetLangString</em></a>) – The SetLangString object to be added, representing a text in a specific language.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstring</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add_setlangstring</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;Hi&#39;}@en</span>
@@ -334,13 +331,12 @@ this set. If the language already exists, the text is added to the existing set 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>multilangstring</strong> (<a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString"><em>MultiLangString</em></a>) – The MultiLangString object to be added.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls2</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span><span class="o">.</span><span class="n">add_multilangstring</span><span class="p">(</span><span class="n">mls2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls1</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -357,13 +353,12 @@ this set. If the language already exists, the text is added to the existing set 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language to add.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">add_empty_lang</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {}@en</span>
 </pre></div>
@@ -383,13 +378,12 @@ SetLangString, or MultiLangString objects. Optionally, it can remove empty langu
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove empty language entries after discarding. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard</span><span class="p">((</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {}@en, {&#39;Bonjour&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -413,13 +407,12 @@ If the set becomes empty and clean_empty is True, the language entry is removed.
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_entry</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_entry</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="n">clean_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -441,13 +434,12 @@ If the set becomes empty and clean_empty is True, the language entry is removed.
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_text_in_pref_lang</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_text_in_pref_lang</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="n">clean_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -469,13 +461,12 @@ If the set becomes empty and clean_empty is True, the language entry is removed.
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_langstring</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -499,13 +490,12 @@ If the set becomes empty and clean_empty is True, the language entry is removed.
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_setlangstring</span><span class="p">(</span><span class="n">set_lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -529,13 +519,12 @@ If a set becomes empty and clean_empty is True, the language entry is removed.</
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove empty language entries after discarding. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls_to_discard</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_multilangstring</span><span class="p">(</span><span class="n">mls_to_discard</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -555,13 +544,12 @@ If a set becomes empty and clean_empty is True, the language entry is removed.</
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language to discard.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_lang</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Bonjour&#39;, &#39;Salut&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">discard_lang</span><span class="p">(</span><span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -583,13 +571,12 @@ SetLangString, or MultiLangString objects. Optionally, it can remove empty langu
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove empty language entries after removing. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove</span><span class="p">((</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {}@en, {&#39;Bonjour&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -613,13 +600,12 @@ empty set for the language, the language key is also removed from the dictionary
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_entry</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_entry</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="n">clean_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -641,13 +627,12 @@ If the set becomes empty and clean_empty is True, the language entry is removed.
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_text_in_pref_lang</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_text_in_pref_lang</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="n">clean_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -669,13 +654,12 @@ If the set becomes empty and clean_empty is True, the language entry is removed.
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_langstring</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -699,13 +683,12 @@ If the set becomes empty and clean_empty is True, the language entry is removed.
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove the language entry if it becomes empty. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_setlangstring</span><span class="p">(</span><span class="n">set_lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -729,13 +712,12 @@ If a set becomes empty and clean_empty is True, the language entry is removed.</
 <li><p><strong>clean_empty</strong> (<em>bool</em>) – If True, remove empty language entries after removing. Defaults to False.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls_to_remove</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_multilangstring</span><span class="p">(</span><span class="n">mls_to_remove</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
@@ -755,13 +737,12 @@ If a set becomes empty and clean_empty is True, the language entry is removed.</
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to be removed along with all its texts.</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_lang</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Bonjour&#39;, &#39;Salut&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_lang</span><span class="p">(</span><span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -775,18 +756,17 @@ If a set becomes empty and clean_empty is True, the language entry is removed.</
 <span class="sig-name descname"><span class="pre">remove_empty_langs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString.remove_empty_langs" title="Link to this definition"></a></dt>
 <dd><p>Remove all empty language entries from the dictionary.</p>
 <p>This method checks for languages that have no associated text entries and removes them from the dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">()})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">()})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">remove_empty_langs</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;}@en</span>
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -811,10 +791,9 @@ The resulting list of strings is sorted to generate a deterministic output.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[str]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">strings</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">to_strings</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span>  <span class="c1"># Output: [&#39;&quot;Bonjour&quot;@fr&#39;, &#39;&quot;Hello&quot;@en&#39;, &#39;&quot;World&quot;@en&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">strings</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">to_strings</span><span class="p">(</span><span class="n">print_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">print_lang</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -838,10 +817,9 @@ The resulting list of strings is sorted to generate a deterministic output.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">langstrings</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">to_langstrings</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">langstring</span> <span class="ow">in</span> <span class="n">langstrings</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">langstring</span><span class="p">)</span>
@@ -868,16 +846,15 @@ The resulting list of strings is sorted to generate a deterministic output.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">setlangstrings</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">to_setlangstrings</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">setlangstring</span> <span class="ow">in</span> <span class="n">setlangstrings</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">setlangstring</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output:   {&#39;Hello&#39;, &#39;World&#39;}@en</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#           {&#39;Bonjour&#39;}@fr</span>
+<span class="go"># Output:   {&#39;Hello&#39;, &#39;World&#39;}@en</span>
+<span class="go">#           {&#39;Bonjour&#39;}@fr</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -897,10 +874,9 @@ The resulting list of strings is sorted to generate a deterministic output.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">count</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">count_entries_of_lang</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>  <span class="c1"># Output: 2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">count</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">count_entries_of_lang</span><span class="p">(</span><span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -921,10 +897,9 @@ The resulting list of strings is sorted to generate a deterministic output.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict[str, int]</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">counts</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">count_entries_per_lang</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>  <span class="c1"># Output: {&#39;en&#39;: 2, &#39;fr&#39;: 1}</span>
 </pre></div>
@@ -943,10 +918,9 @@ The resulting list of strings is sorted to generate a deterministic output.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">total_count</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">count_entries_total</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">total_count</span><span class="p">)</span>  <span class="c1"># Output: 3</span>
 </pre></div>
@@ -965,10 +939,9 @@ The resulting list of strings is sorted to generate a deterministic output.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">total_langs</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">count_langs_total</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">total_langs</span><span class="p">)</span>  <span class="c1"># Output: 2</span>
 </pre></div>
@@ -991,10 +964,9 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains</span><span class="p">((</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -1028,10 +1000,9 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_entry</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_entry</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -1057,10 +1028,9 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_lang</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_lang</span><span class="p">(</span><span class="s2">&quot;fr&quot;</span><span class="p">)</span>
@@ -1086,10 +1056,9 @@ SetLangString, or MultiLangString objects.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_text_in_pref_lang</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_text_in_pref_lang</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">)</span>
@@ -1114,10 +1083,9 @@ in the MultiLangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_text_in_any_lang</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_text_in_any_lang</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">)</span>
@@ -1143,10 +1111,9 @@ in the MultiLangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">LangString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_langstring</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
@@ -1174,10 +1141,9 @@ language’s set; otherwise, False.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span> <span class="o">=</span> <span class="n">SetLangString</span><span class="p">({</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_setlangstring</span><span class="p">(</span><span class="n">set_lang_str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
@@ -1208,10 +1174,9 @@ False otherwise.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls_to_check</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">contains_multilangstring</span><span class="p">(</span><span class="n">mls_to_check</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: True</span>
@@ -1238,10 +1203,9 @@ the language codes are returned in lowercase.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[str]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">langs</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_langs</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">langs</span><span class="p">)</span>  <span class="c1"># Output: [&#39;en&#39;, &#39;fr&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">langs_casefolded</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_langs</span><span class="p">(</span><span class="n">casefold</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1262,10 +1226,9 @@ the language codes are returned in lowercase.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[str]</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_texts</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>  <span class="c1"># Output: [&#39;Bonjour&#39;, &#39;Hello&#39;, &#39;World&#39;]</span>
 </pre></div>
@@ -1292,10 +1255,9 @@ not found.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_langstring</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_langstring</span><span class="p">(</span><span class="s2">&quot;Hola&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">)</span>
@@ -1321,10 +1283,9 @@ if not found.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_setlangstring</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">set_lang_str</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_setlangstring</span><span class="p">(</span><span class="s2">&quot;es&quot;</span><span class="p">)</span>
@@ -1349,10 +1310,9 @@ from the current MultiLangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">MultiLangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hola&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hola&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">new_mls</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">get_multilangstring</span><span class="p">([</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">new_mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en, {&#39;Hola&#39;}@es</span>
 </pre></div>
@@ -1378,10 +1338,9 @@ and returns it as a LangString object. If the entry is not found, it returns Non
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Optional[<a class="reference internal" href="../index.html#langstring.LangString" title="langstring.LangString">LangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lang_str</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">pop_langstring</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lang_str</span><span class="p">)</span>  <span class="c1"># Output: &quot;Hello&quot;@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {}@en, {&#39;Bonjour&#39;}@fr,</span>
@@ -1408,10 +1367,9 @@ and returns them as a SetLangString object. If the language is not found, it ret
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Optional[<a class="reference internal" href="../index.html#langstring.SetLangString" title="langstring.SetLangString">SetLangString</a>]</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">set_lang_str</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">pop_setlangstring</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">set_lang_str</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Bonjour&#39;}@fr</span>
@@ -1438,10 +1396,9 @@ and returns them as a new MultiLangString object.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">MultiLangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hola&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">},</span> <span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hola&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">new_mls</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">pop_multilangstring</span><span class="p">([</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;es&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">new_mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en, {&#39;Hola&#39;}@es</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Bonjour&#39;}@fr</span>
@@ -1461,10 +1418,9 @@ and returns them as a new MultiLangString object.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">has_entries</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">has_pref_lang_entries</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">has_entries</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="o">.</span><span class="n">pop_setlangstring</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
@@ -1490,10 +1446,9 @@ exists in the MultiLangString.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;en&quot;</span> <span class="ow">in</span> <span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;es&quot;</span> <span class="ow">in</span> <span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: False</span>
 </pre></div>
@@ -1513,13 +1468,12 @@ entry from the MultiLangString.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>KeyError</strong> – If the language is not found in the MultiLangString.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">mls</span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Bonjour&#39;}@fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">mls</span><span class="p">[</span><span class="s2">&quot;es&quot;</span><span class="p">]</span>  <span class="c1"># Raises KeyError</span>
@@ -1544,10 +1498,9 @@ The pref_lang attribute is not considered in the equality check.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls2</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls1</span> <span class="o">==</span> <span class="n">mls2</span><span class="p">)</span>  <span class="c1"># Output: True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls3</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Salut&quot;</span><span class="p">}})</span>
@@ -1576,10 +1529,9 @@ Raises KeyError if the language is not found.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>KeyError</strong> – If the language is not found in the MultiLangString.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">])</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">[</span><span class="s2">&quot;es&quot;</span><span class="p">])</span>  <span class="c1"># Raises KeyError</span>
 </pre></div>
@@ -1601,10 +1553,9 @@ I.e., the pref_lang attribute is not considered in the hash creation.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}},</span> <span class="n">pref_lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}},</span> <span class="n">pref_lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls2</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}},</span> <span class="n">pref_lang</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">mls1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">hash</span><span class="p">(</span><span class="n">mls2</span><span class="p">))</span>  <span class="c1"># Output: True</span>
 </pre></div>
@@ -1624,10 +1575,9 @@ language codes present in the MultiLangString.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>iterator</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">lang</span> <span class="ow">in</span> <span class="n">mls</span><span class="p">:</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Output:   en</span>
@@ -1649,10 +1599,9 @@ language entries present in the MultiLangString.</p>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mls</span><span class="p">))</span>  <span class="c1"># Output: 2</span>
 </pre></div>
 </div>
@@ -1671,11 +1620,11 @@ dictionary of language strings and the preferred language, making it useful for 
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">mls</span><span class="p">))</span>  <span class="c1"># Output: &#39;MultiLangString(mls_dict={&#39;en&#39;: {&#39;Hello&#39;}, &#39;fr&#39;: {&#39;Bonjour&#39;}}, pref_lang=&#39;en&#39;)&#39;</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">mls</span><span class="p">))</span>
+<span class="go"># Output: &#39;MultiLangString(mls_dict={&#39;en&#39;: {&#39;Hello&#39;}, &#39;fr&#39;: {&#39;Bonjour&#39;}}, pref_lang=&#39;en&#39;)&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1692,10 +1641,9 @@ dictionary of language strings and the preferred language, making it useful for 
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>reverse_iterator</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">reversed_langs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">mls</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">reversed_langs</span><span class="p">)</span>  <span class="c1"># Output: [&#39;fr&#39;, &#39;en&#39;]</span>
 </pre></div>
@@ -1715,13 +1663,12 @@ dictionary behavior. If the language does not exist, it is added.</p>
 <li><p><strong>texts</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – A set of text entries to associate with the language.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span><span class="p">[</span><span class="s2">&quot;es&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Hola&quot;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en, {&#39;Hola&#39;}@es</span>
@@ -1744,10 +1691,9 @@ associated language tag. The output is sorted alphabetically by language and the
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en, {&#39;Bonjour&#39;}@fr</span>
 </pre></div>
 </div>
@@ -1770,66 +1716,12 @@ instances. If the list is empty, an empty MultiLangString is returned.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#langstring.multilangstring.MultiLangString" title="langstring.multilangstring.MultiLangString">MultiLangString</a></p>
 </dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls1</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mls2</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hola&quot;</span><span class="p">},</span> <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;World&quot;</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">merged_mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="o">.</span><span class="n">merge_multilangstrings</span><span class="p">([</span><span class="n">mls1</span><span class="p">,</span> <span class="n">mls2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">merged_mls</span><span class="p">)</span>  <span class="c1"># Output: {&#39;Hello&#39;, &#39;World&#39;}@en, {&#39;Hola&#39;}@es, {&#39;Bonjour&#39;}@fr</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._get_registered_lang">
-<span class="sig-name descname"><span class="pre">_get_registered_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._get_registered_lang" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the registered language key from the MultiLangString.</p>
-<p>This method performs a case-insensitive lookup to find and return the registered language key
-in the MultiLangString. If the language key is not found, it returns None.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lang</strong> (<em>str</em>) – The language key to look up.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The registered language key, or None if not found.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Union[str, None]</p>
-</dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="p">({</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">registered_lang</span> <span class="o">=</span> <span class="n">mls</span><span class="o">.</span><span class="n">_get_registered_lang</span><span class="p">(</span><span class="s2">&quot;EN&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">registered_lang</span><span class="p">)</span>  <span class="c1"># Output: en</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.multilangstring.MultiLangString._merge_language_entries">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_merge_language_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mls_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.multilangstring.MultiLangString._merge_language_entries" title="Link to this definition"></a></dt>
-<dd><p>Merge language entries in a dictionary where the language codes match case-insensitively.</p>
-<p>This static method takes a dictionary with language codes as keys and sets of strings as values.
-It merges entries with case-insensitive language codes, combining their text sets. The original
-language codes are preserved if there are no case-insensitive duplicates.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mls_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – A dictionary with language codes as keys and sets of strings as values.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary with merged entries for case-insensitive duplicates, preserving original case otherwise.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, set[str]]</p>
-</dd>
-<dt class="field-even">Example<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mls_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="s2">&quot;EN&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;World&quot;</span><span class="p">},</span> <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">}}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">merged_dict</span> <span class="o">=</span> <span class="n">MultiLangString</span><span class="o">.</span><span class="n">_merge_language_entries</span><span class="p">(</span><span class="n">mls_dict</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">merged_dict</span><span class="p">)</span>  <span class="c1"># Output: {&#39;en&#39;: {&#39;Hello&#39;, &#39;World&#39;}, &#39;fr&#39;: {&#39;Bonjour&#39;}}</span>
 </pre></div>
 </div>
 </dd></dl>

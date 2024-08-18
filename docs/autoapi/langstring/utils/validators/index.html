@@ -41,7 +41,7 @@
               <img src="../../../../_static/langstring-lib-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.0.1
+                3.0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -102,36 +102,40 @@
   <section id="module-langstring.utils.validators">
 <span id="langstring-utils-validators"></span><h1>langstring.utils.validators<a class="headerlink" href="#module-langstring.utils.validators" title="Link to this heading"></a></h1>
 <p>The <cite>validators</cite> module provides two classes, <cite>TypeValidator</cite> and <cite>FlagValidator</cite>, for validating argument types and flag-based constraints, respectively.</p>
-<p>This module defines two classes:
-- <cite>TypeValidator</cite>: Handles type validation for arguments based on type hints. It includes methods for validating</p>
-<blockquote>
-<div><p>single arguments, iterables, and decorated functions or methods.</p>
-</div></blockquote>
-<ul class="simple">
+<dl class="simple">
+<dt>This module defines two classes:</dt><dd><ul class="simple">
+<li><p><cite>TypeValidator</cite>: Handles type validation for arguments based on type hints. It includes methods for validating
+single arguments, iterables, and decorated functions or methods.</p></li>
 <li><p><cite>FlagValidator</cite>: Handles validation and transformation of text and language arguments based on configuration flags
 managed by the <cite>Controller</cite>.</p></li>
 </ul>
+</dd>
+</dl>
 <p>The validators ensure that arguments and values adhere to specified types and constraints, enhancing the robustness
 and reliability of the application.</p>
-<p>Key Features:
-- <strong>Type Validation</strong>: <cite>TypeValidator</cite> offers methods to validate single arguments, iterables, and function/method</p>
-<blockquote>
-<div><p>arguments based on type hints.</p>
-</div></blockquote>
-<ul class="simple">
+<dl class="simple">
+<dt>Key Features:</dt><dd><ul class="simple">
+<li><p><strong>Type Validation</strong>: <cite>TypeValidator</cite> offers methods to validate single arguments, iterables, and function/method
+arguments based on type hints.</p></li>
 <li><p><strong>Flag-based Validation</strong>: <cite>FlagValidator</cite> provides methods to validate and transform text and language arguments
 according to control flags.</p></li>
-<li><p><strong>Separation of Concerns</strong>: By separating type validation and flag-based validation into different classes, the module
-maintains a clear and organized structure.</p></li>
+<li><p><strong>Separation of Concerns</strong>: By separating type validation and flag-based validation into different classes,
+the module maintains a clear and organized structure.</p></li>
 </ul>
-<p>Classes:
-- <strong>TypeValidator</strong>: Validates argument types based on type hints.
-- <strong>FlagValidator</strong>: Validates and transforms arguments based on control flags.</p>
-<p>Enums Utilized:
-- <strong>GlobalFlag</strong>: Flags affecting the behavior of all classes.
-- <strong>LangStringFlag</strong>: Flags specific to the <cite>LangString</cite> class.
-- <strong>SetLangStringFlag</strong>: Flags specific to the <cite>SetLangString</cite> class.
-- <strong>MultiLangStringFlag</strong>: Flags specific to the <cite>MultiLangString</cite> class.</p>
+</dd>
+<dt>Classes:</dt><dd><ul class="simple">
+<li><p><strong>TypeValidator</strong>: Validates argument types based on type hints.</p></li>
+<li><p><strong>FlagValidator</strong>: Validates and transforms arguments based on control flags.</p></li>
+</ul>
+</dd>
+<dt>Enums Utilized:</dt><dd><ul class="simple">
+<li><p><strong>GlobalFlag</strong>: Flags affecting the behavior of all classes.</p></li>
+<li><p><strong>LangStringFlag</strong>: Flags specific to the <cite>LangString</cite> class.</p></li>
+<li><p><strong>SetLangStringFlag</strong>: Flags specific to the <cite>SetLangString</cite> class.</p></li>
+<li><p><strong>MultiLangStringFlag</strong>: Flags specific to the <cite>MultiLangString</cite> class.</p></li>
+</ul>
+</dd>
+</dl>
 <p>The validators in this module are designed to be non-instantiable, emphasizing their role as static utility classes.</p>
 <section id="attributes">
 <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
@@ -171,35 +175,34 @@ maintains a clear and organized structure.</p></li>
 according to the specified flag type. The validation rules and transformations are controlled by flags
 managed by the <cite>Controller</cite> class.</p>
 <p>The <cite>FlagValidator</cite> class is non-instantiable, emphasizing its role as a static utility class.</p>
-<p>Methods:
-- <cite>validate_flags_text(flag_type: type[Enum], text: Optional[str]) -&gt; str</cite>: Validate and transform the <cite>text</cite></p>
-<blockquote>
-<div><p>argument based on the specified flag type.</p>
-</div></blockquote>
-<ul class="simple">
+<dl class="simple">
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p><cite>validate_flags_text(flag_type: type[Enum], text: Optional[str]) -&gt; str</cite>: Validate and transform the <cite>text</cite>
+argument based on the specified flag type.</p></li>
 <li><p><cite>validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -&gt; Optional[str]</cite>: Validate and transform the
 <cite>lang</cite> argument based on the specified flag type.</p></li>
 </ul>
-<p>Examples:
-- Validating and transforming text:
-&gt;&gt;&gt; Controller.set_flag(GlobalFlag.STRIP_TEXT, True)
-&gt;&gt;&gt; Controller.set_flag(GlobalFlag.DEFINED_TEXT, True)
-&gt;&gt;&gt; print(FlagValidator.validate_flags_text(GlobalFlag, “  Hello  “))  # Output: Hello
-&gt;&gt;&gt; print(FlagValidator.validate_flags_text(GlobalFlag, “     “))  # Raises ValueError
-&gt;&gt;&gt; print(FlagValidator.validate_flags_text(GlobalFlag, None))  # Raises ValueError</p>
-<ul class="simple">
-<li><p>Validating and transforming language:</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">STRIP_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  EN  &quot;</span><span class="p">))</span>  <span class="c1"># Output: &#39;EN&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  EN  &quot;</span><span class="p">))</span>  <span class="c1"># Output: &#39;en&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">DEFINED_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">))</span>
-<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>  <span class="c1"># Output: Invalid &#39;lang&#39; value received (&#39;  &#39;). &#39;LangStringFlag.DEFINED_LANG&#39; is enabled.</span>
-<span class="go">                  # Expected non-empty &#39;str&#39; or &#39;str&#39; with non-space characters.</span>
+</dd>
+</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validating and transforming text:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">STRIP_TEXT</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">DEFINED_TEXT</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_text</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="p">,</span> <span class="s2">&quot;  Hello  &quot;</span><span class="p">))</span>  <span class="c1"># Output: Hello</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_text</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="p">,</span> <span class="s2">&quot;     &quot;</span><span class="p">))</span>  <span class="c1"># Raises ValueError</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_text</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>  <span class="c1"># Raises ValueError</span>
+
+<span class="c1"># Validating and transforming language:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">STRIP_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  EN  &quot;</span><span class="p">))</span>  <span class="c1"># Output: &#39;EN&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  EN  &quot;</span><span class="p">))</span>  <span class="c1"># Output: &#39;en&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">DEFINED_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">try</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">))</span>
+<span class="o">...</span> <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>  <span class="c1"># Output: Invalid &#39;lang&#39; value received (&#39;  &#39;). &#39;LangStringFlag.DEFINED_LANG&#39; is enabled.</span>
+<span class="o">...</span>               <span class="c1"># Expected non-empty &#39;str&#39; or &#39;str&#39; with non-space characters.</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -228,10 +231,9 @@ Additionally, it can strip whitespace from the ‘text’ based on the <cite>STR
 <li><p><strong>ValueError</strong> – If the text does not meet the criteria specified by the control flags.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">STRIP_TEXT</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">STRIP_TEXT</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">DEFINED_TEXT</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_text</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="p">,</span> <span class="s2">&quot;  Hello  &quot;</span><span class="p">))</span>  <span class="c1"># Output: Hello</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_text</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="p">,</span> <span class="s2">&quot;     &quot;</span><span class="p">))</span>  <span class="c1"># Raises ValueError</span>
@@ -270,10 +272,9 @@ is enabled.</p></li>
 <cite>ENFORCE_EXTRA_DEPEND</cite> is enabled.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">STRIP_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">STRIP_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  EN  &quot;</span><span class="p">))</span>  <span class="c1"># Output: &#39;EN&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="o">.</span><span class="n">LOWERCASE_LANG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">FlagValidator</span><span class="o">.</span><span class="n">validate_flags_lang</span><span class="p">(</span><span class="n">LangStringFlag</span><span class="p">,</span> <span class="s2">&quot;  EN  &quot;</span><span class="p">))</span>  <span class="c1"># Output: &#39;en&#39;</span>
@@ -297,132 +298,60 @@ is enabled.</p></li>
 validation decorators to functions or methods.
 The validation ensures that the arguments match the specified type hints.</p>
 <p>The <cite>TypeValidator</cite> class is non-instantiable, emphasizing its role as a static utility class.</p>
-<p>Methods:
-- <cite>_check_arg(arg: Any, hint: type[Any]) -&gt; bool</cite>: Check if the argument matches the type hint.
-- <cite>validate_type_decorator(func: Callable[…, T]) -&gt; Callable[…, T]</cite>: Decorator to validate the types of</p>
-<blockquote>
-<div><p>arguments passed to a function or method based on their type hints.</p>
-</div></blockquote>
-<ul>
-<li><dl class="simple">
-<dt><cite>validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -&gt; None</cite>: Validate that a single</dt><dd><p>argument matches the expected type.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a href="#id1"><span class="problematic" id="id2">`</span></a>validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False)</dt><dd><p>-&gt; None`:</p>
-</dd>
-</dl>
-<p>Validate that an argument is an iterable of the expected type and that its contents match the expected
-content type.</p>
-</li>
-</ul>
-<p>Examples:
-- Using the type validation decorator:
-&gt;&gt;&gt; &#64;TypeValidator.validate_type_decorator
-… def greet(name: str, age: int) -&gt; str:
-…     return f”Hello, {name}. You are {age} years old.”
-…
-&gt;&gt;&gt; print(greet(“Alice”, 30))  # Output: Hello, Alice. You are 30 years old.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">process_list</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">process_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># Output: 6</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">union_example</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Received: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">union_example</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>  <span class="c1"># Output: Received: 42</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">union_example</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">))</span>  <span class="c1"># Output: Received: 42</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Validating a single argument:</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>  <span class="c1"># Raise TypeError</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Validating an iterable:</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="langstring.utils.validators.TypeValidator._check_arg">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_check_arg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validators.TypeValidator._check_arg" title="Link to this definition"></a></dt>
-<dd><p>Check if the argument matches the type hint.</p>
-<p>This private method validates that the provided argument matches the specified type hint.
-It supports basic types, parameterized generics like lists and dictionaries, and unions of types.
-It is intended to be used internally by the <cite>validate_type_decorator</cite> method for argument validation.</p>
-<p>This method has functionalities that the <cite>validate_type_single</cite> and <cite>validate_type_iterable</cite> methods do
-not fully cover:
-1. <strong>Handling Union Types</strong>:</p>
-<blockquote>
-<div><p><cite>_check_arg</cite> can handle <cite>Union</cite> types, allowing for type hints that specify multiple possible
-types for an argument (e.g., <cite>Union[int, str]</cite>).</p>
-</div></blockquote>
-<ol class="arabic simple" start="2">
-<li><dl class="simple">
-<dt><strong>Parameterized Generics</strong>:</dt><dd><p><cite>_check_arg</cite> supports parameterized generics such as <cite>List[int]</cite>, <cite>Set[str]</cite>, <cite>Tuple[int, str]</cite>,
-and <cite>Dict[str, int]</cite>. It checks both the container type and the types of the items within the container.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><strong>Nested Types</strong>:</dt><dd><p><cite>_check_arg</cite> can validate more complex nested types,
-such as a list of dictionaries or a dictionary with tuple values.</p>
-</dd>
-</dl>
-</li>
-</ol>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>arg</strong> (<em>Any</em>) – The argument to be checked.</p></li>
-<li><p><strong>hint</strong> (<em>type</em><em>[</em><em>Any</em><em>]</em>) – The expected type of the argument.</p></li>
+<dl class="simple">
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p><cite>_check_arg(arg: Any, hint: type[Any]) -&gt; bool</cite>: Check if the argument matches the type hint.</p></li>
+<li><p><cite>validate_type_decorator(func: Callable[…, T]) -&gt; Callable[…, T]</cite>: Decorator to validate the types of
+arguments passed to a function or method based on their type hints.</p></li>
+<li><p><cite>validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -&gt; None</cite>: Validate that a single
+argument matches the expected type.</p></li>
+<li><p><cite>validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False) -&gt;
+None</cite>: Validate that an argument is an iterable of the expected type and that its contents match the expected
+content type.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if the argument matches the type hint, otherwise raises a TypeError.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If the argument does not match the expected type hint.</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<p># Check a simple type
-&gt;&gt;&gt; print(TypeValidator._check_arg(5, int))  # Output: True</p>
-<p># Check a union type
-&gt;&gt;&gt; print(TypeValidator._check_arg(“test”, Union[str, int]))  # Output: True</p>
-<p># Check a list of integers
-&gt;&gt;&gt; print(TypeValidator._check_arg([1, 2, 3], list[int]))  # Output: True</p>
-<p># Check a dictionary with string keys and integer values
-&gt;&gt;&gt; print(TypeValidator._check_arg({“a”: 1, “b”: 2}, dict[str, int]))  # Output: True</p>
-<p># This will raise a TypeError because the argument does not match the expected type
-&gt;&gt;&gt; print(TypeValidator._check_arg(“test”, int))  # Raises TypeError</p>
-</dd></dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the type validation decorator:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
+<span class="o">...</span> <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">. You are </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old.&quot;</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>  <span class="c1"># Output: Hello, Alice. You are 30 years old.</span>
 
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
+<span class="o">...</span> <span class="k">def</span> <span class="nf">process_list</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">process_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># Output: 6</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
+<span class="o">...</span> <span class="k">def</span> <span class="nf">union_example</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Received: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">union_example</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>  <span class="c1"># Output: Received: 42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">union_example</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">))</span>  <span class="c1"># Output: Received: 42</span>
+
+<span class="c1"># Validating a single argument:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
+
+<span class="c1"># Validating an iterable:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Does not raise error.</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="langstring.utils.validators.TypeValidator.validate_type_decorator">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_type_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.utils.validators.TypeValidator.validate_type_decorator" title="Link to this definition"></a></dt>
 <dd><p>Is a decorator to validate the types of arguments passed to a function or method based on their type hints.</p>
 <p>This method checks if each argument’s type matches its corresponding type hint. It is intended for use with
 functions or instance methods where explicit type hints are provided for all arguments.</p>
-<dl>
+<dl class="simple">
 <dt>Usage:</dt><dd><ul class="simple">
 <li><p>Apply this decorator to functions or instance methods that require type validation based on type hints.</p></li>
 </ul>
@@ -430,11 +359,11 @@ functions or instance methods where explicit type hints are provided for all arg
 <dt>When to Use:</dt><dd><ul class="simple">
 <li><p>Use this decorator for functions or methods where argument types need to be strictly validated.</p></li>
 <li><p>Suitable for validating primitive types (int, str, float, bool, etc.), Optional types, and Union types.</p></li>
-<li><p>Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and its</p></li>
+<li><p>Useful for parameterized generics like List[int], Set[str], etc., to ensure both the container and its
+contents match the specified types.</p></li>
+<li><p>Appropriate for instance methods, adjusting for the ‘self’ parameter automatically.</p></li>
+<li><p>Suitable for static methods but requires manual validation for class methods and setters.</p></li>
 </ul>
-<p>contents match the specified types.
-- Appropriate for instance methods, adjusting for the ‘self’ parameter automatically.
-- Suitable for static methods but requires manual validation for class methods and setters.</p>
 </dd>
 <dt>When Not to Use:</dt><dd><ul class="simple">
 <li><p>Do not use this decorator for class methods with the ‘cls’ parameter. It doesn`t handle ‘cls’ explicitly.</p></li>
@@ -461,37 +390,37 @@ validated by this decorator.</p></li>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If an argument’s type does not match its type hint.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
 <span class="gp">... </span><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">. You are </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old.&quot;</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>  <span class="c1"># Output: Hello, Alice. You are 30 years old.</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
 <span class="gp">... </span><span class="k">def</span> <span class="nf">process_list</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">process_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># Output: 6</span>
-</pre></div>
-</div>
-<p># Raises TypeError because ‘age’ is expected to be an int, not a str
-&gt;&gt;&gt; greet(“Alice”, “30”)  # Raises TypeError</p>
-<p># Raises TypeError because ‘data’ is expected to be a list[int], not a list[str]
-&gt;&gt;&gt; process_list([“1”, “2”, “3”])  # Raises TypeError</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
+
+<span class="go"># Raises TypeError because &#39;age&#39; is expected to be an int, not a str</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;30&quot;</span><span class="p">)</span>  <span class="c1"># Raises TypeError</span>
+
+<span class="go"># Raises TypeError because &#39;data&#39; is expected to be a list[int], not a list[str]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">process_list</span><span class="p">([</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">])</span>  <span class="c1"># Raises TypeError</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>
 <span class="gp">... </span><span class="k">def</span> <span class="nf">union_example</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Received: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">union_example</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>  <span class="c1"># Output: Received: 42</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">union_example</span><span class="p">(</span><span class="s2">&quot;42&quot;</span><span class="p">))</span>  <span class="c1"># Output: Received: 42</span>
+
+<span class="go"># Raises TypeError because &#39;value&#39; is expected to be Union[int, str], not a list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">union_example</span><span class="p">([</span><span class="mi">42</span><span class="p">])</span>  <span class="c1"># Raises TypeError</span>
 </pre></div>
 </div>
-<p># Raises TypeError because ‘value’ is expected to be Union[int, str], not a list
-&gt;&gt;&gt; union_example([42])  # Raises TypeError</p>
 </dd></dl>
 
 <dl class="py method">
@@ -511,23 +440,24 @@ the argument can also be None. If the argument does not match the expected type,
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the argument does not match the expected type.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="go"># This will raise a TypeError because the argument is not of the expected type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="go"># Raises TypeError: Invalid argument with value &#39;5&#39;. Expected &#39;str&#39;, but got &#39;int&#39;.</span>
+
+<span class="go"># This will also raise a TypeError because the argument is not of the expected type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_single</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="go"># Raises TypeError: Invalid argument with value &#39;test&#39;. Expected &#39;int&#39;, but got &#39;str&#39;.</span>
 </pre></div>
 </div>
-<p># This will raise a TypeError because the argument is not of the expected type
-&gt;&gt;&gt; TypeValidator.validate_type_single(5, str)
-# Raises TypeError: Invalid argument with value ‘5’. Expected ‘str’, but got ‘int’.</p>
-<p># This will also raise a TypeError because the argument is not of the expected type
-&gt;&gt;&gt; TypeValidator.validate_type_single(“test”, int)
-# Raises TypeError: Invalid argument with value ‘test’. Expected ‘int’, but got ‘str’.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -550,23 +480,24 @@ If the argument or its contents do not match the expected types, a TypeError is 
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the argument or its contents do not match the expected types.</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="go"># This will raise a TypeError because the argument is not of the expected iterable type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="go"># Raises TypeError: Invalid argument with value &#39;[1, 2, 3]&#39;. Expected &#39;set&#39;, but got &#39;list&#39;.</span>
+
+<span class="go"># This will also raise a TypeError because the contents are not of the expected type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TypeValidator</span><span class="o">.</span><span class="n">validate_type_iterable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="go"># Raises TypeError: Invalid argument with value &#39;2&#39;. Expected &#39;int&#39;, but got &#39;str&#39;.</span>
 </pre></div>
 </div>
-<p># This will raise a TypeError because the argument is not of the expected iterable type
-&gt;&gt;&gt; TypeValidator.validate_type_iterable([1, 2, 3], set, int)
-# Raises TypeError: Invalid argument with value ‘[1, 2, 3]’. Expected ‘set’, but got ‘list’.</p>
-<p># This will also raise a TypeError because the contents are not of the expected type
-&gt;&gt;&gt; TypeValidator.validate_type_iterable([1, “2”, 3], list, int)
-# Raises TypeError: Invalid argument with value ‘2’. Expected ‘int’, but got ‘str’.</p>
 </dd></dl>
 
 </dd></dl>

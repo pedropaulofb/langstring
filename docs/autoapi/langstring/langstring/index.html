@@ -1515,9 +1515,13 @@ If None, whitespace characters are removed.</p>
 <dt class="sig sig-object py" id="langstring.langstring.LangString.__add__">
 <span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.langstring.LangString.__add__" title="Link to this definition"></a></dt>
 <dd><p>Add another LangString or a string to this LangString.</p>
-<p>The operation can only be performed if:
-- Both are LangString objects with the same language tag.
-- The other is a string, which will be concatenated to the text of this LangString.</p>
+<dl class="simple">
+<dt>The operation can only be performed if:</dt><dd><ul class="simple">
+<li><p>Both are LangString objects with the same language tag.</p></li>
+<li><p>The other is a string, which will be concatenated to the text of this LangString.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.langstring.LangString" title="langstring.langstring.LangString"><em>LangString</em></a><em>, </em><em>str</em><em>]</em>) – The LangString or string to add.</p>

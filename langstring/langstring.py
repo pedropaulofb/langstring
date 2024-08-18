@@ -1271,8 +1271,8 @@ class LangString:
         Add another LangString or a string to this LangString.
 
         The operation can only be performed if:
-        - Both are LangString objects with the same language tag.
-        - The other is a string, which will be concatenated to the text of this LangString.
+            - Both are LangString objects with the same language tag.
+            - The other is a string, which will be concatenated to the text of this LangString.
 
         :param other: The LangString or string to add.
         :type other: Union[LangString, str]

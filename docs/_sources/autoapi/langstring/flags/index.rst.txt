@@ -13,14 +13,14 @@ langstring.flags
 
    Enums defined in this module:
 
-   - **GlobalFlag**: Flags that affect the behavior of all classes. These global flags ensure consistent behavior across
-     the entire system when dealing with multilingual strings.
-   - **LangStringFlag**: Flags specific to the `LangString` class. These flags control how individual language strings
-     are handled, validated, and displayed.
-   - **SetLangStringFlag**: Flags specific to the `SetLangString` class. These flags manage the behavior of sets of
-     language strings, allowing for batch operations and validations.
-   - **MultiLangStringFlag**: Flags specific to the `MultiLangString` class. These flags configure the behavior of
-     multilingual string collections, enabling complex multilingual text management.
+       - **GlobalFlag**: Flags that affect the behavior of all classes. These global flags ensure consistent behavior
+         across the entire system when dealing with multilingual strings.
+       - **LangStringFlag**: Flags specific to the `LangString` class. These flags control how individual language strings
+         are handled, validated, and displayed.
+       - **SetLangStringFlag**: Flags specific to the `SetLangString` class. These flags manage the behavior of sets of
+         language strings, allowing for batch operations and validations.
+       - **MultiLangStringFlag**: Flags specific to the `MultiLangString` class. These flags configure the behavior of
+         multilingual string collections, enabling complex multilingual text management.
 
    Each enumeration includes flags for various aspects such as text validation, language code handling,
    and output formatting.

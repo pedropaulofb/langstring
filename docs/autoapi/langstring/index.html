@@ -124,58 +124,22 @@ framework for applications that require multilingual support.</p>
 <section id="modules-and-classes">
 <h2>Modules and Classes:<a class="headerlink" href="#modules-and-classes" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><strong>controller</strong>: Handles the control mechanisms for language strings.</p></li>
+<li><p><strong>converter</strong>: Provides utilities for converting language strings between different formats.</p></li>
 <li><dl class="simple">
-<dt>controller:</dt><dd><p>Handles the control mechanisms for language strings.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>converter:</dt><dd><p>Provides utilities for converting language strings between different formats.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>flags:</dt><dd><p>Defines various flag classes used for global settings and specific types of language strings.</p>
-<ul>
-<li><dl class="simple">
-<dt>GlobalFlag:</dt><dd><p>A flag for global settings affecting all language string types.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>LangStringFlag:</dt><dd><p>A flag specific to single language strings.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>SetLangStringFlag:</dt><dd><p>A flag specific to sets of language strings.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>MultiLangStringFlag:</dt><dd><p>A flag specific to multi-language strings.</p>
-</dd>
-</dl>
-</li>
+<dt><strong>flags</strong>: Defines various flag classes used for global settings and specific types of language strings.</dt><dd><ul>
+<li><p><cite>GlobalFlag</cite>: A flag for global settings affecting all language string types.</p></li>
+<li><p><cite>LangStringFlag</cite>: A flag specific to single language strings.</p></li>
+<li><p><cite>SetLangStringFlag</cite>: A flag specific to sets of language strings.</p></li>
+<li><p><cite>MultiLangStringFlag</cite>: A flag specific to multi-language strings.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>langstring:</dt><dd><p>Represents a single language string, encapsulating its properties and behaviors.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>multilangstring:</dt><dd><p>Represents a string in multiple langs, providing methods to manage and manipulate the different language variants.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>setlangstring:</dt><dd><p>Represents a set of language strings, facilitating operations on groups of multilingual texts.</p>
-</dd>
-</dl>
-</li>
+<li><p><strong>langstring</strong>: Represents a single language string, encapsulating its properties and behaviors.</p></li>
+<li><p><strong>multilangstring</strong>: Represents a string in multiple langs, providing methods to manage and manipulate the different
+language variants.</p></li>
+<li><p><strong>setlangstring</strong>: Represents a set of language strings, facilitating operations on groups of multilingual texts.</p></li>
 </ul>
 </section>
 <section id="package-contents">
@@ -3079,9 +3043,13 @@ If None, whitespace characters are removed.</p>
 <dt class="sig sig-object py" id="langstring.LangString.__add__">
 <span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langstring.LangString.__add__" title="Link to this definition"></a></dt>
 <dd><p>Add another LangString or a string to this LangString.</p>
-<p>The operation can only be performed if:
-- Both are LangString objects with the same language tag.
-- The other is a string, which will be concatenated to the text of this LangString.</p>
+<dl class="simple">
+<dt>The operation can only be performed if:</dt><dd><ul class="simple">
+<li><p>Both are LangString objects with the same language tag.</p></li>
+<li><p>The other is a string, which will be concatenated to the text of this LangString.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#langstring.LangString" title="langstring.LangString"><em>LangString</em></a><em>, </em><em>str</em><em>]</em>) – The LangString or string to add.</p>

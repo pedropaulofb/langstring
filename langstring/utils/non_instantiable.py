@@ -6,11 +6,12 @@ This module is useful for creating classes intended solely as namespaces or cont
 variables, without allowing instances of such classes to be created.
 
 Key Features:
-- **Instantiation Prevention**: `NonInstantiable` ensures that any attempt to instantiate a class using this
-metaclass will raise a `TypeError`.
+
+    - **Instantiation Prevention**: `NonInstantiable` ensures that any attempt to instantiate a class using this
+      metaclass will raise a `TypeError`.
 
 Classes:
-- **NonInstantiable**: A metaclass that overrides the default instantiation behavior to prevent class instantiation.
+    - **NonInstantiable**: A metaclass that overrides the default instantiation behavior to prevent class instantiation.
 
 **Example**::
 
@@ -39,10 +40,11 @@ class NonInstantiable(type):
     containers for static methods and class variables, without the intention of creating instances.
 
     Key Features:
-    - **Prevent Instantiation**: Ensures that any attempt to create an instance of a class using this metaclass
-    will raise a `TypeError`.
-    - **Namespace Utility**: Ideal for defining classes that serve as namespaces or containers for static methods
-    and constants.
+
+        - **Prevent Instantiation**: Ensures that any attempt to create an instance of a class using this metaclass
+          will raise a `TypeError`.
+        - **Namespace Utility**: Ideal for defining classes that serve as namespaces or containers for static methods
+          and constants.
 
     **Example**::
 

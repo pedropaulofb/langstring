@@ -112,18 +112,24 @@
 flags. These flags influence the behavior and validation rules of the multilingual text handling classes within the
 application. By centralizing flag management, the <cite>Controller</cite> ensures consistent configuration and behavior across
 the system.</p>
-<p>Key Features:
-- <strong>Global Configuration</strong>: The <cite>Controller</cite> manages flags globally, allowing uniform behavior across different
-multilingual text classes.
-- <strong>Non-Instantiable Design</strong>: The <cite>Controller</cite> class uses the <cite>NonInstantiable</cite> metaclass to prevent instantiation,
-emphasizing its role as a static configuration manager.
-- <strong>Flexible Flag Management</strong>: Methods are provided to set, retrieve, print, and reset individual or all flags,
-enabling dynamic configuration during runtime.</p>
-<p>Enums Utilized:
-- <strong>GlobalFlag</strong>: Flags affecting the behavior of all classes.
-- <strong>LangStringFlag</strong>: Flags specific to the <cite>LangString</cite> class.
-- <strong>SetLangStringFlag</strong>: Flags specific to the <cite>SetLangString</cite> class.
-- <strong>MultiLangStringFlag</strong>: Flags specific to the <cite>MultiLangString</cite> class.</p>
+<dl class="simple">
+<dt>Key Features:</dt><dd><ul class="simple">
+<li><p><strong>Global Configuration</strong>: The <cite>Controller</cite> manages flags globally, allowing uniform behavior across different
+multilingual text classes.</p></li>
+<li><p><strong>Non-Instantiable Design</strong>: The <cite>Controller</cite> class uses the <cite>NonInstantiable</cite> metaclass to prevent instantiation,
+emphasizing its role as a static configuration manager.</p></li>
+<li><p><strong>Flexible Flag Management</strong>: Methods are provided to set, retrieve, print, and reset individual or all flags,
+enabling dynamic configuration during runtime.</p></li>
+</ul>
+</dd>
+<dt>Enums Utilized:</dt><dd><ul class="simple">
+<li><p><strong>GlobalFlag</strong>: Flags affecting the behavior of all classes.</p></li>
+<li><p><strong>LangStringFlag</strong>: Flags specific to the <cite>LangString</cite> class.</p></li>
+<li><p><strong>SetLangStringFlag</strong>: Flags specific to the <cite>SetLangString</cite> class.</p></li>
+<li><p><strong>MultiLangStringFlag</strong>: Flags specific to the <cite>MultiLangString</cite> class.</p></li>
+</ul>
+</dd>
+</dl>
 <p>The <cite>Controller</cite> class ensures that the multilingual text handling classes adhere to specified rules and constraints,
 enhancing the robustness and reliability of multilingual content management.</p>
 <section id="classes">

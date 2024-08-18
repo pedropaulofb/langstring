@@ -104,11 +104,19 @@
 <p>The <cite>non_instantiable</cite> module provides the <cite>NonInstantiable</cite> metaclass, designed to prevent the instantiation of any class that uses it.</p>
 <p>This module is useful for creating classes intended solely as namespaces or containers for static methods and class
 variables, without allowing instances of such classes to be created.</p>
-<p>Key Features:
-- <strong>Instantiation Prevention</strong>: <cite>NonInstantiable</cite> ensures that any attempt to instantiate a class using this
-metaclass will raise a <cite>TypeError</cite>.</p>
-<p>Classes:
-- <strong>NonInstantiable</strong>: A metaclass that overrides the default instantiation behavior to prevent class instantiation.</p>
+<p>Key Features:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Instantiation Prevention</strong>: <cite>NonInstantiable</cite> ensures that any attempt to instantiate a class using this
+metaclass will raise a <cite>TypeError</cite>.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Classes:</dt><dd><ul class="simple">
+<li><p><strong>NonInstantiable</strong>: A metaclass that overrides the default instantiation behavior to prevent class instantiation.</p></li>
+</ul>
+</dd>
+</dl>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nd">@staticmethod</span>
@@ -144,11 +152,15 @@ sense and should be prevented by design.</p>
 <p>When a class is defined with <cite>NonInstantiable</cite> as its metaclass, any attempt to instantiate that class will
 result in a <cite>TypeError</cite>. This is useful for creating classes that are meant to be used as namespaces or
 containers for static methods and class variables, without the intention of creating instances.</p>
-<p>Key Features:
-- <strong>Prevent Instantiation</strong>: Ensures that any attempt to create an instance of a class using this metaclass
-will raise a <cite>TypeError</cite>.
-- <strong>Namespace Utility</strong>: Ideal for defining classes that serve as namespaces or containers for static methods
-and constants.</p>
+<p>Key Features:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Prevent Instantiation</strong>: Ensures that any attempt to create an instance of a class using this metaclass
+will raise a <cite>TypeError</cite>.</p></li>
+<li><p><strong>Namespace Utility</strong>: Ideal for defining classes that serve as namespaces or containers for static methods
+and constants.</p></li>
+</ul>
+</div></blockquote>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">NonInstantiable</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nd">@staticmethod</span>

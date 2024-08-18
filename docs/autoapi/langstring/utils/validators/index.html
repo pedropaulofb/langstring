@@ -119,8 +119,8 @@ and reliability of the application.</p>
 arguments based on type hints.</p></li>
 <li><p><strong>Flag-based Validation</strong>: <cite>FlagValidator</cite> provides methods to validate and transform text and language arguments
 according to control flags.</p></li>
-<li><p><strong>Separation of Concerns</strong>: By separating type validation and flag-based validation into different classes, the module
-maintains a clear and organized structure.</p></li>
+<li><p><strong>Separation of Concerns</strong>: By separating type validation and flag-based validation into different classes,
+the module maintains a clear and organized structure.</p></li>
 </ul>
 </dd>
 <dt>Classes:</dt><dd><ul class="simple">
@@ -175,11 +175,15 @@ maintains a clear and organized structure.</p></li>
 according to the specified flag type. The validation rules and transformations are controlled by flags
 managed by the <cite>Controller</cite> class.</p>
 <p>The <cite>FlagValidator</cite> class is non-instantiable, emphasizing its role as a static utility class.</p>
-<p>Methods:
-- <cite>validate_flags_text(flag_type: type[Enum], text: Optional[str]) -&gt; str</cite>: Validate and transform the <cite>text</cite>
-argument based on the specified flag type.
-- <cite>validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -&gt; Optional[str]</cite>: Validate and transform the
-<cite>lang</cite> argument based on the specified flag type.</p>
+<dl class="simple">
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p><cite>validate_flags_text(flag_type: type[Enum], text: Optional[str]) -&gt; str</cite>: Validate and transform the <cite>text</cite>
+argument based on the specified flag type.</p></li>
+<li><p><cite>validate_flags_lang(flag_type: type[Enum], lang: Optional[str]) -&gt; Optional[str]</cite>: Validate and transform the
+<cite>lang</cite> argument based on the specified flag type.</p></li>
+</ul>
+</dd>
+</dl>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Validating and transforming text:</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Controller</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="n">GlobalFlag</span><span class="o">.</span><span class="n">STRIP_TEXT</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -294,15 +298,19 @@ is enabled.</p></li>
 validation decorators to functions or methods.
 The validation ensures that the arguments match the specified type hints.</p>
 <p>The <cite>TypeValidator</cite> class is non-instantiable, emphasizing its role as a static utility class.</p>
-<p>Methods:
-- <cite>_check_arg(arg: Any, hint: type[Any]) -&gt; bool</cite>: Check if the argument matches the type hint.
-- <cite>validate_type_decorator(func: Callable[…, T]) -&gt; Callable[…, T]</cite>: Decorator to validate the types of
-arguments passed to a function or method based on their type hints.
-- <cite>validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -&gt; None</cite>: Validate that a single
-argument matches the expected type.
-- <cite>validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False) -&gt;
+<dl class="simple">
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p><cite>_check_arg(arg: Any, hint: type[Any]) -&gt; bool</cite>: Check if the argument matches the type hint.</p></li>
+<li><p><cite>validate_type_decorator(func: Callable[…, T]) -&gt; Callable[…, T]</cite>: Decorator to validate the types of
+arguments passed to a function or method based on their type hints.</p></li>
+<li><p><cite>validate_type_single(arg: Any, arg_exp_type: type, optional: bool = False) -&gt; None</cite>: Validate that a single
+argument matches the expected type.</p></li>
+<li><p><cite>validate_type_iterable(arg: Any, arg_exp_type: type, arg_content_exp_type: type, optional: bool = False) -&gt;
 None</cite>: Validate that an argument is an iterable of the expected type and that its contents match the expected
-content type.</p>
+content type.</p></li>
+</ul>
+</dd>
+</dl>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the type validation decorator:</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nd">@TypeValidator</span><span class="o">.</span><span class="n">validate_type_decorator</span>

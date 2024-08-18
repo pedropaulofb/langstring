@@ -6,35 +6,17 @@ framework for applications that require multilingual support.
 
 Modules and Classes:
 --------------------
-- controller:
-    Handles the control mechanisms for language strings.
-
-- converter:
-    Provides utilities for converting language strings between different formats.
-
-- flags:
-    Defines various flag classes used for global settings and specific types of language strings.
-
-    - GlobalFlag:
-        A flag for global settings affecting all language string types.
-
-    - LangStringFlag:
-        A flag specific to single language strings.
-
-    - SetLangStringFlag:
-        A flag specific to sets of language strings.
-
-    - MultiLangStringFlag:
-        A flag specific to multi-language strings.
-
-- langstring:
-    Represents a single language string, encapsulating its properties and behaviors.
-
-- multilangstring:
-    Represents a string in multiple langs, providing methods to manage and manipulate the different language variants.
-
-- setlangstring:
-    Represents a set of language strings, facilitating operations on groups of multilingual texts.
+- **controller**: Handles the control mechanisms for language strings.
+- **converter**: Provides utilities for converting language strings between different formats.
+- **flags**: Defines various flag classes used for global settings and specific types of language strings.
+    - `GlobalFlag`: A flag for global settings affecting all language string types.
+    - `LangStringFlag`: A flag specific to single language strings.
+    - `SetLangStringFlag`: A flag specific to sets of language strings.
+    - `MultiLangStringFlag`: A flag specific to multi-language strings.
+- **langstring**: Represents a single language string, encapsulating its properties and behaviors.
+- **multilangstring**: Represents a string in multiple langs, providing methods to manage and manipulate the different
+  language variants.
+- **setlangstring**: Represents a set of language strings, facilitating operations on groups of multilingual texts.
 
 Package Contents:
 -----------------

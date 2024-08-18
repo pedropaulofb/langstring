@@ -16,18 +16,18 @@ langstring.controller
    the system.
 
    Key Features:
-   - **Global Configuration**: The `Controller` manages flags globally, allowing uniform behavior across different
-   multilingual text classes.
-   - **Non-Instantiable Design**: The `Controller` class uses the `NonInstantiable` metaclass to prevent instantiation,
-   emphasizing its role as a static configuration manager.
-   - **Flexible Flag Management**: Methods are provided to set, retrieve, print, and reset individual or all flags,
-   enabling dynamic configuration during runtime.
+       - **Global Configuration**: The `Controller` manages flags globally, allowing uniform behavior across different
+         multilingual text classes.
+       - **Non-Instantiable Design**: The `Controller` class uses the `NonInstantiable` metaclass to prevent instantiation,
+         emphasizing its role as a static configuration manager.
+       - **Flexible Flag Management**: Methods are provided to set, retrieve, print, and reset individual or all flags,
+         enabling dynamic configuration during runtime.
 
    Enums Utilized:
-   - **GlobalFlag**: Flags affecting the behavior of all classes.
-   - **LangStringFlag**: Flags specific to the `LangString` class.
-   - **SetLangStringFlag**: Flags specific to the `SetLangString` class.
-   - **MultiLangStringFlag**: Flags specific to the `MultiLangString` class.
+       - **GlobalFlag**: Flags affecting the behavior of all classes.
+       - **LangStringFlag**: Flags specific to the `LangString` class.
+       - **SetLangStringFlag**: Flags specific to the `SetLangString` class.
+       - **MultiLangStringFlag**: Flags specific to the `MultiLangString` class.
 
    The `Controller` class ensures that the multilingual text handling classes adhere to specified rules and constraints,
    enhancing the robustness and reliability of multilingual content management.

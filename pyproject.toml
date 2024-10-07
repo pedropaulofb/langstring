@@ -36,7 +36,7 @@ tomli = "^2.0.1"
 sphinx = "^7.2.6"
 sphinx-autoapi = "^3.0.0"
 sphinx-rtd-size = "^0.2.0"
-sphinx-rtd-theme = "^2.0.0"
+sphinx-rtd-theme = ">=2,<4"
 sphinx-toolbox = "^3.5.0"
 # Flake8 and plugins
 flake8 = "^7.1.0"

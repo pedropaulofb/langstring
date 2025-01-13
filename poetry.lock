@@ -596,13 +596,13 @@ files = [
 
 [[package]]
 name = "docstring-parser-fork"
-version = "0.0.9"
+version = "0.0.12"
 description = "Parse Python docstrings in reST, Google and Numpydoc format"
 optional = false
 python-versions = "<4.0,>=3.7"
 files = [
-    {file = "docstring_parser_fork-0.0.9-py3-none-any.whl", hash = "sha256:0be85ad00cb25bf5beeb673e46e777facf0f47552fa3a7570d120ef7e3374401"},
-    {file = "docstring_parser_fork-0.0.9.tar.gz", hash = "sha256:95b23cc5092af85080c716a6da68360f5ae4fcffa75f4a3aca5e539783cbcc3d"},
+    {file = "docstring_parser_fork-0.0.12-py3-none-any.whl", hash = "sha256:55d7cbbc8b367655efd64372b9a0b33a49bae930a8ddd5cdc4c6112312e28a87"},
+    {file = "docstring_parser_fork-0.0.12.tar.gz", hash = "sha256:b44c5e0be64ae80f395385f01497d381bd094a57221fd9ff020987d06857b2a0"},
 ]
 
 [[package]]
@@ -1695,18 +1695,18 @@ files = [
 
 [[package]]
 name = "pydoclint"
-version = "0.5.14"
+version = "0.6.0"
 description = "A Python docstring linter that checks arguments, returns, yields, and raises sections"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "pydoclint-0.5.14-py2.py3-none-any.whl", hash = "sha256:d06c8b4f4eff49e1814cac3d7a7ca0c858ae6866dd4afa9588659ae9dbf86462"},
-    {file = "pydoclint-0.5.14.tar.gz", hash = "sha256:4e63ddcc4b6bb0a3fb6135cb841e1f71549c2547baee731c82b231a7c652d020"},
+    {file = "pydoclint-0.6.0-py2.py3-none-any.whl", hash = "sha256:f1fb9676efe70c9a0443c7177186a01001a2227c9100272ef72d7da269ae9bbd"},
+    {file = "pydoclint-0.6.0.tar.gz", hash = "sha256:bee5b509f5407c8ae180ff86a6776895084129097a4600b749fd133fd58a1cf4"},
 ]
 
 [package.dependencies]
 click = ">=8.1.0"
-docstring_parser_fork = ">=0.0.9"
+docstring_parser_fork = ">=0.0.12"
 
 [package.extras]
 flake8 = ["flake8 (>=4)"]
@@ -2773,4 +2773,4 @@ langcodes = ["langcodes"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "be2cc6cc6f1c17116f15dd86e50af0bf594b9be22dfff9c57db9a61a06382798"
+content-hash = "6476f93a165e8776e1386bee4dd5645b1ab875044adffc87a7ec6d939b02f56b"

@@ -722,9 +722,9 @@ poetry-plugin-export==1.8.0 ; python_version >= "3.11" and python_version < "4.0
 poetry==1.8.3 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:67f4eb68288eab41e841cc71a00d26cf6bdda9533022d0189a145a34d0a35f48 \
     --hash=sha256:88191c69b08d06f9db671b793d68f40048e8904c0718404b63dcc2b5aec62d13
-pre-commit==3.8.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:8bb6494d4a20423842e198980c9ecf9f96607a07ea29549e180eef9ae80fe7af \
-    --hash=sha256:9a90a53bf82fdd8778d58085faf8d83df56e40dfe18f45b19446e26bf1b3a63f
+pre-commit==4.2.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:601283b9757afd87d40c4c4a9b2b5de9637a8ea02eaff7adc2d0fb4e04841146 \
+    --hash=sha256:a009ca7205f1eb497d10b845e52c838a98b6cdd2102a6c8e4540e94ee75c58bd
 ptyprocess==0.7.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35 \
     --hash=sha256:5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347423220

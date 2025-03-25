@@ -1009,9 +1009,9 @@ sphinx-rtd-theme==2.0.0 ; python_version >= "3.11" and python_version < "4.0" \
 sphinx-tabs==3.4.5 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:92cc9473e2ecf1828ca3f6617d0efc0aa8acb06b08c56ba29d1413f2f0f6cf09 \
     --hash=sha256:ba9d0c1e3e37aaadd4b5678449eb08176770e0fc227e769b6ce747df3ceea531
-sphinx-toolbox==3.8.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:36f484c540569c0fb62b4197187d166443fe0708134b98c88f6ba5418d06b95e \
-    --hash=sha256:f6b62c7800dc2a2e2cbaf7b13ee7c5f06cbf3e1a5ad2c4b2f0744851a05afaee
+sphinx-toolbox==3.9.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:49024961c7791ad6e9dd39c611f89b5162550afa26ccad087be38388c3dd3c1e \
+    --hash=sha256:9ee0603b090762d6eed4d0ec9fa91445e3ef95d40a584af125308541c1bf7b8d
 sphinx==7.4.7 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:242f92a7ea7e6c5b406fdc2615413890ba9f699114a9c09192d7dfead2ee9cfe \
     --hash=sha256:c2419e2135d11f1951cd994d6eb18a1835bd8fdd8429f9ca375dc1f3281bd239

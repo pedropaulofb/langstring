@@ -1012,9 +1012,9 @@ sphinx-tabs==3.4.5 ; python_version >= "3.11" and python_version < "4.0" \
 sphinx-toolbox==3.9.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:49024961c7791ad6e9dd39c611f89b5162550afa26ccad087be38388c3dd3c1e \
     --hash=sha256:9ee0603b090762d6eed4d0ec9fa91445e3ef95d40a584af125308541c1bf7b8d
-sphinx==7.4.7 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:242f92a7ea7e6c5b406fdc2615413890ba9f699114a9c09192d7dfead2ee9cfe \
-    --hash=sha256:c2419e2135d11f1951cd994d6eb18a1835bd8fdd8429f9ca375dc1f3281bd239
+sphinx==8.2.3 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:398ad29dee7f63a75888314e9424d40f52ce5a6a87ae88e7071e80af296ec348 \
+    --hash=sha256:4405915165f13521d875a8c29c8970800a0141c14cc5416a38feca4ea5d9b9c3
 sphinxcontrib-applehelp==2.0.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:2f29ef331735ce958efa4734873f084941970894c6090408b079c61b2e1c06d1 \
     --hash=sha256:4cd3f0ec4ac5dd9c17ec65e9ab272c9b867ea77425228e68ecf08d6b28ddbdb5

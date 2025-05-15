@@ -318,9 +318,9 @@ docstring-parser-fork==0.0.12 ; python_version >= "3.11" and python_version < "4
 docutils==0.20.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:96f387a2c5562db4476f09f13bbab2192e764cac08ebbf3a34a95d9b1e4a59d6 \
     --hash=sha256:f08a4e276c3a1583a86dce3e34aba3fe04d02bba2dd51ed16106244e8a923e3b
-domdf-python-tools==3.9.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:1f8a96971178333a55e083e35610d7688cd7620ad2b99790164e1fc1a3614c18 \
-    --hash=sha256:4e1ef365cbc24627d6d1e90cf7d46d8ab8df967e1237f4a26885f6986c78872e
+domdf-python-tools==3.10.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:2ae308d2f4f1e9145f5f4ba57f840fbfd1c2983ee26e4824347789649d3ae298 \
+    --hash=sha256:5e71c1be71bbcc1f881d690c8984b60e64298ec256903b3147f068bc33090c36
 dulwich==0.22.8 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:00e7d9a3d324f9e0a1b27880eec0e8e276ff76519621b66c1a429ca9eb3f5a8d \
     --hash=sha256:017152c51b9a613f0698db28c67cf3e0a89392d28050dbf4f4ac3f657ea4c0dc \

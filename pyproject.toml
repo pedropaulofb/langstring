@@ -37,7 +37,7 @@ sphinx = ">=7.2.6,<9.0.0"
 sphinx-autoapi = "^3.0.0"
 sphinx-rtd-size = "^0.2.0"
 sphinx-rtd-theme = ">=2,<4"
-sphinx-toolbox = "^3.5.0"
+sphinx-toolbox = ">=3.5,<5.0"
 # Flake8 and plugins
 flake8 = "^7.1.0"
 flake8-broken-line = "^1.0.0"

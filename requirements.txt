@@ -715,9 +715,9 @@ pkginfo==1.12.1.2 ; python_version >= "3.11" and python_version < "4.0" \
 platformdirs==4.2.2 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:2d7a1657e36a80ea911db832a8a6ece5ee53d8de21edd5cc5879af6530b1bfee \
     --hash=sha256:38b7b51f512eed9e84a22788b4bce1de17c0adb134d6becb09836e37d8654cd3
-pluggy==1.5.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:2cffa88e94fdc978c4c574f15f9e59b7f4201d439195c3715ca9e2486f1d0cf1 \
-    --hash=sha256:44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669
+pluggy==1.6.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3 \
+    --hash=sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746
 poetry-core==2.1.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:bc3b0382ab4d00d5d780277fd0aad1580eb4403613b37fc60fec407b5bee1fe6 \
     --hash=sha256:c1a1f6f00e4254742f40988a8caf665549101cf9991122cd5de1198897768b1a

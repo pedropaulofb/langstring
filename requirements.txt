@@ -10,9 +10,9 @@ apeye==1.4.1 ; python_version >= "3.11" and python_version < "4.0" \
 astroid==3.3.2 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:99e9b5b602cbb005434084309213d6af32bf7a9b743c836749168b8e2b330cbd \
     --hash=sha256:9f8136ce9770e0f912401b25a0f15d5c2ec20b50e99b1b413ac0778fe53ff6f1
-autodocsumm==0.2.13 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:ac5f0cf1adbe957acb136fe0d9e16c38fb74fcaefb45c148204aba26dbb12ee2 \
-    --hash=sha256:bf4d82ea7acb3e7d9a3ad8c135e097eca1d3f0bd00800d7804127e848e66741d
+autodocsumm==0.2.14 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:2839a9d4facc3c4eccd306c08695540911042b46eeafcdc3203e6d0bab40bc77 \
+    --hash=sha256:3bad8717fc5190802c60392a7ab04b9f3c97aa9efa8b3780b3d81d615bfe5dc0
 babel==2.17.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:0c54cffb19f690cdcc52a3b50bcbf71e07a808d1c80d549f2459b9d2cf0afb9d \
     --hash=sha256:4d0b53093fdfb4b21c92b5213dba5a1b23885afa8383709427046b21c366e5f2

@@ -1071,9 +1071,9 @@ tomli==2.2.1 ; python_version >= "3.11" and python_version < "4.0" \
 tomlkit==0.13.2 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:7a974427f6e119197f670fbbbeae7bef749a6c14e793db934baefc1b5f03efde \
     --hash=sha256:fff5fe59a87295b278abd31bec92c15d9bc4a06885ab12bcea52c71119392e79
-trove-classifiers==2025.3.19.19 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:5fc02770ecd81588a605ac98b9d85d50a5a3f9daa30af2a6b1361a1999d75d07 \
-    --hash=sha256:98e9d396fe908d5f43b7454fa4c43d17cd0fdadf046f45fb38a5e3af8d959ecd
+trove-classifiers==2025.5.9.12 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:7ca7c8a7a76e2cd314468c677c69d12cc2357711fcab4a60f87994c1589e5cb5 \
+    --hash=sha256:e381c05537adac78881c8fa345fd0e9970159f4e4a04fcc42cfd3129cca640ce
 tryceratops==2.3.3 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:21fa82059fe272f9731db701b720d78eff8dcf84248e97581419a2992ee6a02e \
     --hash=sha256:c13f0596f1c099351416e3bbb5efae1b3b860d8d633e67b45fca189e312fa3c0

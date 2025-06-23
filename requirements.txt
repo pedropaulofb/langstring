@@ -381,9 +381,9 @@ flake8-unused-arguments==0.0.13 ; python_version >= "3.11" and python_version < 
 flake8-useless-assert==0.4.4 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:336bcc5e558fee11593b4294ccda46777eb873cb4445e51a0edeecf9d8517b42 \
     --hash=sha256:3f1c0c579eaaf008721bc0d0db2e3391355a8dacd06b5ac63c1bab0c9e29e51f
-flake8==7.2.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:93b92ba5bdb60754a6da14fa3b93a9361fd00a59632ada61fd7b130436c40343 \
-    --hash=sha256:fa558ae3f6f7dbf2b4f22663e5343b6b6023620461f8d4ff2019ef4b5ee70426
+flake8==7.3.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:b9696257b9ce8beb888cdbe31cf885c90d31928fe202be0889a7cdafad32f01e \
+    --hash=sha256:fe044858146b9fc69b551a4b490d69cf960fcb78ad1edcb84e7fbb1b4a8e3872
 html5lib==1.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:0d78f8fde1c230e99fe37986a60526d7049ed4bf8a9fadbad5f00e22e58e041d \
     --hash=sha256:b2e5b40261e20f354d198eae92afc10d750afb487ed5e50f9c4eaf07c184146f

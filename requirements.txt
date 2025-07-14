@@ -7,9 +7,9 @@ apeye-core==1.1.5 ; python_version >= "3.11" and python_version < "4.0" \
 apeye==1.4.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:14ea542fad689e3bfdbda2189a354a4908e90aee4bf84c15ab75d68453d76a36 \
     --hash=sha256:44e58a9104ec189bf42e76b3a7fe91e2b2879d96d48e9a77e5e32ff699c9204e
-astroid==3.3.10 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:104fb9cb9b27ea95e847a94c003be03a9e039334a8ebca5ee27dafaf5c5711eb \
-    --hash=sha256:c332157953060c6deb9caa57303ae0d20b0fbdb2e59b4a4f2a6ba49d0a7961ce
+astroid==3.3.11 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:1e5a5011af2920c7c67a53f65d536d65bfa7116feeaf2354d8b94f29573bb0ce \
+    --hash=sha256:54c760ae8322ece1abd213057c4b5bba7c49818853fc901ef09719a60dbf9dec
 autodocsumm==0.2.14 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:2839a9d4facc3c4eccd306c08695540911042b46eeafcdc3203e6d0bab40bc77 \
     --hash=sha256:3bad8717fc5190802c60392a7ab04b9f3c97aa9efa8b3780b3d81d615bfe5dc0

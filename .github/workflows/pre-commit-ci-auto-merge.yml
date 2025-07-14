@@ -31,4 +31,4 @@ jobs:
               pull_number: context.issue.number,
               merge_method: 'squash'
             });
-          github-token: ${{ secrets.AUTO_MERGE_LANGSTRING_PRE_COMMIT_CI }}
+          github-token: ${{ secrets.AUTO_MERGE_PRE_COMMIT_CI }}

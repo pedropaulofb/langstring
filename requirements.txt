@@ -511,9 +511,9 @@ marisa-trie==1.2.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:f35c2603a6be168088ed1db6ad1704b078aa8f39974c60888fbbced95dcadad4 \
     --hash=sha256:f4cd800704a5fc57e53c39c3a6b0c9b1519ebdbcb644ede3ee67a06eb542697d \
     --hash=sha256:f713af9b8aa66a34cd3a78c7d150a560a75734713abe818a69021fd269e927fa
-markdown-it-py==3.0.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:355216845c60bd96232cd8d8c40e8f9765cc86f46880e43a8fd22dc1a1a8cab1 \
-    --hash=sha256:e3f60a94fa066dc52ec76661e37c851cb232d92f9886b15cb560aaada2df8feb
+markdown-it-py==4.0.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:87327c59b172c5011896038353a81343b6754500a08cd7a4973bb48c6d578147 \
+    --hash=sha256:cb0a2b4aa34f932c007117b194e945bd74e0ec24133ceb5bac59009cda1cb9f3
 markupsafe==3.0.2 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:0bff5e0ae4ef2e1ae4fdf2dfd5b76c75e5c2fa4132d05fc1b0dabcd20c7e28c4 \
     --hash=sha256:0f4ca02bea9a23221c0182836703cbf8930c5e9454bacce27e767509fa286a30 \

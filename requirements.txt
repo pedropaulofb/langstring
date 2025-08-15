@@ -732,9 +732,9 @@ pycodestyle==2.14.0 ; python_version >= "3.11" and python_version < "4.0" \
 pycparser==2.22 ; python_version >= "3.11" and python_version < "4.0" and (sys_platform == "darwin" or sys_platform == "linux") and (sys_platform == "darwin" or platform_python_implementation != "PyPy") \
     --hash=sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6 \
     --hash=sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc
-pydoclint==0.6.8 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:2557231e7defa12b9bc8e42feb80aa816a3d7d1605ad05c6b5277bdaf9691141 \
-    --hash=sha256:e78ce16dba1ccabb4aa190cd6ef074079e76b8dfe56473d59ca0fa6f10665564
+pydoclint==0.6.10 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:171c24f273c274715f4aa8754933cad11f2013878583e02146e416e732aae8b7 \
+    --hash=sha256:91e3d69be30e2d9201c1d34f63f01cb9d11aa6d8cbf63156bb886f6b15fb67ba
 pydocstyle==6.3.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019 \
     --hash=sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1

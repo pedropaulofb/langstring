@@ -321,9 +321,9 @@ dict2css==0.3.0.post1 ; python_version >= "3.11" and python_version < "4.0" \
 distlib==0.4.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:9659f7d87e46584a30b5780e43ac7a2143098441670ff0a49d5f9034c54a6c16 \
     --hash=sha256:feec40075be03a04501a973d81f633735b4b69f98b05450592310c0f401a4e0d
-docstring-parser-fork==0.0.12 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:55d7cbbc8b367655efd64372b9a0b33a49bae930a8ddd5cdc4c6112312e28a87 \
-    --hash=sha256:b44c5e0be64ae80f395385f01497d381bd094a57221fd9ff020987d06857b2a0
+docstring-parser-fork==0.0.14 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:4c544f234ef2cc2749a3df32b70c437d77888b1099143a1ad5454452c574b9af \
+    --hash=sha256:a2743a63d8d36c09650594f7b4ab5b2758fee8629dcf794d1b221b23179baa5c
 docutils==0.22 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:4ed966a0e96a0477d852f7af31bdcb3adc049fbb35ccba358c2ea8a03287615e \
     --hash=sha256:ba9d57750e92331ebe7c08a1bbf7a7f8143b86c476acd51528b042216a6aad0f

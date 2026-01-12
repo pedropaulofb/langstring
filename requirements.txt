@@ -1005,9 +1005,9 @@ soupsieve==2.8 ; python_version >= "3.11" and python_version < "4.0" \
 sphinx-autoapi==3.6.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:1ff2992b7d5e39ccf92413098a376e0f91e7b4ca532c4f3e71298dbc8a4a9900 \
     --hash=sha256:6b7af0d5650f6eac1f4b85c1eb9f9a4911160ec7138bdc4451c77a5e94d5832c
-sphinx-autodoc-typehints==3.5.1 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:6114bc788d7b5118712b4f163e0c693e3828c552296007ff1a60ba1606b04718 \
-    --hash=sha256:e5c61ae50d0b311129a1f0091c9c25075a5734d575549cbd1b9d9f8a3fc35cfb
+sphinx-autodoc-typehints==3.6.1 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:dd818ba31d4c97f219a8c0fcacef280424f84a3589cedcb73003ad99c7da41ca \
+    --hash=sha256:fa0b686ae1b85965116c88260e5e4b82faec3687c2e94d6a10f9b36c3743e2fe
 sphinx-jinja2-compat==0.4.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:0188f0802d42c3da72997533b55a00815659a78d3f81d4b4747b1fb15a5728e6 \
     --hash=sha256:64ca0d46f0d8029fbe69ea612793a55e6ef0113e1bba4a85d402158c09f17a14

@@ -1,19 +1,36 @@
-name: dependabot-auto-merge
+name: Dependabot auto-merge (GitHub native)
 
 on:
-  pull_request:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
-  auto-merge-dependabot:
+  enable-automerge:
+    if: ${{ github.actor == 'dependabot[bot]' && !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
-    # Only run if the PR was created by Dependabot
-    if: ${{ github.actor == 'dependabot[bot]' }}
-    steps:
-      - uses: actions/checkout@v6.0.1
 
-      - name: Auto merge dependabot PR
-        uses: ahmadnassri/action-dependabot-auto-merge@v2.6.6
+    steps:
+      - name: Fetch Dependabot metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v2
         with:
-          target: all
-          botName: dependabot
-          github-token: ${{ secrets.AUTO_MERGE_DEPENDABOT }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Remove this step if your branch rules do NOT require approvals
+      - name: Approve PR (only if required by branch rules)
+        if: ${{ steps.meta.outputs.update-type != 'version-update:semver-major' }}
+        run: gh pr review "$PR_NUMBER" --approve --repo "$GITHUB_REPOSITORY"
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_DEPENDABOT }}
+
+      - name: Enable auto-merge (squash)
+        if: ${{ steps.meta.outputs.update-type != 'version-update:semver-major' }}
+        run: gh pr merge "$PR_NUMBER" --squash --auto --repo "$GITHUB_REPOSITORY"
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_DEPENDABOT }}

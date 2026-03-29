@@ -16,11 +16,11 @@ jobs:
     steps:
       - name: Harden Runner
         if: runner.os == 'Linux'
-        uses: step-security/harden-runner@v2.14.2
+        uses: step-security/harden-runner@v2.16.0
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v6.0.1
+      - uses: actions/checkout@v6.0.2
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6.1.0

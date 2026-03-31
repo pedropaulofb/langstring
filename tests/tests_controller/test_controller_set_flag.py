@@ -5,7 +5,6 @@ from langstring import LangStringFlag
 from langstring import MultiLangStringFlag
 from langstring import SetLangStringFlag
 
-
 # Combine all flag types into a single list for parametrization
 all_flags = (
     list(LangStringFlag.__members__.values())

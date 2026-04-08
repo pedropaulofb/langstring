@@ -925,22 +925,22 @@ tests = ["pytest", "pytest-cov"]
 
 [[package]]
 name = "flake8-noqa"
-version = "1.4.0"
+version = "1.5.0"
 description = "Flake8 noqa comment validation"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "flake8-noqa-1.4.0.tar.gz", hash = "sha256:771765ab27d1efd157528379acd15131147f9ae578a72d17fb432ca197881243"},
-    {file = "flake8_noqa-1.4.0-py3-none-any.whl", hash = "sha256:4465e16a19be433980f6f563d05540e2e54797eb11facb9feb50fed60624dc45"},
+    {file = "flake8_noqa-1.5.0-py3-none-any.whl", hash = "sha256:8f638e3c83cb87ccebf1aa6a9dffffc15c5ff5ee5acac52182ad0800c9a08608"},
+    {file = "flake8_noqa-1.5.0.tar.gz", hash = "sha256:4b1f4acc0b9dfb204b337b0b85ed0e94da583f5b6bf93c47619422172234a6a2"},
 ]
 
 [package.dependencies]
-flake8 = ">=3.8.0,<8.0"
-typing-extensions = ">=3.7.4.2"
+flake8 = ">=5.0.0,<8.0"
+typing_extensions = ">=3.7.4.2"
 
 [package.extras]
-dev = ["flake8 (>=3.8.0,<6.0.0)", "flake8-annotations", "flake8-bandit", "flake8-bugbear", "flake8-commas", "flake8-comprehensions", "flake8-continuation", "flake8-datetimez", "flake8-docstrings", "flake8-import-order", "flake8-literal", "flake8-modern-annotations", "flake8-noqa", "flake8-polyfill", "flake8-pyproject", "flake8-requirements", "flake8-typechecking-import", "flake8-use-fstring", "mypy", "pep8-naming"]
+dev = ["flake8 (>=3.8.0,<6.0.0)", "flake8-annotations", "flake8-bandit", "flake8-bugbear", "flake8-commas", "flake8-comprehensions", "flake8-continuation", "flake8-datetimez", "flake8-docstrings", "flake8-import-order", "flake8-literal", "flake8-modern-annotations", "flake8-noqa", "flake8-polyfill", "flake8-pyproject", "flake8-requirements", "flake8-typechecking-import", "flake8-use-fstring", "pep8-naming", "ty"]
 test = ["flake8-docstrings"]
 
 [[package]]
@@ -2044,14 +2044,14 @@ dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests
 
 [[package]]
 name = "pytest-cov"
-version = "7.0.0"
+version = "7.1.0"
 description = "Pytest plugin for measuring coverage."
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "pytest_cov-7.0.0-py3-none-any.whl", hash = "sha256:3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861"},
-    {file = "pytest_cov-7.0.0.tar.gz", hash = "sha256:33c97eda2e049a0c5298e91f519302a1334c26ac65c1a483d6206fd458361af1"},
+    {file = "pytest_cov-7.1.0-py3-none-any.whl", hash = "sha256:a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678"},
+    {file = "pytest_cov-7.1.0.tar.gz", hash = "sha256:30674f2b5f6351aa09702a9c8c364f6a01c27aae0c1366ae8016160d1efc56b2"},
 ]
 
 [package.dependencies]

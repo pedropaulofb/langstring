@@ -18,19 +18,18 @@ jobs:
         id: meta
         uses: dependabot/fetch-metadata@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ github.token }}
 
-      # Remove this step if your branch rules do NOT require approvals
       - name: Approve PR (only if required by branch rules)
         if: ${{ steps.meta.outputs.update-type != 'version-update:semver-major' }}
         run: gh pr review "$PR_NUMBER" --approve --repo "$GITHUB_REPOSITORY"
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          GH_TOKEN: ${{ secrets.AUTO_MERGE_DEPENDABOT }}
+          GH_TOKEN: ${{ github.token }}
 
       - name: Enable auto-merge (squash)
         if: ${{ steps.meta.outputs.update-type != 'version-update:semver-major' }}
         run: gh pr merge "$PR_NUMBER" --squash --auto --repo "$GITHUB_REPOSITORY"
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          GH_TOKEN: ${{ secrets.AUTO_MERGE_DEPENDABOT }}
+          GH_TOKEN: ${{ github.token }}

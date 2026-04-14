@@ -30,40 +30,28 @@ For detailed documentation and code examples, please refer to the library's [doc
 ## Contents
 
 <!-- TOC -->
-* [LangString Python Library](#langstring-python-library)
-  * [Contents](#contents)
-  * [Installation and Usage](#installation-and-usage)
-    * [Dependencies](#dependencies)
-      * [Mandatory Dependencies](#mandatory-dependencies)
-      * [Optional Dependencies](#optional-dependencies)
-      * [Dev Dependencies](#dev-dependencies)
-    * [Installation](#installation)
-      * [Basic Installation](#basic-installation)
-      * [Full Installation](#full-installation)
-      * [Dev Installation](#dev-installation)
-    * [Importing Elements](#importing-elements)
-    * [Basic Usage](#basic-usage)
-  * [Basic Reference](#basic-reference)
-    * [Classes](#classes)
-      * [LangString Class](#langstring-class)
-      * [SetLangString Class](#setlangstring-class)
-      * [MultiLangString Class](#multilangstring-class)
-      * [Controller Class](#controller-class)
-      * [Converter Class](#converter-class)
-    * [Configuration via Flags](#configuration-via-flags)
-    * [Elements' Relationships](#elements-relationships)
-  * [Testing](#testing)
-    * [Test Organization](#test-organization)
-    * [Running the Tests](#running-the-tests)
-    * [Continuous Integration](#continuous-integration)
-  * [How to Contribute](#how-to-contribute)
-    * [Reporting Issues](#reporting-issues)
-    * [Code Contributions](#code-contributions)
-    * [Test Contributions](#test-contributions)
-    * [General Guidelines](#general-guidelines)
-  * [Related Libraries and Differences](#related-libraries-and-differences)
-  * [License](#license)
-  * [Author](#author)
+- [Contents](#contents)
+- [Installation and Usage](#installation-and-usage)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Importing Elements](#importing-elements)
+  - [Basic Usage](#basic-usage)
+- [Basic Reference](#basic-reference)
+  - [Classes](#classes)
+  - [Configuration via Flags](#configuration-via-flags)
+  - [Elements' Relationships](#elements-relationships)
+- [Testing](#testing)
+  - [Test Organization](#test-organization)
+  - [Running the Tests](#running-the-tests)
+  - [Continuous Integration](#continuous-integration)
+- [How to Contribute](#how-to-contribute)
+  - [Reporting Issues](#reporting-issues)
+  - [Code Contributions](#code-contributions)
+  - [Test Contributions](#test-contributions)
+  - [General Guidelines](#general-guidelines)
+- [Related Libraries and Differences](#related-libraries-and-differences)
+- [License](#license)
+- [Author](#author)
 <!-- TOC -->
 
 ## Installation and Usage
@@ -315,7 +303,7 @@ This command will execute all the tests and provide a detailed report on the cov
 We use GitHub Actions to automatically run our tests on every push to the repository. The [Action's workflow](https://github.com/pedropaulofb/langstring/blob/main/.github/workflows/code_testing.yml) execute the tests across multiple operating systems and Python versions to ensure compatibility and reliability.
 
 - **Operating Systems**: Windows, Linux, and macOS.
-- **Python Versions**: 3.11 and 3.12.
+- **Python Versions**: 3.11, 3.12, 3.13, and 3.14.
 
 ## How to Contribute
 

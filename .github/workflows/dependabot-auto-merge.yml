@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   enable-automerge:
-    if: ${{ github.actor == 'dependabot[bot]' && !github.event.pull_request.draft }}
+    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' && !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
 
     steps:
@@ -18,18 +18,18 @@ jobs:
         id: meta
         uses: dependabot/fetch-metadata@v2
         with:
-          github-token: ${{ github.token }}
+          github-token: ${{ secrets.AUTO_MERGE_DEPENDABOT }}
 
       - name: Approve PR (only if required by branch rules)
         if: ${{ steps.meta.outputs.update-type != 'version-update:semver-major' }}
         run: gh pr review "$PR_NUMBER" --approve --repo "$GITHUB_REPOSITORY"
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_DEPENDABOT }}
 
       - name: Enable auto-merge (squash)
         if: ${{ steps.meta.outputs.update-type != 'version-update:semver-major' }}
         run: gh pr merge "$PR_NUMBER" --squash --auto --repo "$GITHUB_REPOSITORY"
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_DEPENDABOT }}

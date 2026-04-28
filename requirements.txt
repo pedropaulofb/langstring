@@ -376,9 +376,9 @@ cryptography==43.0.0 ; python_version >= "3.11" and python_version < "4.0" and s
     --hash=sha256:ea9e57f8ea880eeea38ab5abf9fbe39f923544d7884228ec67d666abd60f5a47 \
     --hash=sha256:ee0c405832ade84d4de74b9029bedb7b31200600fa524d218fc29bfa371e97f5 \
     --hash=sha256:fdcb265de28585de5b859ae13e3846a8e805268a823a12a4da2597f1f5afc9f0
-cssutils==2.14.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:79ad979e4a383f39f0b3f0ca82ee3f1b01065da9fa02701b63bfed38ac76eb91 \
-    --hash=sha256:c33256f0cbc215ad405b647117ace63c9e22af96fe42dcb7861742a591e6464c
+cssutils==2.15.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:207faa466810a1aef109261673f2458356d0839ddedaebc0ee553376290fb6a9 \
+    --hash=sha256:e9739237f3915037dacba787c4b58f280e3ec5d9864953e185bf23d40ff7d021
 dict2css==0.3.0.post1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:89c544c21c4ca7472c3fffb9d37d3d926f606329afdb751dc1de67a411b70719 \
     --hash=sha256:f006a6b774c3e31869015122ae82c491fd25e7de4a75607a62aa3e798f837e0d

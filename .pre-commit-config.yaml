@@ -44,7 +44,7 @@ repos:
       - id: check-merge-conflict
       # - id: no-commit-to-branch    # To be included when other contributions join the project
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 26.3.1
+    rev: 26.5.0
     hooks:
       - id: black
         args: [ --line-length=120 ]
@@ -70,7 +70,7 @@ repos:
                                   mccabe,
                                   tryceratops]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.0.0
+    rev: v2.1.0
     hooks:
     - id: mypy
       args: [ -p=langstring ]

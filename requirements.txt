@@ -1085,9 +1085,9 @@ shellingham==1.5.4 ; python_version >= "3.11" and python_version < "4.0" \
 six==1.17.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274 \
     --hash=sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81
-snowballstemmer==3.0.1 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:6cd7b3897da8d6c9ffb968a6781fa6532dce9c3618a4b127d920dab764a19064 \
-    --hash=sha256:6d5eeeec8e9f84d4d56b847692bacf79bc2c8e90c7f80ca4444ff8b6f2e52895
+snowballstemmer==3.1.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:17e6d1da216aa07db6dad37139ea70cf13c4b2e9a096f6e64a9648fc657d3154 \
+    --hash=sha256:fd9e34526b23340cd23ffea6c9f9760974ecc2c2ac9e1d81401443ccdb2a801f
 soupsieve==2.8.3 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:3267f1eeea4251fb42728b6dfb746edc9acaffc4a45b27e19450b676586e8349 \
     --hash=sha256:ed64f2ba4eebeab06cc4962affce381647455978ffc1e36bb79a545b91f45a95

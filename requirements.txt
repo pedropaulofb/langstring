@@ -382,9 +382,9 @@ cssutils==2.15.0 ; python_version >= "3.11" and python_version < "4.0" \
 dict2css==0.6.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:143e55cb71c98a88c79f2c41e08a5fa4d875659275756f794e31ccd69936ce88 \
     --hash=sha256:5251f1df1c78ffdf09313657a7f88add0ad219127d9aeb18fb343b052d6bfbbe
-distlib==0.4.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:9659f7d87e46584a30b5780e43ac7a2143098441670ff0a49d5f9034c54a6c16 \
-    --hash=sha256:feec40075be03a04501a973d81f633735b4b69f98b05450592310c0f401a4e0d
+distlib==0.4.1 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:9c2c552c68cbadc619f2d0ed3a69e27c351a3f4c9baa9ffb7df9e9cdc3d19a97 \
+    --hash=sha256:c3804d0d2d4b5fcd44036eb860cb6660485fcdf5c2aba53dc324d805837ea65b
 docstring-parser-fork==0.0.14 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:4c544f234ef2cc2749a3df32b70c437d77888b1099143a1ad5454452c574b9af \
     --hash=sha256:a2743a63d8d36c09650594f7b4ab5b2758fee8629dcf794d1b221b23179baa5c

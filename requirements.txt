@@ -370,9 +370,9 @@ dict2css==0.6.0 ; python_version >= "3.11" and python_version < "4.0" \
 distlib==0.4.3 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:4b0ce306c966eb73bc3a7b6abad017c556dadd92c44701562cd528ac7fde4d5b \
     --hash=sha256:f152097224a0ae24be5a0f6bae1b9359af82133bce63f98a95f86cae1aede9ed
-docstring-parser-fork==0.0.15 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:2927da0c189d2b61e32712a487adbb6d0ee03be36951bf8cdf03ec379205da8f \
-    --hash=sha256:34fa86d324851fc83911987a21b3f17056894813483ad1df17a2f11e9ebf6e2a
+docstring-parser-fork==0.0.16 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:9ecf861ceab8b87d1297a71001c15a1956ad02e87434ee6473643a5988094f7c \
+    --hash=sha256:c024c97af582d6acf85a14f0b332b3a2ab08626648d251c25e47191f33064386
 docutils==0.23 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:25d013af9bf23bc1c7b2b093dff4208166c53a94786c9e447808335ef1185fea \
     --hash=sha256:746f5060322511280a1e50eb76846ed6bf2342984b2ac04dc42caa1a8d78799e

@@ -19,9 +19,9 @@ babel==2.18.0 ; python_version >= "3.11" and python_version < "4.0" \
 beautifulsoup4==4.15.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:288e3ca7d54b06f2ac191970bc275c1939cb46d450b255bf6718b04aa37ab4f7 \
     --hash=sha256:d6f88de62e1d4e38ecb1077eb9724cd0eff29d2a08ca16a401e9b9e93f117cf9
-build==1.5.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:13f3eecb844759ab66efec90ca17639bbf14dc06cb2fdf37a9010322d9c50a6f \
-    --hash=sha256:302c22c3ba2a0fd5f3911918651341ebb3896176cbdec15bd421f80b1afc7647
+build==1.5.1 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:94e17f1db803ab22f46049376c44c8437c52090f0dfdf1adc43df56542d644fb \
+    --hash=sha256:f1a58fe2e5af5b0238a07b9e70207492c79ddebbdb1ad954fc86d62a56be3e0d
 cachecontrol[filecache]==0.14.4 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:b7ac014ff72ee199b5f8af1de29d60239954f223e948196fa3d84adaffc71d2b \
     --hash=sha256:e6220afafa4c22a47dd0badb319f84475d79108100d04e26e8542ef7d3ab05a1

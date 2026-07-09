@@ -733,15 +733,20 @@ files = [
 
 [[package]]
 name = "docstring-parser-fork"
-version = "0.0.12"
+version = "0.0.16"
 description = "Parse Python docstrings in reST, Google and Numpydoc format"
 optional = false
-python-versions = "<4.0,>=3.7"
+python-versions = ">=3.8"
 groups = ["dev"]
 files = [
-    {file = "docstring_parser_fork-0.0.12-py3-none-any.whl", hash = "sha256:55d7cbbc8b367655efd64372b9a0b33a49bae930a8ddd5cdc4c6112312e28a87"},
-    {file = "docstring_parser_fork-0.0.12.tar.gz", hash = "sha256:b44c5e0be64ae80f395385f01497d381bd094a57221fd9ff020987d06857b2a0"},
+    {file = "docstring_parser_fork-0.0.16-py3-none-any.whl", hash = "sha256:c024c97af582d6acf85a14f0b332b3a2ab08626648d251c25e47191f33064386"},
+    {file = "docstring_parser_fork-0.0.16.tar.gz", hash = "sha256:9ecf861ceab8b87d1297a71001c15a1956ad02e87434ee6473643a5988094f7c"},
 ]
+
+[package.extras]
+dev = ["docstring-parser[docs]", "docstring-parser[test]", "pre-commit (>=2.16.0) ; python_version >= \"3.9\""]
+docs = ["pydoctor (>=25.4.0)"]
+test = ["pytest"]
 
 [[package]]
 name = "docutils"
@@ -1996,19 +2001,19 @@ files = [
 
 [[package]]
 name = "pydoclint"
-version = "0.9.0"
+version = "0.9.1"
 description = "A Python docstring linter that checks arguments, returns, yields, and raises sections"
 optional = false
 python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "pydoclint-0.9.0-py3-none-any.whl", hash = "sha256:2c2ba4c33bf5006d9bca333a2cf425ff45c49e837659458f67a042cae24008e1"},
-    {file = "pydoclint-0.9.0.tar.gz", hash = "sha256:be67d039db66bf8eb2b1d77f97741e1e493794ba3b77ef62f7b9e6b74f9328e0"},
+    {file = "pydoclint-0.9.1-py3-none-any.whl", hash = "sha256:685b4a1c3c852045e4523b61d9c3f789672dfab3a454fe51a9e346c9e21dfcdb"},
+    {file = "pydoclint-0.9.1.tar.gz", hash = "sha256:eb699ecf95124b8d0b881d55cd53cccaa567172005d1223ec91a0259b51a5650"},
 ]
 
 [package.dependencies]
 click = ">=8.1.0"
-docstring_parser_fork = ">=0.0.12"
+docstring_parser_fork = "0.0.16"
 
 [package.extras]
 flake8 = ["flake8 (>=4)"]

@@ -938,18 +938,18 @@ files = [
 
 [[package]]
 name = "flake8-implicit-str-concat"
-version = "0.6.0"
+version = "0.7.0"
 description = "Flake8 plugin to encourage correct string literal concatenation"
 optional = false
 python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "flake8_implicit_str_concat-0.6.0-py3-none-any.whl", hash = "sha256:67dafdcf2ecf0437b308974dfa397b9162b654f65b01d7ad961fca595a03cba0"},
-    {file = "flake8_implicit_str_concat-0.6.0.tar.gz", hash = "sha256:2611436664ebf452f57bf0b3229fb88b58a828e4b22733bd781ce8f1b676ff2b"},
+    {file = "flake8_implicit_str_concat-0.7.0-py3-none-any.whl", hash = "sha256:fdabd6c6a314678364053b4a8682495692a43c22f229358e801f711999340d8b"},
+    {file = "flake8_implicit_str_concat-0.7.0.tar.gz", hash = "sha256:492d6d1097ec51ca9e712bef9c5b2e8345867dfa8c744a12bf4ef014fdb18561"},
 ]
 
 [package.extras]
-tests = ["pytest", "pytest-cov"]
+tests = ["pytest (>=9)", "pytest-cov"]
 
 [[package]]
 name = "flake8-noqa"
@@ -3280,4 +3280,4 @@ langcodes = ["langcodes"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "79f7cf1bedcc27287f697501e3bd9c93dd9a9ba99bc9c8638b49eb20f5f47041"
+content-hash = "a460de5fa0f9e8c6d46fa12eefc4a341b1ab5ad89d1876280eb406fe52a35ccf"

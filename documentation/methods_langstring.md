@@ -1,5 +1,10 @@
 # Methods in LangString Class
 
+> [!WARNING]
+> In version 3.0.2, this class is mutable and its hash depends on its content. Do not mutate it while it is a dictionary key or a set member; lookup can break. Keep mutable instances as values/list items, or use immutable snapshots as keys. See the [README warning](../README.md#langstring-python-library).
+> With default flags, a `LangString` can also equal a plain `str` while their hashes differ. Do not rely on mixed-type keys or set members for lookup or deduplication.
+
+
 <!-- TOC -->
 * [Methods in LangString Class](#methods-in-langstring-class)
   * [Initialization and Properties](#initialization-and-properties)

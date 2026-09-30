@@ -19,7 +19,38 @@
 
 # LangString Python Library
 
-LangString is a Python library designed to handle multilingual text data with precision and flexibility. Although the need for robust management of multilingual content is critical, existing solutions often lack the necessary features to manage language-tagged strings, sets of strings, and collections of multilingual strings effectively. LangString addresses this gap by providing classes and utilities that enable the creation, manipulation, and validation of multilingual text data consistently and accurately. Inspired by [RDFS's langstrings](https://www.w3.org/TR/rdf-schema/), LangString integrates seamlessly into Python applications, offering familiar methods that mimic those of regular Python types, making it intuitive for developers to adopt and use.
+LangString stores text together with its language tag and provides operations for multilingual labels, descriptions, and other metadata:
+
+- **`LangString`** holds one text value and its language tag. String transformations such as `strip()` and `upper()` return tagged values.
+- **`SetLangString`** holds distinct text values sharing one language tag.
+- **`MultiLangString`** groups sets of text values by language, for example alternative labels in English and Dutch.
+
+These are custom Python containers, not a translation service or a replacement for `str`, JSON serialization, or RDF tooling. Use them when repeated language-aware operations justify more than an ordinary dictionary or set.
+
+> [!WARNING]
+> **Known hashing limitations in langstring 3.0.2.** The following findings from an AI-assisted assessment were independently reproduced against the published package:
+>
+> - With the default flags, a `LangString` can compare equal to a plain `str` while their hashes differ. Do not rely on mixed `str`/`LangString` dictionary keys or set members for lookup or deduplication.
+> - `LangString`, `SetLangString`, and `MultiLangString` are mutable but have content-based hashes. Changing their content or language tags after using them as dictionary keys or inserting them into sets can break lookup. This includes changes through exposed nested collections.
+>
+> **Precautions:** Prefer keeping these instances as dictionary values or list items. Use an immutable snapshot as a key instead: `value.text` for text-only identity, or `(value.text, value.lang.casefold())` when both text and language identify a `LangString`. Do not mutate any of these instances while it is a dictionary key or set member. These precautions do not fix the implementation; ordinary use outside hashed keys/members is not made unsafe by these two findings.
+
+Install with `pip install langstring`, then try:
+
+```python
+from langstring import LangString, SetLangString, MultiLangString
+
+label = LangString("  heart  ", "en").strip().capitalize()
+assert (label.text, label.lang) == ("Heart", "en")
+
+english_labels = SetLangString({label.text, "Cardiac organ"}, label.lang)
+labels = MultiLangString({"nl": {"Hart"}})
+labels.add_setlangstring(english_labels)
+assert labels["en"] == {"Heart", "Cardiac organ"}
+print(sorted(labels["en"]))  # ['Cardiac organ', 'Heart']
+```
+
+The explicit `sorted()` makes this example's list output deterministic; ordinary set iteration order is unspecified. The example assumes the default configuration. Language-tag validation is opt-in; see [Optional Dependencies](#optional-dependencies).
 
 **📦 PyPI Package:**
 The library is conveniently [available as a PyPI package](https://pypi.org/project/langstring/), allowing users to easily import it into other Python projects.
@@ -67,7 +98,24 @@ The LangString Library does not require mandatory dependencies.
 
 #### Optional Dependencies
 
-The LangString Library has a single optional dependency, the [langcodes package](https://pypi.org/project/langcodes/). It is used  particularly for validating language tags when the `ENSURE_VALID_LANG` flag is enabled. This dependency is crucial for ensuring that language tags used in LangString and `MultiLangString` instances are valid and conform to international standards, thereby maintaining the integrity and reliability of multilingual text processing.
+The optional [langcodes package](https://pypi.org/project/langcodes/) validates language tags when the applicable `VALID_LANG` flag is enabled. Validation is **disabled by default**; installing the extra alone does not enable it.
+
+- Enable `GlobalFlag.VALID_LANG` for all three classes, or the corresponding class flag (for example, `LangStringFlag.VALID_LANG`). Validation runs when a constructor or setter/method passes a tag through the library's validator; enabling a flag does not retroactively revalidate existing objects. Direct edits to exposed collections can bypass validation.
+- With `langcodes` available, an invalid tag raises `ValueError` on those validation paths.
+- If the import of `langcodes` fails, validation emits `UserWarning` and is skipped by default. Enable `GlobalFlag.ENFORCE_EXTRA_DEPEND` to raise `ImportError` instead. That flag alone does not enable validation.
+
+After `pip install "langstring[langcodes]"`, configure validation before creating values:
+
+```python
+from langstring import Controller, GlobalFlag, LangString
+
+Controller.set_flag(GlobalFlag.VALID_LANG, True)
+Controller.set_flag(GlobalFlag.ENFORCE_EXTRA_DEPEND, True)
+label = LangString("Heart", "en")
+assert label.lang == "en"
+```
+
+Flags are shared across the process. Configure them deliberately; changing them can affect other code using the library.
 
 #### Dev Dependencies
 
@@ -152,8 +200,10 @@ from langstring import LangString, SetLangString, MultiLangString, Controller, G
    multi_lang_str = MultiLangString({"en": {"Hello", "Hi"}, "es": {"Hola"}})
 
    # Print the multilingual string representation
-   print(multi_lang_str)  # Output: en: {'Hello', 'Hi'}, es: {'Hola'}
+   print(multi_lang_str)  # Output: {'Hello', 'Hi'}@en, {'Hola'}@es
    ```
+
+   With the default flags in 3.0.2, `MultiLangString.__str__()` sorts language keys and text values for display, producing the output above. This does not give the underlying sets an iteration order. Display flags can change the representation.
 
 4. **Controller** and **Flags** are used to manage global and specific language string states.
 
@@ -190,11 +240,11 @@ from langstring import LangString, SetLangString, MultiLangString, Controller, G
 
 #### LangString Class
 
-The `LangString` class encapsulates a string along with its associated language information. It is designed to work seamlessly with text strings that require language tags, providing functionalities such as validation of language tags, handling of empty strings, and enforcement of constraints through control flags. It is also possible to validate language tags using the `langcodes` library, ensuring that the language information is accurate.
+The `LangString` class encapsulates a string along with its associated language information. It provides string operations and optional validation controlled by flags. Tag validation checks tags through `langcodes` when enabled and available; it does not verify that the text is actually written in the stated language. See [Optional Dependencies](#optional-dependencies) for configuration and missing-dependency behavior.
 
 Using the `LangString` class is beneficial when you need to manage multilingual text data in your applications. It is particularly useful in scenarios where strings need to be associated with specific languages, such as in internationalization and localization projects, or when processing text data that must be tagged with its language for further analysis or processing. The class can be utilized in any context where you need to ensure the integrity of language-tagged strings, enhancing data consistency and reducing errors.
 
-To use the `LangString` class, simply create an instance by providing the text and the corresponding language tag. The class supports many standard string operations, which have been overridden to return `LangString` objects, allowing for seamless integration and extended functionality. For example, you can concatenate two `LangString` objects, convert the text to uppercase, or check if the text contains a specific substring, all while maintaining the associated language tag. This makes it easy to work with multilingual text data as if you were handling regular strings, but with the added benefit of language context.
+To use the `LangString` class, simply create an instance by providing the text and the corresponding language tag. The class implements many familiar string operations; text-transforming methods generally return `LangString` objects. It is not a subclass of `str`, so APIs requiring a plain string need explicit conversion, such as accessing `.text`. For example, you can concatenate two `LangString` objects, convert the text to uppercase, or check if the text contains a specific substring, all while maintaining the associated language tag. See the warning above before using these objects in hashed collections; their equality and hashing behavior differs from ordinary strings.
 
 Note that in this library's context, language tags are case-insensitive, meaning `en`, `EN`, `En`, and `eN` are considered equivalent. However, subtags such as `en`, `en-UK`, and `en-US` are treated as distinct entities. Additionally, spaces in language tags are not automatically trimmed unless the classes' `STRIP_LANG` flags are set to True. As an example, `"en"` is not considered equal to `"en "`. However, if the `STRIP_LANG` flag is set to True, `"en "` will be converted to `"en"`, thereby making the languages equal.
 
@@ -206,7 +256,7 @@ Note that in this library's context, language tags are case-insensitive, meaning
 
 The `SetLangString` class is a structure designed to encapsulate a set of strings with a common language tag. This class provides a way to manage collections of text strings, ensuring that each string within the set is associated with a specified language tag. By using the `SetLangString` class, you can easily handle multilingual datasets, validate language tags, and manage string sets with enhanced functionality compared to standard Python sets.
 
-Using `SetLangString` is beneficial when working with multilingual text data, as it integrates validation mechanisms and control flags to enforce constraints such as non-empty text strings and valid language tags. This ensures data integrity and consistency across your application. The class also overrides many standard set methods to return `SetLangString` objects, allowing seamless integration and extending the functionality of regular sets. This makes it an excellent choice for developers needing a more sophisticated way to manage and manipulate text data in different languages.
+Using `SetLangString` is beneficial when working with multilingual text data, as it integrates validation mechanisms and control flags to enforce constraints such as non-empty text strings and valid language tags. These constraints apply only when the relevant flags are enabled and validation runs; see [Optional Dependencies](#optional-dependencies). Many set operations return `SetLangString` objects. Unlike a built-in mutable set, this class exposes a content-based hash; follow the warning above. This makes it an excellent choice for developers needing a more sophisticated way to manage and manipulate text data in different languages.
 
 You should consider using `SetLangString` when you need to manage sets of text strings that are tagged with specific languages, such as in internationalization and localization projects, or when handling datasets that require strict validation of language tags. The `SetLangString` class makes it straightforward to add, remove, and manipulate text strings while maintaining the association with their respective language tags. For example, you can create a `SetLangString` object, add new strings, check for the existence of a string, and perform set operations like union and intersection, all while preserving language tag integrity.
 
@@ -217,7 +267,7 @@ You should consider using `SetLangString` when you need to manage sets of text s
 
 The `MultiLangString` class is designed to manage and manipulate multilingual text strings, providing a flexible and efficient way to handle multilingual content in various applications. It uses a dictionary to store text entries associated with language tags, allowing easy representation and manipulation of text in different languages. The class supports adding new entries, removing entries, and retrieving entries based on specific languages or across all languages. Additionally, it allows setting a preferred language, which can be used as a default for operations involving text retrieval.
 
-Using `MultiLangString` is beneficial when you need to manage and organize text data in multiple languages within your application. This class integrates seamlessly with other components like `LangString` and `SetLangString`, offering extensive functionality for handling multilingual text data. By encapsulating text entries within a structured dictionary, it ensures that language-specific data is maintained with integrity, making it ideal for internationalization and localization projects. Furthermore, the class provides methods for merging multilingual data, validating inputs, and performing various set operations, enhancing its utility in complex multilingual environments.
+Using `MultiLangString` is beneficial when you need to manage and organize text data in multiple languages within your application. This class accepts entries from `LangString` and `SetLangString` and groups them by language. Validation is optional and does not cover direct edits to exposed collections. Unlike a built-in dictionary, this mutable class exposes a content-based hash; follow the warning above. Furthermore, the class provides methods for merging multilingual data, validating inputs, and performing various set operations, enhancing its utility in complex multilingual environments.
 
 You should consider using `MultiLangString` when your application requires management of text data in multiple languages. The class simplifies tasks like adding new language entries, retrieving texts in a specific language, and ensuring data consistency across languages. For instance, you can create a `MultiLangString` object, add or remove text entries in different languages, and easily access or manipulate these entries as needed.
 
@@ -238,7 +288,7 @@ You should use the `Controller` class when you need to enforce specific constrai
 
 #### Converter Class
 
-The `Converter` class is a utility class designed to facilitate conversions between different string types used in language processing, specifically regular `str`, `LangString`, `SetLangString`, and `MultiLangString`. These string types are integral to managing and manipulating multilingual text data, ensuring that language-specific text handling is seamless. The `Converter` class provides a range of static methods to perform these conversions.
+The `Converter` class is a utility class designed to facilitate conversions between different string types used in language processing, specifically regular `str`, `LangString`, `SetLangString`, and `MultiLangString`. These conversions operate on the library's representations; they are not JSON or RDF serializers. The `Converter` class provides a range of static methods to perform these conversions.
 
 Using the `Converter` class ensures compatibility and ease of use when transforming between various string representations. This is particularly beneficial in scenarios where data interchange between different components or modules is required. By leveraging the `Converter`, developers can maintain consistency in data representation and avoid common pitfalls associated with manual string manipulation. The utility nature of the class, providing only static methods streamlines its integration into different parts of an application.
 

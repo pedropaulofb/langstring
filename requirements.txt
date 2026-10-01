@@ -928,9 +928,9 @@ pexpect==4.9.0 ; python_version >= "3.11" and python_version < "4.0" \
 pkginfo==1.13 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:37e1bfb7b5b149829e6f140a225b517c4c8808d8d164f68137b9492023874061 \
     --hash=sha256:4f70471c643f71fe84a06230c0e33c5c5b12a33b2fd21bff14ddaef5a974adb1
-platformdirs==4.12.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:095be5c143382b1bee917c4f3e9987a0d8d6a582261f1d061ad0c403b7695b5b \
-    --hash=sha256:f6fb2960f2f2eb0870f820f7e49e49e6c0f0589c637f34d33b260b07591327c9
+platformdirs==4.12.1 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:38da801a4af303033cbffccb39030db22bf0473e6414309b02acebeee7ca8bf1 \
+    --hash=sha256:7f251621befae78b2cb74616f9fc99d3fa3db0afba5035987731f8dcd430337d
 pluggy==1.6.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3 \
     --hash=sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746

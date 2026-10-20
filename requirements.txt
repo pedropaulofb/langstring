@@ -990,9 +990,9 @@ pep8-naming==0.15.1 ; python_version >= "3.11" and python_version < "4.0" \
 pexpect==4.9.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:7236d1e080e4936be2dc3e326cec0af72acf9212a7e1d060210e70a47e253523 \
     --hash=sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f
-pkginfo==1.13 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:37e1bfb7b5b149829e6f140a225b517c4c8808d8d164f68137b9492023874061 \
-    --hash=sha256:4f70471c643f71fe84a06230c0e33c5c5b12a33b2fd21bff14ddaef5a974adb1
+pkginfo==1.13.3 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:66520cd19fddf3faa9554d68dcc0e6801944275bf612e8b581dfba968a9b4cc9 \
+    --hash=sha256:ad74cc8184b28b77b06cccc49361fd0fdc56fd87e307425ce1c2b7596dbe3185
 platformdirs==4.13.3 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:5e567f664eb087ab8521c0179cd8d1bd60857d271136567a39719e28e2d383ce \
     --hash=sha256:f6ad7f447f24f8a3b82cce5976387428bff894a0eca6c3488f4a17f153c130c4

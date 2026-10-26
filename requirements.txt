@@ -449,9 +449,9 @@ docstring-parser-fork==0.0.16 ; python_version >= "3.11" and python_version < "4
 docutils==0.23 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:25d013af9bf23bc1c7b2b093dff4208166c53a94786c9e447808335ef1185fea \
     --hash=sha256:746f5060322511280a1e50eb76846ed6bf2342984b2ac04dc42caa1a8d78799e
-domdf-python-tools==3.10.0 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:2ae308d2f4f1e9145f5f4ba57f840fbfd1c2983ee26e4824347789649d3ae298 \
-    --hash=sha256:5e71c1be71bbcc1f881d690c8984b60e64298ec256903b3147f068bc33090c36
+domdf-python-tools==3.11.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:518ac47b27a799a72b01377f21588e41550a59918c25a74fb55fc7d15fbb2434 \
+    --hash=sha256:561ac19b452cdfee01121f50117a338d03c51b36084d2f9617651113eec6aac8
 dulwich==1.2.19 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:04a22388664813857aa72db2892f315a1d018ab864e72775dfac0a90c026f5f1 \
     --hash=sha256:07143a9567a62d02aa071bb945311d3349272037cd438eff5700b4d101f08af0 \

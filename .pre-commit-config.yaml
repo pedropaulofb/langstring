@@ -49,7 +49,7 @@ repos:
       - id: black
         args: [ --line-length=120 ]
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.4.1
+    rev: 7.5.0
     hooks:
       - id: flake8
         language_version: python3.13
@@ -70,7 +70,7 @@ repos:
                                   mccabe,
                                   tryceratops]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.4.0
+    rev: v2.4.1
     hooks:
     - id: mypy
       args: [ -p=langstring ]

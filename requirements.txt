@@ -657,9 +657,9 @@ langcodes==3.5.1 ; python_version >= "3.11" and python_version < "4.0" \
 language-data==1.4.0 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:800e6457e7beda781c156e02d7707e38db2ded026472e07e2c055dc8446ee574 \
     --hash=sha256:f741927c24ab14cbed2a57bc2bfe82b00cff266c427179597e8b14123364f084
-loguru==0.7.3 ; python_version >= "3.11" and python_version < "4.0" \
-    --hash=sha256:19480589e77d47b8d85b2c827ad95d49bf31b0dcde16593892eb51dd18706eb6 \
-    --hash=sha256:31a33c10c8e1e10422bfd431aeb5d351c7cf7fa671e3c4df004162264b28220c
+loguru==0.8.0 ; python_version >= "3.11" and python_version < "4.0" \
+    --hash=sha256:e0fba09d6f76ba2d2f4bd1757122942f5a670c702e988b5efaeab99dacba0069 \
+    --hash=sha256:fb3e4623288e37700a0577f6e0ce776cc1860b5d95c657d67f07a2476b304867
 marisa-trie==1.4.1 ; python_version >= "3.11" and python_version < "4.0" \
     --hash=sha256:05dd3921622063b82d0c7fc51e79ba509d69a5ee72a6a2c24ee68782e5152c46 \
     --hash=sha256:0666b071851fff8b687bc6c0c899c7ce1cb6119399ed8c3c4f4526aca876a5e2 \
